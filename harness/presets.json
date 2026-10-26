@@ -1,8 +1,45 @@
 {
-  "_doc": "Tailles par workload. 'smoke' sert à valider les checksums et à mesurer le coût de démarrage ; 'large'/'xlarge' sont les vrais tests de charge (plusieurs centaines de Mo à plusieurs Go).",
-  "smoke":  {"sort": 10000,    "sieve": 1000000,    "matmul": 64,   "lines": 10000,    "hashmap": 10000},
-  "small":  {"sort": 1000000,  "sieve": 20000000,   "matmul": 512,  "lines": 1000000,  "hashmap": 500000},
-  "medium": {"sort": 8000000,  "sieve": 200000000,  "matmul": 1600,  "lines": 10000000, "hashmap": 4000000},
-  "large":  {"sort": 32000000, "sieve": 1000000000, "matmul": 2500, "lines": 40000000, "hashmap": 16000000},
-  "xlarge": {"sort": 100000000,"sieve": 3000000000, "matmul": 4096, "lines": 100000000,"hashmap": 48000000}
+ "_doc": "Tailles par workload. 'smoke' valide les checksums et mesure le coût de démarrage ; 'tiny' est la seule taille que l'extraction OCaml de F* (très lente) termine en un temps raisonnable ; 'large'/'xlarge' sont les vrais tests de charge (plusieurs centaines de Mo à plusieurs Go).",
+ "smoke": {
+  "sort": 10000,
+  "sieve": 1000000,
+  "matmul": 64,
+  "lines": 10000,
+  "hashmap": 10000
+ },
+ "tiny": {
+  "sort": 200000,
+  "sieve": 5000000,
+  "matmul": 128,
+  "lines": 50000,
+  "hashmap": 100000
+ },
+ "small": {
+  "sort": 1000000,
+  "sieve": 20000000,
+  "matmul": 512,
+  "lines": 1000000,
+  "hashmap": 500000
+ },
+ "medium": {
+  "sort": 8000000,
+  "sieve": 200000000,
+  "matmul": 1600,
+  "lines": 10000000,
+  "hashmap": 4000000
+ },
+ "large": {
+  "sort": 32000000,
+  "sieve": 1000000000,
+  "matmul": 2500,
+  "lines": 40000000,
+  "hashmap": 16000000
+ },
+ "xlarge": {
+  "sort": 100000000,
+  "sieve": 3000000000,
+  "matmul": 4096,
+  "lines": 100000000,
+  "hashmap": 48000000
+ }
 }

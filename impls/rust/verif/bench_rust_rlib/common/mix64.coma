@@ -1,0 +1,62 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/common.rs" 10 0 10 27 *)
+
+let%span scommon = "/home/user/benchmark-verif/impls/rust/src/common.rs" 11 27 11 45
+let%span scommon'0 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 11 12 11 46
+let%span scommon'1 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 12 23 12 25
+let%span scommon'2 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 12 17 12 26
+let%span scommon'3 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 12 41 12 59
+let%span scommon'4 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 12 12 12 60
+let%span scommon'5 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 13 23 13 25
+let%span scommon'6 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 13 17 13 26
+let%span scommon'7 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 13 41 13 59
+let%span scommon'8 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 13 12 13 60
+let%span scommon'9 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 14 14 14 16
+let%span scommon'10 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 14 8 14 17
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+
+use creusot.int.UInt64
+use creusot.int.Int32
+use creusot.prelude.Any
+
+let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
+    (! return {result}) ]
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum'0] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let mix64 [#"/home/user/benchmark-verif/impls/rust/src/common.rs" 10 0 10 27] (x: UInt64.t) (return (x'0: UInt64.t)) =
+(! bb0
+  [ bb0 = s0
+    [ s0 = wrapping_add [%#scommon'0] {x} {[%#scommon] (11400714819323198485: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z <- _x ] s1)
+    | s1 = UInt64.shr [%#scommon'2] {z} {Int32.to_int ([%#scommon'1] (30: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_7 <- _x ] s2)
+    | s2 = [ &_5 <- UInt64.bw_xor z _7 ] s3
+    | s3 = wrapping_mul [%#scommon'4] {_5} {[%#scommon'3] (13787848793156543929: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z'0 <- _x ] s4)
+    | s4 = UInt64.shr [%#scommon'6] {z'0} {Int32.to_int ([%#scommon'5] (27: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_12 <- _x ] s5)
+    | s5 = [ &_10 <- UInt64.bw_xor z'0 _12 ] s6
+    | s6 = wrapping_mul [%#scommon'8] {_10} {[%#scommon'7] (10723151780598845931: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z'1 <- _x ] s7)
+    | s7 = UInt64.shr [%#scommon'10] {z'1} {Int32.to_int ([%#scommon'9] (31: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_15 <- _x ] s8)
+    | s8 = [ &_ret <- UInt64.bw_xor z'1 _15 ] s9
+    | s9 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & x: UInt64.t = x
+  | & z: UInt64.t = Any.any_l ()
+  | & z'0: UInt64.t = Any.any_l ()
+  | & _5: UInt64.t = Any.any_l ()
+  | & _7: UInt64.t = Any.any_l ()
+  | & z'1: UInt64.t = Any.any_l ()
+  | & _10: UInt64.t = Any.any_l ()
+  | & _12: UInt64.t = Any.any_l ()
+  | & _15: UInt64.t = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

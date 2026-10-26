@@ -1,129 +1,211 @@
 module Bench.Sort
-(* Tri fusion ascendant, un seul buffer de 2n u32 : [0,n) et [n,2n) alternent source/destination.
-   Prouvé : toutes les lectures/écritures sont dans les bornes, aucun débordement u32
-   (n <= 2^30), seul `buf` est modifié. Non prouvé : que le résultat soit trié
-   (vérifié à l'exécution par `checksum`, qui renvoie 0 sinon). *)
-
-open FStar.HyperStack.ST
-open LowStar.BufferOps
+#lang-pulse
+(* Tri fusion descendant (récursif) avec tableau temporaire et recopie. 1 <= n <= 2^30.
+   Prouvé (correction fonctionnelle complète) : `msort` trie la plage [lo,hi), le résultat en est une
+   permutation, rien d'autre n'est modifié ; plus mémoire sûre, absence de débordement, terminaison. *)
+open Pulse.Lib.Pervasives
 open Bench.Common
-
-module B   = LowStar.Buffer
-module HS  = FStar.HyperStack
+open Bench.SortSpec
+module V   = Pulse.Lib.Vec
+module R   = Pulse.Lib.Reference
+module SZ  = FStar.SizeT
 module U32 = FStar.UInt32
 module U64 = FStar.UInt64
-module C   = FStar.Int.Cast
 
-#set-options "--fuel 0 --ifuel 0 --z3rlimit 100"
+#set-options "--z3rlimit 100"
 
-inline_for_extraction noextract
 let seed : U64.t = 0x0123456789ABCDEFuL
 
-val gen: buf:B.buffer U32.t -> n:U32.t -> i:U32.t -> Stack unit
-  (requires fun h -> B.live h buf /\ U32.v n <= B.length buf /\ U32.v i <= U32.v n)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer buf) h0 h1)
-let rec gen buf n i =
-  if U32.lt i n then begin
-    let r = mix64 (U64.add_mod seed (C.uint32_to_uint64 i)) in
-    buf.(i) <- to_u32 (U64.shift_right r 32ul);
-    gen buf n (U32.add i 1ul)
-  end
+fn fill (v: V.vec U32.t) (n: SZ.t) (#s0: Ghost.erased (Seq.seq U32.t))
+  requires V.pts_to v s0 ** pure (V.length v == SZ.v n)
+  ensures exists* s. V.pts_to v s ** pure (Seq.length s == SZ.v n)
+{
+  V.pts_to_len v;
+  let mut i = 0sz;
+  while (!i `SZ.lt` n)
+  invariant exists* vi s. R.pts_to i vi ** V.pts_to v s ** pure (SZ.v vi <= SZ.v n /\ Seq.length s == SZ.v n)
+  decreases (SZ.v n - SZ.v !i)
+  {
+    let vi = !i;
+    V.(v.(vi) <- hi32 (mix64 (U64.add_mod seed (SZ.sizet_to_uint64 vi))));
+    i := SZ.add vi 1sz
+  }
+}
 
-(* Recopie la fin du run gauche ; relation k + mid = i + hi (la droite est épuisée). *)
-val copy_left: buf:B.buffer U32.t -> n:U32.t -> so:U32.t -> d:U32.t -> mid:U32.t -> hi:U32.t -> i:U32.t -> k:U32.t -> Stack unit
-  (requires fun h ->
-    B.live h buf /\ B.length buf == 2 * U32.v n /\ U32.v n <= 1073741824 /\
-    (U32.v so == 0 /\ U32.v d == U32.v n \/ U32.v so == U32.v n /\ U32.v d == 0) /\
-    U32.v i <= U32.v mid /\ U32.v mid <= U32.v hi /\ U32.v hi <= U32.v n /\
-    U32.v k + U32.v mid == U32.v i + U32.v hi)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer buf) h0 h1)
-let rec copy_left buf n so d mid hi i k =
-  if U32.lt i mid then begin
-    buf.(U32.add d k) <- buf.(U32.add so i);
-    copy_left buf n so d mid hi (U32.add i 1ul) (U32.add k 1ul)
-  end
+(* Fusionne les runs triés src[lo,mid) et src[mid,hi) dans dst[lo,hi). *)
+fn merge (src dst: V.vec U32.t) (lo mid hi: SZ.t)
+         (#ss: Ghost.erased (Seq.seq U32.t)) (#sd: Ghost.erased (Seq.seq U32.t))
+  preserves V.pts_to src ss
+  requires V.pts_to dst sd **
+           pure (Seq.length ss == Seq.length sd /\ SZ.v lo <= SZ.v mid /\ SZ.v mid <= SZ.v hi /\ SZ.v hi <= Seq.length ss /\
+                 sorted_range ss (SZ.v lo) (SZ.v mid) /\ sorted_range ss (SZ.v mid) (SZ.v hi) /\
+                 SZ.fits (Seq.length ss + 1))
+  ensures exists* sd'. V.pts_to dst sd' **
+          pure (Seq.length sd' == Seq.length sd /\ sorted_range sd' (SZ.v lo) (SZ.v hi) /\
+                perm_range sd' ss (SZ.v lo) (SZ.v hi) /\ frame sd' sd (SZ.v lo) (SZ.v hi))
+{
+  V.pts_to_len src;
+  V.pts_to_len dst;
+  merge_init sd ss (SZ.v lo) (SZ.v mid) (SZ.v hi);
+  frame_refl sd (SZ.v lo) (SZ.v hi);
+  let mut i = lo;
+  let mut j = mid;
+  let mut k = lo;
+  while (!k `SZ.lt` hi)
+  invariant exists* vi vj vk sd1. R.pts_to i vi ** R.pts_to j vj ** R.pts_to k vk ** V.pts_to dst sd1 **
+            pure (merge_inv sd1 ss (SZ.v lo) (SZ.v mid) (SZ.v hi) (SZ.v vi) (SZ.v vj) (SZ.v vk) /\
+                  frame sd1 sd (SZ.v lo) (SZ.v hi) /\
+                  SZ.v lo <= SZ.v vi /\ SZ.v vi <= SZ.v mid /\ SZ.v mid <= SZ.v vj /\ SZ.v vj <= SZ.v hi /\
+                  SZ.v vk + SZ.v mid == SZ.v vi + SZ.v vj /\ SZ.v vk <= SZ.v hi)
+  decreases (SZ.v hi - SZ.v !k)
+  {
+    with vi0 vj0 vk0 sd1. assert (R.pts_to i vi0 ** R.pts_to j vj0 ** R.pts_to k vk0 ** V.pts_to dst sd1);
+    frame_len sd1 sd (SZ.v lo) (SZ.v hi);
+    let vi = !i;
+    let vj = !j;
+    let vk = !k;
+    let x = if (vi `SZ.lt` mid) { V.(src.(vi)) } else { 0ul };
+    let y = if (vj `SZ.lt` hi) { V.(src.(vj)) } else { 0ul };
+    let take_left = (vi `SZ.lt` mid) && ((not (vj `SZ.lt` hi)) || U32.lte x y);
+    assert (pure (take_left ==> SZ.v vi < SZ.v mid));
+    assert (pure (~take_left ==> SZ.v vj < SZ.v hi));
+    assert (pure (SZ.v vi < SZ.v mid ==> SZ.v vi < Seq.length ss));
+    assert (pure (SZ.v vj < SZ.v hi ==> SZ.v vj < Seq.length ss));
+    assert (pure (take_left ==> (SZ.v vj >= SZ.v hi \/ (SZ.v vj < Seq.length ss /\ SZ.v vi < Seq.length ss /\ U32.v (Seq.index ss (SZ.v vi)) <= U32.v (Seq.index ss (SZ.v vj))))));
+    assert (pure (~take_left ==> (SZ.v vi >= SZ.v mid \/ (SZ.v vi < Seq.length ss /\ SZ.v vj < Seq.length ss /\ U32.v (Seq.index ss (SZ.v vj)) < U32.v (Seq.index ss (SZ.v vi))))));
+    merge_step sd1 ss (SZ.v lo) (SZ.v mid) (SZ.v hi) (SZ.v vi) (SZ.v vj) (SZ.v vk) take_left;
+    V.(dst.(vk) <- (if take_left then x else y));
+    frame_upd sd1 sd (SZ.v lo) (SZ.v hi) (SZ.v vk) (if take_left then x else y);
+    SZ.fits_lte (SZ.v vi + 1) (Seq.length ss + 1);
+    SZ.fits_lte (SZ.v vj + 1) (Seq.length ss + 1);
+    SZ.fits_lte (SZ.v vk + 1) (Seq.length ss + 1);
+    i := (if take_left then SZ.add vi 1sz else vi);
+    j := (if take_left then vj else SZ.add vj 1sz);
+    k := SZ.add vk 1sz
+  };
+  with vi vj vk sd1. assert (R.pts_to i vi ** R.pts_to j vj ** R.pts_to k vk ** V.pts_to dst sd1);
+  merge_done sd1 ss (SZ.v lo) (SZ.v mid) (SZ.v hi) (SZ.v vi) (SZ.v vj) (SZ.v vk);
+  frame_len sd1 sd (SZ.v lo) (SZ.v hi);
+  V.pts_to_len dst
+}
 
-(* Recopie la fin du run droit ; la gauche est épuisée donc k = j. *)
-val copy_right: buf:B.buffer U32.t -> n:U32.t -> so:U32.t -> d:U32.t -> hi:U32.t -> j:U32.t -> Stack unit
-  (requires fun h ->
-    B.live h buf /\ B.length buf == 2 * U32.v n /\ U32.v n <= 1073741824 /\
-    (U32.v so == 0 /\ U32.v d == U32.v n \/ U32.v so == U32.v n /\ U32.v d == 0) /\
-    U32.v j <= U32.v hi /\ U32.v hi <= U32.v n)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer buf) h0 h1)
-let rec copy_right buf n so d hi j =
-  if U32.lt j hi then begin
-    buf.(U32.add d j) <- buf.(U32.add so j);
-    copy_right buf n so d hi (U32.add j 1ul)
-  end
+(* a[lo,hi) <- tmp[lo,hi). *)
+fn copy_back (tmp a: V.vec U32.t) (lo hi: SZ.t)
+             (#st: Ghost.erased (Seq.seq U32.t)) (#sa: Ghost.erased (Seq.seq U32.t))
+  preserves V.pts_to tmp st
+  requires V.pts_to a sa **
+           pure (Seq.length st == Seq.length sa /\ SZ.v lo <= SZ.v hi /\ SZ.v hi <= Seq.length sa /\
+                 SZ.fits (Seq.length sa + 1))
+  ensures exists* sa'. V.pts_to a sa' **
+          pure (Seq.length sa' == Seq.length sa /\ slice_eq sa' st (SZ.v lo) (SZ.v hi) /\
+                frame sa' sa (SZ.v lo) (SZ.v hi))
+{
+  V.pts_to_len tmp;
+  V.pts_to_len a;
+  frame_refl sa (SZ.v lo) (SZ.v hi);
+  let mut i = lo;
+  while (!i `SZ.lt` hi)
+  invariant exists* vi sa1. R.pts_to i vi ** V.pts_to a sa1 **
+            pure (SZ.v lo <= SZ.v vi /\ SZ.v vi <= SZ.v hi /\ Seq.length sa1 == Seq.length sa /\
+                  frame sa1 sa (SZ.v lo) (SZ.v hi) /\
+                  (forall (p: nat). SZ.v lo <= p /\ p < SZ.v vi ==> Seq.index sa1 p == Seq.index st p))
+  decreases (SZ.v hi - SZ.v !i)
+  {
+    with vi0 sa1. assert (R.pts_to i vi0 ** V.pts_to a sa1);
+    frame_len sa1 sa (SZ.v lo) (SZ.v hi);
+    let vi = !i;
+    let x = V.(tmp.(vi));
+    V.(a.(vi) <- x);
+    frame_upd sa1 sa (SZ.v lo) (SZ.v hi) (SZ.v vi) x;
+    SZ.fits_lte (SZ.v vi + 1) (Seq.length sa + 1);
+    i := SZ.add vi 1sz
+  };
+  with vi sa1. assert (R.pts_to i vi ** V.pts_to a sa1);
+  frame_len sa1 sa (SZ.v lo) (SZ.v hi);
+  slice_eq_intro sa1 st (SZ.v lo) (SZ.v hi);
+  V.pts_to_len a
+}
 
-val merge_main: buf:B.buffer U32.t -> n:U32.t -> so:U32.t -> d:U32.t -> mid:U32.t -> hi:U32.t ->
-                i:U32.t -> j:U32.t -> k:U32.t -> Stack unit
-  (requires fun h ->
-    B.live h buf /\ B.length buf == 2 * U32.v n /\ U32.v n <= 1073741824 /\
-    (U32.v so == 0 /\ U32.v d == U32.v n \/ U32.v so == U32.v n /\ U32.v d == 0) /\
-    U32.v i <= U32.v mid /\ U32.v mid <= U32.v j /\ U32.v j <= U32.v hi /\ U32.v hi <= U32.v n /\
-    U32.v k + U32.v mid == U32.v i + U32.v j)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer buf) h0 h1)
-let rec merge_main buf n so d mid hi i j k =
-  if U32.lt i mid && U32.lt j hi then begin
-    let x = buf.(U32.add so i) in
-    let y = buf.(U32.add so j) in
-    if U32.lte x y then begin
-      buf.(U32.add d k) <- x;
-      merge_main buf n so d mid hi (U32.add i 1ul) j (U32.add k 1ul)
-    end else begin
-      buf.(U32.add d k) <- y;
-      merge_main buf n so d mid hi i (U32.add j 1ul) (U32.add k 1ul)
-    end
-  end
-  else if U32.lt i mid then copy_left buf n so d mid hi i k
-  else copy_right buf n so d hi j
+fn rec msort (a tmp: V.vec U32.t) (lo hi: SZ.t)
+             (#sa: Ghost.erased (Seq.seq U32.t)) (#st: Ghost.erased (Seq.seq U32.t))
+  requires V.pts_to a sa ** V.pts_to tmp st **
+           pure (Seq.length sa == Seq.length st /\ SZ.v lo <= SZ.v hi /\ SZ.v hi <= Seq.length sa /\
+                 SZ.fits (Seq.length sa + 1))
+  ensures exists* sa' st'. V.pts_to a sa' ** V.pts_to tmp st' **
+          pure (Seq.length sa' == Seq.length sa /\ Seq.length st' == Seq.length st /\
+                sorted_range sa' (SZ.v lo) (SZ.v hi) /\ perm_range sa' sa (SZ.v lo) (SZ.v hi) /\
+                frame sa' sa (SZ.v lo) (SZ.v hi))
+  decreases (SZ.v hi - SZ.v lo)
+{
+  if (SZ.lt (SZ.sub hi lo) 2sz) {
+    perm_range_refl sa (SZ.v lo) (SZ.v hi);
+    sorted_small sa (SZ.v lo) (SZ.v hi);
+    frame_refl sa (SZ.v lo) (SZ.v hi);
+    V.pts_to_len a
+  } else {
+    let mid = SZ.add lo (SZ.div (SZ.sub hi lo) 2sz);
+    msort a tmp lo mid;
+    with s1 t1. assert (V.pts_to a s1 ** V.pts_to tmp t1);
+    msort a tmp mid hi;
+    with s2 t2. assert (V.pts_to a s2 ** V.pts_to tmp t2);
+    sorted_frame_l s2 s1 (SZ.v lo) (SZ.v mid) (SZ.v mid) (SZ.v hi);
+    merge a tmp lo mid hi;
+    with t3. assert (V.pts_to tmp t3);
+    copy_back tmp a lo hi;
+    with s3. assert (V.pts_to a s3);
+    msort_combine sa s1 s2 t3 s3 (SZ.v lo) (SZ.v mid) (SZ.v hi);
+    V.pts_to_len a
+  }
+}
 
-val pass: buf:B.buffer U32.t -> n:U32.t -> so:U32.t -> d:U32.t -> w:U32.t -> lo:U32.t -> Stack unit
-  (requires fun h ->
-    B.live h buf /\ B.length buf == 2 * U32.v n /\ U32.v n <= 1073741824 /\
-    (U32.v so == 0 /\ U32.v d == U32.v n \/ U32.v so == U32.v n /\ U32.v d == 0) /\
-    1 <= U32.v w /\ U32.v w <= U32.v n /\ U32.v lo <= U32.v n)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer buf) h0 h1)
-let rec pass buf n so d w lo =
-  if U32.lt lo n then begin
-    let w2 = U32.add w w in
-    let mid = if U32.lt (U32.add lo w) n then U32.add lo w else n in
-    let hi = if U32.lt (U32.add lo w2) n then U32.add lo w2 else n in
-    merge_main buf n so d mid hi lo mid lo;
-    pass buf n so d w (if U32.lt (U32.add lo w2) n then U32.add lo w2 else n)
-  end
+(* fold des éléments dans l'ordre ; 0 si l'ordre n'est pas croissant. *)
+fn checksum (v: V.vec U32.t) (n: SZ.t) (#s: Ghost.erased (Seq.seq U32.t))
+  preserves V.pts_to v s
+  requires pure (V.length v == SZ.v n /\ SZ.fits (SZ.v n + 1))
+  returns r: U64.t
+{
+  V.pts_to_len v;
+  let mut i = 0sz;
+  let mut ck = ck_init;
+  let mut prev = 0ul;
+  let mut ok = true;
+  while (!i `SZ.lt` n)
+  invariant exists* vi vck vprev vok. R.pts_to i vi ** R.pts_to ck vck ** R.pts_to prev vprev ** R.pts_to ok vok **
+            pure (SZ.v vi <= SZ.v n)
+  decreases (SZ.v n - SZ.v !i)
+  {
+    let vi = !i;
+    let x = V.(v.(vi));
+    let vp = !prev;
+    let vok = !ok;
+    ok := (vok && U32.lte vp x);
+    prev := x;
+    ck := ckfold !ck (FStar.Int.Cast.uint32_to_uint64 x);
+    SZ.fits_lte (SZ.v vi + 1) (SZ.v n + 1);
+    i := SZ.add vi 1sz
+  };
+  let vok = !ok;
+  let vck = !ck;
+  (if vok then vck else 0uL)
+}
 
-(* Renvoie le décalage (0 ou n) de la moitié qui contient le résultat. *)
-val sort_rec: buf:B.buffer U32.t -> n:U32.t -> so:U32.t -> d:U32.t -> w:U32.t -> Stack U32.t
-  (requires fun h ->
-    B.live h buf /\ B.length buf == 2 * U32.v n /\ U32.v n <= 1073741824 /\
-    (U32.v so == 0 /\ U32.v d == U32.v n \/ U32.v so == U32.v n /\ U32.v d == 0) /\ 1 <= U32.v w)
-  (ensures fun h0 r h1 -> B.modifies (B.loc_buffer buf) h0 h1 /\ (U32.v r == 0 \/ U32.v r == U32.v n))
-let rec sort_rec buf n so d w =
-  if U32.lt w n then begin
-    pass buf n so d w 0ul;
-    sort_rec buf n d so (U32.add w w)
-  end else so
-
-val checksum: buf:B.buffer U32.t -> n:U32.t -> off:U32.t -> i:U32.t -> prev:U32.t -> ck:U64.t -> ok:bool -> Stack U64.t
-  (requires fun h ->
-    B.live h buf /\ B.length buf == 2 * U32.v n /\ U32.v n <= 1073741824 /\
-    (U32.v off == 0 \/ U32.v off == U32.v n) /\ U32.v i <= U32.v n)
-  (ensures fun h0 _ h1 -> h0 == h1)
-let rec checksum buf n off i prev ck ok =
-  if U32.lt i n then begin
-    let x = buf.(U32.add off i) in
-    checksum buf n off (U32.add i 1ul) x (fold ck (C.uint32_to_uint64 x)) (ok && U32.lte prev x)
-  end else (if ok then ck else 0uL)
-
-val run: n:U32.t -> ST U64.t
-  (requires fun _ -> 1 <= U32.v n /\ U32.v n <= 1073741824)
-  (ensures fun _ _ _ -> True)
-let run n =
-  let buf = B.malloc HS.root 0ul (U32.add n n) in
-  gen buf n 0ul;
-  let off = sort_rec buf n 0ul n 1ul in
-  let ck = checksum buf n off 0ul 0ul ck_init true in
-  B.free buf;
+fn run (n: SZ.t)
+  requires pure (SZ.fits_u64 /\ SZ.v n >= 1 /\ SZ.v n <= 1073741824)
+  returns r: U64.t
+  ensures emp
+{
+  assert_norm (pow2 64 == 18446744073709551616);
+  SZ.fits_u64_implies_fits (SZ.v n + 1);
+  let a = V.alloc 0ul n;
+  let tmp = V.alloc 0ul n;
+  fill a n;
+  V.pts_to_len a;
+  V.pts_to_len tmp;
+  msort a tmp 0sz n;
+  with sa. assert (V.pts_to a sa);
+  V.pts_to_len a;
+  let ck = checksum a n;
+  V.free a;
+  V.free tmp;
   ck
+}

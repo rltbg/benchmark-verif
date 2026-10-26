@@ -1,0 +1,68 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/lines.rs" 12 0 12 31 *)
+
+let%span slines = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 13 11 13 13
+let%span slines'0 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 14 8 14 9
+let%span slines'1 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 15 18 15 21
+let%span slines'2 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 16 8 16 9
+let%span slines'3 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 17 18 17 22
+let%span slines'4 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 18 8 18 9
+let%span slines'5 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 19 18 19 23
+let%span slines'6 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 20 8 20 9
+let%span slines'7 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 21 18 21 24
+let%span slines'8 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 22 8 22 9
+let%span slines'9 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 23 18 23 25
+let%span slines'10 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 24 8 24 9
+let%span slines'11 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 26 8 26 9
+let%span slines'12 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 9 10 9 38
+let%span slines'13 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 10 10 10 39
+
+use creusot.int.UInt32
+use creusot.int.UInt64
+use creusot.prelude.Any
+use int.Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let ndigits [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 12 0 12 31] (v: UInt32.t) (return (x: UInt64.t)) =
+(! bb0
+  [ bb0 = s0
+    [ s0 = [ &_5 <- UInt32.lt v ([%#slines] (10: UInt32.t)) ] s1
+    | s1 = any [ br0 -> {_5 = false} (! bb2) | br1 -> {_5} (! bb1) ] ]
+  | bb1 = s0 [ s0 = [ &_ret <- [%#slines'0] (1: UInt64.t) ] s1 | s1 = return {_ret} ]
+  | bb2 = s0
+    [ s0 = [ &_7 <- UInt32.lt v ([%#slines'1] (100: UInt32.t)) ] s1
+    | s1 = any [ br0 -> {_7 = false} (! bb4) | br1 -> {_7} (! bb3) ] ]
+  | bb3 = s0 [ s0 = [ &_ret <- [%#slines'2] (2: UInt64.t) ] s1 | s1 = return {_ret} ]
+  | bb4 = s0
+    [ s0 = [ &_9 <- UInt32.lt v ([%#slines'3] (1000: UInt32.t)) ] s1
+    | s1 = any [ br0 -> {_9 = false} (! bb6) | br1 -> {_9} (! bb5) ] ]
+  | bb5 = s0 [ s0 = [ &_ret <- [%#slines'4] (3: UInt64.t) ] s1 | s1 = return {_ret} ]
+  | bb6 = s0
+    [ s0 = [ &_11 <- UInt32.lt v ([%#slines'5] (10000: UInt32.t)) ] s1
+    | s1 = any [ br0 -> {_11 = false} (! bb8) | br1 -> {_11} (! bb7) ] ]
+  | bb7 = s0 [ s0 = [ &_ret <- [%#slines'6] (4: UInt64.t) ] s1 | s1 = return {_ret} ]
+  | bb8 = s0
+    [ s0 = [ &_13 <- UInt32.lt v ([%#slines'7] (100000: UInt32.t)) ] s1
+    | s1 = any [ br0 -> {_13 = false} (! bb10) | br1 -> {_13} (! bb9) ] ]
+  | bb9 = s0 [ s0 = [ &_ret <- [%#slines'8] (5: UInt64.t) ] s1 | s1 = return {_ret} ]
+  | bb10 = s0
+    [ s0 = [ &_15 <- UInt32.lt v ([%#slines'9] (1000000: UInt32.t)) ] s1
+    | s1 = any [ br0 -> {_15 = false} (! bb12) | br1 -> {_15} (! bb11) ] ]
+  | bb11 = s0 [ s0 = [ &_ret <- [%#slines'10] (6: UInt64.t) ] s1 | s1 = return {_ret} ]
+  | bb12 = s0 [ s0 = [ &_ret <- [%#slines'11] (7: UInt64.t) ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & v: UInt32.t = v
+  | & _5: bool = Any.any_l ()
+  | & _7: bool = Any.any_l ()
+  | & _9: bool = Any.any_l ()
+  | & _11: bool = Any.any_l ()
+  | & _13: bool = Any.any_l ()
+  | & _15: bool = Any.any_l () ])
+  [ return (result: UInt64.t) ->
+  {[@stop_split] [@expl:ndigits ensures] ([@stop_split] [@expl:ndigits ensures #0] [%#slines'12] 1
+        <= UInt64.t'int result
+      /\ UInt64.t'int result <= 7)
+    /\ ([@stop_split] [@expl:ndigits ensures #1] [%#slines'13] UInt32.t'int v < 1000000 -> UInt64.t'int result <= 6)}
+    (! return {result}) ]

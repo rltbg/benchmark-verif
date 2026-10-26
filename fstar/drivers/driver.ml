@@ -1,17 +1,16 @@
-(* Driver OCaml pour les modules extraits par `fstar.exe --codegen OCaml`. *)
+(* Pilote OCaml pour le programme extrait par `fstar.exe --codegen OCaml` (même format de sortie). *)
 let () =
   if Array.length Sys.argv <> 3 then (prerr_endline "usage: bench <sort|sieve|matmul|lines|hashmap> <n>"; exit 2);
-  let n = int_of_string Sys.argv.(2) in
-  let n32 = Stdint.Uint32.of_int n in
+  let n = FStar_SizeT.uint_to_t (Z.of_string Sys.argv.(2)) in
   let t0 = Unix.gettimeofday () in
   let ck =
     match Sys.argv.(1) with
-    | "sort" -> Bench_Sort.run n32
-    | "sieve" -> Bench_Sieve.run n32
-    | "matmul" -> Bench_Matmul.run n32
-    | "lines" -> Bench_Lines.run n32
-    | "hashmap" -> Bench_Hashmap.run n32
+    | "sort" -> Bench_Sort.run n
+    | "sieve" -> Bench_Sieve.run n
+    | "matmul" -> Bench_Matmul.run n
+    | "lines" -> Bench_Lines.run n
+    | "hashmap" -> Bench_Hashmap.run n
     | _ -> prerr_endline "workload inconnu"; exit 2 in
   let ns = Int64.of_float ((Unix.gettimeofday () -. t0) *. 1e9) in
-  Printf.printf "RESULT workload=%s n=%d checksum=%016Lx time_ns=%Ld\n" Sys.argv.(1) n
-    (Stdint.Uint64.to_int64 ck) ns
+  Printf.printf "RESULT workload=%s n=%s checksum=%s time_ns=%Ld\n" Sys.argv.(1) Sys.argv.(2)
+    (Z.format "%016x" (FStar_UInt64.v ck)) ns

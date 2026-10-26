@@ -1,0 +1,10 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_key_of": { "prover": "alt-ergo", "time": 0.008 },
+      "vc_mix64": { "prover": "alt-ergo", "time": 0.006 },
+      "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.006 }
+    }
+  }
+}

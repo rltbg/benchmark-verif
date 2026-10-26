@@ -1,22 +1,32 @@
 {
- "c-ref": {
-  "build_s": 0.552540495,
+ "rust-creusot": {
+  "build_s": 10.16,
+  "binary_kb": 394.0,
+  "runtime_kb": 0.0,
+  "verify_s": 12.7499559
+ },
+ "fstar-c": {
+  "verify_s": 153.705193886,
+  "build_s": 2.412169025,
   "binary_kb": 20.0,
   "runtime_kb": 0.0
  },
- "rust-creusot": {
-  "build_s": 6.301657403,
-  "binary_kb": 394.0,
+ "fstar-ocaml": {
+  "verify_s": 153.705193886,
+  "build_s": 2.828037276,
+  "binary_kb": 5077.0,
   "runtime_kb": 0.0
  },
- "ocaml-ref": {
-  "build_s": 0.298409436,
-  "binary_kb": 1594.0,
-  "runtime_kb": 0.0
+ "fstar-fsharp": {
+  "verify_s": 153.705193886,
+  "build_s": 9.999502302,
+  "binary_kb": 50.0,
+  "runtime_kb": 74188.0
  },
- "fsharp-ref": {
-  "build_s": 2.94454063,
-  "binary_kb": 14.0,
-  "runtime_kb": 68356.0
+ "fstar-ocaml-fast": {
+  "build_s": 4.143275186,
+  "verify_s": 153.705193886,
+  "binary_kb": 5059.0,
+  "runtime_kb": 0.0
  }
 }

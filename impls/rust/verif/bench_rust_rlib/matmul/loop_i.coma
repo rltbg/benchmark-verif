@@ -1,0 +1,110 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 66 0 66 69 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span smatmul = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 67 16 67 22
+let%span smatmul'0 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 69 14 69 21
+let%span smatmul'1 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 68 16 68 47
+let%span smatmul'2 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 71 8 71 29
+let%span smatmul'3 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 72 13 72 14
+let%span smatmul'4 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 72 8 72 14
+let%span smatmul'5 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 62 11 62 21
+let%span smatmul'6 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 63 11 63 76
+let%span smatmul'7 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 64 10 64 33
+let%span smatmul'8 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 47 11 47 32
+let%span smatmul'9 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 48 11 48 76
+let%span smatmul'10 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 49 10 49 33
+
+use creusot.int.UInt64
+use creusot.prelude.MutBorrow
+use seq.Seq
+use creusot.int.UInt32
+use creusot.prelude.Any
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+type t_Vec_u32_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
+
+axiom view_Vec_u32_Global_spec:
+  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec] Seq.length (view_Vec_u32_Global self)
+    <= UInt64.t'int const_MAX
+
+let loop_k (a: t_Vec_u32_Global) (b: t_Vec_u32_Global) (c: MutBorrow.t t_Vec_u32_Global) (n: UInt64.t) (i: UInt64.t)
+  (return (x: ())) =
+{[@stop_split] [@expl:loop_k requires] ([@stop_split] [@expl:loop_k requires #0] [%#smatmul'8] UInt64.t'int n <= 4096
+    /\ UInt64.t'int i < UInt64.t'int n)
+  /\ ([@stop_split] [@expl:loop_k requires #1] [%#smatmul'9] Seq.length (view_Vec_u32_Global a)
+    = UInt64.t'int n * UInt64.t'int n
+  /\ Seq.length (view_Vec_u32_Global b) = UInt64.t'int n * UInt64.t'int n
+  /\ Seq.length (view_Vec_u32_Global c.current) = UInt64.t'int n * UInt64.t'int n)}
+  any
+  [ return (result: ()) -> {[@stop_split] [@expl:loop_k ensures] [%#smatmul'10] Seq.length (view_Vec_u32_Global c.final)
+    = Seq.length (view_Vec_u32_Global c.current)}
+    (! return {result}) ]
+
+predicate resolve_refmut_Vec_u32_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u32_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u32_Global
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let loop_i [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 66 0 66 69] (a: t_Vec_u32_Global)
+  (b: t_Vec_u32_Global) (c: MutBorrow.t t_Vec_u32_Global) (n: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:loop_i requires] ([@stop_split] [@expl:loop_i requires #0] [%#smatmul'5] UInt64.t'int n <= 4096)
+  /\ ([@stop_split] [@expl:loop_i requires #1] [%#smatmul'6] Seq.length (view_Vec_u32_Global a)
+    = UInt64.t'int n * UInt64.t'int n
+  /\ Seq.length (view_Vec_u32_Global b) = UInt64.t'int n * UInt64.t'int n
+  /\ Seq.length (view_Vec_u32_Global c.current) = UInt64.t'int n * UInt64.t'int n)}
+  (! bb0
+  [ bb0 = s0 [ s0 = [ &i <- [%#smatmul] (0: UInt64.t) ] s1 | s1 = [ &_old <- c.final ] s2 | s2 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#smatmul'0] UInt64.t'int n
+      - UInt64.t'int i)}
+      bb1invariant
+    | bb1invariant = {[@expl:inferred invariant: unchanged value] _old = c.final}
+      {[@expl:loop invariant] [%#smatmul'1] Seq.length (view_Vec_u32_Global c.current) = UInt64.t'int n * UInt64.t'int n
+      /\ UInt64.t'int i <= UInt64.t'int n}
+      (! [ &variant_old_bb1 <- [%#smatmul'0] UInt64.t'int n - UInt64.t'int i ] s0)
+      [ s0 = [ &_24 <- UInt64.lt i n ] s1 | s1 = any [ br0 -> {_24 = false} (! bb5) | br1 -> {_24} (! bb3) ] ]
+      [ bb3 = s0
+        [ s0 = MutBorrow.borrow_mut <t_Vec_u32_Global> {c.current}
+            (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_30 <- _bor ] [ &c <- { c with current = _bor.final } ] s1)
+        | s1 = loop_k [%#smatmul'2] {a} {b} {_30} {n} {i} (fun (_x: ()) -> [ &_27 <- _x ] s2)
+        | s2 = UInt64.add [%#smatmul'4] {i} {[%#smatmul'3] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s3)
+        | s3 = bb1 ] ] ]
+  | bb5 = s0 [ s0 = -{resolve_refmut_Vec_u32_Global c}- s1 | s1 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & a: t_Vec_u32_Global = a
+  | & b: t_Vec_u32_Global = b
+  | & c: MutBorrow.t t_Vec_u32_Global = c
+  | & n: UInt64.t = n
+  | & i: UInt64.t = Any.any_l ()
+  | & _24: bool = Any.any_l ()
+  | & _27: () = Any.any_l ()
+  | & _30: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _old: t_Vec_u32_Global = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l () ])
+  [ return (result: ()) -> {[@stop_split] [@expl:loop_i ensures] [%#smatmul'7] Seq.length (view_Vec_u32_Global c.final)
+    = Seq.length (view_Vec_u32_Global c.current)}
+    (! return {result}) ]

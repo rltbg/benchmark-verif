@@ -1,0 +1,41 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 12 0 12 49 *)
+
+let%span smatmul = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 13 18 13 40
+let%span smatmul'0 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 14 18 14 37
+let%span smatmul'1 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 15 4 15 9
+let%span smatmul'2 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 15 4 15 13
+let%span smatmul'3 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 8 11 8 43
+let%span smatmul'4 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 9 10 9 54
+let%span smatmul'5 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 10 10 10 28
+
+use creusot.int.UInt64
+use creusot.prelude.Any
+use int.Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let idx [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 12 0 12 49] (n: UInt64.t) (i: UInt64.t) (j: UInt64.t)
+  (return (x: UInt64.t)) = {[@stop_split] [@expl:idx requires] [%#smatmul'3] UInt64.t'int n <= 4096
+  /\ UInt64.t'int i < UInt64.t'int n /\ UInt64.t'int j < UInt64.t'int n}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = {[@expl:assertion] [%#smatmul] UInt64.t'int i * UInt64.t'int n + UInt64.t'int j
+      < UInt64.t'int n * UInt64.t'int n}
+      s1
+    | s1 = {[@expl:assertion] [%#smatmul'0] UInt64.t'int n * UInt64.t'int n <= 16777216} s2
+    | s2 = UInt64.mul [%#smatmul'1] {i} {n} (fun (_x: UInt64.t) -> [ &_21 <- _x ] s3)
+    | s3 = UInt64.add [%#smatmul'2] {_21} {j} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s4)
+    | s4 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & n: UInt64.t = n
+  | & i: UInt64.t = i
+  | & j: UInt64.t = j
+  | & _21: UInt64.t = Any.any_l () ])
+  [ return (result: UInt64.t) ->
+  {[@stop_split] [@expl:idx ensures] ([@stop_split] [@expl:idx ensures #0] [%#smatmul'4] UInt64.t'int result
+        = UInt64.t'int i * UInt64.t'int n + UInt64.t'int j
+      /\ UInt64.t'int result < UInt64.t'int n * UInt64.t'int n)
+    /\ ([@stop_split] [@expl:idx ensures #1] [%#smatmul'5] UInt64.t'int result < 16777216)}
+    (! return {result}) ]

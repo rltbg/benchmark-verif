@@ -1,0 +1,29 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sort.rs" 32 0 32 70 *)
+
+let%span ssort = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 30 11 30 53
+let%span ssort'0 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 31 10 31 49
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 371 8 371 41
+
+use creusot.int.UInt32
+use seq.Seq
+use seq.Permut
+
+predicate permutation_of_u32 (self: Seq.seq UInt32.t) (other: Seq.seq UInt32.t) =
+  [%#sseq] Permut.permut self other 0 (Seq.length self)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant a : Seq.seq UInt32.t
+
+constant b : Seq.seq UInt32.t
+
+constant c : Seq.seq UInt32.t
+
+constant d : Seq.seq UInt32.t
+
+function perm_concat [#"/home/user/benchmark-verif/impls/rust/src/sort.rs" 32 0 32 70] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (c: Seq.seq UInt32.t) (d: Seq.seq UInt32.t) : ()
+
+goal vc_perm_concat: ([%#ssort] permutation_of_u32 a b /\ permutation_of_u32 c d)
+  -> ([@stop_split] [@expl:perm_concat ensures] [%#ssort'0] permutation_of_u32 (Seq.(++) a c) (Seq.(++) b d))

@@ -1,0 +1,9 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_ckfold": { "prover": "alt-ergo", "time": 0.014 },
+      "vc_wrapping_mul": { "prover": "alt-ergo", "time": 0.014 }
+    }
+  }
+}

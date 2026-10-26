@@ -35,6 +35,11 @@ def ideal_bytes(w, n):
     raise KeyError(w)
 
 
+def load_checksums():
+    p = ROOT / "spec" / "checksums.json"
+    return {k: v for k, v in json.loads(p.read_text()).items() if not k.startswith("_")} if p.exists() else {}
+
+
 def load(name):
     return json.loads((Path(__file__).parent / name).read_text())
 
@@ -48,27 +53,48 @@ def available(impls):
     return out
 
 
+def build_runner():
+    """Compile harness/runner.c (fork/exec/wait4) si besoin ; renvoie son chemin."""
+    exe = ROOT / "results" / ".runner"
+    src = Path(__file__).parent / "runner.c"
+    if not exe.exists() or exe.stat().st_mtime < src.stat().st_mtime:
+        exe.parent.mkdir(exist_ok=True)
+        subprocess.run(["gcc", "-O2", "-o", str(exe), str(src)], check=True)
+    return str(exe)
+
+
+def children_of(pid):
+    try:
+        return [int(x) for x in open(f"/proc/{pid}/task/{pid}/children").read().split()]
+    except OSError:
+        return []
+
+
 def run_once(cmd, wrapper, timeout):
-    argv = (shlex.split(wrapper) if wrapper else []) + cmd
-    with open("/proc/self/statm") as f:
-        parent_rss_kb = int(f.read().split()[1]) * PAGE // 1024
+    runner = build_runner()
+    out = ROOT / "results" / f".rusage.{os.getpid()}"
+    argv = [runner, str(out)] + (shlex.split(wrapper) if wrapper else []) + cmd
     t0 = time.perf_counter()
     p = subprocess.Popen(argv, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     samples, stop, hwm = [], threading.Event(), [0]
 
     def sampler():
+        child = None
         while not stop.is_set():
             try:
-                with open(f"/proc/{p.pid}/stat") as f:
-                    parts = f.read().rsplit(")", 1)[1].split()
-                cpu = (int(parts[11]) + int(parts[12])) / HZ
-                with open(f"/proc/{p.pid}/statm") as f:
-                    rss = int(f.read().split()[1]) * PAGE // 1024
-                with open(f"/proc/{p.pid}/status") as f:
-                    for ln in f:
-                        if ln.startswith("VmHWM:"): hwm[0] = max(hwm[0], int(ln.split()[1]))
-                samples.append((time.perf_counter() - t0, rss, cpu))
-            except (FileNotFoundError, ProcessLookupError, IndexError, ValueError):
+                if child is None:
+                    kids = children_of(p.pid)
+                    child = kids[0] if kids else None
+                if child is not None:
+                    with open(f"/proc/{child}/stat") as f:
+                        parts = f.read().rsplit(")", 1)[1].split()
+                    cpu = (int(parts[11]) + int(parts[12])) / HZ
+                    with open(f"/proc/{child}/status") as f:
+                        for ln in f:
+                            if ln.startswith("VmHWM:"): hwm[0] = max(hwm[0], int(ln.split()[1]))
+                            elif ln.startswith("VmRSS:"): rss = int(ln.split()[1])
+                    samples.append((time.perf_counter() - t0, rss, cpu))
+            except (FileNotFoundError, ProcessLookupError, IndexError, ValueError, NameError):
                 pass
             stop.wait(0.02)
 
@@ -79,24 +105,26 @@ def run_once(cmd, wrapper, timeout):
     def killer():
         nonlocal timed_out
         timed_out = True
-        try: p.kill()
-        except ProcessLookupError: pass
+        for c in children_of(p.pid):
+            try: os.kill(c, 9)
+            except ProcessLookupError: pass
 
     timer = threading.Timer(timeout, killer)
     timer.start()
-    _, status, ru = os.wait4(p.pid, 0)
+    stdout, stderr = p.communicate()
     wall = time.perf_counter() - t0
     timer.cancel(); stop.set(); th.join()
-    p.returncode = os.waitstatus_to_exitcode(status)
-    out, err = p.stdout.read(), p.stderr.read()
-    p.stdout.close(); p.stderr.close()
-    rec = {"returncode": p.returncode, "timed_out": timed_out, "wall_s": wall,
-           "user_s": ru.ru_utime, "sys_s": ru.ru_stime,
-           # ru_maxrss hérite du RSS du harnais Python (fork) : on ne s'y fie que s'il le dépasse nettement.
-           "peak_rss_kb": ru.ru_maxrss if ru.ru_maxrss > parent_rss_kb * 1.05 else (hwm[0] or ru.ru_maxrss),
-           "minflt": ru.ru_minflt, "majflt": ru.ru_majflt, "inblock": ru.ru_inblock, "oublock": ru.ru_oublock,
-           "ctx_vol": ru.ru_nvcsw, "ctx_invol": ru.ru_nivcsw, "stderr": err.strip()[-300:]}
-    for line in out.splitlines():
+    try:
+        f = [int(x) for x in out.read_text().split()]
+        out.unlink()
+    except (OSError, ValueError):
+        f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    _, status, ut, st, maxrss, minflt, majflt, inb, oub, vol, invol = f
+    rc = os.waitstatus_to_exitcode(status) if status else 0
+    rec = {"returncode": rc, "timed_out": timed_out, "wall_s": wall, "user_s": ut / 1e6, "sys_s": st / 1e6,
+           "peak_rss_kb": max(maxrss, hwm[0]), "minflt": minflt, "majflt": majflt, "inblock": inb, "oublock": oub,
+           "ctx_vol": vol, "ctx_invol": invol, "stderr": stderr.strip()[-300:]}
+    for line in stdout.splitlines():
         if line.startswith("RESULT "):
             kv = dict(x.split("=", 1) for x in line[7:].split())
             rec["checksum"] = kv["checksum"]; rec["internal_s"] = int(kv["time_ns"]) / 1e9
@@ -104,8 +132,8 @@ def run_once(cmd, wrapper, timeout):
         step = len(samples) / 120
         samples = [samples[int(i * step)] for i in range(120)]
     rec["timeline"] = [(round(t, 3), r, round(c, 3)) for t, r, c in samples]
-    rec["status"] = ("timeout" if timed_out else "ok" if p.returncode == 0 and "checksum" in rec
-                     else "oom?" if p.returncode == -9 else "failed")
+    rec["status"] = ("timeout" if timed_out else "ok" if rc == 0 and "checksum" in rec
+                     else "oom?" if rc in (-9, 137) else "failed")
     return rec
 
 
@@ -183,6 +211,12 @@ def summarize(data):
         for v in d.values():
             if v.get("status") == "ok": v["agrees"] = len(sums) == 1
         d["_checksums"] = sorted(sums)
+        # comparaison à la table de référence (spec/checksums.json) quand la taille y figure
+        n = next(v["n"] for v in d.values() if isinstance(v, dict) and "n" in v)
+        ref = load_checksums().get(f"{w}:{n}")
+        for v in d.values():
+            if isinstance(v, dict) and v.get("status") == "ok" and ref:
+                v["agrees"] = v["agrees"] and v["checksum"] == ref
     return table, impls_meta
 
 

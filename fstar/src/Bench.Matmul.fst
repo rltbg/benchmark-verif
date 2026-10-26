@@ -1,23 +1,15 @@
 module Bench.Matmul
-(* C = A*B, matrices n x n de u32 (arithmétique modulo 2^32), ordre i-k-j.
-   Un seul buffer de 3n^2 : A = [0,nn), B = [nn,2nn), C = [2nn,3nn).
-   Prouvé : tous les indices i*n+j sont < n*n (lemme d'arithmétique non linéaire `lemma_idx`),
-   aucun débordement des calculs d'indices (n <= 4096). *)
-
-open FStar.HyperStack.ST
-open LowStar.BufferOps
+#lang-pulse
+(* C = A*B, matrices n x n de u32 (arithmétique modulo 2^32), boucles i, k, j. 1 <= n <= 4096. *)
+open Pulse.Lib.Pervasives
 open Bench.Common
-
-module B   = LowStar.Buffer
-module HS  = FStar.HyperStack
+module V   = Pulse.Lib.Vec
+module R   = Pulse.Lib.Reference
+module SZ  = FStar.SizeT
 module U32 = FStar.UInt32
 module U64 = FStar.UInt64
-module C   = FStar.Int.Cast
 module ML  = FStar.Math.Lemmas
 
-#set-options "--fuel 0 --ifuel 0 --z3rlimit 100"
-
-inline_for_extraction noextract
 let seed : U64.t = 0x0FEDCBA987654321uL
 
 let lemma_idx (i j n: nat) : Lemma (requires i < n /\ j < n) (ensures i * n + j < n * n) =
@@ -28,83 +20,148 @@ let lemma_nn (n: nat) : Lemma (requires n <= 4096) (ensures n * n <= 16777216) =
   ML.lemma_mult_le_right n n 4096;
   ML.lemma_mult_le_left 4096 n 4096
 
-inline_for_extraction noextract
-val idx: n:U32.t -> i:U32.t -> j:U32.t -> Pure U32.t
-  (requires U32.v n <= 4096 /\ U32.v i < U32.v n /\ U32.v j < U32.v n)
-  (ensures fun r -> U32.v r == U32.v i * U32.v n + U32.v j /\ U32.v r < U32.v n * U32.v n)
-inline_for_extraction noextract
-let idx n i j =
-  lemma_idx (U32.v i) (U32.v j) (U32.v n);
-  lemma_nn (U32.v n);
-  U32.add (U32.mul i n) j
+(* Indice i*n+j, provablement < n*n et sans débordement de size_t. *)
+let idx (n i j: SZ.t) : Pure SZ.t
+  (requires SZ.fits_u64 /\ SZ.v n <= 4096 /\ SZ.v i < SZ.v n /\ SZ.v j < SZ.v n)
+  (ensures fun r -> SZ.v r == SZ.v i * SZ.v n + SZ.v j /\ SZ.v r < SZ.v n * SZ.v n)
+= lemma_idx (SZ.v i) (SZ.v j) (SZ.v n);
+  lemma_nn (SZ.v n);
+  assert_norm (pow2 64 == 18446744073709551616);
+  SZ.fits_u64_implies_fits (SZ.v i * SZ.v n);
+  SZ.fits_u64_implies_fits (SZ.v i * SZ.v n + SZ.v j);
+  SZ.add (SZ.mul i n) j
 
-val init_mat: m:B.buffer U32.t -> nn:U32.t -> i:U32.t -> Stack unit
-  (requires fun h -> B.live h m /\ U32.v nn <= 16777216 /\ B.length m == 3 * U32.v nn /\ U32.v i <= U32.v nn)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer m) h0 h1)
-let rec init_mat m nn i =
-  if U32.lt i nn then begin
-    let s = U64.add_mod seed (C.uint32_to_uint64 i) in
-    m.(i) <- to_u32 (U64.shift_right (mix64 s) 32ul);
-    m.(U32.add nn i) <- to_u32 (U64.shift_right (mix64 (U64.add_mod s (C.uint32_to_uint64 nn))) 32ul);
-    init_mat m nn (U32.add i 1ul)
-  end
+(* m[i] = hi32(mix64(seed + off + i)) pour i < len. *)
+fn init_mat (m: V.vec U32.t) (len: SZ.t) (off: U64.t) (#s0: Ghost.erased (Seq.seq U32.t))
+  requires V.pts_to m s0 ** pure (V.length m == SZ.v len)
+  ensures exists* s. V.pts_to m s ** pure (Seq.length s == SZ.v len)
+{
+  V.pts_to_len m;
+  let mut i = 0sz;
+  while (!i `SZ.lt` len)
+  invariant exists* vi s. R.pts_to i vi ** V.pts_to m s ** pure (SZ.v vi <= SZ.v len /\ Seq.length s == SZ.v len)
+  decreases (SZ.v len - SZ.v !i)
+  {
+    let vi = !i;
+    V.(m.(vi) <- hi32 (mix64 (U64.add_mod (U64.add_mod seed off) (SZ.sizet_to_uint64 vi))));
+    i := SZ.add vi 1sz
+  }
+}
 
-val loop_j: m:B.buffer U32.t -> n:U32.t -> nn:U32.t -> i:U32.t -> k:U32.t -> aik:U32.t -> j:U32.t -> Stack unit
-  (requires fun h ->
-    B.live h m /\ U32.v n <= 4096 /\ U32.v nn == U32.v n * U32.v n /\ B.length m == 3 * U32.v nn /\
-    U32.v i < U32.v n /\ U32.v k < U32.v n /\ U32.v j <= U32.v n)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer m) h0 h1)
-let rec loop_j m n nn i k aik j =
-  if U32.lt j n then begin
-    lemma_nn (U32.v n);
-    let nn2 = U32.add nn nn in
-    let ci = U32.add nn2 (idx n i j) in
-    let bi = U32.add nn (idx n k j) in
-    m.(ci) <- U32.add_mod m.(ci) (U32.mul_mod aik m.(bi));
-    loop_j m n nn i k aik (U32.add j 1ul)
-  end
+fn loop_j (a b c: V.vec U32.t) (n i k: SZ.t) (aik: U32.t)
+          (#sa #sb #sc: Ghost.erased (Seq.seq U32.t))
+  preserves V.pts_to a sa ** V.pts_to b sb
+  requires V.pts_to c sc **
+           pure (SZ.fits_u64 /\ SZ.v n <= 4096 /\ SZ.v i < SZ.v n /\ SZ.v k < SZ.v n /\
+                 V.length a == SZ.v n * SZ.v n /\ V.length b == SZ.v n * SZ.v n /\ V.length c == SZ.v n * SZ.v n)
+  ensures exists* sc'. V.pts_to c sc' ** pure (Seq.length sc' == SZ.v n * SZ.v n)
+{
+  V.pts_to_len a;
+  V.pts_to_len b;
+  V.pts_to_len c;
+  let mut j = 0sz;
+  while (!j `SZ.lt` n)
+  invariant exists* vj sc1. R.pts_to j vj ** V.pts_to c sc1 **
+            pure (SZ.v vj <= SZ.v n /\ Seq.length sc1 == SZ.v n * SZ.v n)
+  decreases (SZ.v n - SZ.v !j)
+  {
+    let vj = !j;
+    let ci = idx n i vj;
+    let bi = idx n k vj;
+    let bv = V.(b.(bi));
+    let cv = V.(c.(ci));
+    V.(c.(ci) <- U32.add_mod cv (U32.mul_mod aik bv));
+    fits_small (SZ.v vj + 1);
+    j := SZ.add vj 1sz
+  }
+}
 
-val loop_k: m:B.buffer U32.t -> n:U32.t -> nn:U32.t -> i:U32.t -> k:U32.t -> Stack unit
-  (requires fun h ->
-    B.live h m /\ U32.v n <= 4096 /\ U32.v nn == U32.v n * U32.v n /\ B.length m == 3 * U32.v nn /\
-    U32.v i < U32.v n /\ U32.v k <= U32.v n)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer m) h0 h1)
-let rec loop_k m n nn i k =
-  if U32.lt k n then begin
-    let aik = m.(idx n i k) in
-    loop_j m n nn i k aik 0ul;
-    loop_k m n nn i (U32.add k 1ul)
-  end
+fn loop_k (a b c: V.vec U32.t) (n i: SZ.t)
+          (#sa #sb #sc: Ghost.erased (Seq.seq U32.t))
+  preserves V.pts_to a sa ** V.pts_to b sb
+  requires V.pts_to c sc **
+           pure (SZ.fits_u64 /\ SZ.v n <= 4096 /\ SZ.v i < SZ.v n /\
+                 V.length a == SZ.v n * SZ.v n /\ V.length b == SZ.v n * SZ.v n /\ V.length c == SZ.v n * SZ.v n)
+  ensures exists* sc'. V.pts_to c sc' ** pure (Seq.length sc' == SZ.v n * SZ.v n)
+{
+  V.pts_to_len a;
+  V.pts_to_len c;
+  let mut k = 0sz;
+  while (!k `SZ.lt` n)
+  invariant exists* vk sc1. R.pts_to k vk ** V.pts_to c sc1 **
+            pure (SZ.v vk <= SZ.v n /\ Seq.length sc1 == SZ.v n * SZ.v n)
+  decreases (SZ.v n - SZ.v !k)
+  {
+    let vk = !k;
+    let aik = V.(a.(idx n i vk));
+    loop_j a b c n i vk aik;
+    fits_small (SZ.v vk + 1);
+    k := SZ.add vk 1sz
+  }
+}
 
-val loop_i: m:B.buffer U32.t -> n:U32.t -> nn:U32.t -> i:U32.t -> Stack unit
-  (requires fun h ->
-    B.live h m /\ U32.v n <= 4096 /\ U32.v nn == U32.v n * U32.v n /\ B.length m == 3 * U32.v nn /\
-    U32.v i <= U32.v n)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer m) h0 h1)
-let rec loop_i m n nn i =
-  if U32.lt i n then begin
-    loop_k m n nn i 0ul;
-    loop_i m n nn (U32.add i 1ul)
-  end
+fn loop_i (a b c: V.vec U32.t) (n: SZ.t)
+          (#sa #sb #sc: Ghost.erased (Seq.seq U32.t))
+  preserves V.pts_to a sa ** V.pts_to b sb
+  requires V.pts_to c sc **
+           pure (SZ.fits_u64 /\ SZ.v n <= 4096 /\
+                 V.length a == SZ.v n * SZ.v n /\ V.length b == SZ.v n * SZ.v n /\ V.length c == SZ.v n * SZ.v n)
+  ensures exists* sc'. V.pts_to c sc' ** pure (Seq.length sc' == SZ.v n * SZ.v n)
+{
+  V.pts_to_len c;
+  let mut i = 0sz;
+  while (!i `SZ.lt` n)
+  invariant exists* vi sc1. R.pts_to i vi ** V.pts_to c sc1 **
+            pure (SZ.v vi <= SZ.v n /\ Seq.length sc1 == SZ.v n * SZ.v n)
+  decreases (SZ.v n - SZ.v !i)
+  {
+    let vi = !i;
+    loop_k a b c n vi;
+    fits_small (SZ.v vi + 1);
+    i := SZ.add vi 1sz
+  }
+}
 
-val checksum: m:B.buffer U32.t -> nn:U32.t -> i:U32.t -> ck:U64.t -> Stack U64.t
-  (requires fun h -> B.live h m /\ U32.v nn <= 16777216 /\ B.length m == 3 * U32.v nn /\ U32.v i <= U32.v nn)
-  (ensures fun h0 _ h1 -> h0 == h1)
-let rec checksum m nn i ck =
-  if U32.lt i nn then
-    checksum m nn (U32.add i 1ul) (fold ck (C.uint32_to_uint64 m.(U32.add (U32.add nn nn) i)))
-  else ck
+fn checksum (c: V.vec U32.t) (nn: SZ.t) (#s: Ghost.erased (Seq.seq U32.t))
+  preserves V.pts_to c s
+  requires pure (V.length c == SZ.v nn /\ SZ.fits (SZ.v nn + 1))
+  returns r: U64.t
+{
+  V.pts_to_len c;
+  let mut i = 0sz;
+  let mut ck = ck_init;
+  while (!i `SZ.lt` nn)
+  invariant exists* vi vck. R.pts_to i vi ** R.pts_to ck vck ** pure (SZ.v vi <= SZ.v nn)
+  decreases (SZ.v nn - SZ.v !i)
+  {
+    let vi = !i;
+    let x = V.(c.(vi));
+    ck := ckfold !ck (FStar.Int.Cast.uint32_to_uint64 x);
+    SZ.fits_lte (SZ.v vi + 1) (SZ.v nn + 1);
+    i := SZ.add vi 1sz
+  };
+  !ck
+}
 
-val run: n:U32.t -> ST U64.t
-  (requires fun _ -> 1 <= U32.v n /\ U32.v n <= 4096)
-  (ensures fun _ _ _ -> True)
-let run n =
-  lemma_nn (U32.v n);
-  ML.pos_times_pos_is_pos (U32.v n) (U32.v n);
-  let nn = U32.mul n n in
-  let m = B.malloc HS.root 0ul (U32.mul 3ul nn) in
-  init_mat m nn 0ul;
-  loop_i m n nn 0ul;
-  let ck = checksum m nn 0ul ck_init in
-  B.free m;
-  ck
+fn run (n: SZ.t)
+  requires pure (SZ.fits_u64 /\ SZ.v n >= 1 /\ SZ.v n <= 4096)
+  returns r: U64.t
+  ensures emp
+{
+  assert_norm (pow2 64 == 18446744073709551616);
+  lemma_nn (SZ.v n);
+  SZ.fits_u64_implies_fits (SZ.v n * SZ.v n);
+  SZ.fits_u64_implies_fits (SZ.v n * SZ.v n + 1);
+  let nn = SZ.mul n n;
+  let a = V.alloc 0ul nn;
+  let b = V.alloc 0ul nn;
+  let c = V.alloc 0ul nn;
+  init_mat a nn 0uL;
+  init_mat b nn (SZ.sizet_to_uint64 nn);
+  loop_i a b c n;
+  let r = checksum c nn;
+  V.free a;
+  V.free b;
+  V.free c;
+  r
+}

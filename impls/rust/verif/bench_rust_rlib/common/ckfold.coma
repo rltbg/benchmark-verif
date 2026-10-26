@@ -1,0 +1,26 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/common.rs" 19 0 19 37 *)
+
+let%span scommon = "/home/user/benchmark-verif/impls/rust/src/common.rs" 20 26 20 39
+let%span scommon'0 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 20 4 20 40
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+
+use creusot.int.UInt64
+use creusot.prelude.Any
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let ckfold [#"/home/user/benchmark-verif/impls/rust/src/common.rs" 19 0 19 37] (ck: UInt64.t) (v: UInt64.t)
+  (return (x: UInt64.t)) = (! bb0
+  [ bb0 = s0
+    [ s0 = [ &_3 <- UInt64.bw_xor ck v ] s1
+    | s1 = wrapping_mul [%#scommon'0] {_3} {[%#scommon] (1099511628211: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_ret <- _x ] s2)
+    | s2 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l () | & ck: UInt64.t = ck | & v: UInt64.t = v | & _3: UInt64.t = Any.any_l () ])
+  [ return (result: UInt64.t) -> (! return {result}) ]

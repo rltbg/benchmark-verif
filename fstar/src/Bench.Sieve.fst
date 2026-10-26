@@ -1,57 +1,102 @@
 module Bench.Sieve
-(* Crible d'Ératosthène, 1 octet par entier. n <= 4_000_000_000.
-   Prouvé : accès dans les bornes (garde `j <= n` explicite), pas de débordement dans `mark`.
-   Non prouvé : j0 = i*i et i+1 utilisent *_mod (la valeur est exacte tant que n <= 4e9,
-   mais l'obligation de non-débordement n'a pas été démontrée). *)
-
-open FStar.HyperStack.ST
-open LowStar.BufferOps
+#lang-pulse
+(* Crible d'Ératosthène, 1 octet par entier. 2 <= n <= 4_000_000_000. *)
+open Pulse.Lib.Pervasives
 open Bench.Common
-
-module B   = LowStar.Buffer
-module HS  = FStar.HyperStack
+module V   = Pulse.Lib.Vec
+module R   = Pulse.Lib.Reference
+module SZ  = FStar.SizeT
 module U8  = FStar.UInt8
-module U32 = FStar.UInt32
 module U64 = FStar.UInt64
-module C   = FStar.Int.Cast
+module ML  = FStar.Math.Lemmas
 
-#set-options "--fuel 0 --ifuel 0 --z3rlimit 100"
+(* Marque les multiples de i à partir de j (j <= n). *)
+fn mark (f: V.vec U8.t) (n i j0: SZ.t) (#s0: Ghost.erased (Seq.seq U8.t))
+  requires V.pts_to f s0 ** pure (V.length f == SZ.v n + 1 /\ SZ.v j0 <= SZ.v n + 1 /\ SZ.v i >= 1 /\ SZ.v i <= SZ.v n /\ SZ.fits (2 * SZ.v n + 2))
+  ensures exists* s. V.pts_to f s ** pure (Seq.length s == SZ.v n + 1)
+{
+  V.pts_to_len f;
+  let mut j = j0;
+  while (!j `SZ.lte` n)
+  invariant exists* vj s. R.pts_to j vj ** V.pts_to f s **
+            pure (SZ.v vj <= SZ.v n + SZ.v i /\ Seq.length s == SZ.v n + 1)
+  decreases (if SZ.v !j <= SZ.v n then SZ.v n + 1 - SZ.v !j else 0)
+  {
+    let vj = !j;
+    V.(f.(vj) <- 1uy);
+    SZ.fits_lte (SZ.v vj + SZ.v i) (2 * SZ.v n + 2);
+    j := SZ.add vj i;
+  }
+}
 
-val mark: f:B.buffer U8.t -> n:U32.t -> i:U32.t -> j:U32.t -> Stack unit
-  (requires fun h -> B.live h f /\ B.length f == U32.v n + 1 /\ U32.v j <= U32.v n)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer f) h0 h1)
-let rec mark f n i j =
-  f.(j) <- 1uy;
-  if U32.lte i (U32.sub n j) then mark f n i (U32.add j i)
+(* Pour chaque i >= 2 tel que i*i <= n (testé sous la forme i <= n/i) et i premier, marque ses multiples. *)
+fn sieve_outer (f: V.vec U8.t) (n: SZ.t) (#s0: Ghost.erased (Seq.seq U8.t))
+  requires V.pts_to f s0 ** pure (V.length f == SZ.v n + 1 /\ SZ.v n >= 2 /\ SZ.fits (2 * SZ.v n + 2))
+  ensures exists* s. V.pts_to f s ** pure (Seq.length s == SZ.v n + 1)
+{
+  V.pts_to_len f;
+  let mut i = 2sz;
+  while (
+    let vi = !i;
+    (SZ.lte vi n && SZ.lte vi (SZ.div n vi))
+  )
+  invariant exists* vi s. R.pts_to i vi ** V.pts_to f s **
+            pure (SZ.v vi >= 2 /\ SZ.v vi <= SZ.v n + 1 /\ Seq.length s == SZ.v n + 1)
+  decreases (SZ.v n + 1 - SZ.v !i)
+  {
+    let vi = !i;
+    let fi = V.(f.(vi));
+    if (fi = 0uy) {
+      ML.multiply_fractions (SZ.v n) (SZ.v vi);
+      ML.lemma_mult_le_left (SZ.v vi) (SZ.v vi) (SZ.v n / SZ.v vi);
+      SZ.fits_lte (SZ.v vi * SZ.v vi) (SZ.v n);
+      let j0 = SZ.mul vi vi;
+      mark f n vi j0
+    };
+    V.pts_to_len f;
+    SZ.fits_lte (SZ.v vi + 1) (2 * SZ.v n + 2);
+    i := SZ.add vi 1sz
+  }
+}
 
-val sieve_outer: f:B.buffer U8.t -> n:U32.t -> i:U32.t -> Stack unit
-  (requires fun h -> B.live h f /\ B.length f == U32.v n + 1 /\ U32.v n <= 4000000000 /\ U32.v i >= 2 /\ U32.v i <= U32.v n + 1)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer f) h0 h1)
-let rec sieve_outer f n i =
-  if U32.lte i n && U32.lte i (U32.div n i) then begin
-    (if U8.eq f.(i) 0uy then begin
-      let j0 = U32.mul_mod i i in
-      if U32.lte j0 n then mark f n i j0
-    end);
-    sieve_outer f n (U32.add i 1ul)
-  end
+(* ck = fold des premiers p (dans l'ordre), puis du nombre de premiers. *)
+fn count (f: V.vec U8.t) (n: SZ.t) (#s: Ghost.erased (Seq.seq U8.t))
+  preserves V.pts_to f s
+  requires pure (V.length f == SZ.v n + 1 /\ SZ.v n >= 2 /\ SZ.fits (2 * SZ.v n + 2))
+  returns r: U64.t
+{
+  V.pts_to_len f;
+  let mut i = 2sz;
+  let mut ck = ck_init;
+  let mut cnt = 0uL;
+  while (!i `SZ.lte` n)
+  invariant exists* vi vck vcnt. R.pts_to i vi ** R.pts_to ck vck ** R.pts_to cnt vcnt **
+            pure (SZ.v vi >= 2 /\ SZ.v vi <= SZ.v n + 1)
+  decreases (SZ.v n + 1 - SZ.v !i)
+  {
+    let vi = !i;
+    let fi = V.(f.(vi));
+    if (fi = 0uy) {
+      ck := ckfold !ck (SZ.sizet_to_uint64 vi);
+      cnt := U64.add_mod !cnt 1uL
+    };
+    SZ.fits_lte (SZ.v vi + 1) (2 * SZ.v n + 2);
+    i := SZ.add vi 1sz
+  };
+  ckfold !ck !cnt
+}
 
-val count: f:B.buffer U8.t -> n:U32.t -> i:U32.t -> ck:U64.t -> cnt:U64.t -> Stack U64.t
-  (requires fun h -> B.live h f /\ B.length f == U32.v n + 1 /\ U32.v n <= 4000000000 /\ U32.v i >= 2 /\ U32.v i <= U32.v n + 1)
-  (ensures fun h0 _ h1 -> h0 == h1)
-let rec count f n i ck cnt =
-  if U32.lte i n then begin
-    if U8.eq f.(i) 0uy
-    then count f n (U32.add i 1ul) (fold ck (C.uint32_to_uint64 i)) (U64.add_mod cnt 1uL)
-    else count f n (U32.add i 1ul) ck cnt
-  end else fold ck cnt
-
-val run: n:U32.t -> ST U64.t
-  (requires fun _ -> 2 <= U32.v n /\ U32.v n <= 4000000000)
-  (ensures fun _ _ _ -> True)
-let run n =
-  let f = B.malloc HS.root 0uy (U32.add n 1ul) in
-  sieve_outer f n 2ul;
-  let ck = count f n 2ul ck_init 0uL in
-  B.free f;
-  ck
+fn run (n: SZ.t)
+  requires pure (SZ.fits_u64 /\ SZ.v n >= 2 /\ SZ.v n <= 4000000000)
+  returns r: U64.t
+  ensures emp
+{
+  assert_norm (pow2 64 == 18446744073709551616);
+  SZ.fits_u64_implies_fits (SZ.v n + 1);
+  SZ.fits_u64_implies_fits (2 * SZ.v n + 2);
+  let f = V.alloc 0uy (SZ.add n 1sz);
+  sieve_outer f n;
+  let r = count f n;
+  V.free f;
+  r
+}

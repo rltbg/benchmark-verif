@@ -1,194 +1,214 @@
-# Benchmark de programmation vérifiée : F* (→ C / OCaml / F#) et Rust + Creusot
+# Programmation vérifiée : F* (→ C, OCaml, F#) contre Rust + Creusot
 
-Question posée : *« le code vérifié (F*, Creusot) tient-il la route face au code écrit à la main, en
-CPU, en RAM, en disque et surtout en débit (5 lignes/s ou 150 000 ?) »*.
+Question : *« le code vérifié tient-il la route, en CPU, en RAM, en disque, et surtout en débit ? »*
 
-Ce dépôt contient **cinq workloads identiques** (spécification dans [`spec/WORKLOADS.md`](spec/WORKLOADS.md)),
-implémentés dans plusieurs langages, un **harnais de mesure** externe (temps, CPU, pic RAM + courbe
-RAM, défauts de page, E/S disque, taille des binaires, coût de démarrage) et un **rapport** (Markdown,
-HTML, CSV). Chaque implémentation doit produire le **même checksum** ; sinon le résultat est marqué ❌.
+Ce dépôt compare **quatre chaînes**, sur **cinq workloads identiques** (spécification dans
+[`spec/WORKLOADS.md`](spec/WORKLOADS.md)), avec un harnais de mesure externe (temps, CPU, pic RAM et courbe,
+défauts de page, E/S disque, taille des binaires, coût de démarrage). Chaque chaîne doit produire le **même
+checksum** ; sinon le résultat est marqué ❌.
 
-## Ce qui est mesuré, et ce qui ne l'est pas encore — lisez ceci d'abord
-
-| colonne | source | état dans cette session |
+| colonne | source vérifiée | extraction / compilation |
 |---|---|---|
-| `c-ref` — C écrit à la main | `impls/c-ref` | ✅ construit, exécuté, mesuré (oracle des checksums) |
-| `rust-creusot` — Rust annoté Creusot | `impls/rust` | ✅ construit (`cargo build` efface les contrats), exécuté, mesuré. ⚠️ **les preuves Creusot n'ont pas été lancées** (Creusot n'est pas installé ici) |
-| `ocaml-ref` — OCaml écrit à la main | `impls/ocaml-ref` | ✅ construit, exécuté, mesuré (contrôle) |
-| `fsharp-ref` — F# écrit à la main | `impls/fsharp-ref` | ✅ construit, exécuté, mesuré (contrôle) |
-| `fstar-c` — F* → Low* → KaRaMeL → C | `fstar/` | ⚠️ **sources et scripts écrits, jamais exécutés** |
-| `fstar-ocaml` — F* → OCaml | `fstar/` | ⚠️ idem |
-| `fstar-fsharp` — F* → F# | `fstar/` | ⚠️ idem, et **expérimental** (voir plus bas) |
+| `rust-creusot` | `impls/rust` (Rust annoté Creusot) | `cargo build --release` (les contrats sont effacés) |
+| `fstar-c` | `fstar/src/*.fst` (Pulse) | `fstar.exe --codegen C` → `gcc -O3` |
+| `fstar-fsharp` | **les mêmes** sources F* | `fstar.exe --codegen FSharp` → .NET 10 |
+| `fstar-ocaml` / `fstar-ocaml-fast` | **les mêmes** sources F* | `fstar.exe --codegen OCaml` → `ocamlopt` (runtime livré / conversions corrigées) |
 
-**Pourquoi les trois colonnes F* n'ont pas de chiffres.** J'ai pu télécharger le binaire officiel de F*
-(v2025.03.25) mais l'exécution d'un binaire téléchargé a été refusée par le contrôle de permissions de
-la session. Je n'ai donc **pas pu vérifier ni extraire** les modules F*. Les six fichiers
-`fstar/src/Bench.*.fst` ont été écrits en lisant les signatures de la ulib livrée (`LowStar.Buffer`,
-`FStar.UInt32`, `FStar.Math.Lemmas`…) mais **n'ont jamais été typés par F\***. Attendez-vous à
-quelques itérations de correction au premier `fstar/build.sh verify` (obligations de preuve SMT
-manquantes, noms de lemmes, syntaxe). Les lignes F* du rapport apparaissent automatiquement dès que
-les binaires `fstar/_build/{c,ocaml,fsharp}` existent.
+Il n'y a **aucune implémentation écrite à la main** dans le benchmark. (Version précédente : j'avais ajouté des
+ports C/OCaml/F# « à la main » comme contrôles ; ils ont été supprimés — voir plus bas.)
 
-Les checksums des quatre implémentations exécutables sont **identiques sur les cinq workloads**,
-donc la spécification est non ambiguë et les futures sorties F* pourront être comparées à un oracle.
+## Réponses aux deux questions de fond
+
+### « Pourquoi des implémentations à la main ? »
+
+Je les avais introduites pour deux raisons : (1) avoir un oracle de checksums avant de pouvoir exécuter F*, et
+(2) disposer de « planchers » pour séparer le coût du langage du coût de l'extraction F*. Avec le binaire F* récent
+(v2026.10.25), ces deux raisons disparaissent : F* s'exécute, et ses trois backends sont réels. Elles sont donc
+supprimées. Il reste seulement une table de checksums de référence aux petites tailles
+([`spec/checksums.json`](spec/checksums.json)), calculée une fois par un programme C jetable et retrouvée à
+l'identique par les quatre chaînes. Si vous voulez un jour un plancher « C écrit à la main », il faudra le
+réintroduire explicitement.
+
+### « Que veut dire Rust + contrats Creusot ? »
+
+* **Creusot** est un outil de *vérification déductive* pour Rust. On écrit dans le code Rust des **contrats** :
+  `#[requires(…)]` (précondition), `#[ensures(…)]` (postcondition), `#[invariant(…)]` (invariant de boucle),
+  `#[variant(…)]` (terminaison), et des fonctions de spécification en logique (`#[logic]`). `cargo creusot`
+  traduit le MIR en Why3/Coma, génère des obligations de preuve et les confie à des solveurs SMT
+  (Alt-Ergo, Z3, CVC4/5).
+* Un `cargo build` ordinaire **ignore** ces annotations : le binaire est du Rust normal. Le surcoût à l'exécution
+  vient uniquement des choix de code que la preuve impose, jamais des preuves elles-mêmes.
+* Ce qui est **réellement prouvé** ici (`make creusot`, voir « Niveau de preuve »): absence de panique et de
+  débordement arithmétique pour tout le crate, terminaison de tout ce qui n'alloue pas, et — pour le tri —
+  la **correction fonctionnelle complète** (le résultat est trié *et* est une permutation de l'entrée, rien
+  d'autre n'est modifié). Les preuves sont exécutées (Alt-Ergo/Z3/CVC5) : un invariant affaibli fait échouer le
+  but correspondant, je l'ai vérifié.
+* Dans la version précédente du dépôt, les contrats étaient écrits mais **jamais prouvés** (Creusot n'était pas
+  installé). Ce n'est plus le cas.
+
+## Niveau de preuve (ce qui est démontré, et ce qui ne l'est pas)
+
+| workload | F* (Pulse) | Rust (Creusot) |
+|---|---|---|
+| `sort` | **fonctionnel complet** : trié ∧ permutation ∧ cadre ; mémoire, débordements, terminaison | **fonctionnel complet** (idem) ; terminaison sauf l'allocation |
+| `sieve` | mémoire sûre, indices, débordements, terminaison | idem |
+| `matmul` | idem + indices non linéaires `i·n+j < n²` | idem |
+| `lines` | idem ; l'analyseur est gardé par `p < len` | idem |
+| `hashmap` | idem ; sondage borné par `cap` essais | idem |
+
+**Limites assumées.** Hors du tri, je n'ai pas prouvé la correction « métier » (crible = nombres premiers,
+produit matriciel = somme des produits, table = dictionnaire, analyse de lignes = somme par clé). Ce sont des
+preuves de plusieurs jours chacune ; elles n'ajouteraient pas une instruction au code généré, seulement du temps
+de preuve. Le checksum, comparé entre les quatre chaînes, tient lieu de test de non-régression pour ces quatre-là.
+Les corps de `mix64` et `ckfold` sont des opérations modulo 2^64 sans contrat.
+
+## Ce que fait réellement F* 2026.10.25 (constats)
+
+F* a changé : `LowStar.Buffer`/KaRaMeL ont disparu de la ulib ; la programmation de bas niveau passe par
+**Pulse** (logique de séparation, `Pulse.Lib.Vec`, boucles `while` avec invariants) et l'extracteur
+**Custard** (extraction « programme entier », monomorphisante).
+
+* **C** : Custard produit directement du C11 autonome (boucles `while`, `malloc`/`free`, aucun runtime). Sur le
+  tri et le crible, c'est exactement le C qu'on écrirait à la main.
+* **F#** : les entiers machine deviennent les types .NET natifs (`uint32`, `uint64`, `byte[]`), sans bibliothèque de
+  support. C'est le backend le plus proche du C en sémantique ; il refuse tout `Prims.int` à l'exécution.
+* **OCaml** : le backend OCaml, lui, conserve le modèle de la bibliothèque F* : `FStar_SizeT.t` est un type boxé
+  (`Sz of FStar_UInt64.t`, lui-même un `Stdint.Uint64.t`), les index passent par `Z.to_int (FStar_SizeT.v p)`,
+  et **`FStar_UIntN.v` convertit l'entier en chaîne décimale puis la reparse avec Zarith**
+  (`Prims.parse_int (M.to_string x)`), de même pour `uint_to_t`. C'est la cause principale de la lenteur : chaque
+  accès tableau fait un aller-retour par une chaîne de caractères. D'où deux colonnes :
+  * `fstar-ocaml` : runtime exactement tel que livré (compilé depuis `ulib/ml` ; les `.cmxa` précompilés exigent une
+    variante exacte d'OCaml 5.3, rejetée par un OCaml standard) ;
+  * `fstar-ocaml-fast` : **mêmes sources extraites**, seules `v` et `uint_to_t` remplacées par des conversions
+    directes (`fstar/ocaml/build-ocaml.sh fast`).
+  Un essai avec flambda (`-O3`) change les temps de ±20 % dans les deux sens : pas de colonne dédiée.
+* **Bibliothèque** : la bibliothèque Pulse fournit un tri fusion vérifié (`Pulse.Lib.Sort.Merge.*`) et une table de
+  hachage vérifiée (`Pulse.Lib.HashTable`). Je les ai examinées et **n'ai pas pu utiliser le tri** : sa
+  spécification (`spec_merge`) renvoie `false` dès que deux éléments se comparent égaux, donc il ne trie que des
+  clés toutes distinctes ; mon workload (8 M de u32 aléatoires) contient des doublons. J'ai donc écrit un tri
+  fusion de même nature mais avec doublons. `Pulse.Lib.Vec`, `FStar.SizeT`, `FStar.Seq.Properties`
+  (`permutation`, `append_permutations`, …) et `FStar.Math.Lemmas` sont, eux, utilisés.
 
 ## Mise en route
 
 ```bash
-make refs                     # C, Rust, OCaml, F# : build + empreinte disque (gcc, cargo, ocamlfind, dotnet 8)
-make bench PRESET=medium      # exécute tout ce qui est construit ; écrit results/run-medium.{json,md,html,csv}
-python3 harness/bench.py list # implémentations détectées + tailles des presets
+scripts/setup-fstar.sh      # F* 2026.10.25, .NET 10, switch opam OCaml 5.3 (stdint, zarith, ppx_deriving...)
+scripts/setup-creusot.sh    # Creusot (clone, opam, solveurs, cargo-creusot)
 
-# F* (optionnel, voir ci-dessous)
-scripts/setup-fstar.sh && scripts/setup-karamel.sh
-make fstar-verify             # ne fait que vérifier les modules
-make fstar                    # vérifie puis construit fstar-c, fstar-ocaml, fstar-fsharp
+scripts/build-all.sh        # Rust + F* -> C, F#, OCaml ; écrit results/footprint.json
+make creusot                # preuves Creusot (durée enregistrée)
+fstar/build.sh verify       # preuves F* (durée enregistrée)
 
-# Creusot (optionnel)
-scripts/setup-creusot.sh && make creusot   # `cargo creusot prove`, temps enregistré dans le rapport
+python3 harness/bench.py list
+python3 harness/bench.py run --preset medium --repeat 3         # écrit results/run-medium.{json,md,html,csv}
+python3 harness/bench.py run --preset tiny --impls fstar-ocaml  # l'OCaml livré ne termine que 'tiny'
 ```
 
-Presets : `smoke` (validation + coût de démarrage), `small`, `medium`, `large` (≈ 1 Go de RAM par
-workload), `xlarge` (jusqu'à plusieurs Go : sieve 3 G, matmul 4096, lines 100 M). Options utiles :
-`--repeat N`, `--timeout S`, `--impls a,b`, `--workloads w1,w2`, et `--wrapper "…"` pour préfixer la
-commande, par exemple `--wrapper "taskset -c 2"` pour épingler un cœur ou
-`--wrapper "systemd-run --scope -p MemoryMax=2G --user"` pour plafonner la RAM et voir qui meurt.
+Presets : `smoke`, `tiny`, `small`, `medium`, `large`, `xlarge` (voir `harness/presets.json`). Options :
+`--repeat N`, `--timeout S`, `--impls a,b`, `--workloads w,…`, `--wrapper "taskset -c 2"` ou
+`--wrapper "systemd-run --scope -p MemoryMax=2G --user"` pour plafonner la RAM.
 
 ## Organisation
 
 ```
-spec/WORKLOADS.md           spécification des 5 workloads (algorithmes, graines, checksums, tailles)
-harness/bench.py            lanceur + mesures + rapport ; impls.json / presets.json
-impls/c-ref                 C à la main (plancher de perf, oracle de checksum)
-impls/rust                  crate Rust annoté Creusot (#[requires]/#[ensures]/#[invariant])
-impls/ocaml-ref, fsharp-ref ports idiomatiques à la main (contrôles pour les colonnes F* → OCaml / F#)
-fstar/src                   Bench.{Common,Sort,Sieve,Matmul,Lines,Hashmap}.fst — Low* vérifié
-fstar/drivers, build.sh     pilotes C/OCaml/F# + pipeline verify → krml → C | OCaml | F#
-fstar/ocaml/fastbuf.ml      réalisation OCaml native des buffers (voir « constats »)
-scripts/                    installation de F*, KaRaMeL, Creusot ; build des références
-results/                    sorties des runs
+spec/WORKLOADS.md        les 5 workloads (algorithmes, graines, checksums, tailles) ; spec/checksums.json
+harness/bench.py         lanceur + mesures + rapport ; runner.c (fork/exec/wait4) ; impls.json ; presets.json
+impls/rust               crate Rust + contrats Creusot (src/{common,sort,sieve,matmul,lines,hashmap}.rs)
+fstar/src                Bench.{Common,SortSpec,Sort,Sieve,Matmul,Lines,Hashmap,All}.fst(i) — Pulse
+fstar/build.sh           verify -> extraction Custard -> C | F# | OCaml
+fstar/ocaml/build-ocaml.sh   compile le code OCaml extrait avec le runtime F* (stock | fast)
+fstar/drivers            pilotes C / F# / OCaml (parse des arguments, chronométrage, affichage)
+scripts/                 installation et construction ; results/ : sorties
 ```
-
-## Les cinq workloads (ce qu'ils attaquent)
-
-| workload | CPU | RAM | particularité |
-|---|:-:|:-:|---|
-| `sort` — tri fusion de n u32, buffer de 2n | ●●● | ●●○ | branches imprévisibles, deux flux d'écriture |
-| `sieve` — crible d'Ératosthène jusqu'à n | ●○○ | ●●● | bande passante mémoire, 1 octet/entier, jusqu'à 3 Go |
-| `matmul` — produit dense n×n en u32 | ●●● | ●○○ | arithmétique, vectorisation, indices non linéaires à prouver |
-| `lines` — génère puis parse n lignes `clé;valeur`, agrège par clé | ●●○ | ●●○ | **lignes/seconde**, flux d'octets, table de 16 Mo en accès aléatoire |
-| `hashmap` — adressage ouvert, n insertions + 2n recherches | ●○○ | ●●● | latence mémoire (un défaut de cache par sonde) |
-
-Chaque workload dérive ses entrées d'une fonction pure de l'indice (splitmix64), pas de PRNG à état
-ni de fichier d'entrée : aucune variance liée au générateur ni au disque. Le disque est mesuré par les
-compteurs d'E/S du noyau (`ru_inblock/oublock`) et par la taille des binaires/runtimes ; aucun
-workload ne lit de fichier (un benchmark « disque » mesurerait le disque, pas le langage).
 
 ## Méthodologie de mesure
 
-* **Débit** : mesuré *dans* le processus autour du calcul seul (horloge monotone), donc sans le
-  démarrage de .NET (~60 ms, ~27 Mo) ; le coût de démarrage est rapporté séparément.
-* **CPU / RAM / disque** : mesurés *de l'extérieur* par le harnais (`wait4` : user, sys, `ru_maxrss`,
-  défauts de page, blocs E/S) plus un échantillonneur `/proc/<pid>` toutes les 20 ms (courbe de RSS,
-  `VmHWM`). `ru_maxrss` hérite du RSS du harnais Python lors du `fork` ; le harnais le corrige avec
-  `VmHWM` quand le pic réel est inférieur — pour les runs de quelques millisecondes, la valeur de
-  pic est donc une borne basse.
-* **RAM/idéal** : pic RSS divisé par la taille des structures de la spécification (voir
-  `spec/WORKLOADS.md`). 1.00 = aucune surconsommation ; c'est la mesure la plus parlante de
-  l'empreinte d'un runtime et de sa représentation des données (par exemple un `int array` OCaml
-  pèse 8 octets par u32).
-* Médiane de N exécutions ; l'écart relatif min–max du temps interne est conservé dans le JSON.
-* Les checksums de toutes les implémentations d'une même ligne doivent être égaux (✅/❌).
-* Limites : une seule machine virtuelle, pas d'épinglage de cœur par défaut, pas de gouverneur CPU
-  figé, pas d'isolation du bruit des autres VM. Les comparaisons relatives entre lignes d'un même
-  run sont fiables à quelques pourcents ; les valeurs absolues ne le sont pas.
-* Équité des compilateurs : `gcc -O3` (sans `-march=native`), `rustc -C opt-level=3 + LTO`,
-  `ocamlopt -O3` (sans flambda, `-O3` est ignoré), `dotnet` Release avec TieredPGO. Les accès restent
-  contrôlés (bornes) en Rust, OCaml et .NET, comme dans l'idiome de chaque langage.
-
-## Ce que « vérifié » veut dire ici (et ce que ça coûte à l'exécution)
-
-Le point à retenir : **les preuves sont effacées à la compilation**. Ce qui coûte à l'exécution, ce
-sont les *choix de représentation et de style* que la vérification impose, pas les preuves elles-mêmes.
-
-| implémentation | ce qui est démontré (visé) | gardes / écarts par rapport au C à la main |
-|---|---|---|
-| F* (Low*) | mémoire sûre (aucun accès hors bornes), seuls les buffers annoncés sont modifiés, pas de débordement des indices ; arithmétique des PRNG en `*_mod` | `lines` : `p < len` testé à chaque octet (machine à états) ; `hashmap` : indices masqués ; `sieve`/`hashmap` : quelques `*_mod` là où la preuve de non-débordement n'a pas été faite (documentés dans l'en-tête de chaque module) |
-| Rust + Creusot | absence de panique : indices dans les bornes et pas de débordement hors `wrapping_*`, via `#[requires]`, `#[ensures]`, `#[invariant]` | les corps de `mix64` et `fold` sont `#[trusted]` ; l'invariant de forme du texte de `lines` n'est pas écrit (les accès restent contrôlés par Rust) ; `matmul` demande un lemme d'arithmétique non linéaire non fourni |
-
-Aucune des deux chaînes ne prouve ici la **correction fonctionnelle** (le tri est une permutation
-triée, le crible renvoie les premiers…). C'est volontaire : elle n'ajoute pas une instruction au code
-généré, seulement du temps de preuve. Le checksum, comparé à l'oracle C, tient lieu de test de
-non-régression. Quand les preuves tourneront, le temps de vérification s'affichera dans la table
-« Empreinte disque et coût de construction ».
-
-## Constats déjà établis en lisant la bibliothèque de F* (sans l'exécuter)
-
-Ces points viennent de la lecture du tarball officiel `fstar-v2025.03.25-Linux-x86_64`, pas de
-mesures ; ils expliquent pourquoi les colonnes OCaml/F# de F* ne sont pas un simple « F* mais plus
-lent ».
-
-1. **Le piège de `LowStar.Buffer` vers OCaml.** La réalisation OCaml fournie
-   (`ulib.ml/LowStar_Monotonic_Buffer.ml`) stocke le contenu d'un buffer dans une `FStar.Seq`, qui est
-   en OCaml une **liste chaînée** (`type 'a seq = MkSeq of 'a list`, `index`/`upd` en O(n)). Un tri de
-   8 millions d'éléments y est quadratique : irréalisable. `FStar.Array` en OCaml est encore pire
-   (séquence immuable dans une `ref`, copiée à chaque `upd`). `fstar/ocaml/fastbuf.ml` fournit une
-   réalisation native (tableau OCaml + décalage) que `FASTBUF=1 fstar/build.sh ocaml` substitue par
-   réécriture du code extrait. Sans elle, attendez-vous à des `timeout` dès `small`.
-2. **Entiers machine = `Stdint` boxés.** `FStar.UInt32/UInt64/UInt8` sont réalisés par `Stdint`
-   (blocs custom alloués dans le tas) et tout tableau extrait est un `'a array` générique : un `u8`
-   coûte donc un pointeur plus un bloc boxé. Le crible de 1 G ne peut pas tenir dans 16 Go avec ce
-   modèle ; `sieve` doit être mesuré à `small`/`medium` seulement pour `fstar-ocaml`.
-3. **`int` et `nat` F\* = Zarith** (`Prims.int` est un `Z.t`). Le code de ce dépôt n'utilise des
-   `int` que dans les spécifications (effacées) ; tout le calcul est en entiers machine.
-4. **Pas de runtime F# dans la distribution.** Le tarball ne contient que `ulib/ml` (pas de `ulib/fs`)
-   et un accès direct à `ulib/fs/Prims.fs` sur la branche principale du dépôt amont renvoie 404. Le backend
-   `--codegen FSharp` existe encore dans le compilateur mais n'a plus de bibliothèque d'exécution ;
-   `fstar/fsharp/Runtime.fs` n'en est qu'un squelette hypothétique (entiers, conversions, buffers) et
-   `fstar-fsharp` est donc **expérimental**. Le contrôle `fsharp-ref` donne le plancher que .NET sait
-   atteindre.
-5. **Le chemin sérieux vers la vitesse est Low\* → C.** C'est celui que HACL\*, EverCrypt, etc.
-   utilisent : KaRaMeL produit du C idiomatique que gcc optimise comme le C écrit à la main. Le surcoût
-   attendu est celui des gardes et de la forme des boucles (récursions terminales converties en
-   `while`), pas celui des preuves.
+* **Débit** : mesuré *dans* le processus autour du calcul (hors démarrage du runtime) ; le démarrage est rapporté
+  à part (run minuscule, médiane de 3).
+* **CPU / RAM / disque** : mesurés par un petit lanceur C (`harness/runner.c`) qui fait `fork`/`exec`/`wait4`
+  (user, sys, `ru_maxrss`, défauts de page, blocs E/S) plus un échantillonneur `/proc/<pid>` toutes les 20 ms
+  (courbe de RSS). Le lanceur est nécessaire : `ru_maxrss` d'un enfant hérite du RSS du parent au `fork`, ce qui
+  ajoutait ~15 Mo de plancher parasite quand le parent était l'interpréteur Python.
+* **RAM/idéal** = pic RSS ÷ taille des structures de la spécification (voir `spec/WORKLOADS.md`).
+* Médiane de N exécutions ; checksums vérifiés entre chaînes et contre `spec/checksums.json` (✅/❌).
+* Limites : une VM de 4 cœurs, pas d'épinglage ni de gouverneur CPU figé ; les comparaisons relatives sont fiables à
+  quelques pourcents, pas les valeurs absolues. Aucun workload ne lit de fichier : le « disque » est mesuré par les
+  compteurs d'E/S du noyau (nuls) et par la taille des binaires/runtimes.
+* Équité des compilateurs : `gcc -O3` (sans `-march=native`) pour le C extrait ; `rustc -C opt-level=3 + LTO` ;
+  `dotnet` Release (TieredPGO) ; `ocamlopt -inline 200 -unsafe` (sans flambda).
 
 ## Résultats
 
-Voir [`results/`](results/) : `run-medium.{md,html,csv}` et `run-large.{md,html,csv}`. Synthèse
-au moment de la rédaction, pour les implémentations exécutables (moyenne géométrique des cinq
-workloads, 1.00 = meilleure du workload) :
+Machine : VM de 4 cœurs, 16 Go. Médiane de 2 à 3 exécutions. Débit = éléments (ou lignes, ou opérations) par seconde dans le processus ; temps = durée interne ; RAM = pic RSS. **Tous les checksums concordent** entre chaînes et avec la table de référence (100 comparaisons, aucune divergence, aucun timeout). Rapports complets : `results/run-*.{md,html,csv}`.
 
-### Preset `large` — débit (plus haut = mieux) / pic RAM
+### `large` (jusqu'à ~1 Go de données)
 
-| workload (n) | C (main, non vérifié) | Rust + contrats Creusot | F# (main, non vérifié) | OCaml (main, non vérifié) |
+| workload (n) | Rust + Creusot | F* (Pulse) → C | F* (Pulse) → F# |
+|---|--:|--:|--:|
+| sort (32 000 000) | 6.62 M/s · 4.84 s · 246 Mo | 7.13 M/s · 4.49 s · 246 Mo | 4.56 M/s · 7.02 s · 292 Mo |
+| sieve (1 000 000 000) | 48.34 M/s · 20.69 s · 956 Mo | 53.44 M/s · 18.71 s · 955 Mo | 42.32 M/s · 23.63 s · 982 Mo |
+| matmul (2 500) | 3.29 G/s · 4.75 s · 73 Mo | 3.16 G/s · 4.95 s · 73 Mo | 662.09 M/s · 23.60 s · 230 Mo |
+| lines (40 000 000) | 14.12 M/s · 2.83 s · 546 Mo | 16.99 M/s · 2.35 s · 545 Mo | 7.81 M/s · 5.12 s · 751 Mo |
+| hashmap (16 000 000) | 13.81 M/s · 3.48 s · 514 Mo | 16.74 M/s · 2.87 s · 514 Mo | 5.75 M/s · 8.36 s · 675 Mo |
+
+### `medium`
+
+| workload (n) | Rust + Creusot | F* (Pulse) → C | F* (Pulse) → F# |
+|---|--:|--:|--:|
+| sort (8 000 000) | 7.28 M/s · 1.10 s · 63 Mo | 7.46 M/s · 1.07 s · 62 Mo | 4.56 M/s · 1.75 s · 109 Mo |
+| sieve (200 000 000) | 59.65 M/s · 3.35 s · 193 Mo | 61.79 M/s · 3.24 s · 192 Mo | 48.65 M/s · 4.11 s · 219 Mo |
+| matmul (1 600) | 3.24 G/s · 1.27 s · 31 Mo | 3.02 G/s · 1.36 s · 31 Mo | 807.05 M/s · 5.08 s · 115 Mo |
+| lines (10 000 000) | 12.44 M/s · 0.80 s · 150 Mo | 15.58 M/s · 0.64 s · 149 Mo | 7.37 M/s · 1.36 s · 322 Mo |
+| hashmap (4 000 000) | 16.31 M/s · 0.74 s · 130 Mo | 18.41 M/s · 0.65 s · 130 Mo | 6.38 M/s · 1.88 s · 291 Mo |
+
+### `small` (première taille que l'OCaml corrigé termine)
+
+| workload (n) | Rust + Creusot | F* (Pulse) → C | F* (Pulse) → F# | F* (Pulse) → OCaml (conversions d'entiers corrigées) |
 |---|--:|--:|--:|--:|
-| sort (32 000 000) | 8.06 M éléments/s · 245 Mo | 7.14 M éléments/s · 246 Mo | 5.79 M éléments/s · 271 Mo | 5.38 M éléments/s · 501 Mo |
-| sieve (1 000 000 000) | 45.79 M entiers/s · 955 Mo | 47.08 M entiers/s · 955 Mo | 47.05 M entiers/s · 981 Mo | 43.00 M entiers/s · 973 Mo |
-| matmul (2 500) | 3.29 G mult-add/s · 73 Mo | 2.92 G mult-add/s · 73 Mo | 415.72 M mult-add/s · 99 Mo | 228.30 M mult-add/s · 149 Mo |
-| lines (40 000 000) | 16.85 M lignes/s · 545 Mo | 12.87 M lignes/s · 545 Mo | 11.76 M lignes/s · 571 Mo | 6.62 M lignes/s · 557 Mo |
-| hashmap (16 000 000) | 15.32 M opérations/s · 513 Mo | 14.71 M opérations/s · 514 Mo | 11.74 M opérations/s · 539 Mo | 8.12 M opérations/s · 517 Mo |
+| sort (1 000 000) | 8.37 M/s · 0.12 s · 10 Mo | 8.37 M/s · 0.12 s · 9 Mo | 3.03 M/s · 0.33 s · 60 Mo | 103.90 k/s · 9.62 s · 47 Mo |
+| sieve (20 000 000) | 146.67 M/s · 0.14 s · 21 Mo | 153.57 M/s · 0.13 s · 21 Mo | 88.36 M/s · 0.23 s · 47 Mo | 2.57 M/s · 7.77 s · 160 Mo |
+| matmul (512) | 4.16 G/s · 0.03 s · 5 Mo | 2.80 G/s · 0.05 s · 4 Mo | 397.29 M/s · 0.34 s · 37 Mo | 4.15 M/s · 32.36 s · 77 Mo |
+| lines (1 000 000) | 8.62 M/s · 0.12 s · 31 Mo | 10.99 M/s · 0.09 s · 31 Mo | 4.01 M/s · 0.25 s · 151 Mo | 130.70 k/s · 7.65 s · 184 Mo |
+| hashmap (500 000) | 25.58 M/s · 0.06 s · 18 Mo | 28.23 M/s · 0.05 s · 18 Mo | 7.06 M/s · 0.21 s · 171 Mo | 457.40 k/s · 3.28 s · 46 Mo |
 
-### Preset `medium` — débit (plus haut = mieux) / pic RAM
+### `tiny` (seule taille où l'OCaml livré termine)
 
-| workload (n) | C (main, non vérifié) | Rust + contrats Creusot | F# (main, non vérifié) | OCaml (main, non vérifié) |
-|---|--:|--:|--:|--:|
-| sort (8 000 000) | 8.15 M éléments/s · 62 Mo | 7.39 M éléments/s · 63 Mo | 6.26 M éléments/s · 88 Mo | 6.23 M éléments/s · 129 Mo |
-| sieve (200 000 000) | 58.72 M entiers/s · 192 Mo | 59.00 M entiers/s · 192 Mo | 58.19 M entiers/s · 218 Mo | 57.85 M entiers/s · 196 Mo |
-| matmul (1 600) | 3.24 G mult-add/s · 31 Mo | 2.86 G mult-add/s · 31 Mo | 685.21 M mult-add/s · 57 Mo | 326.97 M mult-add/s · 64 Mo |
-| lines (10 000 000) | 14.06 M lignes/s · 149 Mo | 12.60 M lignes/s · 150 Mo | 11.96 M lignes/s · 175 Mo | 7.59 M lignes/s · 155 Mo |
-| hashmap (4 000 000) | 19.21 M opérations/s · 129 Mo | 15.41 M opérations/s · 130 Mo | 14.45 M opérations/s · 155 Mo | 10.31 M opérations/s · 133 Mo |
+| workload (n) | Rust + Creusot | F* (Pulse) → C | F* (Pulse) → F# | F* (Pulse) → OCaml (conversions d'entiers corrigées) | F* (Pulse) → OCaml (runtime livré) |
+|---|--:|--:|--:|--:|--:|
+| sort (200 000) | 9.09 M/s · 0.02 s · 3 Mo | 10.22 M/s · 0.02 s · 3 Mo | 1.32 M/s · 0.15 s · 48 Mo | 121.11 k/s · 1.65 s · 15 Mo | 16.64 k/s · 12.02 s · 17 Mo |
+| sieve (5 000 000) | 123.99 M/s · 0.04 s · 7 Mo | 180.45 M/s · 0.03 s · 6 Mo | 109.70 M/s · 0.05 s · 33 Mo | 2.75 M/s · 1.82 s · 45 Mo | 498.05 k/s · 10.04 s · 47 Mo |
+| matmul (128) | 2.54 G/s · 0.00 s · 2 Mo | 3.03 G/s · 0.00 s · 2 Mo | 88.67 M/s · 0.02 s · 29 Mo | 3.76 M/s · 0.56 s · 10 Mo | 728.62 k/s · 2.88 s · 12 Mo |
+| lines (50 000) | 1.92 M/s · 0.03 s · 19 Mo | 1.88 M/s · 0.03 s · 18 Mo | 1.39 M/s · 0.04 s · 50 Mo | 69.80 k/s · 0.72 s · 31 Mo | 6.48 k/s · 7.72 s · 32 Mo |
+| hashmap (100 000) | 33.12 M/s · 0.01 s · 6 Mo | 37.54 M/s · 0.01 s · 5 Mo | 6.91 M/s · 0.04 s · 58 Mo | 475.13 k/s · 0.63 s · 16 Mo | 69.66 k/s · 4.31 s · 16 Mo |
 
-Synthèse (moyenne géométrique du temps relatif au meilleur, `large`) : C ×1.01 · Rust+Creusot ×1.12 · F# ×1.83 · OCaml ×2.58 ; pic RAM relatif : C ×1.00 · Rust ×1.00 · F# ×1.11 · OCaml ×1.34. Coût de démarrage : C/Rust/OCaml 2–3 ms et < 1 Mo ; F# (.NET) ≈ 60 ms et 27 Mo, plus 67 Mo de runtime à installer. Les 40 checksums (2 presets × 5 workloads × 4 implémentations) concordent.
+### Synthèse (moyenne géométrique du temps relatif au meilleur, `large`)
 
-Lecture rapide : sur ces workloads le **Rust annoté Creusot coûte ~10 % de plus que le C** (hypothèse non mesurée : contrôles de bornes conservés, les preuves Creusot ne les éliminent pas) et n'a pas de surcoût mémoire ; les écarts viennent surtout de `lines` (+30 %), `hashmap` (+15 %) et `sort` (+10 %). Les ports OCaml/F# à la main sont 1.5–2.6× plus lents que le C, avec un écart maximal sur `matmul` (cause probable, non vérifiée : gcc vectorise la boucle interne, ni OCaml ni .NET ici). Ce sont les *planchers* auxquels comparer les colonnes F* → OCaml / F# : on s'attend à ce que l'extraction F* soit plus lente encore (Stdint boxés, buffers génériques, voir « Constats »), mais ce n'est pas mesuré.
+| chaîne | temps | CPU | pic RAM |
+|---|--:|--:|--:|
+| F* (Pulse) → C | ×1.01 | ×1.01 | ×1.00 |
+| Rust + Creusot | ×1.12 | ×1.12 | ×1.00 |
+| F* (Pulse) → F# | ×2.28 | ×2.31 | ×1.48 |
 
-## Suite logique
+À taille `small`, l'OCaml extrait avec conversions corrigées est ~60× (sieve) à ~650× (matmul) plus lent que le C (sort 1 M : 9,6 s contre 0,12 s ;
+matmul 512 : 32 s contre 0,05 s) ; avec le runtime livré tel quel, `tiny` seulement : 12 s pour trier 200 000 éléments (C : 0,02 s).
 
-1. Autoriser l'exécution de `fstar.exe` (ou lancer `scripts/setup-fstar.sh` puis `make fstar-verify`
-   sur votre machine) pour faire typer les modules ; corriger les obligations de preuve restantes.
-2. Installer KaRaMeL et mesurer `fstar-c` — c'est la colonne qui répond vraiment à la question de départ.
-3. Installer Creusot, lancer `make creusot`, compléter les invariants manquants (forme du texte de `lines`,
-   lemme de `matmul`) et noter le temps de preuve.
-4. Mesurer `fstar-ocaml` avec et sans `FASTBUF=1` aux tailles `smoke`/`small` pour chiffrer le piège ci-dessus.
-5. Décider si l'on ajoute de la correction fonctionnelle (tri = permutation triée) pour mesurer
-   *le coût de preuve*, qui est le vrai prix de la programmation vérifiée.
+### Ce que disent ces chiffres (et ce qu'ils ne disent pas)
+
+* **F* → C est au niveau de Rust, parfois devant** (+8 % sur `sort`, +20 % sur `lines` et `hashmap` à `large`). Hypothèse
+  non mesurée : le code F* est prouvé sûr, donc extrait sans aucun contrôle de bornes, alors que le Rust vérifié garde les siens
+  (Creusot prouve qu'ils réussissent, mais `rustc` ne s'en sert pas pour les supprimer). Sur `matmul` (vectorisable) les deux
+  sont à ±5 % à `large`.
+* **F* → F# est ~2,2× plus lent que C** en moyenne (de 1,3× sur `sieve` à ~5× sur `matmul`, ~3× sur `hashmap`, ~2× sur `lines`), avec 1,2 à 3× plus
+  de RAM (tableaux .NET et GC) et ~30 Mo / ~90 ms de démarrage du runtime. Cause du `matmul` : hypothèse non mesurée (pas de vectorisation SIMD).
+* **F* → OCaml n'est pas utilisable pour de la charge** avec ce backend : entiers boxés, `FStar_SizeT` boxé, et pour le runtime livré un
+  aller-retour par une chaîne décimale à chaque accès tableau. Corriger seulement `v`/`uint_to_t` apporte un facteur 5 à 11,
+  mais on reste 60 à 650× derrière le C (`small`).
+* **Mémoire** : C et Rust sont à ~1,0× la taille des structures ; .NET ajoute ~30 Mo de runtime et 1,2 à 3× sur les tableaux ; l'OCaml extrait
+  consomme jusqu'à ~8× (crible `small` : 160 Mo pour 20 Mo de données, un mot par octet dans un tableau générique), ~5× sur le tri.
+* **Disque** : les binaires pèsent 20 Ko (F*→C) et ~390 Ko (Rust) ; F# 50 Ko + 74 Mo de runtime .NET à installer ; OCaml ~5 Mo.
+  Aucun workload ne lit de fichier ; les compteurs d'E/S du noyau sont nuls partout.
+* **Coût de la preuve** (le vrai prix de la programmation vérifiée) : vérification **à froid** de tous les modules F* : **154 s** ;
+  preuves Creusot du crate Rust : **13 s** (avec 4 solveurs en parallèle). Ces durées ne changent pas une instruction de code généré.
+* Ce que cette étude **ne montre pas** : l'effet de preuves fonctionnelles plus fortes (seul le tri en a), l'effet d'un autre compilateur C
+  ou d'`-march=native`, et la variabilité entre machines.
+

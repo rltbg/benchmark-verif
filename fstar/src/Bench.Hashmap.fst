@@ -1,110 +1,185 @@
 module Bench.Hashmap
-(* Table de hachage à adressage ouvert, sondage linéaire, couples (clé, valeur) entrelacés
-   dans un seul buffer de 2*cap u64 (cap = puissance de 2 >= 2n). n <= 2^26.
-   Prouvé : indices dans les bornes (masque `mask_idx`), sondage borné par `cap` essais. *)
-
-open FStar.HyperStack.ST
-open LowStar.BufferOps
+#lang-pulse
+(* Table de hachage à adressage ouvert, sondage linéaire, couples (clé, valeur) entrelacés dans un
+   seul tableau de 2*cap u64 (cap = puissance de 2 >= 2n). 1 <= n <= 2^26. *)
+open Pulse.Lib.Pervasives
 open Bench.Common
-
-module B   = LowStar.Buffer
-module HS  = FStar.HyperStack
+module V   = Pulse.Lib.Vec
+module R   = Pulse.Lib.Reference
+module SZ  = FStar.SizeT
 module U32 = FStar.UInt32
 module U64 = FStar.UInt64
-module C   = FStar.Int.Cast
 
-#set-options "--fuel 0 --ifuel 0 --z3rlimit 100"
+#set-options "--z3rlimit 40"
 
-inline_for_extraction noextract
 let seed : U64.t = 0x2468ACE013579BDFuL
 
-let rec find_cap (n2: U32.t{U32.v n2 <= 134217728})
-                 (cap: U32.t{2 <= U32.v cap /\ U32.v cap <= 134217728})
-                 (lg: U32.t{1 <= U32.v lg /\ U32.v lg <= 27})
-  : Tot (r: (U32.t & U32.t){2 <= U32.v (fst r) /\ U32.v (fst r) <= 134217728 /\
-                            1 <= U32.v (snd r) /\ U32.v (snd r) <= 27})
-        (decreases (27 - U32.v lg)) =
-  if U32.lt cap n2 && U32.lt lg 27ul && U32.lte cap 67108864ul
-  then find_cap n2 (U32.add cap cap) (U32.add lg 1ul)
-  else (cap, lg)
+let key_of (off i: U64.t) : U64.t =
+  U64.logor (mix64 (U64.add_mod (U64.add_mod seed off) i)) 1uL
 
-inline_for_extraction noextract
-let slot_of (key: U64.t) (lg: U32.t{1 <= U32.v lg /\ U32.v lg <= 27}) (m: U32.t) : Pure U32.t
-  (requires True) (ensures fun r -> U32.v r <= U32.v m) =
-  let h = U64.mul_mod key 0x9E3779B97F4A7C15uL in
-  mask_idx (to_u32 (U64.shift_right h (U32.sub 64ul lg))) m
+(* Position initiale : (key * phi) >> (64 - lg). *)
+let slot_raw (key: U64.t) (lg: U32.t) : Pure U64.t (requires 1 <= U32.v lg /\ U32.v lg <= 27) (ensures fun _ -> True) =
+  U64.shift_right (U64.mul_mod key 0x9E3779B97F4A7C15uL) (U32.sub 64ul lg)
 
-inline_for_extraction noextract
-let key_of (off i: U32.t) : U64.t =
-  U64.logor (mix64 (U64.add_mod (U64.add_mod seed (C.uint32_to_uint64 off)) (C.uint32_to_uint64 i))) 1uL
+(* Recherche d'un emplacement libre ou portant déjà `key`, au plus cap essais ; y écrit/ajoute i1. *)
+fn insert (t: V.vec U64.t) (cap: SZ.t) (lg: U32.t) (key i1: U64.t) (#s0: Ghost.erased (Seq.seq U64.t))
+  requires V.pts_to t s0 **
+           pure (SZ.fits_u64 /\ 2 <= SZ.v cap /\ SZ.v cap <= 134217728 /\ V.length t == 2 * SZ.v cap /\
+                 SZ.fits (2 * SZ.v cap + 2) /\ 1 <= U32.v lg /\ U32.v lg <= 27)
+  ensures exists* s. V.pts_to t s ** pure (Seq.length s == 2 * SZ.v cap)
+{
+  V.pts_to_len t;
+  let sraw = SZ.uint64_to_sizet (slot_raw key lg);
+  let mut s = (if SZ.lt sraw cap then sraw else 0sz);
+  let mut tries = 0sz;
+  let mut fin = false;
+  while (
+    let vf = !fin;
+    let vt = !tries;
+    ((not vf) && (vt `SZ.lt` cap))
+  )
+  invariant exists* vs vt vf sv. R.pts_to s vs ** R.pts_to tries vt ** R.pts_to fin vf ** V.pts_to t sv **
+            pure (SZ.v vs < SZ.v cap /\ SZ.v vt <= SZ.v cap /\ Seq.length sv == 2 * SZ.v cap)
+  decreases (if !fin then 0 else SZ.v cap - SZ.v !tries + 1)
+  {
+    let vs = !s;
+    let vt = !tries;
+    SZ.fits_lte (SZ.v vs + SZ.v vs) (2 * SZ.v cap + 2);
+    SZ.fits_lte (SZ.v vs + SZ.v vs + 1) (2 * SZ.v cap + 2);
+    let s2 = SZ.add vs vs;
+    let k = V.(t.(s2));
+    let cur = V.(t.(SZ.add s2 1sz));
+    let stop = ((k = 0uL) || (k = key));
+    if stop {
+      V.(t.(s2) <- key);
+      V.(t.(SZ.add s2 1sz) <- (if (k = 0uL) then i1 else U64.add_mod cur i1))
+    };
+    V.pts_to_len t;
+    SZ.fits_lte (SZ.v vs + 1) (2 * SZ.v cap + 2);
+    SZ.fits_lte (SZ.v vt + 1) (2 * SZ.v cap + 2);
+    let s1 = SZ.add vs 1sz;
+    s := (if stop then vs else (if SZ.lt s1 cap then s1 else 0sz));
+    tries := (if stop then vt else SZ.add vt 1sz);
+    fin := stop
+  }
+}
 
-val insert: t:B.buffer U64.t -> cap:U32.t -> m:U32.t -> key:U64.t -> s:U32.t -> tries:U32.t -> i1:U64.t -> Stack unit
-  (requires fun h ->
-    B.live h t /\ 2 <= U32.v cap /\ U32.v cap <= 134217728 /\ B.length t == 2 * U32.v cap /\
-    U32.v m == U32.v cap - 1 /\ U32.v s <= U32.v m)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer t) h0 h1)
-let rec insert t cap m key s tries i1 =
-  if U32.lt tries cap then begin
-    let s2 = U32.add s s in
-    let k = t.(s2) in
-    if U64.eq k 0uL then begin
-      t.(s2) <- key;
-      t.(U32.add s2 1ul) <- i1
-    end else if U64.eq k key then begin
-      t.(U32.add s2 1ul) <- U64.add_mod t.(U32.add s2 1ul) i1
-    end else begin
-      insert t cap m key (mask_idx (U32.add s 1ul) m) (U32.add tries 1ul) i1
-    end
-  end
+fn lookup (t: V.vec U64.t) (cap: SZ.t) (lg: U32.t) (key: U64.t) (#s: Ghost.erased (Seq.seq U64.t))
+  preserves V.pts_to t s
+  requires pure (SZ.fits_u64 /\ 2 <= SZ.v cap /\ SZ.v cap <= 134217728 /\ V.length t == 2 * SZ.v cap /\
+                 SZ.fits (2 * SZ.v cap + 2) /\ 1 <= U32.v lg /\ U32.v lg <= 27)
+  returns r: U64.t
+{
+  V.pts_to_len t;
+  let sraw = SZ.uint64_to_sizet (slot_raw key lg);
+  let mut s = (if SZ.lt sraw cap then sraw else 0sz);
+  let mut tries = 0sz;
+  let mut fin = false;
+  let mut res = 0uL;
+  while (
+    let vf = !fin;
+    let vt = !tries;
+    ((not vf) && (vt `SZ.lt` cap))
+  )
+  invariant exists* vs vt vf vr. R.pts_to s vs ** R.pts_to tries vt ** R.pts_to fin vf ** R.pts_to res vr **
+            pure (SZ.v vs < SZ.v cap /\ SZ.v vt <= SZ.v cap)
+  decreases (if !fin then 0 else SZ.v cap - SZ.v !tries + 1)
+  {
+    let vs = !s;
+    let vt = !tries;
+    SZ.fits_lte (SZ.v vs + SZ.v vs) (2 * SZ.v cap + 2);
+    SZ.fits_lte (SZ.v vs + SZ.v vs + 1) (2 * SZ.v cap + 2);
+    let s2 = SZ.add vs vs;
+    let k = V.(t.(s2));
+    let v = V.(t.(SZ.add s2 1sz));
+    let stop = ((k = 0uL) || (k = key));
+    SZ.fits_lte (SZ.v vs + 1) (2 * SZ.v cap + 2);
+    SZ.fits_lte (SZ.v vt + 1) (2 * SZ.v cap + 2);
+    let s1 = SZ.add vs 1sz;
+    s := (if stop then vs else (if SZ.lt s1 cap then s1 else 0sz));
+    tries := (if stop then vt else SZ.add vt 1sz);
+    res := (if (k = key) then v else 0uL);
+    fin := stop
+  };
+  !res
+}
 
-val lookup: t:B.buffer U64.t -> cap:U32.t -> m:U32.t -> key:U64.t -> s:U32.t -> tries:U32.t -> Stack U64.t
-  (requires fun h ->
-    B.live h t /\ 2 <= U32.v cap /\ U32.v cap <= 134217728 /\ B.length t == 2 * U32.v cap /\
-    U32.v m == U32.v cap - 1 /\ U32.v s <= U32.v m)
-  (ensures fun h0 _ h1 -> h0 == h1)
-let rec lookup t cap m key s tries =
-  if U32.lt tries cap then begin
-    let s2 = U32.add s s in
-    let k = t.(s2) in
-    if U64.eq k 0uL then 0uL
-    else if U64.eq k key then t.(U32.add s2 1ul)
-    else lookup t cap m key (mask_idx (U32.add s 1ul) m) (U32.add tries 1ul)
-  end else 0uL
+fn insert_all (t: V.vec U64.t) (cap: SZ.t) (lg: U32.t) (n: SZ.t) (#s0: Ghost.erased (Seq.seq U64.t))
+  requires V.pts_to t s0 **
+           pure (SZ.fits_u64 /\ 2 <= SZ.v cap /\ SZ.v cap <= 134217728 /\ V.length t == 2 * SZ.v cap /\
+                 SZ.fits (2 * SZ.v cap + 2) /\ 1 <= U32.v lg /\ U32.v lg <= 27 /\ SZ.v n <= 67108864)
+  ensures exists* s. V.pts_to t s ** pure (Seq.length s == 2 * SZ.v cap)
+{
+  V.pts_to_len t;
+  let mut i = 0sz;
+  while (!i `SZ.lt` n)
+  invariant exists* vi s. R.pts_to i vi ** V.pts_to t s ** pure (SZ.v vi <= SZ.v n /\ Seq.length s == 2 * SZ.v cap)
+  decreases (SZ.v n - SZ.v !i)
+  {
+    let vi = !i;
+    let i64 = SZ.sizet_to_uint64 vi;
+    insert t cap lg (key_of 0uL i64) (U64.add_mod i64 1uL);
+    SZ.fits_u64_implies_fits (SZ.v vi + 1);
+    i := SZ.add vi 1sz
+  }
+}
 
-val insert_all: t:B.buffer U64.t -> cap:U32.t -> lg:U32.t -> m:U32.t -> n:U32.t -> i:U32.t -> Stack unit
-  (requires fun h ->
-    B.live h t /\ 2 <= U32.v cap /\ U32.v cap <= 134217728 /\ B.length t == 2 * U32.v cap /\
-    U32.v m == U32.v cap - 1 /\ 1 <= U32.v lg /\ U32.v lg <= 27 /\ U32.v i <= U32.v n /\ U32.v n <= 67108864)
-  (ensures fun h0 _ h1 -> B.modifies (B.loc_buffer t) h0 h1)
-let rec insert_all t cap lg m n i =
-  if U32.lt i n then begin
-    let key = key_of 0ul i in
-    insert t cap m key (slot_of key lg m) 0ul (C.uint32_to_uint64 (U32.add i 1ul));
-    insert_all t cap lg m n (U32.add i 1ul)
-  end
+fn lookup_all (t: V.vec U64.t) (cap: SZ.t) (lg: U32.t) (n: SZ.t) (off: U64.t) (ck0: U64.t)
+              (#s: Ghost.erased (Seq.seq U64.t))
+  preserves V.pts_to t s
+  requires pure (SZ.fits_u64 /\ 2 <= SZ.v cap /\ SZ.v cap <= 134217728 /\ V.length t == 2 * SZ.v cap /\
+                 SZ.fits (2 * SZ.v cap + 2) /\ 1 <= U32.v lg /\ U32.v lg <= 27 /\ SZ.v n <= 67108864)
+  returns r: U64.t
+{
+  let mut i = 0sz;
+  let mut ck = ck0;
+  while (!i `SZ.lt` n)
+  invariant exists* vi vck. R.pts_to i vi ** R.pts_to ck vck ** pure (SZ.v vi <= SZ.v n)
+  decreases (SZ.v n - SZ.v !i)
+  {
+    let vi = !i;
+    let v = lookup t cap lg (key_of off (SZ.sizet_to_uint64 vi));
+    ck := ckfold !ck v;
+    SZ.fits_u64_implies_fits (SZ.v vi + 1);
+    i := SZ.add vi 1sz
+  };
+  !ck
+}
 
-val lookup_all: t:B.buffer U64.t -> cap:U32.t -> lg:U32.t -> m:U32.t -> n:U32.t -> off:U32.t -> i:U32.t -> ck:U64.t -> Stack U64.t
-  (requires fun h ->
-    B.live h t /\ 2 <= U32.v cap /\ U32.v cap <= 134217728 /\ B.length t == 2 * U32.v cap /\
-    U32.v m == U32.v cap - 1 /\ 1 <= U32.v lg /\ U32.v lg <= 27 /\ U32.v i <= U32.v n /\ U32.v n <= 67108864 /\
-    U32.v off <= 67108864)
-  (ensures fun h0 _ h1 -> h0 == h1)
-let rec lookup_all t cap lg m n off i ck =
-  if U32.lt i n then begin
-    let key = key_of off i in
-    let v = lookup t cap m key (slot_of key lg m) 0ul in
-    lookup_all t cap lg m n off (U32.add i 1ul) (fold ck v)
-  end else ck
-
-val run: n:U32.t -> ST U64.t
-  (requires fun _ -> 1 <= U32.v n /\ U32.v n <= 67108864)
-  (ensures fun _ _ _ -> True)
-let run n =
-  let (cap, lg) = find_cap (U32.add n n) 2ul 1ul in
-  let m = U32.sub cap 1ul in
-  let t = B.malloc HS.root 0uL (U32.add cap cap) in
-  insert_all t cap lg m n 0ul;
-  let ck = lookup_all t cap lg m n 0ul 0ul ck_init in
-  let ck = lookup_all t cap lg m n n 0ul ck in
-  B.free t;
-  ck
+fn run (n: SZ.t)
+  requires pure (SZ.fits_u64 /\ SZ.v n >= 1 /\ SZ.v n <= 67108864)
+  returns r: U64.t
+  ensures emp
+{
+  assert_norm (pow2 64 == 18446744073709551616);
+  SZ.fits_u64_implies_fits (2 * SZ.v n);
+  SZ.fits_u64_implies_fits 33554432;
+  let lim = SZ.uint_to_t 33554432;
+  let n2 = SZ.add n n;
+  let mut cap = 2sz;
+  let mut lg = 1ul;
+  while (
+    let vc = !cap;
+    let vl = !lg;
+    ((vc `SZ.lt` n2) && U32.lt vl 27ul && (vc `SZ.lte` lim))
+  )
+  invariant exists* vc vl. R.pts_to cap vc ** R.pts_to lg vl **
+            pure (2 <= SZ.v vc /\ SZ.v vc <= 134217728 /\ 1 <= U32.v vl /\ U32.v vl <= 27)
+  decreases (27 - U32.v !lg)
+  {
+    let vc = !cap;
+    let vl = !lg;
+    SZ.fits_u64_implies_fits (SZ.v vc + SZ.v vc);
+    cap := SZ.add vc vc;
+    lg := U32.add vl 1ul
+  };
+  let vcap = !cap;
+  let vlg = !lg;
+  SZ.fits_u64_implies_fits (2 * SZ.v vcap + 2);
+  let t = V.alloc 0uL (SZ.add vcap vcap);
+  insert_all t vcap vlg n;
+  let ck1 = lookup_all t vcap vlg n 0uL ck_init;
+  let ck2 = lookup_all t vcap vlg n (SZ.sizet_to_uint64 n) ck1;
+  V.free t;
+  ck2
+}

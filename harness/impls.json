@@ -1,9 +1,43 @@
 {
-  "c-ref":        {"label": "C (main, non vérifié)",            "kind": "control",  "cmd": ["impls/c-ref/bench", "{workload}", "{n}"]},
-  "rust-creusot": {"label": "Rust + contrats Creusot",           "kind": "verified", "cmd": ["impls/rust/target/release/bench-rust", "{workload}", "{n}"]},
-  "ocaml-ref":    {"label": "OCaml (main, non vérifié)",         "kind": "control",  "cmd": ["impls/ocaml-ref/bench", "{workload}", "{n}"]},
-  "fsharp-ref":   {"label": "F# (main, non vérifié)",            "kind": "control",  "cmd": ["dotnet", "impls/fsharp-ref/out/bench-fsharp.dll", "{workload}", "{n}"]},
-  "fstar-c":      {"label": "F* → Low* → KaRaMeL → C",           "kind": "verified", "cmd": ["fstar/_build/c/bench", "{workload}", "{n}"]},
-  "fstar-ocaml":  {"label": "F* → OCaml (extraction)",           "kind": "verified", "cmd": ["fstar/_build/ocaml/bench", "{workload}", "{n}"]},
-  "fstar-fsharp": {"label": "F* → F# (extraction)",              "kind": "verified", "cmd": ["dotnet", "fstar/_build/fsharp/out/bench-fstar-fsharp.dll", "{workload}", "{n}"]}
+ "rust-creusot": {
+  "label": "Rust + Creusot",
+  "cmd": [
+   "impls/rust/target/release/bench-rust",
+   "{workload}",
+   "{n}"
+  ]
+ },
+ "fstar-c": {
+  "label": "F* (Pulse) → C",
+  "cmd": [
+   "fstar/_build/c/bench",
+   "{workload}",
+   "{n}"
+  ]
+ },
+ "fstar-fsharp": {
+  "label": "F* (Pulse) → F#",
+  "cmd": [
+   "dotnet",
+   "fstar/_build/fsharp/out/bench-fstar-fsharp.dll",
+   "{workload}",
+   "{n}"
+  ]
+ },
+ "fstar-ocaml": {
+  "label": "F* (Pulse) → OCaml (runtime livré)",
+  "cmd": [
+   "fstar/_build/ocaml/bench",
+   "{workload}",
+   "{n}"
+  ]
+ },
+ "fstar-ocaml-fast": {
+  "label": "F* (Pulse) → OCaml (conversions d'entiers corrigées)",
+  "cmd": [
+   "fstar/_build/ocaml-fast/bench",
+   "{workload}",
+   "{n}"
+  ]
+ }
 }

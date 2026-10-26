@@ -1,0 +1,9 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_loop_i": { "prover": "alt-ergo", "time": 0.025 },
+      "vc_loop_k": { "prover": "alt-ergo", "time": 0.018 }
+    }
+  }
+}

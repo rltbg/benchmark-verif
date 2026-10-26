@@ -1,0 +1,39 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 10 0 10 38 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 11 10 11 14
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 11 10 11 32
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 11 10 11 48
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 11 4 11 49
+let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 11 52 11 53
+let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 10 0 10 38
+
+use creusot.int.UInt64
+use creusot.prelude.Any
+
+constant const_SEED: UInt64.t = [%#shashmap'4] (2623536861340474335: UInt64.t)
+
+let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
+    (! return {result}) ]
+
+let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let key_of [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 10 0 10 38] (off: UInt64.t) (i: UInt64.t)
+  (return (x: UInt64.t)) = (! bb0
+  [ bb0 = s0
+    [ s0 = wrapping_add [%#shashmap'0] {[%#shashmap] const_SEED} {off} (fun (_x: UInt64.t) -> [ &_5 <- _x ] s1)
+    | s1 = wrapping_add [%#shashmap'1] {_5} {i} (fun (_x: UInt64.t) -> [ &_4 <- _x ] s2)
+    | s2 = mix64 [%#shashmap'2] {_4} (fun (_x: UInt64.t) -> [ &_3 <- _x ] s3)
+    | s3 = [ &_ret <- UInt64.bw_or _3 ([%#shashmap'3] (1: UInt64.t)) ] s4
+    | s4 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & off: UInt64.t = off
+  | & i: UInt64.t = i
+  | & _3: UInt64.t = Any.any_l ()
+  | & _4: UInt64.t = Any.any_l ()
+  | & _5: UInt64.t = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

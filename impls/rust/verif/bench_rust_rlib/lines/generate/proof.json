@@ -1,0 +1,13 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_generate": { "prover": "z3", "time": 0.006 },
+      "vc_index_mut_Vec_u8_Global": { "prover": "alt-ergo", "time": 0.014 },
+      "vc_mix64": { "prover": "alt-ergo", "time": 0.011 },
+      "vc_ndigits": { "prover": "alt-ergo", "time": 0.009 },
+      "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.012 },
+      "vc_write_dec": { "prover": "alt-ergo", "time": 0.015 }
+    }
+  }
+}

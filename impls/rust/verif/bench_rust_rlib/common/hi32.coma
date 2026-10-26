@@ -1,0 +1,22 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/common.rs" 26 0 26 26 *)
+
+let%span scommon = "/home/user/benchmark-verif/impls/rust/src/common.rs" 27 10 27 12
+let%span scommon'0 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 27 4 27 13
+
+use creusot.int.Int32
+use creusot.int.UInt64
+use creusot.int.UInt32
+use creusot.prelude.Any
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let hi32 [#"/home/user/benchmark-verif/impls/rust/src/common.rs" 26 0 26 26] (x: UInt64.t) (return (x'0: UInt32.t)) =
+(! bb0
+  [ bb0 = s0
+    [ s0 = UInt64.shr [%#scommon'0] {x} {Int32.to_int ([%#scommon] (32: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_2 <- _x ] s1)
+    | s1 = [ &_ret <- UInt32.of_int (UInt64.t'int _2) ] s2
+    | s2 = return {_ret} ] ] [ & _ret: UInt32.t = Any.any_l () | & x: UInt64.t = x | & _2: UInt64.t = Any.any_l () ])
+  [ return (result: UInt32.t) -> (! return {result}) ]

@@ -1,0 +1,144 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sort.rs" 169 0 169 27 *)
+
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 96 22 96 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 97 22 97 22
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span smacros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
+let%span smacros'0 = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
+let%span ssort = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 170 26 170 30
+let%span ssort'0 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 171 28 171 32
+let%span ssort'1 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 172 4 172 19
+let%span ssort'2 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 173 28 173 29
+let%span ssort'3 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 173 4 173 33
+let%span ssort'4 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 174 4 174 19
+let%span ssort'5 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 168 11 168 38
+let%span ssort'6 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 34 11 34 25
+let%span ssort'7 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 35 10 35 27
+let%span ssort'8 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 122 10 122 19
+let%span ssort'9 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 116 11 116 66
+let%span ssort'10 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 117 10 117 64
+let%span ssort'11 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 118 10 118 38
+let%span ssort'12 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 119 10 119 41
+let%span ssort'13 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 120 10 120 10
+let%span ssort'14 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 149 11 149 45
+let%span ssort'15 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 15 16 15 75
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 413 12 413 12
+let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 371 8 371 41
+
+use creusot.int.UInt32
+use creusot.int.UInt64
+use seq.Seq
+use creusot.prelude.MutBorrow
+use seq.Permut
+use creusot.prelude.Any
+use int.Int
+
+type t_Vec_u32_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
+
+axiom view_Vec_u32_Global_spec:
+  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec'1] Seq.length (view_Vec_u32_Global self)
+    <= UInt64.t'int const_MAX
+
+function index_Vec_u32_Global [@inline:trivial] (self: t_Vec_u32_Global) (ix: int) : UInt32.t =
+  [%#svec'2] Seq.get (view_Vec_u32_Global self) ix
+
+meta "rewrite_def" function index_Vec_u32_Global
+
+let from_elem_u32 (elem: UInt32.t) (n: UInt64.t) (return (x: t_Vec_u32_Global)) = any
+  [ return (result: t_Vec_u32_Global) ->
+  {[@stop_split] [@expl:from_elem_u32 ensures] ([@stop_split] [@expl:from_elem ensures #0] [%#svec] Seq.length (view_Vec_u32_Global result)
+      = UInt64.t'int n)
+    /\ ([@stop_split] [@expl:from_elem ensures #1] [%#svec'0] forall i: int. 0 <= i /\ i < UInt64.t'int n
+      -> index_Vec_u32_Global result i = elem)}
+    (! return {result}) ]
+
+let fill (v: MutBorrow.t t_Vec_u32_Global) (n: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:fill requires] [%#ssort'6] Seq.length (view_Vec_u32_Global v.current) = UInt64.t'int n}
+  any
+  [ return (result: ()) -> {[@stop_split] [@expl:fill ensures] [%#ssort'7] Seq.length (view_Vec_u32_Global v.final)
+    = UInt64.t'int n}
+    (! return {result}) ]
+
+predicate resolve_refmut_Vec_u32_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u32_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u32_Global
+
+predicate sorted_range_u32 (self: Seq.seq UInt32.t) (start: int) (end': int) =
+  [%#sseq] forall i: int, j: int. start <= i /\ i <= j /\ j < end' -> UInt32.le (Seq.get self i) (Seq.get self j)
+
+predicate permutation_of_u32 (self: Seq.seq UInt32.t) (other: Seq.seq UInt32.t) =
+  [%#sseq'0] Permut.permut self other 0 (Seq.length self)
+
+predicate perm_range [#"/home/user/benchmark-verif/impls/rust/src/sort.rs" 14 0 14 69] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (lo: int) (hi: int) =
+  [%#ssort'15] permutation_of_u32 (Seq.([..]) a lo hi) (Seq.([..]) b lo hi)
+
+let msort (a: MutBorrow.t t_Vec_u32_Global) (tmp: MutBorrow.t t_Vec_u32_Global) (lo: UInt64.t) (hi: UInt64.t)
+  (return (x: ())) = {[@stop_split] [@expl:msort requires] [%#ssort'9] Seq.length (view_Vec_u32_Global a.current)
+    = Seq.length (view_Vec_u32_Global tmp.current)
+  /\ UInt64.t'int lo <= UInt64.t'int hi /\ UInt64.t'int hi <= Seq.length (view_Vec_u32_Global a.current)}
+  any
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:msort ensures] ([@stop_split] [@expl:msort ensures #0] [%#ssort'10] Seq.length (view_Vec_u32_Global a.final)
+        = Seq.length (view_Vec_u32_Global a.current)
+      /\ Seq.length (view_Vec_u32_Global tmp.final) = Seq.length (view_Vec_u32_Global tmp.current))
+    /\ ([@stop_split] [@expl:msort ensures #1] [%#ssort'11] sorted_range_u32 (view_Vec_u32_Global a.final) (UInt64.t'int lo) (UInt64.t'int hi))
+    /\ ([@stop_split] [@expl:msort ensures #2] [%#ssort'12] perm_range (view_Vec_u32_Global a.final) (view_Vec_u32_Global a.current) (UInt64.t'int lo) (UInt64.t'int hi))
+    /\ ([@stop_split] [@expl:msort ensures #3] [%#ssort'13] forall p: int. 0 <= p
+        /\ p < Seq.length (view_Vec_u32_Global a.current) /\ (p < UInt64.t'int lo \/ UInt64.t'int hi <= p)
+      -> Seq.get (view_Vec_u32_Global a.final) p = Seq.get (view_Vec_u32_Global a.current) p)}
+    (! return {result}) ]
+
+let checksum (v: t_Vec_u32_Global) (n: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:checksum requires] [%#ssort'14] Seq.length (view_Vec_u32_Global v) = UInt64.t'int n
+  /\ UInt64.t'int n <= 1073741824}
+  any [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let run [#"/home/user/benchmark-verif/impls/rust/src/sort.rs" 169 0 169 27] (n: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:run requires] [%#ssort'5] 1 <= UInt64.t'int n /\ UInt64.t'int n <= 1073741824}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = from_elem_u32 [%#smacros] {[%#ssort] (0: UInt32.t)} {n} (fun (_x: t_Vec_u32_Global) -> [ &a <- _x ] s1)
+    | s1 = from_elem_u32 [%#smacros'0] {[%#ssort'0] (0: UInt32.t)} {n} (fun (_x: t_Vec_u32_Global) -> [ &tmp <- _x ] s2)
+    | s2 = MutBorrow.borrow_mut <t_Vec_u32_Global> {a}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_10 <- _bor ] [ &a <- _bor.final ] s3)
+    | s3 = MutBorrow.borrow_final <t_Vec_u32_Global> {_10.current} {MutBorrow.get_id _10}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_9 <- _bor ] [ &_10 <- { _10 with current = _bor.final } ] s4)
+    | s4 = fill [%#ssort'1] {_9} {n} (fun (_x: ()) -> [ &_8 <- _x ] s5)
+    | s5 = -{resolve_refmut_Vec_u32_Global _10}- s6
+    | s6 = MutBorrow.borrow_mut <t_Vec_u32_Global> {a}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_14 <- _bor ] [ &a <- _bor.final ] s7)
+    | s7 = MutBorrow.borrow_mut <t_Vec_u32_Global> {tmp}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_16 <- _bor ] [ &tmp <- _bor.final ] s8)
+    | s8 = MutBorrow.borrow_final <t_Vec_u32_Global> {_14.current} {MutBorrow.get_id _14}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_13 <- _bor ] [ &_14 <- { _14 with current = _bor.final } ] s9)
+    | s9 = MutBorrow.borrow_final <t_Vec_u32_Global> {_16.current} {MutBorrow.get_id _16}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_15 <- _bor ] [ &_16 <- { _16 with current = _bor.final } ] s10)
+    | s10 = msort [%#ssort'3] {_13} {_15} {[%#ssort'2] (0: UInt64.t)} {n} (fun (_x: ()) -> [ &_12 <- _x ] s11)
+    | s11 = -{resolve_refmut_Vec_u32_Global _16}- s12
+    | s12 = -{resolve_refmut_Vec_u32_Global _14}- s13
+    | s13 = [ &_19 <- a ] s14
+    | s14 = checksum [%#ssort'4] {_19} {n} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s15)
+    | s15 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & n: UInt64.t = n
+  | & a: t_Vec_u32_Global = Any.any_l ()
+  | & tmp: t_Vec_u32_Global = Any.any_l ()
+  | & _8: () = Any.any_l ()
+  | & _9: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _10: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _12: () = Any.any_l ()
+  | & _13: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _14: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _15: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _16: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _19: t_Vec_u32_Global = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

@@ -1,0 +1,10 @@
+{
+ "_doc": "Checksums de référence aux tailles du preset smoke (calculés par un programme C de référence jetable, écrit à la main pour cette seule fin, puis retrouvés à l'identique par Rust et par les trois extractions F*). Le harnais compare chaque résultat à cette table en plus de la comparaison entre implémentations.",
+ "sort:1000": "f2b5b60894a46cfb",
+ "sieve:1000000": "0c28b4b013f8d676",
+ "matmul:64": "ca8d1bf8c2c39885",
+ "lines:10000": "ed29565c33f35ce6",
+ "hashmap:10000": "4657001acc4f46d5",
+ "sort:8000000": "e83b33c2a58ec5c2",
+ "sieve:200000000": "69d55ea2e02061e8"
+}

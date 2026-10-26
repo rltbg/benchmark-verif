@@ -1,0 +1,153 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 53 0 53 65 *)
+
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 54 16 54 34
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 55 20 55 26
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 57 14 57 27
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 56 16 56 67
+let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 59 18 59 19
+let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 59 18 59 23
+let%span shashmap'5 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 59 17 59 24
+let%span shashmap'6 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 60 16 60 17
+let%span shashmap'7 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 66 13 66 14
+let%span shashmap'8 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 66 8 66 14
+let%span shashmap'9 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 68 16 68 17
+let%span shashmap'10 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 70 17 70 18
+let%span shashmap'11 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 70 8 70 18
+let%span shashmap'12 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 61 19 61 20
+let%span shashmap'13 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 64 21 64 22
+let%span shashmap'14 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 64 21 64 26
+let%span shashmap'15 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 64 29 64 30
+let%span shashmap'16 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 64 21 64 30
+let%span shashmap'17 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 64 20 64 31
+let%span shashmap'18 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 72 4 72 5
+let%span shashmap'19 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 51 11 51 90
+let%span shashmap'20 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 15 11 15 45
+let%span shashmap'21 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 16 10 16 24
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+
+use creusot.int.UInt64
+use creusot.int.UInt32
+use seq.Seq
+use creusot.prelude.Any
+use int.Int
+
+let slot (key: UInt64.t) (lg: UInt32.t) (cap: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:slot requires] [%#shashmap'20] 1 <= UInt32.t'int lg
+  /\ UInt32.t'int lg <= 27 /\ 2 <= UInt64.t'int cap}
+  any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:slot ensures] [%#shashmap'21] UInt64.t'int result
+    < UInt64.t'int cap}
+    (! return {result}) ]
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+type t_Vec_u64_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u64_Global (self: t_Vec_u64_Global) : Seq.seq UInt64.t
+
+axiom view_Vec_u64_Global_spec:
+  forall self: t_Vec_u64_Global [view_Vec_u64_Global self]. [%#svec] Seq.length (view_Vec_u64_Global self)
+    <= UInt64.t'int const_MAX
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) (out: UInt64.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+let index_Vec_u64_Global (self: t_Vec_u64_Global) (index: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:index requires] [%#svec'0] in_bounds_usize index (view_Vec_u64_Global self)}
+  any
+  [ return (result: UInt64.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u64_Global self) result}
+    (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let lookup [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 53 0 53 65] (t: t_Vec_u64_Global) (cap: UInt64.t)
+  (lg: UInt32.t) (key: UInt64.t) (return (x: UInt64.t)) = {[@stop_split] [@expl:lookup requires] [%#shashmap'19] 2
+    <= UInt64.t'int cap
+  /\ UInt64.t'int cap <= 134217728
+  /\ Seq.length (view_Vec_u64_Global t) = 2 * UInt64.t'int cap /\ 1 <= UInt32.t'int lg /\ UInt32.t'int lg <= 27}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = slot [%#shashmap] {key} {lg} {cap} (fun (_x: UInt64.t) -> [ &s <- _x ] s1)
+    | s1 = [ &tries <- [%#shashmap'0] (0: UInt64.t) ] s2
+    | s2 = bb2 ]
+  | bb2 = bb2invariant
+    [ bb2 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb2 ([%#shashmap'1] UInt64.t'int cap
+      - UInt64.t'int tries)}
+      bb2invariant
+    | bb2invariant = {[@expl:loop invariant] [%#shashmap'2] UInt64.t'int s < UInt64.t'int cap
+      /\ UInt64.t'int tries <= UInt64.t'int cap /\ Seq.length (view_Vec_u64_Global t) = 2 * UInt64.t'int cap}
+      (! [ &variant_old_bb2 <- [%#shashmap'1] UInt64.t'int cap - UInt64.t'int tries ] s0)
+      [ s0 = [ &_25 <- UInt64.lt tries cap ] s1 | s1 = any [ br0 -> {_25 = false} (! bb14) | br1 -> {_25} (! bb4) ] ]
+      [ bb4 = s0
+        [ s0 = UInt64.mul [%#shashmap'4] {[%#shashmap'3] (2: UInt64.t)} {s} (fun (_x: UInt64.t) -> [ &_31 <- _x ] s1)
+        | s1 = index_Vec_u64_Global [%#shashmap'5] {t} {_31} (fun (_x: UInt64.t) -> [ &_29 <- _x ] s2)
+        | s2 = [ &k <- _29 ] s3
+        | s3 = [ &_34 <- k = ([%#shashmap'6] (0: UInt64.t)) ] s4
+        | s4 = any [ br0 -> {_34 = false} (! bb7) | br1 -> {_34} (! bb6) ] ]
+      | bb7 = s0 [ s0 = [ &_38 <- k = key ] s1 | s1 = any [ br0 -> {_38 = false} (! bb9) | br1 -> {_38} (! bb8) ] ]
+      | bb9 = s0
+        [ s0 = UInt64.add [%#shashmap'8] {s} {[%#shashmap'7] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &s <- _x ] s1)
+        | s1 = [ &_48 <- s = cap ] s2
+        | s2 = any [ br0 -> {_48 = false} (! bb13) | br1 -> {_48} (! bb11) ] ]
+      | bb11 = s0 [ s0 = [ &s <- [%#shashmap'9] (0: UInt64.t) ] s1 | s1 = bb13 ]
+      | bb13 = s0
+        [ s0 = UInt64.add [%#shashmap'11] {tries} {[%#shashmap'10] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &tries <- _x ] s1)
+        | s1 = bb2 ] ] ]
+  | bb6 = s0 [ s0 = [ &_ret <- [%#shashmap'12] (0: UInt64.t) ] s1 | s1 = return {_ret} ]
+  | bb8 = s0
+    [ s0 = UInt64.mul [%#shashmap'14] {[%#shashmap'13] (2: UInt64.t)} {s} (fun (_x: UInt64.t) -> [ &_45 <- _x ] s1)
+    | s1 = UInt64.add [%#shashmap'16] {_45} {[%#shashmap'15] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &_44 <- _x ] s2)
+    | s2 = index_Vec_u64_Global [%#shashmap'17] {t} {_44} (fun (_x: UInt64.t) -> [ &_42 <- _x ] s3)
+    | s3 = [ &_ret <- _42 ] s4
+    | s4 = return {_ret} ]
+  | bb14 = s0 [ s0 = [ &_ret <- [%#shashmap'18] (0: UInt64.t) ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & t: t_Vec_u64_Global = t
+  | & cap: UInt64.t = cap
+  | & lg: UInt32.t = lg
+  | & key: UInt64.t = key
+  | & s: UInt64.t = Any.any_l ()
+  | & tries: UInt64.t = Any.any_l ()
+  | & _25: bool = Any.any_l ()
+  | & k: UInt64.t = Any.any_l ()
+  | & _29: UInt64.t = Any.any_l ()
+  | & _31: UInt64.t = Any.any_l ()
+  | & _34: bool = Any.any_l ()
+  | & _38: bool = Any.any_l ()
+  | & _42: UInt64.t = Any.any_l ()
+  | & _44: UInt64.t = Any.any_l ()
+  | & _45: UInt64.t = Any.any_l ()
+  | & _48: bool = Any.any_l ()
+  | & variant_old_bb2: int = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

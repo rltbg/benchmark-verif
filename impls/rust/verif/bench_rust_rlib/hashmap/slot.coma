@@ -1,0 +1,51 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 18 0 18 51 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 19 30 19 48
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 19 13 19 49
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 19 54 19 56
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 19 53 19 62
+let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 19 12 19 63
+let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 20 28 20 29
+let%span shashmap'5 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 15 11 15 45
+let%span shashmap'6 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 16 10 16 24
+
+use creusot.int.UInt64
+use creusot.int.UInt32
+use creusot.prelude.Any
+use int.Int
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let slot [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 18 0 18 51] (key: UInt64.t) (lg: UInt32.t)
+  (cap: UInt64.t) (return (x: UInt64.t)) = {[@stop_split] [@expl:slot requires] [%#shashmap'5] 1 <= UInt32.t'int lg
+  /\ UInt32.t'int lg <= 27 /\ 2 <= UInt64.t'int cap}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = wrapping_mul [%#shashmap'0] {key} {[%#shashmap] (11400714819323198485: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_11 <- _x ] s1)
+    | s1 = UInt32.sub [%#shashmap'2] {[%#shashmap'1] (64: UInt32.t)} {lg} (fun (_x: UInt32.t) -> [ &_13 <- _x ] s2)
+    | s2 = UInt64.shr [%#shashmap'3] {_11} {UInt32.t'int _13} (fun (_x: UInt64.t) -> [ &_10 <- _x ] s3)
+    | s3 = [ &s <- _10 ] s4
+    | s4 = [ &_15 <- UInt64.lt s cap ] s5
+    | s5 = any [ br0 -> {_15 = false} (! bb3) | br1 -> {_15} (! bb2) ] ]
+  | bb2 = s0 [ s0 = [ &_ret <- s ] s1 | s1 = return {_ret} ]
+  | bb3 = s0 [ s0 = [ &_ret <- [%#shashmap'4] (0: UInt64.t) ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & key: UInt64.t = key
+  | & lg: UInt32.t = lg
+  | & cap: UInt64.t = cap
+  | & s: UInt64.t = Any.any_l ()
+  | & _10: UInt64.t = Any.any_l ()
+  | & _11: UInt64.t = Any.any_l ()
+  | & _13: UInt32.t = Any.any_l ()
+  | & _15: bool = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:slot ensures] [%#shashmap'6] UInt64.t'int result
+    < UInt64.t'int cap}
+    (! return {result}) ]

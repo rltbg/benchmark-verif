@@ -1,0 +1,123 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/lines.rs" 115 0 115 38 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span slines = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 116 17 116 24
+let%span slines'0 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 117 16 117 22
+let%span slines'1 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 119 14 119 26
+let%span slines'2 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 120 14 120 21
+let%span slines'3 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 118 16 118 54
+let%span slines'4 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 121 35 121 36
+let%span slines'5 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 121 35 121 40
+let%span slines'6 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 121 34 121 41
+let%span slines'7 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 121 20 121 42
+let%span slines'8 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 121 48 121 49
+let%span slines'9 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 121 48 121 53
+let%span slines'10 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 121 56 121 57
+let%span slines'11 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 121 48 121 57
+let%span slines'12 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 121 47 121 58
+let%span slines'13 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 121 13 121 59
+let%span slines'14 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 122 13 122 14
+let%span slines'15 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 122 8 122 14
+let%span slines'16 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 113 11 113 32
+let%span slines'17 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 115 0 115 38
+
+use creusot.int.UInt64
+use seq.Seq
+use creusot.prelude.Any
+use int.Int
+
+constant const_CK_INIT: UInt64.t = [%#slines'17] (14695981039346656037: UInt64.t)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+type t_Vec_u64_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u64_Global (self: t_Vec_u64_Global) : Seq.seq UInt64.t
+
+axiom view_Vec_u64_Global_spec:
+  forall self: t_Vec_u64_Global [view_Vec_u64_Global self]. [%#svec] Seq.length (view_Vec_u64_Global self)
+    <= UInt64.t'int const_MAX
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) (out: UInt64.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+let index_Vec_u64_Global (self: t_Vec_u64_Global) (index: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:index requires] [%#svec'0] in_bounds_usize index (view_Vec_u64_Global self)}
+  any
+  [ return (result: UInt64.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u64_Global self) result}
+    (! return {result}) ]
+
+let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let checksum [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 115 0 115 38] (tab: t_Vec_u64_Global)
+  (return (x: UInt64.t)) = {[@stop_split] [@expl:checksum requires] [%#slines'16] Seq.length (view_Vec_u64_Global tab)
+  = 2097152}
+  (! bb0
+  [ bb0 = s0 [ s0 = [ &ck <- [%#slines] const_CK_INIT ] s1 | s1 = [ &k <- [%#slines'0] (0: UInt64.t) ] s2 | s2 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#slines'1] 1048576 - UInt64.t'int k)}
+      bb1invariant
+    | bb1invariant = {[@expl:loop invariant] [%#slines'3] Seq.length (view_Vec_u64_Global tab) = 2097152
+      /\ UInt64.t'int k <= 1048576}
+      (! [ &variant_old_bb1 <- [%#slines'1] 1048576 - UInt64.t'int k ] s0)
+      [ s0 = [ &_14 <- UInt64.lt k ([%#slines'2] (1048576: UInt64.t)) ] s1
+      | s1 = any [ br0 -> {_14 = false} (! bb8) | br1 -> {_14} (! bb3) ] ]
+      [ bb3 = s0
+        [ s0 = UInt64.mul [%#slines'5] {[%#slines'4] (2: UInt64.t)} {k} (fun (_x: UInt64.t) -> [ &_22 <- _x ] s1)
+        | s1 = index_Vec_u64_Global [%#slines'6] {tab} {_22} (fun (_x: UInt64.t) -> [ &_20 <- _x ] s2)
+        | s2 = ckfold [%#slines'7] {ck} {_20} (fun (_x: UInt64.t) -> [ &_17 <- _x ] s3)
+        | s3 = UInt64.mul [%#slines'9] {[%#slines'8] (2: UInt64.t)} {k} (fun (_x: UInt64.t) -> [ &_28 <- _x ] s4)
+        | s4 = UInt64.add [%#slines'11] {_28} {[%#slines'10] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &_27 <- _x ] s5)
+        | s5 = index_Vec_u64_Global [%#slines'12] {tab} {_27} (fun (_x: UInt64.t) -> [ &_25 <- _x ] s6)
+        | s6 = ckfold [%#slines'13] {_17} {_25} (fun (_x: UInt64.t) -> [ &_16 <- _x ] s7)
+        | s7 = [ &ck <- _16 ] s8
+        | s8 = UInt64.add [%#slines'15] {k} {[%#slines'14] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &k <- _x ] s9)
+        | s9 = bb1 ] ] ]
+  | bb8 = s0 [ s0 = [ &_ret <- ck ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & tab: t_Vec_u64_Global = tab
+  | & ck: UInt64.t = Any.any_l ()
+  | & k: UInt64.t = Any.any_l ()
+  | & _14: bool = Any.any_l ()
+  | & _16: UInt64.t = Any.any_l ()
+  | & _17: UInt64.t = Any.any_l ()
+  | & _20: UInt64.t = Any.any_l ()
+  | & _22: UInt64.t = Any.any_l ()
+  | & _25: UInt64.t = Any.any_l ()
+  | & _27: UInt64.t = Any.any_l ()
+  | & _28: UInt64.t = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

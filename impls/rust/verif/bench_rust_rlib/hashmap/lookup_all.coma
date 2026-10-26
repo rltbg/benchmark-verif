@@ -1,0 +1,103 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 90 0 90 89 *)
+
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 92 16 92 22
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 94 14 94 21
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 93 16 93 48
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 96 43 96 64
+let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 96 24 96 65
+let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 96 13 96 66
+let%span shashmap'5 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 97 13 97 14
+let%span shashmap'6 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 97 8 97 14
+let%span shashmap'7 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 88 11 88 108
+let%span shashmap'8 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 51 11 51 90
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+
+use creusot.int.UInt64
+use seq.Seq
+use creusot.int.UInt32
+use creusot.prelude.Any
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+type t_Vec_u64_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u64_Global (self: t_Vec_u64_Global) : Seq.seq UInt64.t
+
+axiom view_Vec_u64_Global_spec:
+  forall self: t_Vec_u64_Global [view_Vec_u64_Global self]. [%#svec] Seq.length (view_Vec_u64_Global self)
+    <= UInt64.t'int const_MAX
+
+let key_of (off: UInt64.t) (i: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> (! return {result}) ]
+
+let lookup (t: t_Vec_u64_Global) (cap: UInt64.t) (lg: UInt32.t) (key: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:lookup requires] [%#shashmap'8] 2 <= UInt64.t'int cap
+  /\ UInt64.t'int cap <= 134217728
+  /\ Seq.length (view_Vec_u64_Global t) = 2 * UInt64.t'int cap /\ 1 <= UInt32.t'int lg /\ UInt32.t'int lg <= 27}
+  any [ return (result: UInt64.t) -> (! return {result}) ]
+
+let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let lookup_all [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 90 0 90 89] (t: t_Vec_u64_Global)
+  (cap: UInt64.t) (lg: UInt32.t) (n: UInt64.t) (off: UInt64.t) (ck0: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:lookup_all requires] [%#shashmap'7] 2 <= UInt64.t'int cap
+  /\ UInt64.t'int cap <= 134217728
+  /\ Seq.length (view_Vec_u64_Global t) = 2 * UInt64.t'int cap
+  /\ 1 <= UInt32.t'int lg /\ UInt32.t'int lg <= 27 /\ UInt64.t'int n <= 67108864}
+  (! bb0
+  [ bb0 = s0 [ s0 = [ &ck <- ck0 ] s1 | s1 = [ &i <- [%#shashmap] (0: UInt64.t) ] s2 | s2 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#shashmap'0] UInt64.t'int n
+      - UInt64.t'int i)}
+      bb1invariant
+    | bb1invariant = {[@expl:loop invariant] [%#shashmap'1] UInt64.t'int i <= UInt64.t'int n
+      /\ Seq.length (view_Vec_u64_Global t) = 2 * UInt64.t'int cap}
+      (! [ &variant_old_bb1 <- [%#shashmap'0] UInt64.t'int n - UInt64.t'int i ] s0)
+      [ s0 = [ &_25 <- UInt64.lt i n ] s1 | s1 = any [ br0 -> {_25 = false} (! bb7) | br1 -> {_25} (! bb3) ] ]
+      [ bb3 = s0
+        [ s0 = [ &_36 <- i ] s1
+        | s1 = key_of [%#shashmap'2] {off} {_36} (fun (_x: UInt64.t) -> [ &_34 <- _x ] s2)
+        | s2 = lookup [%#shashmap'3] {t} {cap} {lg} {_34} (fun (_x: UInt64.t) -> [ &_30 <- _x ] s3)
+        | s3 = ckfold [%#shashmap'4] {ck} {_30} (fun (_x: UInt64.t) -> [ &_28 <- _x ] s4)
+        | s4 = [ &ck <- _28 ] s5
+        | s5 = UInt64.add [%#shashmap'6] {i} {[%#shashmap'5] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s6)
+        | s6 = bb1 ] ] ]
+  | bb7 = s0 [ s0 = [ &_ret <- ck ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & t: t_Vec_u64_Global = t
+  | & cap: UInt64.t = cap
+  | & lg: UInt32.t = lg
+  | & n: UInt64.t = n
+  | & off: UInt64.t = off
+  | & ck0: UInt64.t = ck0
+  | & ck: UInt64.t = Any.any_l ()
+  | & i: UInt64.t = Any.any_l ()
+  | & _25: bool = Any.any_l ()
+  | & _28: UInt64.t = Any.any_l ()
+  | & _30: UInt64.t = Any.any_l ()
+  | & _34: UInt64.t = Any.any_l ()
+  | & _36: UInt64.t = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

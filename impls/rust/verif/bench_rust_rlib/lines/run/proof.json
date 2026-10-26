@@ -1,0 +1,13 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_checksum": { "prover": "alt-ergo", "time": 0.013 },
+      "vc_from_elem_u64": { "prover": "alt-ergo", "time": 0.007 },
+      "vc_from_elem_u8": { "prover": "alt-ergo", "time": 0.012 },
+      "vc_generate": { "prover": "alt-ergo", "time": 0.012 },
+      "vc_parse": { "prover": "alt-ergo", "time": 0.007 },
+      "vc_run": { "prover": "alt-ergo", "time": 0.013 }
+    }
+  }
+}

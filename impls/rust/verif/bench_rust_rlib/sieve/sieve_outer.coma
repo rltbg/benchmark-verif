@@ -1,0 +1,149 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 23 0 23 45 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span ssieve = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 24 16 24 22
+let%span ssieve'0 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 27 14 27 25
+let%span ssieve'1 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 26 16 26 39
+let%span ssieve'2 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 25 16 25 34
+let%span ssieve'3 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 28 25 28 30
+let%span ssieve'4 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 29 12 29 15
+let%span ssieve'5 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 29 19 29 20
+let%span ssieve'6 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 30 26 30 31
+let%span ssieve'7 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 30 12 30 32
+let%span ssieve'8 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 32 13 32 14
+let%span ssieve'9 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 32 8 32 14
+let%span ssieve'10 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 20 11 20 60
+let%span ssieve'11 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 21 10 21 33
+let%span ssieve'12 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 6 11 6 90
+let%span ssieve'13 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 7 10 7 33
+
+use creusot.int.UInt64
+use creusot.prelude.MutBorrow
+use seq.Seq
+use creusot.int.UInt8
+use creusot.prelude.Any
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+type t_Vec_u8_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u8_Global (self: t_Vec_u8_Global) : Seq.seq UInt8.t
+
+axiom view_Vec_u8_Global_spec:
+  forall self: t_Vec_u8_Global [view_Vec_u8_Global self]. [%#svec] Seq.length (view_Vec_u8_Global self)
+    <= UInt64.t'int const_MAX
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt8.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt8.t) (out: UInt8.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+let index_Vec_u8_Global (self: t_Vec_u8_Global) (index: UInt64.t) (return (x: UInt8.t)) =
+{[@stop_split] [@expl:index requires] [%#svec'0] in_bounds_usize index (view_Vec_u8_Global self)}
+  any
+  [ return (result: UInt8.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u8_Global self) result}
+    (! return {result}) ]
+
+let mark (f: MutBorrow.t t_Vec_u8_Global) (n: UInt64.t) (i: UInt64.t) (j0: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:mark requires] [%#ssieve'12] Seq.length (view_Vec_u8_Global f.current) = UInt64.t'int n + 1
+  /\ 1 <= UInt64.t'int i
+  /\ UInt64.t'int i <= UInt64.t'int n
+  /\ UInt64.t'int n <= 4000000000 /\ UInt64.t'int j0 <= UInt64.t'int n + UInt64.t'int i}
+  any
+  [ return (result: ()) -> {[@stop_split] [@expl:mark ensures] [%#ssieve'13] Seq.length (view_Vec_u8_Global f.final)
+    = Seq.length (view_Vec_u8_Global f.current)}
+    (! return {result}) ]
+
+predicate resolve_refmut_Vec_u8_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u8_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u8_Global
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let sieve_outer [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 23 0 23 45] (f: MutBorrow.t t_Vec_u8_Global)
+  (n: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:sieve_outer requires] [%#ssieve'10] Seq.length (view_Vec_u8_Global f.current) = UInt64.t'int n + 1
+  /\ 2 <= UInt64.t'int n /\ UInt64.t'int n <= 4000000000}
+  (! bb0
+  [ bb0 = s0 [ s0 = [ &i <- [%#ssieve] (2: UInt64.t) ] s1 | s1 = [ &_old <- f.final ] s2 | s2 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#ssieve'0] UInt64.t'int n + 1
+      - UInt64.t'int i)}
+      bb1invariant
+    | bb1invariant = {[@expl:inferred invariant: unchanged value] _old = f.final}
+      {[@expl:loop invariant #0] [%#ssieve'2] Seq.length (view_Vec_u8_Global f.current) = UInt64.t'int n + 1}
+      {[@expl:loop invariant #1] [%#ssieve'1] 2 <= UInt64.t'int i /\ UInt64.t'int i <= UInt64.t'int n + 1}
+      (! [ &variant_old_bb1 <- [%#ssieve'0] UInt64.t'int n + 1 - UInt64.t'int i ] s0)
+      [ s0 = [ &_20 <- UInt64.le i n ] s1 | s1 = any [ br0 -> {_20 = false} (! bb12) | br1 -> {_20} (! bb3) ] ]
+      [ bb3 = s0
+        [ s0 = [ &_27 <- i ] s1
+        | s1 = [ &_28 <- _27 = ([%#ssieve'3] (0: UInt64.t)) ] s2
+        | s2 = {[@expl:division by zero] [%#ssieve'3] not _28} s3
+        | s3 = UInt64.div [%#ssieve'3] {n} {_27} (fun (_x: UInt64.t) -> [ &_25 <- _x ] s4)
+        | s4 = [ &_23 <- UInt64.le i _25 ] s5
+        | s5 = any [ br0 -> {_23 = false} (! bb11) | br1 -> {_23} (! bb5) ] ]
+      | bb5 = s0
+        [ s0 = index_Vec_u8_Global [%#ssieve'4] {f.current} {i} (fun (_x: UInt8.t) -> [ &_32 <- _x ] s1)
+        | s1 = [ &_30 <- _32 = ([%#ssieve'5] (0: UInt8.t)) ] s2
+        | s2 = any [ br0 -> {_30 = false} (! bb10) | br1 -> {_30} (! bb7) ] ]
+      | bb7 = s0
+        [ s0 = UInt64.mul [%#ssieve'6] {i} {i} (fun (_x: UInt64.t) -> [ &_39 <- _x ] s1)
+        | s1 = MutBorrow.borrow_mut <t_Vec_u8_Global> {f.current}
+            (fun (_bor: MutBorrow.t t_Vec_u8_Global) -> [ &_36 <- _bor ] [ &f <- { f with current = _bor.final } ] s2)
+        | s2 = mark [%#ssieve'7] {_36} {n} {i} {_39} (fun (_x: ()) -> [ &_35 <- _x ] s3)
+        | s3 = bb10 ]
+      | bb10 = s0
+        [ s0 = UInt64.add [%#ssieve'9] {i} {[%#ssieve'8] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s1)
+        | s1 = bb1 ] ] ]
+  | bb11 = s0 [ s0 = -{resolve_refmut_Vec_u8_Global f}- s1 | s1 = return {_ret} ]
+  | bb12 = s0 [ s0 = -{resolve_refmut_Vec_u8_Global f}- s1 | s1 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & f: MutBorrow.t t_Vec_u8_Global = f
+  | & n: UInt64.t = n
+  | & i: UInt64.t = Any.any_l ()
+  | & _20: bool = Any.any_l ()
+  | & _23: bool = Any.any_l ()
+  | & _25: UInt64.t = Any.any_l ()
+  | & _27: UInt64.t = Any.any_l ()
+  | & _28: bool = Any.any_l ()
+  | & _30: bool = Any.any_l ()
+  | & _32: UInt8.t = Any.any_l ()
+  | & _35: () = Any.any_l ()
+  | & _36: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
+  | & _39: UInt64.t = Any.any_l ()
+  | & _old: t_Vec_u8_Global = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l () ])
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:sieve_outer ensures] [%#ssieve'11] Seq.length (view_Vec_u8_Global f.final)
+    = Seq.length (view_Vec_u8_Global f.current)}
+    (! return {result}) ]

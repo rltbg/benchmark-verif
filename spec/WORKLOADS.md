@@ -30,10 +30,12 @@ aucun coût de génération dépendant de l'implémentation du générateur.
 ## 1. `sort` — tri fusion (CPU + RAM)
 
 * `a[i] = (u32)(mix64(0x0123456789ABCDEF + i) >> 32)` pour `i ∈ [0,n)`.
-* Tri fusion **ascendant par le bas** (largeur w = 1, 2, 4, … ; fusion stable `gauche <= droite`)
-  dans un unique buffer de **2n u32** : `[0,n)` et `[n,2n)` alternent source/destination.
+* Tri fusion **descendant** (récursif) de `a[0,n)` avec un tableau temporaire `tmp` de n u32 :
+  `msort(lo,hi)` : si `hi-lo < 2` rien ; sinon `mid = lo + (hi-lo)/2`, `msort(lo,mid)`, `msort(mid,hi)`,
+  fusion stable (`gauche <= droite`) de `a[lo,mid)` et `a[mid,hi)` dans `tmp[lo,hi)`, puis recopie `tmp[lo,hi) → a[lo,hi)`.
 * Checksum : `fold` de chaque élément trié dans l'ordre ; **0** si l'ordre n'est pas croissant.
 * Mémoire idéale : 8·n octets. Contraintes : 1 ≤ n ≤ 2^30.
+* Prouvé (F* et Creusot) : le résultat est trié, c'est une permutation de l'entrée, rien hors de la plage n'est modifié.
 
 ## 2. `sieve` — crible d'Ératosthène (bande passante mémoire)
 
@@ -56,8 +58,9 @@ aucun coût de génération dépendant de l'implémentation du générateur.
 * Génération de n lignes ASCII `clé;valeur\n` dans un buffer d'au plus 15·n octets,
   avec `r = mix64(0x1357924680ACEBDF + i)`, `clé = r >> 44` (20 bits), `valeur = ((r >> 8) & 0xFFFFFFFF) mod 1 000 000`,
   nombres en décimal sans zéros de tête.
-* Puis relecture octet par octet de tout le buffer : pour chaque ligne, `tab[2·clé] += valeur`,
-  `tab[2·clé+1] += 1` (`tab` : 2^21 u64, 16 Mo, accès aléatoires).
+* Puis relecture octet par octet de tout le buffer par une **machine à états** (un octet par itération :
+  chiffres de la clé jusqu'à `;`, puis chiffres de la valeur jusqu'à `\n`) ; à chaque fin de ligne
+  `tab[2·clé] += valeur`, `tab[2·clé+1] += 1` (`tab` : 2^21 u64, 16 Mo, accès aléatoires).
 * Checksum : pour `k ∈ [0, 2^20)` : `ck = fold(fold(ck, tab[2k]), tab[2k+1])`.
 * Débit rapporté : n / durée totale (génération + parsing). Mémoire idéale : 15·n + 16 Mo.
   Contraintes : 1 ≤ n ≤ 268 435 455.
