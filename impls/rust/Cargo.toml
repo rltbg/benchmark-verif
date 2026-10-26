@@ -1,0 +1,22 @@
+[package]
+name = "bench-rust"
+version = "0.1.0"
+edition = "2021"
+description = "Workloads de benchmark en Rust, annotés pour Creusot (les contrats sont effacés par un `cargo build` normal)"
+
+[dependencies]
+creusot-contracts = "=0.8.0"
+
+[features]
+# `cargo creusot` active cfg(creusot) lui-même ; cette feature n'est là que pour la documentation.
+default = []
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(creusot)'] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+debug = false

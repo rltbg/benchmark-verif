@@ -1,0 +1,11 @@
+impls/rust/target/
+impls/c-ref/bench
+impls/ocaml-ref/bench
+impls/ocaml-ref/*.cm*
+impls/ocaml-ref/*.o
+impls/fsharp-ref/bin/
+impls/fsharp-ref/obj/
+impls/fsharp-ref/out/
+fstar/_build/
+__pycache__/
+results/test-*
