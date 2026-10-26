@@ -5,3 +5,8 @@ results/.rusage.*
 __pycache__/
 *.checked
 impls/rust/.why3find/
+impls/rust-plain/target/
+impls/c-native/bench
+impls/zig/bench
+impls/zig/bench.o
+impls/zig/.zig-cache/

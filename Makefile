@@ -21,4 +21,4 @@ bench:
 	python3 harness/bench.py run --preset $(PRESET) --repeat $(REPEAT)
 
 clean:
-	rm -rf impls/rust/target fstar/_build results/.runner
+	rm -rf impls/rust/target impls/rust-plain/target impls/c-native/bench impls/zig/bench fstar/_build results/.runner

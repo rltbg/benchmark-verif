@@ -57,10 +57,10 @@
               { "prover": "z3", "time": 0.021 },
               { "prover": "alt-ergo", "time": 0.086 },
               { "prover": "cvc4", "time": 0.06 },
-              { "prover": "cvc4", "time": 0.176 },
+              { "prover": "cvc4", "time": 0.212 },
               { "prover": "z3", "time": 0.028 },
               { "prover": "alt-ergo", "time": 0.261 },
-              { "prover": "cvc5", "time": 0.306 },
+              { "prover": "cvc5", "time": 0.34 },
               { "prover": "z3", "time": 0.043 }
             ]
           }

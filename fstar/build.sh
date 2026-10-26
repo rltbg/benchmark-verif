@@ -16,7 +16,7 @@ FSTAR_HOME=${FSTAR_HOME:-/opt/tools/fstar2/fstar}
 export PATH="$FSTAR_HOME/bin:$PATH"
 FOOT=../results/footprint.json
 B=$PWD/_build
-MODS=(Common Sort Sieve Matmul Lines Hashmap All)
+MODS=(Common.fst SortSpec.fsti SortSpec.fst Sort.fst Sieve.fst Matmul.fst Lines.fst Hashmap.fst All.fst)
 ENTRIES=(--custard_entry Bench.Sort.run --custard_entry Bench.Sieve.run --custard_entry Bench.Matmul.run
          --custard_entry Bench.Lines.run --custard_entry Bench.Hashmap.run)
 export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1
@@ -34,13 +34,15 @@ now() { date +%s.%N; }
 since() { echo "$(now) - $1" | bc -l; }
 
 verify() {
-  local t0; t0=$(now)
+  local t0 warm=0; t0=$(now)
+  [ -f "$B/cache/Bench.All.fst.checked" ] && warm=1
   ( cd src
     for m in "${MODS[@]}"; do
-      fstar.exe -c --cache_dir "$B/cache" "Bench.$m.fst" 2>&1 | { grep -v '^All verification conditions' || true; }
+      fstar.exe -c --cache_dir "$B/cache" "Bench.$m" 2>&1 | { grep -v '^All verification conditions' || true; }
     done )
   local dt; dt=$(since "$t0")
-  for i in fstar-c fstar-ocaml fstar-ocaml-fast fstar-fsharp; do record "$i" verify_s "$dt"; done
+  # cache chaud : la durée ne mesure pas la vérification, on garde la dernière mesure à froid
+  if [ "$warm" = 0 ]; then for i in fstar-c fstar-ocaml fstar-ocaml-fast fstar-fsharp; do record "$i" verify_s "$dt"; done; fi
   echo "vérifié en ${dt}s"
 }
 

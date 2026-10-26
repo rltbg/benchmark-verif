@@ -8,7 +8,7 @@
   ]
  },
  "fstar-c": {
-  "label": "F* (Pulse) → C",
+  "label": "F* (Pulse) \u2192 C",
   "cmd": [
    "fstar/_build/c/bench",
    "{workload}",
@@ -16,7 +16,7 @@
   ]
  },
  "fstar-fsharp": {
-  "label": "F* (Pulse) → F#",
+  "label": "F* (Pulse) \u2192 F#",
   "cmd": [
    "dotnet",
    "fstar/_build/fsharp/out/bench-fstar-fsharp.dll",
@@ -25,7 +25,7 @@
   ]
  },
  "fstar-ocaml": {
-  "label": "F* (Pulse) → OCaml (runtime livré)",
+  "label": "F* (Pulse) \u2192 OCaml (runtime livr\u00e9)",
   "cmd": [
    "fstar/_build/ocaml/bench",
    "{workload}",
@@ -33,9 +33,33 @@
   ]
  },
  "fstar-ocaml-fast": {
-  "label": "F* (Pulse) → OCaml (conversions d'entiers corrigées)",
+  "label": "F* (Pulse) \u2192 OCaml (conversions d'entiers corrig\u00e9es)",
   "cmd": [
    "fstar/_build/ocaml-fast/bench",
+   "{workload}",
+   "{n}"
+  ]
+ },
+ "rust-plain": {
+  "label": "Rust (sans Creusot)",
+  "cmd": [
+   "impls/rust-plain/target/release/bench-rust-plain",
+   "{workload}",
+   "{n}"
+  ]
+ },
+ "c-native": {
+  "label": "C natif (\u00e0 la main)",
+  "cmd": [
+   "impls/c-native/bench",
+   "{workload}",
+   "{n}"
+  ]
+ },
+ "zig": {
+  "label": "Zig 0.17 (\u00e0 la main)",
+  "cmd": [
+   "impls/zig/bench",
    "{workload}",
    "{n}"
   ]
