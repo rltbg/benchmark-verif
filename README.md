@@ -229,15 +229,17 @@ Temps relatif au meilleur de la ligne, taille `large` (1,00 = meilleur ; « > 60
 
 Graphes (générés par `python3 harness/charts.py`, source : `results/run-*.json`) :
 
-1. **Temps relatif au meilleur, `large`, hors OCaml** : montre que les cinq colonnes natives/vérifiées sont dans un mouchoir et que seul F# s'en détache.
+> **F\* → OCaml (livré et corrigé) est volontairement absent de tous les graphes** : il est de ×26 à ×136 plus lent que le meilleur à `large`
+> (jusqu'à ×1000 à `small`), dépasse le délai de 600 s sur `matmul` et sur tout `large` pour le runtime livré, et consomme jusqu'à ×8 la RAM idéale.
+> Sur la même échelle il écrase les autres courbes. Ses chiffres sont dans le tableau ci-dessus et dans les tableaux de la section Résultats.
+
+1. **Temps relatif au meilleur, `large`** (échelle log) : les cinq colonnes natives ou vérifiées sont dans un mouchoir, seul F# s'en détache.
    ![relatif](results/charts/relatif-large.png)
-2. **Même graphe, OCaml inclus (échelle log)** : l'écart de deux ordres de grandeur du backend OCaml.
-   ![relatif OCaml](results/charts/relatif-large-avec-ocaml.png)
-3. **Débit en fonction de la taille** : un panneau par workload ; courbes plates = pas de dégradation avec la charge ; les courbes OCaml s'arrêtent où le délai est dépassé.
+2. **Débit en fonction de la taille** : un panneau par workload ; le débit baisse quand les données sortent des caches (`sieve`, `hashmap`) de la même façon pour toutes les colonnes natives, et les courbes F# restent en dessous sans converger.
    ![débit](results/charts/debit-vs-taille.png)
-4. **Mémoire à `large`** (pic RAM ÷ taille des structures, échelle log) : C/Zig/Rust à ~1, .NET entre 1,2 et 3, OCaml jusqu'à 8.
+3. **Mémoire à `large`** (pic RAM ÷ taille des structures, échelle log) : C/Zig/Rust à ~1, .NET entre 1,2 et 3.
    ![mémoire](results/charts/memoire-large.png)
-5. **Coût de la vérification** : le prix de la preuve, payé hors exécution.
+4. **Coût de la vérification** : le prix de la preuve, payé hors exécution.
    ![preuve](results/charts/cout-preuve.png)
 
 ### Ce que disent ces chiffres (et ce qu'ils ne disent pas)

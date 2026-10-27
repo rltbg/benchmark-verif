@@ -4,6 +4,7 @@ import sys, math
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import bench, readme_tables as rt
+ORDER = [i for i in rt.ORDER if "ocaml" not in i]  # OCaml exclu des graphes : 25 à 1000x plus lent, il écrase les échelles (voir tableau du README)
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt, matplotlib.ticker
 
@@ -34,7 +35,7 @@ def relative_bars(preset, impls, fname, title):
 def scaling(fname):
     fig, axes = plt.subplots(1, 5, figsize=(16, 3.6))
     for ax, w in zip(axes, W):
-        for i in rt.ORDER:
+        for i in ORDER:
             xs, ys = [], []
             for p in ["tiny", "small", "medium", "large", "xlarge"]:
                 t = tables(p)
@@ -42,16 +43,16 @@ def scaling(fname):
             if xs: ax.plot(xs, ys, "o-", ms=3, label=rt.SHORT[i], color=COL[i])
         ax.set_xscale("log"); ax.set_yscale("log"); ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter()); ax.set_title(w); ax.set_xlabel("n"); ax.grid(alpha=.3)
     axes[0].set_ylabel("débit (éléments/s, log)"); axes[0].legend(fontsize=6)
-    fig.suptitle("Débit en fonction de la taille (échelle log) : les colonnes OCaml s'arrêtent où elles dépassent 600 s"); fig.tight_layout()
+    fig.suptitle("Débit en fonction de la taille (échelle log) — F*→OCaml exclu"); fig.tight_layout()
     fig.savefig(OUT / fname, dpi=130); plt.close(fig)
 
 def memory(fname):
-    t = tables("large"); fig, ax = plt.subplots(figsize=(11, 4.4)); impls = [i for i in rt.ORDER if any(ok(t[w].get(i)) for w in W)]
+    t = tables("large"); fig, ax = plt.subplots(figsize=(11, 4.4)); impls = [i for i in ORDER if any(ok(t[w].get(i)) for w in W)]
     bw = 0.8 / len(impls)
     for j, i in enumerate(impls):
         ax.bar([k + j * bw for k in range(len(W))], [t[w][i]["rss_ratio"] if ok(t[w].get(i)) else float("nan") for w in W], bw, label=rt.SHORT[i], color=COL[i])
     ax.axhline(1, color="k", lw=.6); ax.set_yscale("log"); ax.set_xticks([k + .4 - bw / 2 for k in range(len(W))]); ax.set_xticklabels(W)
-    ax.set_ylabel("pic RAM / taille des structures (log)"); ax.set_title("Empreinte mémoire à `large` (1 = idéal)"); ax.legend(ncol=3, fontsize=8)
+    ax.set_ylabel("pic RAM / taille des structures (log)"); ax.set_title("Empreinte mémoire à `large` (1 = idéal) — F*→OCaml exclu"); ax.legend(ncol=3, fontsize=8)
     ax.grid(axis="y", alpha=.3); fig.tight_layout(); fig.savefig(OUT / fname, dpi=130); plt.close(fig)
 
 def proof_cost(fname):
@@ -63,7 +64,6 @@ def proof_cost(fname):
     ax.set_title("Coût de la vérification"); fig.tight_layout(); fig.savefig(OUT / fname, dpi=130); plt.close(fig)
 
 native = ["c-native", "zig", "rust-plain", "rust-creusot", "fstar-c", "fstar-fsharp"]
-relative_bars("large", native, "relatif-large.png", "Temps relatif au meilleur, `large` (hors OCaml)")
-relative_bars("large", rt.ORDER, "relatif-large-avec-ocaml.png", "Temps relatif au meilleur, `large` (OCaml inclus : trous = délai 600 s dépassé)")
+relative_bars("large", native, "relatif-large.png", "Temps relatif au meilleur, `large` (F*→OCaml exclu, voir tableau)")
 scaling("debit-vs-taille.png"); memory("memoire-large.png"); proof_cost("cout-preuve.png")
 print("ok", sorted(p.name for p in OUT.iterdir()))
