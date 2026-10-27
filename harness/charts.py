@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt, matplotlib.ticker
 OUT = rt.R / "charts"; OUT.mkdir(exist_ok=True)
 COL = {"c-native": "#6b7280", "zig": "#f59e0b", "rust-plain": "#b45309", "rust-creusot": "#dc2626",
        "fstar-c": "#2563eb", "fstar-fsharp": "#7c3aed", "fstar-ocaml-fast": "#059669", "fstar-ocaml": "#065f46"}
-W = bench.WORKLOADS
+W = bench.BASE_WORKLOADS  # les graphes du README portent sur les 5 workloads de base
 
 def tables(preset):
     d = rt.merged(preset)

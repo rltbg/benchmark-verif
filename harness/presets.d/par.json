@@ -1,0 +1,8 @@
+{
+ "parmatmul": {"smoke": {"n": 64, "threads": 4}, "tiny": {"n": 256, "threads": 4}, "small": {"n": 1024, "threads": 4}, "medium": {"n": 2048, "threads": 4},
+               "large": {"n": 6144, "threads": 4}, "xlarge": {"n": 8192, "threads": 4}, "saturate": {"n": 12288, "threads": 4}},
+ "parsort":   {"smoke": {"n": 10000, "threads": 4}, "tiny": {"n": 500000, "threads": 4}, "small": {"n": 4000000, "threads": 4}, "medium": {"n": 20000000, "threads": 4},
+               "large": {"n": 100000000, "threads": 4}, "xlarge": {"n": 400000000, "threads": 4}, "saturate": {"n": 1000000000, "threads": 4}},
+ "parsha":    {"smoke": {"n": 25600, "threads": 4}, "tiny": {"n": 25600000, "threads": 4}, "small": {"n": 256000000, "threads": 4}, "medium": {"n": 1024000000, "threads": 4},
+               "large": {"n": 5120000000, "threads": 4}, "xlarge": {"n": 25600000000, "threads": 4}, "saturate": {"n": 64000000000, "threads": 4}}
+}

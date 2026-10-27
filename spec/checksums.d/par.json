@@ -1,0 +1,9 @@
+{
+ "_doc": "parmatmul = matmul et parsort = sort au même n (mêmes données) ; parsha dépend de T : clé parsha@T:n (T = threads du preset ou de la surcharge @T), T=1 = sha256. parsha:n sans @T = checksum à 4 threads (valeur du preset).",
+ "parmatmul:64": "ca8d1bf8c2c39885",
+ "parsort:10000": "351c39298dce79ff",
+ "parsha@4:25600": "cc6118776b4becd3",
+ "parsha@1:25600": "88efd3aaddddca34",
+ "parsha@2:25600": "2dc77ca2faac3765",
+ "parsha:25600": "cc6118776b4becd3"
+}

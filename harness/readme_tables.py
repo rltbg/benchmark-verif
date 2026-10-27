@@ -38,8 +38,7 @@ def main():
         print(f"### `{preset}`\n")
         print("| workload (n) | " + " | ".join(SHORT[i] for i in impls) + " |")
         print("|---|" + "--:|" * len(impls))
-        for w in bench.WORKLOADS:
-            if w not in table: continue
+        for w in bench.report_order(table):
             d = table[w]; n = next(v["n"] for k, v in d.items() if isinstance(v, dict) and "n" in v)
             print(f"| {w} ({n:,}) | ".replace(",", " ") + " | ".join(cell(d[i]) if i in d else "—" for i in impls) + " |")
         # synthèse (moyenne géométrique du temps relatif au meilleur) sur les workloads complets
@@ -59,7 +58,7 @@ def footprint(preset="large"):
     out = [f"#### CPU et RAM, `{preset}`\n",
            "Cellule : temps CPU (user+sys) · utilisation d'un cœur · pic RAM (RSS) · RAM ÷ taille idéale des structures · fautes de page mineures.\n",
            "| workload | " + " | ".join(SHORT[i] for i in impls) + " |", "|---|" + "--:|" * len(impls)]
-    for w in bench.WORKLOADS:
+    for w in bench.report_order(table):
         cells = []
         for i in impls:
             v = table[w].get(i)

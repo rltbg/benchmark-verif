@@ -24,6 +24,7 @@ MODS=(Common.fst SortSpec.fsti SortSpec.fst Sort.fst Sieve.fst Matmul.fst Lines.
       Ntt.fst
       Ptrchase.fst
       Sha256.fst
+      Par.fst
       # @@MODS@@ (modules des workloads étendus, avant All.fst : une ligne `<Nom>.fst` ; les ancres sont retirées par la ligne suivante)
       All.fst)
 ENTRIES=(--custard_entry Bench.Sort.run --custard_entry Bench.Sieve.run --custard_entry Bench.Matmul.run
@@ -36,6 +37,9 @@ ENTRIES=(--custard_entry Bench.Sort.run --custard_entry Bench.Sieve.run --custar
          --custard_entry Bench.Ntt.run
          --custard_entry Bench.Ptrchase.run
          --custard_entry Bench.Sha256.run
+         --custard_entry Bench.Par.u32_alloc --custard_entry Bench.Par.u32_free --custard_entry Bench.Par.mat_rows --custard_entry Bench.Par.sha_seg
+         --custard_entry Bench.Matmul.init_mat --custard_entry Bench.Matmul.checksum
+         --custard_entry Bench.Sort.fill --custard_entry Bench.Sort.msort --custard_entry Bench.Sort.merge --custard_entry Bench.Sort.copy_back --custard_entry Bench.Sort.checksum
          # @@ENTRIES@@ (une ligne `--custard_entry Bench.<Nom>.run` par workload étendu)
 )
 export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1

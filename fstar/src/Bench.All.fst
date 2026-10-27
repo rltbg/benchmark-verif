@@ -14,4 +14,5 @@ let alloc = Bench.Alloc.run
 let ntt = Bench.Ntt.run
 let ptrchase = Bench.Ptrchase.run
 let sha256 = Bench.Sha256.run
+module Par_ = Bench.Par  (* noyaux de parmatmul/parsort/parsha : points d'entrée Bench.Par.* et Bench.{Matmul,Sort}.* passés en --custard_entry ; les threads sont dans les pilotes *)
 (* @@ALL@@ une ligne `let <nom> = Bench.<Nom>.run` par workload étendu *)

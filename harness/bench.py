@@ -25,16 +25,28 @@ for _f in sorted((ROOT / "spec" / "workloads.d").glob("*.json")):
 WORKLOADS = BASE_WORKLOADS + sorted(_EXTRA)
 
 
+def base(w):
+    """'parmatmul@4' -> 'parmatmul' (surcharge du nombre de threads : --workloads parmatmul@1,parmatmul@2,parmatmul@4)."""
+    return w.split("@")[0]
+
+
+def report_order(table):
+    """Noms de workloads présents dans `table`, dans l'ordre de WORKLOADS, les variantes @T triées par T."""
+    return [w for b in WORKLOADS for w in sorted((x for x in table if base(x) == b), key=lambda x: int(x.split("@")[1]) if "@" in x else 0)]
+
+
 def _ev(expr, n, t):
     return eval(expr, {"__builtins__": {}}, {"n": n, "t": t, "math": math, "min": min, "max": max})
 
 
 def work_items(w, n, t=1):
+    w = base(w)
     return _ev(_EXTRA[w]["work_items"], n, t) if w in _EXTRA else _ev(_BASE_WORK[w], n, t)
 
 
 def ideal_bytes(w, n, t=1):
     """Taille des structures de données allouées par la spécification (plancher mémoire)."""
+    w = base(w)
     if w in _EXTRA: return _ev(_EXTRA[w]["ideal_bytes"], n, t)
     if w == "sort": return 8 * n
     if w == "sieve": return n + 1
@@ -217,7 +229,7 @@ def _cmd_run(a, ballast):
     results = {"meta": {"preset": a.preset, "repeat": a.repeat, "wrapper": a.wrapper, "date": time.strftime("%F %T"),
                         "ballast": a.ballast, "host": {"cpus": os.cpu_count(), "uname": " ".join(os.uname()[:3]),
                                  "mem_kb": int(open("/proc/meminfo").readline().split()[1])},
-                        "sizes": {w: size_of(presets[w])[0] for w in wl}, "threads": {w: size_of(presets[w])[1] for w in wl if size_of(presets[w])[1]}}, "runs": []}
+                        "sizes": {w: size_of(presets[base(w)])[0] for w in wl}, "threads": {w: size_of(presets[base(w)])[1] for w in wl if size_of(presets[base(w)])[1]}}, "runs": []}
     if not impls: sys.exit("aucune implémentation construite (voir README : make all)")
     print(f"implémentations : {', '.join(impls)}", file=sys.stderr)
     smoke = load_presets()["smoke"]
@@ -227,16 +239,17 @@ def _cmd_run(a, ballast):
         results.setdefault("startup", {})[name] = {"wall_s": statistics.median(x["wall_s"] for x in st),
                                                   "rss_kb": statistics.median(x["peak_rss_kb"] for x in st)}
         for w in wl:
-            n, thr = size_of(presets[w])
-            if w in spec.get("unsupported", {}):
+            n, thr = size_of(presets[base(w)])
+            if "@" in w: thr = int(w.split("@")[1])  # surcharge : parmatmul@2 = 2 threads
+            if base(w) in spec.get("unsupported", {}):
                 results["runs"].append({"impl": name, "workload": w, "n": n, "threads": thr or 1, "rep": 0, "status": "unsupported",
-                                        "stderr": spec["unsupported"][w], "returncode": 0, "timed_out": False, "wall_s": 0, "user_s": 0,
+                                        "stderr": spec["unsupported"][base(w)], "returncode": 0, "timed_out": False, "wall_s": 0, "user_s": 0,
                                         "sys_s": 0, "peak_rss_kb": 0, "minflt": 0, "majflt": 0, "inblock": 0, "oublock": 0, "timeline": []})
-                print(f"{name:14s} {w:8s} non implémenté : {spec['unsupported'][w]}", file=sys.stderr)
+                print(f"{name:14s} {w:8s} non implémenté : {spec['unsupported'][base(w)]}", file=sys.stderr)
                 continue
             prepare_workload(w, n)
             for r in range(a.repeat):
-                cmd = [c.format(workload=w, n=n) for c in spec["cmd"]] + ([str(thr)] if thr else [])
+                cmd = [c.format(workload=base(w), n=n) for c in spec["cmd"]] + ([str(thr)] if thr else [])
                 drop_caches(w)
                 rec = run_once(cmd, a.wrapper, a.timeout)
                 rec.update(impl=name, workload=w, n=n, threads=thr or 1, rep=r)
@@ -293,7 +306,7 @@ def summarize(data):
         d["_checksums"] = sorted(sums)
         # comparaison à la table de référence (spec/checksums.json) quand la taille y figure
         n = next(v["n"] for v in d.values() if isinstance(v, dict) and "n" in v)
-        ref = load_checksums().get(f"{w}:{n}")
+        ref = load_checksums().get(f"{w}:{n}") or load_checksums().get(f"{base(w)}:{n}")
         for v in d.values():
             if isinstance(v, dict) and v.get("status") == "ok" and ref:
                 v["agrees"] = v["agrees"] and v["checksum"] == ref
@@ -316,13 +329,13 @@ def report(path):
           f"_{data['meta']['date']} · {data['meta']['host']['cpus']} CPU · {data['meta']['host']['mem_kb']//1024} Mo RAM · "
           f"{data['meta']['host']['uname']} · médiane de {data['meta']['repeat']} exécutions_", ""]
     agg_t, agg_m, agg_c = {}, {}, {}
-    for w in WORKLOADS:
-        if w not in table: continue
+    for w in report_order(table):
         d = {k: v for k, v in table[w].items() if not k.startswith("_")}
         oks = {k: v for k, v in d.items() if v["status"] == "ok"}
         n = next(iter(d.values()))["n"]
-        md += [f"## {w} (n = {n:,})".replace(",", " "), "",
-               f"Débit = {UNIT[w]}/s mesuré à l'intérieur du processus (hors démarrage du runtime). "
+        thr = next(iter(d.values())).get("threads", 1)
+        md += [f"## {w} (n = {n:,}{f' — {thr} threads' if thr > 1 else ''})".replace(",", " "), "",
+               f"Débit = {UNIT[base(w)]}/s mesuré à l'intérieur du processus (hors démarrage du runtime). "
                f"RAM/idéal = pic RSS ÷ taille des structures de la spécification ({ideal_bytes(w, n, next(iter(d.values())).get("threads", 1))/2**20:.0f} Mo).", "",
                "| implémentation | débit | temps | vs meilleur | CPU (user+sys) | CPU % | pic RAM | RAM/idéal | fautes de page | E/S disque (blocs r/w) | checksum |",
                "|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|:-:|"]
@@ -400,12 +413,11 @@ td.bar{position:relative}td.bar span{position:relative;z-index:1}td.bar i{positi
         pct = 0 if not mx else min(100, 100 * val / mx)
         return f'<td class="bar"><i style="width:{pct:.0f}%"></i><span>{text}</span></td>'
 
-    for w in WORKLOADS:
-        if w not in table: continue
+    for w in report_order(table):
         d = {k: v for k, v in table[w].items() if not k.startswith("_")}
         oks = [v for v in d.values() if v["status"] == "ok"]
         n = next(iter(d.values()))["n"]
-        out.append(f'<h2>{w} — n = {n:,}</h2><div class="wrap"><table><tr><th>implémentation</th><th>débit ({UNIT[w]}/s)</th><th>temps</th><th>CPU user+sys</th><th>pic RAM</th><th>RAM/idéal</th><th>courbe RAM</th><th>fautes page</th><th>E/S blocs</th><th>checksum</th></tr>'.replace(",", " "))
+        out.append(f'<h2>{w} — n = {n:,}</h2><div class="wrap"><table><tr><th>implémentation</th><th>débit ({UNIT[base(w)]}/s)</th><th>temps</th><th>CPU user+sys</th><th>pic RAM</th><th>RAM/idéal</th><th>courbe RAM</th><th>fautes page</th><th>E/S blocs</th><th>checksum</th></tr>'.replace(",", " "))
         mt = max((v["throughput"] for v in oks), default=1); mc = max((v["cpu_s"] for v in oks), default=1); mr = max((v["rss_mb"] for v in oks), default=1)
         for k, v in sorted(d.items(), key=lambda kv: kv[1].get("internal_s", 1e99)):
             lab = e(meta.get(k, {}).get("label", k))
