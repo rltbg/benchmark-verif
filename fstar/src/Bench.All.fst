@@ -11,4 +11,5 @@ module Stream_ = Bench.Stream  (* noyau de `stream` : chunk/new_buf/new_state/ne
 let bfs = Bench.Bfs.run
 let strsort = Bench.Strsort.run
 let alloc = Bench.Alloc.run
+let ntt = Bench.Ntt.run
 (* @@ALL@@ une ligne `let <nom> = Bench.<Nom>.run` par workload étendu *)

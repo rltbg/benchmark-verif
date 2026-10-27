@@ -80,7 +80,7 @@ pub fn run(n: usize) -> u64 {
     #[invariant(i@ <= n@)]
     while i < n {
         let r = mix64(0xA110C00000000001u64.wrapping_add(i as u64));
-        let s = 8 + 8 * ((r & 31) as usize);
+        let s = 8 + 8 * ((r % 32) as usize);
         let mut b = std::vec![0u8; s];
         barrier(&b);
         fill(&mut b, i as u64);

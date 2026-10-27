@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
     else if (!strcmp(argv[1], "bfs")) ck = Bench_Bfs_run(n);
     else if (!strcmp(argv[1], "strsort")) ck = Bench_Strsort_run(n);
     else if (!strcmp(argv[1], "alloc")) ck = Bench_Alloc_run(n);
+    else if (!strcmp(argv[1], "ntt")) ck = Bench_Ntt_run(n);
     /* @@DISPATCH@@ (une ligne `else if (!strcmp(argv[1], "<nom>")) ck = Bench_<Nom>_run(n);` ; threads/pthread possibles ici, voir drivers/driver_par.h) */
     else { fprintf(stderr, "workload inconnu\n"); return 2; }
     clock_gettime(CLOCK_MONOTONIC, &t1);

@@ -37,6 +37,7 @@ let main argv =
             | "bfs" -> Custard.bench_Bfs_run n
             | "strsort" -> Custard.bench_Strsort_run n
             | "alloc" -> Custard.bench_Alloc_run n
+            | "ntt" -> Custard.bench_Ntt_run n
             // @@DISPATCH@@ (une ligne `| "<nom>" -> Custard.bench_<Nom>_run n` ; si le noyau est parallélisé par le pilote : Tasks/Threads ici, `threads` disponible)
             | _ -> failwith "workload inconnu"
         let ns = int64 (float sw.ElapsedTicks * 1e9 / float Stopwatch.Frequency)
