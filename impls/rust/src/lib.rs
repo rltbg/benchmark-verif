@@ -10,3 +10,4 @@ pub mod lines;
 pub mod matmul;
 pub mod sieve;
 pub mod sort;
+// @@MODS@@ (une ligne `pub mod <nom>;` ; chaque module expose `pub fn run(n: usize, threads: usize) -> u64`, contrats Creusot sur les noyaux)

@@ -14,16 +14,28 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PAGE = os.sysconf("SC_PAGE_SIZE")
 HZ = os.sysconf("SC_CLK_TCK")
-WORKLOADS = ["sort", "sieve", "matmul", "lines", "hashmap"]
+BASE_WORKLOADS = ["sort", "sieve", "matmul", "lines", "hashmap"]
 UNIT = {"sort": "éléments", "sieve": "entiers", "matmul": "mult-add", "lines": "lignes", "hashmap": "opérations"}
+_BASE_WORK = {"sort": "n", "sieve": "n", "matmul": "n**3", "lines": "n", "hashmap": "3*n"}
+_EXTRA = {}  # workloads « extrêmes » décrits par spec/workloads.d/<nom>.json : {"unit","work_items","ideal_bytes"} (expressions en n, t)
+for _f in sorted((ROOT / "spec" / "workloads.d").glob("*.json")):
+    _d = json.loads(_f.read_text())
+    _EXTRA[_d["name"]] = _d
+    UNIT[_d["name"]] = _d["unit"]
+WORKLOADS = BASE_WORKLOADS + sorted(_EXTRA)
 
 
-def work_items(w, n):
-    return {"sort": n, "sieve": n, "matmul": n ** 3, "lines": n, "hashmap": 3 * n}[w]
+def _ev(expr, n, t):
+    return eval(expr, {"__builtins__": {}}, {"n": n, "t": t, "math": math, "min": min, "max": max})
 
 
-def ideal_bytes(w, n):
+def work_items(w, n, t=1):
+    return _ev(_EXTRA[w]["work_items"], n, t) if w in _EXTRA else _ev(_BASE_WORK[w], n, t)
+
+
+def ideal_bytes(w, n, t=1):
     """Taille des structures de données allouées par la spécification (plancher mémoire)."""
+    if w in _EXTRA: return _ev(_EXTRA[w]["ideal_bytes"], n, t)
     if w == "sort": return 8 * n
     if w == "sieve": return n + 1
     if w == "matmul": return 12 * n * n
@@ -35,9 +47,26 @@ def ideal_bytes(w, n):
     raise KeyError(w)
 
 
+def load_presets():
+    """presets.json (workloads de base) + harness/presets.d/<nom>.json : {"<workload>": {"smoke": n | {"n":..,"threads":..}, ...}}."""
+    p = load("presets.json")
+    for f in sorted((Path(__file__).parent / "presets.d").glob("*.json")):
+        for w, by_preset in json.loads(f.read_text()).items():
+            for name, v in by_preset.items():
+                p.setdefault(name, {})[w] = v
+    return p
+
+
+def size_of(v):
+    """Valeur de preset -> (n, threads|None)."""
+    return (v["n"], v.get("threads")) if isinstance(v, dict) else (v, None)
+
+
 def load_checksums():
-    p = ROOT / "spec" / "checksums.json"
-    return {k: v for k, v in json.loads(p.read_text()).items() if not k.startswith("_")} if p.exists() else {}
+    out = {}
+    for p in [ROOT / "spec" / "checksums.json"] + sorted((ROOT / "spec" / "checksums.d").glob("*.json")):
+        if p.exists(): out.update({k: v for k, v in json.loads(p.read_text()).items() if not k.startswith("_")})
+    return out
 
 
 def load(name):
@@ -140,26 +169,32 @@ def run_once(cmd, wrapper, timeout):
 def cmd_run(a):
     impls = available(load("impls.json"))
     if a.impls: impls = {k: v for k, v in impls.items() if k in a.impls.split(",")}
-    presets = load("presets.json")[a.preset]
-    wl = a.workloads.split(",") if a.workloads else WORKLOADS
+    presets = load_presets()[a.preset]
+    wl = a.workloads.split(",") if a.workloads else [w for w in WORKLOADS if w in presets]
     results = {"meta": {"preset": a.preset, "repeat": a.repeat, "wrapper": a.wrapper, "date": time.strftime("%F %T"),
                         "host": {"cpus": os.cpu_count(), "uname": " ".join(os.uname()[:3]),
                                  "mem_kb": int(open("/proc/meminfo").readline().split()[1])},
-                        "sizes": {w: presets[w] for w in wl}}, "runs": []}
+                        "sizes": {w: size_of(presets[w])[0] for w in wl}, "threads": {w: size_of(presets[w])[1] for w in wl if size_of(presets[w])[1]}}, "runs": []}
     if not impls: sys.exit("aucune implémentation construite (voir README : make all)")
     print(f"implémentations : {', '.join(impls)}", file=sys.stderr)
-    smoke = load("presets.json")["smoke"]
+    smoke = load_presets()["smoke"]
     for name, spec in impls.items():
         # coût de démarrage : plus petit run, médiane de 3
         st = [run_once([c.format(workload="sort", n=smoke["sort"]) for c in spec["cmd"]], a.wrapper, 120) for _ in range(3)]
         results.setdefault("startup", {})[name] = {"wall_s": statistics.median(x["wall_s"] for x in st),
                                                   "rss_kb": statistics.median(x["peak_rss_kb"] for x in st)}
         for w in wl:
-            n = presets[w]
+            n, thr = size_of(presets[w])
+            if w in spec.get("unsupported", {}):
+                results["runs"].append({"impl": name, "workload": w, "n": n, "threads": thr or 1, "rep": 0, "status": "unsupported",
+                                        "stderr": spec["unsupported"][w], "returncode": 0, "timed_out": False, "wall_s": 0, "user_s": 0,
+                                        "sys_s": 0, "peak_rss_kb": 0, "minflt": 0, "majflt": 0, "inblock": 0, "oublock": 0, "timeline": []})
+                print(f"{name:14s} {w:8s} non implémenté : {spec['unsupported'][w]}", file=sys.stderr)
+                continue
             for r in range(a.repeat):
-                cmd = [c.format(workload=w, n=n) for c in spec["cmd"]]
+                cmd = [c.format(workload=w, n=n) for c in spec["cmd"]] + ([str(thr)] if thr else [])
                 rec = run_once(cmd, a.wrapper, a.timeout)
-                rec.update(impl=name, workload=w, n=n, rep=r)
+                rec.update(impl=name, workload=w, n=n, threads=thr or 1, rep=r)
                 results["runs"].append(rec)
                 print(f"{name:14s} {w:8s} n={n:<11d} #{r} {rec['status']:7s} wall={rec['wall_s']:7.2f}s "
                       f"cpu={rec['user_s']+rec['sys_s']:7.2f}s rss={rec['peak_rss_kb']/1024:8.1f}MB", file=sys.stderr)
@@ -187,7 +222,7 @@ def summarize(data):
     table = {}
     for (w, impl), rs in by.items():
         ok = [r for r in rs if r["status"] == "ok"]
-        n = rs[0]["n"]
+        n = rs[0]["n"]; t = rs[0].get("threads", 1)
         if not ok:
             table.setdefault(w, {})[impl] = {"status": rs[-1]["status"], "n": n, "stderr": rs[-1]["stderr"]}
             continue
@@ -195,13 +230,13 @@ def summarize(data):
         best = min(ok, key=lambda r: r["internal_s"])
         cpu = med("user_s") + med("sys_s")
         table.setdefault(w, {})[impl] = {
-            "status": "ok", "n": n, "internal_s": med("internal_s"), "wall_s": med("wall_s"),
+            "status": "ok", "n": n, "threads": t, "internal_s": med("internal_s"), "wall_s": med("wall_s"),
             "cpu_s": cpu, "user_s": med("user_s"), "sys_s": med("sys_s"),
             "cpu_pct": 100 * cpu / med("wall_s"), "rss_mb": med("peak_rss_kb") / 1024,
-            "rss_ratio": med("peak_rss_kb") * 1024 / ideal_bytes(w, n),
+            "rss_ratio": med("peak_rss_kb") * 1024 / ideal_bytes(w, n, t),
             "minflt": med("minflt"), "majflt": med("majflt"), "inblock": med("inblock"), "oublock": med("oublock"),
-            "throughput": work_items(w, n) / med("internal_s"),
-            "mb_s_per_rss": work_items(w, n) / med("internal_s") / (med("peak_rss_kb") / 1024),
+            "throughput": work_items(w, n, t) / med("internal_s"),
+            "mb_s_per_rss": work_items(w, n, t) / med("internal_s") / (med("peak_rss_kb") / 1024),
             "checksum": ok[0]["checksum"], "consistent": len({r["checksum"] for r in ok}) == 1,
             "internal_spread": (max(r["internal_s"] for r in ok) - min(r["internal_s"] for r in ok)) / med("internal_s"),
             "timeline": best["timeline"], "runs": len(ok)}
@@ -243,7 +278,7 @@ def report(path):
         n = next(iter(d.values()))["n"]
         md += [f"## {w} (n = {n:,})".replace(",", " "), "",
                f"Débit = {UNIT[w]}/s mesuré à l'intérieur du processus (hors démarrage du runtime). "
-               f"RAM/idéal = pic RSS ÷ taille des structures de la spécification ({ideal_bytes(w, n)/2**20:.0f} Mo).", "",
+               f"RAM/idéal = pic RSS ÷ taille des structures de la spécification ({ideal_bytes(w, n, next(iter(d.values())).get("threads", 1))/2**20:.0f} Mo).", "",
                "| implémentation | débit | temps | vs meilleur | CPU (user+sys) | CPU % | pic RAM | RAM/idéal | fautes de page | E/S disque (blocs r/w) | checksum |",
                "|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|:-:|"]
         best_t = min((v["internal_s"] for v in oks.values()), default=None)

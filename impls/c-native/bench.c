@@ -151,9 +151,13 @@ static u64 run_hashmap(size_t n) {
     return ck;
 }
 
+/* Workloads étendus : chaque w_<nom>.c définit `static u64 run_<nom>(size_t n, int threads)` ; voir w_all.h. */
+#include "w_all.h"
+
 int main(int argc, char **argv) {
-    if (argc != 3) { fprintf(stderr, "usage: %s <sort|sieve|matmul|lines|hashmap> <n>\n", argv[0]); return 2; }
+    if (argc < 3 || argc > 4) { fprintf(stderr, "usage: %s <workload> <n> [threads]\n", argv[0]); return 2; }
     size_t n = (size_t)strtoull(argv[2], NULL, 10);
+    int threads = argc == 4 ? atoi(argv[3]) : 1; (void)threads;
     u64 ck;
     struct timespec t0, t1;
     clock_gettime(CLOCK_MONOTONIC, &t0);
@@ -162,6 +166,7 @@ int main(int argc, char **argv) {
     else if (!strcmp(argv[1], "matmul")) ck = run_matmul(n);
     else if (!strcmp(argv[1], "lines")) ck = run_lines(n);
     else if (!strcmp(argv[1], "hashmap")) ck = run_hashmap(n);
+    /* @@DISPATCH@@ */
     else { fprintf(stderr, "workload inconnu\n"); return 2; }
     clock_gettime(CLOCK_MONOTONIC, &t1);
     u64 ns = (u64)(t1.tv_sec - t0.tv_sec) * 1000000000ULL + (u64)(t1.tv_nsec - t0.tv_nsec);

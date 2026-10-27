@@ -201,10 +201,21 @@ fn run_hashmap(n: usize) -> u64 {
     ck
 }
 
+// @@MODS@@ (une ligne `mod w_<nom>;` ; chaque module expose `pub fn run(n: usize, threads: usize) -> u64`)
+
+fn extended(w: &str, n: usize, threads: usize) -> Option<u64> {
+    let _ = (n, threads);
+    match w {
+        // @@DISPATCH@@
+        _ => None,
+    }
+}
+
 fn main() {
     let args: Vec<String> = std::env::args().collect();
-    if args.len() != 3 {
-        eprintln!("usage: bench-rust-plain <sort|sieve|matmul|lines|hashmap> <n>");
+    let threads: usize = args.get(3).map_or(1, |t| t.parse().expect("threads"));
+    if args.len() < 3 || args.len() > 4 {
+        eprintln!("usage: bench-rust-plain <workload> <n> [threads]");
         std::process::exit(2);
     }
     let n: usize = args[2].parse().expect("n");
@@ -215,10 +226,10 @@ fn main() {
         "matmul" => run_matmul(n),
         "lines" => run_lines(n),
         "hashmap" => run_hashmap(n),
-        _ => {
+        w => extended(w, n, threads).unwrap_or_else(|| {
             eprintln!("workload inconnu");
             std::process::exit(2);
-        }
+        }),
     };
     println!("RESULT workload={} n={} checksum={:016x} time_ns={}", args[1], n, ck, t0.elapsed().as_nanos());
 }

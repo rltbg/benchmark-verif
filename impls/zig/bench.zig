@@ -241,17 +241,27 @@ fn runHashmap(n: usize) u64 {
     return ck;
 }
 
+// @@IMPORTS@@ (une ligne `const w_<nom> = @import("w_<nom>.zig");` ; chaque module exporte `pub fn run(n: usize, threads: usize) u64`)
+
+/// Workloads étendus : `// @@DISPATCH@@` — ajouter `if (std.mem.eql(u8, w, "<nom>")) return w_<nom>.run(n, threads);` sous l'ancre.
+fn extended(w: []const u8, n: usize, threads: usize) ?u64 {
+    _ = .{ w, n, threads };
+    // @@DISPATCH@@
+    return null;
+}
+
 pub export fn main(argc: c_int, argv: [*][*:0]u8) c_int {
-    if (argc != 3) {
-        _ = printf("usage: bench <sort|sieve|matmul|lines|hashmap> <n>\n");
+    if (argc < 3 or argc > 4) {
+        _ = printf("usage: bench <workload> <n> [threads]\n");
         return 2;
     }
+    const threads: usize = if (argc == 4) @intCast(strtoull(argv[3], null, 10)) else 1;
     const w = std.mem.span(argv[1]);
     const n: usize = @intCast(strtoull(argv[2], null, 10));
     var t0: Timespec = undefined;
     var t1: Timespec = undefined;
     _ = clock_gettime(1, &t0); // CLOCK_MONOTONIC
-    const ck: u64 = if (std.mem.eql(u8, w, "sort")) runSort(n) else if (std.mem.eql(u8, w, "sieve")) runSieve(n) else if (std.mem.eql(u8, w, "matmul")) runMatmul(n) else if (std.mem.eql(u8, w, "lines")) runLines(n) else if (std.mem.eql(u8, w, "hashmap")) runHashmap(n) else {
+    const ck: u64 = if (std.mem.eql(u8, w, "sort")) runSort(n) else if (std.mem.eql(u8, w, "sieve")) runSieve(n) else if (std.mem.eql(u8, w, "matmul")) runMatmul(n) else if (std.mem.eql(u8, w, "lines")) runLines(n) else if (std.mem.eql(u8, w, "hashmap")) runHashmap(n) else if (extended(w, n, threads)) |r| r else {
         _ = printf("workload inconnu\n");
         return 2;
     };
