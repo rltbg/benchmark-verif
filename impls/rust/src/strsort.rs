@@ -9,7 +9,7 @@ use creusot_std::prelude::*;
 #[check(terminates)]
 #[inline(always)]
 pub fn len_of(i: u64) -> u64 {
-    1 + (mix64(0xC0FFEE0000000001u64.wrapping_add(i)) >> 59)
+    (mix64(0xC0FFEE0000000001u64.wrapping_add(i)) >> 59).wrapping_add(1)
 }
 
 #[check(terminates)]

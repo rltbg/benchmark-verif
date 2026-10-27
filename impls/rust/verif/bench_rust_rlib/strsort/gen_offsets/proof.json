@@ -1,0 +1,14 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_gen_offsets": { "prover": "alt-ergo", "time": 0.023 },
+      "vc_index_mut_Vec_usize_Global": {
+        "prover": "alt-ergo",
+        "time": 0.016
+      },
+      "vc_len_of": { "prover": "alt-ergo", "time": 0.011 },
+      "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.011 }
+    }
+  }
+}

@@ -9,4 +9,6 @@ let lines = Bench.Lines.run
 let hashmap = Bench.Hashmap.run
 module Stream_ = Bench.Stream  (* noyau de `stream` : chunk/new_buf/new_state/new_table/finish sont des --custard_entry *)
 let bfs = Bench.Bfs.run
+let strsort = Bench.Strsort.run
+let alloc = Bench.Alloc.run
 (* @@ALL@@ une ligne `let <nom> = Bench.<Nom>.run` par workload étendu *)

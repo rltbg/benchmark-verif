@@ -1,0 +1,11 @@
+{
+ "strsort": {
+  "smoke": 10000,
+  "tiny": 20000,
+  "small": 300000,
+  "medium": 2000000,
+  "large": 8000000,
+  "xlarge": 50000000,
+  "saturate": 120000000
+ }
+}

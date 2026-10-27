@@ -18,9 +18,10 @@ module C   = FStar.Int.Cast
 noeq
 type node = {
   blk  : V.vec U8.t;
-  next : option node_ptr;
+  next : nlist;
 }
 and node_ptr = B.box node
+and nlist = | Nil | Cons : node_ptr -> nlist
 
 (* Compteur fantôme (Peano) : la slprop récursive se déplie par filtrage sur sa forme. *)
 type cnt = | Z | S : cnt -> cnt
@@ -28,35 +29,35 @@ type cnt = | Z | S : cnt -> cnt
 let rec clen (c: cnt) : nat = match c with | Z -> 0 | S c' -> 1 + clen c'
 
 (* Des blocs chaînés à partir de x, un par S, chacun propriétaire de son bloc d'octets (pleinement alloué). *)
-let rec owned ([@@@mkey] x: option node_ptr) (c: cnt) : Tot slprop (decreases c) =
+let rec owned ([@@@mkey] x: nlist) (c: cnt) : Tot slprop (decreases c) =
   match c with
-  | Z -> pure (x == None)
+  | Z -> pure (x == Nil)
   | S c' ->
     exists* (p: node_ptr) (nd: node) (s: Seq.seq U8.t).
-      pure (x == Some p) ** B.pts_to p nd ** V.pts_to nd.blk s ** pure (V.is_full_vec nd.blk) **
+      pure (x == Cons p) ** B.pts_to p nd ** V.pts_to nd.blk s ** pure (V.is_full_vec nd.blk) **
       owned nd.next c'
 
 ghost
-fn owned_zero (x: option node_ptr)
-  requires pure (x == None)
+fn owned_zero (x: nlist)
+  requires pure (x == Nil)
   ensures owned x Z
 {
   fold (owned x Z)
 }
 
 ghost
-fn owned_succ (x: option node_ptr) (p: node_ptr) (blk: V.vec U8.t) (nx: option node_ptr) (s: Seq.seq U8.t) (c: cnt)
-  requires pure (x == Some p) ** B.pts_to p ({ blk = blk; next = nx }) ** V.pts_to blk s ** pure (V.is_full_vec blk) ** owned nx c
+fn owned_succ (x: nlist) (p: node_ptr) (blk: V.vec U8.t) (nx: nlist) (s: Seq.seq U8.t) (c: cnt)
+  requires pure (x == Cons p) ** B.pts_to p ({ blk = blk; next = nx }) ** V.pts_to blk s ** pure (V.is_full_vec blk) ** owned nx c
   ensures owned x (S c)
 {
   fold (owned x (S c))
 }
 
 ghost
-fn owned_pop_case (x: option node_ptr) (c: cnt)
+fn owned_pop_case (x: nlist) (c: cnt)
   requires owned x c ** pure (clen c > 0)
   ensures exists* (p: node_ptr) (nd: node) (s: Seq.seq U8.t) (c': cnt).
-      pure (x == Some p /\ clen c' + 1 == clen c) ** B.pts_to p nd ** V.pts_to nd.blk s ** pure (V.is_full_vec nd.blk) ** owned nd.next c'
+      pure (x == Cons p /\ clen c' + 1 == clen c) ** B.pts_to p nd ** V.pts_to nd.blk s ** pure (V.is_full_vec nd.blk) ** owned nd.next c'
 {
   match c {
     Z -> { unfold (owned x Z); unreachable () }
@@ -65,8 +66,8 @@ fn owned_pop_case (x: option node_ptr) (c: cnt)
 }
 
 (* Ajoute un bloc en tête de la pile `st` (de n blocs). *)
-fn push_blk (st: R.ref (option node_ptr)) (nr: R.ref SZ.t) (blk: V.vec U8.t)
-  (#s: Ghost.erased (Seq.seq U8.t)) (#x0: Ghost.erased (option node_ptr)) (#n0: Ghost.erased SZ.t) (#c0: Ghost.erased cnt)
+fn push_blk (st: R.ref (nlist)) (nr: R.ref SZ.t) (blk: V.vec U8.t)
+  (#s: Ghost.erased (Seq.seq U8.t)) (#x0: Ghost.erased (nlist)) (#n0: Ghost.erased SZ.t) (#c0: Ghost.erased cnt)
   requires R.pts_to st x0 ** R.pts_to nr n0 ** owned x0 c0 ** V.pts_to blk s **
            pure (SZ.fits_u64 /\ V.is_full_vec blk /\ clen c0 == SZ.v n0 /\ SZ.v n0 < 1000000000)
   ensures exists* x1 n1 c1. R.pts_to st x1 ** R.pts_to nr n1 ** owned x1 c1 **
@@ -75,16 +76,16 @@ fn push_blk (st: R.ref (option node_ptr)) (nr: R.ref SZ.t) (blk: V.vec U8.t)
   let x = !st;
   let n = !nr;
   let p = B.alloc ({ blk = blk; next = x });
-  owned_succ (Some p) p blk x s c0;
-  st := Some p;
+  owned_succ (Cons p) p blk x s c0;
+  st := Cons p;
   assert_norm (pow2 64 == 18446744073709551616);
   SZ.fits_u64_implies_fits (SZ.v n + 1);
   nr := SZ.add n 1sz
 }
 
 (* Libère le bloc de tête de la pile (n >= 1 blocs). *)
-fn pop_free (st: R.ref (option node_ptr)) (nr: R.ref SZ.t)
-  (#x0: Ghost.erased (option node_ptr)) (#n0: Ghost.erased SZ.t) (#c0: Ghost.erased cnt)
+fn pop_free (st: R.ref (nlist)) (nr: R.ref SZ.t)
+  (#x0: Ghost.erased (nlist)) (#n0: Ghost.erased SZ.t) (#c0: Ghost.erased cnt)
   requires R.pts_to st x0 ** R.pts_to nr n0 ** owned x0 c0 ** pure (clen c0 == SZ.v n0 /\ SZ.v n0 > 0)
   ensures exists* x1 n1 c1. R.pts_to st x1 ** R.pts_to nr n1 ** owned x1 c1 **
            pure (SZ.v n1 + 1 == SZ.v n0 /\ clen c1 == SZ.v n1)
@@ -93,8 +94,8 @@ fn pop_free (st: R.ref (option node_ptr)) (nr: R.ref SZ.t)
   owned_pop_case x c0;
   with p nd s cr. _;
   match x {
-    None -> { unreachable () }
-    Some q -> {
+    Nil -> { unreachable () }
+    Cons q -> {
       rewrite each p as q;
       let nv = B.op_Bang q;
       V.free nv.blk;
@@ -107,9 +108,9 @@ fn pop_free (st: R.ref (option node_ptr)) (nr: R.ref SZ.t)
 }
 
 (* Retourne la pile `bk` sur la pile `fr` : tous les blocs de `bk` passent (en ordre inverse) au-dessus de `fr`. *)
-fn move_all (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option node_ptr)) (nb: R.ref SZ.t)
-  (#f0: Ghost.erased (option node_ptr)) (#n0: Ghost.erased SZ.t) (#cf0: Ghost.erased cnt)
-  (#b0: Ghost.erased (option node_ptr)) (#m0: Ghost.erased SZ.t) (#cb0: Ghost.erased cnt)
+fn move_all (fr: R.ref (nlist)) (nf: R.ref SZ.t) (bk: R.ref (nlist)) (nb: R.ref SZ.t)
+  (#f0: Ghost.erased (nlist)) (#n0: Ghost.erased SZ.t) (#cf0: Ghost.erased cnt)
+  (#b0: Ghost.erased (nlist)) (#m0: Ghost.erased SZ.t) (#cb0: Ghost.erased cnt)
   requires R.pts_to fr f0 ** R.pts_to nf n0 ** owned f0 cf0 ** R.pts_to bk b0 ** R.pts_to nb m0 ** owned b0 cb0 **
            pure (SZ.fits_u64 /\ clen cf0 == SZ.v n0 /\ clen cb0 == SZ.v m0 /\ SZ.v n0 + SZ.v m0 < 1000000000)
   ensures exists* f1 n1 cf1 b1 m1 cb1. R.pts_to fr f1 ** R.pts_to nf n1 ** owned f1 cf1 ** R.pts_to bk b1 ** R.pts_to nb m1 ** owned b1 cb1 **
@@ -127,14 +128,14 @@ fn move_all (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option no
     owned_pop_case bv _;
     with p nd s cr. _;
     match bv {
-      None -> { unreachable () }
-      Some q -> {
+      Nil -> { unreachable () }
+      Cons q -> {
         rewrite each p as q;
         let nv = B.op_Bang q;
         let fv = !fr;
         B.op_Colon_Equals q ({ blk = nv.blk; next = fv });
-        owned_succ (Some q) q nv.blk fv s _;
-        fr := Some q;
+        owned_succ (Cons q) q nv.blk fv s _;
+        fr := Cons q;
         bk := nv.next;
         let a = !nf;
         let m = !nb;
@@ -148,19 +149,19 @@ fn move_all (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option no
 }
 
 (* La file : deux piles (front = les plus anciens, bk = les plus récents) ; au plus b blocs (b <= 2^25 + 1). *)
-let qinv (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option node_ptr)) (nb: R.ref SZ.t) (b: nat) : slprop =
-  exists* (fv: option node_ptr) (nfv: SZ.t) (cf: cnt) (bv: option node_ptr) (nbv: SZ.t) (cb: cnt).
+let qinv (fr: R.ref (nlist)) (nf: R.ref SZ.t) (bk: R.ref (nlist)) (nb: R.ref SZ.t) (b: nat) : slprop =
+  exists* (fv: nlist) (nfv: SZ.t) (cf: cnt) (bv: nlist) (nbv: SZ.t) (cb: cnt).
     R.pts_to fr fv ** R.pts_to nf nfv ** owned fv cf ** R.pts_to bk bv ** R.pts_to nb nbv ** owned bv cb **
     pure (clen cf == SZ.v nfv /\ clen cb == SZ.v nbv /\ SZ.v nfv + SZ.v nbv <= b /\ b <= 33554433)
 
 (* idem, avec en plus : la pile front est non vide. *)
-let qfront (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option node_ptr)) (nb: R.ref SZ.t) (b: nat) : slprop =
-  exists* (fv: option node_ptr) (nfv: SZ.t) (cf: cnt) (bv: option node_ptr) (nbv: SZ.t) (cb: cnt).
+let qfront (fr: R.ref (nlist)) (nf: R.ref SZ.t) (bk: R.ref (nlist)) (nb: R.ref SZ.t) (b: nat) : slprop =
+  exists* (fv: nlist) (nfv: SZ.t) (cf: cnt) (bv: nlist) (nbv: SZ.t) (cb: cnt).
     R.pts_to fr fv ** R.pts_to nf nfv ** owned fv cf ** R.pts_to bk bv ** R.pts_to nb nbv ** owned bv cb **
     pure (clen cf == SZ.v nfv /\ clen cb == SZ.v nbv /\ SZ.v nfv > 0 /\ SZ.v nfv + SZ.v nbv <= b /\ b <= 33554433)
 
 (* File de <= w+1 blocs -> file de <= w blocs : libère le plus ancien si la file a w+1 blocs. *)
-fn trim (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option node_ptr)) (nb: R.ref SZ.t) (w: SZ.t)
+fn trim (fr: R.ref (nlist)) (nf: R.ref SZ.t) (bk: R.ref (nlist)) (nb: R.ref SZ.t) (w: SZ.t)
   requires qinv fr nf bk nb (SZ.v w + 1) ** pure (SZ.fits_u64 /\ 1 <= SZ.v w /\ SZ.v w <= 33554432)
   ensures qinv fr nf bk nb (SZ.v w)
 {
@@ -186,7 +187,7 @@ fn trim (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option node_p
 }
 
 (* Un bloc conservé dans la fenêtre de w blocs (le plus ancien est libéré quand elle déborde). *)
-fn keep_blk (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option node_ptr)) (nb: R.ref SZ.t) (w: SZ.t)
+fn keep_blk (fr: R.ref (nlist)) (nf: R.ref SZ.t) (bk: R.ref (nlist)) (nb: R.ref SZ.t) (w: SZ.t)
   (blk: V.vec U8.t) (#s: Ghost.erased (Seq.seq U8.t))
   requires qinv fr nf bk nb (SZ.v w) ** V.pts_to blk s **
            pure (SZ.fits_u64 /\ V.is_full_vec blk /\ 1 <= SZ.v w /\ SZ.v w <= 33554432)
@@ -199,9 +200,9 @@ fn keep_blk (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option no
 }
 
 ghost
-fn owned_nil (x: option node_ptr) (c: cnt)
+fn owned_nil (x: nlist) (c: cnt)
   requires owned x c ** pure (clen c == 0)
-  ensures pure (x == None)
+  ensures pure (x == Nil)
 {
   match c {
     Z -> { unfold (owned x Z) }
@@ -210,9 +211,9 @@ fn owned_nil (x: option node_ptr) (c: cnt)
 }
 
 (* Libère toute la file (front puis bk). *)
-fn drain (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option node_ptr)) (nb: R.ref SZ.t) (w: SZ.t)
+fn drain (fr: R.ref (nlist)) (nf: R.ref SZ.t) (bk: R.ref (nlist)) (nb: R.ref SZ.t) (w: SZ.t)
   requires qinv fr nf bk nb (SZ.v w) ** pure (SZ.fits_u64 /\ SZ.v w <= 33554432)
-  ensures exists* (fv: option node_ptr) (nfv: SZ.t) (bv: option node_ptr) (nbv: SZ.t).
+  ensures exists* (fv: nlist) (nfv: SZ.t) (bv: nlist) (nbv: SZ.t).
           R.pts_to fr fv ** R.pts_to nf nfv ** R.pts_to bk bv ** R.pts_to nb nbv
 {
   unfold (qinv fr nf bk nb (SZ.v w));
@@ -221,7 +222,7 @@ fn drain (fr: R.ref (option node_ptr)) (nf: R.ref SZ.t) (bk: R.ref (option node_
     let a = !nf;
     SZ.lt 0sz a
   )
-  invariant exists* (fv: option node_ptr) (nfv: SZ.t) (cf: cnt). R.pts_to fr fv ** R.pts_to nf nfv ** owned fv cf ** pure (clen cf == SZ.v nfv)
+  invariant exists* (fv: nlist) (nfv: SZ.t) (cf: cnt). R.pts_to fr fv ** R.pts_to nf nfv ** owned fv cf ** pure (clen cf == SZ.v nfv)
   decreases (SZ.v !nf)
   {
     pop_free fr nf
@@ -290,12 +291,12 @@ fn run (n: SZ.t)
   let w0 = SZ.div n 64sz;
   let w1 = (if SZ.lt 0sz w0 then w0 else 1sz);
   let w = (if SZ.lt w1 wmax then w1 else wmax);
-  let mut fr : option node_ptr = None;
+  let mut fr : nlist = Nil;
   let mut nf = 0sz;
-  let mut bk : option node_ptr = None;
+  let mut bk : nlist = Nil;
   let mut nb = 0sz;
-  owned_zero None;
-  owned_zero None;
+  owned_zero Nil;
+  owned_zero Nil;
   fold (qinv fr nf bk nb (SZ.v w));
   let mut ck = ck_init;
   let mut kept = 0uL;

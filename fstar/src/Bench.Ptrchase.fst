@@ -35,7 +35,7 @@ fn insert_one (a: V.vec U64.t) (n: SZ.t) (cntr: R.ref SZ.t) (nk: U64.t)
            pure (ok_n n /\ V.length a == 2 * SZ.v n /\ 1 <= SZ.v c0 /\ SZ.v c0 < SZ.v n)
   returns r: SZ.t
   ensures exists* s c. V.pts_to a s ** R.pts_to cntr c **
-          pure (Seq.length s == 2 * SZ.v n /\ SZ.v c0 <= SZ.v c /\ SZ.v c <= SZ.v c0 + 1)
+          pure (Seq.length s == 2 * SZ.v n /\ SZ.v c0 <= SZ.v c /\ SZ.v c <= SZ.v c0 + 1 /\ SZ.v r <= SZ.v n)
 {
   V.pts_to_len a;
   let mut cur = 0sz;
@@ -244,6 +244,7 @@ fn chase (nx: V.vec U32.t) (n: SZ.t) (#s: Ghost.erased (Seq.seq U32.t))
   decreases (if U64.v !h < U64.v ntot then U64.v ntot - U64.v !h else 0)
   {
     let vcur = !cur;
+    SZ.fits_u64_implies_fits_32 ();
     let v = SZ.uint32_to_sizet V.(nx.(vcur));
     let nc = (if (v `SZ.lt` n) then v else vcur);
     cur := nc;

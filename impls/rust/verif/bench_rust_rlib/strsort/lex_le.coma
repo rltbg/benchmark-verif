@@ -1,0 +1,270 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 68 0 68 81 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 114 18 114 40
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span sstrsort = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 69 55 69 56
+let%span sstrsort'0 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 70 55 70 56
+let%span sstrsort'1 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 71 24 71 28
+let%span sstrsort'2 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 71 39 71 40
+let%span sstrsort'3 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 71 34 71 40
+let%span sstrsort'4 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 71 33 71 41
+let%span sstrsort'5 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 72 24 72 28
+let%span sstrsort'6 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 72 39 72 40
+let%span sstrsort'7 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 72 34 72 40
+let%span sstrsort'8 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 72 33 72 41
+let%span sstrsort'9 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 73 13 73 23
+let%span sstrsort'10 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 74 17 74 37
+let%span sstrsort'11 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 75 17 75 37
+let%span sstrsort'12 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 76 36 76 43
+let%span sstrsort'13 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 76 14 76 43
+let%span sstrsort'14 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 77 36 77 43
+let%span sstrsort'15 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 77 14 77 43
+let%span sstrsort'16 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 78 51 78 52
+let%span sstrsort'17 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 78 54 78 55
+let%span sstrsort'18 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 79 51 79 52
+let%span sstrsort'19 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 79 54 79 55
+let%span sstrsort'20 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 81 16 81 22
+let%span sstrsort'21 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 83 14 83 21
+let%span sstrsort'22 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 82 16 82 24
+let%span sstrsort'23 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 85 22 85 28
+let%span sstrsort'24 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 85 21 85 29
+let%span sstrsort'25 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 86 22 86 28
+let%span sstrsort'26 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 86 21 86 29
+let%span sstrsort'27 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 90 13 90 14
+let%span sstrsort'28 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 90 8 90 14
+let%span sstrsort'29 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 66 11 66 42
+
+use creusot.int.UInt32
+use creusot.int.UInt64
+use seq.Seq
+use creusot.int.UInt8
+use creusot.prelude.Any
+use int.Int
+
+type t_Vec_usize_Global
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_usize_Global (self: t_Vec_usize_Global) : Seq.seq UInt64.t
+
+axiom view_Vec_usize_Global_spec:
+  forall self: t_Vec_usize_Global [view_Vec_usize_Global self]. [%#svec'2] Seq.length (view_Vec_usize_Global self)
+    <= UInt64.t'int const_MAX
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) (out: UInt64.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+let index_Vec_usize_Global (self: t_Vec_usize_Global) (index: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:index requires] [%#svec] in_bounds_usize index (view_Vec_usize_Global self)}
+  any
+  [ return (result: UInt64.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'0] has_value_usize index (view_Vec_usize_Global self) result}
+    (! return {result}) ]
+
+type tup2_usize_usize = { f0: UInt64.t; f1: UInt64.t }
+
+type t_Vec_u8_Global
+
+function view_Vec_u8_Global (self: t_Vec_u8_Global) : Seq.seq UInt8.t
+
+axiom view_Vec_u8_Global_spec:
+  forall self: t_Vec_u8_Global [view_Vec_u8_Global self]. [%#svec'2] Seq.length (view_Vec_u8_Global self)
+    <= UInt64.t'int const_MAX
+
+let len_u8 (self: t_Vec_u8_Global) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:len ensures] [%#svec'1] UInt64.t'int result
+    = Seq.length (view_Vec_u8_Global self)}
+    (! return {result}) ]
+
+let wrapping_sub (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_sub ensures] [%#snum] result = UInt64.sub self rhs}
+    (! return {result}) ]
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+predicate in_bounds_usize'0 [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt8.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize'0
+
+predicate has_value_usize'0 [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt8.t) (out: UInt8.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize'0
+
+let index_Vec_u8_Global (self: t_Vec_u8_Global) (index: UInt64.t) (return (x: UInt8.t)) =
+{[@stop_split] [@expl:index requires] [%#svec] in_bounds_usize'0 index (view_Vec_u8_Global self)}
+  any
+  [ return (result: UInt8.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'0] has_value_usize'0 index (view_Vec_u8_Global self) result}
+    (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let lex_le [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 68 0 68 81] (pool: t_Vec_u8_Global)
+  (off: t_Vec_usize_Global) (n: UInt64.t) (a: UInt32.t) (b: UInt32.t) (return (x: bool)) =
+{[@stop_split] [@expl:lex_le requires] [%#sstrsort'29] 1 <= UInt64.t'int n
+  /\ Seq.length (view_Vec_usize_Global off) = UInt64.t'int n + 1}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = [ &_11 <- UInt64.of_int (UInt32.t'int a) ] s1
+    | s1 = [ &_10 <- UInt64.lt _11 n ] s2
+    | s2 = any [ br0 -> {_10 = false} (! bb2) | br1 -> {_10} (! bb1) ] ]
+  | bb1 = s0 [ s0 = [ &ia <- UInt64.of_int (UInt32.t'int a) ] s1 | s1 = bb3 ]
+  | bb2 = s0 [ s0 = [ &ia <- [%#sstrsort] (0: UInt64.t) ] s1 | s1 = bb3 ]
+  | bb3 = s0
+    [ s0 = [ &_17 <- UInt64.of_int (UInt32.t'int b) ] s1
+    | s1 = [ &_16 <- UInt64.lt _17 n ] s2
+    | s2 = any [ br0 -> {_16 = false} (! bb5) | br1 -> {_16} (! bb4) ] ]
+  | bb4 = s0 [ s0 = [ &ib <- UInt64.of_int (UInt32.t'int b) ] s1 | s1 = bb6 ]
+  | bb5 = s0 [ s0 = [ &ib <- [%#sstrsort'0] (0: UInt64.t) ] s1 | s1 = bb6 ]
+  | bb6 = s0
+    [ s0 = index_Vec_usize_Global [%#sstrsort'1] {off} {ia} (fun (_x: UInt64.t) -> [ &_25 <- _x ] s1)
+    | s1 = UInt64.add [%#sstrsort'3] {ia} {[%#sstrsort'2] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &_31 <- _x ] s2)
+    | s2 = index_Vec_usize_Global [%#sstrsort'4] {off} {_31} (fun (_x: UInt64.t) -> [ &_29 <- _x ] s3)
+    | s3 = [ &_23 <- { f0 = _25; f1 = _29 } ] s4
+    | s4 = [ &oa <- _23.f0 ] s5
+    | s5 = [ &oa1 <- _23.f1 ] s6
+    | s6 = index_Vec_usize_Global [%#sstrsort'5] {off} {ib} (fun (_x: UInt64.t) -> [ &_37 <- _x ] s7)
+    | s7 = UInt64.add [%#sstrsort'7] {ib} {[%#sstrsort'6] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &_43 <- _x ] s8)
+    | s8 = index_Vec_usize_Global [%#sstrsort'8] {off} {_43} (fun (_x: UInt64.t) -> [ &_41 <- _x ] s9)
+    | s9 = [ &_35 <- { f0 = _37; f1 = _41 } ] s10
+    | s10 = [ &ob <- _35.f0 ] s11
+    | s11 = [ &ob1 <- _35.f1 ] s12
+    | s12 = len_u8 [%#sstrsort'9] {pool} (fun (_x: UInt64.t) -> [ &pl <- _x ] s13)
+    | s13 = wrapping_sub [%#sstrsort'10] {oa1} {oa} (fun (_x: UInt64.t) -> [ &la_raw <- _x ] s14)
+    | s14 = wrapping_sub [%#sstrsort'11] {ob1} {ob} (fun (_x: UInt64.t) -> [ &lb_raw <- _x ] s15)
+    | s15 = [ &_54 <- UInt64.le oa pl ] s16
+    | s16 = any [ br0 -> {_54 = false} (! bb15) | br1 -> {_54} (! bb14) ] ]
+  | bb14 = s0
+    [ s0 = UInt64.sub [%#sstrsort'12] {pl} {oa} (fun (_x: UInt64.t) -> [ &_58 <- _x ] s1)
+    | s1 = [ &oka <- UInt64.le la_raw _58 ] s2
+    | s2 = bb16 ]
+  | bb15 = s0 [ s0 = [ &oka <- [%#sstrsort'13] false ] s1 | s1 = bb16 ]
+  | bb16 = s0
+    [ s0 = [ &_62 <- UInt64.le ob pl ] s1 | s1 = any [ br0 -> {_62 = false} (! bb18) | br1 -> {_62} (! bb17) ] ]
+  | bb17 = s0
+    [ s0 = UInt64.sub [%#sstrsort'14] {pl} {ob} (fun (_x: UInt64.t) -> [ &_66 <- _x ] s1)
+    | s1 = [ &okb <- UInt64.le lb_raw _66 ] s2
+    | s2 = bb19 ]
+  | bb18 = s0 [ s0 = [ &okb <- [%#sstrsort'15] false ] s1 | s1 = bb19 ]
+  | bb19 = any [ br0 -> {oka = false} (! bb21) | br1 -> {oka} (! bb20) ]
+  | bb20 = s0 [ s0 = [ &_71 <- { f0 = oa; f1 = la_raw } ] s1 | s1 = bb22 ]
+  | bb21 = s0
+    [ s0 = [ &_71 <- { f0 = ([%#sstrsort'16] (0: UInt64.t)); f1 = ([%#sstrsort'17] (0: UInt64.t)) } ] s1 | s1 = bb22 ]
+  | bb22 = s0
+    [ s0 = [ &sa <- _71.f0 ] s1
+    | s1 = [ &la <- _71.f1 ] s2
+    | s2 = any [ br0 -> {okb = false} (! bb24) | br1 -> {okb} (! bb23) ] ]
+  | bb23 = s0 [ s0 = [ &_77 <- { f0 = ob; f1 = lb_raw } ] s1 | s1 = bb25 ]
+  | bb24 = s0
+    [ s0 = [ &_77 <- { f0 = ([%#sstrsort'18] (0: UInt64.t)); f1 = ([%#sstrsort'19] (0: UInt64.t)) } ] s1 | s1 = bb25 ]
+  | bb25 = s0
+    [ s0 = [ &sb <- _77.f0 ] s1
+    | s1 = [ &lb <- _77.f1 ] s2
+    | s2 = [ &_82 <- UInt64.le la lb ] s3
+    | s3 = any [ br0 -> {_82 = false} (! bb27) | br1 -> {_82} (! bb26) ] ]
+  | bb26 = s0 [ s0 = [ &m <- la ] s1 | s1 = bb28 ]
+  | bb27 = s0 [ s0 = [ &m <- lb ] s1 | s1 = bb28 ]
+  | bb28 = s0 [ s0 = [ &k <- [%#sstrsort'20] (0: UInt64.t) ] s1 | s1 = bb29 ]
+  | bb29 = bb29invariant
+    [ bb29 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb29 ([%#sstrsort'21] UInt64.t'int m
+      - UInt64.t'int k)}
+      bb29invariant
+    | bb29invariant = {[@expl:loop invariant] [%#sstrsort'22] UInt64.t'int k <= UInt64.t'int m}
+      (! [ &variant_old_bb29 <- [%#sstrsort'21] UInt64.t'int m - UInt64.t'int k ] s0)
+      [ s0 = [ &_95 <- UInt64.lt k m ] s1 | s1 = any [ br0 -> {_95 = false} (! bb36) | br1 -> {_95} (! bb31) ] ]
+      [ bb31 = s0
+        [ s0 = UInt64.add [%#sstrsort'23] {sa} {k} (fun (_x: UInt64.t) -> [ &_101 <- _x ] s1)
+        | s1 = index_Vec_u8_Global [%#sstrsort'24] {pool} {_101} (fun (_x: UInt8.t) -> [ &_99 <- _x ] s2)
+        | s2 = [ &ca <- _99 ] s3
+        | s3 = UInt64.add [%#sstrsort'25] {sb} {k} (fun (_x: UInt64.t) -> [ &_107 <- _x ] s4)
+        | s4 = index_Vec_u8_Global [%#sstrsort'26] {pool} {_107} (fun (_x: UInt8.t) -> [ &_105 <- _x ] s5)
+        | s5 = [ &cb <- _105 ] s6
+        | s6 = [ &_111 <- ca <> cb ] s7
+        | s7 = any [ br0 -> {_111 = false} (! bb35) | br1 -> {_111} (! bb34) ] ]
+      | bb35 = s0
+        [ s0 = UInt64.add [%#sstrsort'28] {k} {[%#sstrsort'27] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &k <- _x ] s1)
+        | s1 = bb29 ] ] ]
+  | bb34 = s0 [ s0 = [ &_ret <- UInt8.lt ca cb ] s1 | s1 = return {_ret} ]
+  | bb36 = s0 [ s0 = [ &_ret <- UInt64.le la lb ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: bool = Any.any_l ()
+  | & pool: t_Vec_u8_Global = pool
+  | & off: t_Vec_usize_Global = off
+  | & n: UInt64.t = n
+  | & a: UInt32.t = a
+  | & b: UInt32.t = b
+  | & ia: UInt64.t = Any.any_l ()
+  | & _10: bool = Any.any_l ()
+  | & _11: UInt64.t = Any.any_l ()
+  | & ib: UInt64.t = Any.any_l ()
+  | & _16: bool = Any.any_l ()
+  | & _17: UInt64.t = Any.any_l ()
+  | & oa: UInt64.t = Any.any_l ()
+  | & oa1: UInt64.t = Any.any_l ()
+  | & _23: tup2_usize_usize = Any.any_l ()
+  | & _25: UInt64.t = Any.any_l ()
+  | & _29: UInt64.t = Any.any_l ()
+  | & _31: UInt64.t = Any.any_l ()
+  | & ob: UInt64.t = Any.any_l ()
+  | & ob1: UInt64.t = Any.any_l ()
+  | & _35: tup2_usize_usize = Any.any_l ()
+  | & _37: UInt64.t = Any.any_l ()
+  | & _41: UInt64.t = Any.any_l ()
+  | & _43: UInt64.t = Any.any_l ()
+  | & pl: UInt64.t = Any.any_l ()
+  | & la_raw: UInt64.t = Any.any_l ()
+  | & lb_raw: UInt64.t = Any.any_l ()
+  | & oka: bool = Any.any_l ()
+  | & _54: bool = Any.any_l ()
+  | & _58: UInt64.t = Any.any_l ()
+  | & okb: bool = Any.any_l ()
+  | & _62: bool = Any.any_l ()
+  | & _66: UInt64.t = Any.any_l ()
+  | & sa: UInt64.t = Any.any_l ()
+  | & la: UInt64.t = Any.any_l ()
+  | & _71: tup2_usize_usize = Any.any_l ()
+  | & sb: UInt64.t = Any.any_l ()
+  | & lb: UInt64.t = Any.any_l ()
+  | & _77: tup2_usize_usize = Any.any_l ()
+  | & m: UInt64.t = Any.any_l ()
+  | & _82: bool = Any.any_l ()
+  | & k: UInt64.t = Any.any_l ()
+  | & _95: bool = Any.any_l ()
+  | & ca: UInt8.t = Any.any_l ()
+  | & _99: UInt8.t = Any.any_l ()
+  | & _101: UInt64.t = Any.any_l ()
+  | & cb: UInt8.t = Any.any_l ()
+  | & _105: UInt8.t = Any.any_l ()
+  | & _107: UInt64.t = Any.any_l ()
+  | & _111: bool = Any.any_l ()
+  | & variant_old_bb29: int = Any.any_l () ]) [ return (result: bool) -> (! return {result}) ]

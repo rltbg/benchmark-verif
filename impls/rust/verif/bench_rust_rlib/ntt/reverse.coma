@@ -28,7 +28,7 @@ let%span sntt'8 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 200 10 200 
 let%span sntt'9 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 200 9 200 16
 let%span sntt'10 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 201 13 201 14
 let%span sntt'11 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 201 8 201 14
-let%span sntt'12 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 190 11 190 36
+let%span sntt'12 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 190 11 190 55
 let%span sntt'13 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 191 10 191 33
 
 use creusot.int.UInt64
@@ -109,7 +109,7 @@ meta "select_lsinst" "all"
 let reverse [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 193 0 193 42] (a: MutBorrow.t t_Vec_u32_Global)
   (n: UInt64.t) (return (x: ())) =
 {[@stop_split] [@expl:reverse requires] [%#sntt'12] Seq.length (view_Vec_u32_Global a.current) = UInt64.t'int n
-  /\ 1 <= UInt64.t'int n}
+  /\ 1 <= UInt64.t'int n /\ UInt64.t'int n <= 134217728}
   (! bb0
   [ bb0 = s0 [ s0 = [ &i <- [%#sntt] (1: UInt64.t) ] s1 | s1 = [ &_old <- a.final ] s2 | s2 = bb1 ]
   | bb1 = bb1invariant

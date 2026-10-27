@@ -19,4 +19,5 @@ pub mod parmatmul;
 pub mod parsort;
 pub mod parsha;
 pub mod strsort;
+pub mod alloc;
 // @@MODS@@ (une ligne `pub mod <nom>;` ; chaque module expose `pub fn run(n: usize, threads: usize) -> u64`, contrats Creusot sur les noyaux)

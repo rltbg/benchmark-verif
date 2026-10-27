@@ -1,0 +1,7 @@
+{
+ "name": "strsort",
+ "unit": "chaînes",
+ "work_items": "n",
+ "ideal_bytes": "33*n",
+ "desc": "tri fusion stable d'indices de n chaînes de 1 à 32 octets (alphabet a..d) dans un pool contigu"
+}

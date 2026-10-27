@@ -1,0 +1,13 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_len_of": {
+        "tactic": "split_vc",
+        "children": [ { "prover": "alt-ergo", "time": 0.005 } ]
+      },
+      "vc_mix64": { "prover": "alt-ergo", "time": 0.009 },
+      "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.009 }
+    }
+  }
+}

@@ -220,7 +220,7 @@ pub fn checksum(a: &Vec<u32>, n: usize, ninv: u64) -> u64 {
 
 #[ensures(result@ >= 0)]
 pub fn run(n: usize, _threads: usize) -> u64 {
-    if n > 134217728 {
+    if n == 0 || n > 134217728 {
         return 0;
     }
     let mut pw = 1usize;

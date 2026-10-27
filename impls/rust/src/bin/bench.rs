@@ -25,6 +25,7 @@ fn main() {
         "parsha" => parsha::run(n, threads),
         "bfs" => bfs::run(n, threads),
         "strsort" => strsort::run(n, threads),
+        "alloc" => alloc::run(n),
         // @@DISPATCH@@ (une ligne `"<nom>" => <nom>::run(n, threads),`)
         _ => {
             eprintln!("workload inconnu");

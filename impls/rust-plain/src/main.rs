@@ -210,6 +210,7 @@ mod w_parmatmul;
 mod w_parsort;
 mod w_parsha;
 mod w_strsort;
+mod w_alloc;
 // @@MODS@@ (une ligne `mod w_<nom>;` ; chaque module expose `pub fn run(n: usize, threads: usize) -> u64`)
 
 fn extended(w: &str, n: usize, threads: usize) -> Option<u64> {
@@ -224,6 +225,7 @@ fn extended(w: &str, n: usize, threads: usize) -> Option<u64> {
         "parsort" => Some(w_parsort::run(n, threads)),
         "parsha" => Some(w_parsha::run(n, threads)),
         "strsort" => Some(w_strsort::run(n, threads)),
+        "alloc" => Some(w_alloc::run(n, threads)),
         // @@DISPATCH@@
         _ => None,
     }

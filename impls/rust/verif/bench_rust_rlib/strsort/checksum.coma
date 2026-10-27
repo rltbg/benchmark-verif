@@ -1,0 +1,112 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 153 0 153 58 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span sstrsort = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 154 17 154 24
+let%span sstrsort'0 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 155 16 155 22
+let%span sstrsort'1 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 157 14 157 21
+let%span sstrsort'2 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 156 16 156 42
+let%span sstrsort'3 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 159 25 159 28
+let%span sstrsort'4 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 159 13 159 36
+let%span sstrsort'5 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 160 13 160 14
+let%span sstrsort'6 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 160 8 160 14
+let%span sstrsort'7 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 162 4 162 21
+let%span sstrsort'8 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 151 11 151 25
+let%span sstrsort'9 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 153 0 153 58
+
+use creusot.int.UInt64
+use seq.Seq
+use creusot.int.UInt32
+use creusot.prelude.Any
+use int.Int
+
+constant const_CK_INIT: UInt64.t = [%#sstrsort'9] (14695981039346656037: UInt64.t)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+type t_Vec_u32_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
+
+axiom view_Vec_u32_Global_spec:
+  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec] Seq.length (view_Vec_u32_Global self)
+    <= UInt64.t'int const_MAX
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) (out: UInt32.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+let index_Vec_u32_Global (self: t_Vec_u32_Global) (index: UInt64.t) (return (x: UInt32.t)) =
+{[@stop_split] [@expl:index requires] [%#svec'0] in_bounds_usize index (view_Vec_u32_Global self)}
+  any
+  [ return (result: UInt32.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u32_Global self) result}
+    (! return {result}) ]
+
+let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let checksum [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 153 0 153 58] (a: t_Vec_u32_Global) (n: UInt64.t)
+  (total: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:checksum requires] [%#sstrsort'8] Seq.length (view_Vec_u32_Global a) = UInt64.t'int n}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = [ &ck <- [%#sstrsort] const_CK_INIT ] s1 | s1 = [ &i <- [%#sstrsort'0] (0: UInt64.t) ] s2 | s2 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#sstrsort'1] UInt64.t'int n
+      - UInt64.t'int i)}
+      bb1invariant
+    | bb1invariant = {[@expl:loop invariant] [%#sstrsort'2] UInt64.t'int i <= UInt64.t'int n
+      /\ Seq.length (view_Vec_u32_Global a) = UInt64.t'int n}
+      (! [ &variant_old_bb1 <- [%#sstrsort'1] UInt64.t'int n - UInt64.t'int i ] s0)
+      [ s0 = [ &_19 <- UInt64.lt i n ] s1 | s1 = any [ br0 -> {_19 = false} (! bb6) | br1 -> {_19} (! bb3) ] ]
+      [ bb3 = s0
+        [ s0 = index_Vec_u32_Global [%#sstrsort'3] {a} {i} (fun (_x: UInt32.t) -> [ &_26 <- _x ] s1)
+        | s1 = [ &_24 <- UInt64.of_int (UInt32.t'int _26) ] s2
+        | s2 = ckfold [%#sstrsort'4] {ck} {_24} (fun (_x: UInt64.t) -> [ &_22 <- _x ] s3)
+        | s3 = [ &ck <- _22 ] s4
+        | s4 = UInt64.add [%#sstrsort'6] {i} {[%#sstrsort'5] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s5)
+        | s5 = bb1 ] ] ]
+  | bb6 = s0
+    [ s0 = ckfold [%#sstrsort'7] {ck} {total} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s1) | s1 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & a: t_Vec_u32_Global = a
+  | & n: UInt64.t = n
+  | & total: UInt64.t = total
+  | & ck: UInt64.t = Any.any_l ()
+  | & i: UInt64.t = Any.any_l ()
+  | & _19: bool = Any.any_l ()
+  | & _22: UInt64.t = Any.any_l ()
+  | & _24: UInt64.t = Any.any_l ()
+  | & _26: UInt32.t = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

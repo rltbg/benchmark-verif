@@ -1,0 +1,165 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 26 0 26 36 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 114 18 114 40
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
+let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
+let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
+let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
+let%span salloc = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 27 21 27 24
+let%span salloc'0 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 27 16 27 25
+let%span salloc'1 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 28 16 28 22
+let%span salloc'2 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 29 12 29 19
+let%span salloc'3 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 33 14 33 21
+let%span salloc'4 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 32 16 32 25
+let%span salloc'5 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 31 16 31 24
+let%span salloc'6 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 30 16 30 30
+let%span salloc'7 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 35 9 35 12
+let%span salloc'8 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 36 20 36 23
+let%span salloc'9 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 36 26 36 27
+let%span salloc'10 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 36 41 36 42
+let%span salloc'11 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 36 37 36 42
+let%span salloc'12 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 37 13 37 14
+let%span salloc'13 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 37 8 37 14
+let%span salloc'14 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 23 11 23 26
+let%span salloc'15 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 24 10 24 33
+
+use creusot.int.UInt64
+use creusot.int.UInt8
+use seq.Seq
+use creusot.prelude.MutBorrow
+use creusot.prelude.Any
+use int.Int
+
+type t_Vec_u8_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u8_Global (self: t_Vec_u8_Global) : Seq.seq UInt8.t
+
+axiom view_Vec_u8_Global_spec:
+  forall self: t_Vec_u8_Global [view_Vec_u8_Global self]. [%#svec'0] Seq.length (view_Vec_u8_Global self)
+    <= UInt64.t'int const_MAX
+
+let len_u8 (self: t_Vec_u8_Global) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:len ensures] [%#svec] UInt64.t'int result
+    = Seq.length (view_Vec_u8_Global self)}
+    (! return {result}) ]
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt8.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt8.t) (out: UInt8.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+predicate resolve_elswhere_usize [@inline:trivial] (self: UInt64.t) (old': Seq.seq UInt8.t) (fin: Seq.seq UInt8.t) =
+  [%#sslice'1] forall i: int. 0 <= i /\ i <> UInt64.t'int self /\ i < Seq.length old' -> Seq.get old' i = Seq.get fin i
+
+meta "rewrite_def" predicate resolve_elswhere_usize
+
+let index_mut_Vec_u8_Global (self: MutBorrow.t t_Vec_u8_Global) (index: UInt64.t) (return (x: MutBorrow.t UInt8.t)) =
+{[@stop_split] [@expl:index_mut requires] [%#svec'1] in_bounds_usize index (view_Vec_u8_Global self.current)}
+  any
+  [ return (result: MutBorrow.t UInt8.t) ->
+  {[@stop_split] [@expl:index_mut_Vec_u8_Global ensures] ([@stop_split] [@expl:index_mut ensures #0] [%#svec'2] has_value_usize index (view_Vec_u8_Global self.current) result.current)
+    /\ ([@stop_split] [@expl:index_mut ensures #1] [%#svec'3] has_value_usize index (view_Vec_u8_Global self.final) result.final)
+    /\ ([@stop_split] [@expl:index_mut ensures #2] [%#svec'4] resolve_elswhere_usize index (view_Vec_u8_Global self.current) (view_Vec_u8_Global self.final))
+    /\ ([@stop_split] [@expl:index_mut ensures #3] [%#svec'5] Seq.length (view_Vec_u8_Global self.final)
+    = Seq.length (view_Vec_u8_Global self.current))}
+    (! return {result}) ]
+
+predicate resolve_refmut_u8 [@inline:trivial] (_1: MutBorrow.t UInt8.t) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_u8
+
+predicate resolve_refmut_Vec_u8_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u8_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u8_Global
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let fill [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 26 0 26 36] (b: MutBorrow.t t_Vec_u8_Global)
+  (i: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:fill requires] [%#salloc'14] Seq.length (view_Vec_u8_Global b.current) <= 256}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = [ &_10 <- ([%#salloc] (251: UInt64.t)) = ([%#salloc'0] (0: UInt64.t)) ] s1
+    | s1 = {[@expl:remainder by zero] [%#salloc'0] not _10} s2
+    | s2 = UInt64.rem [%#salloc'0] {i} {[%#salloc] (251: UInt64.t)} (fun (_x: UInt64.t) -> [ &_8 <- _x ] s3)
+    | s3 = [ &v <- UInt8.of_int (UInt64.t'int _8) ] s4
+    | s4 = [ &k <- [%#salloc'1] (0: UInt64.t) ] s5
+    | s5 = len_u8 [%#salloc'2] {b.current} (fun (_x: UInt64.t) -> [ &n <- _x ] s6)
+    | s6 = [ &_old <- b.final ] s7
+    | s7 = bb3 ]
+  | bb3 = bb3invariant
+    [ bb3 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb3 ([%#salloc'3] UInt64.t'int n
+      - UInt64.t'int k)}
+      bb3invariant
+    | bb3invariant = {[@expl:inferred invariant: unchanged value] _old = b.final}
+      {[@expl:loop invariant #0] [%#salloc'6] Seq.length (view_Vec_u8_Global b.current) = UInt64.t'int n}
+      {[@expl:loop invariant #1] [%#salloc'5] UInt64.t'int k <= UInt64.t'int n}
+      {[@expl:loop invariant #2] [%#salloc'4] UInt8.t'int v <= 250}
+      (! [ &variant_old_bb3 <- [%#salloc'3] UInt64.t'int n - UInt64.t'int k ] s0)
+      [ s0 = [ &_27 <- UInt64.lt k n ] s1 | s1 = any [ br0 -> {_27 = false} (! bb10) | br1 -> {_27} (! bb5) ] ]
+      [ bb5 = s0
+        [ s0 = MutBorrow.borrow_mut <t_Vec_u8_Global> {b.current}
+            (fun (_bor: MutBorrow.t t_Vec_u8_Global) -> [ &_32 <- _bor ] [ &b <- { b with current = _bor.final } ] s1)
+        | s1 = index_mut_Vec_u8_Global [%#salloc'7] {_32} {k} (fun (_x: MutBorrow.t UInt8.t) -> [ &_31 <- _x ] s2)
+        | s2 = [ &_31 <- { _31 with current = v } ] s3
+        | s3 = -{resolve_refmut_u8 _31}- s4
+        | s4 = [ &_35 <- v = ([%#salloc'8] (250: UInt8.t)) ] s5
+        | s5 = any [ br0 -> {_35 = false} (! bb8) | br1 -> {_35} (! bb7) ] ]
+      | bb7 = s0 [ s0 = [ &_34 <- [%#salloc'9] (0: UInt8.t) ] s1 | s1 = bb9 ]
+      | bb8 = s0
+        [ s0 = UInt8.add [%#salloc'11] {v} {[%#salloc'10] (1: UInt8.t)} (fun (_x: UInt8.t) -> [ &_34 <- _x ] s1)
+        | s1 = bb9 ]
+      | bb9 = s0
+        [ s0 = [ &v <- _34 ] s1
+        | s1 = UInt64.add [%#salloc'13] {k} {[%#salloc'12] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &k <- _x ] s2)
+        | s2 = bb3 ] ] ]
+  | bb10 = s0 [ s0 = -{resolve_refmut_Vec_u8_Global b}- s1 | s1 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & b: MutBorrow.t t_Vec_u8_Global = b
+  | & i: UInt64.t = i
+  | & v: UInt8.t = Any.any_l ()
+  | & _8: UInt64.t = Any.any_l ()
+  | & _10: bool = Any.any_l ()
+  | & k: UInt64.t = Any.any_l ()
+  | & n: UInt64.t = Any.any_l ()
+  | & _27: bool = Any.any_l ()
+  | & _31: MutBorrow.t UInt8.t = Any.any_l ()
+  | & _32: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
+  | & _34: UInt8.t = Any.any_l ()
+  | & _35: bool = Any.any_l ()
+  | & _old: t_Vec_u8_Global = Any.any_l ()
+  | & variant_old_bb3: int = Any.any_l () ])
+  [ return (result: ()) -> {[@stop_split] [@expl:fill ensures] [%#salloc'15] Seq.length (view_Vec_u8_Global b.final)
+    = Seq.length (view_Vec_u8_Global b.current)}
+    (! return {result}) ]

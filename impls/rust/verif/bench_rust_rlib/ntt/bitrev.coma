@@ -48,10 +48,10 @@ let%span sntt'28 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 19 16 19 5
 let%span sntt'29 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 33 10 33 11
 let%span sntt'30 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 31 11 31 27
 let%span sntt'31 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 32 10 32 28
-let%span sntt'32 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 35 16 35 46
+let%span sntt'32 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 35 16 35 62
 let%span sntt'33 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 25 10 25 11
 let%span sntt'34 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 23 11 23 17
-let%span sntt'35 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 24 10 24 21
+let%span sntt'35 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 24 10 24 37
 let%span sntt'36 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 27 16 27 43
 
 use creusot.int.UInt64
@@ -88,19 +88,19 @@ function pow2 [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 18 0 18 26] (
 
 axiom pow2_def: forall k: int [pow2 k]. pow2 k = ([%#sntt'28] if k <= 0 then 1 else 2 * pow2 (k - 1))
 
-function pow2_le [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 34 0 34 30] (a: int) (b: int) : ()
-
-axiom pow2_le_def: forall a: int, b: int [pow2_le a b]. ([%#sntt'30] 0 <= a /\ a <= b)
-    -> pow2_le a b = ([%#sntt'32] if a < b then pow2_le a (b - 1) else ())
-
-axiom pow2_le_spec: forall a: int, b: int. ([%#sntt'30] 0 <= a /\ a <= b) -> ([%#sntt'31] pow2 a <= pow2 b)
-
 function pow2_gt [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 26 0 26 22] (k: int) : ()
 
 axiom pow2_gt_def: forall k: int [pow2_gt k]. ([%#sntt'34] 0 <= k)
     -> pow2_gt k = ([%#sntt'36] if gt_log_Int k 0 then pow2_gt (k - 1) else ())
 
-axiom pow2_gt_spec: forall k: int. ([%#sntt'34] 0 <= k) -> ([%#sntt'35] gt_log_Int (pow2 k) k)
+axiom pow2_gt_spec: forall k: int. ([%#sntt'34] 0 <= k) -> ([%#sntt'35] gt_log_Int (pow2 k) k /\ ge_log_Int (pow2 k) 1)
+
+function pow2_le [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 34 0 34 30] (a: int) (b: int) : ()
+
+axiom pow2_le_def: forall a: int, b: int [pow2_le a b]. ([%#sntt'30] 0 <= a /\ a <= b)
+    -> pow2_le a b = ([%#sntt'32] if a < b then let _ = pow2_gt (b - 1) in pow2_le a (b - 1) else ())
+
+axiom pow2_le_spec: forall a: int, b: int. ([%#sntt'30] 0 <= a /\ a <= b) -> ([%#sntt'31] pow2 a <= pow2 b)
 
 predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) =
   [%#sslice] UInt64.t'int self < Seq.length seq

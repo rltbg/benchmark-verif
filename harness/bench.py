@@ -179,6 +179,28 @@ def start_ballast(spec):
     return p
 
 
+_PREPARED = set()
+
+
+def prepare_workload(w, n):
+    """Hook optionnel « prepare » (spec/workloads.d/<w>.json) : commande shell avec {n}, exécutée une fois par (workload, n), hors temps mesuré
+    (ex. génération du fichier d'entrée de `stream`)."""
+    cmd = _EXTRA.get(w, {}).get("prepare")
+    if cmd and (w, n) not in _PREPARED:
+        _PREPARED.add((w, n))
+        subprocess.run(cmd.format(n=n), shell=True, cwd=ROOT, check=True)
+
+
+def drop_caches(w):
+    """Si le workload le demande ("drop_caches": true), vide le cache de pages avant chaque run pour que les lectures aillent au disque
+    (ignoré silencieusement si non permis)."""
+    if _EXTRA.get(w, {}).get("drop_caches"):
+        try:
+            subprocess.run("sync; echo 3 > /proc/sys/vm/drop_caches", shell=True, stderr=subprocess.DEVNULL)
+        except OSError:
+            pass
+
+
 def cmd_run(a):
     ballast = start_ballast(a.ballast) if a.ballast else None
     try:
@@ -212,8 +234,10 @@ def _cmd_run(a, ballast):
                                         "sys_s": 0, "peak_rss_kb": 0, "minflt": 0, "majflt": 0, "inblock": 0, "oublock": 0, "timeline": []})
                 print(f"{name:14s} {w:8s} non implémenté : {spec['unsupported'][w]}", file=sys.stderr)
                 continue
+            prepare_workload(w, n)
             for r in range(a.repeat):
                 cmd = [c.format(workload=w, n=n) for c in spec["cmd"]] + ([str(thr)] if thr else [])
+                drop_caches(w)
                 rec = run_once(cmd, a.wrapper, a.timeout)
                 rec.update(impl=name, workload=w, n=n, threads=thr or 1, rep=r)
                 results["runs"].append(rec)

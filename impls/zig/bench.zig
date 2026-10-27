@@ -250,6 +250,7 @@ const w_parsort = @import("w_parsort.zig");
 const w_parsha = @import("w_parsha.zig");
 const w_stream = @import("w_stream.zig");
 const w_strsort = @import("w_strsort.zig");
+const w_alloc = @import("w_alloc.zig");
 // @@IMPORTS@@ (une ligne `const w_<nom> = @import("w_<nom>.zig");` ; chaque module exporte `pub fn run(n: usize, threads: usize) u64`)
 
 /// Workloads étendus : `// @@DISPATCH@@` — ajouter `if (std.mem.eql(u8, w, "<nom>")) return w_<nom>.run(n, threads);` sous l'ancre.
@@ -264,6 +265,7 @@ fn extended(w: []const u8, n: usize, threads: usize) ?u64 {
     if (std.mem.eql(u8, w, "parsha")) return w_parsha.run(n, threads);
     if (std.mem.eql(u8, w, "stream")) return w_stream.run(n, threads);
     if (std.mem.eql(u8, w, "strsort")) return w_strsort.run(n, threads);
+    if (std.mem.eql(u8, w, "alloc")) return w_alloc.run(n, threads);
     // @@DISPATCH@@
     return null;
 }

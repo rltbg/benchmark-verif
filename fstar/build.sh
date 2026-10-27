@@ -19,6 +19,8 @@ B=$PWD/_build
 MODS=(Common.fst SortSpec.fsti SortSpec.fst Sort.fst Sieve.fst Matmul.fst Lines.fst Hashmap.fst
       Stream.fst
       Bfs.fst
+      Strsort.fst
+      Alloc.fst
       # @@MODS@@ (modules des workloads étendus, avant All.fst : une ligne `<Nom>.fst` ; les ancres sont retirées par la ligne suivante)
       All.fst)
 ENTRIES=(--custard_entry Bench.Sort.run --custard_entry Bench.Sieve.run --custard_entry Bench.Matmul.run
@@ -26,6 +28,8 @@ ENTRIES=(--custard_entry Bench.Sort.run --custard_entry Bench.Sieve.run --custar
          --custard_entry Bench.Stream.chunk --custard_entry Bench.Stream.new_buf --custard_entry Bench.Stream.new_state
          --custard_entry Bench.Stream.new_table --custard_entry Bench.Stream.finish
          --custard_entry Bench.Bfs.run
+         --custard_entry Bench.Strsort.run
+         --custard_entry Bench.Alloc.run
          # @@ENTRIES@@ (une ligne `--custard_entry Bench.<Nom>.run` par workload étendu)
 )
 export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1
@@ -67,7 +71,7 @@ target_c() {
   verify
   local t0; t0=$(now)
   extract C "$B/c"
-  gcc -O3 -march=native -std=gnu11 -pthread -I "$B/c" "$B/c/Custard.c" drivers/driver.c -o "$B/c/bench"
+  gcc -O3 -march=native -std=gnu11 -pthread -fno-builtin-malloc -fno-builtin-free -I "$B/c" "$B/c/Custard.c" drivers/driver.c -o "$B/c/bench"
   record fstar-c build_s "$(since "$t0")"
   record fstar-c binary_kb "$(( $(stat -c %s "$B/c/bench") / 1024 ))"; record fstar-c runtime_kb 0
 }
