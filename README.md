@@ -215,6 +215,31 @@ Moyenne géométrique du temps relatif au meilleur : F*→C ×1.02 (5/5), Rust �
 
 Les moyennes géométriques avec « (4/5) » ou « (2/5) » ne portent que sur les workloads terminés : elles ne sont pas comparables aux autres.
 
+## Synthèse des performances et graphes
+
+Temps relatif au meilleur de la ligne, taille `large` (1,00 = meilleur ; « > 600 s » = délai dépassé, pas de résultat) :
+
+| workload | C natif | Zig 0.17 | Rust | Rust + Creusot | F*→C | F*→F# | F*→OCaml (corrigé) | F*→OCaml (livré) |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|
+| sort | ×1.23 | ×1.00 | ×1.14 | ×1.19 | ×1.06 | ×1.53 | ×106.52 | > 600 s |
+| sieve | ×1.00 | ×1.01 | ×1.01 | ×1.03 | ×1.00 | ×1.25 | ×26.05 | > 600 s |
+| matmul | ×1.00 | ×1.44 | ×1.41 | ×1.06 | ×1.13 | ×4.76 | > 600 s | > 600 s |
+| lines | ×1.10 | ×1.24 | ×1.04 | ×1.34 | ×1.00 | ×2.08 | ×136.38 | > 600 s |
+| hashmap | ×1.00 | ×1.05 | ×1.20 | ×1.17 | ×1.07 | ×2.93 | ×42.39 | > 600 s |
+
+Graphes (générés par `python3 harness/charts.py`, source : `results/run-*.json`) :
+
+1. **Temps relatif au meilleur, `large`, hors OCaml** : montre que les cinq colonnes natives/vérifiées sont dans un mouchoir et que seul F# s'en détache.
+   ![relatif](results/charts/relatif-large.png)
+2. **Même graphe, OCaml inclus (échelle log)** : l'écart de deux ordres de grandeur du backend OCaml.
+   ![relatif OCaml](results/charts/relatif-large-avec-ocaml.png)
+3. **Débit en fonction de la taille** : un panneau par workload ; courbes plates = pas de dégradation avec la charge ; les courbes OCaml s'arrêtent où le délai est dépassé.
+   ![débit](results/charts/debit-vs-taille.png)
+4. **Mémoire à `large`** (pic RAM ÷ taille des structures, échelle log) : C/Zig/Rust à ~1, .NET entre 1,2 et 3, OCaml jusqu'à 8.
+   ![mémoire](results/charts/memoire-large.png)
+5. **Coût de la vérification** : le prix de la preuve, payé hors exécution.
+   ![preuve](results/charts/cout-preuve.png)
+
 ### Ce que disent ces chiffres (et ce qu'ils ne disent pas)
 
 * **Le code vérifié ne coûte rien de mesurable face au code à la main, en C comme en Rust.** À `large`, moyenne géométrique du temps
