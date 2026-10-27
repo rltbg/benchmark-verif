@@ -13,13 +13,13 @@ SHORT = {"c-native": "C natif", "zig": "Zig 0.17", "rust-plain": "Rust", "rust-c
 
 def merged(preset):
     """Fusionne run-<preset>.json et les campagnes OCaml run-<preset>-<impl>.json."""
-    files = [R / f"run-{preset}.json"] + [R / f"run-{preset}-{i}.json" for i in ("fstar-ocaml", "fstar-ocaml-fast", "zig")]
+    files = [R / f"run-{preset}.json"] + [R / f"run-{preset}-{i}.json" for i in ("ext", "par", "fstar-ocaml", "fstar-ocaml-fast", "zig")]
     data = None
     for f in files:
         if not f.exists(): continue
         d = json.loads(f.read_text())
-        if f.name.endswith("-zig.json"):  # relance de Zig après optimisation de matmul : remplace les anciennes mesures
-            data["runs"] = [r for r in data["runs"] if r["impl"] != "zig"]
+        if f.name.endswith("-zig.json") and data:  # relance de Zig après optimisation de matmul : remplace les anciennes mesures de base
+            data["runs"] = [r for r in data["runs"] if r["impl"] != "zig" or r["workload"] not in bench.BASE_WORKLOADS]
         if data is None: data = d
         else: data["runs"] += d["runs"]
     return data
@@ -30,7 +30,7 @@ def cell(v):
     return f"{bench.fmt_rate(v['throughput'])}/s · {v['internal_s']:.2f} s · {v['rss_mb']:.0f} Mo" + ("" if v.get("agrees") else " ❌")
 
 def main():
-    for preset in ["xlarge", "large", "medium", "small", "tiny"]:
+    for preset in ["saturate", "xlarge", "large", "medium", "small", "tiny"]:
         data = merged(preset)
         if not data: continue
         table, meta = bench.summarize(data)
@@ -49,7 +49,7 @@ def main():
             bt = min(v["internal_s"] for v in oks.values())
             for k, v in oks.items(): agg.setdefault(k, []).append(v["internal_s"] / bt)
         print("\nMoyenne géométrique du temps relatif au meilleur : " + ", ".join(
-            f"{SHORT[k]} ×{bench.gmean(agg[k]):.2f} ({len(agg[k])}/5)" for k in sorted(agg, key=lambda k: bench.gmean(agg[k]))) + ".\n")
+            f"{SHORT[k]} ×{bench.gmean(agg[k]):.2f} ({len(agg[k])}/{len(table)})" for k in sorted(agg, key=lambda k: bench.gmean(agg[k]))) + ".\n")
 
 def footprint(preset="large"):
     """Tableaux CPU/RAM par workload et empreinte disque/démarrage/construction (cités dans le README)."""
@@ -74,6 +74,24 @@ def footprint(preset="large"):
                    + (f"{f['verify_s']:.0f} s" if f.get("verify_s") else "—") + " |")
     print("\n".join(out))
 
+def scaling(preset="large"):
+    """Passage à l'échelle des workloads parallèles : temps et accélération à 1, 2, 4 threads (run-<preset>-scaling.json)."""
+    f = R / f"run-{preset}-scaling.json"
+    if not f.exists(): return
+    table, _ = bench.summarize(json.loads(f.read_text()))
+    impls = [i for i in ORDER if any(i in table[w] for w in table)]
+    print(f"#### Passage à l'échelle (taille `{preset}`) : temps · accélération vs 1 thread\n")
+    print("| workload | threads | " + " | ".join(SHORT[i] for i in impls) + " |"); print("|---|--:|" + "--:|" * len(impls))
+    for base in ("parmatmul", "parsort", "parsha"):
+        for t in (1, 2, 4):
+            row = []
+            for i in impls:
+                v = table.get(f"{base}@{t}", {}).get(i); v1 = table.get(f"{base}@1", {}).get(i)
+                row.append(f"{v['internal_s']:.1f} s · ×{v1['internal_s']/v['internal_s']:.2f}" if v and v.get("status") == "ok" and v1 and v1.get("status") == "ok" else "—")
+            print(f"| {base} | {t} | " + " | ".join(row) + " |")
+    print()
+
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "footprint": footprint(*sys.argv[2:3])
+    elif len(sys.argv) > 1 and sys.argv[1] == "scaling": scaling(*sys.argv[2:3])
     else: main()
