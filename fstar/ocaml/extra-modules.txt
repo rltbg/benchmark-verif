@@ -4,3 +4,4 @@ Bench_Ntt.ml
 Bench_Strsort.ml
 Bench_Alloc.ml
 Bench_Ptrchase.ml
+Bench_Sha256.ml

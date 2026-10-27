@@ -63,35 +63,20 @@ let%span salloc'40 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 95 13 
 let%span salloc'41 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 95 8 95 14
 let%span salloc'42 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 97 4 97 27
 let%span salloc'43 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 58 11 58 38
-let%span salloc'44 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 12 25 12 27
-let%span salloc'45 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 12 20 12 27
-let%span salloc'46 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 12 20 12 21
-let%span salloc'47 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 59 0 59 27
-let%span salloc'48 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 23 11 23 26
-let%span salloc'49 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 24 10 24 33
-let%span salloc'50 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 42 11 42 26
+let%span salloc'44 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 59 0 59 27
+let%span salloc'45 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 23 11 23 26
+let%span salloc'46 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 24 10 24 33
+let%span salloc'47 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 42 11 42 26
 
 use creusot.int.Int32
 use creusot.int.UInt64
-use creusot.int.UInt32
-use creusot.prelude.Any
 use seq.Seq
 use creusot.prelude.MutBorrow
 use creusot.int.UInt8
+use creusot.prelude.Any
 use int.Int
 
-constant const_WMAX [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 12 0 12 17] : UInt64.t
-
-let set_WMAX (return) = bb0
-  [ bb0 = s0
-    [ s0 = [ &_1 <- UInt32.of_int (Int32.to_int ([%#salloc'44] (25: Int32.t))) ] s1
-    | s1 = [ &_2 <- UInt32.lt _1 ([%#salloc'45] (64: UInt32.t)) ] s2
-    | s2 = {[@expl:Shl overflow] [%#salloc'45] _2} s3
-    | s3 = UInt64.shl [%#salloc'45] {[%#salloc'46] (1: UInt64.t)} {Int32.to_int ([%#salloc'44] (25: Int32.t))}
-        (fun (_x: UInt64.t) -> [ &_ret <- _x ] s4)
-    | s4 = return {_ret} ] ]
-  [ & _ret: UInt64.t = Any.any_l () | & _1: UInt32.t = Any.any_l () | & _2: bool = Any.any_l () ]
-  [ return (_const: UInt64.t) -> -{const_WMAX = _const}- return ]
+constant const_WMAX: UInt64.t = [%#salloc'44] (33554432: UInt64.t)
 
 type t_Vec_Option_Vec_u8_Global_Global
 
@@ -119,7 +104,7 @@ let push_Option_Vec_u8_Global (self: MutBorrow.t t_Vec_Option_Vec_u8_Global_Glob
     = Seq.snoc (view_Vec_Option_Vec_u8_Global_Global self.current) value}
     (! return {result}) ]
 
-constant const_CK_INIT: UInt64.t = [%#salloc'47] (14695981039346656037: UInt64.t)
+constant const_CK_INIT: UInt64.t = [%#salloc'44] (14695981039346656037: UInt64.t)
 
 let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
   [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
@@ -149,9 +134,9 @@ let from_elem_u8 (elem: UInt8.t) (n: UInt64.t) (return (x: t_Vec_u8_Global)) = a
 let barrier (b: t_Vec_u8_Global) (return (x: ())) = any [ return (result: ()) -> (! return {result}) ]
 
 let fill (b: MutBorrow.t t_Vec_u8_Global) (i: UInt64.t) (return (x: ())) =
-{[@stop_split] [@expl:fill requires] [%#salloc'48] Seq.length (view_Vec_u8_Global b.current) <= 256}
+{[@stop_split] [@expl:fill requires] [%#salloc'45] Seq.length (view_Vec_u8_Global b.current) <= 256}
   any
-  [ return (result: ()) -> {[@stop_split] [@expl:fill ensures] [%#salloc'49] Seq.length (view_Vec_u8_Global b.final)
+  [ return (result: ()) -> {[@stop_split] [@expl:fill ensures] [%#salloc'46] Seq.length (view_Vec_u8_Global b.final)
     = Seq.length (view_Vec_u8_Global b.current)}
     (! return {result}) ]
 
@@ -160,7 +145,7 @@ predicate resolve_refmut_Vec_u8_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_
 meta "rewrite_def" predicate resolve_refmut_Vec_u8_Global
 
 let sum (b: t_Vec_u8_Global) (return (x: UInt64.t)) =
-{[@stop_split] [@expl:sum requires] [%#salloc'50] Seq.length (view_Vec_u8_Global b) <= 256}
+{[@stop_split] [@expl:sum requires] [%#salloc'47] Seq.length (view_Vec_u8_Global b) <= 256}
   any [ return (result: UInt64.t) -> (! return {result}) ]
 
 let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
@@ -208,147 +193,144 @@ meta "select_lsinst" "all"
 
 let run [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 59 0 59 27] (n: UInt64.t) (return (x: UInt64.t)) =
 {[@stop_split] [@expl:run requires] [%#salloc'43] 1 <= UInt64.t'int n /\ UInt64.t'int n <= 4000000000}
-  (! set_WMAX
-    (bb0
-    [ bb0 = s0
-      [ s0 = UInt64.shr [%#salloc'0] {n} {Int32.to_int ([%#salloc] (6: Int32.t))}
-          (fun (_x: UInt64.t) -> [ &w <- _x ] s1)
-      | s1 = [ &_7 <- UInt64.lt w ([%#salloc'1] (1: UInt64.t)) ] s2
-      | s2 = any [ br0 -> {_7 = false} (! bb3) | br1 -> {_7} (! bb1) ] ]
-    | bb1 = s0 [ s0 = [ &w <- [%#salloc'2] (1: UInt64.t) ] s1 | s1 = bb3 ]
-    | bb3 = s0
-      [ s0 = [ &_10 <- UInt64.gt w ([%#salloc'3] const_WMAX) ] s1
-      | s1 = any [ br0 -> {_10 = false} (! bb6) | br1 -> {_10} (! bb4) ] ]
-    | bb4 = s0 [ s0 = [ &w <- [%#salloc'4] const_WMAX ] s1 | s1 = bb6 ]
-    | bb6 = s0
-      [ s0 = new_Option_Vec_u8_Global [%#salloc'5] (fun (_x: t_Vec_Option_Vec_u8_Global_Global) -> [ &ring <- _x ] s1)
-      | s1 = [ &j <- [%#salloc'6] (0: UInt64.t) ] s2
-      | s2 = bb8 ]
-    | bb8 = bb8
-      [ bb8 = {[@expl:loop invariant #0] [%#salloc'8] Seq.length (view_Vec_Option_Vec_u8_Global_Global ring)
-        = UInt64.t'int j}
-        {[@expl:loop invariant #1] [%#salloc'7] UInt64.t'int j <= UInt64.t'int w}
-        (! s0)
-        [ s0 = [ &_23 <- UInt64.lt j w ] s1 | s1 = any [ br0 -> {_23 = false} (! bb12) | br1 -> {_23} (! bb10) ] ]
-        [ bb10 = s0
-          [ s0 = [ &_28 <- None ] s1
-          | s1 = MutBorrow.borrow_mut <t_Vec_Option_Vec_u8_Global_Global> {ring}
-              (fun (_bor: MutBorrow.t t_Vec_Option_Vec_u8_Global_Global) -> [ &_27 <- _bor ] [ &ring <- _bor.final ] s2)
-          | s2 = push_Option_Vec_u8_Global [%#salloc'9] {_27} {_28} (fun (_x: ()) -> [ &_26 <- _x ] s3)
-          | s3 = UInt64.add [%#salloc'11] {j} {[%#salloc'10] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &j <- _x ] s4)
-          | s4 = bb8 ] ] ]
-    | bb12 = s0
-      [ s0 = [ &ck <- [%#salloc'12] const_CK_INIT ] s1
-      | s1 = [ &kept <- [%#salloc'13] (0: UInt64.t) ] s2
-      | s2 = [ &i <- [%#salloc'14] (0: UInt64.t) ] s3
-      | s3 = bb13 ]
-    | bb13 = bb13
-      [ bb13 = {[@expl:loop invariant #0] [%#salloc'17] Seq.length (view_Vec_Option_Vec_u8_Global_Global ring)
-        = UInt64.t'int w}
-        {[@expl:loop invariant #1] [%#salloc'16] 1 <= UInt64.t'int w}
-        {[@expl:loop invariant #2] [%#salloc'15] UInt64.t'int i <= UInt64.t'int n}
-        (! s0)
-        [ s0 = [ &_43 <- UInt64.lt i n ] s1 | s1 = any [ br0 -> {_43 = false} (! bb37) | br1 -> {_43} (! bb15) ] ]
-        [ bb15 = s0
-          [ s0 = [ &_48 <- i ] s1
-          | s1 = wrapping_add [%#salloc'19] {[%#salloc'18] (11605987345966301185: UInt64.t)} {_48}
-              (fun (_x: UInt64.t) -> [ &_47 <- _x ] s2)
-          | s2 = mix64 [%#salloc'20] {_47} (fun (_x: UInt64.t) -> [ &r <- _x ] s3)
-          | s3 = [ &_55 <- ([%#salloc'21] (32: UInt64.t)) = ([%#salloc'22] (0: UInt64.t)) ] s4
-          | s4 = {[@expl:remainder by zero] [%#salloc'22] not _55} s5
-          | s5 = UInt64.rem [%#salloc'22] {r} {[%#salloc'21] (32: UInt64.t)} (fun (_x: UInt64.t) -> [ &_53 <- _x ] s6)
-          | s6 = [ &_52 <- _53 ] s7
-          | s7 = UInt64.mul [%#salloc'24] {[%#salloc'23] (8: UInt64.t)} {_52} (fun (_x: UInt64.t) -> [ &_51 <- _x ] s8)
-          | s8 = UInt64.add [%#salloc'26] {[%#salloc'25] (8: UInt64.t)} {_51} (fun (_x: UInt64.t) -> [ &s <- _x ] s9)
-          | s9 = from_elem_u8 [%#smacros] {[%#salloc'27] (0: UInt8.t)} {s}
-              (fun (_x: t_Vec_u8_Global) -> [ &b <- _x ] s10)
-          | s10 = [ &_60 <- b ] s11
-          | s11 = barrier [%#salloc'28] {_60} (fun (_x: ()) -> [ &_58 <- _x ] s12)
-          | s12 = MutBorrow.borrow_mut <t_Vec_u8_Global> {b}
-              (fun (_bor: MutBorrow.t t_Vec_u8_Global) -> [ &_63 <- _bor ] [ &b <- _bor.final ] s13)
-          | s13 = [ &_64 <- i ] s14
-          | s14 = MutBorrow.borrow_final <t_Vec_u8_Global> {_63.current} {MutBorrow.get_id _63}
-              (fun (_bor: MutBorrow.t t_Vec_u8_Global) ->
-                [ &_62 <- _bor ] [ &_63 <- { _63 with current = _bor.final } ] s15)
-          | s15 = fill [%#salloc'29] {_62} {_64} (fun (_x: ()) -> [ &_61 <- _x ] s16)
-          | s16 = -{resolve_refmut_Vec_u8_Global _63}- s17
-          | s17 = [ &_70 <- b ] s18
-          | s18 = sum [%#salloc'30] {_70} (fun (_x: UInt64.t) -> [ &_68 <- _x ] s19)
-          | s19 = ckfold [%#salloc'31] {ck} {_68} (fun (_x: UInt64.t) -> [ &_66 <- _x ] s20)
-          | s20 = [ &ck <- _66 ] s21
-          | s21 = [ &_75 <- ([%#salloc'32] (16: UInt64.t)) = ([%#salloc'33] (0: UInt64.t)) ] s22
-          | s22 = {[@expl:remainder by zero] [%#salloc'33] not _75} s23
-          | s23 = UInt64.rem [%#salloc'33] {i} {[%#salloc'32] (16: UInt64.t)} (fun (_x: UInt64.t) -> [ &_73 <- _x ] s24)
-          | s24 = [ &_72 <- _73 = ([%#salloc'34] (0: UInt64.t)) ] s25
-          | s25 = any [ br0 -> {_72 = false} (! bb33) | br1 -> {_72} (! bb25) ] ]
-        | bb25 = s0
-          [ s0 = [ &_78 <- w ] s1
-          | s1 = [ &_79 <- _78 = ([%#salloc'35] (0: UInt64.t)) ] s2
-          | s2 = {[@expl:remainder by zero] [%#salloc'35] not _79} s3
-          | s3 = UInt64.rem [%#salloc'35] {kept} {_78} (fun (_x: UInt64.t) -> [ &slot <- _x ] s4)
-          | s4 = [ &_80 <- Some b ] s5
-          | s5 = MutBorrow.borrow_mut <t_Vec_Option_Vec_u8_Global_Global> {ring}
-              (fun (_bor: MutBorrow.t t_Vec_Option_Vec_u8_Global_Global) -> [ &_83 <- _bor ] [ &ring <- _bor.final ] s6)
-          | s6 = index_mut_Vec_Option_Vec_u8_Global_Global [%#salloc'36] {_83} {slot}
-              (fun (_x: MutBorrow.t t_Option_Vec_u8_Global) -> [ &_82 <- _x ] s7)
-          | s7 = [ &_82 <- { _82 with current = _80 } ] s8
-          | s8 = -{resolve_refmut_Option_Vec_u8_Global _82}- s9
-          | s9 = wrapping_add'0 [%#salloc'38] {kept} {[%#salloc'37] (1: UInt64.t)}
-              (fun (_x: UInt64.t) -> [ &_85 <- _x ] s10)
-          | s10 = [ &kept <- _85 ] s11
-          | s11 = bb35 ]
-        | bb33 = s0
-          [ s0 = [ &_89 <- b ] s1 | s1 = barrier [%#salloc'39] {_89} (fun (_x: ()) -> [ &_87 <- _x ] s2) | s2 = bb35 ]
-        | bb35 = s0
-          [ s0 = UInt64.add [%#salloc'41] {i} {[%#salloc'40] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s1)
-          | s1 = bb13 ] ] ]
-    | bb37 = s0
-      [ s0 = [ &_92 <- kept ] s1
-      | s1 = ckfold [%#salloc'42] {ck} {_92} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s2)
-      | s2 = return {_ret} ] ]
-    [ & _ret: UInt64.t = Any.any_l ()
-    | & n: UInt64.t = n
-    | & w: UInt64.t = Any.any_l ()
-    | & _7: bool = Any.any_l ()
-    | & _10: bool = Any.any_l ()
-    | & ring: t_Vec_Option_Vec_u8_Global_Global = Any.any_l ()
-    | & j: UInt64.t = Any.any_l ()
-    | & _23: bool = Any.any_l ()
-    | & _26: () = Any.any_l ()
-    | & _27: MutBorrow.t t_Vec_Option_Vec_u8_Global_Global = Any.any_l ()
-    | & _28: t_Option_Vec_u8_Global = Any.any_l ()
-    | & ck: UInt64.t = Any.any_l ()
-    | & kept: UInt64.t = Any.any_l ()
-    | & i: UInt64.t = Any.any_l ()
-    | & _43: bool = Any.any_l ()
-    | & r: UInt64.t = Any.any_l ()
-    | & _47: UInt64.t = Any.any_l ()
-    | & _48: UInt64.t = Any.any_l ()
-    | & s: UInt64.t = Any.any_l ()
-    | & _51: UInt64.t = Any.any_l ()
-    | & _52: UInt64.t = Any.any_l ()
-    | & _53: UInt64.t = Any.any_l ()
-    | & _55: bool = Any.any_l ()
-    | & b: t_Vec_u8_Global = Any.any_l ()
-    | & _58: () = Any.any_l ()
-    | & _60: t_Vec_u8_Global = Any.any_l ()
-    | & _61: () = Any.any_l ()
-    | & _62: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
-    | & _63: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
-    | & _64: UInt64.t = Any.any_l ()
-    | & _66: UInt64.t = Any.any_l ()
-    | & _68: UInt64.t = Any.any_l ()
-    | & _70: t_Vec_u8_Global = Any.any_l ()
-    | & _72: bool = Any.any_l ()
-    | & _73: UInt64.t = Any.any_l ()
-    | & _75: bool = Any.any_l ()
-    | & slot: UInt64.t = Any.any_l ()
-    | & _78: UInt64.t = Any.any_l ()
-    | & _79: bool = Any.any_l ()
-    | & _80: t_Option_Vec_u8_Global = Any.any_l ()
-    | & _82: MutBorrow.t t_Option_Vec_u8_Global = Any.any_l ()
-    | & _83: MutBorrow.t t_Vec_Option_Vec_u8_Global_Global = Any.any_l ()
-    | & _85: UInt64.t = Any.any_l ()
-    | & _87: () = Any.any_l ()
-    | & _89: t_Vec_u8_Global = Any.any_l ()
-    | & _92: UInt64.t = Any.any_l () ])) [ return (result: UInt64.t) -> (! return {result}) ]
+  (! bb0
+  [ bb0 = s0
+    [ s0 = UInt64.shr [%#salloc'0] {n} {Int32.to_int ([%#salloc] (6: Int32.t))} (fun (_x: UInt64.t) -> [ &w <- _x ] s1)
+    | s1 = [ &_7 <- UInt64.lt w ([%#salloc'1] (1: UInt64.t)) ] s2
+    | s2 = any [ br0 -> {_7 = false} (! bb3) | br1 -> {_7} (! bb1) ] ]
+  | bb1 = s0 [ s0 = [ &w <- [%#salloc'2] (1: UInt64.t) ] s1 | s1 = bb3 ]
+  | bb3 = s0
+    [ s0 = [ &_10 <- UInt64.gt w ([%#salloc'3] const_WMAX) ] s1
+    | s1 = any [ br0 -> {_10 = false} (! bb6) | br1 -> {_10} (! bb4) ] ]
+  | bb4 = s0 [ s0 = [ &w <- [%#salloc'4] const_WMAX ] s1 | s1 = bb6 ]
+  | bb6 = s0
+    [ s0 = new_Option_Vec_u8_Global [%#salloc'5] (fun (_x: t_Vec_Option_Vec_u8_Global_Global) -> [ &ring <- _x ] s1)
+    | s1 = [ &j <- [%#salloc'6] (0: UInt64.t) ] s2
+    | s2 = bb8 ]
+  | bb8 = bb8
+    [ bb8 = {[@expl:loop invariant #0] [%#salloc'8] Seq.length (view_Vec_Option_Vec_u8_Global_Global ring)
+      = UInt64.t'int j}
+      {[@expl:loop invariant #1] [%#salloc'7] UInt64.t'int j <= UInt64.t'int w}
+      (! s0)
+      [ s0 = [ &_23 <- UInt64.lt j w ] s1 | s1 = any [ br0 -> {_23 = false} (! bb12) | br1 -> {_23} (! bb10) ] ]
+      [ bb10 = s0
+        [ s0 = [ &_28 <- None ] s1
+        | s1 = MutBorrow.borrow_mut <t_Vec_Option_Vec_u8_Global_Global> {ring}
+            (fun (_bor: MutBorrow.t t_Vec_Option_Vec_u8_Global_Global) -> [ &_27 <- _bor ] [ &ring <- _bor.final ] s2)
+        | s2 = push_Option_Vec_u8_Global [%#salloc'9] {_27} {_28} (fun (_x: ()) -> [ &_26 <- _x ] s3)
+        | s3 = UInt64.add [%#salloc'11] {j} {[%#salloc'10] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &j <- _x ] s4)
+        | s4 = bb8 ] ] ]
+  | bb12 = s0
+    [ s0 = [ &ck <- [%#salloc'12] const_CK_INIT ] s1
+    | s1 = [ &kept <- [%#salloc'13] (0: UInt64.t) ] s2
+    | s2 = [ &i <- [%#salloc'14] (0: UInt64.t) ] s3
+    | s3 = bb13 ]
+  | bb13 = bb13
+    [ bb13 = {[@expl:loop invariant #0] [%#salloc'17] Seq.length (view_Vec_Option_Vec_u8_Global_Global ring)
+      = UInt64.t'int w}
+      {[@expl:loop invariant #1] [%#salloc'16] 1 <= UInt64.t'int w}
+      {[@expl:loop invariant #2] [%#salloc'15] UInt64.t'int i <= UInt64.t'int n}
+      (! s0)
+      [ s0 = [ &_43 <- UInt64.lt i n ] s1 | s1 = any [ br0 -> {_43 = false} (! bb37) | br1 -> {_43} (! bb15) ] ]
+      [ bb15 = s0
+        [ s0 = [ &_48 <- i ] s1
+        | s1 = wrapping_add [%#salloc'19] {[%#salloc'18] (11605987345966301185: UInt64.t)} {_48}
+            (fun (_x: UInt64.t) -> [ &_47 <- _x ] s2)
+        | s2 = mix64 [%#salloc'20] {_47} (fun (_x: UInt64.t) -> [ &r <- _x ] s3)
+        | s3 = [ &_55 <- ([%#salloc'21] (32: UInt64.t)) = ([%#salloc'22] (0: UInt64.t)) ] s4
+        | s4 = {[@expl:remainder by zero] [%#salloc'22] not _55} s5
+        | s5 = UInt64.rem [%#salloc'22] {r} {[%#salloc'21] (32: UInt64.t)} (fun (_x: UInt64.t) -> [ &_53 <- _x ] s6)
+        | s6 = [ &_52 <- _53 ] s7
+        | s7 = UInt64.mul [%#salloc'24] {[%#salloc'23] (8: UInt64.t)} {_52} (fun (_x: UInt64.t) -> [ &_51 <- _x ] s8)
+        | s8 = UInt64.add [%#salloc'26] {[%#salloc'25] (8: UInt64.t)} {_51} (fun (_x: UInt64.t) -> [ &s <- _x ] s9)
+        | s9 = from_elem_u8 [%#smacros] {[%#salloc'27] (0: UInt8.t)} {s} (fun (_x: t_Vec_u8_Global) -> [ &b <- _x ] s10)
+        | s10 = [ &_60 <- b ] s11
+        | s11 = barrier [%#salloc'28] {_60} (fun (_x: ()) -> [ &_58 <- _x ] s12)
+        | s12 = MutBorrow.borrow_mut <t_Vec_u8_Global> {b}
+            (fun (_bor: MutBorrow.t t_Vec_u8_Global) -> [ &_63 <- _bor ] [ &b <- _bor.final ] s13)
+        | s13 = [ &_64 <- i ] s14
+        | s14 = MutBorrow.borrow_final <t_Vec_u8_Global> {_63.current} {MutBorrow.get_id _63}
+            (fun (_bor: MutBorrow.t t_Vec_u8_Global) ->
+              [ &_62 <- _bor ] [ &_63 <- { _63 with current = _bor.final } ] s15)
+        | s15 = fill [%#salloc'29] {_62} {_64} (fun (_x: ()) -> [ &_61 <- _x ] s16)
+        | s16 = -{resolve_refmut_Vec_u8_Global _63}- s17
+        | s17 = [ &_70 <- b ] s18
+        | s18 = sum [%#salloc'30] {_70} (fun (_x: UInt64.t) -> [ &_68 <- _x ] s19)
+        | s19 = ckfold [%#salloc'31] {ck} {_68} (fun (_x: UInt64.t) -> [ &_66 <- _x ] s20)
+        | s20 = [ &ck <- _66 ] s21
+        | s21 = [ &_75 <- ([%#salloc'32] (16: UInt64.t)) = ([%#salloc'33] (0: UInt64.t)) ] s22
+        | s22 = {[@expl:remainder by zero] [%#salloc'33] not _75} s23
+        | s23 = UInt64.rem [%#salloc'33] {i} {[%#salloc'32] (16: UInt64.t)} (fun (_x: UInt64.t) -> [ &_73 <- _x ] s24)
+        | s24 = [ &_72 <- _73 = ([%#salloc'34] (0: UInt64.t)) ] s25
+        | s25 = any [ br0 -> {_72 = false} (! bb33) | br1 -> {_72} (! bb25) ] ]
+      | bb25 = s0
+        [ s0 = [ &_78 <- w ] s1
+        | s1 = [ &_79 <- _78 = ([%#salloc'35] (0: UInt64.t)) ] s2
+        | s2 = {[@expl:remainder by zero] [%#salloc'35] not _79} s3
+        | s3 = UInt64.rem [%#salloc'35] {kept} {_78} (fun (_x: UInt64.t) -> [ &slot <- _x ] s4)
+        | s4 = [ &_80 <- Some b ] s5
+        | s5 = MutBorrow.borrow_mut <t_Vec_Option_Vec_u8_Global_Global> {ring}
+            (fun (_bor: MutBorrow.t t_Vec_Option_Vec_u8_Global_Global) -> [ &_83 <- _bor ] [ &ring <- _bor.final ] s6)
+        | s6 = index_mut_Vec_Option_Vec_u8_Global_Global [%#salloc'36] {_83} {slot}
+            (fun (_x: MutBorrow.t t_Option_Vec_u8_Global) -> [ &_82 <- _x ] s7)
+        | s7 = [ &_82 <- { _82 with current = _80 } ] s8
+        | s8 = -{resolve_refmut_Option_Vec_u8_Global _82}- s9
+        | s9 = wrapping_add'0 [%#salloc'38] {kept} {[%#salloc'37] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_85 <- _x ] s10)
+        | s10 = [ &kept <- _85 ] s11
+        | s11 = bb35 ]
+      | bb33 = s0
+        [ s0 = [ &_89 <- b ] s1 | s1 = barrier [%#salloc'39] {_89} (fun (_x: ()) -> [ &_87 <- _x ] s2) | s2 = bb35 ]
+      | bb35 = s0
+        [ s0 = UInt64.add [%#salloc'41] {i} {[%#salloc'40] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s1)
+        | s1 = bb13 ] ] ]
+  | bb37 = s0
+    [ s0 = [ &_92 <- kept ] s1
+    | s1 = ckfold [%#salloc'42] {ck} {_92} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s2)
+    | s2 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & n: UInt64.t = n
+  | & w: UInt64.t = Any.any_l ()
+  | & _7: bool = Any.any_l ()
+  | & _10: bool = Any.any_l ()
+  | & ring: t_Vec_Option_Vec_u8_Global_Global = Any.any_l ()
+  | & j: UInt64.t = Any.any_l ()
+  | & _23: bool = Any.any_l ()
+  | & _26: () = Any.any_l ()
+  | & _27: MutBorrow.t t_Vec_Option_Vec_u8_Global_Global = Any.any_l ()
+  | & _28: t_Option_Vec_u8_Global = Any.any_l ()
+  | & ck: UInt64.t = Any.any_l ()
+  | & kept: UInt64.t = Any.any_l ()
+  | & i: UInt64.t = Any.any_l ()
+  | & _43: bool = Any.any_l ()
+  | & r: UInt64.t = Any.any_l ()
+  | & _47: UInt64.t = Any.any_l ()
+  | & _48: UInt64.t = Any.any_l ()
+  | & s: UInt64.t = Any.any_l ()
+  | & _51: UInt64.t = Any.any_l ()
+  | & _52: UInt64.t = Any.any_l ()
+  | & _53: UInt64.t = Any.any_l ()
+  | & _55: bool = Any.any_l ()
+  | & b: t_Vec_u8_Global = Any.any_l ()
+  | & _58: () = Any.any_l ()
+  | & _60: t_Vec_u8_Global = Any.any_l ()
+  | & _61: () = Any.any_l ()
+  | & _62: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
+  | & _63: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
+  | & _64: UInt64.t = Any.any_l ()
+  | & _66: UInt64.t = Any.any_l ()
+  | & _68: UInt64.t = Any.any_l ()
+  | & _70: t_Vec_u8_Global = Any.any_l ()
+  | & _72: bool = Any.any_l ()
+  | & _73: UInt64.t = Any.any_l ()
+  | & _75: bool = Any.any_l ()
+  | & slot: UInt64.t = Any.any_l ()
+  | & _78: UInt64.t = Any.any_l ()
+  | & _79: bool = Any.any_l ()
+  | & _80: t_Option_Vec_u8_Global = Any.any_l ()
+  | & _82: MutBorrow.t t_Option_Vec_u8_Global = Any.any_l ()
+  | & _83: MutBorrow.t t_Vec_Option_Vec_u8_Global_Global = Any.any_l ()
+  | & _85: UInt64.t = Any.any_l ()
+  | & _87: () = Any.any_l ()
+  | & _89: t_Vec_u8_Global = Any.any_l ()
+  | & _92: UInt64.t = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

@@ -28,68 +28,65 @@ let s2u (x: SZ.t) : Pure U64.t (requires SZ.v x < 4294967296) (ensures fun y -> 
 let ok_n (n: SZ.t) : prop =
   SZ.fits_u64 /\ 1 <= SZ.v n /\ SZ.v n <= 2147483646 /\ SZ.fits (2 * SZ.v n + 2)
 
-(* Insère `nk` ; cnt (>= 1, < n) est lu/écrit dans cntr. Renvoie le nombre de nœuds visités. *)
-fn insert_one (a: V.vec U64.t) (n: SZ.t) (cntr: R.ref SZ.t) (nk: U64.t)
-              (#s0: Ghost.erased (Seq.seq U64.t)) (#c0: Ghost.erased SZ.t)
-  requires V.pts_to a s0 ** R.pts_to cntr c0 **
-           pure (ok_n n /\ V.length a == 2 * SZ.v n /\ 1 <= SZ.v c0 /\ SZ.v c0 < SZ.v n)
+(* Insère `nk` dans un arbre de cnt nœuds (1 <= cnt < n). Renvoie 2*v + a : v = nombre de nœuds visités
+   (<= cnt), a = 1 si un nœud a été ajouté (le nouveau cnt est alors cnt + 1). cnt est passé par valeur. *)
+fn insert_one (a: V.vec U64.t) (n cnt: SZ.t) (nk: U64.t) (#s0: Ghost.erased (Seq.seq U64.t))
+  requires V.pts_to a s0 ** pure (ok_n n /\ V.length a == 2 * SZ.v n /\ 1 <= SZ.v cnt /\ SZ.v cnt < SZ.v n)
   returns r: SZ.t
-  ensures exists* s c. V.pts_to a s ** R.pts_to cntr c **
-          pure (Seq.length s == 2 * SZ.v n /\ SZ.v c0 <= SZ.v c /\ SZ.v c <= SZ.v c0 + 1 /\ SZ.v r <= SZ.v n)
+  ensures exists* s. V.pts_to a s ** pure (Seq.length s == 2 * SZ.v n /\ SZ.v r <= 2 * SZ.v cnt + 1)
 {
   V.pts_to_len a;
+  let cnt64 = s2u cnt;
   let mut cur = 0sz;
   let mut v = 0sz;
   let mut fin = false;
+  let mut added = false;
   while (
     let vf = !fin;
     let vv = !v;
-    let vc = !cntr;
-    ((not vf) && (vv `SZ.lt` vc))
+    ((not vf) && (vv `SZ.lt` cnt))
   )
-  invariant exists* vcur vv vf vc sv. R.pts_to cur vcur ** R.pts_to v vv ** R.pts_to fin vf ** R.pts_to cntr vc **
+  invariant exists* vcur vv vf vad sv. R.pts_to cur vcur ** R.pts_to v vv ** R.pts_to fin vf ** R.pts_to added vad **
             V.pts_to a sv **
-            pure (SZ.v vcur < SZ.v vc /\ SZ.v vv <= SZ.v vc /\ SZ.v c0 <= SZ.v vc /\ SZ.v vc <= SZ.v c0 + 1 /\
-                  (vf \/ SZ.v vc == SZ.v c0) /\ Seq.length sv == 2 * SZ.v n)
+            pure (SZ.v vcur < SZ.v cnt /\ SZ.v vv <= SZ.v cnt /\ Seq.length sv == 2 * SZ.v n)
   decreases (SZ.v n - SZ.v !v)
   {
     let vcur = !cur;
     let vv = !v;
-    let vc = !cntr;
-    let vf = !fin;
     SZ.fits_lte (SZ.v vcur + SZ.v vcur) (2 * SZ.v n + 2);
     SZ.fits_lte (SZ.v vcur + SZ.v vcur + 1) (2 * SZ.v n + 2);
     SZ.fits_lte (SZ.v vv + 1) (2 * SZ.v n + 2);
-    SZ.fits_lte (SZ.v vc + 1) (2 * SZ.v n + 2);
-    SZ.fits_lte (SZ.v vc + SZ.v vc) (2 * SZ.v n + 2);
-    SZ.fits_lte (SZ.v vc + SZ.v vc + 1) (2 * SZ.v n + 2);
+    SZ.fits_lte (SZ.v cnt + SZ.v cnt) (2 * SZ.v n + 2);
+    SZ.fits_lte (SZ.v cnt + SZ.v cnt + 1) (2 * SZ.v n + 2);
     let i2 = SZ.add vcur vcur;
     let key = V.(a.(i2));
     let lnk = V.(a.(SZ.add i2 1sz));
     let eq = (nk = key);
     let left = U64.lt nk key;
     let c = (if left then U64.logand lnk 0xFFFFFFFFuL else U64.shift_right lnk 32ul);
-    let vc64 = s2u vc;
-    let inr = ((not eq) && U64.lt c vc64);
-    let attach = ((not vf) && (not eq) && (not (U64.lt c vc64)));
+    let inr = ((not eq) && U64.lt c cnt64);
+    let attach = ((not eq) && (not (U64.lt c cnt64)));
     if attach {
-      let ic = SZ.add vc vc;
+      let ic = SZ.add cnt cnt;
       V.(a.(ic) <- nk);
       V.(a.(SZ.add ic 1sz) <- nilnil);
       V.(a.(SZ.add i2 1sz) <-
-           (if left then U64.logor (U64.logand lnk 0xFFFFFFFF00000000uL) vc64
-                    else U64.logor (U64.logand lnk 0xFFFFFFFFuL) (U64.shift_left vc64 32ul)))
+           (if left then U64.logor (U64.logand lnk 0xFFFFFFFF00000000uL) cnt64
+                    else U64.logor (U64.logand lnk 0xFFFFFFFFuL) (U64.shift_left cnt64 32ul)))
     };
     V.pts_to_len a;
     cur := (if inr then SZ.uint64_to_sizet c else vcur);
-    cntr := (if attach then SZ.add vc 1sz else vc);
     v := SZ.add vv 1sz;
+    added := attach;
     fin := (not inr)
   };
-  !v
+  let vv = !v;
+  let vad = !added;
+  SZ.fits_lte (SZ.v vv + SZ.v vv + 1) (2 * SZ.v n + 2);
+  SZ.add (SZ.add vv vv) (if vad then 1sz else 0sz)
 }
 
-(* n insertions ; renvoie la somme des longueurs de chemin ; cnt final dans cntr. *)
+(* n insertions ; renvoie la somme des longueurs de chemin ; cnt final dans cntr (écrit une seule fois). *)
 fn build (a: V.vec U64.t) (n: SZ.t) (cntr: R.ref SZ.t) (#s0: Ghost.erased (Seq.seq U64.t)) (#c0: Ghost.erased SZ.t)
   requires V.pts_to a s0 ** R.pts_to cntr c0 ** pure (ok_n n /\ V.length a == 2 * SZ.v n)
   returns plen: U64.t
@@ -99,21 +96,25 @@ fn build (a: V.vec U64.t) (n: SZ.t) (cntr: R.ref SZ.t) (#s0: Ghost.erased (Seq.s
   V.pts_to_len a;
   V.(a.(0sz) <- U64.logor (mix64 seed1) 1uL);
   V.(a.(1sz) <- nilnil);
-  cntr := 1sz;
+  let mut cnt = 1sz;
   let mut i = 1sz;
   let mut plen = 0uL;
   while (!i `SZ.lt` n)
-  invariant exists* vi vp vc s. R.pts_to i vi ** R.pts_to plen vp ** R.pts_to cntr vc ** V.pts_to a s **
+  invariant exists* vi vp vc s. R.pts_to i vi ** R.pts_to plen vp ** R.pts_to cnt vc ** V.pts_to a s **
             pure (1 <= SZ.v vi /\ SZ.v vi <= SZ.v n /\ 1 <= SZ.v vc /\ SZ.v vc <= SZ.v vi /\ Seq.length s == 2 * SZ.v n)
   decreases (SZ.v n - SZ.v !i)
   {
     let vi = !i;
+    let vc = !cnt;
     let nk = U64.logor (mix64 (U64.add_mod seed1 (s2u vi))) 1uL;
-    let v = insert_one a n cntr nk;
-    plen := U64.add_mod !plen (s2u v);
+    let r = insert_one a n vc nk;
+    SZ.fits_lte (SZ.v vc + 1) (2 * SZ.v n + 2);
+    plen := U64.add_mod !plen (s2u (SZ.div r 2sz));
+    cnt := SZ.add vc (SZ.rem r 2sz);
     SZ.fits_lte (SZ.v vi + 1) (2 * SZ.v n + 2);
     i := SZ.add vi 1sz
   };
+  cntr := !cnt;
   !plen
 }
 

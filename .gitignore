@@ -11,3 +11,4 @@ impls/zig/bench
 impls/zig/bench.o
 impls/zig/.zig-cache/
 results/.ballast
+results/.genstream

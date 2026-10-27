@@ -281,6 +281,8 @@ fn tail_blocks (h w k: V.vec U32.t) (n: SZ.t) (#sh #sw #sk: Ghost.erased (Seq.se
   ensures exists* sh' sw'. V.pts_to h sh' ** V.pts_to w sw' ** pure (Seq.length sh' == 8 /\ Seq.length sw' == 64)
 {
   assert_norm (pow2 64 == 18446744073709551616);
+  V.pts_to_len h;
+  V.pts_to_len w;
   let tail = V.alloc 0uy 128sz;
   V.pts_to_len tail;
   let t = SZ.rem n 64sz;

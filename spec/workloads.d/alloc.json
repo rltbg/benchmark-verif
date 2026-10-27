@@ -1,0 +1,2 @@
+{"name": "alloc", "unit": "allocations", "desc": "allocation en masse : blocs de 8..256 o, churn + fenêtre vivante FIFO",
+ "work_items": "n", "ideal_bytes": "min(max(n // 64, 1), 2**25) * 140 + 4096"}

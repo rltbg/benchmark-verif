@@ -9,7 +9,7 @@
 use crate::common::*;
 use creusot_std::prelude::*;
 
-const WMAX: usize = 1 << 25;
+const WMAX: usize = 33554432; // 2^25
 
 /// Barrière d'optimisation : le compilateur ne peut pas éliminer l'allocation du bloc (non vérifié, sans effet logique).
 #[trusted]
