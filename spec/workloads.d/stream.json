@@ -1,4 +1,1 @@
-{"name": "stream", "unit": "octets", "work_items": "n * 1048576", "ideal_bytes": "1048576 + 4096",
- "desc": "CRC-32 + tokeniseur JSON-lines sur un fichier de n Mio lu par blocs de 1 Mio (E/S disque réelles)",
- "prepare": "gcc -O2 -o results/.genstream harness/genstream.c && results/.genstream {n}",
- "drop_caches": true}
+{"name": "stream", "unit": "octets", "work_items": "n * 1048576", "ideal_bytes": "1048576 + 4096", "desc": "CRC-32 + tokeniseur JSON-lines sur un fichier de n Mio lu par blocs de 1 Mio (E/S disque r\u00e9elles)", "prepare": "find /var/tmp/bench-data -name 'stream-*.json' ! -name 'stream-{n}.json' -size +100M -delete 2>/dev/null; gcc -O2 -o results/.genstream harness/genstream.c && results/.genstream {n}", "drop_caches": true}

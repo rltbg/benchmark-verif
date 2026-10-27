@@ -231,6 +231,8 @@ def _cmd_run(a, ballast):
                                  "mem_kb": int(open("/proc/meminfo").readline().split()[1])},
                         "sizes": {w: size_of(presets[base(w)])[0] for w in wl}, "threads": {w: size_of(presets[base(w)])[1] for w in wl if size_of(presets[base(w)])[1]}}, "runs": []}
     if not impls: sys.exit("aucune implémentation construite (voir README : make all)")
+    out = Path(a.out or ROOT / "results" / f"run-{a.preset}-{time.strftime('%Y%m%d-%H%M%S')}.json")
+    out.parent.mkdir(parents=True, exist_ok=True)
     print(f"implémentations : {', '.join(impls)}", file=sys.stderr)
     smoke = load_presets()["smoke"]
     for name, spec in impls.items():
@@ -254,11 +256,10 @@ def _cmd_run(a, ballast):
                 rec = run_once(cmd, a.wrapper, a.timeout)
                 rec.update(impl=name, workload=w, n=n, threads=thr or 1, rep=r)
                 results["runs"].append(rec)
+                out.write_text(json.dumps(results))  # sauvegarde incrémentale : un crash ne perd pas les mesures déjà faites
                 print(f"{name:14s} {w:8s} n={n:<11d} #{r} {rec['status']:7s} wall={rec['wall_s']:7.2f}s "
                       f"cpu={rec['user_s']+rec['sys_s']:7.2f}s rss={rec['peak_rss_kb']/1024:8.1f}MB", file=sys.stderr)
                 if rec["status"] != "ok": break  # inutile de répéter un échec
-    out = Path(a.out or ROOT / "results" / f"run-{a.preset}-{time.strftime('%Y%m%d-%H%M%S')}.json")
-    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(results))
     print(out)
     report(out)

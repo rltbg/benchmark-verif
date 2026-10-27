@@ -1,5 +1,5 @@
 {
- "_doc": "Tailles par workload. 'smoke' valide les checksums et mesure le coût de démarrage ; 'tiny' est la seule taille que l'extraction OCaml de F* (très lente) termine en un temps raisonnable ; 'large'/'xlarge' sont les vrais tests de charge (plusieurs centaines de Mo à plusieurs Go).",
+ "_doc": "Tailles par workload. 'smoke' valide les checksums et mesure le co\u00fbt de d\u00e9marrage ; 'tiny' est la seule taille que l'extraction OCaml de F* (tr\u00e8s lente) termine en un temps raisonnable ; 'large'/'xlarge' sont les vrais tests de charge (plusieurs centaines de Mo \u00e0 plusieurs Go). 'saturate' : tailles proches des limites de la machine (4 c\u0153urs, 15 Go) ; les workloads \u00e9tendus ont leurs tailles dans harness/presets.d/.",
  "smoke": {
   "sort": 10000,
   "sieve": 1000000,
@@ -41,5 +41,12 @@
   "matmul": 4096,
   "lines": 100000000,
   "hashmap": 48000000
+ },
+ "saturate": {
+  "sort": 400000000,
+  "sieve": 8000000000,
+  "matmul": 7000,
+  "lines": 300000000,
+  "hashmap": 60000000
  }
 }

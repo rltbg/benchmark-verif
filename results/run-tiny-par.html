@@ -1,0 +1,56 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Benchmark programmation vérifiée</title><style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mut:#6b6b66;--line:#e2e1da;--accent:#2f6fdb;--bar:#cfdcf5;--bad:#c0392b;--good:#1e8449;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#161715;--fg:#ecece8;--mut:#9a9a93;--line:#2c2d2a;--accent:#6ea2ff;--bar:#27395c;--bad:#ff7b6b;--good:#5fd08a;--card:#1d1e1c}}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif;margin:0;padding:24px 16px}main{max-width:1180px;margin:auto}
+h1{font-size:24px}h2{font-size:18px;margin-top:36px}p.meta{color:var(--mut)}
+table{border-collapse:collapse;width:100%;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:13.5px}
+th,td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}
+th{color:var(--mut);font-weight:600;font-size:12px}.wrap{overflow-x:auto}
+td.bar{position:relative}td.bar span{position:relative;z-index:1}td.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--bar);z-index:0}
+.bad{color:var(--bad);font-weight:600}.good{color:var(--good)}.spark{vertical-align:middle}
+</style></head><body><main><h1>Benchmark : programmation vérifiée (F*, Creusot) vs références</h1>
+<p class="meta">preset <b>tiny</b> · 2026-10-27 05:11:13 · 4 CPU · 16091 Mo RAM · médiane de 3 exécutions</p>
+<h2>parmatmul — n = 256</h2><div class="wrap"><table><tr><th>implémentation</th><th>débit (mult-add/s)</th><th>temps</th><th>CPU user+sys</th><th>pic RAM</th><th>RAM/idéal</th><th>courbe RAM</th><th>fautes page</th><th>E/S blocs</th><th>checksum</th></tr>
+<tr><td>F* (Pulse) → C</td><td class="bar"><i style="width:100%"></i><span>11.43 G/s</span></td><td>0.001 s</td><td class="bar"><i style="width:6%"></i><span>0.01 s</span></td><td class="bar"><i style="width:9%"></i><span>2 Mo</span></td><td>×3.31</td><td></td><td>297/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>Rust + Creusot</td><td class="bar"><i style="width:74%"></i><span>8.40 G/s</span></td><td>0.002 s</td><td class="bar"><i style="width:7%"></i><span>0.01 s</span></td><td class="bar"><i style="width:9%"></i><span>2 Mo</span></td><td>×3.30</td><td></td><td>315/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>Zig 0.17 (à la main)</td><td class="bar"><i style="width:71%"></i><span>8.10 G/s</span></td><td>0.002 s</td><td class="bar"><i style="width:6%"></i><span>0.01 s</span></td><td class="bar"><i style="width:13%"></i><span>4 Mo</span></td><td>×4.83</td><td></td><td>555/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>Rust (sans Creusot)</td><td class="bar"><i style="width:61%"></i><span>7.01 G/s</span></td><td>0.002 s</td><td class="bar"><i style="width:9%"></i><span>0.01 s</span></td><td class="bar"><i style="width:9%"></i><span>2 Mo</span></td><td>×3.30</td><td></td><td>374/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>C natif (à la main)</td><td class="bar"><i style="width:54%"></i><span>6.14 G/s</span></td><td>0.003 s</td><td class="bar"><i style="width:10%"></i><span>0.01 s</span></td><td class="bar"><i style="width:8%"></i><span>2 Mo</span></td><td>×2.96</td><td></td><td>361/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>F* (Pulse) → F#</td><td class="bar"><i style="width:10%"></i><span>1.16 G/s</span></td><td>0.014 s</td><td class="bar"><i style="width:100%"></i><span>0.09 s</span></td><td class="bar"><i style="width:100%"></i><span>29 Mo</span></td><td>×38.33</td><td><svg class="spark" viewBox="0 0 160 34" width="160" height="34"><polyline points="41.0,15.3 80.0,5.7 121.0,3.2 160.0,2.0" fill="none" stroke="var(--accent)" stroke-width="1.5"/></svg></td><td>2119/0</td><td>16/8</td><td class="good">✓</td></tr>
+</table></div>
+<h2>parsha — n = 25 600 000</h2><div class="wrap"><table><tr><th>implémentation</th><th>débit (octets/s)</th><th>temps</th><th>CPU user+sys</th><th>pic RAM</th><th>RAM/idéal</th><th>courbe RAM</th><th>fautes page</th><th>E/S blocs</th><th>checksum</th></tr>
+<tr><td>C natif (à la main)</td><td class="bar"><i style="width:100%"></i><span>843.59 M/s</span></td><td>0.030 s</td><td class="bar"><i style="width:14%"></i><span>0.11 s</span></td><td class="bar"><i style="width:6%"></i><span>2 Mo</span></td><td>×0.89</td><td></td><td>101/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>F* (Pulse) → C</td><td class="bar"><i style="width:98%"></i><span>826.78 M/s</span></td><td>0.031 s</td><td class="bar"><i style="width:14%"></i><span>0.12 s</span></td><td class="bar"><i style="width:6%"></i><span>2 Mo</span></td><td>×0.91</td><td></td><td>106/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>Rust (sans Creusot)</td><td class="bar"><i style="width:68%"></i><span>575.29 M/s</span></td><td>0.044 s</td><td class="bar"><i style="width:20%"></i><span>0.17 s</span></td><td class="bar"><i style="width:7%"></i><span>2 Mo</span></td><td>×1.05</td><td><svg class="spark" viewBox="0 0 160 34" width="160" height="34"><polyline points="80.0,2.0 160.0,2.0" fill="none" stroke="var(--accent)" stroke-width="1.5"/></svg></td><td>115/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>Zig 0.17 (à la main)</td><td class="bar"><i style="width:57%"></i><span>482.81 M/s</span></td><td>0.053 s</td><td class="bar"><i style="width:24%"></i><span>0.20 s</span></td><td class="bar"><i style="width:10%"></i><span>3 Mo</span></td><td>×1.47</td><td><svg class="spark" viewBox="0 0 160 34" width="160" height="34"><polyline points="87.3,2.0 160.0,2.0" fill="none" stroke="var(--accent)" stroke-width="1.5"/></svg></td><td>360/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>Rust + Creusot</td><td class="bar"><i style="width:52%"></i><span>441.13 M/s</span></td><td>0.058 s</td><td class="bar"><i style="width:27%"></i><span>0.22 s</span></td><td class="bar"><i style="width:8%"></i><span>2 Mo</span></td><td>×1.09</td><td><svg class="spark" viewBox="0 0 160 34" width="160" height="34"><polyline points="85.6,2.0 160.0,2.0" fill="none" stroke="var(--accent)" stroke-width="1.5"/></svg></td><td>117/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>F* (Pulse) → F#</td><td class="bar"><i style="width:15%"></i><span>125.19 M/s</span></td><td>0.204 s</td><td class="bar"><i style="width:100%"></i><span>0.84 s</span></td><td class="bar"><i style="width:100%"></i><span>28 Mo</span></td><td>×14.03</td><td><svg class="spark" viewBox="0 0 160 34" width="160" height="34"><polyline points="12.5,12.9 24.4,4.9 36.9,4.9 48.8,4.9 60.7,4.9 72.6,4.9 87.4,4.9 99.3,4.9 111.2,4.9 123.7,4.9 135.6,4.8 147.5,2.8 160.0,2.0" fill="none" stroke="var(--accent)" stroke-width="1.5"/></svg></td><td>1963/0</td><td>0/0</td><td class="good">✓</td></tr>
+</table></div>
+<h2>parsort — n = 500 000</h2><div class="wrap"><table><tr><th>implémentation</th><th>débit (éléments/s)</th><th>temps</th><th>CPU user+sys</th><th>pic RAM</th><th>RAM/idéal</th><th>courbe RAM</th><th>fautes page</th><th>E/S blocs</th><th>checksum</th></tr>
+<tr><td>C natif (à la main)</td><td class="bar"><i style="width:100%"></i><span>22.45 M/s</span></td><td>0.022 s</td><td class="bar"><i style="width:38%"></i><span>0.07 s</span></td><td class="bar"><i style="width:18%"></i><span>6 Mo</span></td><td>×1.50</td><td></td><td>1080/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>Zig 0.17 (à la main)</td><td class="bar"><i style="width:97%"></i><span>21.72 M/s</span></td><td>0.023 s</td><td class="bar"><i style="width:34%"></i><span>0.06 s</span></td><td class="bar"><i style="width:21%"></i><span>7 Mo</span></td><td>×1.74</td><td></td><td>1338/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>Rust + Creusot</td><td class="bar"><i style="width:96%"></i><span>21.47 M/s</span></td><td>0.023 s</td><td class="bar"><i style="width:39%"></i><span>0.07 s</span></td><td class="bar"><i style="width:19%"></i><span>6 Mo</span></td><td>×1.58</td><td></td><td>1095/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>Rust (sans Creusot)</td><td class="bar"><i style="width:90%"></i><span>20.17 M/s</span></td><td>0.025 s</td><td class="bar"><i style="width:40%"></i><span>0.07 s</span></td><td class="bar"><i style="width:19%"></i><span>6 Mo</span></td><td>×1.57</td><td></td><td>1092/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>F* (Pulse) → C</td><td class="bar"><i style="width:79%"></i><span>17.71 M/s</span></td><td>0.028 s</td><td class="bar"><i style="width:42%"></i><span>0.08 s</span></td><td class="bar"><i style="width:18%"></i><span>6 Mo</span></td><td>×1.50</td><td></td><td>1080/0</td><td>0/0</td><td class="good">✓</td></tr>
+<tr><td>F* (Pulse) → F#</td><td class="bar"><i style="width:48%"></i><span>10.70 M/s</span></td><td>0.047 s</td><td class="bar"><i style="width:100%"></i><span>0.18 s</span></td><td class="bar"><i style="width:100%"></i><span>32 Mo</span></td><td>×8.36</td><td><svg class="spark" viewBox="0 0 160 34" width="160" height="34"><polyline points="32.9,12.7 64.3,4.9 97.3,4.8 128.6,2.9 160.0,2.0" fill="none" stroke="var(--accent)" stroke-width="1.5"/></svg></td><td>2919/0</td><td>0/0</td><td class="good">✓</td></tr>
+</table></div>
+<h2>Synthèse (moyenne géométrique ; 1.00 = meilleur)</h2><div class="wrap"><table><tr><th>implémentation</th><th>temps</th><th>CPU</th><th>pic RAM</th></tr>
+<tr><td>F* (Pulse) → C</td><td>×1.09</td><td>×1.09</td><td>×1.04</td></tr>
+<tr><td>C natif (à la main)</td><td>×1.23</td><td>×1.25</td><td>×1.00</td></tr>
+<tr><td>Zig 0.17 (à la main)</td><td>×1.37</td><td>×1.21</td><td>×1.46</td></tr>
+<tr><td>Rust (sans Creusot)</td><td>×1.39</td><td>×1.43</td><td>×1.11</td></tr>
+<tr><td>Rust + Creusot</td><td>×1.40</td><td>×1.40</td><td>×1.13</td></tr>
+<tr><td>F* (Pulse) → F#</td><td>×5.18</td><td>×7.31</td><td>×10.42</td></tr>
+</table></div>
+<h2>Empreinte disque et coût de construction</h2><div class="wrap"><table><tr><th>implémentation</th><th>exécutable</th><th>runtime requis</th><th>compilation</th><th>vérification</th></tr>
+<tr><td>Rust + Creusot</td><td>0.46 Mo</td><td>0.0 Mo</td><td>0.2 s</td><td>37.6 s</td></tr>
+<tr><td>F* (Pulse) → C</td><td>0.05 Mo</td><td>0.0 Mo</td><td>3.5 s</td><td>428.5 s</td></tr>
+<tr><td>F* (Pulse) → OCaml (runtime livré)</td><td>5.83 Mo</td><td>0.0 Mo</td><td>5.3 s</td><td>428.5 s</td></tr>
+<tr><td>F* (Pulse) → F#</td><td>0.09 Mo</td><td>72.4 Mo</td><td>9.6 s</td><td>428.5 s</td></tr>
+<tr><td>F* (Pulse) → OCaml (conversions d&#x27;entiers corrigées)</td><td>5.74 Mo</td><td>0.0 Mo</td><td>7.9 s</td><td>428.5 s</td></tr>
+<tr><td>Rust (sans Creusot)</td><td>0.46 Mo</td><td>0.0 Mo</td><td>0.1 s</td><td>—</td></tr>
+<tr><td>C natif (à la main)</td><td>0.04 Mo</td><td>0.0 Mo</td><td>0.8 s</td><td>—</td></tr>
+<tr><td>Zig 0.17 (à la main)</td><td>3.71 Mo</td><td>0.0 Mo</td><td>18.1 s</td><td>—</td></tr>
+</table></div>
+</main></body></html>
