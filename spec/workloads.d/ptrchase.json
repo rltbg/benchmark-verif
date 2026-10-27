@@ -1,0 +1,1 @@
+{"name": "ptrchase", "unit": "accès dépendants", "work_items": "7.5*n", "ideal_bytes": "20*n", "desc": "BST non équilibré (arène par indices) + recherches + chasse de pointeurs (cycle de Sattolo) : latence mémoire"}

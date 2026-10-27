@@ -201,11 +201,15 @@ fn run_hashmap(n: usize) -> u64 {
     ck
 }
 
+mod w_sha256;
+mod w_bfs;
 // @@MODS@@ (une ligne `mod w_<nom>;` ; chaque module expose `pub fn run(n: usize, threads: usize) -> u64`)
 
 fn extended(w: &str, n: usize, threads: usize) -> Option<u64> {
     let _ = (n, threads);
     match w {
+        "sha256" => Some(w_sha256::run(n, threads)),
+        "bfs" => Some(w_bfs::run(n, threads)),
         // @@DISPATCH@@
         _ => None,
     }

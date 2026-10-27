@@ -13,7 +13,8 @@
 int main(int argc, char **argv) {
     if (argc < 3) return 2;
     pid_t pid = fork();
-    if (pid == 0) { execvp(argv[2], argv + 2); perror("execvp"); _exit(127); }
+    if (pid == 0) { { FILE *oa = fopen("/proc/self/oom_score_adj", "w"); if (oa) { fputs("500", oa); fclose(oa); } }
+        execvp(argv[2], argv + 2); perror("execvp"); _exit(127); }
     int status; struct rusage ru;
     wait4(pid, &status, 0, &ru);
     FILE *f = fopen(argv[1], "w");

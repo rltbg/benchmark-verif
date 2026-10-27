@@ -166,6 +166,10 @@ int main(int argc, char **argv) {
     else if (!strcmp(argv[1], "matmul")) ck = run_matmul(n);
     else if (!strcmp(argv[1], "lines")) ck = run_lines(n);
     else if (!strcmp(argv[1], "hashmap")) ck = run_hashmap(n);
+    else if (!strcmp(argv[1], "bfs")) ck = run_bfs(n, threads);
+    else if (!strcmp(argv[1], "sha256")) ck = run_sha256(n, threads);
+    else if (!strcmp(argv[1], "ntt")) ck = run_ntt(n, threads);
+    else if (!strcmp(argv[1], "ptrchase")) ck = run_ptrchase(n, threads);
     /* @@DISPATCH@@ */
     else { fprintf(stderr, "workload inconnu\n"); return 2; }
     clock_gettime(CLOCK_MONOTONIC, &t1);

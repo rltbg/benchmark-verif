@@ -241,11 +241,15 @@ fn runHashmap(n: usize) u64 {
     return ck;
 }
 
+const w_bfs = @import("w_bfs.zig");
+const w_sha256 = @import("w_sha256.zig");
 // @@IMPORTS@@ (une ligne `const w_<nom> = @import("w_<nom>.zig");` ; chaque module exporte `pub fn run(n: usize, threads: usize) u64`)
 
 /// Workloads étendus : `// @@DISPATCH@@` — ajouter `if (std.mem.eql(u8, w, "<nom>")) return w_<nom>.run(n, threads);` sous l'ancre.
 fn extended(w: []const u8, n: usize, threads: usize) ?u64 {
     _ = .{ w, n, threads };
+    if (std.mem.eql(u8, w, "bfs")) return w_bfs.run(n, threads);
+    if (std.mem.eql(u8, w, "sha256")) return w_sha256.run(n, threads);
     // @@DISPATCH@@
     return null;
 }

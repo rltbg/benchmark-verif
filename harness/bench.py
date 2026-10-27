@@ -166,13 +166,34 @@ def run_once(cmd, wrapper, timeout):
     return rec
 
 
+def start_ballast(spec):
+    """--ballast 9G : lest mlock pour réduire la RAM disponible (mode dépassement de RAM, voir scripts/swap.sh)."""
+    mult = {"K": 2**10, "M": 2**20, "G": 2**30}
+    n = int(float(spec[:-1]) * mult[spec[-1].upper()]) if spec[-1].upper() in mult else int(spec)
+    exe = ROOT / "results" / ".ballast"
+    src = Path(__file__).parent / "ballast.c"
+    if not exe.exists() or exe.stat().st_mtime < src.stat().st_mtime:
+        subprocess.run(["gcc", "-O2", "-o", str(exe), str(src)], check=True)
+    p = subprocess.Popen([str(exe), str(n)], stdout=subprocess.PIPE, text=True)
+    if p.stdout.readline().strip() != "READY": sys.exit("lest mémoire impossible")
+    return p
+
+
 def cmd_run(a):
+    ballast = start_ballast(a.ballast) if a.ballast else None
+    try:
+        _cmd_run(a, ballast)
+    finally:
+        if ballast: ballast.terminate()
+
+
+def _cmd_run(a, ballast):
     impls = available(load("impls.json"))
     if a.impls: impls = {k: v for k, v in impls.items() if k in a.impls.split(",")}
     presets = load_presets()[a.preset]
     wl = a.workloads.split(",") if a.workloads else [w for w in WORKLOADS if w in presets]
     results = {"meta": {"preset": a.preset, "repeat": a.repeat, "wrapper": a.wrapper, "date": time.strftime("%F %T"),
-                        "host": {"cpus": os.cpu_count(), "uname": " ".join(os.uname()[:3]),
+                        "ballast": a.ballast, "host": {"cpus": os.cpu_count(), "uname": " ".join(os.uname()[:3]),
                                  "mem_kb": int(open("/proc/meminfo").readline().split()[1])},
                         "sizes": {w: size_of(presets[w])[0] for w in wl}, "threads": {w: size_of(presets[w])[1] for w in wl if size_of(presets[w])[1]}}, "runs": []}
     if not impls: sys.exit("aucune implémentation construite (voir README : make all)")
@@ -394,6 +415,7 @@ def main():
     r.add_argument("--preset", default="medium"); r.add_argument("--impls"); r.add_argument("--workloads")
     r.add_argument("--repeat", type=int, default=3); r.add_argument("--timeout", type=int, default=900)
     r.add_argument("--wrapper", default=""); r.add_argument("--out")
+    r.add_argument("--ballast", default="", help="lest mémoire verrouillé (ex. 9G) pour forcer le swap (voir scripts/swap.sh)")
     rp = sp.add_parser("report"); rp.add_argument("file")
     a = ap.parse_args()
     if a.cmd == "list":
