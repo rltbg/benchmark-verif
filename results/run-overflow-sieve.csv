@@ -1,0 +1,3 @@
+workload,impl,n,status,internal_s,wall_s,cpu_s,cpu_pct,rss_mb,rss_ratio,throughput,minflt,majflt,inblock,oublock,checksum,agrees
+sieve,rust-creusot,8000000000,timeout,,,,,,,,,,,,,
+lines,rust-creusot,300000000,ok,52.326867763,52.34229012400101,41.706028,79.67941009305618,2380.0546875,0.5525329465353024,5733192.389018326,1906761,127346,8126784,0,d97a82bf8cdf3a75,True

@@ -1,0 +1,8 @@
+workload,impl,n,status,internal_s,wall_s,cpu_s,cpu_pct,rss_mb,rss_ratio,throughput,minflt,majflt,inblock,oublock,checksum,agrees
+alloc,fstar-ocaml-fast,20000000,timeout,,,,,,,,,,,,,
+bfs,fstar-ocaml-fast,4000000,timeout,,,,,,,,,,,,,
+ntt,fstar-ocaml-fast,8388608,timeout,,,,,,,,,,,,,
+ptrchase,fstar-ocaml-fast,1500000,ok,64.656868934,64.67526197400002,63.730602999999995,98.53938129484533,143.95703125,5.031662933333333,173995.43444461713,35927,3,1872,0,33f38d2f70246c81,True
+sha256,fstar-ocaml-fast,200000000,timeout,,,,,,,,,,,,,
+stream,fstar-ocaml-fast,1024,timeout,,,,,,,,,,,,,
+strsort,fstar-ocaml-fast,2000000,ok,123.645596027,123.67379417699703,122.32724499999999,98.91120897037418,417.06640625,6.626148848484848,16175.262720746381,105868,0,0,0,2bd863740310cc65,True

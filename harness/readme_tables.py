@@ -13,7 +13,7 @@ SHORT = {"c-native": "C natif", "zig": "Zig 0.17", "rust-plain": "Rust", "rust-c
 
 def merged(preset):
     """Fusionne run-<preset>.json et les campagnes OCaml run-<preset>-<impl>.json."""
-    files = [R / f"run-{preset}.json"] + [R / f"run-{preset}-{i}.json" for i in ("ext", "par", "fstar-ocaml", "fstar-ocaml-fast", "zig")]
+    files = [R / f"run-{preset}.json"] + [R / f"run-{preset}-{i}.json" for i in ("ext", "par", "fstar-ocaml", "fstar-ocaml-fast", "fstar-ocaml-ext", "fstar-ocaml-fast-ext", "fstar-ocaml-par", "fstar-ocaml-fast-par", "zig")]
     data = None
     for f in files:
         if not f.exists(): continue

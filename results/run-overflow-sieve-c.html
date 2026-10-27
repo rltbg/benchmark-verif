@@ -1,0 +1,27 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Benchmark programmation vérifiée</title><style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mut:#6b6b66;--line:#e2e1da;--accent:#2f6fdb;--bar:#cfdcf5;--bad:#c0392b;--good:#1e8449;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#161715;--fg:#ecece8;--mut:#9a9a93;--line:#2c2d2a;--accent:#6ea2ff;--bar:#27395c;--bad:#ff7b6b;--good:#5fd08a;--card:#1d1e1c}}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif;margin:0;padding:24px 16px}main{max-width:1180px;margin:auto}
+h1{font-size:24px}h2{font-size:18px;margin-top:36px}p.meta{color:var(--mut)}
+table{border-collapse:collapse;width:100%;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:13.5px}
+th,td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}
+th{color:var(--mut);font-weight:600;font-size:12px}.wrap{overflow-x:auto}
+td.bar{position:relative}td.bar span{position:relative;z-index:1}td.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--bar);z-index:0}
+.bad{color:var(--bad);font-weight:600}.good{color:var(--good)}.spark{vertical-align:middle}
+</style></head><body><main><h1>Benchmark : programmation vérifiée (F*, Creusot) vs références</h1>
+<p class="meta">preset <b>overflow</b> · 2026-10-27 15:33:49 · 4 CPU · 16091 Mo RAM · médiane de 1 exécutions</p>
+<h2>sieve — n = 8 000 000 000</h2><div class="wrap"><table><tr><th>implémentation</th><th>débit (entiers/s)</th><th>temps</th><th>CPU user+sys</th><th>pic RAM</th><th>RAM/idéal</th><th>courbe RAM</th><th>fautes page</th><th>E/S blocs</th><th>checksum</th></tr>
+<tr><td>C natif (à la main)</td><td colspan="9" class="bad">timeout </td></tr>
+</table></div>
+<h2>Empreinte disque et coût de construction</h2><div class="wrap"><table><tr><th>implémentation</th><th>exécutable</th><th>runtime requis</th><th>compilation</th><th>vérification</th></tr>
+<tr><td>Rust + Creusot</td><td>0.46 Mo</td><td>0.0 Mo</td><td>0.2 s</td><td>37.6 s</td></tr>
+<tr><td>F* (Pulse) → C</td><td>0.05 Mo</td><td>0.0 Mo</td><td>3.5 s</td><td>428.5 s</td></tr>
+<tr><td>F* (Pulse) → OCaml (runtime livré)</td><td>5.83 Mo</td><td>0.0 Mo</td><td>5.3 s</td><td>428.5 s</td></tr>
+<tr><td>F* (Pulse) → F#</td><td>0.09 Mo</td><td>72.4 Mo</td><td>9.6 s</td><td>428.5 s</td></tr>
+<tr><td>F* (Pulse) → OCaml (conversions d&#x27;entiers corrigées)</td><td>5.74 Mo</td><td>0.0 Mo</td><td>7.9 s</td><td>428.5 s</td></tr>
+<tr><td>Rust (sans Creusot)</td><td>0.46 Mo</td><td>0.0 Mo</td><td>0.1 s</td><td>—</td></tr>
+<tr><td>C natif (à la main)</td><td>0.04 Mo</td><td>0.0 Mo</td><td>0.8 s</td><td>—</td></tr>
+<tr><td>Zig 0.17 (à la main)</td><td>3.71 Mo</td><td>0.0 Mo</td><td>18.1 s</td><td>—</td></tr>
+</table></div>
+</main></body></html>
