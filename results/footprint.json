@@ -1,47 +1,47 @@
 {
  "rust-creusot": {
-  "build_s": 8.886509546,
-  "binary_kb": 394.0,
+  "build_s": 0.081954049,
+  "binary_kb": 396.0,
   "runtime_kb": 0.0,
   "verify_s": 16.268446701
  },
  "fstar-c": {
   "verify_s": 236.489977381,
-  "build_s": 2.354601971,
-  "binary_kb": 20.0,
+  "build_s": 4.030953677,
+  "binary_kb": 24.0,
   "runtime_kb": 0.0
  },
  "fstar-ocaml": {
   "verify_s": 236.489977381,
-  "build_s": 3.137422884,
+  "build_s": 10.117097778,
   "binary_kb": 5077.0,
   "runtime_kb": 0.0
  },
  "fstar-fsharp": {
   "verify_s": 236.489977381,
-  "build_s": 7.201164232,
+  "build_s": 22.621594746,
   "binary_kb": 50.0,
   "runtime_kb": 74188.0
  },
  "fstar-ocaml-fast": {
-  "build_s": 4.450698543,
+  "build_s": 11.483685417,
   "verify_s": 236.489977381,
   "binary_kb": 5059.0,
   "runtime_kb": 0.0
  },
  "rust-plain": {
-  "build_s": 4.054050036,
-  "binary_kb": 394.0,
+  "build_s": 0.069145269,
+  "binary_kb": 395.0,
   "runtime_kb": 0.0
  },
  "c-native": {
-  "build_s": 0.219763367,
+  "build_s": 0.260679321,
   "binary_kb": 20.0,
   "runtime_kb": 0.0
  },
  "zig": {
-  "build_s": 0.331815064,
-  "binary_kb": 66.0,
+  "build_s": 0.34565849,
+  "binary_kb": 67.0,
   "runtime_kb": 0.0
  }
 }

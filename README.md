@@ -142,75 +142,82 @@ scripts/                 installation et construction ; results/ : sorties
 * Limites : une VM de 4 cœurs, pas d'épinglage ni de gouverneur CPU figé ; les comparaisons relatives sont fiables à
   quelques pourcents, pas les valeurs absolues. Aucun workload ne lit de fichier : le « disque » est mesuré par les
   compteurs d'E/S du noyau (nuls) et par la taille des binaires/runtimes.
-* Équité des compilateurs : `gcc -O3` (sans `-march=native`) pour le C extrait et le C natif ; Zig `-O ReleaseFast` (cible x86_64 générique, sans contrôles de bornes) ; `rustc -C opt-level=3 + LTO` ;
-  `dotnet` Release (TieredPGO) ; `ocamlopt -inline 200 -unsafe` (sans flambda).
+* **Réglages pour la performance maximale** (appliqués à *toutes* les colonnes natives, par `scripts/build-all.sh` et `fstar/build.sh`) :
+  `gcc -O3 -march=native` (C natif et F*→C) ; `rustc -C opt-level=3 -C target-cpu=native` + LTO, `codegen-units=1`, `panic=abort`
+  (`.cargo/config.toml` des deux crates) ; Zig `-O ReleaseFast -mcpu=native` ; .NET 10 Release avec `TieredPGO` et
+  `TieredCompilationQuickJitForLoops=false` (les boucles sont compilées en pleine optimisation d'emblée : sans cela `matmul`
+  était ~30 % plus lent, mesuré) ; OCaml `ocamlopt -inline 200 -unsafe` (sans flambda : ±20 %, pas de colonne dédiée). Le CPU de la
+  machine a AVX2 et AVX-512 : les binaires natifs ne sont **pas portables** vers une machine plus ancienne. Toutes les colonnes natives
+  sont épinglées sur un cœur (`taskset -c 1`) pour éviter les migrations. Le premier jeu de mesures utilisait une cible x86-64
+  générique ; passer en `-march=native` a, par exemple, divisé par ~1,8 le temps de `matmul` en C et en Rust.
+* **Zig, `matmul`** : la version idiomatique (`for (crow, brow) |*c, b| c.* += a*b`) n'était pas auto-vectorisée par LLVM (2,3 G/s à `large`,
+  contre 6 en C) ; j'ai écrit la boucle interne avec `@Vector(16, u32)` et `noalias` (4,9 G/s). C'est le seul endroit où j'ai adapté le code à un
+  compilateur ; le checksum est inchangé.
 
 ## Résultats
 
-Machine : VM de 4 cœurs, 16 Go. Chaque cellule : débit · durée interne · pic RAM. `tiny`, `small`, `medium`, `large` : médiane de 3
-exécutions (sauf OCaml : 1 exécution, timeout 600 s, épinglé sur un cœur avec `--wrapper "taskset -c N"` ; les deux OCaml tournaient en parallèle) ;
-`xlarge` : 1 exécution (timeout 1800 s). **490 exécutions, 479 réussies, 11 sans résultat (timeouts OCaml et un échec F#), aucun
+Machine : VM de 4 cœurs, 16 Go. Chaque cellule : débit · durée interne · pic RAM. Colonnes natives : médiane de 3 exécutions à toutes les tailles, épinglées sur un cœur (`--wrapper "taskset -c 1"`), binaires compilés pour le CPU de la machine (voir « Réglages pour la performance maximale »). OCaml : 1 exécution, timeout 600 s, épinglé sur un autre cœur ; les deux OCaml tournaient en parallèle ; `xlarge` : timeout 1800 s. **490 exécutions, 479 réussies, 11 sans résultat (timeouts OCaml et un échec F#), aucun
 checksum divergent** entre colonnes ni avec la table de référence. Rapports complets : `results/run-*.{md,html,csv}`.
 
-### `xlarge`
+#### `xlarge`
 
 | workload (n) | C natif | Zig 0.17 | Rust | Rust + Creusot | F*→C | F*→F# |
 |---|--:|--:|--:|--:|--:|--:|
-| sort (100 000 000) | 6.20 M/s · 16.12 s · 764 Mo | 7.12 M/s · 14.04 s · 764 Mo | 6.00 M/s · 16.66 s · 765 Mo | 5.74 M/s · 17.41 s · 765 Mo | 6.64 M/s · 15.06 s · 764 Mo | 4.32 M/s · 23.14 s · 812 Mo |
-| sieve (3 000 000 000) | 48.79 M/s · 61.48 s · 2862 Mo | 49.40 M/s · 60.73 s · 2863 Mo | 49.86 M/s · 60.17 s · 2863 Mo | 42.10 M/s · 71.26 s · 2863 Mo | 50.62 M/s · 59.26 s · 2862 Mo | **échec** |
-| matmul (4 096) | 2.50 G/s · 27.53 s · 193 Mo | 1.14 G/s · 60.40 s · 194 Mo | 1.59 G/s · 43.14 s · 194 Mo | 2.87 G/s · 23.94 s · 194 Mo | 1.57 G/s · 43.90 s · 193 Mo | 513.56 M/s · 133.81 s · 351 Mo |
-| lines (100 000 000) | 14.00 M/s · 7.14 s · 1336 Mo | 15.40 M/s · 6.49 s · 1336 Mo | 16.07 M/s · 6.22 s · 1337 Mo | 14.16 M/s · 7.06 s · 1337 Mo | 18.31 M/s · 5.46 s · 1336 Mo | 7.96 M/s · 12.56 s · 1609 Mo |
-| hashmap (48 000 000) | 6.74 M/s · 21.38 s · 1025 Mo | 5.71 M/s · 25.22 s · 1026 Mo | 6.11 M/s · 23.58 s · 1026 Mo | 6.06 M/s · 23.76 s · 1026 Mo | 5.23 M/s · 27.53 s · 1026 Mo | 3.83 M/s · 37.56 s · 1187 Mo |
+| sort (100 000 000) | 5.40 M/s · 18.54 s · 764 Mo | 5.64 M/s · 17.72 s · 764 Mo | 4.42 M/s · 22.61 s · 765 Mo | 4.47 M/s · 22.35 s · 765 Mo | 5.36 M/s · 18.64 s · 764 Mo | 3.58 M/s · 27.90 s · 792 Mo |
+| sieve (3 000 000 000) | 51.30 M/s · 58.48 s · 2862 Mo | 53.38 M/s · 56.20 s · 2863 Mo | 49.32 M/s · 60.83 s · 2863 Mo | 54.21 M/s · 55.34 s · 2863 Mo | 56.02 M/s · 53.55 s · 2862 Mo | **échec** |
+| matmul (4 096) | 5.94 G/s · 11.57 s · 193 Mo | 5.09 G/s · 13.50 s · 194 Mo | 4.91 G/s · 13.99 s · 194 Mo | 5.54 G/s · 12.41 s · 194 Mo | 5.13 G/s · 13.40 s · 193 Mo | 877.06 M/s · 78.35 s · 221 Mo |
+| lines (100 000 000) | 10.32 M/s · 9.69 s · 1336 Mo | 9.01 M/s · 11.10 s · 1336 Mo | 10.36 M/s · 9.65 s · 1337 Mo | 9.47 M/s · 10.56 s · 1337 Mo | 11.58 M/s · 8.64 s · 1336 Mo | 7.12 M/s · 14.05 s · 1476 Mo |
+| hashmap (48 000 000) | 6.07 M/s · 23.72 s · 1025 Mo | 5.86 M/s · 24.58 s · 1026 Mo | 5.97 M/s · 24.14 s · 1026 Mo | 6.63 M/s · 21.73 s · 1026 Mo | 5.86 M/s · 24.56 s · 1026 Mo | 4.38 M/s · 32.87 s · 1053 Mo |
 
-Moyenne géométrique du temps relatif au meilleur : C natif ×1.12 (5/5), Rust + Creusot ×1.16 (5/5), F*→C ×1.20 (5/5), Rust ×1.22 (5/5), Zig 0.17 ×1.29 (5/5), F*→F# ×2.47 (4/5).
+Moyenne géométrique du temps relatif au meilleur : F*→C ×1.07 (5/5), C natif ×1.07 (5/5), Rust + Creusot ×1.11 (5/5), Zig 0.17 ×1.12 (5/5), Rust ×1.17 (5/5), F*→F# ×2.26 (4/5).
 
-### `large`
-
-| workload (n) | C natif | Zig 0.17 | Rust | Rust + Creusot | F*→C | F*→F# | F*→OCaml (corrigé) | F*→OCaml (livré) |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|
-| sort (32 000 000) | 5.98 M/s · 5.35 s · 246 Mo | 7.34 M/s · 4.36 s · 246 Mo | 6.44 M/s · 4.97 s · 246 Mo | 6.18 M/s · 5.18 s · 246 Mo | 6.91 M/s · 4.63 s · 246 Mo | 4.81 M/s · 6.66 s · 294 Mo | 68.88 k/s · 464.57 s · 1267 Mo | délai dépassé |
-| sieve (1 000 000 000) | 53.45 M/s · 18.71 s · 955 Mo | 52.67 M/s · 18.98 s · 955 Mo | 52.72 M/s · 18.97 s · 956 Mo | 51.99 M/s · 19.23 s · 956 Mo | 53.44 M/s · 18.71 s · 955 Mo | 42.82 M/s · 23.35 s · 982 Mo | 2.05 M/s · 487.39 s · 7648 Mo | délai dépassé |
-| matmul (2 500) | 3.39 G/s · 4.60 s · 73 Mo | 2.36 G/s · 6.62 s · 73 Mo | 2.41 G/s · 6.48 s · 73 Mo | 3.19 G/s · 4.89 s · 73 Mo | 3.00 G/s · 5.21 s · 73 Mo | 713.59 M/s · 21.90 s · 231 Mo | délai dépassé | délai dépassé |
-| lines (40 000 000) | 15.05 M/s · 2.66 s · 545 Mo | 13.36 M/s · 2.99 s · 545 Mo | 16.00 M/s · 2.50 s · 545 Mo | 12.36 M/s · 3.24 s · 546 Mo | 16.57 M/s · 2.41 s · 545 Mo | 7.98 M/s · 5.01 s · 751 Mo | 121.47 k/s · 329.29 s · 6469 Mo | délai dépassé |
-| hashmap (16 000 000) | 16.64 M/s · 2.89 s · 513 Mo | 15.78 M/s · 3.04 s · 514 Mo | 13.88 M/s · 3.46 s · 514 Mo | 14.19 M/s · 3.38 s · 514 Mo | 15.51 M/s · 3.10 s · 514 Mo | 5.69 M/s · 8.44 s · 675 Mo | 392.43 k/s · 122.31 s · 1259 Mo | délai dépassé |
-
-Moyenne géométrique du temps relatif au meilleur : F*→C ×1.05 (5/5), C natif ×1.06 (5/5), Zig 0.17 ×1.14 (5/5), Rust ×1.15 (5/5), Rust + Creusot ×1.15 (5/5), F*→F# ×2.23 (5/5), F*→OCaml (corrigé) ×63.29 (4/5).
-
-### `medium`
+#### `large`
 
 | workload (n) | C natif | Zig 0.17 | Rust | Rust + Creusot | F*→C | F*→F# | F*→OCaml (corrigé) | F*→OCaml (livré) |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|
-| sort (8 000 000) | 6.21 M/s · 1.29 s · 63 Mo | 8.13 M/s · 0.98 s · 63 Mo | 6.60 M/s · 1.21 s · 63 Mo | 6.37 M/s · 1.26 s · 63 Mo | 7.40 M/s · 1.08 s · 62 Mo | 4.65 M/s · 1.72 s · 109 Mo | 85.29 k/s · 93.79 s · 322 Mo | délai dépassé |
-| sieve (200 000 000) | 60.12 M/s · 3.33 s · 192 Mo | 60.00 M/s · 3.33 s · 192 Mo | 60.49 M/s · 3.31 s · 193 Mo | 59.55 M/s · 3.36 s · 193 Mo | 62.80 M/s · 3.18 s · 192 Mo | 46.41 M/s · 4.31 s · 219 Mo | 2.40 M/s · 83.31 s · 1536 Mo | 430.51 k/s · 464.56 s · 1592 Mo |
-| matmul (1 600) | 3.19 G/s · 1.28 s · 31 Mo | 2.25 G/s · 1.82 s · 31 Mo | 2.59 G/s · 1.58 s · 31 Mo | 3.03 G/s · 1.35 s · 31 Mo | 3.20 G/s · 1.28 s · 31 Mo | 816.45 M/s · 5.02 s · 115 Mo | délai dépassé | délai dépassé |
-| lines (10 000 000) | 11.54 M/s · 0.87 s · 149 Mo | 13.53 M/s · 0.74 s · 149 Mo | 16.06 M/s · 0.62 s · 150 Mo | 9.47 M/s · 1.06 s · 150 Mo | 12.16 M/s · 0.82 s · 149 Mo | 7.59 M/s · 1.32 s · 322 Mo | 132.24 k/s · 75.62 s · 1635 Mo | délai dépassé |
-| hashmap (4 000 000) | 20.06 M/s · 0.60 s · 129 Mo | 18.02 M/s · 0.67 s · 130 Mo | 15.48 M/s · 0.78 s · 130 Mo | 15.61 M/s · 0.77 s · 130 Mo | 18.60 M/s · 0.65 s · 130 Mo | 5.99 M/s · 2.00 s · 291 Mo | 448.65 k/s · 26.75 s · 320 Mo | 61.42 k/s · 195.39 s · 347 Mo |
+| sort (32 000 000) | 5.89 M/s · 5.43 s · 246 Mo | 6.58 M/s · 4.86 s · 246 Mo | 5.23 M/s · 6.12 s · 246 Mo | 4.90 M/s · 6.53 s · 246 Mo | 5.44 M/s · 5.89 s · 246 Mo | 3.56 M/s · 8.98 s · 273 Mo | 68.88 k/s · 464.57 s · 1267 Mo | délai dépassé |
+| sieve (1 000 000 000) | 54.28 M/s · 18.42 s · 955 Mo | 54.53 M/s · 18.34 s · 955 Mo | 57.12 M/s · 17.51 s · 956 Mo | 53.19 M/s · 18.80 s · 956 Mo | 51.80 M/s · 19.30 s · 955 Mo | 53.32 M/s · 18.75 s · 983 Mo | 2.05 M/s · 487.39 s · 7648 Mo | délai dépassé |
+| matmul (2 500) | 6.13 G/s · 2.55 s · 73 Mo | 4.91 G/s · 3.18 s · 73 Mo | 6.22 G/s · 2.51 s · 73 Mo | 4.70 G/s · 3.32 s · 73 Mo | 5.33 G/s · 2.93 s · 73 Mo | 1.04 G/s · 15.09 s · 101 Mo | délai dépassé | délai dépassé |
+| lines (40 000 000) | 11.24 M/s · 3.56 s · 545 Mo | 10.42 M/s · 3.84 s · 545 Mo | 13.27 M/s · 3.01 s · 546 Mo | 8.21 M/s · 4.87 s · 546 Mo | 10.28 M/s · 3.89 s · 545 Mo | 8.80 M/s · 4.55 s · 617 Mo | 121.47 k/s · 329.29 s · 6469 Mo | délai dépassé |
+| hashmap (16 000 000) | 17.14 M/s · 2.80 s · 513 Mo | 17.03 M/s · 2.82 s · 514 Mo | 14.11 M/s · 3.40 s · 514 Mo | 14.53 M/s · 3.30 s · 514 Mo | 15.06 M/s · 3.19 s · 514 Mo | 10.27 M/s · 4.68 s · 541 Mo | 392.43 k/s · 122.31 s · 1259 Mo | délai dépassé |
 
-Moyenne géométrique du temps relatif au meilleur : F*→C ×1.09 (5/5), C natif ×1.14 (5/5), Zig 0.17 ×1.15 (5/5), Rust ×1.15 (5/5), Rust + Creusot ×1.25 (5/5), F*→F# ×2.31 (5/5), F*→OCaml (corrigé) ×60.67 (4/5), F*→OCaml (livré) ×218.28 (2/5).
+Moyenne géométrique du temps relatif au meilleur : C natif ×1.07 (5/5), Rust ×1.09 (5/5), Zig 0.17 ×1.11 (5/5), F*→C ×1.18 (5/5), Rust + Creusot ×1.29 (5/5), F*→F# ×1.97 (5/5), F*→OCaml (corrigé) ×59.68 (4/5).
 
-### `small`
-
-| workload (n) | C natif | Zig 0.17 | Rust | Rust + Creusot | F*→C | F*→F# | F*→OCaml (corrigé) | F*→OCaml (livré) |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|
-| sort (1 000 000) | 7.21 M/s · 0.14 s · 9 Mo | 8.66 M/s · 0.12 s · 9 Mo | 7.75 M/s · 0.13 s · 10 Mo | 7.53 M/s · 0.13 s · 10 Mo | 7.65 M/s · 0.13 s · 9 Mo | 3.16 M/s · 0.32 s · 63 Mo | 106.57 k/s · 9.38 s · 46 Mo | 14.85 k/s · 67.36 s · 58 Mo |
-| sieve (20 000 000) | 135.27 M/s · 0.15 s · 21 Mo | 149.44 M/s · 0.13 s · 21 Mo | 135.93 M/s · 0.15 s · 21 Mo | 147.97 M/s · 0.14 s · 21 Mo | 148.78 M/s · 0.13 s · 21 Mo | 92.31 M/s · 0.22 s · 48 Mo | 2.68 M/s · 7.45 s · 160 Mo | 479.79 k/s · 41.68 s · 165 Mo |
-| matmul (512) | 4.29 G/s · 0.03 s · 4 Mo | 2.70 G/s · 0.05 s · 5 Mo | 2.75 G/s · 0.05 s · 5 Mo | 3.85 G/s · 0.03 s · 5 Mo | 3.85 G/s · 0.03 s · 4 Mo | 422.28 M/s · 0.32 s · 37 Mo | 4.18 M/s · 32.14 s · 77 Mo | 668.22 k/s · 200.86 s · 81 Mo |
-| lines (1 000 000) | 7.26 M/s · 0.14 s · 31 Mo | 10.14 M/s · 0.10 s · 31 Mo | 10.00 M/s · 0.10 s · 31 Mo | 7.82 M/s · 0.13 s · 31 Mo | 9.15 M/s · 0.11 s · 31 Mo | 4.99 M/s · 0.20 s · 151 Mo | 128.38 k/s · 7.79 s · 184 Mo | 13.82 k/s · 72.37 s · 197 Mo |
-| hashmap (500 000) | 29.99 M/s · 0.05 s · 17 Mo | 31.52 M/s · 0.05 s · 18 Mo | 26.27 M/s · 0.06 s · 18 Mo | 23.53 M/s · 0.06 s · 18 Mo | 28.51 M/s · 0.05 s · 18 Mo | 6.67 M/s · 0.22 s · 171 Mo | 518.71 k/s · 2.89 s · 47 Mo | 66.34 k/s · 22.61 s · 50 Mo |
-
-Moyenne géométrique du temps relatif au meilleur : F*→C ×1.09 (5/5), Zig 0.17 ×1.10 (5/5), C natif ×1.14 (5/5), Rust + Creusot ×1.18 (5/5), Rust ×1.18 (5/5), F*→F# ×3.37 (5/5), F*→OCaml (corrigé) ×117.42 (5/5), F*→OCaml (livré) ×835.33 (5/5).
-
-### `tiny`
+#### `medium`
 
 | workload (n) | C natif | Zig 0.17 | Rust | Rust + Creusot | F*→C | F*→F# | F*→OCaml (corrigé) | F*→OCaml (livré) |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|
-| sort (200 000) | 8.92 M/s · 0.02 s · 3 Mo | 10.83 M/s · 0.02 s · 3 Mo | 8.62 M/s · 0.02 s · 3 Mo | 8.48 M/s · 0.02 s · 3 Mo | 10.01 M/s · 0.02 s · 3 Mo | 1.41 M/s · 0.14 s · 48 Mo | 123.11 k/s · 1.62 s · 15 Mo | 16.34 k/s · 12.24 s · 17 Mo |
-| sieve (5 000 000) | 149.35 M/s · 0.03 s · 6 Mo | 162.05 M/s · 0.03 s · 6 Mo | 158.15 M/s · 0.03 s · 7 Mo | 160.61 M/s · 0.03 s · 7 Mo | 177.09 M/s · 0.03 s · 6 Mo | 104.13 M/s · 0.05 s · 33 Mo | 2.88 M/s · 1.74 s · 45 Mo | 489.85 k/s · 10.21 s · 47 Mo |
-| matmul (128) | 2.31 G/s · 0.00 s · 2 Mo | 1.64 G/s · 0.00 s · 2 Mo | 3.16 G/s · 0.00 s · 2 Mo | 2.64 G/s · 0.00 s · 2 Mo | 3.07 G/s · 0.00 s · 2 Mo | 84.84 M/s · 0.02 s · 29 Mo | 3.88 M/s · 0.54 s · 10 Mo | 720.44 k/s · 2.91 s · 12 Mo |
-| lines (50 000) | 1.73 M/s · 0.03 s · 18 Mo | 1.68 M/s · 0.03 s · 18 Mo | 1.98 M/s · 0.03 s · 19 Mo | 1.95 M/s · 0.03 s · 19 Mo | 2.16 M/s · 0.02 s · 18 Mo | 1.46 M/s · 0.03 s · 50 Mo | 65.64 k/s · 0.76 s · 31 Mo | 6.60 k/s · 7.57 s · 32 Mo |
-| hashmap (100 000) | 30.80 M/s · 0.01 s · 5 Mo | 39.80 M/s · 0.01 s · 5 Mo | 35.51 M/s · 0.01 s · 6 Mo | 37.79 M/s · 0.01 s · 6 Mo | 44.16 M/s · 0.01 s · 5 Mo | 4.73 M/s · 0.06 s · 58 Mo | 538.82 k/s · 0.56 s · 16 Mo | 69.80 k/s · 4.30 s · 16 Mo |
+| sort (8 000 000) | 6.33 M/s · 1.26 s · 63 Mo | 7.36 M/s · 1.09 s · 63 Mo | 5.76 M/s · 1.39 s · 63 Mo | 5.56 M/s · 1.44 s · 63 Mo | 6.44 M/s · 1.24 s · 62 Mo | 4.18 M/s · 1.91 s · 90 Mo | 85.29 k/s · 93.79 s · 322 Mo | délai dépassé |
+| sieve (200 000 000) | 65.58 M/s · 3.05 s · 192 Mo | 62.35 M/s · 3.21 s · 192 Mo | 66.15 M/s · 3.02 s · 193 Mo | 60.67 M/s · 3.30 s · 193 Mo | 64.39 M/s · 3.11 s · 192 Mo | 65.47 M/s · 3.05 s · 220 Mo | 2.40 M/s · 83.31 s · 1536 Mo | 430.51 k/s · 464.56 s · 1592 Mo |
+| matmul (1 600) | 6.03 G/s · 0.68 s · 31 Mo | 5.83 G/s · 0.70 s · 31 Mo | 6.02 G/s · 0.68 s · 31 Mo | 5.17 G/s · 0.79 s · 31 Mo | 5.83 G/s · 0.70 s · 31 Mo | 1.03 G/s · 3.97 s · 58 Mo | délai dépassé | délai dépassé |
+| lines (10 000 000) | 10.90 M/s · 0.92 s · 149 Mo | 12.18 M/s · 0.82 s · 149 Mo | 15.70 M/s · 0.64 s · 150 Mo | 10.40 M/s · 0.96 s · 150 Mo | 16.57 M/s · 0.60 s · 149 Mo | 8.57 M/s · 1.17 s · 188 Mo | 132.24 k/s · 75.62 s · 1635 Mo | délai dépassé |
+| hashmap (4 000 000) | 18.83 M/s · 0.64 s · 129 Mo | 20.48 M/s · 0.59 s · 130 Mo | 18.83 M/s · 0.64 s · 130 Mo | 17.26 M/s · 0.70 s · 130 Mo | 20.59 M/s · 0.58 s · 130 Mo | 11.70 M/s · 1.03 s · 157 Mo | 448.65 k/s · 26.75 s · 320 Mo | 61.42 k/s · 195.39 s · 347 Mo |
 
-Moyenne géométrique du temps relatif au meilleur : F*→C ×1.02 (5/5), Rust ×1.14 (5/5), Rust + Creusot ×1.17 (5/5), Zig 0.17 ×1.25 (5/5), C natif ×1.29 (5/5), F*→F# ×5.83 (5/5), F*→OCaml (corrigé) ×103.50 (5/5), F*→OCaml (livré) ×736.97 (5/5).
+Moyenne géométrique du temps relatif au meilleur : F*→C ×1.04 (5/5), Rust ×1.08 (5/5), Zig 0.17 ×1.08 (5/5), C natif ×1.14 (5/5), Rust + Creusot ×1.26 (5/5), F*→F# ×2.04 (5/5), F*→OCaml (corrigé) ×60.81 (4/5), F*→OCaml (livré) ×226.95 (2/5).
+
+#### `small`
+
+| workload (n) | C natif | Zig 0.17 | Rust | Rust + Creusot | F*→C | F*→F# | F*→OCaml (corrigé) | F*→OCaml (livré) |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|
+| sort (1 000 000) | 7.64 M/s · 0.13 s · 9 Mo | 7.57 M/s · 0.13 s · 9 Mo | 6.66 M/s · 0.15 s · 10 Mo | 6.73 M/s · 0.15 s · 10 Mo | 6.49 M/s · 0.15 s · 9 Mo | 4.89 M/s · 0.20 s · 37 Mo | 106.57 k/s · 9.38 s · 46 Mo | 14.85 k/s · 67.36 s · 58 Mo |
+| sieve (20 000 000) | 154.35 M/s · 0.13 s · 21 Mo | 162.35 M/s · 0.12 s · 21 Mo | 147.94 M/s · 0.14 s · 21 Mo | 145.12 M/s · 0.14 s · 21 Mo | 157.43 M/s · 0.13 s · 21 Mo | 146.49 M/s · 0.14 s · 48 Mo | 2.68 M/s · 7.45 s · 160 Mo | 479.79 k/s · 41.68 s · 165 Mo |
+| matmul (512) | 7.79 G/s · 0.02 s · 4 Mo | 7.97 G/s · 0.02 s · 4 Mo | 6.14 G/s · 0.02 s · 5 Mo | 4.28 G/s · 0.03 s · 5 Mo | 6.46 G/s · 0.02 s · 4 Mo | 1.11 G/s · 0.12 s · 32 Mo | 4.18 M/s · 32.14 s · 77 Mo | 668.22 k/s · 200.86 s · 81 Mo |
+| lines (1 000 000) | 9.27 M/s · 0.11 s · 31 Mo | 10.42 M/s · 0.10 s · 31 Mo | 10.36 M/s · 0.10 s · 31 Mo | 8.23 M/s · 0.12 s · 31 Mo | 9.13 M/s · 0.11 s · 31 Mo | 7.79 M/s · 0.13 s · 59 Mo | 128.38 k/s · 7.79 s · 184 Mo | 13.82 k/s · 72.37 s · 197 Mo |
+| hashmap (500 000) | 31.45 M/s · 0.05 s · 17 Mo | 39.80 M/s · 0.04 s · 18 Mo | 30.88 M/s · 0.05 s · 18 Mo | 31.13 M/s · 0.05 s · 18 Mo | 32.56 M/s · 0.05 s · 18 Mo | 18.92 M/s · 0.08 s · 45 Mo | 518.71 k/s · 2.89 s · 47 Mo | 66.34 k/s · 22.61 s · 50 Mo |
+
+Moyenne géométrique du temps relatif au meilleur : Zig 0.17 ×1.00 (5/5), C natif ×1.09 (5/5), F*→C ×1.16 (5/5), Rust ×1.16 (5/5), Rust + Creusot ×1.31 (5/5), F*→F# ×2.04 (5/5), F*→OCaml (corrigé) ×138.85 (5/5), F*→OCaml (livré) ×987.79 (5/5).
+
+#### `tiny`
+
+| workload (n) | C natif | Zig 0.17 | Rust | Rust + Creusot | F*→C | F*→F# |
+|---|--:|--:|--:|--:|--:|--:|
+| sort (200 000) | 8.38 M/s · 0.02 s · 3 Mo | 9.37 M/s · 0.02 s · 3 Mo | 7.86 M/s · 0.03 s · 3 Mo | 7.28 M/s · 0.03 s · 3 Mo | 8.09 M/s · 0.02 s · 3 Mo | 5.17 M/s · 0.04 s · 30 Mo |
+| sieve (5 000 000) | 177.59 M/s · 0.03 s · 6 Mo | 186.86 M/s · 0.03 s · 6 Mo | 185.19 M/s · 0.03 s · 7 Mo | 165.58 M/s · 0.03 s · 7 Mo | 187.10 M/s · 0.03 s · 6 Mo | 153.18 M/s · 0.03 s · 33 Mo |
+| matmul (128) | 4.24 G/s · 0.00 s · 2 Mo | 4.99 G/s · 0.00 s · 2 Mo | 5.72 G/s · 0.00 s · 2 Mo | 2.77 G/s · 0.00 s · 2 Mo | 4.53 G/s · 0.00 s · 2 Mo | 455.66 M/s · 0.00 s · 29 Mo |
+| lines (50 000) | 1.73 M/s · 0.03 s · 18 Mo | 2.04 M/s · 0.02 s · 18 Mo | 2.31 M/s · 0.02 s · 19 Mo | 2.01 M/s · 0.02 s · 19 Mo | 2.20 M/s · 0.02 s · 18 Mo | 2.34 M/s · 0.02 s · 46 Mo |
+| hashmap (100 000) | 35.29 M/s · 0.01 s · 5 Mo | 48.29 M/s · 0.01 s · 5 Mo | 37.37 M/s · 0.01 s · 6 Mo | 35.65 M/s · 0.01 s · 6 Mo | 50.79 M/s · 0.01 s · 5 Mo | 19.19 M/s · 0.02 s · 33 Mo |
+
+Moyenne géométrique du temps relatif au meilleur : Zig 0.17 ×1.07 (5/5), F*→C ×1.09 (5/5), Rust ×1.11 (5/5), C natif ×1.25 (5/5), Rust + Creusot ×1.38 (5/5), F*→F# ×2.36 (5/5).
 
 
 Les moyennes géométriques avec « (4/5) » ou « (2/5) » ne portent que sur les workloads terminés : elles ne sont pas comparables aux autres.
@@ -221,13 +228,11 @@ Temps relatif au meilleur de la ligne, taille `large` (1,00 = meilleur ; « > 60
 
 | workload | C natif | Zig 0.17 | Rust | Rust + Creusot | F*→C | F*→F# | F*→OCaml (corrigé) | F*→OCaml (livré) |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|
-| sort | ×1.23 | ×1.00 | ×1.14 | ×1.19 | ×1.06 | ×1.53 | ×106.52 | > 600 s |
-| sieve | ×1.00 | ×1.01 | ×1.01 | ×1.03 | ×1.00 | ×1.25 | ×26.05 | > 600 s |
-| matmul | ×1.00 | ×1.44 | ×1.41 | ×1.06 | ×1.13 | ×4.76 | > 600 s | > 600 s |
-| lines | ×1.10 | ×1.24 | ×1.04 | ×1.34 | ×1.00 | ×2.08 | ×136.38 | > 600 s |
-| hashmap | ×1.00 | ×1.05 | ×1.20 | ×1.17 | ×1.07 | ×2.93 | ×42.39 | > 600 s |
-
-Graphes (générés par `python3 harness/charts.py`, source : `results/run-*.json`) :
+| sort | ×1.12 | ×1.00 | ×1.26 | ×1.34 | ×1.21 | ×1.85 | ×95.56 | > 600 s |
+| sieve | ×1.05 | ×1.05 | ×1.00 | ×1.07 | ×1.10 | ×1.07 | ×27.84 | > 600 s |
+| matmul | ×1.01 | ×1.27 | ×1.00 | ×1.32 | ×1.17 | ×6.01 | > 600 s | > 600 s |
+| lines | ×1.18 | ×1.27 | ×1.00 | ×1.62 | ×1.29 | ×1.51 | ×109.24 | > 600 s |
+| hashmap | ×1.00 | ×1.01 | ×1.21 | ×1.18 | ×1.14 | ×1.67 | ×43.66 | > 600 s |
 
 > **F\* → OCaml (livré et corrigé) est volontairement absent de tous les graphes** : il est de ×26 à ×136 plus lent que le meilleur à `large`
 > (jusqu'à ×1000 à `small`), dépasse le délai de 600 s sur `matmul` et sur tout `large` pour le runtime livré, et consomme jusqu'à ×8 la RAM idéale.
@@ -237,49 +242,78 @@ Graphes (générés par `python3 harness/charts.py`, source : `results/run-*.jso
    ![relatif](results/charts/relatif-large.png)
 2. **Débit en fonction de la taille** : un panneau par workload ; le débit baisse quand les données sortent des caches (`sieve`, `hashmap`) de la même façon pour toutes les colonnes natives, et les courbes F# restent en dessous sans converger.
    ![débit](results/charts/debit-vs-taille.png)
-3. **Mémoire à `large`** (pic RAM ÷ taille des structures, échelle log) : C/Zig/Rust à ~1, .NET entre 1,2 et 3.
+3. **Mémoire à `large`** (pic RAM ÷ taille des structures, échelle log) : C/Zig/Rust à ~1, .NET entre 1,03 et 3,2.
    ![mémoire](results/charts/memoire-large.png)
 4. **Coût de la vérification** : le prix de la preuve, payé hors exécution.
    ![preuve](results/charts/cout-preuve.png)
 
+## Empreinte : CPU, RAM, disque
+
+Ces mesures existent depuis le début (colonnes `CPU`, `pic RAM`, `RAM/idéal`, fautes de page, E/S disque de chaque rapport `results/run-*.md`),
+mais elles n'étaient pas dans ce README ; les voici pour `large`. Méthode : un lanceur C fait `fork`/`exec`/`wait4` et lit user+sys, `ru_maxrss`,
+fautes de page et blocs d'E/S ; un échantillonneur lit `/proc/<pid>` toutes les 20 ms (courbe de RSS dans les rapports HTML).
+
+### CPU et RAM, `large`
+
+Cellule : temps CPU (user+sys) · utilisation d'un cœur · pic RAM (RSS) · RAM ÷ taille idéale des structures · fautes de page mineures.
+
+| workload | C natif | Zig 0.17 | Rust | Rust + Creusot | F*→C | F*→F# | F*→OCaml (corrigé) | F*→OCaml (livré) |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|
+| sort | 5.4 s · 99 % · 246 Mo · ×1.01 · 63 k | 4.8 s · 99 % · 246 Mo · ×1.01 · 63 k | 6.1 s · 99 % · 246 Mo · ×1.01 · 63 k | 6.5 s · 99 % · 246 Mo · ×1.01 · 63 k | 5.9 s · 100 % · 246 Mo · ×1.01 · 63 k | 9.0 s · 99 % · 273 Mo · ×1.12 · 64 k | 458.6 s · 99 % · 1267 Mo · ×5.19 · 324 k | — |
+| sieve | 17.4 s · 94 % · 955 Mo · ×1.00 · 244 k | 18.0 s · 98 % · 955 Mo · ×1.00 · 244 k | 17.5 s · 100 % · 956 Mo · ×1.00 · 244 k | 17.9 s · 95 % · 956 Mo · ×1.00 · 244 k | 19.1 s · 99 % · 955 Mo · ×1.00 · 244 k | 18.8 s · 100 % · 983 Mo · ×1.03 · 246 k | 480.3 s · 99 % · 7648 Mo · ×8.02 · 1957 k | — |
+| matmul | 2.5 s · 99 % · 73 Mo · ×1.02 · 25 k | 3.2 s · 99 % · 73 Mo · ×1.02 · 18 k | 2.5 s · 99 % · 73 Mo · ×1.03 · 25 k | 3.3 s · 99 % · 73 Mo · ×1.03 · 25 k | 2.9 s · 98 % · 73 Mo · ×1.02 · 25 k | 15.1 s · 99 % · 101 Mo · ×1.41 · 20 k | — | — |
+| lines | 3.5 s · 99 % · 545 Mo · ×0.93 · 143 k | 3.8 s · 99 % · 545 Mo · ×0.93 · 143 k | 2.9 s · 96 % · 546 Mo · ×0.93 · 143 k | 4.8 s · 99 % · 546 Mo · ×0.93 · 143 k | 3.9 s · 99 % · 545 Mo · ×0.93 · 143 k | 4.6 s · 99 % · 617 Mo · ×1.05 · 153 k | 325.9 s · 99 % · 6469 Mo · ×11.00 · 1655 k | — |
+| hashmap | 2.8 s · 100 % · 513 Mo · ×1.00 · 262 k | 2.8 s · 100 % · 514 Mo · ×1.00 · 131 k | 3.4 s · 98 % · 514 Mo · ×1.00 · 262 k | 3.3 s · 99 % · 514 Mo · ×1.00 · 262 k | 3.2 s · 99 % · 514 Mo · ×1.00 · 131 k | 4.7 s · 98 % · 541 Mo · ×1.06 · 133 k | 120.9 s · 99 % · 1259 Mo · ×2.46 · 321 k | — |
+
+### Empreinte disque, démarrage, construction
+
+| colonne | exécutable | runtime à installer | démarrage (run minuscule) | RAM au démarrage | compilation | vérification à froid |
+|---|--:|--:|--:|--:|--:|--:|
+| C natif | 20 Ko | 0 Mo | 6 ms | 1.7 Mo | 0.3 s | — |
+| Zig 0.17 | 67 Ko | 0 Mo | 6 ms | 1.7 Mo | 0.3 s | — |
+| Rust | 395 Ko | 0 Mo | 5 ms | 1.9 Mo | 0.1 s | — |
+| Rust + Creusot | 396 Ko | 0 Mo | 6 ms | 1.9 Mo | 0.1 s | 16 s |
+| F*→C | 24 Ko | 0 Mo | 5 ms | 1.7 Mo | 4.0 s | 236 s |
+| F*→F# | 50 Ko | 72 Mo | 86 ms | 28.8 Mo | 22.6 s | 236 s |
+| F*→OCaml (corrigé) | 5059 Ko | 0 Mo | — | — | 11.5 s | 236 s |
+| F*→OCaml (livré) | 5077 Ko | 0 Mo | — | — | 10.1 s | 236 s |
+
+Lecture :
+* **CPU** : tous les programmes sont mono-thread (aucun workload n'est parallèle), donc ~98–100 % d'un cœur et temps CPU ≈ durée ; le temps CPU
+  n'apporte une information distincte que pour .NET (compilation JIT, quelques centaines de ms au démarrage). Le classement par temps CPU est donc celui du temps.
+* **RAM** : C, Zig, Rust et Rust + Creusot sont à ×1,00–1,03 de la taille des structures (×0,93 sur `lines` : le texte est consommé au fil de l'eau) ;
+  F*→C est identique au C à la page près. .NET ajoute ~30 Mo fixes et ×1,03 à ×3,2 selon le workload ; l'OCaml extrait va de ×2,5 (`hashmap`) à ×11 (`lines`, 6,5 Go).
+* **Disque** : aucun workload ne lit ni n'écrit de fichier (blocs E/S nuls, hors quelques blocs côté .NET) ; l'empreinte disque est celle de l'exécutable et du runtime
+  (tableau ci-dessus) : 20–66 Ko en C/Zig/F*→C, ~400 Ko en Rust, 50 Ko + 72 Mo de runtime .NET, ~5 Mo pour OCaml.
+
 ### Ce que disent ces chiffres (et ce qu'ils ne disent pas)
 
-* **Le code vérifié ne coûte rien de mesurable face au code à la main, en C comme en Rust.** À `large`, moyenne géométrique du temps
-  relatif au meilleur : F*→C ×1,05, C natif ×1,06, Zig ×1,14, Rust ×1,15, Rust + Creusot ×1,15. À `xlarge` : C natif ×1,12, Rust + Creusot ×1,16,
-  F*→C ×1,20, Rust ×1,22, Zig ×1,29. Les écarts de ±10 % entre ces cinq colonnes changent d'ordre d'une taille à l'autre et d'un
-  workload à l'autre (une seule exécution à `xlarge`) : c'est du bruit de VM et de choix du compilateur, pas un coût de la preuve.
-* **Le Rust sans Creusot n'est pas plus rapide que le Rust avec Creusot** (×1,15 contre ×1,15 à `large`, ×1,22 contre ×1,16 à `xlarge`) : les
-  contrats sont effacés, les deux binaires ont la même taille (~394 Ko). Les différences viennent du code (boucles indicées pour
-  la preuve contre itérateurs `zip` dans la version simple), pas des contrats.
-* **`matmul` est le seul workload où les colonnes se séparent nettement** : à `xlarge` Rust + Creusot (2,87 G/s) et C natif (2,50 G/s) devancent
-  Rust simple (1,59), F*→C (1,57) et Zig (1,14). Ce sont des écarts de *vectorisation* par le compilateur (cible x86-64 générique, sans
-  `-march=native`) sur une boucle `i-k-j` identique ; je n'ai pas inspecté l'assembleur, la cause exacte est donc une hypothèse. Le Zig
-  est ici la colonne la plus lente des cinq — hypothèse non mesurée : LLVM ne prouve pas l'absence d'aliasing entre les tranches `c` et `b`.
-* **Zig 0.17 (ReleaseFast) est au niveau du C** sur `sort`, `sieve`, `lines`, `hashmap` (premier sur `sort` à toutes les tailles ; écart au meilleur ≤ ×1,25 à `large` sur les quatre), moins bon sur `matmul` (voir ci-dessus).
-* **F* → F# est ~2,2× plus lent que C** en moyenne (de 1,25× sur `sieve` à ~4,8× sur `matmul` ; ~2,9× sur `hashmap`, ~2,1× sur `lines`, à `large`), avec 1,2 à 3× plus
-  de RAM (tableaux .NET et GC) et ~30 Mo / ~75 ms de démarrage du runtime. **Échec à `xlarge`/`sieve`** (3 milliards d'octets) : le backend F#
-  convertit la taille en `int` 32 bits (`Array.create` reçoit `-1294967295`) et lève une exception ; un tableau de plus de 2³¹−1 éléments ne
-  peut donc pas être alloué par le code extrait. Le C extrait le fait sans souci (2,86 Go).
-* **F* → OCaml n'est pas utilisable pour de la charge** avec ce backend : entiers boxés, `FStar_SizeT` boxé, et pour le runtime livré un
-  aller-retour par une chaîne décimale à chaque accès tableau. Avec le runtime livré, seul `tiny` passe en totalité (12 s pour trier 200 000
-  éléments, C : 0,02 s) ; à `medium` seuls `sieve` (465 s) et `hashmap` (195 s) terminent avant 600 s ; à `large` rien ne termine. Corriger
-  seulement `v`/`uint_to_t` apporte un facteur 5,6 à 9,3 (`small`) : `medium` termine pour 4 workloads sur 5 (`sort` 94 s contre 1,1 s en C) ; `large`
-  termine `sort` (465 s), `sieve` (487 s), `lines` (329 s), `hashmap` (122 s) mais pas `matmul` (> 600 s), soit ×26 (`sieve`) à ×140 (`lines`) le temps du C à `large` (×57 à ×1000 à `small`).
-* **Mémoire** : C, Zig et Rust sont à ~1,0× la taille des structures ; .NET ajoute ~30 Mo de runtime et 1,2 à 3× sur les tableaux ; l'OCaml extrait
-  consomme jusqu'à ~8× (crible `large` : 7,6 Go pour 1 Go de données, un mot par octet dans un tableau générique), ~5× sur `sort`.
-* **Disque** : les binaires pèsent 20 Ko (F*→C et C natif), 66 Ko (Zig), ~390 Ko (Rust, deux versions) ; F# 50 Ko + 74 Mo de runtime .NET à
-  installer ; OCaml ~5 Mo. Aucun workload ne lit de fichier ; les compteurs d'E/S du noyau sont nuls partout (sauf quelques blocs écrits côté .NET).
-* **Coût de la preuve** (le vrai prix de la programmation vérifiée) : vérification **à froid** de tous les modules F* : **154 à 236 s** selon
-  la charge de la machine (236 s mesurés lors de la dernière reconstruction complète) ; preuves Creusot du crate Rust, sans cache : **16 s**.
+* **Le code vérifié ne coûte rien de mesurable face au code à la main.** À `large`, moyenne géométrique du temps relatif au meilleur : C natif ×1,07,
+  Rust ×1,09, Zig ×1,11, F*→C ×1,18, Rust + Creusot ×1,29 ; à `xlarge` : F*→C ×1,07, C natif ×1,07, Rust + Creusot ×1,11, Zig ×1,12, Rust ×1,17.
+  Le classement change d'une taille à l'autre et d'un workload à l'autre : ce sont des écarts de génération de code, pas un coût de la preuve.
+* **Rust + Creusot contre Rust simple** : les contrats sont effacés (binaires de même taille, ~396 Ko). À `large` le Rust + Creusot est plus lent
+  (×1,29 contre ×1,09), surtout sur `lines` (4,9 s contre 3,0 s) et `matmul` ; à `xlarge` c'est l'inverse (×1,11 contre ×1,17). La différence vient du code (boucles
+  indicées, tests de bornes que la preuve garantit mais que `rustc` ne supprime pas), pas des contrats.
+* **F* → C est au niveau du C écrit à la main** (×1,04 à ×1,18 selon la taille, premier ou deuxième sur plusieurs workloads).
+* **Zig 0.17** : au niveau du C sauf si on laisse LLVM seul vectoriser `matmul` (voir Méthodologie) ; premier sur `sort` à `medium`/`large`.
+* **F* → F#** : ×2 environ en moyenne (×1,97 à `large`), de ×1,0 sur `sieve` (53,3 contre 54,3 M/s) à ×6 sur `matmul` (pas de SIMD explicite), ~×1,7 à ×1,9 sur
+  `hashmap`/`sort`. **Échec à `xlarge`/`sieve`** (3 milliards d'octets) : le backend F# convertit la taille en `int` 32 bits (`Array.create` reçoit `-1294967295`) ; le code
+  extrait ne peut pas allouer plus de 2³¹−1 éléments, le C extrait le fait sans souci (2,86 Go).
+* **F* → OCaml n'est pas utilisable pour de la charge** avec ce backend : entiers boxés, `FStar_SizeT` boxé, et pour le runtime livré un aller-retour par une chaîne
+  décimale à chaque accès tableau. Runtime livré : seul `tiny` passe en totalité (12 s pour trier 200 000 éléments, C : 0,02 s) ; à `medium`, seuls `sieve` (465 s) et
+  `hashmap` (195 s) terminent avant 600 s ; à `large` rien ne termine. Corriger seulement `v`/`uint_to_t` apporte un facteur 5,6 à 9,3 (`small`) : `large` termine `sort`
+  (465 s), `sieve` (487 s), `lines` (329 s) et `hashmap` (122 s), pas `matmul`, soit ×26 à ×140 le temps du C. Ces deux colonnes ont été mesurées avec une seule
+  exécution et sont donc des ordres de grandeur.
+* **Coût de la preuve** : vérification à froid de tous les modules F* : **236 s** (154 s lors d'une mesure antérieure : dépend de la charge) ; preuves Creusot sans cache : **16 s**.
   Ces durées ne changent pas une instruction de code généré.
-* Ce que cette étude **ne montre pas** : l'effet de preuves fonctionnelles plus fortes (seul le tri en a), l'effet d'un autre compilateur C
-  ou d'`-march=native`, et la variabilité entre machines. Une VM partagée : seuls les écarts ≳ 15 % sont à prendre au sérieux.
+* Ce que cette étude **ne montre pas** : l'effet de preuves fonctionnelles plus fortes (seul le tri en a), d'autres compilateurs (clang, rustc nightly), d'autres machines. Une VM
+  partagée : seuls les écarts ≳ 15 % sont à prendre au sérieux.
 
 ## Ce qui a été exécuté
 
 Tout ce qui est décrit ci-dessus a été exécuté sur cette machine : `make build` (construction des 8 colonnes), `make fstar-verify`
 (tous les modules F*, à froid : 236 s), `make creusot` (36 fichiers prouvés), `make list`, `make bench`, les six presets
-(`smoke`, `tiny`, `small`, `medium`, `large`, `xlarge`) pour toutes les colonnes qui en sont capables, l'option `--wrapper` (`taskset -c N`
+(`smoke`, `tiny`, `small`, `medium`, `large`, `xlarge`) pour toutes les colonnes qui en sont capables, relancés après le passage aux réglages « performance maximale », l'option `--wrapper` (`taskset -c N`
 pour les runs OCaml), et les trois scripts d'installation (`setup-zig.sh` : téléchargement + sha256 vérifiés ; `setup-fstar.sh` dans un préfixe vierge ;
 `setup-creusot.sh` sur un clone vierge). Ce qui n'a **pas** de résultat : OCaml aux tailles où il dépasse 600 s (« délai dépassé »,
 colonnes concernées dans les tableaux), l'OCaml livré n'ayant été lancé ni à `xlarge` ni avec plus d'une exécution, et `fstar-fsharp`/`sieve` à `xlarge` (échec, ci-dessus).

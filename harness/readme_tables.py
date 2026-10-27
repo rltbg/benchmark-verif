@@ -13,11 +13,13 @@ SHORT = {"c-native": "C natif", "zig": "Zig 0.17", "rust-plain": "Rust", "rust-c
 
 def merged(preset):
     """Fusionne run-<preset>.json et les campagnes OCaml run-<preset>-<impl>.json."""
-    files = [R / f"run-{preset}.json"] + [R / f"run-{preset}-{i}.json" for i in ("fstar-ocaml", "fstar-ocaml-fast")]
+    files = [R / f"run-{preset}.json"] + [R / f"run-{preset}-{i}.json" for i in ("fstar-ocaml", "fstar-ocaml-fast", "zig")]
     data = None
     for f in files:
         if not f.exists(): continue
         d = json.loads(f.read_text())
+        if f.name.endswith("-zig.json"):  # relance de Zig après optimisation de matmul : remplace les anciennes mesures
+            data["runs"] = [r for r in data["runs"] if r["impl"] != "zig"]
         if data is None: data = d
         else: data["runs"] += d["runs"]
     return data
@@ -50,5 +52,29 @@ def main():
         print("\nMoyenne géométrique du temps relatif au meilleur : " + ", ".join(
             f"{SHORT[k]} ×{bench.gmean(agg[k]):.2f} ({len(agg[k])}/5)" for k in sorted(agg, key=lambda k: bench.gmean(agg[k]))) + ".\n")
 
+def footprint(preset="large"):
+    """Tableaux CPU/RAM par workload et empreinte disque/démarrage/construction (cités dans le README)."""
+    data = merged(preset); table, meta = bench.summarize(data)
+    impls = [i for i in ORDER if any(i in table[w] for w in table)]
+    out = [f"#### CPU et RAM, `{preset}`\n",
+           "Cellule : temps CPU (user+sys) · utilisation d'un cœur · pic RAM (RSS) · RAM ÷ taille idéale des structures · fautes de page mineures.\n",
+           "| workload | " + " | ".join(SHORT[i] for i in impls) + " |", "|---|" + "--:|" * len(impls)]
+    for w in bench.WORKLOADS:
+        cells = []
+        for i in impls:
+            v = table[w].get(i)
+            cells.append(f"{v['cpu_s']:.1f} s · {v['cpu_pct']:.0f} % · {v['rss_mb']:.0f} Mo · ×{v['rss_ratio']:.2f} · {v['minflt']/1e3:.0f} k" if v and v.get("status") == "ok" else "—")
+        out.append(f"| {w} | " + " | ".join(cells) + " |")
+    fp = json.loads((R / "footprint.json").read_text()); st = data.get("startup", {})
+    out += ["", "#### Empreinte disque, démarrage, construction\n",
+            "| colonne | exécutable | runtime à installer | démarrage (run minuscule) | RAM au démarrage | compilation | vérification à froid |", "|---|--:|--:|--:|--:|--:|--:|"]
+    for i in impls:
+        f = fp.get(i, {}); s_ = st.get(i, {})
+        out.append(f"| {SHORT[i]} | {f.get('binary_kb', 0):.0f} Ko | {f.get('runtime_kb', 0)/1024:.0f} Mo | " +
+                   (f"{s_['wall_s']*1000:.0f} ms | {s_['rss_kb']/1024:.1f} Mo | " if s_ else "— | — | ") + f"{f.get('build_s', 0):.1f} s | "
+                   + (f"{f['verify_s']:.0f} s" if f.get("verify_s") else "—") + " |")
+    print("\n".join(out))
+
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1 and sys.argv[1] == "footprint": footprint(*sys.argv[2:3])
+    else: main()

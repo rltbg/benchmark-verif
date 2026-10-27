@@ -92,6 +92,18 @@ fn runSieve(n: usize) u64 {
 }
 
 // ---------- matmul ----------
+fn axpy(noalias crow: []u32, noalias brow: []const u32, aik: u32) void {
+    const V = 16;
+    const Vec = @Vector(V, u32);
+    const av: Vec = @splat(aik);
+    var j: usize = 0;
+    while (j + V <= crow.len) : (j += V) {
+        const bv: Vec = brow[j..][0..V].*;
+        const cv: Vec = crow[j..][0..V].*;
+        crow[j..][0..V].* = cv +% av *% bv;
+    }
+    while (j < crow.len) : (j += 1) crow[j] +%= aik *% brow[j];
+}
 fn runMatmul(n: usize) u64 {
     const nn = n * n;
     const a = alloc.alloc(u32, nn) catch oom();
@@ -108,7 +120,7 @@ fn runMatmul(n: usize) u64 {
             const aik = a[i * n + k];
             const brow = b[k * n .. k * n + n];
             const crow = c[i * n .. i * n + n];
-            for (crow, brow) |*cv, bv| cv.* +%= aik *% bv;
+            axpy(crow, brow, aik);
         }
     }
     var ck = ck_init;

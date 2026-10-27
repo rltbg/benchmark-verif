@@ -23,11 +23,11 @@ t0=$(now); (cd impls/rust-plain && cargo build --release --quiet 2>&1 | { grep -
 record rust-plain build_s "$(echo "$(now) - $t0" | bc -l)"
 record rust-plain binary_kb "$(( $(stat -c %s impls/rust-plain/target/release/bench-rust-plain) / 1024 ))"; record rust-plain runtime_kb 0
 echo "== c-native =="
-t0=$(now); gcc -O3 -std=c11 -Wall -Wextra -o impls/c-native/bench impls/c-native/bench.c
+t0=$(now); gcc -O3 -march=native -std=c11 -Wall -Wextra -o impls/c-native/bench impls/c-native/bench.c
 record c-native build_s "$(echo "$(now) - $t0" | bc -l)"
 record c-native binary_kb "$(( $(stat -c %s impls/c-native/bench) / 1024 ))"; record c-native runtime_kb 0
 echo "== zig $("$ZIG" version) =="
-t0=$(now); (cd impls/zig && "$ZIG" build-exe bench.zig -O ReleaseFast -lc -femit-bin=bench && rm -f bench.o)
+t0=$(now); (cd impls/zig && "$ZIG" build-exe bench.zig -O ReleaseFast -mcpu=native -lc -femit-bin=bench && rm -f bench.o)
 record zig build_s "$(echo "$(now) - $t0" | bc -l)"
 record zig binary_kb "$(( $(stat -c %s impls/zig/bench) / 1024 ))"; record zig runtime_kb 0
 echo "== F* =="

@@ -58,7 +58,7 @@ target_c() {
   verify
   local t0; t0=$(now)
   extract C "$B/c"
-  gcc -O3 -std=c11 -I "$B/c" "$B/c/Custard.c" drivers/driver.c -o "$B/c/bench"
+  gcc -O3 -march=native -std=c11 -I "$B/c" "$B/c/Custard.c" drivers/driver.c -o "$B/c/bench"
   record fstar-c build_s "$(since "$t0")"
   record fstar-c binary_kb "$(( $(stat -c %s "$B/c/bench") / 1024 ))"; record fstar-c runtime_kb 0
 }
@@ -69,7 +69,7 @@ target_fsharp() {
   extract FSharp "$B/fsharp"
   cp drivers/Driver.fs "$B/fsharp/Driver.fs"
   sed -i 's|<OutputType>Library</OutputType>|<OutputType>Exe</OutputType>|; s|<Compile Include="Custard.fs" />|<Compile Include="Custard.fs" /><Compile Include="Driver.fs" />|' "$B/fsharp/Custard.fsproj"
-  sed -i 's|<InvariantGlobalization>|<AssemblyName>bench-fstar-fsharp</AssemblyName><Optimize>true</Optimize><DebugType>none</DebugType><ServerGarbageCollector>false</ServerGarbageCollector><ConcurrentGarbageCollection>false</ConcurrentGarbageCollection><TieredPGO>true</TieredPGO><InvariantGlobalization>|' "$B/fsharp/Custard.fsproj"
+  sed -i 's|<InvariantGlobalization>|<AssemblyName>bench-fstar-fsharp</AssemblyName><Optimize>true</Optimize><DebugType>none</DebugType><ServerGarbageCollector>false</ServerGarbageCollector><ConcurrentGarbageCollection>false</ConcurrentGarbageCollection><TieredPGO>true</TieredPGO><TieredCompilationQuickJitForLoops>false</TieredCompilationQuickJitForLoops><InvariantGlobalization>|' "$B/fsharp/Custard.fsproj"
   ( cd "$B/fsharp" && dotnet build -c Release -o out --nologo -v q 2>&1 | grep -E 'error|Warn|Error' | head )
   record fstar-fsharp build_s "$(since "$t0")"
   record fstar-fsharp binary_kb "$(( $(stat -c %s "$B/fsharp/out/bench-fstar-fsharp.dll") / 1024 ))"
