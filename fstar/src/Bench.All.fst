@@ -13,4 +13,5 @@ let strsort = Bench.Strsort.run
 let alloc = Bench.Alloc.run
 let ntt = Bench.Ntt.run
 let ptrchase = Bench.Ptrchase.run
+let sha256 = Bench.Sha256.run
 (* @@ALL@@ une ligne `let <nom> = Bench.<Nom>.run` par workload étendu *)

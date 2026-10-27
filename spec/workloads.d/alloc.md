@@ -45,5 +45,5 @@ précisément ce que le workload veut faire apparaître.
 | small | 2 000 000 | 31 250 | `1cb80a794f97dc3f` |
 | medium | 20 000 000 | 312 500 | `2e7aff6a37f04a16` |
 | large | 100 000 000 | 1 562 500 | `7f2586b8212b4ee9` |
-| xlarge | 500 000 000 | 7 812 500 | (voir `spec/checksums.d/alloc.json`) |
-| saturate | 1 600 000 000 | 25 000 000 | (idem) |
+| xlarge | 500 000 000 | 7 812 500 | `b77d67e5349e76e1` |
+| saturate | 1 600 000 000 | 25 000 000 | `d9341e955a5b882d` |

@@ -37,6 +37,7 @@ let () =
     | "alloc" -> Bench_Alloc.run n
     | "ntt" -> Bench_Ntt.run n
     | "ptrchase" -> Bench_Ptrchase.run n
+    | "sha256" -> Bench_Sha256.run n
     (* @@DISPATCH@@ (une ligne `| "<nom>" -> Bench_<Nom>.run n` ; Domain.spawn possible, `threads` disponible) *)
     | _ -> prerr_endline "workload inconnu"; exit 2 in
   let ns = Int64.of_float ((Unix.gettimeofday () -. t0) *. 1e9) in

@@ -9,6 +9,7 @@
 #include <pthread.h>
 #include "Custard.h"
 #include "driver_stream.h"
+#include "driver_par.h"
 /* @@INCLUDES@@ (pilotes auxiliaires, ex. #include "driver_<nom>.h") */
 
 int main(int argc, char **argv) {
@@ -29,6 +30,10 @@ int main(int argc, char **argv) {
     else if (!strcmp(argv[1], "alloc")) ck = Bench_Alloc_run(n);
     else if (!strcmp(argv[1], "ntt")) ck = Bench_Ntt_run(n);
     else if (!strcmp(argv[1], "ptrchase")) ck = Bench_Ptrchase_run(n);
+    else if (!strcmp(argv[1], "sha256")) ck = Bench_Sha256_run(n);
+    else if (!strcmp(argv[1], "parmatmul")) ck = drv_parmatmul(n, threads);
+    else if (!strcmp(argv[1], "parsort")) ck = drv_parsort(n, threads);
+    else if (!strcmp(argv[1], "parsha")) ck = drv_parsha(n, threads);
     /* @@DISPATCH@@ (une ligne `else if (!strcmp(argv[1], "<nom>")) ck = Bench_<Nom>_run(n);` ; threads/pthread possibles ici, voir drivers/driver_par.h) */
     else { fprintf(stderr, "workload inconnu\n"); return 2; }
     clock_gettime(CLOCK_MONOTONIC, &t1);
