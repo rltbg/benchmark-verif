@@ -3,6 +3,19 @@ module Driver
 
 open System.Diagnostics
 
+/// Workload `stream` : lecture du fichier par blocs de 1 Mio (non prouvé) + noyau Pulse `bench_Stream_chunk`.
+let streamRun (nMio: uint64) : uint64 =
+    let dir = match System.Environment.GetEnvironmentVariable "BENCH_DATA_DIR" with | null -> "/var/tmp/bench-data" | d -> d
+    use f = new System.IO.FileStream(sprintf "%s/stream-%d.json" dir nMio, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read, 0)
+    let buf = Custard.bench_Stream_new_buf ()
+    let st = Custard.bench_Stream_new_state ()
+    let tab = Custard.bench_Stream_new_table ()
+    let mutable go = true
+    while go do
+        let got = f.Read(buf, 0, buf.Length)
+        if got = 0 then go <- false else Custard.bench_Stream_chunk buf (uint64 got) st tab
+    Custard.bench_Stream_finish st
+
 [<EntryPoint>]
 let main argv =
     if argv.Length < 2 || argv.Length > 3 then
@@ -20,6 +33,8 @@ let main argv =
             | "matmul" -> Custard.bench_Matmul_run n
             | "lines" -> Custard.bench_Lines_run n
             | "hashmap" -> Custard.bench_Hashmap_run n
+            | "stream" -> streamRun n
+            | "bfs" -> Custard.bench_Bfs_run n
             // @@DISPATCH@@ (une ligne `| "<nom>" -> Custard.bench_<Nom>_run n` ; si le noyau est parallélisé par le pilote : Tasks/Threads ici, `threads` disponible)
             | _ -> failwith "workload inconnu"
         let ns = int64 (float sw.ElapsedTicks * 1e9 / float Stopwatch.Frequency)

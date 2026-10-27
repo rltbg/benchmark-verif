@@ -1,0 +1,31 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 18 0 18 26 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 17 10 17 11
+
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant k : int
+
+function pow2 [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 18 0 18 26] (k: int) : int
+
+goal vc_pow2: if k <= 0 then true else [@expl:variant decreases] well_founded_relation_Int ([%#sntt] k) ([%#sntt] k - 1)

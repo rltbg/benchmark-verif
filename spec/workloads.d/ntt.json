@@ -1,0 +1,2 @@
+{"name": "ntt", "unit": "papillons", "work_items": "n*math.log2(n)", "ideal_bytes": "6*n",
+ "desc": "NTT entière (analogue de la FFT) : produit cyclique a*a mod (x^n-1) par NTT directe, mise au carré, NTT « inverse »"}

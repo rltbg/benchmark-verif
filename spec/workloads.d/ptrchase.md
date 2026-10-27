@@ -41,7 +41,7 @@ Pour `i = 0 … n−1` : `nk = mix64(SEED1 + i) | 1`.
 
 `ck = fold(fold(fold(CK_INIT, r1), r2), r3)`.
 
-Mémoire idéale : `16·n + 4·n = 20·n` octets (arène + `next`). Travail : `work_items = 2·n + n/2 + 4·n + n = 7.5·n` accès dépendants (`n` insertions, `3n/2` recherches, `4n` sauts, `n` pour Sattolo).
+Mémoire idéale : `16·n + 4·n = 20·n` octets (arène + `next`). Travail : `work_items = 7.5·n` opérations (`n` insertions, `3n/2` recherches, `4n` sauts, `n` échanges de Sattolo).
 
 ## Preuve (F* Pulse, Creusot)
 

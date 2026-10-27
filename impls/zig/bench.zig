@@ -243,6 +243,13 @@ fn runHashmap(n: usize) u64 {
 
 const w_bfs = @import("w_bfs.zig");
 const w_sha256 = @import("w_sha256.zig");
+const w_ptrchase = @import("w_ptrchase.zig");
+const w_ntt = @import("w_ntt.zig");
+const w_parmatmul = @import("w_parmatmul.zig");
+const w_parsort = @import("w_parsort.zig");
+const w_parsha = @import("w_parsha.zig");
+const w_stream = @import("w_stream.zig");
+const w_strsort = @import("w_strsort.zig");
 // @@IMPORTS@@ (une ligne `const w_<nom> = @import("w_<nom>.zig");` ; chaque module exporte `pub fn run(n: usize, threads: usize) u64`)
 
 /// Workloads étendus : `// @@DISPATCH@@` — ajouter `if (std.mem.eql(u8, w, "<nom>")) return w_<nom>.run(n, threads);` sous l'ancre.
@@ -250,6 +257,13 @@ fn extended(w: []const u8, n: usize, threads: usize) ?u64 {
     _ = .{ w, n, threads };
     if (std.mem.eql(u8, w, "bfs")) return w_bfs.run(n, threads);
     if (std.mem.eql(u8, w, "sha256")) return w_sha256.run(n, threads);
+    if (std.mem.eql(u8, w, "ptrchase")) return w_ptrchase.run(n, threads);
+    if (std.mem.eql(u8, w, "ntt")) return w_ntt.run(n, threads);
+    if (std.mem.eql(u8, w, "parmatmul")) return w_parmatmul.run(n, threads);
+    if (std.mem.eql(u8, w, "parsort")) return w_parsort.run(n, threads);
+    if (std.mem.eql(u8, w, "parsha")) return w_parsha.run(n, threads);
+    if (std.mem.eql(u8, w, "stream")) return w_stream.run(n, threads);
+    if (std.mem.eql(u8, w, "strsort")) return w_strsort.run(n, threads);
     // @@DISPATCH@@
     return null;
 }

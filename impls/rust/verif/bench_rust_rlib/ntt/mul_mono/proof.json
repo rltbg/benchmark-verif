@@ -1,0 +1,4 @@
+{
+  "profile": [],
+  "proofs": { "Coma": { "vc_mul_mono": { "prover": "z3", "time": 0.005 } } }
+}

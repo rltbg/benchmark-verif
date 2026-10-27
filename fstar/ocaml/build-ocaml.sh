@@ -22,7 +22,7 @@ mkdir -p "$OUT"; OUT=$(realpath "$OUT")
 find "$OUT" -mindepth 1 -delete
 cp "$APP"/Prims.ml "$APP"/FStar_UInt8.ml "$APP"/FStar_SizeT.ml "$APP"/ints/FStar_Ints.ml.body "$APP"/ints/mk_int_file.sh "$OUT"/
 cp "$SRC"/*.ml "$OUT"/
-cp "$HERE/drivers/driver.ml" "$OUT"/driver.ml
+cp "${ML_DRIVER:-$HERE/drivers/driver.ml}" "$OUT"/driver.ml
 cd "$OUT"
 for w in 16 32 64; do bash mk_int_file.sh U $w > FStar_UInt$w.ml; done
 if [ "$MODE" = fast ]; then
@@ -34,9 +34,11 @@ if [ "$MODE" = fast ]; then
           s|let uint_to_t x = M.of_string (Z.to_string x)|let uint_to_t x = M.of_int64 (Z.to_int64_unsigned x)|" FStar_UInt64.ml
   sed -i "s|let v (x:uint8) : Prims.int = Prims.parse_int (string_of_int x)|let v (x:uint8) : Prims.int = Z.of_int x|" FStar_UInt8.ml
 fi
+# Modules des workloads étendus : un nom de fichier .ml par ligne dans extra-modules.txt (ajoutez une ligne, ne réécrivez pas le fichier).
+EXTRA_ML=$(cat "$HERE/ocaml/extra-modules.txt" 2>/dev/null | tr '\n' ' ')
 PKGS=stdint,zarith,ppx_deriving.show,ppx_deriving_yojson,yojson,unix
 # Le build OCaml « du banc » : -O3 est ignoré sans flambda ; -unsafe retire les contrôles de bornes
 # des tableaux comme le fait le code C (le code extrait reste prouvé sûr côté F*).
 ocamlfind ocamlopt ${OCAMLOPT_FLAGS:--inline 200} -unsafe -w -a -package "$PKGS" -linkpkg \
   Prims.ml FStar_UInt8.ml FStar_UInt16.ml FStar_UInt32.ml FStar_UInt64.ml FStar_SizeT.ml \
-  Bench_Common.ml Bench_Sort.ml Bench_Sieve.ml Bench_Matmul.ml Bench_Lines.ml Bench_Hashmap.ml driver.ml -o bench
+  ${ML_MODULES:-Bench_Common.ml Bench_Sort.ml Bench_Sieve.ml Bench_Matmul.ml Bench_Lines.ml Bench_Hashmap.ml $EXTRA_ML} driver.ml -o bench

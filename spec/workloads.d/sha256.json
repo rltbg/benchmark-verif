@@ -1,0 +1,7 @@
+{
+ "name": "sha256",
+ "unit": "octets",
+ "work_items": "n",
+ "ideal_bytes": "1024",
+ "desc": "SHA-256 d'un message de n octets g\u00e9n\u00e9r\u00e9 \u00e0 la vol\u00e9e (CPU pur, m\u00e9moire constante)"
+}

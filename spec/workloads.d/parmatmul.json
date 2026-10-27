@@ -1,0 +1,1 @@
+{"name": "parmatmul", "unit": "mult-add", "work_items": "n**3", "ideal_bytes": "12*n*n", "desc": "produit matriciel i-k-j réparti en blocs de lignes sur T threads (même checksum que matmul)"}

@@ -1,0 +1,56 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 92 0 92 28 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span ssha256 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 93 33 93 34
+let%span ssha256'0 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 93 29 93 34
+let%span ssha256'1 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 93 11 93 15
+let%span ssha256'2 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 93 11 93 35
+let%span ssha256'3 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 93 5 93 36
+let%span ssha256'4 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 93 50 93 51
+let%span ssha256'5 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 93 45 93 52
+let%span ssha256'6 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 93 41 93 42
+let%span ssha256'7 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 93 40 93 53
+let%span ssha256'8 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 93 4 93 54
+let%span ssha256'9 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 92 0 92 28
+
+use creusot.int.UInt64
+use creusot.int.UInt8
+use creusot.prelude.Any
+
+constant const_SEED: UInt64.t = [%#ssha256'9] (6001118187368099138: UInt64.t)
+
+let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
+    (! return {result}) ]
+
+let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let byte_at [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 92 0 92 28] (i: UInt64.t) (return (x: UInt8.t)) =
+(! bb0
+  [ bb0 = s0
+    [ s0 = [ &_7 <- ([%#ssha256] (8: UInt64.t)) = ([%#ssha256'0] (0: UInt64.t)) ] s1
+    | s1 = {[@expl:division by zero] [%#ssha256'0] not _7} s2
+    | s2 = UInt64.div [%#ssha256'0] {i} {[%#ssha256] (8: UInt64.t)} (fun (_x: UInt64.t) -> [ &_5 <- _x ] s3)
+    | s3 = wrapping_add [%#ssha256'2] {[%#ssha256'1] const_SEED} {_5} (fun (_x: UInt64.t) -> [ &_4 <- _x ] s4)
+    | s4 = mix64 [%#ssha256'3] {_4} (fun (_x: UInt64.t) -> [ &_3 <- _x ] s5)
+    | s5 = [ &_11 <- ([%#ssha256'4] (8: UInt64.t)) = ([%#ssha256'5] (0: UInt64.t)) ] s6
+    | s6 = {[@expl:remainder by zero] [%#ssha256'5] not _11} s7
+    | s7 = UInt64.rem [%#ssha256'5] {i} {[%#ssha256'4] (8: UInt64.t)} (fun (_x: UInt64.t) -> [ &_9 <- _x ] s8)
+    | s8 = UInt64.mul [%#ssha256'7] {[%#ssha256'6] (8: UInt64.t)} {_9} (fun (_x: UInt64.t) -> [ &_8 <- _x ] s9)
+    | s9 = UInt64.shr [%#ssha256'8] {_3} {UInt64.t'int _8} (fun (_x: UInt64.t) -> [ &_2 <- _x ] s10)
+    | s10 = [ &_ret <- UInt8.of_int (UInt64.t'int _2) ] s11
+    | s11 = return {_ret} ] ]
+  [ & _ret: UInt8.t = Any.any_l ()
+  | & i: UInt64.t = i
+  | & _2: UInt64.t = Any.any_l ()
+  | & _3: UInt64.t = Any.any_l ()
+  | & _4: UInt64.t = Any.any_l ()
+  | & _5: UInt64.t = Any.any_l ()
+  | & _7: bool = Any.any_l ()
+  | & _8: UInt64.t = Any.any_l ()
+  | & _9: UInt64.t = Any.any_l ()
+  | & _11: bool = Any.any_l () ]) [ return (result: UInt8.t) -> (! return {result}) ]

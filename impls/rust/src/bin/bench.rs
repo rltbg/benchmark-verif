@@ -16,6 +16,15 @@ fn main() {
         "matmul" => matmul::run(n),
         "lines" => lines::run(n),
         "hashmap" => hashmap::run(n),
+        "sha256" => sha256::run(n, threads),
+        "ptrchase" => ptrchase::run(n, threads),
+        "stream" => stream::run(n, threads),
+        "ntt" => ntt::run(n, threads),
+        "parmatmul" => parmatmul::run(n, threads),
+        "parsort" => parsort::run(n, threads),
+        "parsha" => parsha::run(n, threads),
+        "bfs" => bfs::run(n, threads),
+        "strsort" => strsort::run(n, threads),
         // @@DISPATCH@@ (une ligne `"<nom>" => <nom>::run(n, threads),`)
         _ => {
             eprintln!("workload inconnu");

@@ -1,8 +1,8 @@
 (* #"/home/user/benchmark-verif/impls/rust/src/common.rs" 19 0 19 37 *)
 
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
 let%span scommon = "/home/user/benchmark-verif/impls/rust/src/common.rs" 20 26 20 39
 let%span scommon'0 = "/home/user/benchmark-verif/impls/rust/src/common.rs" 20 4 20 40
-let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
 
 use creusot.int.UInt64
 use creusot.prelude.Any

@@ -203,6 +203,13 @@ fn run_hashmap(n: usize) -> u64 {
 
 mod w_sha256;
 mod w_bfs;
+mod w_ptrchase;
+mod w_ntt;
+mod w_stream;
+mod w_parmatmul;
+mod w_parsort;
+mod w_parsha;
+mod w_strsort;
 // @@MODS@@ (une ligne `mod w_<nom>;` ; chaque module expose `pub fn run(n: usize, threads: usize) -> u64`)
 
 fn extended(w: &str, n: usize, threads: usize) -> Option<u64> {
@@ -210,6 +217,13 @@ fn extended(w: &str, n: usize, threads: usize) -> Option<u64> {
     match w {
         "sha256" => Some(w_sha256::run(n, threads)),
         "bfs" => Some(w_bfs::run(n, threads)),
+        "ptrchase" => Some(w_ptrchase::run(n, threads)),
+        "ntt" => Some(w_ntt::run(n, threads)),
+        "stream" => Some(w_stream::run(n, threads)),
+        "parmatmul" => Some(w_parmatmul::run(n, threads)),
+        "parsort" => Some(w_parsort::run(n, threads)),
+        "parsha" => Some(w_parsha::run(n, threads)),
+        "strsort" => Some(w_strsort::run(n, threads)),
         // @@DISPATCH@@
         _ => None,
     }

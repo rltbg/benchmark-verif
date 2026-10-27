@@ -1,0 +1,190 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 161 0 161 43 *)
+
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 96 22 96 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 97 22 97 22
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span smacros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
+let%span smacros'0 = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
+let%span sptrchase = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 163 32 163 33
+let%span sptrchase'0 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 163 32 163 37
+let%span sptrchase'1 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 163 26 163 30
+let%span sptrchase'2 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 164 29 164 33
+let%span sptrchase'3 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 165 22 165 38
+let%span sptrchase'4 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 166 27 166 34
+let%span sptrchase'5 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 166 20 166 47
+let%span sptrchase'6 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 166 13 166 54
+let%span sptrchase'7 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 167 13 167 35
+let%span sptrchase'8 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 168 4 168 25
+let%span sptrchase'9 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 169 13 169 28
+let%span sptrchase'10 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 170 25 170 32
+let%span sptrchase'11 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 170 18 170 37
+let%span sptrchase'12 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 170 11 170 42
+let%span sptrchase'13 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 170 4 170 47
+let%span sptrchase'14 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 160 11 160 38
+let%span sptrchase'15 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 16 11 16 60
+let%span sptrchase'16 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 17 10 17 70
+let%span sptrchase'17 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 161 0 161 43
+let%span sptrchase'18 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 94 11 94 76
+let%span sptrchase'19 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 118 11 118 59
+let%span sptrchase'20 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 119 10 119 39
+let%span sptrchase'21 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 142 11 142 59
+
+use creusot.int.UInt64
+use seq.Seq
+use creusot.int.UInt32
+use creusot.prelude.MutBorrow
+use creusot.prelude.Any
+use int.Int
+
+type t_Vec_u64_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u64_Global (self: t_Vec_u64_Global) : Seq.seq UInt64.t
+
+axiom view_Vec_u64_Global_spec:
+  forall self: t_Vec_u64_Global [view_Vec_u64_Global self]. [%#svec'1] Seq.length (view_Vec_u64_Global self)
+    <= UInt64.t'int const_MAX
+
+function index_Vec_u64_Global [@inline:trivial] (self: t_Vec_u64_Global) (ix: int) : UInt64.t =
+  [%#svec'2] Seq.get (view_Vec_u64_Global self) ix
+
+meta "rewrite_def" function index_Vec_u64_Global
+
+let from_elem_u64 (elem: UInt64.t) (n: UInt64.t) (return (x: t_Vec_u64_Global)) = any
+  [ return (result: t_Vec_u64_Global) ->
+  {[@stop_split] [@expl:from_elem_u64 ensures] ([@stop_split] [@expl:from_elem ensures #0] [%#svec] Seq.length (view_Vec_u64_Global result)
+      = UInt64.t'int n)
+    /\ ([@stop_split] [@expl:from_elem ensures #1] [%#svec'0] forall i: int. 0 <= i /\ i < UInt64.t'int n
+      -> index_Vec_u64_Global result i = elem)}
+    (! return {result}) ]
+
+type t_Vec_u32_Global
+
+function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
+
+axiom view_Vec_u32_Global_spec:
+  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec'1] Seq.length (view_Vec_u32_Global self)
+    <= UInt64.t'int const_MAX
+
+function index_Vec_u32_Global [@inline:trivial] (self: t_Vec_u32_Global) (ix: int) : UInt32.t =
+  [%#svec'2] Seq.get (view_Vec_u32_Global self) ix
+
+meta "rewrite_def" function index_Vec_u32_Global
+
+let from_elem_u32 (elem: UInt32.t) (n: UInt64.t) (return (x: t_Vec_u32_Global)) = any
+  [ return (result: t_Vec_u32_Global) ->
+  {[@stop_split] [@expl:from_elem_u32 ensures] ([@stop_split] [@expl:from_elem ensures #0] [%#svec] Seq.length (view_Vec_u32_Global result)
+      = UInt64.t'int n)
+    /\ ([@stop_split] [@expl:from_elem ensures #1] [%#svec'0] forall i: int. 0 <= i /\ i < UInt64.t'int n
+      -> index_Vec_u32_Global result i = elem)}
+    (! return {result}) ]
+
+type tup2_usize_u64 = { f0: UInt64.t; f1: UInt64.t }
+
+let build (a: MutBorrow.t t_Vec_u64_Global) (n: UInt64.t) (return (x: tup2_usize_u64)) =
+{[@stop_split] [@expl:build requires] [%#sptrchase'15] 1 <= UInt64.t'int n
+  /\ UInt64.t'int n <= 2147483646 /\ Seq.length (view_Vec_u64_Global a.current) = 2 * UInt64.t'int n}
+  any
+  [ return (result: tup2_usize_u64) ->
+  {[@stop_split] [@expl:build ensures] [%#sptrchase'16] Seq.length (view_Vec_u64_Global a.final)
+      = Seq.length (view_Vec_u64_Global a.current)
+    /\ 1 <= UInt64.t'int result.f0 /\ UInt64.t'int result.f0 <= UInt64.t'int n}
+    (! return {result}) ]
+
+predicate resolve_refmut_Vec_u64_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u64_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u64_Global
+
+constant const_CK_INIT: UInt64.t = [%#sptrchase'17] (14695981039346656037: UInt64.t)
+
+let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> (! return {result}) ]
+
+let search_all (a: t_Vec_u64_Global) (cnt: UInt64.t) (n: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:search_all requires] [%#sptrchase'18] 1 <= UInt64.t'int cnt
+  /\ UInt64.t'int cnt <= UInt64.t'int n
+  /\ UInt64.t'int n <= 2147483646 /\ Seq.length (view_Vec_u64_Global a) = 2 * UInt64.t'int n}
+  any [ return (result: UInt64.t) -> (! return {result}) ]
+
+let sattolo (next: MutBorrow.t t_Vec_u32_Global) (n: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:sattolo requires] [%#sptrchase'19] 1 <= UInt64.t'int n
+  /\ UInt64.t'int n <= 2147483646 /\ Seq.length (view_Vec_u32_Global next.current) = UInt64.t'int n}
+  any
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:sattolo ensures] [%#sptrchase'20] Seq.length (view_Vec_u32_Global next.final)
+    = Seq.length (view_Vec_u32_Global next.current)}
+    (! return {result}) ]
+
+predicate resolve_refmut_Vec_u32_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u32_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u32_Global
+
+let chase (next: t_Vec_u32_Global) (n: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:chase requires] [%#sptrchase'21] 1 <= UInt64.t'int n
+  /\ UInt64.t'int n <= 2147483646 /\ Seq.length (view_Vec_u32_Global next) = UInt64.t'int n}
+  any [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let run [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 161 0 161 43] (n: UInt64.t) (threads: UInt64.t)
+  (return (x: UInt64.t)) = {[@stop_split] [@expl:run requires] [%#sptrchase'14] 1 <= UInt64.t'int n
+  /\ UInt64.t'int n <= 2147483646}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = UInt64.mul [%#sptrchase'0] {[%#sptrchase] (2: UInt64.t)} {n} (fun (_x: UInt64.t) -> [ &_6 <- _x ] s1)
+    | s1 = from_elem_u64 [%#smacros] {[%#sptrchase'1] (0: UInt64.t)} {_6}
+        (fun (_x: t_Vec_u64_Global) -> [ &a <- _x ] s2)
+    | s2 = from_elem_u32 [%#smacros'0] {[%#sptrchase'2] (0: UInt32.t)} {n}
+        (fun (_x: t_Vec_u32_Global) -> [ &next <- _x ] s3)
+    | s3 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_14 <- _bor ] [ &a <- _bor.final ] s4)
+    | s4 = MutBorrow.borrow_final <t_Vec_u64_Global> {_14.current} {MutBorrow.get_id _14}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_13 <- _bor ] [ &_14 <- { _14 with current = _bor.final } ] s5)
+    | s5 = build [%#sptrchase'3] {_13} {n} (fun (_x: tup2_usize_u64) -> [ &_12 <- _x ] s6)
+    | s6 = -{resolve_refmut_Vec_u64_Global _14}- s7
+    | s7 = [ &cnt <- _12.f0 ] s8
+    | s8 = [ &plen <- _12.f1 ] s9
+    | s9 = [ &_18 <- cnt ] s10
+    | s10 = ckfold [%#sptrchase'5] {[%#sptrchase'4] const_CK_INIT} {_18} (fun (_x: UInt64.t) -> [ &_17 <- _x ] s11)
+    | s11 = ckfold [%#sptrchase'6] {_17} {plen} (fun (_x: UInt64.t) -> [ &r1 <- _x ] s12)
+    | s12 = [ &_23 <- a ] s13
+    | s13 = search_all [%#sptrchase'7] {_23} {cnt} {n} (fun (_x: UInt64.t) -> [ &r2 <- _x ] s14)
+    | s14 = MutBorrow.borrow_mut <t_Vec_u32_Global> {next}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_28 <- _bor ] [ &next <- _bor.final ] s15)
+    | s15 = MutBorrow.borrow_final <t_Vec_u32_Global> {_28.current} {MutBorrow.get_id _28}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_27 <- _bor ] [ &_28 <- { _28 with current = _bor.final } ] s16)
+    | s16 = sattolo [%#sptrchase'8] {_27} {n} (fun (_x: ()) -> [ &_26 <- _x ] s17)
+    | s17 = -{resolve_refmut_Vec_u32_Global _28}- s18
+    | s18 = [ &_32 <- next ] s19
+    | s19 = chase [%#sptrchase'9] {_32} {n} (fun (_x: UInt64.t) -> [ &r3 <- _x ] s20)
+    | s20 = ckfold [%#sptrchase'11] {[%#sptrchase'10] const_CK_INIT} {r1} (fun (_x: UInt64.t) -> [ &_35 <- _x ] s21)
+    | s21 = ckfold [%#sptrchase'12] {_35} {r2} (fun (_x: UInt64.t) -> [ &_34 <- _x ] s22)
+    | s22 = ckfold [%#sptrchase'13] {_34} {r3} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s23)
+    | s23 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & n: UInt64.t = n
+  | & a: t_Vec_u64_Global = Any.any_l ()
+  | & _6: UInt64.t = Any.any_l ()
+  | & next: t_Vec_u32_Global = Any.any_l ()
+  | & cnt: UInt64.t = Any.any_l ()
+  | & plen: UInt64.t = Any.any_l ()
+  | & _12: tup2_usize_u64 = Any.any_l ()
+  | & _13: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _14: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & r1: UInt64.t = Any.any_l ()
+  | & _17: UInt64.t = Any.any_l ()
+  | & _18: UInt64.t = Any.any_l ()
+  | & r2: UInt64.t = Any.any_l ()
+  | & _23: t_Vec_u64_Global = Any.any_l ()
+  | & _26: () = Any.any_l ()
+  | & _27: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _28: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & r3: UInt64.t = Any.any_l ()
+  | & _32: t_Vec_u32_Global = Any.any_l ()
+  | & _34: UInt64.t = Any.any_l ()
+  | & _35: UInt64.t = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

@@ -1,0 +1,32 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 24 0 24 30 *)
+
+let%span ssha256 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 25 4 25 12
+let%span ssha256'0 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 25 22 25 24
+let%span ssha256'1 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 25 21 25 29
+let%span ssha256'2 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 25 15 25 30
+let%span ssha256'3 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 21 11 21 28
+
+use creusot.int.UInt32
+use creusot.prelude.Any
+use int.Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let rotr [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 24 0 24 30] (x: UInt32.t) (k: UInt32.t)
+  (return (x'0: UInt32.t)) = {[@stop_split] [@expl:rotr requires] [%#ssha256'3] 0 < UInt32.t'int k
+  /\ UInt32.t'int k < 32}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = UInt32.shr [%#ssha256] {x} {UInt32.t'int k} (fun (_x: UInt32.t) -> [ &_5 <- _x ] s1)
+    | s1 = UInt32.sub [%#ssha256'1] {[%#ssha256'0] (32: UInt32.t)} {k} (fun (_x: UInt32.t) -> [ &_10 <- _x ] s2)
+    | s2 = UInt32.shl [%#ssha256'2] {x} {UInt32.t'int _10} (fun (_x: UInt32.t) -> [ &_8 <- _x ] s3)
+    | s3 = [ &_ret <- UInt32.bw_or _5 _8 ] s4
+    | s4 = return {_ret} ] ]
+  [ & _ret: UInt32.t = Any.any_l ()
+  | & x: UInt32.t = x
+  | & k: UInt32.t = k
+  | & _5: UInt32.t = Any.any_l ()
+  | & _8: UInt32.t = Any.any_l ()
+  | & _10: UInt32.t = Any.any_l () ]) [ return (result: UInt32.t) -> (! return {result}) ]

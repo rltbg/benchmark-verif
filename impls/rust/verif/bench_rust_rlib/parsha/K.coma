@@ -1,0 +1,169 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/parsha.rs" 10 0 10 18 *)
+
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+let%span sparsha = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 4 11 14
+let%span sparsha'0 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 16 11 26
+let%span sparsha'1 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 28 11 38
+let%span sparsha'2 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 40 11 50
+let%span sparsha'3 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 52 11 62
+let%span sparsha'4 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 64 11 74
+let%span sparsha'5 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 76 11 86
+let%span sparsha'6 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 88 11 98
+let%span sparsha'7 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 100 11 110
+let%span sparsha'8 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 112 11 122
+let%span sparsha'9 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 11 124 11 134
+let%span sparsha'10 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 4 12 14
+let%span sparsha'11 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 16 12 26
+let%span sparsha'12 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 28 12 38
+let%span sparsha'13 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 40 12 50
+let%span sparsha'14 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 52 12 62
+let%span sparsha'15 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 64 12 74
+let%span sparsha'16 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 76 12 86
+let%span sparsha'17 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 88 12 98
+let%span sparsha'18 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 100 12 110
+let%span sparsha'19 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 112 12 122
+let%span sparsha'20 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 12 124 12 134
+let%span sparsha'21 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 4 13 14
+let%span sparsha'22 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 16 13 26
+let%span sparsha'23 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 28 13 38
+let%span sparsha'24 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 40 13 50
+let%span sparsha'25 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 52 13 62
+let%span sparsha'26 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 64 13 74
+let%span sparsha'27 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 76 13 86
+let%span sparsha'28 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 88 13 98
+let%span sparsha'29 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 100 13 110
+let%span sparsha'30 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 112 13 122
+let%span sparsha'31 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 13 124 13 134
+let%span sparsha'32 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 4 14 14
+let%span sparsha'33 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 16 14 26
+let%span sparsha'34 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 28 14 38
+let%span sparsha'35 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 40 14 50
+let%span sparsha'36 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 52 14 62
+let%span sparsha'37 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 64 14 74
+let%span sparsha'38 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 76 14 86
+let%span sparsha'39 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 88 14 98
+let%span sparsha'40 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 100 14 110
+let%span sparsha'41 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 112 14 122
+let%span sparsha'42 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 14 124 14 134
+let%span sparsha'43 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 4 15 14
+let%span sparsha'44 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 16 15 26
+let%span sparsha'45 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 28 15 38
+let%span sparsha'46 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 40 15 50
+let%span sparsha'47 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 52 15 62
+let%span sparsha'48 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 64 15 74
+let%span sparsha'49 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 76 15 86
+let%span sparsha'50 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 88 15 98
+let%span sparsha'51 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 100 15 110
+let%span sparsha'52 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 112 15 122
+let%span sparsha'53 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 15 124 15 134
+let%span sparsha'54 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 16 4 16 14
+let%span sparsha'55 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 16 16 16 26
+let%span sparsha'56 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 16 28 16 38
+let%span sparsha'57 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 16 40 16 50
+let%span sparsha'58 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 16 52 16 62
+let%span sparsha'59 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 16 64 16 74
+let%span sparsha'60 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 16 76 16 86
+let%span sparsha'61 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 16 88 16 98
+let%span sparsha'62 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 16 100 16 110
+let%span sparsha'63 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 10 0 10 18
+
+use creusot.slice.Slice64
+use creusot.int.UInt32
+use seq.Seq
+use creusot.int.UInt64
+use creusot.prelude.Any
+
+predicate inv_Seq_u32 [@inline:trivial] (_1: Seq.seq UInt32.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u32
+
+predicate invariant_array_u32_64 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (64: UInt64.t)
+
+predicate inv_array_u32_64 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_64 _1
+
+meta "rewrite_def" predicate inv_array_u32_64
+
+constant const_K [#"/home/user/benchmark-verif/impls/rust/src/parsha.rs" 10 0 10 18] : Slice64.array UInt32.t
+
+axiom const_K_spec: [%#sparsha'63] inv_array_u32_64 const_K
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let const_K_def [#"/home/user/benchmark-verif/impls/rust/src/parsha.rs" 10 0 10 18]
+  (return (x: Slice64.array UInt32.t)) = (! bb0
+  [ bb0 = s0
+    [ s0 = any
+      [ any_ (__arr_temp: Slice64.array UInt32.t) -> (! -{Seq.get __arr_temp.Slice64.elts 0
+          = ([%#sparsha] (1116352408: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 1 = ([%#sparsha'0] (1899447441: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 2 = ([%#sparsha'1] (3049323471: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 3 = ([%#sparsha'2] (3921009573: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 4 = ([%#sparsha'3] (961987163: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 5 = ([%#sparsha'4] (1508970993: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 6 = ([%#sparsha'5] (2453635748: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 7 = ([%#sparsha'6] (2870763221: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 8 = ([%#sparsha'7] (3624381080: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 9 = ([%#sparsha'8] (310598401: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 10 = ([%#sparsha'9] (607225278: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 11 = ([%#sparsha'10] (1426881987: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 12 = ([%#sparsha'11] (1925078388: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 13 = ([%#sparsha'12] (2162078206: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 14 = ([%#sparsha'13] (2614888103: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 15 = ([%#sparsha'14] (3248222580: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 16 = ([%#sparsha'15] (3835390401: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 17 = ([%#sparsha'16] (4022224774: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 18 = ([%#sparsha'17] (264347078: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 19 = ([%#sparsha'18] (604807628: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 20 = ([%#sparsha'19] (770255983: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 21 = ([%#sparsha'20] (1249150122: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 22 = ([%#sparsha'21] (1555081692: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 23 = ([%#sparsha'22] (1996064986: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 24 = ([%#sparsha'23] (2554220882: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 25 = ([%#sparsha'24] (2821834349: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 26 = ([%#sparsha'25] (2952996808: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 27 = ([%#sparsha'26] (3210313671: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 28 = ([%#sparsha'27] (3336571891: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 29 = ([%#sparsha'28] (3584528711: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 30 = ([%#sparsha'29] (113926993: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 31 = ([%#sparsha'30] (338241895: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 32 = ([%#sparsha'31] (666307205: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 33 = ([%#sparsha'32] (773529912: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 34 = ([%#sparsha'33] (1294757372: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 35 = ([%#sparsha'34] (1396182291: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 36 = ([%#sparsha'35] (1695183700: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 37 = ([%#sparsha'36] (1986661051: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 38 = ([%#sparsha'37] (2177026350: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 39 = ([%#sparsha'38] (2456956037: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 40 = ([%#sparsha'39] (2730485921: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 41 = ([%#sparsha'40] (2820302411: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 42 = ([%#sparsha'41] (3259730800: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 43 = ([%#sparsha'42] (3345764771: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 44 = ([%#sparsha'43] (3516065817: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 45 = ([%#sparsha'44] (3600352804: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 46 = ([%#sparsha'45] (4094571909: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 47 = ([%#sparsha'46] (275423344: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 48 = ([%#sparsha'47] (430227734: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 49 = ([%#sparsha'48] (506948616: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 50 = ([%#sparsha'49] (659060556: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 51 = ([%#sparsha'50] (883997877: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 52 = ([%#sparsha'51] (958139571: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 53 = ([%#sparsha'52] (1322822218: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 54 = ([%#sparsha'53] (1537002063: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 55 = ([%#sparsha'54] (1747873779: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 56 = ([%#sparsha'55] (1955562222: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 57 = ([%#sparsha'56] (2024104815: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 58 = ([%#sparsha'57] (2227730452: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 59 = ([%#sparsha'58] (2361852424: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 60 = ([%#sparsha'59] (2428436474: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 61 = ([%#sparsha'60] (2756734187: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 62 = ([%#sparsha'61] (3204031479: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 63 = ([%#sparsha'62] (3329325298: UInt32.t))
+        /\ Seq.length __arr_temp.Slice64.elts = 64}-
+        [ &_ret <- __arr_temp ] s1) ]
+    | s1 = return {_ret} ] ] [ & _ret: Slice64.array UInt32.t = Any.any_l () ])
+  [ return (result: Slice64.array UInt32.t) -> -{const_K = result}-
+    {[@stop_split] [@expl:K result type invariant] [%#sparsha'63] inv_array_u32_64 result}
+    (! return {result}) ]

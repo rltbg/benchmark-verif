@@ -1,0 +1,10 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_crc_table": { "prover": "alt-ergo", "time": 0.021 },
+      "vc_from_elem_u32": { "prover": "alt-ergo", "time": 0.013 },
+      "vc_index_mut_Vec_u32_Global": { "prover": "alt-ergo", "time": 0.01 }
+    }
+  }
+}

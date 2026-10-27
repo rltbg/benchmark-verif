@@ -170,6 +170,12 @@ int main(int argc, char **argv) {
     else if (!strcmp(argv[1], "sha256")) ck = run_sha256(n, threads);
     else if (!strcmp(argv[1], "ntt")) ck = run_ntt(n, threads);
     else if (!strcmp(argv[1], "ptrchase")) ck = run_ptrchase(n, threads);
+    else if (!strcmp(argv[1], "alloc")) ck = run_alloc(n, threads);
+    else if (!strcmp(argv[1], "parmatmul")) ck = run_parmatmul(n, threads);
+    else if (!strcmp(argv[1], "parsort")) ck = run_parsort(n, threads);
+    else if (!strcmp(argv[1], "parsha")) ck = run_parsha(n, threads);
+    else if (!strcmp(argv[1], "stream")) ck = run_stream(n, threads);
+    else if (!strcmp(argv[1], "strsort")) ck = run_strsort(n, threads);
     /* @@DISPATCH@@ */
     else { fprintf(stderr, "workload inconnu\n"); return 2; }
     clock_gettime(CLOCK_MONOTONIC, &t1);

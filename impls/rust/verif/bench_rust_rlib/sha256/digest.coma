@@ -1,0 +1,526 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 113 0 113 35 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span ssha256 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 115 9 115 19
+let%span ssha256'0 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 115 21 115 31
+let%span ssha256'1 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 115 33 115 43
+let%span ssha256'2 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 115 45 115 55
+let%span ssha256'3 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 115 57 115 67
+let%span ssha256'4 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 115 69 115 79
+let%span ssha256'5 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 115 81 115 91
+let%span ssha256'6 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 115 93 115 103
+let%span ssha256'7 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 116 22 116 24
+let%span ssha256'8 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 116 17 116 25
+let%span ssha256'9 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 117 16 117 26
+let%span ssha256'10 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 117 17 117 21
+let%span ssha256'11 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 118 16 118 20
+let%span ssha256'12 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 120 14 120 26
+let%span ssha256'13 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 119 16 119 29
+let%span ssha256'14 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 122 8 122 29
+let%span ssha256'15 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 123 8 123 28
+let%span ssha256'16 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 124 13 124 14
+let%span ssha256'17 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 124 8 124 14
+let%span ssha256'18 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 126 19 126 29
+let%span ssha256'19 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 126 20 126 23
+let%span ssha256'20 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 127 16 127 18
+let%span ssha256'21 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 127 12 127 18
+let%span ssha256'22 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 128 24 128 26
+let%span ssha256'23 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 128 15 128 26
+let%span ssha256'24 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 129 16 129 22
+let%span ssha256'25 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 131 14 131 21
+let%span ssha256'26 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 130 16 130 35
+let%span ssha256'27 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 133 26 133 41
+let%span ssha256'28 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 133 18 133 42
+let%span ssha256'29 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 133 8 133 15
+let%span ssha256'30 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 133 8 133 42
+let%span ssha256'31 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 134 13 134 14
+let%span ssha256'32 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 134 8 134 14
+let%span ssha256'33 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 136 4 136 11
+let%span ssha256'34 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 136 14 136 18
+let%span ssha256'35 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 136 4 136 18
+let%span ssha256'36 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 137 23 137 25
+let%span ssha256'37 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 137 28 137 35
+let%span ssha256'38 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 137 45 137 53
+let%span ssha256'39 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 138 28 138 29
+let%span ssha256'40 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 138 15 138 29
+let%span ssha256'41 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 139 16 139 22
+let%span ssha256'42 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 141 14 141 20
+let%span ssha256'43 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 142 14 142 15
+let%span ssha256'44 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 140 16 140 23
+let%span ssha256'45 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 143 45 143 46
+let%span ssha256'46 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 143 45 143 50
+let%span ssha256'47 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 143 40 143 42
+let%span ssha256'48 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 143 39 143 51
+let%span ssha256'49 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 143 30 143 52
+let%span ssha256'50 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 143 21 143 22
+let%span ssha256'51 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 143 13 143 22
+let%span ssha256'52 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 143 13 143 26
+let%span ssha256'53 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 143 8 143 27
+let%span ssha256'54 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 143 8 143 58
+let%span ssha256'55 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 144 13 144 14
+let%span ssha256'56 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 144 8 144 14
+let%span ssha256'57 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 146 18 146 24
+let%span ssha256'58 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 148 14 148 27
+let%span ssha256'59 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 147 16 147 65
+let%span ssha256'60 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 150 20 150 26
+let%span ssha256'61 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 152 18 152 25
+let%span ssha256'62 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 153 18 153 20
+let%span ssha256'63 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 151 20 151 86
+let%span ssha256'64 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 154 32 154 33
+let%span ssha256'65 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 154 32 154 37
+let%span ssha256'66 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 154 26 154 37
+let%span ssha256'67 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 154 21 154 38
+let%span ssha256'68 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 154 50 154 52
+let%span ssha256'69 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 154 19 154 53
+let%span ssha256'70 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 155 31 155 32
+let%span ssha256'71 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 155 31 155 36
+let%span ssha256'72 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 155 25 155 36
+let%span ssha256'73 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 155 39 155 40
+let%span ssha256'74 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 155 25 155 40
+let%span ssha256'75 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 155 20 155 41
+let%span ssha256'76 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 155 53 155 55
+let%span ssha256'77 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 155 18 155 56
+let%span ssha256'78 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 156 31 156 32
+let%span ssha256'79 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 156 31 156 36
+let%span ssha256'80 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 156 25 156 36
+let%span ssha256'81 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 156 39 156 40
+let%span ssha256'82 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 156 25 156 40
+let%span ssha256'83 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 156 20 156 41
+let%span ssha256'84 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 156 53 156 54
+let%span ssha256'85 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 156 18 156 55
+let%span ssha256'86 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 157 30 157 31
+let%span ssha256'87 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 157 30 157 35
+let%span ssha256'88 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 157 24 157 35
+let%span ssha256'89 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 157 38 157 39
+let%span ssha256'90 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 157 24 157 39
+let%span ssha256'91 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 157 19 157 40
+let%span ssha256'92 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 154 12 154 16
+let%span ssha256'93 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 154 12 157 48
+let%span ssha256'94 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 158 17 158 18
+let%span ssha256'95 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 158 12 158 18
+let%span ssha256'96 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 160 8 160 28
+let%span ssha256'97 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 161 15 161 17
+let%span ssha256'98 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 161 8 161 17
+let%span ssha256'99 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 111 11 111 30
+let%span ssha256'100 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 113 27 113 35
+let%span ssha256'101 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 99 26 99 27
+let%span ssha256'102 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 97 11 97 15
+let%span ssha256'103 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 36 16 36 17
+let%span ssha256'104 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 36 34 36 35
+let%span ssha256'105 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 34 11 34 15
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+let%span sinvariant = "/opt/tools/creusot/creusot-std/src/invariant.rs" 98 20 98 44
+let%span sinvariant'0 = "/opt/tools/creusot/creusot-std/src/invariant.rs" 90 8 90 18
+
+use creusot.slice.Slice64
+use creusot.int.UInt32
+use creusot.int.UInt64
+use seq.Seq
+use creusot.prelude.MutBorrow
+use creusot.int.UInt8
+use int.ComputerDivision
+use creusot.int.Int32
+use creusot.prelude.Any
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+predicate inv_Seq_u32 [@inline:trivial] (_1: Seq.seq UInt32.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u32
+
+predicate invariant_array_u32_8 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (8: UInt64.t)
+
+predicate inv_array_u32_8 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_8 _1
+
+meta "rewrite_def" predicate inv_array_u32_8
+
+predicate invariant_array_u32_16 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (16: UInt64.t)
+
+predicate inv_array_u32_16 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_16 _1
+
+meta "rewrite_def" predicate inv_array_u32_16
+
+predicate invariant_refmut_array_u32_16 [@inline:trivial] (self: MutBorrow.t (Slice64.array UInt32.t)) =
+  [%#sinvariant] inv_array_u32_16 self.current /\ inv_array_u32_16 self.final
+
+meta "rewrite_def" predicate invariant_refmut_array_u32_16
+
+predicate inv_refmut_array_u32_16 [@inline:trivial] (_1: MutBorrow.t (Slice64.array UInt32.t)) =
+  invariant_refmut_array_u32_16 _1
+
+meta "rewrite_def" predicate inv_refmut_array_u32_16
+
+let load_block (b: UInt64.t) (m: MutBorrow.t (Slice64.array UInt32.t)) (return (x: ())) =
+{[@stop_split] [@expl:load_block 'm' type invariant] [%#ssha256'101] inv_refmut_array_u32_16 m}
+  any [ return (result: ()) -> (! return {result}) ]
+
+predicate resolve_refmut_array_u32_16 [@inline:trivial] (_1: MutBorrow.t (Slice64.array UInt32.t)) =
+  _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_array_u32_16
+
+predicate invariant_refmut_array_u32_8 [@inline:trivial] (self: MutBorrow.t (Slice64.array UInt32.t)) =
+  [%#sinvariant] inv_array_u32_8 self.current /\ inv_array_u32_8 self.final
+
+meta "rewrite_def" predicate invariant_refmut_array_u32_8
+
+predicate inv_refmut_array_u32_8 [@inline:trivial] (_1: MutBorrow.t (Slice64.array UInt32.t)) =
+  invariant_refmut_array_u32_8 _1
+
+meta "rewrite_def" predicate inv_refmut_array_u32_8
+
+predicate invariant_ref_array_u32_16 [@inline:trivial] (self: Slice64.array UInt32.t) =
+  [%#sinvariant'0] inv_array_u32_16 self
+
+meta "rewrite_def" predicate invariant_ref_array_u32_16
+
+predicate inv_ref_array_u32_16 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_ref_array_u32_16 _1
+
+meta "rewrite_def" predicate inv_ref_array_u32_16
+
+let compress (h: MutBorrow.t (Slice64.array UInt32.t)) (m: Slice64.array UInt32.t) (return (x: ())) =
+{[@stop_split] [@expl:compress requires] ([@stop_split] [@expl:compress 'h' type invariant] [%#ssha256'103] inv_refmut_array_u32_8 h)
+  /\ ([@stop_split] [@expl:compress 'm' type invariant] [%#ssha256'104] inv_ref_array_u32_16 m)}
+  any [ return (result: ()) -> (! return {result}) ]
+
+predicate resolve_refmut_array_u32_8 [@inline:trivial] (_1: MutBorrow.t (Slice64.array UInt32.t)) =
+  _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_array_u32_8
+
+predicate inv_Seq_u8 [@inline:trivial] (_1: Seq.seq UInt8.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u8
+
+predicate invariant_array_u8_128 (self: Slice64.array UInt8.t) =
+  [%#sarray] inv_Seq_u8 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (128: UInt64.t)
+
+predicate inv_array_u8_128 [@inline:trivial] (_1: Slice64.array UInt8.t) = invariant_array_u8_128 _1
+
+meta "rewrite_def" predicate inv_array_u8_128
+
+let byte_at (i: UInt64.t) (return (x: UInt8.t)) = any [ return (result: UInt8.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let digest [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 113 0 113 35] (n: UInt64.t)
+  (return (x: Slice64.array UInt32.t)) = {[@stop_split] [@expl:digest requires] [%#ssha256'99] UInt64.t'int n
+  <= 1099511627776}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = any
+      [ any_ (__arr_temp: Slice64.array UInt32.t) -> (! -{Seq.get __arr_temp.Slice64.elts 0
+          = ([%#ssha256] (1779033703: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 1 = ([%#ssha256'0] (3144134277: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 2 = ([%#ssha256'1] (1013904242: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 3 = ([%#ssha256'2] (2773480762: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 4 = ([%#ssha256'3] (1359893119: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 5 = ([%#ssha256'4] (2600822924: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 6 = ([%#ssha256'5] (528734635: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 7 = ([%#ssha256'6] (1541459225: UInt32.t))
+        /\ Seq.length __arr_temp.Slice64.elts = 8}-
+        [ &h <- __arr_temp ] s1) ]
+    | s1 = [ &_8 <- ([%#ssha256'7] (64: UInt64.t)) = ([%#ssha256'8] (0: UInt64.t)) ] s2
+    | s2 = {[@expl:division by zero] [%#ssha256'8] not _8} s3
+    | s3 = UInt64.div [%#ssha256'8] {n} {[%#ssha256'7] (64: UInt64.t)} (fun (_x: UInt64.t) -> [ &_6 <- _x ] s4)
+    | s4 = [ &blocks <- _6 ] s5
+    | s5 = Slice64.create [%#ssha256'9] <UInt32.t> {[%#ssha256'9] (16: UInt64.t)}
+        {fun (_: int) -> [%#ssha256'10] (0: UInt32.t)} (fun (_res: Slice64.array UInt32.t) -> [ &m <- _res ] s6)
+    | s6 = [ &b <- [%#ssha256'11] (0: UInt64.t) ] s7
+    | s7 = bb2 ]
+  | bb2 = bb2invariant
+    [ bb2 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb2 ([%#ssha256'12] UInt64.t'int blocks
+      - UInt64.t'int b)}
+      bb2invariant
+    | bb2invariant = {[@expl:inferred invariant: type invariant] inv_array_u32_16 m}
+      {[@expl:inferred invariant: type invariant] inv_array_u32_8 h}
+      {[@expl:loop invariant] [%#ssha256'13] UInt64.t'int b <= UInt64.t'int blocks}
+      (! [ &variant_old_bb2 <- [%#ssha256'12] UInt64.t'int blocks - UInt64.t'int b ] s0)
+      [ s0 = [ &_20 <- UInt64.lt b blocks ] s1 | s1 = any [ br0 -> {_20 = false} (! bb7) | br1 -> {_20} (! bb4) ] ]
+      [ bb4 = s0
+        [ s0 = MutBorrow.borrow_mut <Slice64.array UInt32.t> {m}
+            (fun (_bor: MutBorrow.t (Slice64.array UInt32.t)) ->
+              [ &_26 <- _bor ] -{inv_array_u32_16 _bor.final}-
+              [ &m <- _bor.final ] s1) [ _ck -> (! {[@expl:type invariant] inv_array_u32_16 m} any) ]
+        | s1 = MutBorrow.borrow_final <Slice64.array UInt32.t> {_26.current} {MutBorrow.get_id _26}
+            (fun (_bor: MutBorrow.t (Slice64.array UInt32.t)) ->
+              [ &_25 <- _bor ] -{inv_array_u32_16 _bor.final}-
+              [ &_26 <- { _26 with current = _bor.final } ] s2)
+          [ _ck -> (! {[@expl:type invariant] inv_array_u32_16 _26.current} any) ]
+        | s2 = load_block [%#ssha256'14] {b} {_25} (fun (_x: ()) -> [ &_23 <- _x ] s3)
+        | s3 = s4 [ _ck -> (! {[@expl:type invariant] inv_refmut_array_u32_16 _26} any) ]
+        | s4 = -{resolve_refmut_array_u32_16 _26}- s5
+        | s5 = MutBorrow.borrow_mut <Slice64.array UInt32.t> {h}
+            (fun (_bor: MutBorrow.t (Slice64.array UInt32.t)) ->
+              [ &_29 <- _bor ] -{inv_array_u32_8 _bor.final}-
+              [ &h <- _bor.final ] s6) [ _ck -> (! {[@expl:type invariant] inv_array_u32_8 h} any) ]
+        | s6 = [ &_31 <- m ] s7
+        | s7 = MutBorrow.borrow_final <Slice64.array UInt32.t> {_29.current} {MutBorrow.get_id _29}
+            (fun (_bor: MutBorrow.t (Slice64.array UInt32.t)) ->
+              [ &_28 <- _bor ] -{inv_array_u32_8 _bor.final}-
+              [ &_29 <- { _29 with current = _bor.final } ] s8)
+          [ _ck -> (! {[@expl:type invariant] inv_array_u32_8 _29.current} any) ]
+        | s8 = compress [%#ssha256'15] {_28} {_31} (fun (_x: ()) -> [ &_27 <- _x ] s9)
+        | s9 = s10 [ _ck -> (! {[@expl:type invariant] inv_refmut_array_u32_8 _29} any) ]
+        | s10 = -{resolve_refmut_array_u32_8 _29}- s11
+        | s11 = UInt64.add [%#ssha256'17] {b} {[%#ssha256'16] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &b <- _x ] s12)
+        | s12 = bb2 ] ] ]
+  | bb7 = s0
+    [ s0 = Slice64.create [%#ssha256'18] <UInt8.t> {[%#ssha256'18] (128: UInt64.t)}
+        {fun (_: int) -> [%#ssha256'19] (0: UInt8.t)} (fun (_res: Slice64.array UInt8.t) -> [ &tail <- _res ] s1)
+    | s1 = [ &_36 <- ([%#ssha256'20] (64: UInt64.t)) = ([%#ssha256'21] (0: UInt64.t)) ] s2
+    | s2 = {[@expl:remainder by zero] [%#ssha256'21] not _36} s3
+    | s3 = UInt64.rem [%#ssha256'21] {n} {[%#ssha256'20] (64: UInt64.t)} (fun (_x: UInt64.t) -> [ &t <- _x ] s4)
+    | s4 = UInt64.mul [%#ssha256'23] {blocks} {[%#ssha256'22] (64: UInt64.t)} (fun (_x: UInt64.t) -> [ &base <- _x ] s5)
+    | s5 = [ &j <- [%#ssha256'24] (0: UInt64.t) ] s6
+    | s6 = bb9 ]
+  | bb9 = bb9invariant
+    [ bb9 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb9 ([%#ssha256'25] UInt64.t'int t
+      - UInt64.t'int j)}
+      bb9invariant
+    | bb9invariant = {[@expl:inferred invariant: type invariant] inv_array_u8_128 tail}
+      {[@expl:loop invariant] [%#ssha256'26] UInt64.t'int j <= UInt64.t'int t /\ UInt64.t'int t < 64}
+      (! [ &variant_old_bb9 <- [%#ssha256'25] UInt64.t'int t - UInt64.t'int j ] s0)
+      [ s0 = [ &_48 <- UInt64.lt j t ] s1 | s1 = any [ br0 -> {_48 = false} (! bb14) | br1 -> {_48} (! bb11) ] ]
+      [ bb11 = s0
+        [ s0 = [ &_54 <- j ] s1
+        | s1 = UInt64.add [%#ssha256'27] {base} {_54} (fun (_x: UInt64.t) -> [ &_52 <- _x ] s2)
+        | s2 = byte_at [%#ssha256'28] {_52} (fun (_x: UInt8.t) -> [ &_51 <- _x ] s3)
+        | s3 = [ &_56 <- j ] s4
+        | s4 = [ &_57 <- UInt64.lt _56 ([%#ssha256'29] (128: UInt64.t)) ] s5
+        | s5 = {[@expl:index in bounds] [%#ssha256'29] _57} s6
+        | s6 = Slice64.set [%#ssha256'30] <UInt8.t> {tail} {_56} {_51}
+            (fun (r: Slice64.array UInt8.t) -> [ &tail <- r ] s7)
+        | s7 = UInt64.add [%#ssha256'32] {j} {[%#ssha256'31] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &j <- _x ] s8)
+        | s8 = bb9 ] ] ]
+  | bb14 = s0
+    [ s0 = [ &_59 <- t ] s1
+    | s1 = [ &_60 <- UInt64.lt _59 ([%#ssha256'33] (128: UInt64.t)) ] s2
+    | s2 = {[@expl:index in bounds] [%#ssha256'33] _60} s3
+    | s3 = Slice64.set [%#ssha256'35] <UInt8.t> {tail} {_59} {[%#ssha256'34] (128: UInt8.t)}
+        (fun (r: Slice64.array UInt8.t) -> [ &tail <- r ] s4)
+    | s4 = [ &_62 <- UInt64.lt t ([%#ssha256'36] (56: UInt64.t)) ] s5
+    | s5 = any [ br0 -> {_62 = false} (! bb17) | br1 -> {_62} (! bb16) ] ]
+  | bb16 = s0 [ s0 = [ &total <- [%#ssha256'37] (64: UInt64.t) ] s1 | s1 = bb18 ]
+  | bb17 = s0 [ s0 = [ &total <- [%#ssha256'38] (128: UInt64.t) ] s1 | s1 = bb18 ]
+  | bb18 = s0
+    [ s0 = [ &_65 <- n ] s1
+    | s1 = UInt64.mul [%#ssha256'40] {_65} {[%#ssha256'39] (8: UInt64.t)} (fun (_x: UInt64.t) -> [ &bits <- _x ] s2)
+    | s2 = [ &q <- [%#ssha256'41] (0: UInt64.t) ] s3
+    | s3 = bb19 ]
+  | bb19 = bb19invariant
+    [ bb19 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb19 ([%#ssha256'42] 8 - UInt64.t'int q)}
+      bb19invariant
+    | bb19invariant = {[@expl:inferred invariant: type invariant] inv_array_u8_128 tail}
+      {[@expl:loop invariant] [%#ssha256'44] UInt64.t'int q <= 8}
+      (! [ &variant_old_bb19 <- [%#ssha256'42] 8 - UInt64.t'int q ] s0)
+      [ s0 = [ &_74 <- UInt64.lt q ([%#ssha256'43] (8: UInt64.t)) ] s1
+      | s1 = any [ br0 -> {_74 = false} (! bb23) | br1 -> {_74} (! bb21) ] ]
+      [ bb21 = s0
+        [ s0 = UInt64.mul [%#ssha256'46] {[%#ssha256'45] (8: UInt64.t)} {q} (fun (_x: UInt64.t) -> [ &_79 <- _x ] s1)
+        | s1 = UInt64.sub [%#ssha256'48] {[%#ssha256'47] (56: UInt64.t)} {_79} (fun (_x: UInt64.t) -> [ &_78 <- _x ] s2)
+        | s2 = UInt64.shr [%#ssha256'49] {bits} {UInt64.t'int _78} (fun (_x: UInt64.t) -> [ &_76 <- _x ] s3)
+        | s3 = UInt64.sub [%#ssha256'51] {total} {[%#ssha256'50] (8: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_82 <- _x ] s4)
+        | s4 = UInt64.add [%#ssha256'52] {_82} {q} (fun (_x: UInt64.t) -> [ &_81 <- _x ] s5)
+        | s5 = [ &_85 <- UInt64.lt _81 ([%#ssha256'53] (128: UInt64.t)) ] s6
+        | s6 = {[@expl:index in bounds] [%#ssha256'53] _85} s7
+        | s7 = Slice64.set [%#ssha256'54] <UInt8.t> {tail} {_81} {UInt8.of_int (UInt64.t'int _76)}
+            (fun (r: Slice64.array UInt8.t) -> [ &tail <- r ] s8)
+        | s8 = UInt64.add [%#ssha256'56] {q} {[%#ssha256'55] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &q <- _x ] s9)
+        | s9 = bb19 ] ] ]
+  | bb23 = s0 [ s0 = [ &off <- [%#ssha256'57] (0: UInt64.t) ] s1 | s1 = bb24 ]
+  | bb24 = bb24invariant
+    [ bb24 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb24 ([%#ssha256'58] UInt64.t'int total
+      - UInt64.t'int off)}
+      bb24invariant
+    | bb24invariant = {[@expl:inferred invariant: type invariant] inv_array_u32_16 m}
+      {[@expl:inferred invariant: type invariant] inv_array_u32_8 h}
+      {[@expl:loop invariant] [%#ssha256'59] ComputerDivision.mod (UInt64.t'int off) 64 = 0
+      /\ UInt64.t'int off <= UInt64.t'int total /\ UInt64.t'int total <= 128}
+      (! [ &variant_old_bb24 <- [%#ssha256'58] UInt64.t'int total - UInt64.t'int off ] s0)
+      [ s0 = [ &_96 <- UInt64.lt off total ] s1 | s1 = any [ br0 -> {_96 = false} (! bb37) | br1 -> {_96} (! bb26) ] ]
+      [ bb26 = s0 [ s0 = [ &i <- [%#ssha256'60] (0: UInt64.t) ] s1 | s1 = bb27 ]
+      | bb27 = bb27invariant
+        [ bb27 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb27 ([%#ssha256'61] 16 - UInt64.t'int i)}
+          bb27invariant
+        | bb27invariant = {[@expl:inferred invariant: type invariant] inv_array_u32_16 m}
+          {[@expl:loop invariant] [%#ssha256'63] UInt64.t'int i <= 16
+          /\ ComputerDivision.mod (UInt64.t'int off) 64 = 0
+          /\ UInt64.t'int off + 64 <= UInt64.t'int total /\ UInt64.t'int total <= 128}
+          (! [ &variant_old_bb27 <- [%#ssha256'61] 16 - UInt64.t'int i ] s0)
+          [ s0 = [ &_108 <- UInt64.lt i ([%#ssha256'62] (16: UInt64.t)) ] s1
+          | s1 = any [ br0 -> {_108 = false} (! bb35) | br1 -> {_108} (! bb29) ] ]
+          [ bb29 = s0
+            [ s0 = UInt64.mul [%#ssha256'65] {[%#ssha256'64] (4: UInt64.t)} {i}
+                (fun (_x: UInt64.t) -> [ &_117 <- _x ] s1)
+            | s1 = UInt64.add [%#ssha256'66] {off} {_117} (fun (_x: UInt64.t) -> [ &_115 <- _x ] s2)
+            | s2 = [ &_119 <- UInt64.lt _115 ([%#ssha256'67] (128: UInt64.t)) ] s3
+            | s3 = {[@expl:index in bounds] [%#ssha256'67] _119} s4
+            | s4 = Slice64.get [%#ssha256'67] <UInt8.t> {tail} {_115} (fun (r: UInt8.t) -> [ &_114 <- r ] s5)
+            | s5 = [ &_113 <- UInt32.of_int (UInt8.t'int _114) ] s6
+            | s6 = UInt32.shl [%#ssha256'69] {_113} {Int32.to_int ([%#ssha256'68] (24: Int32.t))}
+                (fun (_x: UInt32.t) -> [ &_112 <- _x ] s7)
+            | s7 = UInt64.mul [%#ssha256'71] {[%#ssha256'70] (4: UInt64.t)} {i}
+                (fun (_x: UInt64.t) -> [ &_126 <- _x ] s8)
+            | s8 = UInt64.add [%#ssha256'72] {off} {_126} (fun (_x: UInt64.t) -> [ &_124 <- _x ] s9)
+            | s9 = UInt64.add [%#ssha256'74] {_124} {[%#ssha256'73] (1: UInt64.t)}
+                (fun (_x: UInt64.t) -> [ &_123 <- _x ] s10)
+            | s10 = [ &_128 <- UInt64.lt _123 ([%#ssha256'75] (128: UInt64.t)) ] s11
+            | s11 = {[@expl:index in bounds] [%#ssha256'75] _128} s12
+            | s12 = Slice64.get [%#ssha256'75] <UInt8.t> {tail} {_123} (fun (r: UInt8.t) -> [ &_122 <- r ] s13)
+            | s13 = [ &_121 <- UInt32.of_int (UInt8.t'int _122) ] s14
+            | s14 = UInt32.shl [%#ssha256'77] {_121} {Int32.to_int ([%#ssha256'76] (16: Int32.t))}
+                (fun (_x: UInt32.t) -> [ &_120 <- _x ] s15)
+            | s15 = [ &_111 <- UInt32.bw_or _112 _120 ] s16
+            | s16 = UInt64.mul [%#ssha256'79] {[%#ssha256'78] (4: UInt64.t)} {i}
+                (fun (_x: UInt64.t) -> [ &_135 <- _x ] s17)
+            | s17 = UInt64.add [%#ssha256'80] {off} {_135} (fun (_x: UInt64.t) -> [ &_133 <- _x ] s18)
+            | s18 = UInt64.add [%#ssha256'82] {_133} {[%#ssha256'81] (2: UInt64.t)}
+                (fun (_x: UInt64.t) -> [ &_132 <- _x ] s19)
+            | s19 = [ &_137 <- UInt64.lt _132 ([%#ssha256'83] (128: UInt64.t)) ] s20
+            | s20 = {[@expl:index in bounds] [%#ssha256'83] _137} s21
+            | s21 = Slice64.get [%#ssha256'83] <UInt8.t> {tail} {_132} (fun (r: UInt8.t) -> [ &_131 <- r ] s22)
+            | s22 = [ &_130 <- UInt32.of_int (UInt8.t'int _131) ] s23
+            | s23 = UInt32.shl [%#ssha256'85] {_130} {Int32.to_int ([%#ssha256'84] (8: Int32.t))}
+                (fun (_x: UInt32.t) -> [ &_129 <- _x ] s24)
+            | s24 = [ &_110 <- UInt32.bw_or _111 _129 ] s25
+            | s25 = UInt64.mul [%#ssha256'87] {[%#ssha256'86] (4: UInt64.t)} {i}
+                (fun (_x: UInt64.t) -> [ &_143 <- _x ] s26)
+            | s26 = UInt64.add [%#ssha256'88] {off} {_143} (fun (_x: UInt64.t) -> [ &_141 <- _x ] s27)
+            | s27 = UInt64.add [%#ssha256'90] {_141} {[%#ssha256'89] (3: UInt64.t)}
+                (fun (_x: UInt64.t) -> [ &_140 <- _x ] s28)
+            | s28 = [ &_145 <- UInt64.lt _140 ([%#ssha256'91] (128: UInt64.t)) ] s29
+            | s29 = {[@expl:index in bounds] [%#ssha256'91] _145} s30
+            | s30 = Slice64.get [%#ssha256'91] <UInt8.t> {tail} {_140} (fun (r: UInt8.t) -> [ &_139 <- r ] s31)
+            | s31 = [ &_138 <- UInt32.of_int (UInt8.t'int _139) ] s32
+            | s32 = [ &_146 <- i ] s33
+            | s33 = [ &_147 <- UInt64.lt _146 ([%#ssha256'92] (16: UInt64.t)) ] s34
+            | s34 = {[@expl:index in bounds] [%#ssha256'92] _147} s35
+            | s35 = Slice64.set [%#ssha256'93] <UInt32.t> {m} {_146} {UInt32.bw_or _110 _138}
+                (fun (r: Slice64.array UInt32.t) -> [ &m <- r ] s36)
+            | s36 = UInt64.add [%#ssha256'95] {i} {[%#ssha256'94] (1: UInt64.t)}
+                (fun (_x: UInt64.t) -> [ &i <- _x ] s37)
+            | s37 = bb27 ] ] ]
+      | bb35 = s0
+        [ s0 = MutBorrow.borrow_mut <Slice64.array UInt32.t> {h}
+            (fun (_bor: MutBorrow.t (Slice64.array UInt32.t)) ->
+              [ &_151 <- _bor ] -{inv_array_u32_8 _bor.final}-
+              [ &h <- _bor.final ] s1) [ _ck -> (! {[@expl:type invariant] inv_array_u32_8 h} any) ]
+        | s1 = [ &_153 <- m ] s2
+        | s2 = MutBorrow.borrow_final <Slice64.array UInt32.t> {_151.current} {MutBorrow.get_id _151}
+            (fun (_bor: MutBorrow.t (Slice64.array UInt32.t)) ->
+              [ &_150 <- _bor ] -{inv_array_u32_8 _bor.final}-
+              [ &_151 <- { _151 with current = _bor.final } ] s3)
+          [ _ck -> (! {[@expl:type invariant] inv_array_u32_8 _151.current} any) ]
+        | s3 = compress [%#ssha256'96] {_150} {_153} (fun (_x: ()) -> [ &_149 <- _x ] s4)
+        | s4 = s5 [ _ck -> (! {[@expl:type invariant] inv_refmut_array_u32_8 _151} any) ]
+        | s5 = -{resolve_refmut_array_u32_8 _151}- s6
+        | s6 = UInt64.add [%#ssha256'98] {off} {[%#ssha256'97] (64: UInt64.t)} (fun (_x: UInt64.t) -> [ &off <- _x ] s7)
+        | s7 = bb24 ] ] ]
+  | bb37 = s0 [ s0 = [ &_ret <- h ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: Slice64.array UInt32.t = Any.any_l ()
+  | & n: UInt64.t = n
+  | & h: Slice64.array UInt32.t = Any.any_l ()
+  | & blocks: UInt64.t = Any.any_l ()
+  | & _6: UInt64.t = Any.any_l ()
+  | & _8: bool = Any.any_l ()
+  | & m: Slice64.array UInt32.t = Any.any_l ()
+  | & b: UInt64.t = Any.any_l ()
+  | & _20: bool = Any.any_l ()
+  | & _23: () = Any.any_l ()
+  | & _25: MutBorrow.t (Slice64.array UInt32.t) = Any.any_l ()
+  | & _26: MutBorrow.t (Slice64.array UInt32.t) = Any.any_l ()
+  | & _27: () = Any.any_l ()
+  | & _28: MutBorrow.t (Slice64.array UInt32.t) = Any.any_l ()
+  | & _29: MutBorrow.t (Slice64.array UInt32.t) = Any.any_l ()
+  | & _31: Slice64.array UInt32.t = Any.any_l ()
+  | & tail: Slice64.array UInt8.t = Any.any_l ()
+  | & t: UInt64.t = Any.any_l ()
+  | & _36: bool = Any.any_l ()
+  | & base: UInt64.t = Any.any_l ()
+  | & j: UInt64.t = Any.any_l ()
+  | & _48: bool = Any.any_l ()
+  | & _51: UInt8.t = Any.any_l ()
+  | & _52: UInt64.t = Any.any_l ()
+  | & _54: UInt64.t = Any.any_l ()
+  | & _56: UInt64.t = Any.any_l ()
+  | & _57: bool = Any.any_l ()
+  | & _59: UInt64.t = Any.any_l ()
+  | & _60: bool = Any.any_l ()
+  | & total: UInt64.t = Any.any_l ()
+  | & _62: bool = Any.any_l ()
+  | & bits: UInt64.t = Any.any_l ()
+  | & _65: UInt64.t = Any.any_l ()
+  | & q: UInt64.t = Any.any_l ()
+  | & _74: bool = Any.any_l ()
+  | & _76: UInt64.t = Any.any_l ()
+  | & _78: UInt64.t = Any.any_l ()
+  | & _79: UInt64.t = Any.any_l ()
+  | & _81: UInt64.t = Any.any_l ()
+  | & _82: UInt64.t = Any.any_l ()
+  | & _85: bool = Any.any_l ()
+  | & off: UInt64.t = Any.any_l ()
+  | & _96: bool = Any.any_l ()
+  | & i: UInt64.t = Any.any_l ()
+  | & _108: bool = Any.any_l ()
+  | & _110: UInt32.t = Any.any_l ()
+  | & _111: UInt32.t = Any.any_l ()
+  | & _112: UInt32.t = Any.any_l ()
+  | & _113: UInt32.t = Any.any_l ()
+  | & _114: UInt8.t = Any.any_l ()
+  | & _115: UInt64.t = Any.any_l ()
+  | & _117: UInt64.t = Any.any_l ()
+  | & _119: bool = Any.any_l ()
+  | & _120: UInt32.t = Any.any_l ()
+  | & _121: UInt32.t = Any.any_l ()
+  | & _122: UInt8.t = Any.any_l ()
+  | & _123: UInt64.t = Any.any_l ()
+  | & _124: UInt64.t = Any.any_l ()
+  | & _126: UInt64.t = Any.any_l ()
+  | & _128: bool = Any.any_l ()
+  | & _129: UInt32.t = Any.any_l ()
+  | & _130: UInt32.t = Any.any_l ()
+  | & _131: UInt8.t = Any.any_l ()
+  | & _132: UInt64.t = Any.any_l ()
+  | & _133: UInt64.t = Any.any_l ()
+  | & _135: UInt64.t = Any.any_l ()
+  | & _137: bool = Any.any_l ()
+  | & _138: UInt32.t = Any.any_l ()
+  | & _139: UInt8.t = Any.any_l ()
+  | & _140: UInt64.t = Any.any_l ()
+  | & _141: UInt64.t = Any.any_l ()
+  | & _143: UInt64.t = Any.any_l ()
+  | & _145: bool = Any.any_l ()
+  | & _146: UInt64.t = Any.any_l ()
+  | & _147: bool = Any.any_l ()
+  | & _149: () = Any.any_l ()
+  | & _150: MutBorrow.t (Slice64.array UInt32.t) = Any.any_l ()
+  | & _151: MutBorrow.t (Slice64.array UInt32.t) = Any.any_l ()
+  | & _153: Slice64.array UInt32.t = Any.any_l ()
+  | & variant_old_bb2: int = Any.any_l ()
+  | & variant_old_bb9: int = Any.any_l ()
+  | & variant_old_bb19: int = Any.any_l ()
+  | & variant_old_bb24: int = Any.any_l ()
+  | & variant_old_bb27: int = Any.any_l () ])
+  [ return (result: Slice64.array UInt32.t) ->
+  {[@stop_split] [@expl:digest result type invariant] [%#ssha256'100] inv_array_u32_8 result}
+    (! return {result}) ]

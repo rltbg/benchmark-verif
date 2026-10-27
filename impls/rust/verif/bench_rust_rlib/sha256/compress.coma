@@ -1,0 +1,822 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 36 0 36 48 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span ssha256 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 37 16 37 26
+let%span ssha256'0 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 37 17 37 21
+let%span ssha256'1 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 38 16 38 22
+let%span ssha256'2 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 40 14 40 21
+let%span ssha256'3 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 41 14 41 16
+let%span ssha256'4 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 39 16 39 24
+let%span ssha256'5 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 42 15 42 19
+let%span ssha256'6 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 42 8 42 12
+let%span ssha256'7 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 42 8 42 19
+let%span ssha256'8 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 43 13 43 14
+let%span ssha256'9 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 43 8 43 14
+let%span ssha256'10 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 46 14 46 21
+let%span ssha256'11 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 47 14 47 16
+let%span ssha256'12 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 45 16 45 36
+let%span ssha256'13 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 28 48 30
+let%span ssha256'14 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 24 48 30
+let%span ssha256'15 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 22 48 31
+let%span ssha256'16 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 33 48 34
+let%span ssha256'17 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 17 48 35
+let%span ssha256'18 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 49 48 51
+let%span ssha256'19 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 45 48 51
+let%span ssha256'20 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 43 48 52
+let%span ssha256'21 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 54 48 56
+let%span ssha256'22 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 38 48 57
+let%span ssha256'23 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 67 48 69
+let%span ssha256'24 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 63 48 69
+let%span ssha256'25 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 61 48 70
+let%span ssha256'26 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 74 48 75
+let%span ssha256'27 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 48 60 48 76
+let%span ssha256'28 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 28 49 29
+let%span ssha256'29 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 24 49 29
+let%span ssha256'30 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 22 49 30
+let%span ssha256'31 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 32 49 34
+let%span ssha256'32 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 17 49 35
+let%span ssha256'33 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 49 49 50
+let%span ssha256'34 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 45 49 50
+let%span ssha256'35 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 43 49 51
+let%span ssha256'36 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 53 49 55
+let%span ssha256'37 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 38 49 56
+let%span ssha256'38 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 66 49 67
+let%span ssha256'39 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 62 49 67
+let%span ssha256'40 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 60 49 68
+let%span ssha256'41 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 72 49 74
+let%span ssha256'42 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 49 59 49 75
+let%span ssha256'43 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 21 50 23
+let%span ssha256'44 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 17 50 23
+let%span ssha256'45 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 15 50 24
+let%span ssha256'46 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 15 50 41
+let%span ssha256'47 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 61 50 62
+let%span ssha256'48 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 57 50 62
+let%span ssha256'49 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 55 50 63
+let%span ssha256'50 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 15 50 64
+let%span ssha256'51 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 15 50 81
+let%span ssha256'52 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 8 50 12
+let%span ssha256'53 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 50 8 50 81
+let%span ssha256'54 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 51 13 51 14
+let%span ssha256'55 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 51 8 51 14
+let%span ssha256'56 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 53 18 53 19
+let%span ssha256'57 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 53 16 53 20
+let%span ssha256'58 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 54 18 54 19
+let%span ssha256'59 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 54 16 54 20
+let%span ssha256'60 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 55 18 55 19
+let%span ssha256'61 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 55 16 55 20
+let%span ssha256'62 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 56 18 56 19
+let%span ssha256'63 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 56 16 56 20
+let%span ssha256'64 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 57 18 57 19
+let%span ssha256'65 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 57 16 57 20
+let%span ssha256'66 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 58 18 58 19
+let%span ssha256'67 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 58 16 58 20
+let%span ssha256'68 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 59 18 59 19
+let%span ssha256'69 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 59 16 59 20
+let%span ssha256'70 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 60 19 60 20
+let%span ssha256'71 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 60 17 60 21
+let%span ssha256'72 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 61 8 61 9
+let%span ssha256'73 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 63 14 63 21
+let%span ssha256'74 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 64 14 64 16
+let%span ssha256'75 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 62 16 62 24
+let%span ssha256'76 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 66 34 66 35
+let%span ssha256'77 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 66 26 66 36
+let%span ssha256'78 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 66 47 66 49
+let%span ssha256'79 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 66 39 66 50
+let%span ssha256'80 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 66 61 66 63
+let%span ssha256'81 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 66 53 66 64
+let%span ssha256'82 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 65 17 66 65
+let%span ssha256'83 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 65 17 67 45
+let%span ssha256'84 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 68 26 68 27
+let%span ssha256'85 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 68 26 68 30
+let%span ssha256'86 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 65 17 68 31
+let%span ssha256'87 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 69 26 69 30
+let%span ssha256'88 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 65 17 69 31
+let%span ssha256'89 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 70 26 70 27
+let%span ssha256'90 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 70 18 70 28
+let%span ssha256'91 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 70 39 70 41
+let%span ssha256'92 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 70 31 70 42
+let%span ssha256'93 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 70 53 70 55
+let%span ssha256'94 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 70 45 70 56
+let%span ssha256'95 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 70 17 70 99
+let%span ssha256'96 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 74 12 74 30
+let%span ssha256'97 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 78 12 78 31
+let%span ssha256'98 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 79 13 79 14
+let%span ssha256'99 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 79 8 79 14
+let%span ssha256'100 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 81 13 81 14
+let%span ssha256'101 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 81 11 81 15
+let%span ssha256'102 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 81 11 81 31
+let%span ssha256'103 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 81 6 81 7
+let%span ssha256'104 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 81 4 81 8
+let%span ssha256'105 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 81 4 81 31
+let%span ssha256'106 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 82 13 82 14
+let%span ssha256'107 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 82 11 82 15
+let%span ssha256'108 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 82 11 82 31
+let%span ssha256'109 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 82 6 82 7
+let%span ssha256'110 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 82 4 82 8
+let%span ssha256'111 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 82 4 82 31
+let%span ssha256'112 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 83 13 83 14
+let%span ssha256'113 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 83 11 83 15
+let%span ssha256'114 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 83 11 83 31
+let%span ssha256'115 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 83 6 83 7
+let%span ssha256'116 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 83 4 83 8
+let%span ssha256'117 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 83 4 83 31
+let%span ssha256'118 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 84 13 84 14
+let%span ssha256'119 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 84 11 84 15
+let%span ssha256'120 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 84 11 84 31
+let%span ssha256'121 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 84 6 84 7
+let%span ssha256'122 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 84 4 84 8
+let%span ssha256'123 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 84 4 84 31
+let%span ssha256'124 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 85 13 85 14
+let%span ssha256'125 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 85 11 85 15
+let%span ssha256'126 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 85 11 85 31
+let%span ssha256'127 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 85 6 85 7
+let%span ssha256'128 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 85 4 85 8
+let%span ssha256'129 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 85 4 85 31
+let%span ssha256'130 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 86 13 86 14
+let%span ssha256'131 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 86 11 86 15
+let%span ssha256'132 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 86 11 86 31
+let%span ssha256'133 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 86 6 86 7
+let%span ssha256'134 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 86 4 86 8
+let%span ssha256'135 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 86 4 86 31
+let%span ssha256'136 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 87 13 87 14
+let%span ssha256'137 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 87 11 87 15
+let%span ssha256'138 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 87 11 87 31
+let%span ssha256'139 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 87 6 87 7
+let%span ssha256'140 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 87 4 87 8
+let%span ssha256'141 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 87 4 87 31
+let%span ssha256'142 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 88 13 88 14
+let%span ssha256'143 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 88 11 88 15
+let%span ssha256'144 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 88 11 88 32
+let%span ssha256'145 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 88 6 88 7
+let%span ssha256'146 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 88 4 88 8
+let%span ssha256'147 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 88 4 88 32
+let%span ssha256'148 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 36 16 36 17
+let%span ssha256'149 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 36 34 36 35
+let%span ssha256'150 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 34 11 34 15
+let%span ssha256'151 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 21 11 21 28
+let%span ssha256'152 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 12 0 12 18
+let%span ssha256'153 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 4 13 14
+let%span ssha256'154 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 16 13 26
+let%span ssha256'155 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 28 13 38
+let%span ssha256'156 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 40 13 50
+let%span ssha256'157 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 52 13 62
+let%span ssha256'158 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 64 13 74
+let%span ssha256'159 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 76 13 86
+let%span ssha256'160 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 88 13 98
+let%span ssha256'161 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 100 13 110
+let%span ssha256'162 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 112 13 122
+let%span ssha256'163 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 13 124 13 134
+let%span ssha256'164 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 4 14 14
+let%span ssha256'165 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 16 14 26
+let%span ssha256'166 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 28 14 38
+let%span ssha256'167 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 40 14 50
+let%span ssha256'168 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 52 14 62
+let%span ssha256'169 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 64 14 74
+let%span ssha256'170 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 76 14 86
+let%span ssha256'171 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 88 14 98
+let%span ssha256'172 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 100 14 110
+let%span ssha256'173 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 112 14 122
+let%span ssha256'174 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 14 124 14 134
+let%span ssha256'175 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 4 15 14
+let%span ssha256'176 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 16 15 26
+let%span ssha256'177 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 28 15 38
+let%span ssha256'178 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 40 15 50
+let%span ssha256'179 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 52 15 62
+let%span ssha256'180 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 64 15 74
+let%span ssha256'181 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 76 15 86
+let%span ssha256'182 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 88 15 98
+let%span ssha256'183 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 100 15 110
+let%span ssha256'184 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 112 15 122
+let%span ssha256'185 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 15 124 15 134
+let%span ssha256'186 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 4 16 14
+let%span ssha256'187 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 16 16 26
+let%span ssha256'188 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 28 16 38
+let%span ssha256'189 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 40 16 50
+let%span ssha256'190 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 52 16 62
+let%span ssha256'191 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 64 16 74
+let%span ssha256'192 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 76 16 86
+let%span ssha256'193 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 88 16 98
+let%span ssha256'194 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 100 16 110
+let%span ssha256'195 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 112 16 122
+let%span ssha256'196 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 16 124 16 134
+let%span ssha256'197 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 4 17 14
+let%span ssha256'198 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 16 17 26
+let%span ssha256'199 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 28 17 38
+let%span ssha256'200 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 40 17 50
+let%span ssha256'201 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 52 17 62
+let%span ssha256'202 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 64 17 74
+let%span ssha256'203 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 76 17 86
+let%span ssha256'204 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 88 17 98
+let%span ssha256'205 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 100 17 110
+let%span ssha256'206 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 112 17 122
+let%span ssha256'207 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 17 124 17 134
+let%span ssha256'208 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 18 4 18 14
+let%span ssha256'209 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 18 16 18 26
+let%span ssha256'210 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 18 28 18 38
+let%span ssha256'211 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 18 40 18 50
+let%span ssha256'212 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 18 52 18 62
+let%span ssha256'213 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 18 64 18 74
+let%span ssha256'214 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 18 76 18 86
+let%span ssha256'215 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 18 88 18 98
+let%span ssha256'216 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 18 100 18 110
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+let%span sinvariant = "/opt/tools/creusot/creusot-std/src/invariant.rs" 98 20 98 44
+let%span sinvariant'0 = "/opt/tools/creusot/creusot-std/src/invariant.rs" 90 8 90 18
+
+use creusot.int.UInt32
+use creusot.int.UInt64
+use creusot.slice.Slice64
+use seq.Seq
+use creusot.int.Int32
+use creusot.prelude.Any
+use creusot.prelude.MutBorrow
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+predicate inv_Seq_u32 [@inline:trivial] (_1: Seq.seq UInt32.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u32
+
+predicate invariant_array_u32_64 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (64: UInt64.t)
+
+predicate inv_array_u32_64 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_64 _1
+
+meta "rewrite_def" predicate inv_array_u32_64
+
+let rotr (x: UInt32.t) (k: UInt32.t) (return (x'0: UInt32.t)) = {[@stop_split] [@expl:rotr requires] [%#ssha256'151] 0
+    < UInt32.t'int k
+  /\ UInt32.t'int k < 32}
+  any [ return (result: UInt32.t) -> (! return {result}) ]
+
+let wrapping_add (self: UInt32.t) (rhs: UInt32.t) (return (x: UInt32.t)) = any
+  [ return (result: UInt32.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt32.add self rhs}
+    (! return {result}) ]
+
+constant const_K [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 12 0 12 18] : Slice64.array UInt32.t
+
+axiom const_K_spec: [%#ssha256'152] inv_array_u32_64 const_K
+
+let set_K (return) = bb0
+  [ bb0 = s0
+    [ s0 = any
+      [ any_ (__arr_temp: Slice64.array UInt32.t) -> (! -{Seq.get __arr_temp.Slice64.elts 0
+          = ([%#ssha256'153] (1116352408: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 1 = ([%#ssha256'154] (1899447441: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 2 = ([%#ssha256'155] (3049323471: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 3 = ([%#ssha256'156] (3921009573: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 4 = ([%#ssha256'157] (961987163: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 5 = ([%#ssha256'158] (1508970993: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 6 = ([%#ssha256'159] (2453635748: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 7 = ([%#ssha256'160] (2870763221: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 8 = ([%#ssha256'161] (3624381080: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 9 = ([%#ssha256'162] (310598401: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 10 = ([%#ssha256'163] (607225278: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 11 = ([%#ssha256'164] (1426881987: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 12 = ([%#ssha256'165] (1925078388: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 13 = ([%#ssha256'166] (2162078206: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 14 = ([%#ssha256'167] (2614888103: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 15 = ([%#ssha256'168] (3248222580: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 16 = ([%#ssha256'169] (3835390401: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 17 = ([%#ssha256'170] (4022224774: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 18 = ([%#ssha256'171] (264347078: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 19 = ([%#ssha256'172] (604807628: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 20 = ([%#ssha256'173] (770255983: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 21 = ([%#ssha256'174] (1249150122: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 22 = ([%#ssha256'175] (1555081692: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 23 = ([%#ssha256'176] (1996064986: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 24 = ([%#ssha256'177] (2554220882: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 25 = ([%#ssha256'178] (2821834349: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 26 = ([%#ssha256'179] (2952996808: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 27 = ([%#ssha256'180] (3210313671: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 28 = ([%#ssha256'181] (3336571891: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 29 = ([%#ssha256'182] (3584528711: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 30 = ([%#ssha256'183] (113926993: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 31 = ([%#ssha256'184] (338241895: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 32 = ([%#ssha256'185] (666307205: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 33 = ([%#ssha256'186] (773529912: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 34 = ([%#ssha256'187] (1294757372: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 35 = ([%#ssha256'188] (1396182291: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 36 = ([%#ssha256'189] (1695183700: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 37 = ([%#ssha256'190] (1986661051: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 38 = ([%#ssha256'191] (2177026350: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 39 = ([%#ssha256'192] (2456956037: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 40 = ([%#ssha256'193] (2730485921: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 41 = ([%#ssha256'194] (2820302411: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 42 = ([%#ssha256'195] (3259730800: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 43 = ([%#ssha256'196] (3345764771: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 44 = ([%#ssha256'197] (3516065817: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 45 = ([%#ssha256'198] (3600352804: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 46 = ([%#ssha256'199] (4094571909: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 47 = ([%#ssha256'200] (275423344: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 48 = ([%#ssha256'201] (430227734: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 49 = ([%#ssha256'202] (506948616: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 50 = ([%#ssha256'203] (659060556: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 51 = ([%#ssha256'204] (883997877: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 52 = ([%#ssha256'205] (958139571: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 53 = ([%#ssha256'206] (1322822218: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 54 = ([%#ssha256'207] (1537002063: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 55 = ([%#ssha256'208] (1747873779: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 56 = ([%#ssha256'209] (1955562222: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 57 = ([%#ssha256'210] (2024104815: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 58 = ([%#ssha256'211] (2227730452: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 59 = ([%#ssha256'212] (2361852424: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 60 = ([%#ssha256'213] (2428436474: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 61 = ([%#ssha256'214] (2756734187: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 62 = ([%#ssha256'215] (3204031479: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 63 = ([%#ssha256'216] (3329325298: UInt32.t))
+        /\ Seq.length __arr_temp.Slice64.elts = 64}-
+        [ &_ret <- __arr_temp ] s1) ]
+    | s1 = return {_ret} ] ] [ & _ret: Slice64.array UInt32.t = Any.any_l () ]
+  [ return (_const: Slice64.array UInt32.t) -> -{const_K = _const}- return ]
+
+predicate invariant_array_u32_8 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (8: UInt64.t)
+
+predicate inv_array_u32_8 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_8 _1
+
+meta "rewrite_def" predicate inv_array_u32_8
+
+predicate invariant_refmut_array_u32_8 [@inline:trivial] (self: MutBorrow.t (Slice64.array UInt32.t)) =
+  [%#sinvariant] inv_array_u32_8 self.current /\ inv_array_u32_8 self.final
+
+meta "rewrite_def" predicate invariant_refmut_array_u32_8
+
+predicate inv_refmut_array_u32_8 [@inline:trivial] (_1: MutBorrow.t (Slice64.array UInt32.t)) =
+  invariant_refmut_array_u32_8 _1
+
+meta "rewrite_def" predicate inv_refmut_array_u32_8
+
+predicate resolve_refmut_array_u32_8 [@inline:trivial] (_1: MutBorrow.t (Slice64.array UInt32.t)) =
+  _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_array_u32_8
+
+predicate invariant_array_u32_16 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (16: UInt64.t)
+
+predicate inv_array_u32_16 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_16 _1
+
+meta "rewrite_def" predicate inv_array_u32_16
+
+predicate invariant_ref_array_u32_16 [@inline:trivial] (self: Slice64.array UInt32.t) =
+  [%#sinvariant'0] inv_array_u32_16 self
+
+meta "rewrite_def" predicate invariant_ref_array_u32_16
+
+predicate inv_ref_array_u32_16 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_ref_array_u32_16 _1
+
+meta "rewrite_def" predicate inv_ref_array_u32_16
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let compress [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 36 0 36 48]
+  (h: MutBorrow.t (Slice64.array UInt32.t)) (m: Slice64.array UInt32.t) (return (x: ())) =
+{[@stop_split] [@expl:compress requires] ([@stop_split] [@expl:compress 'h' type invariant] [%#ssha256'148] inv_refmut_array_u32_8 h)
+  /\ ([@stop_split] [@expl:compress 'm' type invariant] [%#ssha256'149] inv_ref_array_u32_16 m)}
+  (! set_K
+    (bb0
+    [ bb0 = s0'0
+      [ s0'0 = Slice64.create [%#ssha256] <UInt32.t> {[%#ssha256] (64: UInt64.t)}
+          {fun (_: int) -> [%#ssha256'0] (0: UInt32.t)} (fun (_res: Slice64.array UInt32.t) -> [ &w <- _res ] s1'0)
+      | s1'0 = [ &t <- [%#ssha256'1] (0: UInt64.t) ] s2
+      | s2 = bb1 ]
+    | bb1 = bb1invariant
+      [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#ssha256'2] 16 - UInt64.t'int t)}
+        bb1invariant
+      | bb1invariant = {[@expl:inferred invariant: type invariant] inv_array_u32_64 w}
+        {[@expl:loop invariant] [%#ssha256'4] UInt64.t'int t <= 16}
+        (! [ &variant_old_bb1 <- [%#ssha256'2] 16 - UInt64.t'int t ] s0'0)
+        [ s0'0 = [ &_13 <- UInt64.lt t ([%#ssha256'3] (16: UInt64.t)) ] s1'0
+        | s1'0 = any [ br0 -> {_13 = false} (! bb7) | br1 -> {_13} (! bb3) ] ]
+        [ bb3 = s0'0
+          [ s0'0 = [ &_16 <- t ] s1'0
+          | s1'0 = [ &_17 <- UInt64.lt _16 ([%#ssha256'5] (16: UInt64.t)) ] s2
+          | s2 = {[@expl:index in bounds] [%#ssha256'5] _17} s3
+          | s3 = Slice64.get [%#ssha256'5] <UInt32.t> {m} {_16} (fun (r: UInt32.t) -> [ &_15 <- r ] s4)
+          | s4 = [ &_18 <- t ] s5
+          | s5 = [ &_19 <- UInt64.lt _18 ([%#ssha256'6] (64: UInt64.t)) ] s6
+          | s6 = {[@expl:index in bounds] [%#ssha256'6] _19} s7
+          | s7 = Slice64.set [%#ssha256'7] <UInt32.t> {w} {_18} {_15}
+              (fun (r: Slice64.array UInt32.t) -> [ &w <- r ] s8)
+          | s8 = UInt64.add [%#ssha256'9] {t} {[%#ssha256'8] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &t <- _x ] s9)
+          | s9 = bb1 ] ] ]
+    | bb7 = bb7invariant
+      [ bb7 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb7 ([%#ssha256'10] 64 - UInt64.t'int t)}
+        bb7invariant
+      | bb7invariant = {[@expl:inferred invariant: type invariant] inv_array_u32_64 w}
+        {[@expl:loop invariant] [%#ssha256'12] 16 <= UInt64.t'int t /\ UInt64.t'int t <= 64}
+        (! [ &variant_old_bb7 <- [%#ssha256'10] 64 - UInt64.t'int t ] s0'0)
+        [ s0'0 = [ &_27 <- UInt64.lt t ([%#ssha256'11] (64: UInt64.t)) ] s1'0
+        | s1'0 = any [ br0 -> {_27 = false} (! bb26) | br1 -> {_27} (! bb9) ] ]
+        [ bb9 = s0'0
+          [ s0'0 = UInt64.sub [%#ssha256'14] {t} {[%#ssha256'13] (15: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &_33 <- _x ] s1'0)
+          | s1'0 = [ &_35 <- UInt64.lt _33 ([%#ssha256'15] (64: UInt64.t)) ] s2
+          | s2 = {[@expl:index in bounds] [%#ssha256'15] _35} s3
+          | s3 = Slice64.get [%#ssha256'15] <UInt32.t> {w} {_33} (fun (r: UInt32.t) -> [ &_32 <- r ] s4)
+          | s4 = rotr [%#ssha256'17] {_32} {[%#ssha256'16] (7: UInt32.t)} (fun (_x: UInt32.t) -> [ &_31 <- _x ] s5)
+          | s5 = UInt64.sub [%#ssha256'19] {t} {[%#ssha256'18] (15: UInt64.t)} (fun (_x: UInt64.t) -> [ &_38 <- _x ] s6)
+          | s6 = [ &_40 <- UInt64.lt _38 ([%#ssha256'20] (64: UInt64.t)) ] s7
+          | s7 = {[@expl:index in bounds] [%#ssha256'20] _40} s8
+          | s8 = Slice64.get [%#ssha256'20] <UInt32.t> {w} {_38} (fun (r: UInt32.t) -> [ &_37 <- r ] s9)
+          | s9 = rotr [%#ssha256'22] {_37} {[%#ssha256'21] (18: UInt32.t)} (fun (_x: UInt32.t) -> [ &_36 <- _x ] s10)
+          | s10 = [ &_30 <- UInt32.bw_xor _31 _36 ] s11
+          | s11 = UInt64.sub [%#ssha256'24] {t} {[%#ssha256'23] (15: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &_43 <- _x ] s12)
+          | s12 = [ &_45 <- UInt64.lt _43 ([%#ssha256'25] (64: UInt64.t)) ] s13
+          | s13 = {[@expl:index in bounds] [%#ssha256'25] _45} s14
+          | s14 = Slice64.get [%#ssha256'25] <UInt32.t> {w} {_43} (fun (r: UInt32.t) -> [ &_42 <- r ] s15)
+          | s15 = UInt32.shr [%#ssha256'27] {_42} {Int32.to_int ([%#ssha256'26] (3: Int32.t))}
+              (fun (_x: UInt32.t) -> [ &_41 <- _x ] s16)
+          | s16 = [ &s0 <- UInt32.bw_xor _30 _41 ] s17
+          | s17 = UInt64.sub [%#ssha256'29] {t} {[%#ssha256'28] (2: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &_50 <- _x ] s18)
+          | s18 = [ &_52 <- UInt64.lt _50 ([%#ssha256'30] (64: UInt64.t)) ] s19
+          | s19 = {[@expl:index in bounds] [%#ssha256'30] _52} s20
+          | s20 = Slice64.get [%#ssha256'30] <UInt32.t> {w} {_50} (fun (r: UInt32.t) -> [ &_49 <- r ] s21)
+          | s21 = rotr [%#ssha256'32] {_49} {[%#ssha256'31] (17: UInt32.t)} (fun (_x: UInt32.t) -> [ &_48 <- _x ] s22)
+          | s22 = UInt64.sub [%#ssha256'34] {t} {[%#ssha256'33] (2: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &_55 <- _x ] s23)
+          | s23 = [ &_57 <- UInt64.lt _55 ([%#ssha256'35] (64: UInt64.t)) ] s24
+          | s24 = {[@expl:index in bounds] [%#ssha256'35] _57} s25
+          | s25 = Slice64.get [%#ssha256'35] <UInt32.t> {w} {_55} (fun (r: UInt32.t) -> [ &_54 <- r ] s26)
+          | s26 = rotr [%#ssha256'37] {_54} {[%#ssha256'36] (19: UInt32.t)} (fun (_x: UInt32.t) -> [ &_53 <- _x ] s27)
+          | s27 = [ &_47 <- UInt32.bw_xor _48 _53 ] s28
+          | s28 = UInt64.sub [%#ssha256'39] {t} {[%#ssha256'38] (2: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &_60 <- _x ] s29)
+          | s29 = [ &_62 <- UInt64.lt _60 ([%#ssha256'40] (64: UInt64.t)) ] s30
+          | s30 = {[@expl:index in bounds] [%#ssha256'40] _62} s31
+          | s31 = Slice64.get [%#ssha256'40] <UInt32.t> {w} {_60} (fun (r: UInt32.t) -> [ &_59 <- r ] s32)
+          | s32 = UInt32.shr [%#ssha256'42] {_59} {Int32.to_int ([%#ssha256'41] (10: Int32.t))}
+              (fun (_x: UInt32.t) -> [ &_58 <- _x ] s33)
+          | s33 = [ &s1 <- UInt32.bw_xor _47 _58 ] s34
+          | s34 = UInt64.sub [%#ssha256'44] {t} {[%#ssha256'43] (16: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &_67 <- _x ] s35)
+          | s35 = [ &_69 <- UInt64.lt _67 ([%#ssha256'45] (64: UInt64.t)) ] s36
+          | s36 = {[@expl:index in bounds] [%#ssha256'45] _69} s37
+          | s37 = Slice64.get [%#ssha256'45] <UInt32.t> {w} {_67} (fun (r: UInt32.t) -> [ &_66 <- r ] s38)
+          | s38 = wrapping_add [%#ssha256'46] {_66} {s0} (fun (_x: UInt32.t) -> [ &_65 <- _x ] s39)
+          | s39 = UInt64.sub [%#ssha256'48] {t} {[%#ssha256'47] (7: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &_72 <- _x ] s40)
+          | s40 = [ &_74 <- UInt64.lt _72 ([%#ssha256'49] (64: UInt64.t)) ] s41
+          | s41 = {[@expl:index in bounds] [%#ssha256'49] _74} s42
+          | s42 = Slice64.get [%#ssha256'49] <UInt32.t> {w} {_72} (fun (r: UInt32.t) -> [ &_71 <- r ] s43)
+          | s43 = wrapping_add [%#ssha256'50] {_65} {_71} (fun (_x: UInt32.t) -> [ &_64 <- _x ] s44)
+          | s44 = wrapping_add [%#ssha256'51] {_64} {s1} (fun (_x: UInt32.t) -> [ &_63 <- _x ] s45)
+          | s45 = [ &_76 <- t ] s46
+          | s46 = [ &_77 <- UInt64.lt _76 ([%#ssha256'52] (64: UInt64.t)) ] s47
+          | s47 = {[@expl:index in bounds] [%#ssha256'52] _77} s48
+          | s48 = Slice64.set [%#ssha256'53] <UInt32.t> {w} {_76} {_63}
+              (fun (r: Slice64.array UInt32.t) -> [ &w <- r ] s49)
+          | s49 = UInt64.add [%#ssha256'55] {t} {[%#ssha256'54] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &t <- _x ] s50)
+          | s50 = bb7 ] ] ]
+    | bb26 = s0'0
+      [ s0'0 = [ &_80 <- [%#ssha256'56] (0: UInt64.t) ] s1'0
+      | s1'0 = [ &_81 <- UInt64.lt _80 ([%#ssha256'57] (8: UInt64.t)) ] s2
+      | s2 = {[@expl:index in bounds] [%#ssha256'57] _81} s3
+      | s3 = Slice64.get [%#ssha256'57] <UInt32.t> {h.current} {_80} (fun (r: UInt32.t) -> [ &a <- r ] s4)
+      | s4 = [ &_83 <- [%#ssha256'58] (1: UInt64.t) ] s5
+      | s5 = [ &_84 <- UInt64.lt _83 ([%#ssha256'59] (8: UInt64.t)) ] s6
+      | s6 = {[@expl:index in bounds] [%#ssha256'59] _84} s7
+      | s7 = Slice64.get [%#ssha256'59] <UInt32.t> {h.current} {_83} (fun (r: UInt32.t) -> [ &b <- r ] s8)
+      | s8 = [ &_86 <- [%#ssha256'60] (2: UInt64.t) ] s9
+      | s9 = [ &_87 <- UInt64.lt _86 ([%#ssha256'61] (8: UInt64.t)) ] s10
+      | s10 = {[@expl:index in bounds] [%#ssha256'61] _87} s11
+      | s11 = Slice64.get [%#ssha256'61] <UInt32.t> {h.current} {_86} (fun (r: UInt32.t) -> [ &c <- r ] s12)
+      | s12 = [ &_89 <- [%#ssha256'62] (3: UInt64.t) ] s13
+      | s13 = [ &_90 <- UInt64.lt _89 ([%#ssha256'63] (8: UInt64.t)) ] s14
+      | s14 = {[@expl:index in bounds] [%#ssha256'63] _90} s15
+      | s15 = Slice64.get [%#ssha256'63] <UInt32.t> {h.current} {_89} (fun (r: UInt32.t) -> [ &d <- r ] s16)
+      | s16 = [ &_92 <- [%#ssha256'64] (4: UInt64.t) ] s17
+      | s17 = [ &_93 <- UInt64.lt _92 ([%#ssha256'65] (8: UInt64.t)) ] s18
+      | s18 = {[@expl:index in bounds] [%#ssha256'65] _93} s19
+      | s19 = Slice64.get [%#ssha256'65] <UInt32.t> {h.current} {_92} (fun (r: UInt32.t) -> [ &e <- r ] s20)
+      | s20 = [ &_95 <- [%#ssha256'66] (5: UInt64.t) ] s21
+      | s21 = [ &_96 <- UInt64.lt _95 ([%#ssha256'67] (8: UInt64.t)) ] s22
+      | s22 = {[@expl:index in bounds] [%#ssha256'67] _96} s23
+      | s23 = Slice64.get [%#ssha256'67] <UInt32.t> {h.current} {_95} (fun (r: UInt32.t) -> [ &f <- r ] s24)
+      | s24 = [ &_98 <- [%#ssha256'68] (6: UInt64.t) ] s25
+      | s25 = [ &_99 <- UInt64.lt _98 ([%#ssha256'69] (8: UInt64.t)) ] s26
+      | s26 = {[@expl:index in bounds] [%#ssha256'69] _99} s27
+      | s27 = Slice64.get [%#ssha256'69] <UInt32.t> {h.current} {_98} (fun (r: UInt32.t) -> [ &g <- r ] s28)
+      | s28 = [ &_101 <- [%#ssha256'70] (7: UInt64.t) ] s29
+      | s29 = [ &_102 <- UInt64.lt _101 ([%#ssha256'71] (8: UInt64.t)) ] s30
+      | s30 = {[@expl:index in bounds] [%#ssha256'71] _102} s31
+      | s31 = Slice64.get [%#ssha256'71] <UInt32.t> {h.current} {_101} (fun (r: UInt32.t) -> [ &hh <- r ] s32)
+      | s32 = [ &t <- [%#ssha256'72] (0: UInt64.t) ] s33
+      | s33 = bb35 ]
+    | bb35 = bb35invariant
+      [ bb35 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb35 ([%#ssha256'73] 64 - UInt64.t'int t)}
+        bb35invariant
+      | bb35invariant = {[@expl:loop invariant] [%#ssha256'75] UInt64.t'int t <= 64}
+        (! [ &variant_old_bb35 <- [%#ssha256'73] 64 - UInt64.t'int t ] s0'0)
+        [ s0'0 = [ &_109 <- UInt64.lt t ([%#ssha256'74] (64: UInt64.t)) ] s1'0
+        | s1'0 = any [ br0 -> {_109 = false} (! bb53) | br1 -> {_109} (! bb37) ] ]
+        [ bb37 = s0'0
+          [ s0'0 = rotr [%#ssha256'77] {e} {[%#ssha256'76] (6: UInt32.t)} (fun (_x: UInt32.t) -> [ &_118 <- _x ] s1'0)
+          | s1'0 = rotr [%#ssha256'79] {e} {[%#ssha256'78] (11: UInt32.t)} (fun (_x: UInt32.t) -> [ &_120 <- _x ] s2)
+          | s2 = [ &_117 <- UInt32.bw_xor _118 _120 ] s3
+          | s3 = rotr [%#ssha256'81] {e} {[%#ssha256'80] (25: UInt32.t)} (fun (_x: UInt32.t) -> [ &_122 <- _x ] s4)
+          | s4 = [ &_116 <- UInt32.bw_xor _117 _122 ] s5
+          | s5 = wrapping_add [%#ssha256'82] {hh} {_116} (fun (_x: UInt32.t) -> [ &_114 <- _x ] s6)
+          | s6 = [ &_125 <- UInt32.bw_and e f ] s7
+          | s7 = [ &_129 <- UInt32.bw_not e ] s8
+          | s8 = [ &_128 <- UInt32.bw_and _129 g ] s9
+          | s9 = [ &_124 <- UInt32.bw_xor _125 _128 ] s10
+          | s10 = wrapping_add [%#ssha256'83] {_114} {_124} (fun (_x: UInt32.t) -> [ &_113 <- _x ] s11)
+          | s11 = [ &_133 <- [%#ssha256'84] const_K ] s12
+          | s12 = [ &_134 <- t ] s13
+          | s13 = [ &_135 <- UInt64.lt _134 ([%#ssha256'85] (64: UInt64.t)) ] s14
+          | s14 = {[@expl:index in bounds] [%#ssha256'85] _135} s15
+          | s15 = Slice64.get [%#ssha256'85] <UInt32.t> {_133} {_134} (fun (r: UInt32.t) -> [ &_132 <- r ] s16)
+          | s16 = wrapping_add [%#ssha256'86] {_113} {_132} (fun (_x: UInt32.t) -> [ &_112 <- _x ] s17)
+          | s17 = [ &_137 <- t ] s18
+          | s18 = [ &_138 <- UInt64.lt _137 ([%#ssha256'87] (64: UInt64.t)) ] s19
+          | s19 = {[@expl:index in bounds] [%#ssha256'87] _138} s20
+          | s20 = Slice64.get [%#ssha256'87] <UInt32.t> {w} {_137} (fun (r: UInt32.t) -> [ &_136 <- r ] s21)
+          | s21 = wrapping_add [%#ssha256'88] {_112} {_136} (fun (_x: UInt32.t) -> [ &t1 <- _x ] s22)
+          | s22 = rotr [%#ssha256'90] {a} {[%#ssha256'89] (2: UInt32.t)} (fun (_x: UInt32.t) -> [ &_142 <- _x ] s23)
+          | s23 = rotr [%#ssha256'92] {a} {[%#ssha256'91] (13: UInt32.t)} (fun (_x: UInt32.t) -> [ &_144 <- _x ] s24)
+          | s24 = [ &_141 <- UInt32.bw_xor _142 _144 ] s25
+          | s25 = rotr [%#ssha256'94] {a} {[%#ssha256'93] (22: UInt32.t)} (fun (_x: UInt32.t) -> [ &_146 <- _x ] s26)
+          | s26 = [ &_140 <- UInt32.bw_xor _141 _146 ] s27
+          | s27 = [ &_150 <- UInt32.bw_and a b ] s28
+          | s28 = [ &_153 <- UInt32.bw_and a c ] s29
+          | s29 = [ &_149 <- UInt32.bw_xor _150 _153 ] s30
+          | s30 = [ &_156 <- UInt32.bw_and b c ] s31
+          | s31 = [ &_148 <- UInt32.bw_xor _149 _156 ] s32
+          | s32 = wrapping_add [%#ssha256'95] {_140} {_148} (fun (_x: UInt32.t) -> [ &t2 <- _x ] s33)
+          | s33 = [ &hh <- g ] s34
+          | s34 = [ &g <- f ] s35
+          | s35 = [ &f <- e ] s36
+          | s36 = wrapping_add [%#ssha256'96] {d} {t1} (fun (_x: UInt32.t) -> [ &_162 <- _x ] s37)
+          | s37 = [ &e <- _162 ] s38
+          | s38 = [ &d <- c ] s39
+          | s39 = [ &c <- b ] s40
+          | s40 = [ &b <- a ] s41
+          | s41 = wrapping_add [%#ssha256'97] {t1} {t2} (fun (_x: UInt32.t) -> [ &_168 <- _x ] s42)
+          | s42 = [ &a <- _168 ] s43
+          | s43 = UInt64.add [%#ssha256'99] {t} {[%#ssha256'98] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &t <- _x ] s44)
+          | s44 = bb35 ] ] ]
+    | bb53 = s0'0
+      [ s0'0 = [ &_174 <- [%#ssha256'100] (0: UInt64.t) ] s1'0
+      | s1'0 = [ &_175 <- UInt64.lt _174 ([%#ssha256'101] (8: UInt64.t)) ] s2
+      | s2 = {[@expl:index in bounds] [%#ssha256'101] _175} s3
+      | s3 = Slice64.get [%#ssha256'101] <UInt32.t> {h.current} {_174} (fun (r: UInt32.t) -> [ &_173 <- r ] s4)
+      | s4 = wrapping_add [%#ssha256'102] {_173} {a} (fun (_x: UInt32.t) -> [ &_172 <- _x ] s5)
+      | s5 = [ &_177 <- [%#ssha256'103] (0: UInt64.t) ] s6
+      | s6 = [ &_178 <- UInt64.lt _177 ([%#ssha256'104] (8: UInt64.t)) ] s7
+      | s7 = {[@expl:index in bounds] [%#ssha256'104] _178} s8
+      | s8 = Slice64.set [%#ssha256'105] <UInt32.t> {h.current} {_177} {_172}
+          (fun (r: Slice64.array UInt32.t) -> [ &h <- { h with current = r } ] s9)
+      | s9 = [ &_181 <- [%#ssha256'106] (1: UInt64.t) ] s10
+      | s10 = [ &_182 <- UInt64.lt _181 ([%#ssha256'107] (8: UInt64.t)) ] s11
+      | s11 = {[@expl:index in bounds] [%#ssha256'107] _182} s12
+      | s12 = Slice64.get [%#ssha256'107] <UInt32.t> {h.current} {_181} (fun (r: UInt32.t) -> [ &_180 <- r ] s13)
+      | s13 = wrapping_add [%#ssha256'108] {_180} {b} (fun (_x: UInt32.t) -> [ &_179 <- _x ] s14)
+      | s14 = [ &_184 <- [%#ssha256'109] (1: UInt64.t) ] s15
+      | s15 = [ &_185 <- UInt64.lt _184 ([%#ssha256'110] (8: UInt64.t)) ] s16
+      | s16 = {[@expl:index in bounds] [%#ssha256'110] _185} s17
+      | s17 = Slice64.set [%#ssha256'111] <UInt32.t> {h.current} {_184} {_179}
+          (fun (r: Slice64.array UInt32.t) -> [ &h <- { h with current = r } ] s18)
+      | s18 = [ &_188 <- [%#ssha256'112] (2: UInt64.t) ] s19
+      | s19 = [ &_189 <- UInt64.lt _188 ([%#ssha256'113] (8: UInt64.t)) ] s20
+      | s20 = {[@expl:index in bounds] [%#ssha256'113] _189} s21
+      | s21 = Slice64.get [%#ssha256'113] <UInt32.t> {h.current} {_188} (fun (r: UInt32.t) -> [ &_187 <- r ] s22)
+      | s22 = wrapping_add [%#ssha256'114] {_187} {c} (fun (_x: UInt32.t) -> [ &_186 <- _x ] s23)
+      | s23 = [ &_191 <- [%#ssha256'115] (2: UInt64.t) ] s24
+      | s24 = [ &_192 <- UInt64.lt _191 ([%#ssha256'116] (8: UInt64.t)) ] s25
+      | s25 = {[@expl:index in bounds] [%#ssha256'116] _192} s26
+      | s26 = Slice64.set [%#ssha256'117] <UInt32.t> {h.current} {_191} {_186}
+          (fun (r: Slice64.array UInt32.t) -> [ &h <- { h with current = r } ] s27)
+      | s27 = [ &_195 <- [%#ssha256'118] (3: UInt64.t) ] s28
+      | s28 = [ &_196 <- UInt64.lt _195 ([%#ssha256'119] (8: UInt64.t)) ] s29
+      | s29 = {[@expl:index in bounds] [%#ssha256'119] _196} s30
+      | s30 = Slice64.get [%#ssha256'119] <UInt32.t> {h.current} {_195} (fun (r: UInt32.t) -> [ &_194 <- r ] s31)
+      | s31 = wrapping_add [%#ssha256'120] {_194} {d} (fun (_x: UInt32.t) -> [ &_193 <- _x ] s32)
+      | s32 = [ &_198 <- [%#ssha256'121] (3: UInt64.t) ] s33
+      | s33 = [ &_199 <- UInt64.lt _198 ([%#ssha256'122] (8: UInt64.t)) ] s34
+      | s34 = {[@expl:index in bounds] [%#ssha256'122] _199} s35
+      | s35 = Slice64.set [%#ssha256'123] <UInt32.t> {h.current} {_198} {_193}
+          (fun (r: Slice64.array UInt32.t) -> [ &h <- { h with current = r } ] s36)
+      | s36 = [ &_202 <- [%#ssha256'124] (4: UInt64.t) ] s37
+      | s37 = [ &_203 <- UInt64.lt _202 ([%#ssha256'125] (8: UInt64.t)) ] s38
+      | s38 = {[@expl:index in bounds] [%#ssha256'125] _203} s39
+      | s39 = Slice64.get [%#ssha256'125] <UInt32.t> {h.current} {_202} (fun (r: UInt32.t) -> [ &_201 <- r ] s40)
+      | s40 = wrapping_add [%#ssha256'126] {_201} {e} (fun (_x: UInt32.t) -> [ &_200 <- _x ] s41)
+      | s41 = [ &_205 <- [%#ssha256'127] (4: UInt64.t) ] s42
+      | s42 = [ &_206 <- UInt64.lt _205 ([%#ssha256'128] (8: UInt64.t)) ] s43
+      | s43 = {[@expl:index in bounds] [%#ssha256'128] _206} s44
+      | s44 = Slice64.set [%#ssha256'129] <UInt32.t> {h.current} {_205} {_200}
+          (fun (r: Slice64.array UInt32.t) -> [ &h <- { h with current = r } ] s45)
+      | s45 = [ &_209 <- [%#ssha256'130] (5: UInt64.t) ] s46
+      | s46 = [ &_210 <- UInt64.lt _209 ([%#ssha256'131] (8: UInt64.t)) ] s47
+      | s47 = {[@expl:index in bounds] [%#ssha256'131] _210} s48
+      | s48 = Slice64.get [%#ssha256'131] <UInt32.t> {h.current} {_209} (fun (r: UInt32.t) -> [ &_208 <- r ] s49)
+      | s49 = wrapping_add [%#ssha256'132] {_208} {f} (fun (_x: UInt32.t) -> [ &_207 <- _x ] s50)
+      | s50 = [ &_212 <- [%#ssha256'133] (5: UInt64.t) ] s51
+      | s51 = [ &_213 <- UInt64.lt _212 ([%#ssha256'134] (8: UInt64.t)) ] s52
+      | s52 = {[@expl:index in bounds] [%#ssha256'134] _213} s53
+      | s53 = Slice64.set [%#ssha256'135] <UInt32.t> {h.current} {_212} {_207}
+          (fun (r: Slice64.array UInt32.t) -> [ &h <- { h with current = r } ] s54)
+      | s54 = [ &_216 <- [%#ssha256'136] (6: UInt64.t) ] s55
+      | s55 = [ &_217 <- UInt64.lt _216 ([%#ssha256'137] (8: UInt64.t)) ] s56
+      | s56 = {[@expl:index in bounds] [%#ssha256'137] _217} s57
+      | s57 = Slice64.get [%#ssha256'137] <UInt32.t> {h.current} {_216} (fun (r: UInt32.t) -> [ &_215 <- r ] s58)
+      | s58 = wrapping_add [%#ssha256'138] {_215} {g} (fun (_x: UInt32.t) -> [ &_214 <- _x ] s59)
+      | s59 = [ &_219 <- [%#ssha256'139] (6: UInt64.t) ] s60
+      | s60 = [ &_220 <- UInt64.lt _219 ([%#ssha256'140] (8: UInt64.t)) ] s61
+      | s61 = {[@expl:index in bounds] [%#ssha256'140] _220} s62
+      | s62 = Slice64.set [%#ssha256'141] <UInt32.t> {h.current} {_219} {_214}
+          (fun (r: Slice64.array UInt32.t) -> [ &h <- { h with current = r } ] s63)
+      | s63 = [ &_223 <- [%#ssha256'142] (7: UInt64.t) ] s64
+      | s64 = [ &_224 <- UInt64.lt _223 ([%#ssha256'143] (8: UInt64.t)) ] s65
+      | s65 = {[@expl:index in bounds] [%#ssha256'143] _224} s66
+      | s66 = Slice64.get [%#ssha256'143] <UInt32.t> {h.current} {_223} (fun (r: UInt32.t) -> [ &_222 <- r ] s67)
+      | s67 = wrapping_add [%#ssha256'144] {_222} {hh} (fun (_x: UInt32.t) -> [ &_221 <- _x ] s68)
+      | s68 = [ &_226 <- [%#ssha256'145] (7: UInt64.t) ] s69
+      | s69 = [ &_227 <- UInt64.lt _226 ([%#ssha256'146] (8: UInt64.t)) ] s70
+      | s70 = {[@expl:index in bounds] [%#ssha256'146] _227} s71
+      | s71 = Slice64.set [%#ssha256'147] <UInt32.t> {h.current} {_226} {_221}
+          (fun (r: Slice64.array UInt32.t) -> [ &h <- { h with current = r } ] s72)
+      | s72 = s73 [ _ck -> (! {[@expl:type invariant] inv_refmut_array_u32_8 h} any) ]
+      | s73 = -{resolve_refmut_array_u32_8 h}- s74
+      | s74 = return {_ret} ] ]
+    [ & _ret: () = Any.any_l ()
+    | & h: MutBorrow.t (Slice64.array UInt32.t) = h
+    | & m: Slice64.array UInt32.t = m
+    | & w: Slice64.array UInt32.t = Any.any_l ()
+    | & t: UInt64.t = Any.any_l ()
+    | & _13: bool = Any.any_l ()
+    | & _15: UInt32.t = Any.any_l ()
+    | & _16: UInt64.t = Any.any_l ()
+    | & _17: bool = Any.any_l ()
+    | & _18: UInt64.t = Any.any_l ()
+    | & _19: bool = Any.any_l ()
+    | & _27: bool = Any.any_l ()
+    | & s0: UInt32.t = Any.any_l ()
+    | & _30: UInt32.t = Any.any_l ()
+    | & _31: UInt32.t = Any.any_l ()
+    | & _32: UInt32.t = Any.any_l ()
+    | & _33: UInt64.t = Any.any_l ()
+    | & _35: bool = Any.any_l ()
+    | & _36: UInt32.t = Any.any_l ()
+    | & _37: UInt32.t = Any.any_l ()
+    | & _38: UInt64.t = Any.any_l ()
+    | & _40: bool = Any.any_l ()
+    | & _41: UInt32.t = Any.any_l ()
+    | & _42: UInt32.t = Any.any_l ()
+    | & _43: UInt64.t = Any.any_l ()
+    | & _45: bool = Any.any_l ()
+    | & s1: UInt32.t = Any.any_l ()
+    | & _47: UInt32.t = Any.any_l ()
+    | & _48: UInt32.t = Any.any_l ()
+    | & _49: UInt32.t = Any.any_l ()
+    | & _50: UInt64.t = Any.any_l ()
+    | & _52: bool = Any.any_l ()
+    | & _53: UInt32.t = Any.any_l ()
+    | & _54: UInt32.t = Any.any_l ()
+    | & _55: UInt64.t = Any.any_l ()
+    | & _57: bool = Any.any_l ()
+    | & _58: UInt32.t = Any.any_l ()
+    | & _59: UInt32.t = Any.any_l ()
+    | & _60: UInt64.t = Any.any_l ()
+    | & _62: bool = Any.any_l ()
+    | & _63: UInt32.t = Any.any_l ()
+    | & _64: UInt32.t = Any.any_l ()
+    | & _65: UInt32.t = Any.any_l ()
+    | & _66: UInt32.t = Any.any_l ()
+    | & _67: UInt64.t = Any.any_l ()
+    | & _69: bool = Any.any_l ()
+    | & _71: UInt32.t = Any.any_l ()
+    | & _72: UInt64.t = Any.any_l ()
+    | & _74: bool = Any.any_l ()
+    | & _76: UInt64.t = Any.any_l ()
+    | & _77: bool = Any.any_l ()
+    | & a: UInt32.t = Any.any_l ()
+    | & _80: UInt64.t = Any.any_l ()
+    | & _81: bool = Any.any_l ()
+    | & b: UInt32.t = Any.any_l ()
+    | & _83: UInt64.t = Any.any_l ()
+    | & _84: bool = Any.any_l ()
+    | & c: UInt32.t = Any.any_l ()
+    | & _86: UInt64.t = Any.any_l ()
+    | & _87: bool = Any.any_l ()
+    | & d: UInt32.t = Any.any_l ()
+    | & _89: UInt64.t = Any.any_l ()
+    | & _90: bool = Any.any_l ()
+    | & e: UInt32.t = Any.any_l ()
+    | & _92: UInt64.t = Any.any_l ()
+    | & _93: bool = Any.any_l ()
+    | & f: UInt32.t = Any.any_l ()
+    | & _95: UInt64.t = Any.any_l ()
+    | & _96: bool = Any.any_l ()
+    | & g: UInt32.t = Any.any_l ()
+    | & _98: UInt64.t = Any.any_l ()
+    | & _99: bool = Any.any_l ()
+    | & hh: UInt32.t = Any.any_l ()
+    | & _101: UInt64.t = Any.any_l ()
+    | & _102: bool = Any.any_l ()
+    | & _109: bool = Any.any_l ()
+    | & t1: UInt32.t = Any.any_l ()
+    | & _112: UInt32.t = Any.any_l ()
+    | & _113: UInt32.t = Any.any_l ()
+    | & _114: UInt32.t = Any.any_l ()
+    | & _116: UInt32.t = Any.any_l ()
+    | & _117: UInt32.t = Any.any_l ()
+    | & _118: UInt32.t = Any.any_l ()
+    | & _120: UInt32.t = Any.any_l ()
+    | & _122: UInt32.t = Any.any_l ()
+    | & _124: UInt32.t = Any.any_l ()
+    | & _125: UInt32.t = Any.any_l ()
+    | & _128: UInt32.t = Any.any_l ()
+    | & _129: UInt32.t = Any.any_l ()
+    | & _132: UInt32.t = Any.any_l ()
+    | & _133: Slice64.array UInt32.t = Any.any_l ()
+    | & _134: UInt64.t = Any.any_l ()
+    | & _135: bool = Any.any_l ()
+    | & _136: UInt32.t = Any.any_l ()
+    | & _137: UInt64.t = Any.any_l ()
+    | & _138: bool = Any.any_l ()
+    | & t2: UInt32.t = Any.any_l ()
+    | & _140: UInt32.t = Any.any_l ()
+    | & _141: UInt32.t = Any.any_l ()
+    | & _142: UInt32.t = Any.any_l ()
+    | & _144: UInt32.t = Any.any_l ()
+    | & _146: UInt32.t = Any.any_l ()
+    | & _148: UInt32.t = Any.any_l ()
+    | & _149: UInt32.t = Any.any_l ()
+    | & _150: UInt32.t = Any.any_l ()
+    | & _153: UInt32.t = Any.any_l ()
+    | & _156: UInt32.t = Any.any_l ()
+    | & _162: UInt32.t = Any.any_l ()
+    | & _168: UInt32.t = Any.any_l ()
+    | & _172: UInt32.t = Any.any_l ()
+    | & _173: UInt32.t = Any.any_l ()
+    | & _174: UInt64.t = Any.any_l ()
+    | & _175: bool = Any.any_l ()
+    | & _177: UInt64.t = Any.any_l ()
+    | & _178: bool = Any.any_l ()
+    | & _179: UInt32.t = Any.any_l ()
+    | & _180: UInt32.t = Any.any_l ()
+    | & _181: UInt64.t = Any.any_l ()
+    | & _182: bool = Any.any_l ()
+    | & _184: UInt64.t = Any.any_l ()
+    | & _185: bool = Any.any_l ()
+    | & _186: UInt32.t = Any.any_l ()
+    | & _187: UInt32.t = Any.any_l ()
+    | & _188: UInt64.t = Any.any_l ()
+    | & _189: bool = Any.any_l ()
+    | & _191: UInt64.t = Any.any_l ()
+    | & _192: bool = Any.any_l ()
+    | & _193: UInt32.t = Any.any_l ()
+    | & _194: UInt32.t = Any.any_l ()
+    | & _195: UInt64.t = Any.any_l ()
+    | & _196: bool = Any.any_l ()
+    | & _198: UInt64.t = Any.any_l ()
+    | & _199: bool = Any.any_l ()
+    | & _200: UInt32.t = Any.any_l ()
+    | & _201: UInt32.t = Any.any_l ()
+    | & _202: UInt64.t = Any.any_l ()
+    | & _203: bool = Any.any_l ()
+    | & _205: UInt64.t = Any.any_l ()
+    | & _206: bool = Any.any_l ()
+    | & _207: UInt32.t = Any.any_l ()
+    | & _208: UInt32.t = Any.any_l ()
+    | & _209: UInt64.t = Any.any_l ()
+    | & _210: bool = Any.any_l ()
+    | & _212: UInt64.t = Any.any_l ()
+    | & _213: bool = Any.any_l ()
+    | & _214: UInt32.t = Any.any_l ()
+    | & _215: UInt32.t = Any.any_l ()
+    | & _216: UInt64.t = Any.any_l ()
+    | & _217: bool = Any.any_l ()
+    | & _219: UInt64.t = Any.any_l ()
+    | & _220: bool = Any.any_l ()
+    | & _221: UInt32.t = Any.any_l ()
+    | & _222: UInt32.t = Any.any_l ()
+    | & _223: UInt64.t = Any.any_l ()
+    | & _224: bool = Any.any_l ()
+    | & _226: UInt64.t = Any.any_l ()
+    | & _227: bool = Any.any_l ()
+    | & variant_old_bb1: int = Any.any_l ()
+    | & variant_old_bb7: int = Any.any_l ()
+    | & variant_old_bb35: int = Any.any_l () ])) [ return (result: ()) -> (! return {result}) ]

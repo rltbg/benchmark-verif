@@ -1,0 +1,112 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 48 0 48 38 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 51 16 51 20
+let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 53 14 53 16
+let%span sntt'1 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 54 14 54 15
+let%span sntt'2 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 52 16 52 50
+let%span sntt'3 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 55 23 55 63
+let%span sntt'4 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 56 15 56 16
+let%span sntt'5 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 56 11 56 16
+let%span sntt'6 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 56 20 56 21
+let%span sntt'7 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 57 16 57 21
+let%span sntt'8 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 57 24 57 25
+let%span sntt'9 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 57 16 57 25
+let%span sntt'10 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 57 12 57 25
+let%span sntt'11 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 59 12 59 17
+let%span sntt'12 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 59 20 59 21
+let%span sntt'13 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 59 12 59 21
+let%span sntt'14 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 59 8 59 21
+let%span sntt'15 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 60 13 60 14
+let%span sntt'16 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 60 8 60 14
+let%span sntt'17 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 45 11 45 27
+let%span sntt'18 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 46 10 46 30
+let%span sntt'19 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 40 11 40 47
+let%span sntt'20 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 41 10 41 24
+let%span sntt'21 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 42 48 42 50
+let%span sntt'22 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 48 0 48 38
+
+use creusot.int.UInt64
+use creusot.prelude.Any
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+function mul_mono [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 42 0 42 47] (a: int) (b: int) (x: int) (y: int) : ()
+ = [%#sntt'21] ()
+
+axiom mul_mono_spec: forall a: int, b: int, x: int, y: int. ([%#sntt'19] 0 <= a /\ a <= x /\ 0 <= b /\ b <= y)
+    -> ([%#sntt'20] a * b <= x * y)
+
+constant const_P: UInt64.t = [%#sntt'22] (2013265921: UInt64.t)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let powmod [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 48 0 48 38] (b0: UInt64.t) (e0: UInt64.t)
+  (return (x: UInt64.t)) = {[@stop_split] [@expl:powmod requires] [%#sntt'17] UInt64.t'int b0 < 2013265921}
+  (! bb0
+  [ bb0 = s0 [ s0 = [ &b <- b0 ] s1 | s1 = [ &e <- e0 ] s2 | s2 = [ &r <- [%#sntt] (1: UInt64.t) ] s3 | s3 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#sntt'0] UInt64.t'int e)} bb1invariant
+    | bb1invariant = {[@expl:loop invariant] [%#sntt'2] UInt64.t'int b < 2013265921 /\ UInt64.t'int r < 2013265921}
+      (! [ &variant_old_bb1 <- [%#sntt'0] UInt64.t'int e ] s0)
+      [ s0 = [ &_17 <- UInt64.gt e ([%#sntt'1] (0: UInt64.t)) ] s1
+      | s1 = any [ br0 -> {_17 = false} (! bb11) | br1 -> {_17} (! bb3) ] ]
+      [ bb3 = s0
+        [ s0 =
+          {[@expl:assertion] [%#sntt'3] let _ = mul_mono (UInt64.t'int r) (UInt64.t'int b) 2013265920 2013265920 in let _ = mul_mono (UInt64.t'int b) (UInt64.t'int b) 2013265920 2013265920 in true}
+          s1
+        | s1 = [ &_27 <- ([%#sntt'4] (2: UInt64.t)) = ([%#sntt'5] (0: UInt64.t)) ] s2
+        | s2 = {[@expl:remainder by zero] [%#sntt'5] not _27} s3
+        | s3 = UInt64.rem [%#sntt'5] {e} {[%#sntt'4] (2: UInt64.t)} (fun (_x: UInt64.t) -> [ &_25 <- _x ] s4)
+        | s4 = [ &_24 <- _25 = ([%#sntt'6] (1: UInt64.t)) ] s5
+        | s5 = any [ br0 -> {_24 = false} (! bb8) | br1 -> {_24} (! bb5) ] ]
+      | bb5 = s0
+        [ s0 = UInt64.mul [%#sntt'7] {r} {b} (fun (_x: UInt64.t) -> [ &_28 <- _x ] s1)
+        | s1 = [ &_31 <- ([%#sntt'8] const_P) = ([%#sntt'9] (0: UInt64.t)) ] s2
+        | s2 = {[@expl:remainder by zero] [%#sntt'9] not _31} s3
+        | s3 = UInt64.rem [%#sntt'10] {_28} {[%#sntt'8] const_P} (fun (_x: UInt64.t) -> [ &r <- _x ] s4)
+        | s4 = bb8 ]
+      | bb8 = s0
+        [ s0 = UInt64.mul [%#sntt'11] {b} {b} (fun (_x: UInt64.t) -> [ &_32 <- _x ] s1)
+        | s1 = [ &_35 <- ([%#sntt'12] const_P) = ([%#sntt'13] (0: UInt64.t)) ] s2
+        | s2 = {[@expl:remainder by zero] [%#sntt'13] not _35} s3
+        | s3 = UInt64.rem [%#sntt'14] {_32} {[%#sntt'12] const_P} (fun (_x: UInt64.t) -> [ &b <- _x ] s4)
+        | s4 = [ &_36 <- ([%#sntt'15] (2: UInt64.t)) = ([%#sntt'16] (0: UInt64.t)) ] s5
+        | s5 = {[@expl:division by zero] [%#sntt'16] not _36} s6
+        | s6 = UInt64.div [%#sntt'16] {e} {[%#sntt'15] (2: UInt64.t)} (fun (_x: UInt64.t) -> [ &e <- _x ] s7)
+        | s7 = bb1 ] ] ]
+  | bb11 = s0 [ s0 = [ &_ret <- r ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & b0: UInt64.t = b0
+  | & e0: UInt64.t = e0
+  | & b: UInt64.t = Any.any_l ()
+  | & e: UInt64.t = Any.any_l ()
+  | & r: UInt64.t = Any.any_l ()
+  | & _17: bool = Any.any_l ()
+  | & _24: bool = Any.any_l ()
+  | & _25: UInt64.t = Any.any_l ()
+  | & _27: bool = Any.any_l ()
+  | & _28: UInt64.t = Any.any_l ()
+  | & _31: bool = Any.any_l ()
+  | & _32: UInt64.t = Any.any_l ()
+  | & _35: bool = Any.any_l ()
+  | & _36: bool = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:powmod ensures] [%#sntt'18] UInt64.t'int result < 2013265921}
+    (! return {result}) ]

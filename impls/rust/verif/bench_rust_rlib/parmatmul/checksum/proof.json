@@ -1,0 +1,9 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_checksum": { "prover": "alt-ergo", "time": 0.013 },
+      "vc_ckfold": { "prover": "alt-ergo", "time": 0.015 }
+    }
+  }
+}

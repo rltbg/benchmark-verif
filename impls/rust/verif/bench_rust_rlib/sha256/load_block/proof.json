@@ -1,0 +1,12 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_bswap": { "prover": "alt-ergo", "time": 0.015 },
+      "vc_load_block": { "prover": "alt-ergo", "time": 0.026 },
+      "vc_mix64": { "prover": "alt-ergo", "time": 0.017 },
+      "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.014 },
+      "vc_wrapping_mul": { "prover": "alt-ergo", "time": 0.01 }
+    }
+  }
+}

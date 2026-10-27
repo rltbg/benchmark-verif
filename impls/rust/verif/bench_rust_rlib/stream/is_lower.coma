@@ -1,0 +1,22 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 17 0 17 26 *)
+
+let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 18 9 18 11
+let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 18 20 18 23
+let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 18 4 18 23
+
+use creusot.int.UInt8
+use creusot.prelude.Any
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let is_lower [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 17 0 17 26] (c: UInt8.t) (return (x: bool)) =
+(! bb0
+  [ bb0 = s0
+    [ s0 = [ &_2 <- UInt8.ge c ([%#sstream] (97: UInt8.t)) ] s1
+    | s1 = any [ br0 -> {_2 = false} (! bb2) | br1 -> {_2} (! bb1) ] ]
+  | bb1 = s0 [ s0 = [ &_ret <- UInt8.le c ([%#sstream'0] (122: UInt8.t)) ] s1 | s1 = return {_ret} ]
+  | bb2 = s0 [ s0 = [ &_ret <- [%#sstream'1] false ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: bool = Any.any_l () | & c: UInt8.t = c | & _2: bool = Any.any_l () ])
+  [ return (result: bool) -> (! return {result}) ]

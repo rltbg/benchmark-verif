@@ -1,0 +1,11 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_byte_at": { "prover": "alt-ergo", "time": 0.016 },
+      "vc_compress": { "prover": "alt-ergo", "time": 0.015 },
+      "vc_digest": { "prover": "z3", "time": 0.032 },
+      "vc_load_block": { "prover": "alt-ergo", "time": 0.02 }
+    }
+  }
+}

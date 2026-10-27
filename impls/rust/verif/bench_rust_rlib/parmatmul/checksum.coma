@@ -1,0 +1,84 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 75 0 75 44 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sparmatmul = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 76 17 76 24
+let%span sparmatmul'0 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 77 16 77 22
+let%span sparmatmul'1 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 79 14 79 22
+let%span sparmatmul'2 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 78 16 78 44
+let%span sparmatmul'3 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 81 24 81 28
+let%span sparmatmul'4 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 81 13 81 36
+let%span sparmatmul'5 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 82 13 82 14
+let%span sparmatmul'6 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 82 8 82 14
+let%span sparmatmul'7 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 73 11 73 26
+let%span sparmatmul'8 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 75 0 75 44
+
+use creusot.int.UInt64
+use seq.Seq
+use creusot.slice.Slice64
+use creusot.int.UInt32
+use creusot.prelude.Any
+use int.Int
+
+constant const_CK_INIT: UInt64.t = [%#sparmatmul'8] (14695981039346656037: UInt64.t)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let checksum [#"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 75 0 75 44] (c: Slice64.slice UInt32.t)
+  (nn: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:checksum requires] [%#sparmatmul'7] Seq.length (Slice64.view c) = UInt64.t'int nn}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = [ &ck <- [%#sparmatmul] const_CK_INIT ] s1 | s1 = [ &i <- [%#sparmatmul'0] (0: UInt64.t) ] s2 | s2 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#sparmatmul'1] UInt64.t'int nn
+      - UInt64.t'int i)}
+      bb1invariant
+    | bb1invariant = {[@expl:loop invariant] [%#sparmatmul'2] Seq.length (Slice64.view c) = UInt64.t'int nn
+      /\ UInt64.t'int i <= UInt64.t'int nn}
+      (! [ &variant_old_bb1 <- [%#sparmatmul'1] UInt64.t'int nn - UInt64.t'int i ] s0)
+      [ s0 = [ &_18 <- UInt64.lt i nn ] s1 | s1 = any [ br0 -> {_18 = false} (! bb6) | br1 -> {_18} (! bb3) ] ]
+      [ bb3 = s0
+        [ s0 = [ &_25 <- i ] s1
+        | s1 = [ &_26 <- Slice64.length c ] s2
+        | s2 = [ &_27 <- UInt64.lt _25 _26 ] s3
+        | s3 = {[@expl:index in bounds] [%#sparmatmul'3] _27} s4
+        | s4 = Slice64.get [%#sparmatmul'3] <UInt32.t> {c} {_25} (fun (r: UInt32.t) -> [ &_24 <- r ] s5)
+        | s5 = [ &_23 <- UInt64.of_int (UInt32.t'int _24) ] s6
+        | s6 = ckfold [%#sparmatmul'4] {ck} {_23} (fun (_x: UInt64.t) -> [ &_21 <- _x ] s7)
+        | s7 = [ &ck <- _21 ] s8
+        | s8 = UInt64.add [%#sparmatmul'6] {i} {[%#sparmatmul'5] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s9)
+        | s9 = bb1 ] ] ]
+  | bb6 = s0 [ s0 = [ &_ret <- ck ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & c: Slice64.slice UInt32.t = c
+  | & nn: UInt64.t = nn
+  | & ck: UInt64.t = Any.any_l ()
+  | & i: UInt64.t = Any.any_l ()
+  | & _18: bool = Any.any_l ()
+  | & _21: UInt64.t = Any.any_l ()
+  | & _23: UInt64.t = Any.any_l ()
+  | & _24: UInt32.t = Any.any_l ()
+  | & _25: UInt64.t = Any.any_l ()
+  | & _26: UInt64.t = Any.any_l ()
+  | & _27: bool = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

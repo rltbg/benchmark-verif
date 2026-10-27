@@ -1,6 +1,11 @@
 (* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 78 0 78 66 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
 let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 79 16 79 22
 let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 81 14 81 21
 let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 80 16 80 48
@@ -15,11 +20,6 @@ let%span shashmap'9 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 75 
 let%span shashmap'10 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 76 10 76 33
 let%span shashmap'11 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 24 11 24 90
 let%span shashmap'12 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 25 10 25 33
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
-let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
-let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
 
 use creusot.int.UInt64
 use creusot.prelude.MutBorrow

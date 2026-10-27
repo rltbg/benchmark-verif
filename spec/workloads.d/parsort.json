@@ -1,0 +1,1 @@
+{"name": "parsort", "unit": "éléments", "work_items": "n", "ideal_bytes": "8*n", "desc": "tri fusion par segments sur T threads puis fusion en arbre (même checksum que sort)"}

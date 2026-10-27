@@ -1,0 +1,47 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 26 0 26 22 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 25 10 25 11
+let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 23 11 23 17
+let%span sntt'1 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 24 10 24 21
+let%span sntt'2 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 17 10 17 11
+let%span sntt'3 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 19 16 19 56
+
+use int.Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+function pow2 [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 18 0 18 26] (k: int) : int
+
+axiom pow2_def: forall k: int [pow2 k]. pow2 k = ([%#sntt'3] if k <= 0 then 1 else 2 * pow2 (k - 1))
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant k : int
+
+function pow2_gt [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 26 0 26 22] (k: int) : ()
+
+goal vc_pow2_gt: ([%#sntt'0] 0 <= k)
+  -> (if gt_log_Int k 0 then
+    (([@stop_split] [@expl:pow2_gt requires] [%#sntt'0] 0 <= k - 1)
+      /\ ([@expl:variant decreases] well_founded_relation_Int ([%#sntt] k) ([%#sntt] k - 1)))
+    /\ (([@stop_split] [@expl:pow2_gt ensures] [%#sntt'1] gt_log_Int (pow2 (k - 1)) (k - 1))
+    -> ([@stop_split] [@expl:pow2_gt ensures] [%#sntt'1] gt_log_Int (pow2 k) k))
+  else
+    [@stop_split] [@expl:pow2_gt ensures] [%#sntt'1] gt_log_Int (pow2 k) k
+  )

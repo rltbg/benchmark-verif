@@ -1,0 +1,106 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 168 0 168 44 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span ssha256 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 169 12 169 21
+let%span ssha256'0 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 170 17 170 24
+let%span ssha256'1 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 171 16 171 22
+let%span ssha256'2 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 173 14 173 20
+let%span ssha256'3 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 174 14 174 15
+let%span ssha256'4 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 172 16 172 23
+let%span ssha256'5 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 175 24 175 28
+let%span ssha256'6 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 175 13 175 36
+let%span ssha256'7 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 176 13 176 14
+let%span ssha256'8 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 176 8 176 14
+let%span ssha256'9 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 166 11 166 30
+let%span ssha256'10 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 111 11 111 30
+let%span ssha256'11 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 113 27 113 35
+let%span ssha256'12 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 168 0 168 44
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+
+use creusot.int.UInt64
+use creusot.slice.Slice64
+use creusot.int.UInt32
+use seq.Seq
+use creusot.prelude.Any
+use int.Int
+
+predicate inv_Seq_u32 [@inline:trivial] (_1: Seq.seq UInt32.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u32
+
+predicate invariant_array_u32_8 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (8: UInt64.t)
+
+predicate inv_array_u32_8 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_8 _1
+
+meta "rewrite_def" predicate inv_array_u32_8
+
+let digest (n: UInt64.t) (return (x: Slice64.array UInt32.t)) =
+{[@stop_split] [@expl:digest requires] [%#ssha256'10] UInt64.t'int n <= 1099511627776}
+  any
+  [ return (result: Slice64.array UInt32.t) ->
+  {[@stop_split] [@expl:digest result type invariant] [%#ssha256'11] inv_array_u32_8 result}
+    (! return {result}) ]
+
+constant const_CK_INIT: UInt64.t = [%#ssha256'12] (14695981039346656037: UInt64.t)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let run [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 168 0 168 44] (n: UInt64.t) (_threads: UInt64.t)
+  (return (x: UInt64.t)) = {[@stop_split] [@expl:run requires] [%#ssha256'9] UInt64.t'int n <= 1099511627776}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = digest [%#ssha256] {n} (fun (_x: Slice64.array UInt32.t) -> [ &h <- _x ] s1)
+    | s1 = [ &ck <- [%#ssha256'0] const_CK_INIT ] s2
+    | s2 = [ &i <- [%#ssha256'1] (0: UInt64.t) ] s3
+    | s3 = bb2 ]
+  | bb2 = bb2invariant
+    [ bb2 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb2 ([%#ssha256'2] 8 - UInt64.t'int i)}
+      bb2invariant
+    | bb2invariant = {[@expl:loop invariant] [%#ssha256'4] UInt64.t'int i <= 8}
+      (! [ &variant_old_bb2 <- [%#ssha256'2] 8 - UInt64.t'int i ] s0)
+      [ s0 = [ &_16 <- UInt64.lt i ([%#ssha256'3] (8: UInt64.t)) ] s1
+      | s1 = any [ br0 -> {_16 = false} (! bb7) | br1 -> {_16} (! bb4) ] ]
+      [ bb4 = s0
+        [ s0 = [ &_22 <- i ] s1
+        | s1 = [ &_23 <- UInt64.lt _22 ([%#ssha256'5] (8: UInt64.t)) ] s2
+        | s2 = {[@expl:index in bounds] [%#ssha256'5] _23} s3
+        | s3 = Slice64.get [%#ssha256'5] <UInt32.t> {h} {_22} (fun (r: UInt32.t) -> [ &_21 <- r ] s4)
+        | s4 = [ &_20 <- UInt64.of_int (UInt32.t'int _21) ] s5
+        | s5 = ckfold [%#ssha256'6] {ck} {_20} (fun (_x: UInt64.t) -> [ &_18 <- _x ] s6)
+        | s6 = [ &ck <- _18 ] s7
+        | s7 = UInt64.add [%#ssha256'8] {i} {[%#ssha256'7] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s8)
+        | s8 = bb2 ] ] ]
+  | bb7 = s0 [ s0 = [ &_ret <- ck ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & n: UInt64.t = n
+  | & h: Slice64.array UInt32.t = Any.any_l ()
+  | & ck: UInt64.t = Any.any_l ()
+  | & i: UInt64.t = Any.any_l ()
+  | & _16: bool = Any.any_l ()
+  | & _18: UInt64.t = Any.any_l ()
+  | & _20: UInt64.t = Any.any_l ()
+  | & _21: UInt32.t = Any.any_l ()
+  | & _22: UInt64.t = Any.any_l ()
+  | & _23: bool = Any.any_l ()
+  | & variant_old_bb2: int = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

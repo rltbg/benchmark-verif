@@ -1,0 +1,1 @@
+{"name": "parsha", "unit": "octets", "work_items": "n", "ideal_bytes": "2097152", "desc": "SHA-256 de T segments indépendants, un par thread"}

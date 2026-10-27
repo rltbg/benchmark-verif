@@ -41,3 +41,5 @@ CLI de tous les binaires : `<bin> <workload> <n> [threads]` ; sortie `RESULT wor
 * Ne commitez pas : le coordinateur commite. Ne touchez pas aux fichiers d'un autre workload.
 * Rapport final (≤ 25 lignes) : fichiers créés, checksums de référence, ce qui est prouvé/pas prouvé, colonnes `unsupported` + raison, tailles recommandées par preset avec durée mesurée
   en C natif (cible : `large` ≈ 5–30 s, `xlarge` ≈ 30–120 s, `saturate` ≈ 60–300 s ou ~12 Go de RAM au maximum — jamais plus de 13 Go de pic), problèmes rencontrés.
+
+* OCaml : ajoutez une ligne `Bench_<Nom>.ml` à `fstar/ocaml/extra-modules.txt` (modules compilés après Bench_Hashmap, utilisés par `build-ocaml.sh` ; les variables `ML_MODULES` et `ML_DRIVER` permettent de tester un module seul).

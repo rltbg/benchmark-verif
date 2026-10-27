@@ -8,6 +8,7 @@
 #include <time.h>
 #include <pthread.h>
 #include "Custard.h"
+#include "driver_stream.h"
 /* @@INCLUDES@@ (pilotes auxiliaires, ex. #include "driver_<nom>.h") */
 
 int main(int argc, char **argv) {
@@ -22,6 +23,8 @@ int main(int argc, char **argv) {
     else if (!strcmp(argv[1], "matmul")) ck = Bench_Matmul_run(n);
     else if (!strcmp(argv[1], "lines")) ck = Bench_Lines_run(n);
     else if (!strcmp(argv[1], "hashmap")) ck = Bench_Hashmap_run(n);
+    else if (!strcmp(argv[1], "stream")) ck = drv_stream(n);
+    else if (!strcmp(argv[1], "bfs")) ck = Bench_Bfs_run(n);
     /* @@DISPATCH@@ (une ligne `else if (!strcmp(argv[1], "<nom>")) ck = Bench_<Nom>_run(n);` ; threads/pthread possibles ici, voir drivers/driver_par.h) */
     else { fprintf(stderr, "workload inconnu\n"); return 2; }
     clock_gettime(CLOCK_MONOTONIC, &t1);

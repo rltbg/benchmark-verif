@@ -1,0 +1,766 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 62 0 62 74 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'1 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
+let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
+let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
+let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
+let%span svec'6 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
+let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 63 21 63 22
+let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 63 20 63 23
+let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 64 22 64 23
+let%span sstream'2 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 64 21 64 24
+let%span sstream'3 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 65 23 65 24
+let%span sstream'4 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 65 22 65 25
+let%span sstream'5 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 66 22 66 23
+let%span sstream'6 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 66 21 66 24
+let%span sstream'7 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 67 22 67 23
+let%span sstream'8 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 67 21 67 24
+let%span sstream'9 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 68 22 68 23
+let%span sstream'10 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 68 21 68 24
+let%span sstream'11 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 69 22 69 23
+let%span sstream'12 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 69 21 69 24
+let%span sstream'13 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 70 22 70 23
+let%span sstream'14 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 70 21 70 24
+let%span sstream'15 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 71 22 71 23
+let%span sstream'16 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 71 21 71 24
+let%span sstream'17 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 72 23 72 24
+let%span sstream'18 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 72 22 72 25
+let%span sstream'19 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 73 23 73 25
+let%span sstream'20 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 73 22 73 26
+let%span sstream'21 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 74 24 74 26
+let%span sstream'22 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 74 23 74 27
+let%span sstream'23 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 75 21 75 23
+let%span sstream'24 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 75 20 75 24
+let%span sstream'25 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 76 23 76 25
+let%span sstream'26 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 76 22 76 26
+let%span sstream'27 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 77 23 77 25
+let%span sstream'28 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 77 22 77 26
+let%span sstream'29 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 78 16 78 22
+let%span sstream'30 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 80 14 80 23
+let%span sstream'31 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 79 16 79 88
+let%span sstream'32 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 82 19 82 22
+let%span sstream'33 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 83 40 83 43
+let%span sstream'34 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 83 18 83 44
+let%span sstream'35 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 83 17 83 54
+let%span sstream'36 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 83 65 83 66
+let%span sstream'37 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 83 57 83 67
+let%span sstream'38 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 84 17 84 28
+let%span sstream'39 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 85 17 85 28
+let%span sstream'40 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 86 19 86 20
+let%span sstream'41 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 86 32 86 46
+let%span sstream'42 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 87 37 87 38
+let%span sstream'43 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 87 19 87 39
+let%span sstream'44 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 88 24 88 25
+let%span sstream'45 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 89 25 89 49
+let%span sstream'46 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 90 28 90 29
+let%span sstream'47 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 90 42 90 43
+let%span sstream'48 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 91 28 91 51
+let%span sstream'49 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 94 24 94 25
+let%span sstream'50 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 95 24 95 25
+let%span sstream'51 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 97 19 97 20
+let%span sstream'52 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 98 26 98 27
+let%span sstream'53 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 99 37 99 38
+let%span sstream'54 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 99 19 99 39
+let%span sstream'55 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 100 19 100 20
+let%span sstream'56 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 102 19 102 20
+let%span sstream'57 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 103 19 103 20
+let%span sstream'58 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 104 26 104 27
+let%span sstream'59 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 105 27 105 29
+let%span sstream'60 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 105 32 105 33
+let%span sstream'61 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 105 49 105 51
+let%span sstream'62 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 105 54 105 55
+let%span sstream'63 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 105 65 105 66
+let%span sstream'64 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 106 26 106 27
+let%span sstream'65 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 108 39 108 41
+let%span sstream'66 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 108 22 108 42
+let%span sstream'67 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 108 71 108 73
+let%span sstream'68 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 108 56 108 74
+let%span sstream'69 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 108 22 108 82
+let%span sstream'70 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 110 24 110 25
+let%span sstream'71 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 112 26 112 27
+let%span sstream'72 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 113 23 113 25
+let%span sstream'73 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 114 37 114 38
+let%span sstream'74 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 114 19 114 39
+let%span sstream'75 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 115 19 115 20
+let%span sstream'76 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 116 23 116 26
+let%span sstream'77 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 117 37 117 38
+let%span sstream'78 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 117 19 117 39
+let%span sstream'79 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 118 39 118 40
+let%span sstream'80 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 118 20 118 41
+let%span sstream'81 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 122 23 122 25
+let%span sstream'82 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 123 37 123 38
+let%span sstream'83 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 123 19 123 39
+let%span sstream'84 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 124 39 124 40
+let%span sstream'85 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 124 20 124 41
+let%span sstream'86 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 128 23 128 26
+let%span sstream'87 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 128 35 128 37
+let%span sstream'88 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 129 23 129 24
+let%span sstream'89 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 130 25 130 26
+let%span sstream'90 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 130 16 130 26
+let%span sstream'91 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 132 23 132 25
+let%span sstream'92 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 133 39 133 40
+let%span sstream'93 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 133 20 133 41
+let%span sstream'94 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 134 20 134 21
+let%span sstream'95 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 136 19 136 20
+let%span sstream'96 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 137 33 137 35
+let%span sstream'97 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 137 18 137 36
+let%span sstream'98 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 138 20 138 21
+let%span sstream'99 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 139 23 139 25
+let%span sstream'100 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 140 19 140 20
+let%span sstream'101 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 141 18 141 19
+let%span sstream'102 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 142 20 142 21
+let%span sstream'103 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 144 19 144 20
+let%span sstream'104 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 146 13 146 14
+let%span sstream'105 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 146 8 146 14
+let%span sstream'106 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 148 7 148 8
+let%span sstream'107 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 148 6 148 9
+let%span sstream'108 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 149 7 149 8
+let%span sstream'109 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 149 6 149 9
+let%span sstream'110 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 150 7 150 8
+let%span sstream'111 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 150 6 150 9
+let%span sstream'112 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 151 7 151 8
+let%span sstream'113 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 151 6 151 9
+let%span sstream'114 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 152 7 152 8
+let%span sstream'115 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 152 6 152 9
+let%span sstream'116 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 153 7 153 8
+let%span sstream'117 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 153 6 153 9
+let%span sstream'118 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 154 7 154 8
+let%span sstream'119 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 154 6 154 9
+let%span sstream'120 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 155 7 155 8
+let%span sstream'121 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 155 6 155 9
+let%span sstream'122 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 156 7 156 8
+let%span sstream'123 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 156 6 156 9
+let%span sstream'124 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 157 7 157 8
+let%span sstream'125 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 157 6 157 9
+let%span sstream'126 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 158 7 158 9
+let%span sstream'127 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 158 6 158 10
+let%span sstream'128 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 159 7 159 9
+let%span sstream'129 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 159 6 159 10
+let%span sstream'130 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 160 7 160 9
+let%span sstream'131 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 160 6 160 10
+let%span sstream'132 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 161 7 161 9
+let%span sstream'133 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 161 6 161 10
+let%span sstream'134 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 162 7 162 9
+let%span sstream'135 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 162 6 162 10
+let%span sstream'136 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 163 16 163 18
+let%span sstream'137 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 163 15 163 19
+let%span sstream'138 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 163 13 163 44
+let%span sstream'139 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 163 7 163 9
+let%span sstream'140 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 163 6 163 10
+let%span sstream'141 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 59 11 59 69
+let%span sstream'142 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 60 10 60 28
+
+use creusot.int.UInt64
+use seq.Seq
+use creusot.int.UInt32
+use creusot.int.UInt8
+use creusot.prelude.MutBorrow
+use creusot.int.Int32
+use creusot.prelude.Any
+use int.Int
+
+type t_Vec_u64_Global
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u64_Global (self: t_Vec_u64_Global) : Seq.seq UInt64.t
+
+axiom view_Vec_u64_Global_spec:
+  forall self: t_Vec_u64_Global [view_Vec_u64_Global self]. [%#svec'1] Seq.length (view_Vec_u64_Global self)
+    <= UInt64.t'int const_MAX
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) (out: UInt64.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+let index_Vec_u64_Global (self: t_Vec_u64_Global) (index: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:index requires] [%#svec] in_bounds_usize index (view_Vec_u64_Global self)}
+  any
+  [ return (result: UInt64.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'0] has_value_usize index (view_Vec_u64_Global self) result}
+    (! return {result}) ]
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+type t_Vec_u8_Global
+
+function view_Vec_u8_Global (self: t_Vec_u8_Global) : Seq.seq UInt8.t
+
+axiom view_Vec_u8_Global_spec:
+  forall self: t_Vec_u8_Global [view_Vec_u8_Global self]. [%#svec'1] Seq.length (view_Vec_u8_Global self)
+    <= UInt64.t'int const_MAX
+
+type t_Vec_u32_Global
+
+function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
+
+axiom view_Vec_u32_Global_spec:
+  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec'1] Seq.length (view_Vec_u32_Global self)
+    <= UInt64.t'int const_MAX
+
+predicate in_bounds_usize'0 [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt8.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize'0
+
+predicate has_value_usize'0 [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt8.t) (out: UInt8.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize'0
+
+let index_Vec_u8_Global (self: t_Vec_u8_Global) (index: UInt64.t) (return (x: UInt8.t)) =
+{[@stop_split] [@expl:index requires] [%#svec] in_bounds_usize'0 index (view_Vec_u8_Global self)}
+  any
+  [ return (result: UInt8.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'0] has_value_usize'0 index (view_Vec_u8_Global self) result}
+    (! return {result}) ]
+
+predicate in_bounds_usize'1 [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize'1
+
+predicate has_value_usize'1 [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) (out: UInt32.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize'1
+
+let index_Vec_u32_Global (self: t_Vec_u32_Global) (index: UInt64.t) (return (x: UInt32.t)) =
+{[@stop_split] [@expl:index requires] [%#svec] in_bounds_usize'1 index (view_Vec_u32_Global self)}
+  any
+  [ return (result: UInt32.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'0] has_value_usize'1 index (view_Vec_u32_Global self) result}
+    (! return {result}) ]
+
+let is_digit (c: UInt8.t) (return (x: bool)) = any [ return (result: bool) -> (! return {result}) ]
+
+let is_lower (c: UInt8.t) (return (x: bool)) = any [ return (result: bool) -> (! return {result}) ]
+
+let is_numpunct (c: UInt8.t) (return (x: bool)) = any [ return (result: bool) -> (! return {result}) ]
+
+let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
+    (! return {result}) ]
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum'0] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+let wrapping_sub (self: UInt8.t) (rhs: UInt8.t) (return (x: UInt8.t)) = any
+  [ return (result: UInt8.t) -> {[@stop_split] [@expl:wrapping_sub ensures] [%#snum'1] result = UInt8.sub self rhs}
+    (! return {result}) ]
+
+predicate resolve_elswhere_usize [@inline:trivial] (self: UInt64.t) (old': Seq.seq UInt64.t) (fin: Seq.seq UInt64.t) =
+  [%#sslice'1] forall i: int. 0 <= i /\ i <> UInt64.t'int self /\ i < Seq.length old' -> Seq.get old' i = Seq.get fin i
+
+meta "rewrite_def" predicate resolve_elswhere_usize
+
+let index_mut_Vec_u64_Global (self: MutBorrow.t t_Vec_u64_Global) (index: UInt64.t) (return (x: MutBorrow.t UInt64.t)) =
+{[@stop_split] [@expl:index_mut requires] [%#svec'2] in_bounds_usize index (view_Vec_u64_Global self.current)}
+  any
+  [ return (result: MutBorrow.t UInt64.t) ->
+  {[@stop_split] [@expl:index_mut_Vec_u64_Global ensures] ([@stop_split] [@expl:index_mut ensures #0] [%#svec'3] has_value_usize index (view_Vec_u64_Global self.current) result.current)
+    /\ ([@stop_split] [@expl:index_mut ensures #1] [%#svec'4] has_value_usize index (view_Vec_u64_Global self.final) result.final)
+    /\ ([@stop_split] [@expl:index_mut ensures #2] [%#svec'5] resolve_elswhere_usize index (view_Vec_u64_Global self.current) (view_Vec_u64_Global self.final))
+    /\ ([@stop_split] [@expl:index_mut ensures #3] [%#svec'6] Seq.length (view_Vec_u64_Global self.final)
+    = Seq.length (view_Vec_u64_Global self.current))}
+    (! return {result}) ]
+
+predicate resolve_refmut_u64 [@inline:trivial] (_1: MutBorrow.t UInt64.t) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_u64
+
+predicate resolve_refmut_Vec_u64_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u64_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u64_Global
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let chunk [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 62 0 62 74] (buf: t_Vec_u8_Global) (len: UInt64.t)
+  (st: MutBorrow.t t_Vec_u64_Global) (tab: t_Vec_u32_Global) (return (x: ())) =
+{[@stop_split] [@expl:chunk requires] [%#sstream'141] UInt64.t'int len <= Seq.length (view_Vec_u8_Global buf)
+  /\ Seq.length (view_Vec_u64_Global st.current) = 16 /\ Seq.length (view_Vec_u32_Global tab) = 256}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = index_Vec_u64_Global [%#sstream'0] {st.current} {[%#sstream] (0: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_14 <- _x ] s1)
+    | s1 = [ &crc <- UInt32.of_int (UInt64.t'int _14) ] s2
+    | s2 = index_Vec_u64_Global [%#sstream'2] {st.current} {[%#sstream'1] (1: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_17 <- _x ] s3)
+    | s3 = [ &mode <- _17 ] s4
+    | s4 = index_Vec_u64_Global [%#sstream'4] {st.current} {[%#sstream'3] (2: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_20 <- _x ] s5)
+    | s5 = [ &depth <- _20 ] s6
+    | s6 = index_Vec_u64_Global [%#sstream'6] {st.current} {[%#sstream'5] (3: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_23 <- _x ] s7)
+    | s7 = [ &maxd <- _23 ] s8
+    | s8 = index_Vec_u64_Global [%#sstream'8] {st.current} {[%#sstream'7] (4: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_26 <- _x ] s9)
+    | s9 = [ &objs <- _26 ] s10
+    | s10 = index_Vec_u64_Global [%#sstream'10] {st.current} {[%#sstream'9] (5: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_29 <- _x ] s11)
+    | s11 = [ &strs <- _29 ] s12
+    | s12 = index_Vec_u64_Global [%#sstream'12] {st.current} {[%#sstream'11] (6: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_32 <- _x ] s13)
+    | s13 = [ &nums <- _32 ] s14
+    | s14 = index_Vec_u64_Global [%#sstream'14] {st.current} {[%#sstream'13] (7: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_35 <- _x ] s15)
+    | s15 = [ &arrs <- _35 ] s16
+    | s16 = index_Vec_u64_Global [%#sstream'16] {st.current} {[%#sstream'15] (8: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_38 <- _x ] s17)
+    | s17 = [ &lits <- _38 ] s18
+    | s18 = index_Vec_u64_Global [%#sstream'18] {st.current} {[%#sstream'17] (9: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_41 <- _x ] s19)
+    | s19 = [ &lines <- _41 ] s20
+    | s20 = index_Vec_u64_Global [%#sstream'20] {st.current} {[%#sstream'19] (10: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_44 <- _x ] s21)
+    | s21 = [ &idsum <- _44 ] s22
+    | s22 = index_Vec_u64_Global [%#sstream'22] {st.current} {[%#sstream'21] (11: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_47 <- _x ] s23)
+    | s23 = [ &allsum <- _47 ] s24
+    | s24 = index_Vec_u64_Global [%#sstream'24] {st.current} {[%#sstream'23] (12: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_50 <- _x ] s25)
+    | s25 = [ &acc <- _50 ] s26
+    | s26 = index_Vec_u64_Global [%#sstream'26] {st.current} {[%#sstream'25] (13: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_53 <- _x ] s27)
+    | s27 = [ &isint <- _53 ] s28
+    | s28 = index_Vec_u64_Global [%#sstream'28] {st.current} {[%#sstream'27] (14: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_56 <- _x ] s29)
+    | s29 = [ &gotid <- _56 ] s30
+    | s30 = [ &p <- [%#sstream'29] (0: UInt64.t) ] s31
+    | s31 = bb16 ]
+  | bb16 = bb16invariant
+    [ bb16 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb16 ([%#sstream'30] UInt64.t'int len
+      - UInt64.t'int p)}
+      bb16invariant
+    | bb16invariant = {[@expl:loop invariant] [%#sstream'31] UInt64.t'int p <= UInt64.t'int len
+      /\ UInt64.t'int len <= Seq.length (view_Vec_u8_Global buf)
+      /\ Seq.length (view_Vec_u32_Global tab) = 256 /\ Seq.length (view_Vec_u64_Global st.current) = 16}
+      (! [ &variant_old_bb16 <- [%#sstream'30] UInt64.t'int len - UInt64.t'int p ] s0)
+      [ s0 = [ &_71 <- UInt64.lt p len ] s1 | s1 = any [ br0 -> {_71 = false} (! bb120) | br1 -> {_71} (! bb18) ] ]
+      [ bb18 = s0
+        [ s0 = index_Vec_u8_Global [%#sstream'32] {buf} {p} (fun (_x: UInt8.t) -> [ &_75 <- _x ] s1)
+        | s1 = [ &c <- _75 ] s2
+        | s2 = [ &_85 <- UInt32.of_int (UInt8.t'int c) ] s3
+        | s3 = [ &_83 <- UInt32.bw_xor crc _85 ] s4
+        | s4 = [ &_87 <- ([%#sstream'33] (256: UInt32.t)) = ([%#sstream'34] (0: UInt32.t)) ] s5
+        | s5 = {[@expl:remainder by zero] [%#sstream'34] not _87} s6
+        | s6 = UInt32.rem [%#sstream'34] {_83} {[%#sstream'33] (256: UInt32.t)}
+            (fun (_x: UInt32.t) -> [ &_82 <- _x ] s7)
+        | s7 = [ &_81 <- UInt64.of_int (UInt32.t'int _82) ] s8
+        | s8 = index_Vec_u32_Global [%#sstream'35] {tab} {_81} (fun (_x: UInt32.t) -> [ &_79 <- _x ] s9)
+        | s9 = UInt32.shr [%#sstream'37] {crc} {Int32.to_int ([%#sstream'36] (8: Int32.t))}
+            (fun (_x: UInt32.t) -> [ &_88 <- _x ] s10)
+        | s10 = [ &crc <- UInt32.bw_xor _79 _88 ] s11
+        | s11 = is_digit [%#sstream'38] {c} (fun (_x: bool) -> [ &dg <- _x ] s12)
+        | s12 = is_lower [%#sstream'39] {c} (fun (_x: bool) -> [ &lo <- _x ] s13)
+        | s13 = [ &_95 <- mode = ([%#sstream'40] (3: UInt64.t)) ] s14
+        | s14 = any [ br0 -> {_95 = false} (! bb45) | br1 -> {_95} (! bb24) ] ]
+      | bb24 = any [ br0 -> {dg = false} (! bb25) | br1 -> {dg} (! bb45) ]
+      | bb25 = s0
+        [ s0 = is_numpunct [%#sstream'41] {c} (fun (_x: bool) -> [ &_98 <- _x ] s1)
+        | s1 = any [ br0 -> {_98 = false} (! bb28) | br1 -> {_98} (! bb45) ] ]
+      | bb28 = s0
+        [ s0 = wrapping_add [%#sstream'43] {nums} {[%#sstream'42] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_100 <- _x ] s1)
+        | s1 = [ &nums <- _100 ] s2
+        | s2 = [ &_103 <- isint = ([%#sstream'44] (1: UInt64.t)) ] s3
+        | s3 = any [ br0 -> {_103 = false} (! bb40) | br1 -> {_103} (! bb30) ] ]
+      | bb30 = s0
+        [ s0 = wrapping_add [%#sstream'45] {allsum} {acc} (fun (_x: UInt64.t) -> [ &_105 <- _x ] s1)
+        | s1 = [ &allsum <- _105 ] s2
+        | s2 = [ &_108 <- depth = ([%#sstream'46] (1: UInt64.t)) ] s3
+        | s3 = any [ br0 -> {_108 = false} (! bb40) | br1 -> {_108} (! bb32) ] ]
+      | bb32 = s0
+        [ s0 = [ &_110 <- gotid = ([%#sstream'47] (0: UInt64.t)) ] s1
+        | s1 = any [ br0 -> {_110 = false} (! bb40) | br1 -> {_110} (! bb33) ] ]
+      | bb33 = s0
+        [ s0 = wrapping_add [%#sstream'48] {idsum} {acc} (fun (_x: UInt64.t) -> [ &_112 <- _x ] s1)
+        | s1 = [ &idsum <- _112 ] s2
+        | s2 = bb40 ]
+      | bb40 = s0
+        [ s0 = [ &_116 <- depth = ([%#sstream'49] (1: UInt64.t)) ] s1
+        | s1 = any [ br0 -> {_116 = false} (! bb43) | br1 -> {_116} (! bb41) ] ]
+      | bb41 = s0 [ s0 = [ &gotid <- [%#sstream'50] (1: UInt64.t) ] s1 | s1 = bb43 ]
+      | bb43 = s0 [ s0 = [ &mode <- [%#sstream'51] (0: UInt64.t) ] s1 | s1 = bb52 ]
+      | bb45 = s0
+        [ s0 = [ &_118 <- mode = ([%#sstream'52] (4: UInt64.t)) ] s1
+        | s1 = any [ br0 -> {_118 = false} (! bb52) | br1 -> {_118} (! bb46) ] ]
+      | bb46 = any [ br0 -> {lo = false} (! bb47) | br1 -> {lo} (! bb52) ]
+      | bb47 = s0
+        [ s0 = wrapping_add [%#sstream'54] {lits} {[%#sstream'53] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_121 <- _x ] s1)
+        | s1 = [ &lits <- _121 ] s2
+        | s2 = [ &mode <- [%#sstream'55] (0: UInt64.t) ] s3
+        | s3 = bb52 ]
+      | bb52 = s0
+        [ s0 = [ &_124 <- mode = ([%#sstream'56] (2: UInt64.t)) ] s1
+        | s1 = any [ br0 -> {_124 = false} (! bb54) | br1 -> {_124} (! bb53) ] ]
+      | bb53 = s0 [ s0 = [ &mode <- [%#sstream'57] (1: UInt64.t) ] s1 | s1 = bb119 ]
+      | bb54 = s0
+        [ s0 = [ &_126 <- mode = ([%#sstream'58] (1: UInt64.t)) ] s1
+        | s1 = any [ br0 -> {_126 = false} (! bb62) | br1 -> {_126} (! bb55) ] ]
+      | bb55 = s0
+        [ s0 = [ &_129 <- c = ([%#sstream'59] (92: UInt8.t)) ] s1
+        | s1 = any [ br0 -> {_129 = false} (! bb57) | br1 -> {_129} (! bb56) ] ]
+      | bb56 = s0 [ s0 = [ &_128 <- [%#sstream'60] (2: UInt64.t) ] s1 | s1 = bb61 ]
+      | bb57 = s0
+        [ s0 = [ &_131 <- c = ([%#sstream'61] (34: UInt8.t)) ] s1
+        | s1 = any [ br0 -> {_131 = false} (! bb59) | br1 -> {_131} (! bb58) ] ]
+      | bb58 = s0 [ s0 = [ &_128 <- [%#sstream'62] (0: UInt64.t) ] s1 | s1 = bb61 ]
+      | bb59 = s0 [ s0 = [ &_128 <- [%#sstream'63] (1: UInt64.t) ] s1 | s1 = bb61 ]
+      | bb61 = s0 [ s0 = [ &mode <- _128 ] s1 | s1 = bb119 ]
+      | bb62 = s0
+        [ s0 = [ &_133 <- mode = ([%#sstream'64] (3: UInt64.t)) ] s1
+        | s1 = any [ br0 -> {_133 = false} (! bb70) | br1 -> {_133} (! bb63) ] ]
+      | bb63 = any [ br0 -> {dg = false} (! bb68) | br1 -> {dg} (! bb64) ]
+      | bb64 = s0
+        [ s0 = wrapping_mul [%#sstream'66] {acc} {[%#sstream'65] (10: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_137 <- _x ] s1)
+        | s1 = wrapping_sub [%#sstream'68] {c} {[%#sstream'67] (48: UInt8.t)} (fun (_x: UInt8.t) -> [ &_140 <- _x ] s2)
+        | s2 = [ &_139 <- UInt64.of_int (UInt8.t'int _140) ] s3
+        | s3 = wrapping_add [%#sstream'69] {_137} {_139} (fun (_x: UInt64.t) -> [ &_136 <- _x ] s4)
+        | s4 = [ &acc <- _136 ] s5
+        | s5 = bb119 ]
+      | bb68 = s0 [ s0 = [ &isint <- [%#sstream'70] (0: UInt64.t) ] s1 | s1 = bb119 ]
+      | bb70 = s0
+        [ s0 = [ &_142 <- mode = ([%#sstream'71] (4: UInt64.t)) ] s1
+        | s1 = any [ br0 -> {_142 = false} (! bb72) | br1 -> {_142} (! bb119) ] ]
+      | bb72 = s0
+        [ s0 = [ &_144 <- c = ([%#sstream'72] (34: UInt8.t)) ] s1
+        | s1 = any [ br0 -> {_144 = false} (! bb75) | br1 -> {_144} (! bb73) ] ]
+      | bb73 = s0
+        [ s0 = wrapping_add [%#sstream'74] {strs} {[%#sstream'73] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_146 <- _x ] s1)
+        | s1 = [ &strs <- _146 ] s2
+        | s2 = [ &mode <- [%#sstream'75] (1: UInt64.t) ] s3
+        | s3 = bb119 ]
+      | bb75 = s0
+        [ s0 = [ &_148 <- c = ([%#sstream'76] (123: UInt8.t)) ] s1
+        | s1 = any [ br0 -> {_148 = false} (! bb82) | br1 -> {_148} (! bb76) ] ]
+      | bb76 = s0
+        [ s0 = wrapping_add [%#sstream'78] {objs} {[%#sstream'77] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_150 <- _x ] s1)
+        | s1 = [ &objs <- _150 ] s2
+        | s2 = wrapping_add [%#sstream'80] {depth} {[%#sstream'79] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_152 <- _x ] s3)
+        | s3 = [ &depth <- _152 ] s4
+        | s4 = [ &_154 <- UInt64.gt depth maxd ] s5
+        | s5 = any [ br0 -> {_154 = false} (! bb119) | br1 -> {_154} (! bb79) ] ]
+      | bb79 = s0 [ s0 = [ &maxd <- depth ] s1 | s1 = bb119 ]
+      | bb82 = s0
+        [ s0 = [ &_158 <- c = ([%#sstream'81] (91: UInt8.t)) ] s1
+        | s1 = any [ br0 -> {_158 = false} (! bb89) | br1 -> {_158} (! bb83) ] ]
+      | bb83 = s0
+        [ s0 = wrapping_add [%#sstream'83] {arrs} {[%#sstream'82] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_160 <- _x ] s1)
+        | s1 = [ &arrs <- _160 ] s2
+        | s2 = wrapping_add [%#sstream'85] {depth} {[%#sstream'84] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_162 <- _x ] s3)
+        | s3 = [ &depth <- _162 ] s4
+        | s4 = [ &_164 <- UInt64.gt depth maxd ] s5
+        | s5 = any [ br0 -> {_164 = false} (! bb119) | br1 -> {_164} (! bb86) ] ]
+      | bb86 = s0 [ s0 = [ &maxd <- depth ] s1 | s1 = bb119 ]
+      | bb89 = s0
+        [ s0 = [ &_168 <- c = ([%#sstream'86] (125: UInt8.t)) ] s1
+        | s1 = any [ br0 -> {_168 = false} (! bb91) | br1 -> {_168} (! bb93) ] ]
+      | bb91 = s0
+        [ s0 = [ &_170 <- c = ([%#sstream'87] (93: UInt8.t)) ] s1
+        | s1 = any [ br0 -> {_170 = false} (! bb97) | br1 -> {_170} (! bb93) ] ]
+      | bb93 = s0
+        [ s0 = [ &_172 <- UInt64.gt depth ([%#sstream'88] (0: UInt64.t)) ] s1
+        | s1 = any [ br0 -> {_172 = false} (! bb119) | br1 -> {_172} (! bb94) ] ]
+      | bb94 = s0
+        [ s0 = UInt64.sub [%#sstream'90] {depth} {[%#sstream'89] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &depth <- _x ] s1)
+        | s1 = bb119 ]
+      | bb97 = s0
+        [ s0 = [ &_174 <- c = ([%#sstream'91] (10: UInt8.t)) ] s1
+        | s1 = any [ br0 -> {_174 = false} (! bb100) | br1 -> {_174} (! bb98) ] ]
+      | bb98 = s0
+        [ s0 = wrapping_add [%#sstream'93] {lines} {[%#sstream'92] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_176 <- _x ] s1)
+        | s1 = [ &lines <- _176 ] s2
+        | s2 = [ &gotid <- [%#sstream'94] (0: UInt64.t) ] s3
+        | s3 = bb119 ]
+      | bb100 = any [ br0 -> {dg = false} (! bb103) | br1 -> {dg} (! bb101) ]
+      | bb101 = s0
+        [ s0 = [ &mode <- [%#sstream'95] (3: UInt64.t) ] s1
+        | s1 = wrapping_sub [%#sstream'97] {c} {[%#sstream'96] (48: UInt8.t)} (fun (_x: UInt8.t) -> [ &_179 <- _x ] s2)
+        | s2 = [ &acc <- UInt64.of_int (UInt8.t'int _179) ] s3
+        | s3 = [ &isint <- [%#sstream'98] (1: UInt64.t) ] s4
+        | s4 = bb119 ]
+      | bb103 = s0
+        [ s0 = [ &_181 <- c = ([%#sstream'99] (45: UInt8.t)) ] s1
+        | s1 = any [ br0 -> {_181 = false} (! bb105) | br1 -> {_181} (! bb104) ] ]
+      | bb104 = s0
+        [ s0 = [ &mode <- [%#sstream'100] (3: UInt64.t) ] s1
+        | s1 = [ &acc <- [%#sstream'101] (0: UInt64.t) ] s2
+        | s2 = [ &isint <- [%#sstream'102] (1: UInt64.t) ] s3
+        | s3 = bb119 ]
+      | bb105 = any [ br0 -> {lo = false} (! bb119) | br1 -> {lo} (! bb106) ]
+      | bb106 = s0 [ s0 = [ &mode <- [%#sstream'103] (4: UInt64.t) ] s1 | s1 = bb119 ]
+      | bb119 = s0
+        [ s0 = UInt64.add [%#sstream'105] {p} {[%#sstream'104] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &p <- _x ] s1)
+        | s1 = bb16 ] ] ]
+  | bb120 = s0
+    [ s0 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_187 <- _bor ] [ &st <- { st with current = _bor.final } ] s1)
+    | s1 = index_mut_Vec_u64_Global [%#sstream'107] {_187} {[%#sstream'106] (0: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_186 <- _x ] s2)
+    | s2 = [ &_186 <- { _186 with current = UInt64.of_int (UInt32.t'int crc) } ] s3
+    | s3 = -{resolve_refmut_u64 _186}- s4
+    | s4 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_190 <- _bor ] [ &st <- { st with current = _bor.final } ] s5)
+    | s5 = index_mut_Vec_u64_Global [%#sstream'109] {_190} {[%#sstream'108] (1: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_189 <- _x ] s6)
+    | s6 = [ &_189 <- { _189 with current = mode } ] s7
+    | s7 = -{resolve_refmut_u64 _189}- s8
+    | s8 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_193 <- _bor ] [ &st <- { st with current = _bor.final } ] s9)
+    | s9 = index_mut_Vec_u64_Global [%#sstream'111] {_193} {[%#sstream'110] (2: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_192 <- _x ] s10)
+    | s10 = [ &_192 <- { _192 with current = depth } ] s11
+    | s11 = -{resolve_refmut_u64 _192}- s12
+    | s12 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_196 <- _bor ] [ &st <- { st with current = _bor.final } ] s13)
+    | s13 = index_mut_Vec_u64_Global [%#sstream'113] {_196} {[%#sstream'112] (3: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_195 <- _x ] s14)
+    | s14 = [ &_195 <- { _195 with current = maxd } ] s15
+    | s15 = -{resolve_refmut_u64 _195}- s16
+    | s16 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_199 <- _bor ] [ &st <- { st with current = _bor.final } ] s17)
+    | s17 = index_mut_Vec_u64_Global [%#sstream'115] {_199} {[%#sstream'114] (4: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_198 <- _x ] s18)
+    | s18 = [ &_198 <- { _198 with current = objs } ] s19
+    | s19 = -{resolve_refmut_u64 _198}- s20
+    | s20 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_202 <- _bor ] [ &st <- { st with current = _bor.final } ] s21)
+    | s21 = index_mut_Vec_u64_Global [%#sstream'117] {_202} {[%#sstream'116] (5: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_201 <- _x ] s22)
+    | s22 = [ &_201 <- { _201 with current = strs } ] s23
+    | s23 = -{resolve_refmut_u64 _201}- s24
+    | s24 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_205 <- _bor ] [ &st <- { st with current = _bor.final } ] s25)
+    | s25 = index_mut_Vec_u64_Global [%#sstream'119] {_205} {[%#sstream'118] (6: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_204 <- _x ] s26)
+    | s26 = [ &_204 <- { _204 with current = nums } ] s27
+    | s27 = -{resolve_refmut_u64 _204}- s28
+    | s28 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_208 <- _bor ] [ &st <- { st with current = _bor.final } ] s29)
+    | s29 = index_mut_Vec_u64_Global [%#sstream'121] {_208} {[%#sstream'120] (7: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_207 <- _x ] s30)
+    | s30 = [ &_207 <- { _207 with current = arrs } ] s31
+    | s31 = -{resolve_refmut_u64 _207}- s32
+    | s32 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_211 <- _bor ] [ &st <- { st with current = _bor.final } ] s33)
+    | s33 = index_mut_Vec_u64_Global [%#sstream'123] {_211} {[%#sstream'122] (8: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_210 <- _x ] s34)
+    | s34 = [ &_210 <- { _210 with current = lits } ] s35
+    | s35 = -{resolve_refmut_u64 _210}- s36
+    | s36 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_214 <- _bor ] [ &st <- { st with current = _bor.final } ] s37)
+    | s37 = index_mut_Vec_u64_Global [%#sstream'125] {_214} {[%#sstream'124] (9: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_213 <- _x ] s38)
+    | s38 = [ &_213 <- { _213 with current = lines } ] s39
+    | s39 = -{resolve_refmut_u64 _213}- s40
+    | s40 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_217 <- _bor ] [ &st <- { st with current = _bor.final } ] s41)
+    | s41 = index_mut_Vec_u64_Global [%#sstream'127] {_217} {[%#sstream'126] (10: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_216 <- _x ] s42)
+    | s42 = [ &_216 <- { _216 with current = idsum } ] s43
+    | s43 = -{resolve_refmut_u64 _216}- s44
+    | s44 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_220 <- _bor ] [ &st <- { st with current = _bor.final } ] s45)
+    | s45 = index_mut_Vec_u64_Global [%#sstream'129] {_220} {[%#sstream'128] (11: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_219 <- _x ] s46)
+    | s46 = [ &_219 <- { _219 with current = allsum } ] s47
+    | s47 = -{resolve_refmut_u64 _219}- s48
+    | s48 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_223 <- _bor ] [ &st <- { st with current = _bor.final } ] s49)
+    | s49 = index_mut_Vec_u64_Global [%#sstream'131] {_223} {[%#sstream'130] (12: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_222 <- _x ] s50)
+    | s50 = [ &_222 <- { _222 with current = acc } ] s51
+    | s51 = -{resolve_refmut_u64 _222}- s52
+    | s52 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_226 <- _bor ] [ &st <- { st with current = _bor.final } ] s53)
+    | s53 = index_mut_Vec_u64_Global [%#sstream'133] {_226} {[%#sstream'132] (13: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_225 <- _x ] s54)
+    | s54 = [ &_225 <- { _225 with current = isint } ] s55
+    | s55 = -{resolve_refmut_u64 _225}- s56
+    | s56 = MutBorrow.borrow_mut <t_Vec_u64_Global> {st.current}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_229 <- _bor ] [ &st <- { st with current = _bor.final } ] s57)
+    | s57 = index_mut_Vec_u64_Global [%#sstream'135] {_229} {[%#sstream'134] (14: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_228 <- _x ] s58)
+    | s58 = [ &_228 <- { _228 with current = gotid } ] s59
+    | s59 = -{resolve_refmut_u64 _228}- s60
+    | s60 = index_Vec_u64_Global [%#sstream'137] {st.current} {[%#sstream'136] (15: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_232 <- _x ] s61)
+    | s61 = [ &_234 <- len ] s62
+    | s62 = wrapping_add [%#sstream'138] {_232} {_234} (fun (_x: UInt64.t) -> [ &_230 <- _x ] s63)
+    | s63 = MutBorrow.borrow_final <t_Vec_u64_Global> {st.current} {MutBorrow.get_id st}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_237 <- _bor ] [ &st <- { st with current = _bor.final } ] s64)
+    | s64 = index_mut_Vec_u64_Global [%#sstream'140] {_237} {[%#sstream'139] (15: UInt64.t)}
+        (fun (_x: MutBorrow.t UInt64.t) -> [ &_236 <- _x ] s65)
+    | s65 = [ &_236 <- { _236 with current = _230 } ] s66
+    | s66 = -{resolve_refmut_u64 _236}- s67
+    | s67 = -{resolve_refmut_Vec_u64_Global st}- s68
+    | s68 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & buf: t_Vec_u8_Global = buf
+  | & len: UInt64.t = len
+  | & st: MutBorrow.t t_Vec_u64_Global = st
+  | & tab: t_Vec_u32_Global = tab
+  | & crc: UInt32.t = Any.any_l ()
+  | & _14: UInt64.t = Any.any_l ()
+  | & mode: UInt64.t = Any.any_l ()
+  | & _17: UInt64.t = Any.any_l ()
+  | & depth: UInt64.t = Any.any_l ()
+  | & _20: UInt64.t = Any.any_l ()
+  | & maxd: UInt64.t = Any.any_l ()
+  | & _23: UInt64.t = Any.any_l ()
+  | & objs: UInt64.t = Any.any_l ()
+  | & _26: UInt64.t = Any.any_l ()
+  | & strs: UInt64.t = Any.any_l ()
+  | & _29: UInt64.t = Any.any_l ()
+  | & nums: UInt64.t = Any.any_l ()
+  | & _32: UInt64.t = Any.any_l ()
+  | & arrs: UInt64.t = Any.any_l ()
+  | & _35: UInt64.t = Any.any_l ()
+  | & lits: UInt64.t = Any.any_l ()
+  | & _38: UInt64.t = Any.any_l ()
+  | & lines: UInt64.t = Any.any_l ()
+  | & _41: UInt64.t = Any.any_l ()
+  | & idsum: UInt64.t = Any.any_l ()
+  | & _44: UInt64.t = Any.any_l ()
+  | & allsum: UInt64.t = Any.any_l ()
+  | & _47: UInt64.t = Any.any_l ()
+  | & acc: UInt64.t = Any.any_l ()
+  | & _50: UInt64.t = Any.any_l ()
+  | & isint: UInt64.t = Any.any_l ()
+  | & _53: UInt64.t = Any.any_l ()
+  | & gotid: UInt64.t = Any.any_l ()
+  | & _56: UInt64.t = Any.any_l ()
+  | & p: UInt64.t = Any.any_l ()
+  | & _71: bool = Any.any_l ()
+  | & c: UInt8.t = Any.any_l ()
+  | & _75: UInt8.t = Any.any_l ()
+  | & _79: UInt32.t = Any.any_l ()
+  | & _81: UInt64.t = Any.any_l ()
+  | & _82: UInt32.t = Any.any_l ()
+  | & _83: UInt32.t = Any.any_l ()
+  | & _85: UInt32.t = Any.any_l ()
+  | & _87: bool = Any.any_l ()
+  | & _88: UInt32.t = Any.any_l ()
+  | & dg: bool = Any.any_l ()
+  | & lo: bool = Any.any_l ()
+  | & _95: bool = Any.any_l ()
+  | & _98: bool = Any.any_l ()
+  | & _100: UInt64.t = Any.any_l ()
+  | & _103: bool = Any.any_l ()
+  | & _105: UInt64.t = Any.any_l ()
+  | & _108: bool = Any.any_l ()
+  | & _110: bool = Any.any_l ()
+  | & _112: UInt64.t = Any.any_l ()
+  | & _116: bool = Any.any_l ()
+  | & _118: bool = Any.any_l ()
+  | & _121: UInt64.t = Any.any_l ()
+  | & _124: bool = Any.any_l ()
+  | & _126: bool = Any.any_l ()
+  | & _128: UInt64.t = Any.any_l ()
+  | & _129: bool = Any.any_l ()
+  | & _131: bool = Any.any_l ()
+  | & _133: bool = Any.any_l ()
+  | & _136: UInt64.t = Any.any_l ()
+  | & _137: UInt64.t = Any.any_l ()
+  | & _139: UInt64.t = Any.any_l ()
+  | & _140: UInt8.t = Any.any_l ()
+  | & _142: bool = Any.any_l ()
+  | & _144: bool = Any.any_l ()
+  | & _146: UInt64.t = Any.any_l ()
+  | & _148: bool = Any.any_l ()
+  | & _150: UInt64.t = Any.any_l ()
+  | & _152: UInt64.t = Any.any_l ()
+  | & _154: bool = Any.any_l ()
+  | & _158: bool = Any.any_l ()
+  | & _160: UInt64.t = Any.any_l ()
+  | & _162: UInt64.t = Any.any_l ()
+  | & _164: bool = Any.any_l ()
+  | & _168: bool = Any.any_l ()
+  | & _170: bool = Any.any_l ()
+  | & _172: bool = Any.any_l ()
+  | & _174: bool = Any.any_l ()
+  | & _176: UInt64.t = Any.any_l ()
+  | & _179: UInt8.t = Any.any_l ()
+  | & _181: bool = Any.any_l ()
+  | & _186: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _187: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _189: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _190: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _192: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _193: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _195: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _196: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _198: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _199: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _201: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _202: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _204: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _205: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _207: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _208: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _210: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _211: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _213: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _214: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _216: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _217: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _219: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _220: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _222: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _223: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _225: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _226: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _228: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _229: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _230: UInt64.t = Any.any_l ()
+  | & _232: UInt64.t = Any.any_l ()
+  | & _234: UInt64.t = Any.any_l ()
+  | & _236: MutBorrow.t UInt64.t = Any.any_l ()
+  | & _237: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & variant_old_bb16: int = Any.any_l () ])
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:chunk ensures] [%#sstream'142] Seq.length (view_Vec_u64_Global st.final) = 16}
+    (! return {result}) ]

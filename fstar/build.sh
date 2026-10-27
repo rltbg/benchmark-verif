@@ -17,10 +17,15 @@ export PATH="$FSTAR_HOME/bin:$PATH"
 FOOT=../results/footprint.json
 B=$PWD/_build
 MODS=(Common.fst SortSpec.fsti SortSpec.fst Sort.fst Sieve.fst Matmul.fst Lines.fst Hashmap.fst
+      Stream.fst
+      Bfs.fst
       # @@MODS@@ (modules des workloads étendus, avant All.fst : une ligne `<Nom>.fst` ; les ancres sont retirées par la ligne suivante)
       All.fst)
 ENTRIES=(--custard_entry Bench.Sort.run --custard_entry Bench.Sieve.run --custard_entry Bench.Matmul.run
          --custard_entry Bench.Lines.run --custard_entry Bench.Hashmap.run
+         --custard_entry Bench.Stream.chunk --custard_entry Bench.Stream.new_buf --custard_entry Bench.Stream.new_state
+         --custard_entry Bench.Stream.new_table --custard_entry Bench.Stream.finish
+         --custard_entry Bench.Bfs.run
          # @@ENTRIES@@ (une ligne `--custard_entry Bench.<Nom>.run` par workload étendu)
 )
 export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1

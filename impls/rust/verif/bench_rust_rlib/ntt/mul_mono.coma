@@ -1,0 +1,23 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 42 0 42 47 *)
+
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 40 11 40 47
+let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 41 10 41 24
+
+use int.Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant a : int
+
+constant b : int
+
+constant x : int
+
+constant y : int
+
+function mul_mono [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 42 0 42 47] (a: int) (b: int) (x: int) (y: int) : ()
+
+goal vc_mul_mono: ([%#sntt] 0 <= a /\ a <= x /\ 0 <= b /\ b <= y)
+  -> ([@stop_split] [@expl:mul_mono ensures] [%#sntt'0] a * b <= x * y)

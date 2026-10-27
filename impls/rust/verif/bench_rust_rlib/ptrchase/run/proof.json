@@ -1,0 +1,15 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_build": { "prover": "alt-ergo", "time": 0.013 },
+      "vc_chase": { "prover": "alt-ergo", "time": 0.013 },
+      "vc_ckfold": { "prover": "alt-ergo", "time": 0.012 },
+      "vc_from_elem_u32": { "prover": "alt-ergo", "time": 0.009 },
+      "vc_from_elem_u64": { "prover": "alt-ergo", "time": 0.011 },
+      "vc_run": { "prover": "alt-ergo", "time": 0.018 },
+      "vc_sattolo": { "prover": "alt-ergo", "time": 0.012 },
+      "vc_search_all": { "prover": "alt-ergo", "time": 0.015 }
+    }
+  }
+}

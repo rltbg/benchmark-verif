@@ -1,0 +1,60 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 16 0 16 43 *)
+
+let%span sbfs = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 17 28 17 32
+let%span sbfs'0 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 17 28 17 48
+let%span sbfs'1 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 17 10 17 14
+let%span sbfs'2 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 17 10 17 49
+let%span sbfs'3 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 17 10 17 65
+let%span sbfs'4 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 17 4 17 66
+let%span sbfs'5 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 17 4 17 71
+let%span sbfs'6 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 12 11 12 18
+let%span sbfs'7 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 13 10 13 23
+let%span sbfs'8 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 16 0 16 43
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+
+use creusot.int.UInt64
+use creusot.prelude.Any
+use int.Int
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+constant const_SEED: UInt64.t = [%#sbfs'8] (13109978515275513857: UInt64.t)
+
+let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum'0] result = UInt64.add self rhs}
+    (! return {result}) ]
+
+let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let endp [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 16 0 16 43] (j: UInt64.t) (k: UInt64.t) (nn: UInt64.t)
+  (return (x: UInt64.t)) = {[@stop_split] [@expl:endp requires] [%#sbfs'6] 0 < UInt64.t'int nn}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = wrapping_mul [%#sbfs'0] {[%#sbfs] (2: UInt64.t)} {j} (fun (_x: UInt64.t) -> [ &_11 <- _x ] s1)
+    | s1 = wrapping_add [%#sbfs'2] {[%#sbfs'1] const_SEED} {_11} (fun (_x: UInt64.t) -> [ &_10 <- _x ] s2)
+    | s2 = wrapping_add [%#sbfs'3] {_10} {k} (fun (_x: UInt64.t) -> [ &_9 <- _x ] s3)
+    | s3 = mix64 [%#sbfs'4] {_9} (fun (_x: UInt64.t) -> [ &_8 <- _x ] s4)
+    | s4 = [ &_14 <- nn ] s5
+    | s5 = [ &_15 <- _14 = ([%#sbfs'5] (0: UInt64.t)) ] s6
+    | s6 = {[@expl:remainder by zero] [%#sbfs'5] not _15} s7
+    | s7 = UInt64.rem [%#sbfs'5] {_8} {_14} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s8)
+    | s8 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & j: UInt64.t = j
+  | & k: UInt64.t = k
+  | & nn: UInt64.t = nn
+  | & _8: UInt64.t = Any.any_l ()
+  | & _9: UInt64.t = Any.any_l ()
+  | & _10: UInt64.t = Any.any_l ()
+  | & _11: UInt64.t = Any.any_l ()
+  | & _14: UInt64.t = Any.any_l ()
+  | & _15: bool = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:endp ensures] [%#sbfs'7] UInt64.t'int result < UInt64.t'int nn}
+    (! return {result}) ]

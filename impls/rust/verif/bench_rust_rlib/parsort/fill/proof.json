@@ -1,0 +1,12 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_fill": { "prover": "alt-ergo", "time": 0.016 },
+      "vc_hi32": { "prover": "alt-ergo", "time": 0.014 },
+      "vc_len_u32": { "prover": "alt-ergo", "time": 0.01 },
+      "vc_mix64": { "prover": "alt-ergo", "time": 0.016 },
+      "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.014 }
+    }
+  }
+}

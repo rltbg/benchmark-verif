@@ -1,0 +1,301 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 130 0 130 68 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
+let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
+let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
+let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
+let%span svec'6 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 131 21 131 22
+let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 131 14 131 22
+let%span sntt'1 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 132 17 132 24
+let%span sntt'2 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 133 18 133 38
+let%span sntt'3 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 134 18 134 55
+let%span sntt'4 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 135 18 135 24
+let%span sntt'5 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 137 14 137 28
+let%span sntt'6 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 136 16 136 49
+let%span sntt'7 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 139 23 139 62
+let%span sntt'8 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 140 20 140 29
+let%span sntt'9 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 141 20 141 26
+let%span sntt'10 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 143 18 143 28
+let%span sntt'11 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 142 20 142 49
+let%span sntt'12 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 145 27 145 68
+let%span sntt'13 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 146 26 146 67
+let%span sntt'14 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 147 22 147 31
+let%span sntt'15 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 147 21 147 32
+let%span sntt'16 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 148 22 148 31
+let%span sntt'17 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 148 22 148 38
+let%span sntt'18 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 148 21 148 39
+let%span sntt'19 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 149 23 149 33
+let%span sntt'20 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 149 22 149 34
+let%span sntt'21 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 150 27 150 67
+let%span sntt'22 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 151 20 151 25
+let%span sntt'23 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 151 28 151 29
+let%span sntt'24 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 151 20 151 29
+let%span sntt'25 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 152 28 152 35
+let%span sntt'26 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 152 38 152 39
+let%span sntt'27 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 152 27 152 40
+let%span sntt'28 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 152 14 152 23
+let%span sntt'29 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 152 13 152 24
+let%span sntt'30 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 153 40 153 41
+let%span sntt'31 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 153 36 153 41
+let%span sntt'32 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 153 35 153 46
+let%span sntt'33 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 153 49 153 50
+let%span sntt'34 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 153 34 153 51
+let%span sntt'35 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 153 14 153 23
+let%span sntt'36 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 153 14 153 30
+let%span sntt'37 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 153 13 153 31
+let%span sntt'38 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 154 17 154 18
+let%span sntt'39 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 154 12 154 18
+let%span sntt'40 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 156 15 156 16
+let%span sntt'41 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 156 8 156 16
+let%span sntt'42 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 127 11 127 104
+let%span sntt'43 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 128 10 128 33
+let%span sntt'44 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 40 11 40 47
+let%span sntt'45 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 41 10 41 24
+let%span sntt'46 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 42 48 42 50
+let%span sntt'47 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 130 0 130 68
+
+use creusot.int.UInt64
+use creusot.prelude.MutBorrow
+use seq.Seq
+use creusot.int.UInt32
+use creusot.prelude.Any
+use int.ComputerDivision
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+type t_Vec_u32_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
+
+axiom view_Vec_u32_Global_spec:
+  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec] Seq.length (view_Vec_u32_Global self)
+    <= UInt64.t'int const_MAX
+
+function mul_mono [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 42 0 42 47] (a: int) (b: int) (x: int) (y: int) : ()
+ = [%#sntt'46] ()
+
+axiom mul_mono_spec: forall a: int, b: int, x: int, y: int. ([%#sntt'44] 0 <= a /\ a <= x /\ 0 <= b /\ b <= y)
+    -> ([%#sntt'45] a * b <= x * y)
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) (out: UInt32.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+let index_Vec_u32_Global (self: t_Vec_u32_Global) (index: UInt64.t) (return (x: UInt32.t)) =
+{[@stop_split] [@expl:index requires] [%#svec'0] in_bounds_usize index (view_Vec_u32_Global self)}
+  any
+  [ return (result: UInt32.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u32_Global self) result}
+    (! return {result}) ]
+
+constant const_P: UInt64.t = [%#sntt'47] (2013265921: UInt64.t)
+
+predicate resolve_elswhere_usize [@inline:trivial] (self: UInt64.t) (old': Seq.seq UInt32.t) (fin: Seq.seq UInt32.t) =
+  [%#sslice'1] forall i: int. 0 <= i /\ i <> UInt64.t'int self /\ i < Seq.length old' -> Seq.get old' i = Seq.get fin i
+
+meta "rewrite_def" predicate resolve_elswhere_usize
+
+let index_mut_Vec_u32_Global (self: MutBorrow.t t_Vec_u32_Global) (index: UInt64.t) (return (x: MutBorrow.t UInt32.t)) =
+{[@stop_split] [@expl:index_mut requires] [%#svec'2] in_bounds_usize index (view_Vec_u32_Global self.current)}
+  any
+  [ return (result: MutBorrow.t UInt32.t) ->
+  {[@stop_split] [@expl:index_mut_Vec_u32_Global ensures] ([@stop_split] [@expl:index_mut ensures #0] [%#svec'3] has_value_usize index (view_Vec_u32_Global self.current) result.current)
+    /\ ([@stop_split] [@expl:index_mut ensures #1] [%#svec'4] has_value_usize index (view_Vec_u32_Global self.final) result.final)
+    /\ ([@stop_split] [@expl:index_mut ensures #2] [%#svec'5] resolve_elswhere_usize index (view_Vec_u32_Global self.current) (view_Vec_u32_Global self.final))
+    /\ ([@stop_split] [@expl:index_mut ensures #3] [%#svec'6] Seq.length (view_Vec_u32_Global self.final)
+    = Seq.length (view_Vec_u32_Global self.current))}
+    (! return {result}) ]
+
+predicate resolve_refmut_u32 [@inline:trivial] (_1: MutBorrow.t UInt32.t) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_u32
+
+predicate resolve_refmut_Vec_u32_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u32_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u32_Global
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let stage [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 130 0 130 68] (a: MutBorrow.t t_Vec_u32_Global)
+  (tw: t_Vec_u32_Global) (n: UInt64.t) (half: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:stage requires] [%#sntt'42] Seq.length (view_Vec_u32_Global a.current) = UInt64.t'int n
+  /\ Seq.length (view_Vec_u32_Global tw) = ComputerDivision.div (UInt64.t'int n) 2 + 1
+  /\ 1 <= UInt64.t'int half /\ 2 * UInt64.t'int half <= UInt64.t'int n /\ UInt64.t'int n <= 134217728}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = UInt64.mul [%#sntt'0] {half} {[%#sntt] (2: UInt64.t)} (fun (_x: UInt64.t) -> [ &len <- _x ] s1)
+    | s1 = [ &_16 <- len ] s2
+    | s2 = [ &_17 <- _16 = ([%#sntt'1] (0: UInt64.t)) ] s3
+    | s3 = {[@expl:division by zero] [%#sntt'1] not _17} s4
+    | s4 = UInt64.div [%#sntt'1] {n} {_16} (fun (_x: UInt64.t) -> [ &stride <- _x ] s5)
+    | s5 = {[@expl:assertion] [%#sntt'2] UInt64.t'int stride * UInt64.t'int len <= UInt64.t'int n} s6
+    | s6 = {[@expl:assertion] [%#sntt'3] UInt64.t'int half * UInt64.t'int stride * 2
+      = UInt64.t'int len * UInt64.t'int stride}
+      s7
+    | s7 = [ &blk <- [%#sntt'4] (0: UInt64.t) ] s8
+    | s8 = [ &_old'0 <- a.final ] s9
+    | s9 = bb2 ]
+  | bb2 = bb2invariant
+    [ bb2 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb2 ([%#sntt'5] UInt64.t'int stride
+      - UInt64.t'int blk)}
+      bb2invariant
+    | bb2invariant = {[@expl:inferred invariant: unchanged value] _old'0 = a.final}
+      {[@expl:loop invariant] [%#sntt'6] Seq.length (view_Vec_u32_Global a.current) = UInt64.t'int n
+      /\ UInt64.t'int blk <= UInt64.t'int stride}
+      (! [ &variant_old_bb2 <- [%#sntt'5] UInt64.t'int stride - UInt64.t'int blk ] s0)
+      [ s0 = [ &_39 <- UInt64.lt blk stride ] s1 | s1 = any [ br0 -> {_39 = false} (! bb17) | br1 -> {_39} (! bb4) ] ]
+      [ bb4 = s0
+        [ s0 = {[@expl:assertion] [%#sntt'7] let _ = mul_mono (UInt64.t'int blk
+          + 1) (UInt64.t'int len) (UInt64.t'int stride) (UInt64.t'int len) in true}
+          s1
+        | s1 = UInt64.mul [%#sntt'8] {blk} {len} (fun (_x: UInt64.t) -> [ &start <- _x ] s2)
+        | s2 = [ &j <- [%#sntt'9] (0: UInt64.t) ] s3
+        | s3 = [ &_old <- a.final ] s4
+        | s4 = bb5 ]
+      | bb5 = bb5invariant
+        [ bb5 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb5 ([%#sntt'10] UInt64.t'int half
+          - UInt64.t'int j)}
+          bb5invariant
+        | bb5invariant = {[@expl:inferred invariant: unchanged value] _old = a.final}
+          {[@expl:loop invariant] [%#sntt'11] Seq.length (view_Vec_u32_Global a.current) = UInt64.t'int n
+          /\ UInt64.t'int j <= UInt64.t'int half}
+          (! [ &variant_old_bb5 <- [%#sntt'10] UInt64.t'int half - UInt64.t'int j ] s0)
+          [ s0 = [ &_61 <- UInt64.lt j half ] s1 | s1 = any [ br0 -> {_61 = false} (! bb16) | br1 -> {_61} (! bb7) ] ]
+          [ bb7 = s0
+            [ s0 =
+              {[@expl:assertion] [%#sntt'12] let _ = mul_mono (UInt64.t'int j) (UInt64.t'int stride) (UInt64.t'int half
+              - 1) (UInt64.t'int stride) in let _ = mul_mono (UInt64.t'int half) (UInt64.t'int stride) (UInt64.t'int half) (UInt64.t'int stride) in true}
+              s1
+            | s1 = {[@expl:assertion] [%#sntt'13] UInt64.t'int j * UInt64.t'int stride
+              <= UInt64.t'int half * UInt64.t'int stride - UInt64.t'int stride}
+              s2
+            | s2 = UInt64.add [%#sntt'14] {start} {j} (fun (_x: UInt64.t) -> [ &_78 <- _x ] s3)
+            | s3 = index_Vec_u32_Global [%#sntt'15] {a.current} {_78} (fun (_x: UInt32.t) -> [ &_76 <- _x ] s4)
+            | s4 = [ &u <- UInt64.of_int (UInt32.t'int _76) ] s5
+            | s5 = UInt64.add [%#sntt'16] {start} {j} (fun (_x: UInt64.t) -> [ &_86 <- _x ] s6)
+            | s6 = UInt64.add [%#sntt'17] {_86} {half} (fun (_x: UInt64.t) -> [ &_85 <- _x ] s7)
+            | s7 = index_Vec_u32_Global [%#sntt'18] {a.current} {_85} (fun (_x: UInt32.t) -> [ &_83 <- _x ] s8)
+            | s8 = [ &x <- UInt64.of_int (UInt32.t'int _83) ] s9
+            | s9 = UInt64.mul [%#sntt'19] {j} {stride} (fun (_x: UInt64.t) -> [ &_94 <- _x ] s10)
+            | s10 = index_Vec_u32_Global [%#sntt'20] {tw} {_94} (fun (_x: UInt32.t) -> [ &_92 <- _x ] s11)
+            | s11 = [ &t <- UInt64.of_int (UInt32.t'int _92) ] s12
+            | s12 =
+              {[@expl:assertion] [%#sntt'21] let _ = mul_mono (UInt64.t'int x) (UInt64.t'int t) 4294967295 4294967295 in true}
+              s13
+            | s13 = UInt64.mul [%#sntt'22] {x} {t} (fun (_x: UInt64.t) -> [ &_102 <- _x ] s14)
+            | s14 = [ &_105 <- ([%#sntt'23] const_P) = ([%#sntt'24] (0: UInt64.t)) ] s15
+            | s15 = {[@expl:remainder by zero] [%#sntt'24] not _105} s16
+            | s16 = UInt64.rem [%#sntt'24] {_102} {[%#sntt'23] const_P} (fun (_x: UInt64.t) -> [ &v <- _x ] s17)
+            | s17 = UInt64.add [%#sntt'25] {u} {v} (fun (_x: UInt64.t) -> [ &_107 <- _x ] s18)
+            | s18 = [ &_110 <- ([%#sntt'26] const_P) = ([%#sntt'27] (0: UInt64.t)) ] s19
+            | s19 = {[@expl:remainder by zero] [%#sntt'27] not _110} s20
+            | s20 = UInt64.rem [%#sntt'27] {_107} {[%#sntt'26] const_P} (fun (_x: UInt64.t) -> [ &_106 <- _x ] s21)
+            | s21 = MutBorrow.borrow_mut <t_Vec_u32_Global> {a.current}
+                (fun (_bor: MutBorrow.t t_Vec_u32_Global) ->
+                  [ &_112 <- _bor ] [ &a <- { a with current = _bor.final } ] s22)
+            | s22 = UInt64.add [%#sntt'28] {start} {j} (fun (_x: UInt64.t) -> [ &_113 <- _x ] s23)
+            | s23 = index_mut_Vec_u32_Global [%#sntt'29] {_112} {_113}
+                (fun (_x: MutBorrow.t UInt32.t) -> [ &_111 <- _x ] s24)
+            | s24 = [ &_111 <- { _111 with current = UInt32.of_int (UInt64.t'int _106) } ] s25
+            | s25 = -{resolve_refmut_u32 _111}- s26
+            | s26 = UInt64.add [%#sntt'31] {u} {[%#sntt'30] const_P} (fun (_x: UInt64.t) -> [ &_118 <- _x ] s27)
+            | s27 = UInt64.sub [%#sntt'32] {_118} {v} (fun (_x: UInt64.t) -> [ &_117 <- _x ] s28)
+            | s28 = [ &_121 <- ([%#sntt'33] const_P) = ([%#sntt'34] (0: UInt64.t)) ] s29
+            | s29 = {[@expl:remainder by zero] [%#sntt'34] not _121} s30
+            | s30 = UInt64.rem [%#sntt'34] {_117} {[%#sntt'33] const_P} (fun (_x: UInt64.t) -> [ &_116 <- _x ] s31)
+            | s31 = MutBorrow.borrow_mut <t_Vec_u32_Global> {a.current}
+                (fun (_bor: MutBorrow.t t_Vec_u32_Global) ->
+                  [ &_123 <- _bor ] [ &a <- { a with current = _bor.final } ] s32)
+            | s32 = UInt64.add [%#sntt'35] {start} {j} (fun (_x: UInt64.t) -> [ &_125 <- _x ] s33)
+            | s33 = UInt64.add [%#sntt'36] {_125} {half} (fun (_x: UInt64.t) -> [ &_124 <- _x ] s34)
+            | s34 = index_mut_Vec_u32_Global [%#sntt'37] {_123} {_124}
+                (fun (_x: MutBorrow.t UInt32.t) -> [ &_122 <- _x ] s35)
+            | s35 = [ &_122 <- { _122 with current = UInt32.of_int (UInt64.t'int _116) } ] s36
+            | s36 = -{resolve_refmut_u32 _122}- s37
+            | s37 = UInt64.add [%#sntt'39] {j} {[%#sntt'38] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &j <- _x ] s38)
+            | s38 = bb5 ] ] ]
+      | bb16 = s0
+        [ s0 = UInt64.add [%#sntt'41] {blk} {[%#sntt'40] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &blk <- _x ] s1)
+        | s1 = bb2 ] ] ]
+  | bb17 = s0 [ s0 = -{resolve_refmut_Vec_u32_Global a}- s1 | s1 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & a: MutBorrow.t t_Vec_u32_Global = a
+  | & tw: t_Vec_u32_Global = tw
+  | & n: UInt64.t = n
+  | & half: UInt64.t = half
+  | & len: UInt64.t = Any.any_l ()
+  | & stride: UInt64.t = Any.any_l ()
+  | & _16: UInt64.t = Any.any_l ()
+  | & _17: bool = Any.any_l ()
+  | & blk: UInt64.t = Any.any_l ()
+  | & _39: bool = Any.any_l ()
+  | & start: UInt64.t = Any.any_l ()
+  | & j: UInt64.t = Any.any_l ()
+  | & _61: bool = Any.any_l ()
+  | & u: UInt64.t = Any.any_l ()
+  | & _76: UInt32.t = Any.any_l ()
+  | & _78: UInt64.t = Any.any_l ()
+  | & x: UInt64.t = Any.any_l ()
+  | & _83: UInt32.t = Any.any_l ()
+  | & _85: UInt64.t = Any.any_l ()
+  | & _86: UInt64.t = Any.any_l ()
+  | & t: UInt64.t = Any.any_l ()
+  | & _92: UInt32.t = Any.any_l ()
+  | & _94: UInt64.t = Any.any_l ()
+  | & v: UInt64.t = Any.any_l ()
+  | & _102: UInt64.t = Any.any_l ()
+  | & _105: bool = Any.any_l ()
+  | & _106: UInt64.t = Any.any_l ()
+  | & _107: UInt64.t = Any.any_l ()
+  | & _110: bool = Any.any_l ()
+  | & _111: MutBorrow.t UInt32.t = Any.any_l ()
+  | & _112: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _113: UInt64.t = Any.any_l ()
+  | & _116: UInt64.t = Any.any_l ()
+  | & _117: UInt64.t = Any.any_l ()
+  | & _118: UInt64.t = Any.any_l ()
+  | & _121: bool = Any.any_l ()
+  | & _122: MutBorrow.t UInt32.t = Any.any_l ()
+  | & _123: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _124: UInt64.t = Any.any_l ()
+  | & _125: UInt64.t = Any.any_l ()
+  | & _old: t_Vec_u32_Global = Any.any_l ()
+  | & _old'0: t_Vec_u32_Global = Any.any_l ()
+  | & variant_old_bb2: int = Any.any_l ()
+  | & variant_old_bb5: int = Any.any_l () ])
+  [ return (result: ()) -> {[@stop_split] [@expl:stage ensures] [%#sntt'43] Seq.length (view_Vec_u32_Global a.final)
+    = Seq.length (view_Vec_u32_Global a.current)}
+    (! return {result}) ]

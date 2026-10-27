@@ -1,0 +1,135 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 207 0 207 57 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 208 17 208 24
+let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 209 16 209 22
+let%span sntt'1 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 211 14 211 21
+let%span sntt'2 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 210 16 210 42
+let%span sntt'3 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 213 17 213 20
+let%span sntt'4 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 214 23 214 66
+let%span sntt'5 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 215 24 215 32
+let%span sntt'6 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 215 35 215 36
+let%span sntt'7 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 215 24 215 36
+let%span sntt'8 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 215 13 215 37
+let%span sntt'9 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 216 13 216 14
+let%span sntt'10 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 216 8 216 14
+let%span sntt'11 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 205 11 205 66
+let%span sntt'12 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 207 0 207 57
+let%span sntt'13 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 40 11 40 47
+let%span sntt'14 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 41 10 41 24
+let%span sntt'15 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 42 48 42 50
+
+use creusot.int.UInt64
+use seq.Seq
+use creusot.int.UInt32
+use creusot.prelude.Any
+use int.Int
+
+constant const_CK_INIT: UInt64.t = [%#sntt'12] (14695981039346656037: UInt64.t)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+type t_Vec_u32_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
+
+axiom view_Vec_u32_Global_spec:
+  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec] Seq.length (view_Vec_u32_Global self)
+    <= UInt64.t'int const_MAX
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) (out: UInt32.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+let index_Vec_u32_Global (self: t_Vec_u32_Global) (index: UInt64.t) (return (x: UInt32.t)) =
+{[@stop_split] [@expl:index requires] [%#svec'0] in_bounds_usize index (view_Vec_u32_Global self)}
+  any
+  [ return (result: UInt32.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u32_Global self) result}
+    (! return {result}) ]
+
+function mul_mono [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 42 0 42 47] (a: int) (b: int) (x: int) (y: int) : ()
+ = [%#sntt'15] ()
+
+axiom mul_mono_spec: forall a: int, b: int, x: int, y: int. ([%#sntt'13] 0 <= a /\ a <= x /\ 0 <= b /\ b <= y)
+    -> ([%#sntt'14] a * b <= x * y)
+
+constant const_P: UInt64.t = [%#sntt'12] (2013265921: UInt64.t)
+
+let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let checksum [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 207 0 207 57] (a: t_Vec_u32_Global) (n: UInt64.t)
+  (ninv: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:checksum requires] [%#sntt'11] Seq.length (view_Vec_u32_Global a) = UInt64.t'int n
+  /\ UInt64.t'int ninv < 2013265921 /\ UInt64.t'int n <= 134217728}
+  (! bb0
+  [ bb0 = s0 [ s0 = [ &ck <- [%#sntt] const_CK_INIT ] s1 | s1 = [ &i <- [%#sntt'0] (0: UInt64.t) ] s2 | s2 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#sntt'1] UInt64.t'int n
+      - UInt64.t'int i)}
+      bb1invariant
+    | bb1invariant = {[@expl:loop invariant] [%#sntt'2] Seq.length (view_Vec_u32_Global a) = UInt64.t'int n
+      /\ UInt64.t'int i <= UInt64.t'int n}
+      (! [ &variant_old_bb1 <- [%#sntt'1] UInt64.t'int n - UInt64.t'int i ] s0)
+      [ s0 = [ &_20 <- UInt64.lt i n ] s1 | s1 = any [ br0 -> {_20 = false} (! bb7) | br1 -> {_20} (! bb3) ] ]
+      [ bb3 = s0
+        [ s0 = index_Vec_u32_Global [%#sntt'3] {a} {i} (fun (_x: UInt32.t) -> [ &_25 <- _x ] s1)
+        | s1 = [ &x <- UInt64.of_int (UInt32.t'int _25) ] s2
+        | s2 =
+          {[@expl:assertion] [%#sntt'4] let _ = mul_mono (UInt64.t'int x) (UInt64.t'int ninv) 4294967295 2013265920 in true}
+          s3
+        | s3 = UInt64.mul [%#sntt'5] {x} {ninv} (fun (_x: UInt64.t) -> [ &_35 <- _x ] s4)
+        | s4 = [ &_38 <- ([%#sntt'6] const_P) = ([%#sntt'7] (0: UInt64.t)) ] s5
+        | s5 = {[@expl:remainder by zero] [%#sntt'7] not _38} s6
+        | s6 = UInt64.rem [%#sntt'7] {_35} {[%#sntt'6] const_P} (fun (_x: UInt64.t) -> [ &_34 <- _x ] s7)
+        | s7 = ckfold [%#sntt'8] {ck} {_34} (fun (_x: UInt64.t) -> [ &_32 <- _x ] s8)
+        | s8 = [ &ck <- _32 ] s9
+        | s9 = UInt64.add [%#sntt'10] {i} {[%#sntt'9] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s10)
+        | s10 = bb1 ] ] ]
+  | bb7 = s0 [ s0 = [ &_ret <- ck ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & a: t_Vec_u32_Global = a
+  | & n: UInt64.t = n
+  | & ninv: UInt64.t = ninv
+  | & ck: UInt64.t = Any.any_l ()
+  | & i: UInt64.t = Any.any_l ()
+  | & _20: bool = Any.any_l ()
+  | & x: UInt64.t = Any.any_l ()
+  | & _25: UInt32.t = Any.any_l ()
+  | & _32: UInt64.t = Any.any_l ()
+  | & _34: UInt64.t = Any.any_l ()
+  | & _35: UInt64.t = Any.any_l ()
+  | & _38: bool = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

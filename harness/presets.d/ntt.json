@@ -1,0 +1,1 @@
+{"ntt": {"smoke": 4096, "tiny": 65536, "small": 1048576, "medium": 8388608, "large": 33554432, "xlarge": 67108864, "saturate": 134217728}}

@@ -1,0 +1,115 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 24 0 24 52 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sparmatmul = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 25 16 25 22
+let%span sparmatmul'0 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 27 14 27 23
+let%span sparmatmul'1 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 26 16 26 46
+let%span sparmatmul'2 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 29 26 29 30
+let%span sparmatmul'3 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 29 26 29 48
+let%span sparmatmul'4 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 29 26 29 71
+let%span sparmatmul'5 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 29 20 29 72
+let%span sparmatmul'6 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 29 15 29 73
+let%span sparmatmul'7 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 29 8 29 12
+let%span sparmatmul'8 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 29 8 29 73
+let%span sparmatmul'9 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 30 13 30 14
+let%span sparmatmul'10 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 30 8 30 14
+let%span sparmatmul'11 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 21 11 21 27
+let%span sparmatmul'12 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 22 10 22 29
+let%span sparmatmul'13 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 24 0 24 52
+
+use creusot.int.UInt64
+use creusot.prelude.MutBorrow
+use seq.Seq
+use creusot.slice.Slice64
+use creusot.int.UInt32
+use creusot.prelude.Opaque
+use creusot.prelude.Any
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+constant const_SEED: UInt64.t = [%#sparmatmul'13] (1147797409030816545: UInt64.t)
+
+let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
+    (! return {result}) ]
+
+let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any [ return (result: UInt64.t) -> (! return {result}) ]
+
+let hi32 (x: UInt64.t) (return (x'0: UInt32.t)) = any [ return (result: UInt32.t) -> (! return {result}) ]
+
+predicate resolve_refmut_slice_u32 [@inline:trivial] (_1: MutBorrow.t (Slice64.slice UInt32.t)) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_slice_u32
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let init_mat [#"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 24 0 24 52]
+  (m: MutBorrow.t (Slice64.slice UInt32.t)) (len: UInt64.t) (off: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:init_mat requires] [%#sparmatmul'11] Seq.length (Slice64.view m.current) = UInt64.t'int len}
+  (! bb0
+  [ bb0 = s0 [ s0 = [ &i <- [%#sparmatmul] (0: UInt64.t) ] s1 | s1 = [ &_old <- m.final ] s2 | s2 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#sparmatmul'0] UInt64.t'int len
+      - UInt64.t'int i)}
+      bb1invariant
+    | bb1invariant = {[@expl:inferred invariant: unchanged value] _old = m.final}
+      {[@expl:loop invariant] [%#sparmatmul'1] Seq.length (Slice64.view m.current) = UInt64.t'int len
+      /\ UInt64.t'int i <= UInt64.t'int len}
+      (! [ &variant_old_bb1 <- [%#sparmatmul'0] UInt64.t'int len - UInt64.t'int i ] s0)
+      [ s0 = [ &_20 <- UInt64.lt i len ] s1 | s1 = any [ br0 -> {_20 = false} (! bb9) | br1 -> {_20} (! bb3) ] ]
+      [ bb3 = s0
+        [ s0 = wrapping_add [%#sparmatmul'3] {[%#sparmatmul'2] const_SEED} {off}
+            (fun (_x: UInt64.t) -> [ &_26 <- _x ] s1)
+        | s1 = [ &_28 <- i ] s2
+        | s2 = wrapping_add [%#sparmatmul'4] {_26} {_28} (fun (_x: UInt64.t) -> [ &_25 <- _x ] s3)
+        | s3 = mix64 [%#sparmatmul'5] {_25} (fun (_x: UInt64.t) -> [ &_24 <- _x ] s4)
+        | s4 = hi32 [%#sparmatmul'6] {_24} (fun (_x: UInt32.t) -> [ &_23 <- _x ] s5)
+        | s5 = [ &_30 <- i ] s6
+        | s6 = Opaque.fresh_ptr
+            (fun (_ptr: Opaque.ptr) -> -{Slice64.slice_ptr_len _ptr = Slice64.length m.current}- [ &_31 <- _ptr ] s7)
+        | s7 = [ &_32 <- Slice64.slice_ptr_len _31 ] s8
+        | s8 = [ &_33 <- UInt64.lt _30 _32 ] s9
+        | s9 = {[@expl:index in bounds] [%#sparmatmul'7] _33} s10
+        | s10 = Slice64.set [%#sparmatmul'8] <UInt32.t> {m.current} {_30} {_23}
+            (fun (r: Slice64.slice UInt32.t) -> [ &m <- { m with current = r } ] s11)
+        | s11 = UInt64.add [%#sparmatmul'10] {i} {[%#sparmatmul'9] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &i <- _x ] s12)
+        | s12 = bb1 ] ] ]
+  | bb9 = s0 [ s0 = -{resolve_refmut_slice_u32 m}- s1 | s1 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & m: MutBorrow.t (Slice64.slice UInt32.t) = m
+  | & len: UInt64.t = len
+  | & off: UInt64.t = off
+  | & i: UInt64.t = Any.any_l ()
+  | & _20: bool = Any.any_l ()
+  | & _23: UInt32.t = Any.any_l ()
+  | & _24: UInt64.t = Any.any_l ()
+  | & _25: UInt64.t = Any.any_l ()
+  | & _26: UInt64.t = Any.any_l ()
+  | & _28: UInt64.t = Any.any_l ()
+  | & _30: UInt64.t = Any.any_l ()
+  | & _31: Opaque.ptr = Any.any_l ()
+  | & _32: UInt64.t = Any.any_l ()
+  | & _33: bool = Any.any_l ()
+  | & _old: Slice64.slice UInt32.t = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l () ])
+  [ return (result: ()) -> {[@stop_split] [@expl:init_mat ensures] [%#sparmatmul'12] Seq.length (Slice64.view m.final)
+    = UInt64.t'int len}
+    (! return {result}) ]

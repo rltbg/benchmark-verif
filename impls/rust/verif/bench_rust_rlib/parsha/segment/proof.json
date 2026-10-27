@@ -1,0 +1,13 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_bswap": { "prover": "alt-ergo", "time": 0.017 },
+      "vc_compress": { "prover": "alt-ergo", "time": 0.015 },
+      "vc_mix64": { "prover": "alt-ergo", "time": 0.011 },
+      "vc_segment": { "prover": "z3", "time": 0.022 },
+      "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.015 },
+      "vc_wrapping_mul": { "prover": "alt-ergo", "time": 0.015 }
+    }
+  }
+}

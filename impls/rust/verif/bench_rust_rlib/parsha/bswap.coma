@@ -1,0 +1,48 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/parsha.rs" 87 0 87 23 *)
+
+let%span sparsha = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 88 10 88 12
+let%span sparsha'0 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 88 4 88 13
+let%span sparsha'1 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 88 23 88 24
+let%span sparsha'2 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 88 17 88 25
+let%span sparsha'3 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 88 28 88 34
+let%span sparsha'4 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 88 45 88 46
+let%span sparsha'5 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 88 39 88 47
+let%span sparsha'6 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 88 50 88 58
+let%span sparsha'7 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 88 68 88 70
+let%span sparsha'8 = "/home/user/benchmark-verif/impls/rust/src/parsha.rs" 88 62 88 71
+
+use creusot.int.Int32
+use creusot.int.UInt32
+use creusot.prelude.Any
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let bswap [#"/home/user/benchmark-verif/impls/rust/src/parsha.rs" 87 0 87 23] (x: UInt32.t) (return (x'0: UInt32.t)) =
+(! bb0
+  [ bb0 = s0
+    [ s0 = UInt32.shr [%#sparsha'0] {x} {Int32.to_int ([%#sparsha] (24: Int32.t))}
+        (fun (_x: UInt32.t) -> [ &_4 <- _x ] s1)
+    | s1 = UInt32.shr [%#sparsha'2] {x} {Int32.to_int ([%#sparsha'1] (8: Int32.t))}
+        (fun (_x: UInt32.t) -> [ &_7 <- _x ] s2)
+    | s2 = [ &_6 <- UInt32.bw_and _7 ([%#sparsha'3] (65280: UInt32.t)) ] s3
+    | s3 = [ &_3 <- UInt32.bw_or _4 _6 ] s4
+    | s4 = UInt32.shl [%#sparsha'5] {x} {Int32.to_int ([%#sparsha'4] (8: Int32.t))}
+        (fun (_x: UInt32.t) -> [ &_10 <- _x ] s5)
+    | s5 = [ &_9 <- UInt32.bw_and _10 ([%#sparsha'6] (16711680: UInt32.t)) ] s6
+    | s6 = [ &_2 <- UInt32.bw_or _3 _9 ] s7
+    | s7 = UInt32.shl [%#sparsha'8] {x} {Int32.to_int ([%#sparsha'7] (24: Int32.t))}
+        (fun (_x: UInt32.t) -> [ &_12 <- _x ] s8)
+    | s8 = [ &_ret <- UInt32.bw_or _2 _12 ] s9
+    | s9 = return {_ret} ] ]
+  [ & _ret: UInt32.t = Any.any_l ()
+  | & x: UInt32.t = x
+  | & _2: UInt32.t = Any.any_l ()
+  | & _3: UInt32.t = Any.any_l ()
+  | & _4: UInt32.t = Any.any_l ()
+  | & _6: UInt32.t = Any.any_l ()
+  | & _7: UInt32.t = Any.any_l ()
+  | & _9: UInt32.t = Any.any_l ()
+  | & _10: UInt32.t = Any.any_l ()
+  | & _12: UInt32.t = Any.any_l () ]) [ return (result: UInt32.t) -> (! return {result}) ]
