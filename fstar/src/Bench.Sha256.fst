@@ -60,6 +60,16 @@ let tlen_of (t: SZ.t) : Pure SZ.t (requires SZ.v t < 64)
   (ensures fun r -> (SZ.v r == 64 \/ SZ.v r == 128) /\ SZ.v t + 8 < SZ.v r + (if SZ.v r = 64 then 1 else 0) /\ SZ.v t < SZ.v r) =
   if SZ.lt t 56sz then 64sz else 128sz
 
+(* tail[o+d] <- x. *)
+fn put8 (tail: V.vec U8.t) (o d: SZ.t) (x: U8.t) (#s0: Ghost.erased (Seq.seq U8.t))
+  requires V.pts_to tail s0 ** pure (V.length tail == 128 /\ SZ.v o + SZ.v d < 128)
+  ensures exists* s. V.pts_to tail s ** pure (Seq.length s == 128)
+{
+  V.pts_to_len tail;
+  let p = sadd o d;
+  V.(tail.(p) <- x)
+}
+
 (* Écrit x en k[i] (le rappel de la longueur évite l'accumulation de `Seq.upd` imbriqués dans le contexte SMT). *)
 fn put (k: V.vec U32.t) (i: SZ.t) (x: U32.t) (#s0: Ghost.erased (Seq.seq U32.t))
   requires V.pts_to k s0 ** pure (V.length k == 64 /\ SZ.v i < 64)
@@ -273,6 +283,64 @@ fn full_blocks (h w k: V.vec U32.t) (blocks: U64.t) (#sh #sw #sk: Ghost.erased (
   }
 }
 
+(* tail[0, t) <- octets base .. base+t-1 du message. *)
+fn fill_tail (tail: V.vec U8.t) (t: SZ.t) (base: U64.t) (#s0: Ghost.erased (Seq.seq U8.t))
+  requires V.pts_to tail s0 ** pure (V.length tail == 128 /\ SZ.v t < 64)
+  ensures exists* s. V.pts_to tail s ** pure (Seq.length s == 128)
+{
+  V.pts_to_len tail;
+  let mut j = 0sz;
+  while (!j `SZ.lt` t)
+  invariant exists* vj st. R.pts_to j vj ** V.pts_to tail st **
+            pure (SZ.v vj <= SZ.v t /\ Seq.length st == 128)
+  decreases (SZ.v t - SZ.v !j)
+  {
+    let vj = !j;
+    V.(tail.(vj) <- byte_at (U64.add_mod base (SZ.sizet_to_uint64 vj)));
+    j := SZ.add vj 1sz
+  }
+}
+
+(* Longueur en bits, big-endian, dans tail[o, o+8). *)
+fn put_len (tail: V.vec U8.t) (o: SZ.t) (bits: U64.t) (#s0: Ghost.erased (Seq.seq U8.t))
+  requires V.pts_to tail s0 ** pure (V.length tail == 128 /\ SZ.v o + 8 <= 128)
+  ensures exists* s. V.pts_to tail s ** pure (Seq.length s == 128)
+{
+  V.pts_to_len tail;
+  put8 tail o 0sz (C.uint64_to_uint8 (U64.shift_right bits 56ul));
+  put8 tail o 1sz (C.uint64_to_uint8 (U64.shift_right bits 48ul));
+  put8 tail o 2sz (C.uint64_to_uint8 (U64.shift_right bits 40ul));
+  put8 tail o 3sz (C.uint64_to_uint8 (U64.shift_right bits 32ul));
+  put8 tail o 4sz (C.uint64_to_uint8 (U64.shift_right bits 24ul));
+  put8 tail o 5sz (C.uint64_to_uint8 (U64.shift_right bits 16ul));
+  put8 tail o 6sz (C.uint64_to_uint8 (U64.shift_right bits 8ul));
+  put8 tail o 7sz (C.uint64_to_uint8 bits)
+}
+
+(* Compresse les tlen/64 blocs du tampon de queue. *)
+fn tail_compress (h w k: V.vec U32.t) (tail: V.vec U8.t) (tlen: SZ.t)
+                 (#sh #sw #sk: Ghost.erased (Seq.seq U32.t)) (#st: Ghost.erased (Seq.seq U8.t))
+  preserves V.pts_to k sk ** V.pts_to tail st
+  requires V.pts_to h sh ** V.pts_to w sw **
+           pure (V.length h == 8 /\ V.length w == 64 /\ V.length k == 64 /\ V.length tail == 128 /\
+                 (SZ.v tlen == 64 \/ SZ.v tlen == 128))
+  ensures exists* sh' sw'. V.pts_to h sh' ** V.pts_to w sw' ** pure (Seq.length sh' == 8 /\ Seq.length sw' == 64)
+{
+  V.pts_to_len h;
+  V.pts_to_len w;
+  let mut off = 0sz;
+  while (!off `SZ.lt` tlen)
+  invariant exists* voff sh1 sw1. R.pts_to off voff ** V.pts_to h sh1 ** V.pts_to w sw1 **
+            pure (SZ.v voff <= SZ.v tlen /\ SZ.v voff % 64 == 0 /\ Seq.length sh1 == 8 /\ Seq.length sw1 == 64)
+  decreases (SZ.v tlen - SZ.v !off)
+  {
+    let voff = !off;
+    load_tail_block w tail voff;
+    compress h w k;
+    off := sadd voff 64sz
+  }
+}
+
 (* Queue (n mod 64 octets), padding et longueur : 1 ou 2 blocs. *)
 fn tail_blocks (h w k: V.vec U32.t) (n: SZ.t) (#sh #sw #sk: Ghost.erased (Seq.seq U32.t))
   preserves V.pts_to k sk
@@ -281,47 +349,16 @@ fn tail_blocks (h w k: V.vec U32.t) (n: SZ.t) (#sh #sw #sk: Ghost.erased (Seq.se
   ensures exists* sh' sw'. V.pts_to h sh' ** V.pts_to w sw' ** pure (Seq.length sh' == 8 /\ Seq.length sw' == 64)
 {
   assert_norm (pow2 64 == 18446744073709551616);
-  V.pts_to_len h;
-  V.pts_to_len w;
   let tail = V.alloc 0uy 128sz;
-  V.pts_to_len tail;
   let t = SZ.rem n 64sz;
   let blocks = SZ.div n 64sz;
   let base = U64.mul_mod (SZ.sizet_to_uint64 blocks) 64uL;
-  let mut j = 0sz;
-  while (!j `SZ.lt` t)
-  invariant exists* vj st. R.pts_to j vj ** V.pts_to tail st **
-            pure (SZ.v vj <= SZ.v t /\ SZ.v t < 64 /\ Seq.length st == 128)
-  decreases (SZ.v t - SZ.v !j)
-  {
-    let vj = !j;
-    V.(tail.(vj) <- byte_at (U64.add_mod base (SZ.sizet_to_uint64 vj)));
-    j := SZ.add vj 1sz
-  };
-  V.(tail.(t) <- 128uy);
+  fill_tail tail t base;
+  put8 tail t 0sz 128uy;
   let tlen = tlen_of t;
   let bits = U64.mul_mod (SZ.sizet_to_uint64 n) 8uL;
-  let o = SZ.sub tlen 8sz;
-  V.(tail.(o) <- C.uint64_to_uint8 (U64.shift_right bits 56ul));
-  V.(tail.(sadd o 1sz) <- C.uint64_to_uint8 (U64.shift_right bits 48ul));
-  V.(tail.(sadd o 2sz) <- C.uint64_to_uint8 (U64.shift_right bits 40ul));
-  V.(tail.(sadd o 3sz) <- C.uint64_to_uint8 (U64.shift_right bits 32ul));
-  V.(tail.(sadd o 4sz) <- C.uint64_to_uint8 (U64.shift_right bits 24ul));
-  V.(tail.(sadd o 5sz) <- C.uint64_to_uint8 (U64.shift_right bits 16ul));
-  V.(tail.(sadd o 6sz) <- C.uint64_to_uint8 (U64.shift_right bits 8ul));
-  V.(tail.(sadd o 7sz) <- C.uint64_to_uint8 bits);
-  let mut off = 0sz;
-  while (!off `SZ.lt` tlen)
-  invariant exists* voff sh1 sw1 st. R.pts_to off voff ** V.pts_to h sh1 ** V.pts_to w sw1 ** V.pts_to tail st **
-            pure (SZ.v voff <= SZ.v tlen /\ SZ.v voff % 64 == 0 /\ (SZ.v tlen == 64 \/ SZ.v tlen == 128) /\
-                  Seq.length sh1 == 8 /\ Seq.length sw1 == 64 /\ Seq.length st == 128)
-  decreases (SZ.v tlen - SZ.v !off)
-  {
-    let voff = !off;
-    load_tail_block w tail voff;
-    compress h w k;
-    off := sadd voff 64sz
-  };
+  put_len tail (SZ.sub tlen 8sz) bits;
+  tail_compress h w k tail tlen;
   V.free tail
 }
 
