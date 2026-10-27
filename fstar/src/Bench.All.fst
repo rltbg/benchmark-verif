@@ -12,4 +12,5 @@ let bfs = Bench.Bfs.run
 let strsort = Bench.Strsort.run
 let alloc = Bench.Alloc.run
 let ntt = Bench.Ntt.run
+let ptrchase = Bench.Ptrchase.run
 (* @@ALL@@ une ligne `let <nom> = Bench.<Nom>.run` par workload étendu *)

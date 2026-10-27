@@ -1,7 +1,7 @@
 module Bench.Par
 #lang-pulse
 (* Noyaux séquentiels des workloads parallèles `parmatmul`, `parsort`, `parsha` (spec/workloads.d/par*.md).
-   Les threads ne sont PAS dans ce module : ils sont dans les pilotes (fstar/drivers/*) qui appellent ces points d'entrée sur des plages
+   Les threads ne sont PAS dans ce module : ils sont dans les pilotes (dossier fstar/drivers) qui appellent ces points d'entrée sur des plages
    disjointes d'un même tableau. Prouvé : mémoire-sûreté, indices dans les bornes (n <= 16384 pour le produit matriciel), absence de débordement,
    terminaison. Pas de correction fonctionnelle (voir Bench.Sort pour le tri). Points d'entrée Custard :
      Bench.Par.u32_alloc / u32_free          allocation de tableaux partagés par les threads
@@ -113,7 +113,7 @@ fn mat_rows (a b c: V.vec U32.t) (n i0 i1: SZ.t)
             (#sa #sb #sc: Ghost.erased (Seq.seq U32.t))
   preserves V.pts_to a sa ** V.pts_to b sb
   requires V.pts_to c sc **
-           pure (SZ.fits_u64 /\ SZ.v n <= 16384 /\ SZ.v i1 <= SZ.v n /\
+           pure (SZ.fits_u64 /\ SZ.v n <= 16384 /\ SZ.v i0 <= SZ.v i1 /\ SZ.v i1 <= SZ.v n /\
                  V.length a == SZ.v n * SZ.v n /\ V.length b == SZ.v n * SZ.v n /\ V.length c == SZ.v n * SZ.v n)
   ensures exists* sc'. V.pts_to c sc' ** pure (Seq.length sc' == SZ.v n * SZ.v n)
 {
@@ -121,7 +121,7 @@ fn mat_rows (a b c: V.vec U32.t) (n i0 i1: SZ.t)
   let mut i = i0;
   while (!i `SZ.lt` i1)
   invariant exists* vi sc1. R.pts_to i vi ** V.pts_to c sc1 **
-            pure (SZ.v vi <= SZ.v i1 \/ SZ.v i0 > SZ.v i1) /\ pure (Seq.length sc1 == SZ.v n * SZ.v n)
+            pure (SZ.v vi <= SZ.v i1 /\ Seq.length sc1 == SZ.v n * SZ.v n)
   decreases (SZ.v i1 - SZ.v !i)
   {
     let vi = !i;
