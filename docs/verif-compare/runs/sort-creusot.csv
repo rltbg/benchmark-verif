@@ -1,0 +1,3 @@
+2026-11-13T20:18:36+00:00,68.5,echec,2,sort: tranches + syntaxe s[a..b] + copy_from_slice + same_outside
+2026-11-13T20:20:01+00:00,17.7,echec,1,msort: assert perm intermédiaire; run: a[0..n]==a
+2026-11-13T20:20:36+00:00,6.2,ok,0,msort: égalité des sous-suites puis ponctuelle
