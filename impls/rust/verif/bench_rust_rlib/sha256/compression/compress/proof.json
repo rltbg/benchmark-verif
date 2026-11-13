@@ -1,0 +1,14 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_bsig0": { "prover": "alt-ergo", "time": 0.014 },
+      "vc_bsig1": { "prover": "alt-ergo", "time": 0.016 },
+      "vc_compress": { "prover": "z3", "time": 0.117 },
+      "vc_set_K": { "prover": "alt-ergo", "time": 0.011 },
+      "vc_ssig0": { "prover": "alt-ergo", "time": 0.016 },
+      "vc_ssig1": { "prover": "alt-ergo", "time": 0.012 },
+      "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.024 }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+(* #"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 48 0 48 40 *)
+
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 590 8 590 38
+let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 581 8 581 49
+let%span sparsort = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 46 11 46 33
+let%span sparsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 47 10 47 36
+
+use creusot.int.UInt32
+use seq.Seq
+use int.Int
+
+type t_RangeTo_Int = { end': int }
+
+function index_Seq_u32 [@inline:trivial] (self: Seq.seq UInt32.t) (range: t_RangeTo_Int) : Seq.seq UInt32.t =
+  [%#sseq] Seq.([..]) self 0 range.end'
+
+meta "rewrite_def" function index_Seq_u32
+
+type t_RangeFrom_Int = { start: int }
+
+function index_Seq_u32'0 [@inline:trivial] (self: Seq.seq UInt32.t) (range: t_RangeFrom_Int) : Seq.seq UInt32.t =
+  [%#sseq'0] Seq.([..]) self range.start (Seq.length self)
+
+meta "rewrite_def" function index_Seq_u32'0
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant s : Seq.seq UInt32.t
+
+constant m : int
+
+function split_concat [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 48 0 48 40] (s: Seq.seq UInt32.t) (m: int) : ()
+
+goal vc_split_concat: ([%#sparsort] 0 <= m /\ m <= Seq.length s)
+  -> ([@stop_split] [@expl:split_concat ensures] [%#sparsort'0] s
+  = Seq.(++) (index_Seq_u32 s { end' = m }) (index_Seq_u32'0 s { start = m }))

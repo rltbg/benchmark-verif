@@ -1,0 +1,21 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 204 4 204 24 *)
+
+let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 203 14 203 31
+let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 197 14 197 15
+let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 199 8 199 56
+
+use creusot.int.UInt64
+use int.Int
+
+function u64_of [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 198 4 198 32] (x: int) : UInt64.t
+
+axiom u64_of_def: forall x: int [u64_of x]. u64_of x
+    = ([%#sstream'1] if x <= 0 then (0: UInt64.t) else UInt64.add (u64_of (x - 1)) (1: UInt64.t))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+function u64_of_zero [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 204 4 204 24] : ()
+
+goal vc_u64_of_zero: [@stop_split] [@expl:u64_of_zero ensures] [%#sstream] u64_of 0 = (0: UInt64.t)

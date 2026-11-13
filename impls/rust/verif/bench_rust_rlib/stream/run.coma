@@ -1,0 +1,744 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 481 0 481 48 *)
+
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sinvariant = "/opt/tools/creusot/creusot-std/src/invariant.rs" 98 20 98 44
+let%span sinvariant'0 = "/opt/tools/creusot/creusot-std/src/invariant.rs" 90 8 90 18
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 407 8 407 40
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 96 22 96 41
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 97 22 97 22
+let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 732 4 732 36
+let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 482 16 482 33
+let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 483 14 483 25
+let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 485 14 485 15
+let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 485 24 485 25
+let%span sstream'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 485 33 485 34
+let%span sstream'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 485 42 485 43
+let%span sstream'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 485 51 485 52
+let%span sstream'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 485 60 485 61
+let%span sstream'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 485 69 485 70
+let%span sstream'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 485 78 485 79
+let%span sstream'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 486 15 486 16
+let%span sstream'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 486 25 486 26
+let%span sstream'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 486 36 486 37
+let%span sstream'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 486 44 486 45
+let%span sstream'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 486 54 486 59
+let%span sstream'14 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 486 68 486 73
+let%span sstream'15 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 484 30 484 41
+let%span sstream'16 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 487 14 487 15
+let%span sstream'17 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 488 46 488 49
+let%span sstream'18 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 488 51 488 58
+let%span sstream'19 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 489 29 489 41
+let%span sstream'20 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 490 20 490 33
+let%span sstream'21 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 495 18 495 46
+let%span sstream'22 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 496 18 496 19
+let%span sstream'23 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 493 16 493 46
+let%span sstream'24 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 492 16 492 91
+let%span sstream'25 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 491 16 491 38
+let%span sstream'26 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 500 24 500 74
+let%span sstream'27 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 501 24 501 58
+let%span sstream'28 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 502 8 502 39
+let%span sstream'29 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 503 25 503 50
+let%span sstream'30 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 505 18 505 56
+let%span sstream'31 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 506 4 506 15
+let%span sstream'32 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 480 10 480 10
+let%span sstream'33 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 459 31 459 35
+let%span sstream'34 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 319 22 319 32
+let%span sstream'35 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 317 10 317 10
+let%span sstream'36 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 20 32 20 34
+let%span sstream'37 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 20 27 20 34
+let%span sstream'38 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 20 27 20 28
+let%span sstream'39 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 203 14 203 31
+let%span sstream'40 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 471 14 471 15
+let%span sstream'41 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 470 10 470 62
+let%span sstream'42 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 197 14 197 15
+let%span sstream'43 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 49 16 49 118
+let%span sstream'44 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 167 16 167 114
+let%span sstream'45 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 79 4 82 5
+let%span sstream'46 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 247 10 247 66
+let%span sstream'47 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 250 8 257 9
+let%span sstream'48 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 263 10 263 62
+let%span sstream'49 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 266 8 273 9
+let%span sstream'50 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 207 14 207 16
+let%span sstream'51 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 208 15 208 21
+let%span sstream'52 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 209 14 209 45
+let%span sstream'53 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 416 56 416 59
+let%span sstream'54 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 410 11 410 29
+let%span sstream'55 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 411 11 411 11
+let%span sstream'56 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 412 10 412 65
+let%span sstream'57 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 413 10 413 65
+let%span sstream'58 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 414 10 414 46
+let%span sstream'59 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 55 4 55 45
+let%span sstream'60 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 439 10 439 67
+let%span sstream'61 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 220 16 220 68
+let%span sstream'62 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 34 10 34 11
+let%span sstream'63 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 36 4 36 58
+let%span sstream'64 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 42 4 42 33
+let%span sstream'65 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 160 4 160 29
+let%span sstream'66 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 178 4 178 43
+let%span sstream'67 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 29 4 29 74
+let%span sstream'68 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 128 4 154 5
+let%span sstream'69 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 102 4 115 5
+let%span sstream'70 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 172 4 172 31
+let%span sstream'71 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 481 0 481 48
+let%span sstream'72 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 87 4 87 26
+let%span sstream'73 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 121 4 121 27
+let%span sstream'74 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 91 4 91 27
+let%span sstream'75 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 96 4 96 66
+
+use creusot.int.UInt64
+use creusot.slice.Slice64
+use creusot.int.UInt32
+use seq.Seq
+use creusot.int.UInt8
+use creusot.int.Int32
+use creusot.prelude.Any
+use creusot.prelude.MutBorrow
+use int.Int
+
+type t_File
+
+predicate inv_File (_1: t_File)
+
+let open_input (n_mio: UInt64.t) (return (x: t_File)) = any
+  [ return (result: t_File) -> {[@stop_split] [@expl:open_input result type invariant] [%#sstream'33] inv_File result}
+    (! return {result}) ]
+
+predicate inv_Seq_u32 [@inline:trivial] (_1: Seq.seq UInt32.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u32
+
+predicate invariant_array_u32_256 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (256: UInt64.t)
+
+predicate inv_array_u32_256 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_256 _1
+
+meta "rewrite_def" predicate inv_array_u32_256
+
+function crc_shift [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 28 0 28 31] (x: UInt32.t) : UInt32.t =
+  [%#sstream'67] if UInt32.bw_and x (1: UInt32.t) <> (0: UInt32.t) then
+    UInt32.bw_xor (UInt32.shr x (1: UInt32.t)) (3988292384: UInt32.t)
+  else
+    UInt32.shr x (1: UInt32.t)
+
+
+function crc_iter [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 35 0 35 38] (x: UInt32.t) (k: int) : UInt32.t
+
+axiom crc_iter_def: forall x: UInt32.t, k: int [crc_iter x k]. crc_iter x k
+    = ([%#sstream'63] if k <= 0 then x else crc_shift (crc_iter x (k - 1)))
+
+let crc_table (return (x: Slice64.array UInt32.t)) = any
+  [ return (result: Slice64.array UInt32.t) ->
+  {[@stop_split] [@expl:crc_table ensures] ([@stop_split] [@expl:crc_table result type invariant] [%#sstream'34] inv_array_u32_256 result)
+    /\ ([@stop_split] [@expl:crc_table ensures] [%#sstream'35] forall i: UInt64.t. UInt64.t'int i < 256
+      -> Seq.get (Slice64.view result) (UInt64.t'int i) = crc_iter (UInt32.of_int (UInt64.t'int i)) 8)}
+    (! return {result}) ]
+
+type t_Tok = {
+  mode: UInt8.t;
+  depth: UInt64.t;
+  maxd: UInt64.t;
+  objs: UInt64.t;
+  strs: UInt64.t;
+  nums: UInt64.t;
+  arrs: UInt64.t;
+  lits: UInt64.t;
+  lines: UInt64.t;
+  idsum: UInt64.t;
+  allsum: UInt64.t;
+  acc: UInt64.t;
+  isint: bool;
+  gotid: bool }
+
+type t_State = { crc: UInt32.t; tok: t_Tok; total: UInt64.t }
+
+constant const_BUF_LEN [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 20 0 20 24] : UInt64.t
+
+let set_BUF_LEN (return) = bb0
+  [ bb0 = s0
+    [ s0 = [ &_1 <- UInt32.of_int (Int32.to_int ([%#sstream'36] (20: Int32.t))) ] s1
+    | s1 = [ &_2 <- UInt32.lt _1 ([%#sstream'37] (64: UInt32.t)) ] s2
+    | s2 = {[@expl:Shl overflow] [%#sstream'37] _2} s3
+    | s3 = UInt64.shl [%#sstream'37] {[%#sstream'38] (1: UInt64.t)} {Int32.to_int ([%#sstream'36] (20: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_ret <- _x ] s4)
+    | s4 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l () | & _1: UInt32.t = Any.any_l () | & _2: bool = Any.any_l () ]
+  [ return (_const: UInt64.t) -> -{const_BUF_LEN = _const}- return ]
+
+type t_Vec_u8_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u8_Global (self: t_Vec_u8_Global) : Seq.seq UInt8.t
+
+axiom view_Vec_u8_Global_spec:
+  forall self: t_Vec_u8_Global [view_Vec_u8_Global self]. [%#svec'0] Seq.length (view_Vec_u8_Global self)
+    <= UInt64.t'int const_MAX
+
+function index_Vec_u8_Global [@inline:trivial] (self: t_Vec_u8_Global) (ix: int) : UInt8.t =
+  [%#svec'3] Seq.get (view_Vec_u8_Global self) ix
+
+meta "rewrite_def" function index_Vec_u8_Global
+
+let from_elem_u8 (elem: UInt8.t) (n: UInt64.t) (return (x: t_Vec_u8_Global)) = any
+  [ return (result: t_Vec_u8_Global) ->
+  {[@stop_split] [@expl:from_elem_u8 ensures] ([@stop_split] [@expl:from_elem ensures #0] [%#svec'1] Seq.length (view_Vec_u8_Global result)
+      = UInt64.t'int n)
+    /\ ([@stop_split] [@expl:from_elem ensures #1] [%#svec'2] forall i: int. 0 <= i /\ i < UInt64.t'int n
+      -> index_Vec_u8_Global result i = elem)}
+    (! return {result}) ]
+
+function u64_of [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 198 4 198 32] (x: int) : UInt64.t
+
+constant u64_of_zero [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 204 4 204 24] : ()
+
+axiom u64_of_zero_spec: [%#sstream'39] u64_of 0 = (0: UInt64.t)
+
+predicate invariant_refmut_File [@inline:trivial] (self: MutBorrow.t t_File) =
+  [%#sinvariant] inv_File self.current /\ inv_File self.final
+
+meta "rewrite_def" predicate invariant_refmut_File
+
+predicate inv_refmut_File [@inline:trivial] (_1: MutBorrow.t t_File) = invariant_refmut_File _1
+
+meta "rewrite_def" predicate inv_refmut_File
+
+let read_block (f: MutBorrow.t t_File) (buf: MutBorrow.t t_Vec_u8_Global) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:read_block 'f' type invariant] [%#sstream'40] inv_refmut_File f}
+  any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:read_block ensures] [%#sstream'41] UInt64.t'int result
+      <= Seq.length (view_Vec_u8_Global buf.current)
+    /\ Seq.length (view_Vec_u8_Global buf.final) = Seq.length (view_Vec_u8_Global buf.current)}
+    (! return {result}) ]
+
+predicate resolve_refmut_Vec_u8_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u8_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u8_Global
+
+predicate resolve_refmut_File [@inline:trivial] (_1: MutBorrow.t t_File) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_File
+
+function crc_byte [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 41 0 41 39] (crc'0: UInt32.t) (c: UInt8.t) : UInt32.t
+ = [%#sstream'64] crc_iter (UInt32.bw_xor crc'0 (UInt32.of_int (UInt8.t'int c))) 8
+
+function crc_seq [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 48 0 48 43] (crc'0: UInt32.t) (s: Seq.seq UInt8.t) : UInt32.t
+
+axiom crc_seq_def: forall crc'0: UInt32.t, s: Seq.seq UInt8.t [crc_seq crc'0 s]. crc_seq crc'0 s
+    = ([%#sstream'43] if Seq.length s = 0 then
+      crc'0
+    else
+      crc_byte (crc_seq crc'0 (Seq.([..]) s 0 (Seq.length s - 1))) (Seq.get s (Seq.length s - 1))
+    )
+
+predicate is_digit_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 86 0 86 32] (c: UInt8.t) =
+  [%#sstream'72] UInt8.le (48: UInt8.t) c /\ UInt8.le c (57: UInt8.t)
+
+predicate gt_log_u64 [@inline:trivial] (self: UInt64.t) (other: UInt64.t) = [%#sord] UInt64.lt other self
+
+meta "rewrite_def" predicate gt_log_u64
+
+function tok_open [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 120 0 120 30] (t: t_Tok) : t_Tok =
+  [%#sstream'73] let d = UInt64.add t.depth (1: UInt64.t) in { mode = t.mode;
+                                                               depth = d;
+                                                               maxd = (if gt_log_u64 d t.maxd then d else t.maxd);
+                                                               objs = t.objs;
+                                                               strs = t.strs;
+                                                               nums = t.nums;
+                                                               arrs = t.arrs;
+                                                               lits = t.lits;
+                                                               lines = t.lines;
+                                                               idsum = t.idsum;
+                                                               allsum = t.allsum;
+                                                               acc = t.acc;
+                                                               isint = t.isint;
+                                                               gotid = t.gotid }
+
+predicate is_lower_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 90 0 90 32] (c: UInt8.t) =
+  [%#sstream'74] UInt8.le (97: UInt8.t) c /\ UInt8.le c (122: UInt8.t)
+
+function tok_act [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 127 0 127 36] (t: t_Tok) (c: UInt8.t) : t_Tok =
+  [%#sstream'68] if t.mode = (2: UInt8.t) then
+    { mode = (1: UInt8.t);
+      depth = t.depth;
+      maxd = t.maxd;
+      objs = t.objs;
+      strs = t.strs;
+      nums = t.nums;
+      arrs = t.arrs;
+      lits = t.lits;
+      lines = t.lines;
+      idsum = t.idsum;
+      allsum = t.allsum;
+      acc = t.acc;
+      isint = t.isint;
+      gotid = t.gotid }
+  else
+    if t.mode = (1: UInt8.t) then
+      { mode = (if c = (92: UInt8.t) then (2: UInt8.t) else if c = (34: UInt8.t) then (0: UInt8.t) else (1: UInt8.t));
+        depth = t.depth;
+        maxd = t.maxd;
+        objs = t.objs;
+        strs = t.strs;
+        nums = t.nums;
+        arrs = t.arrs;
+        lits = t.lits;
+        lines = t.lines;
+        idsum = t.idsum;
+        allsum = t.allsum;
+        acc = t.acc;
+        isint = t.isint;
+        gotid = t.gotid }
+    else
+      if t.mode = (3: UInt8.t) then
+        if is_digit_l c then
+          { mode = t.mode;
+            depth = t.depth;
+            maxd = t.maxd;
+            objs = t.objs;
+            strs = t.strs;
+            nums = t.nums;
+            arrs = t.arrs;
+            lits = t.lits;
+            lines = t.lines;
+            idsum = t.idsum;
+            allsum = t.allsum;
+            acc = UInt64.add (UInt64.mul t.acc (10: UInt64.t)) (UInt64.of_int (UInt8.t'int (UInt8.sub c (48: UInt8.t))));
+            isint = t.isint;
+            gotid = t.gotid }
+        else
+          { mode = t.mode;
+            depth = t.depth;
+            maxd = t.maxd;
+            objs = t.objs;
+            strs = t.strs;
+            nums = t.nums;
+            arrs = t.arrs;
+            lits = t.lits;
+            lines = t.lines;
+            idsum = t.idsum;
+            allsum = t.allsum;
+            acc = t.acc;
+            isint = false;
+            gotid = t.gotid }
+      
+      else
+        if t.mode = (4: UInt8.t) then
+          t
+        else
+          if c = (34: UInt8.t) then
+            { mode = (1: UInt8.t);
+              depth = t.depth;
+              maxd = t.maxd;
+              objs = t.objs;
+              strs = UInt64.add t.strs (1: UInt64.t);
+              nums = t.nums;
+              arrs = t.arrs;
+              lits = t.lits;
+              lines = t.lines;
+              idsum = t.idsum;
+              allsum = t.allsum;
+              acc = t.acc;
+              isint = t.isint;
+              gotid = t.gotid }
+          else
+            if c = (123: UInt8.t) then
+              tok_open { mode = t.mode;
+                         depth = t.depth;
+                         maxd = t.maxd;
+                         objs = UInt64.add t.objs (1: UInt64.t);
+                         strs = t.strs;
+                         nums = t.nums;
+                         arrs = t.arrs;
+                         lits = t.lits;
+                         lines = t.lines;
+                         idsum = t.idsum;
+                         allsum = t.allsum;
+                         acc = t.acc;
+                         isint = t.isint;
+                         gotid = t.gotid }
+            else
+              if c = (91: UInt8.t) then
+                tok_open { mode = t.mode;
+                           depth = t.depth;
+                           maxd = t.maxd;
+                           objs = t.objs;
+                           strs = t.strs;
+                           nums = t.nums;
+                           arrs = UInt64.add t.arrs (1: UInt64.t);
+                           lits = t.lits;
+                           lines = t.lines;
+                           idsum = t.idsum;
+                           allsum = t.allsum;
+                           acc = t.acc;
+                           isint = t.isint;
+                           gotid = t.gotid }
+              else
+                if c = (125: UInt8.t) \/ c = (93: UInt8.t) then
+                  { mode = t.mode;
+                    depth = (if gt_log_u64 t.depth (0: UInt64.t) then UInt64.sub t.depth (1: UInt64.t) else t.depth);
+                    maxd = t.maxd;
+                    objs = t.objs;
+                    strs = t.strs;
+                    nums = t.nums;
+                    arrs = t.arrs;
+                    lits = t.lits;
+                    lines = t.lines;
+                    idsum = t.idsum;
+                    allsum = t.allsum;
+                    acc = t.acc;
+                    isint = t.isint;
+                    gotid = t.gotid }
+                else
+                  if c = (10: UInt8.t) then
+                    { mode = t.mode;
+                      depth = t.depth;
+                      maxd = t.maxd;
+                      objs = t.objs;
+                      strs = t.strs;
+                      nums = t.nums;
+                      arrs = t.arrs;
+                      lits = t.lits;
+                      lines = UInt64.add t.lines (1: UInt64.t);
+                      idsum = t.idsum;
+                      allsum = t.allsum;
+                      acc = t.acc;
+                      isint = t.isint;
+                      gotid = false }
+                  else
+                    if is_digit_l c then
+                      { mode = (3: UInt8.t);
+                        depth = t.depth;
+                        maxd = t.maxd;
+                        objs = t.objs;
+                        strs = t.strs;
+                        nums = t.nums;
+                        arrs = t.arrs;
+                        lits = t.lits;
+                        lines = t.lines;
+                        idsum = t.idsum;
+                        allsum = t.allsum;
+                        acc = UInt64.of_int (UInt8.t'int (UInt8.sub c (48: UInt8.t)));
+                        isint = true;
+                        gotid = t.gotid }
+                    else
+                      if c = (45: UInt8.t) then
+                        { mode = (3: UInt8.t);
+                          depth = t.depth;
+                          maxd = t.maxd;
+                          objs = t.objs;
+                          strs = t.strs;
+                          nums = t.nums;
+                          arrs = t.arrs;
+                          lits = t.lits;
+                          lines = t.lines;
+                          idsum = t.idsum;
+                          allsum = t.allsum;
+                          acc = (0: UInt64.t);
+                          isint = true;
+                          gotid = t.gotid }
+                      else
+                        if is_lower_l c then
+                          { mode = (4: UInt8.t);
+                            depth = t.depth;
+                            maxd = t.maxd;
+                            objs = t.objs;
+                            strs = t.strs;
+                            nums = t.nums;
+                            arrs = t.arrs;
+                            lits = t.lits;
+                            lines = t.lines;
+                            idsum = t.idsum;
+                            allsum = t.allsum;
+                            acc = t.acc;
+                            isint = t.isint;
+                            gotid = t.gotid }
+                        else
+                          t
+                      
+                    
+                  
+                
+              
+            
+          
+        
+      
+    
+  
+
+
+predicate is_numpunct_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 95 0 95 35] (c: UInt8.t) =
+  [%#sstream'75] c = (46: UInt8.t) \/ c = (101: UInt8.t) \/ c = (69: UInt8.t) \/ c = (43: UInt8.t) \/ c = (45: UInt8.t)
+
+function tok_end [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 101 0 101 36] (t: t_Tok) (c: UInt8.t) : t_Tok =
+  [%#sstream'69] if t.mode = (3: UInt8.t) /\ not (is_digit_l c \/ is_numpunct_l c) then
+    { mode = (0: UInt8.t);
+      depth = t.depth;
+      maxd = t.maxd;
+      objs = t.objs;
+      strs = t.strs;
+      nums = UInt64.add t.nums (1: UInt64.t);
+      arrs = t.arrs;
+      lits = t.lits;
+      lines = t.lines;
+      idsum = (if t.isint /\ t.depth = (1: UInt64.t) /\ not t.gotid then UInt64.add t.idsum t.acc else t.idsum);
+      allsum = (if t.isint then UInt64.add t.allsum t.acc else t.allsum);
+      acc = t.acc;
+      isint = t.isint;
+      gotid = t.gotid \/ t.depth = (1: UInt64.t) }
+  else
+    if t.mode = (4: UInt8.t) /\ not is_lower_l c then
+      { mode = (0: UInt8.t);
+        depth = t.depth;
+        maxd = t.maxd;
+        objs = t.objs;
+        strs = t.strs;
+        nums = t.nums;
+        arrs = t.arrs;
+        lits = UInt64.add t.lits (1: UInt64.t);
+        lines = t.lines;
+        idsum = t.idsum;
+        allsum = t.allsum;
+        acc = t.acc;
+        isint = t.isint;
+        gotid = t.gotid }
+    else
+      t
+  
+
+
+function tok_step [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 159 0 159 37] (t: t_Tok) (c: UInt8.t) : t_Tok =
+  [%#sstream'65] tok_act (tok_end t c) c
+
+function tok_seq [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 166 0 166 41] (t: t_Tok) (s: Seq.seq UInt8.t) : t_Tok
+
+axiom tok_seq_def: forall t: t_Tok, s: Seq.seq UInt8.t [tok_seq t s]. tok_seq t s
+    = ([%#sstream'44] if Seq.length s = 0 then
+      t
+    else
+      tok_step (tok_seq t (Seq.([..]) s 0 (Seq.length s - 1))) (Seq.get s (Seq.length s - 1))
+    )
+
+constant tok0: t_Tok = [%#sstream'45] { mode = (0: UInt8.t);
+                                        depth = (0: UInt64.t);
+                                        maxd = (0: UInt64.t);
+                                        objs = (0: UInt64.t);
+                                        strs = (0: UInt64.t);
+                                        nums = (0: UInt64.t);
+                                        arrs = (0: UInt64.t);
+                                        lits = (0: UInt64.t);
+                                        lines = (0: UInt64.t);
+                                        idsum = (0: UInt64.t);
+                                        allsum = (0: UInt64.t);
+                                        acc = (0: UInt64.t);
+                                        isint = false;
+                                        gotid = false }
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+function crc_seq_concat [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 248 0 248 55] (crc'0: UInt32.t) (a: Seq.seq UInt8.t) (b: Seq.seq UInt8.t) : ()
+
+axiom crc_seq_concat_def:
+  forall crc'0: UInt32.t, a: Seq.seq UInt8.t, b: Seq.seq UInt8.t [crc_seq_concat crc'0 a b]. crc_seq_concat crc'0 a b
+    = ([%#sstream'47] if gt_log_Int (Seq.length b) 0 then
+      let b1 = Seq.([..]) b 0 (Seq.length b - 1) in let _ = crc_seq_concat crc'0 a b1 in ()
+    else
+      ()
+    )
+
+axiom crc_seq_concat_spec:
+  forall crc'0: UInt32.t, a: Seq.seq UInt8.t, b: Seq.seq UInt8.t. [%#sstream'46] crc_seq crc'0 (Seq.(++) a b)
+    = crc_seq (crc_seq crc'0 a) b
+
+function tok_seq_concat [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 264 0 264 53] (t: t_Tok) (a: Seq.seq UInt8.t) (b: Seq.seq UInt8.t) : ()
+
+axiom tok_seq_concat_def:
+  forall t: t_Tok, a: Seq.seq UInt8.t, b: Seq.seq UInt8.t [tok_seq_concat t a b]. tok_seq_concat t a b
+    = ([%#sstream'49] if gt_log_Int (Seq.length b) 0 then
+      let b1 = Seq.([..]) b 0 (Seq.length b - 1) in let _ = tok_seq_concat t a b1 in ()
+    else
+      ()
+    )
+
+axiom tok_seq_concat_spec:
+  forall t: t_Tok, a: Seq.seq UInt8.t, b: Seq.seq UInt8.t. [%#sstream'48] tok_seq t (Seq.(++) a b)
+    = tok_seq (tok_seq t a) b
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+function u64_of_add [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 210 4 210 37] (x: int) (v: UInt64.t) : ()
+
+axiom u64_of_add_spec: forall x: int, v: UInt64.t. ([%#sstream'51] ge_log_Int x 0)
+    -> ([%#sstream'52] u64_of (x + UInt64.t'int v) = UInt64.add (u64_of x) v)
+
+predicate invariant_ref_array_u32_256 [@inline:trivial] (self: Slice64.array UInt32.t) =
+  [%#sinvariant'0] inv_array_u32_256 self
+
+meta "rewrite_def" predicate invariant_ref_array_u32_256
+
+predicate inv_ref_array_u32_256 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_ref_array_u32_256 _1
+
+meta "rewrite_def" predicate inv_ref_array_u32_256
+
+let chunk (buf: t_Vec_u8_Global) (len: UInt64.t) (st: MutBorrow.t t_State) (tab: Slice64.array UInt32.t)
+  (return (x: ())) =
+{[@stop_split] [@expl:chunk requires] ([@stop_split] [@expl:chunk 'tab' type invariant] [%#sstream'53] inv_ref_array_u32_256 tab)
+  /\ ([@stop_split] [@expl:chunk requires #0] [%#sstream'54] UInt64.t'int len <= Seq.length (view_Vec_u8_Global buf))
+  /\ ([@stop_split] [@expl:chunk requires #1] [%#sstream'55] forall i: UInt64.t. UInt64.t'int i < 256
+    -> Seq.get (Slice64.view tab) (UInt64.t'int i) = crc_iter (UInt32.of_int (UInt64.t'int i)) 8)}
+  any
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:chunk ensures] ([@stop_split] [@expl:chunk ensures #0] [%#sstream'56] st.final.crc
+      = crc_seq st.current.crc (Seq.([..]) (view_Vec_u8_Global buf) 0 (UInt64.t'int len)))
+    /\ ([@stop_split] [@expl:chunk ensures #1] [%#sstream'57] st.final.tok
+      = tok_seq st.current.tok (Seq.([..]) (view_Vec_u8_Global buf) 0 (UInt64.t'int len)))
+    /\ ([@stop_split] [@expl:chunk ensures #2] [%#sstream'58] st.final.total = UInt64.add st.current.total len)}
+    (! return {result}) ]
+
+predicate resolve_refmut_State [@inline:trivial] (_1: MutBorrow.t t_State) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_State
+
+predicate resolve_File (_1: t_File)
+
+function crc32 [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 54 0 54 31] (s: Seq.seq UInt8.t) : UInt32.t =
+  [%#sstream'59] UInt32.bw_xor (crc_seq (4294967295: UInt32.t) s) (4294967295: UInt32.t)
+
+function ckfold_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 171 0 171 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+ = [%#sstream'70] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
+
+constant const_CK_INIT: UInt64.t = [%#sstream'71] (14695981039346656037: UInt64.t)
+
+function ck_of [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 177 0 177 49] (crc'0: UInt32.t) (t: t_Tok) (total'0: UInt64.t) : UInt64.t
+ =
+  [%#sstream'66] let ck = ckfold_l const_CK_INIT (UInt64.of_int (UInt32.t'int crc'0)) in let ck'0 = ckfold_l ck t.objs in let ck'1 = ckfold_l ck'0 t.strs in let ck'2 = ckfold_l ck'1 t.nums in let ck'3 = ckfold_l ck'2 t.arrs in let ck'4 = ckfold_l ck'3 t.lits in let ck'5 = ckfold_l ck'4 t.maxd in let ck'6 = ckfold_l ck'5 t.lines in let ck'7 = ckfold_l ck'6 t.idsum in let ck'8 = ckfold_l ck'7 t.allsum in ckfold_l ck'8 total'0
+
+let finish (st: t_State) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:finish ensures] [%#sstream'60] result
+    = ck_of (UInt32.bw_xor st.crc (4294967295: UInt32.t)) st.tok st.total}
+    (! return {result}) ]
+
+function ck_stream [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 219 0 219 35] (s: Seq.seq UInt8.t) : UInt64.t =
+  [%#sstream'61] ck_of (crc32 s) (tok_seq tok0 s) (u64_of (Seq.length s))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let run [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 481 0 481 48] (n_mio: UInt64.t) (_threads: UInt64.t)
+  (return (x: UInt64.t)) = (! set_BUF_LEN
+    (bb0
+    [ bb0 = s0
+      [ s0 = open_input [%#sstream] {n_mio} (fun (_x: t_File) -> [ &f <- _x ] s1)
+      | s1 = crc_table [%#sstream'0] (fun (_x: Slice64.array UInt32.t) -> [ &tab <- _x ] s2)
+      | s2 = [ &_8 <- { mode = ([%#sstream'1] (0: UInt8.t));
+                        depth = ([%#sstream'2] (0: UInt64.t));
+                        maxd = ([%#sstream'3] (0: UInt64.t));
+                        objs = ([%#sstream'4] (0: UInt64.t));
+                        strs = ([%#sstream'5] (0: UInt64.t));
+                        nums = ([%#sstream'6] (0: UInt64.t));
+                        arrs = ([%#sstream'7] (0: UInt64.t));
+                        lits = ([%#sstream'8] (0: UInt64.t));
+                        lines = ([%#sstream'9] (0: UInt64.t));
+                        idsum = ([%#sstream'10] (0: UInt64.t));
+                        allsum = ([%#sstream'11] (0: UInt64.t));
+                        acc = ([%#sstream'12] (0: UInt64.t));
+                        isint = ([%#sstream'13] false);
+                        gotid = ([%#sstream'14] false) } ] s3
+      | s3 = [ &st <- { crc = ([%#sstream'15] (4294967295: UInt32.t));
+                        tok = _8;
+                        total = ([%#sstream'16] (0: UInt64.t)) } ] s4
+      | s4 = from_elem_u8 [%#svec] {[%#sstream'17] (0: UInt8.t)} {[%#sstream'18] const_BUF_LEN}
+          (fun (_x: t_Vec_u8_Global) -> [ &buf <- _x ] s5)
+      | s5 = [ &seen <- [%#sstream'19] Seq.empty: Seq.seq UInt8.t ] s6
+      | s6 = {[@expl:assertion] [%#sstream'20] let _ = u64_of_zero in true} s7
+      | s7 = bb5 ]
+    | bb5 = bb5
+      [ bb5 = {[@expl:inferred invariant: type invariant] inv_File f}
+        {[@expl:loop invariant #0] [%#sstream'25] Seq.length (view_Vec_u8_Global buf) = UInt64.t'int const_BUF_LEN}
+        {[@expl:loop invariant #1] [%#sstream'24] st.crc = crc_seq (4294967295: UInt32.t) seen
+        /\ st.tok = tok_seq tok0 seen}
+        {[@expl:loop invariant #2] [%#sstream'23] st.total = u64_of (Seq.length seen)}
+        (! s0)
+        [ s0 = MutBorrow.borrow_mut <t_File> {f}
+            (fun (_bor: MutBorrow.t t_File) -> [ &_28 <- _bor ] -{inv_File _bor.final}- [ &f <- _bor.final ] s1)
+          [ _ck -> (! {[@expl:type invariant] inv_File f} any) ]
+        | s1 = MutBorrow.borrow_mut <t_Vec_u8_Global> {buf}
+            (fun (_bor: MutBorrow.t t_Vec_u8_Global) -> [ &_30 <- _bor ] [ &buf <- _bor.final ] s2)
+        | s2 = MutBorrow.borrow_final <t_File> {_28.current} {MutBorrow.get_id _28}
+            (fun (_bor: MutBorrow.t t_File) ->
+              [ &_27 <- _bor ] -{inv_File _bor.final}-
+              [ &_28 <- { _28 with current = _bor.final } ] s3)
+          [ _ck -> (! {[@expl:type invariant] inv_File _28.current} any) ]
+        | s3 = MutBorrow.borrow_final <t_Vec_u8_Global> {_30.current} {MutBorrow.get_id _30}
+            (fun (_bor: MutBorrow.t t_Vec_u8_Global) ->
+              [ &_29 <- _bor ] [ &_30 <- { _30 with current = _bor.final } ] s4)
+        | s4 = read_block [%#sstream'21] {_27} {_29} (fun (_x: UInt64.t) -> [ &got <- _x ] s5)
+        | s5 = -{resolve_refmut_Vec_u8_Global _30}- s6
+        | s6 = s7 [ _ck -> (! {[@expl:type invariant] inv_refmut_File _28} any) ]
+        | s7 = -{resolve_refmut_File _28}- s8
+        | s8 = [ &_32 <- got = ([%#sstream'22] (0: UInt64.t)) ] s9
+        | s9 = any [ br0 -> {_32 = false} (! bb9) | br1 -> {_32} (! bb8) ] ]
+        [ bb9 = s0
+          [ s0 = any
+            [ any_ (_dest: Seq.seq UInt8.t) ->
+            (! -{([@stop_split] [@expl:view ensures] [%#svec'0] Seq.length (view_Vec_u8_Global buf)
+                <= UInt64.t'int const_MAX)
+              /\ _dest = Seq.([..]) (view_Vec_u8_Global buf) 0 (UInt64.t'int got)}-
+              [ &chunk_bytes <- _dest ] s1) ] [ _ck -> (! any) ]
+          | s1 =
+            {[@expl:assertion] [%#sstream'26] let _ = crc_seq_concat (4294967295: UInt32.t) seen chunk_bytes in let _ = tok_seq_concat tok0 seen chunk_bytes in true}
+            s2
+          | s2 = {[@expl:assertion] [%#sstream'27] let _ = u64_of_add (Seq.length seen) got in true} s3
+          | s3 = [ &_49 <- buf ] s4
+          | s4 = MutBorrow.borrow_mut <t_State> {st}
+              (fun (_bor: MutBorrow.t t_State) -> [ &_52 <- _bor ] [ &st <- _bor.final ] s5)
+          | s5 = [ &_54 <- tab ] s6
+          | s6 = MutBorrow.borrow_final <t_State> {_52.current} {MutBorrow.get_id _52}
+              (fun (_bor: MutBorrow.t t_State) -> [ &_51 <- _bor ] [ &_52 <- { _52 with current = _bor.final } ] s7)
+          | s7 = chunk [%#sstream'28] {_49} {got} {_51} {_54} (fun (_x: ()) -> [ &_47 <- _x ] s8)
+          | s8 = -{resolve_refmut_State _52}- s9
+          | s9 = [ &_55 <- [%#sstream'29] Seq.(++) seen chunk_bytes ] s10
+          | s10 = [ &seen <- _55 ] s11
+          | s11 = bb5 ] ] ]
+    | bb8 = s0
+      [ s0 = s1 [ _ck -> (! {[@expl:type invariant] inv_File f} any) ]
+      | s1 = -{resolve_File f}- s2
+      | s2 = {[@expl:assertion] [%#sstream'30] UInt32.bw_xor st.crc (4294967295: UInt32.t) = crc32 seen} s3
+      | s3 = [ &_64 <- st ] s4
+      | s4 = finish [%#sstream'31] {_64} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s5)
+      | s5 = return {_ret} ] ]
+    [ & _ret: UInt64.t = Any.any_l ()
+    | & n_mio: UInt64.t = n_mio
+    | & f: t_File = Any.any_l ()
+    | & tab: Slice64.array UInt32.t = Any.any_l ()
+    | & st: t_State = Any.any_l ()
+    | & _8: t_Tok = Any.any_l ()
+    | & buf: t_Vec_u8_Global = Any.any_l ()
+    | & seen: Seq.seq UInt8.t = Any.any_l ()
+    | & got: UInt64.t = Any.any_l ()
+    | & _27: MutBorrow.t t_File = Any.any_l ()
+    | & _28: MutBorrow.t t_File = Any.any_l ()
+    | & _29: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
+    | & _30: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
+    | & _32: bool = Any.any_l ()
+    | & chunk_bytes: Seq.seq UInt8.t = Any.any_l ()
+    | & _47: () = Any.any_l ()
+    | & _49: t_Vec_u8_Global = Any.any_l ()
+    | & _51: MutBorrow.t t_State = Any.any_l ()
+    | & _52: MutBorrow.t t_State = Any.any_l ()
+    | & _54: Slice64.array UInt32.t = Any.any_l ()
+    | & _55: Seq.seq UInt8.t = Any.any_l ()
+    | & _64: t_State = Any.any_l () ]))
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:run ensures] [%#sstream'32] exists s: Seq.seq UInt8.t. result
+      = ck_stream s}
+    (! return {result}) ]

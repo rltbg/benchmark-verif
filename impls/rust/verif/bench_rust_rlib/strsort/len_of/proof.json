@@ -4,7 +4,17 @@
     "Coma": {
       "vc_len_of": {
         "tactic": "split_vc",
-        "children": [ { "prover": "alt-ergo", "time": 0.005 } ]
+        "children": [
+          { "prover": "z3", "time": 0.0 },
+          { "prover": "z3", "time": 0.007 },
+          {
+            "tactic": "split_vc",
+            "children": [
+              { "prover": "alt-ergo", "time": 0.018 },
+              { "prover": "z3", "time": 0.005 }
+            ]
+          }
+        ]
       },
       "vc_mix64": { "prover": "alt-ergo", "time": 0.009 },
       "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.009 }

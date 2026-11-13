@@ -1,0 +1,57 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 0 27 22 *)
+
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 26 27 36
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 38 27 48
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 50 27 60
+let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 62 27 72
+let%span ssha256'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 74 27 84
+let%span ssha256'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 86 27 96
+let%span ssha256'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 98 27 108
+let%span ssha256'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 110 27 120
+let%span ssha256'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 0 27 22
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+
+use creusot.slice.Slice64
+use creusot.int.UInt32
+use seq.Seq
+use creusot.int.UInt64
+use creusot.prelude.Any
+
+predicate inv_Seq_u32 [@inline:trivial] (_1: Seq.seq UInt32.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u32
+
+predicate invariant_array_u32_8 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (8: UInt64.t)
+
+predicate inv_array_u32_8 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_8 _1
+
+meta "rewrite_def" predicate inv_array_u32_8
+
+constant const_IV [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 0 27 22] : Slice64.array UInt32.t
+
+axiom const_IV_spec: [%#ssha256'7] inv_array_u32_8 const_IV
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let const_IV_def [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 0 27 22]
+  (return (x: Slice64.array UInt32.t)) = (! bb0
+  [ bb0 = s0
+    [ s0 = any
+      [ any_ (__arr_temp: Slice64.array UInt32.t) -> (! -{Seq.get __arr_temp.Slice64.elts 0
+          = ([%#ssha256] (1779033703: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 1 = ([%#ssha256'0] (3144134277: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 2 = ([%#ssha256'1] (1013904242: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 3 = ([%#ssha256'2] (2773480762: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 4 = ([%#ssha256'3] (1359893119: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 5 = ([%#ssha256'4] (2600822924: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 6 = ([%#ssha256'5] (528734635: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 7 = ([%#ssha256'6] (1541459225: UInt32.t))
+        /\ Seq.length __arr_temp.Slice64.elts = 8}-
+        [ &_ret <- __arr_temp ] s1) ]
+    | s1 = return {_ret} ] ] [ & _ret: Slice64.array UInt32.t = Any.any_l () ])
+  [ return (result: Slice64.array UInt32.t) -> -{const_IV = result}-
+    {[@stop_split] [@expl:IV result type invariant] [%#ssha256'7] inv_array_u32_8 result}
+    (! return {result}) ]

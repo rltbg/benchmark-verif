@@ -1,0 +1,98 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 372 0 372 36 *)
+
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 370 11 370 33
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 371 10 371 46
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 295 4 311 5
+
+use creusot.int.UInt64BW
+use int.ComputerDivision
+use creusot.int.UInt8BW
+use int.Int
+
+function byte_le [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 294 0 294 36] (x: UInt64BW.t) (q: int) : UInt8BW.t
+ = [%#ssha256'1] if q = 0 then
+    UInt8BW.of_BV256 (UInt64BW.to_BV256 x)
+  else
+    if q = 1 then
+      UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x (8: UInt64BW.t)))
+    else
+      if q = 2 then
+        UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x (16: UInt64BW.t)))
+      else
+        if q = 3 then
+          UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x (24: UInt64BW.t)))
+        else
+          if q = 4 then
+            UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x (32: UInt64BW.t)))
+          else
+            if q = 5 then
+              UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x (40: UInt64BW.t)))
+            else
+              if q = 6 then
+                UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x (48: UInt64BW.t)))
+              else
+                UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x (56: UInt64BW.t)))
+            
+          
+        
+      
+    
+  
+
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant x : UInt64BW.t
+
+constant s : UInt64BW.t
+
+function byte_le_shift [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 372 0 372 36] (x: UInt64BW.t) (s: UInt64BW.t) : ()
+
+goal vc_byte_le_shift: ([%#ssha256] ComputerDivision.mod (UInt64BW.t'int s) 8 = 0 /\ UInt64BW.t'int s < 64)
+  -> (if UInt64BW.t'int s = 0 then
+    s = (0: UInt64BW.t)
+    && ([@stop_split] [@expl:byte_le_shift ensures] [%#ssha256'0] UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x s))
+    = byte_le x (ComputerDivision.div (UInt64BW.t'int s) 8))
+  else
+    if UInt64BW.t'int s = 8 then
+      s = (8: UInt64BW.t)
+      && ([@stop_split] [@expl:byte_le_shift ensures] [%#ssha256'0] UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x s))
+      = byte_le x (ComputerDivision.div (UInt64BW.t'int s) 8))
+    else
+      if UInt64BW.t'int s = 16 then
+        s = (16: UInt64BW.t)
+        && ([@stop_split] [@expl:byte_le_shift ensures] [%#ssha256'0] UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x s))
+        = byte_le x (ComputerDivision.div (UInt64BW.t'int s) 8))
+      else
+        if UInt64BW.t'int s = 24 then
+          s = (24: UInt64BW.t)
+          && ([@stop_split] [@expl:byte_le_shift ensures] [%#ssha256'0] UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x s))
+          = byte_le x (ComputerDivision.div (UInt64BW.t'int s) 8))
+        else
+          if UInt64BW.t'int s = 32 then
+            s = (32: UInt64BW.t)
+            && ([@stop_split] [@expl:byte_le_shift ensures] [%#ssha256'0] UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x s))
+            = byte_le x (ComputerDivision.div (UInt64BW.t'int s) 8))
+          else
+            if UInt64BW.t'int s = 40 then
+              s = (40: UInt64BW.t)
+              && ([@stop_split] [@expl:byte_le_shift ensures] [%#ssha256'0] UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x s))
+              = byte_le x (ComputerDivision.div (UInt64BW.t'int s) 8))
+            else
+              if UInt64BW.t'int s = 48 then
+                s = (48: UInt64BW.t)
+                && ([@stop_split] [@expl:byte_le_shift ensures] [%#ssha256'0] UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x s))
+                = byte_le x (ComputerDivision.div (UInt64BW.t'int s) 8))
+              else
+                s = (56: UInt64BW.t)
+                && ([@stop_split] [@expl:byte_le_shift ensures] [%#ssha256'0] UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x s))
+                = byte_le x (ComputerDivision.div (UInt64BW.t'int s) 8))
+            
+          
+        
+      
+    
+  
+  )

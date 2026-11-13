@@ -1,0 +1,46 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 35 0 35 38 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 34 10 34 11
+let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 29 4 29 74
+
+use creusot.int.UInt32
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+function crc_shift [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 28 0 28 31] (x: UInt32.t) : UInt32.t =
+  [%#sstream'0] if UInt32.bw_and x (1: UInt32.t) <> (0: UInt32.t) then
+    UInt32.bw_xor (UInt32.shr x (1: UInt32.t)) (3988292384: UInt32.t)
+  else
+    UInt32.shr x (1: UInt32.t)
+
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant x : UInt32.t
+
+constant k : int
+
+function crc_iter [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 35 0 35 38] (x: UInt32.t) (k: int) : UInt32.t
+
+goal vc_crc_iter: if k <= 0 then
+    true
+  else
+    [@expl:variant decreases] well_founded_relation_Int ([%#sstream] k) ([%#sstream] k - 1)
+  

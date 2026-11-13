@@ -7,3 +7,4 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:58:42+00:00,8.7,echec,1,fill (correspondance CSR/arêtes) vérifié du 1er coup; boucle interne BFS dépasse maintenant le rlimit (instabilité)
 2026-11-13T20:58:59+00:00,32.9,echec,1,rlimit(30) essayé: c'est maintenant la boucle externe qui dépasse (instable); attribut retiré
 2026-11-13T21:00:41+00:00,2.9,ok,0,BFS refait avec prédicats opaques (queued/preds/processed) + lemmes de pas: 1.2 s
+2026-11-13T21:15:19+00:00,6.2,ok,0,cargo verus build --release final

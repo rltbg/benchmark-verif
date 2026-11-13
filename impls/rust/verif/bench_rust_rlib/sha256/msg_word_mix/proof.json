@@ -1,0 +1,29 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_msg_word_mix": {
+        "tactic": "compute_specified",
+        "children": [
+          {
+            "tactic": "split_vc",
+            "children": [
+              { "prover": "cvc5", "time": 0.03 },
+              { "prover": "cvc5", "time": 0.054 },
+              { "prover": "alt-ergo", "time": 0.03 },
+              { "prover": "cvc5", "time": 0.12 },
+              { "prover": "alt-ergo", "time": 0.11 },
+              { "prover": "alt-ergo", "time": 0.111 },
+              { "prover": "alt-ergo", "time": 0.113 },
+              { "prover": "alt-ergo", "time": 0.116 },
+              { "prover": "alt-ergo", "time": 0.126 },
+              { "prover": "alt-ergo", "time": 0.134 },
+              { "prover": "alt-ergo", "time": 0.133 },
+              { "prover": "alt-ergo", "time": 0.036 }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

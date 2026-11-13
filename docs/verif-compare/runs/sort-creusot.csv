@@ -9,3 +9,6 @@
 2026-11-13T21:03:31+00:00,21.1,echec,3,toute la lib; avec cache (re-essai; charge machine élevée)
 2026-11-13T21:11:17+00:00,33.6,echec,1,FINAL toute la lib --no-cache (essai 1; robustesse)
 2026-11-13T21:11:50+00:00,62.3,ok,0,FINAL toute la lib --no-cache (essai 2; robustesse)
+2026-11-13T21:13:02+00:00,33.5,ok,0,FINAL toute la lib --no-cache (essai 3; robustesse)
+2026-11-13T21:13:36+00:00,78.8,ok,0,FINAL toute la lib --no-cache (essai 4; robustesse)
+2026-11-13T21:14:54+00:00,2.5,ok,0,FINAL toute la lib avec cache (rejeu proof.json)

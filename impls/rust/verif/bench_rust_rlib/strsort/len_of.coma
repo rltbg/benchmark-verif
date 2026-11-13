@@ -1,40 +1,46 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 11 0 11 28 *)
+(* #"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 24 0 24 28 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span sstrsort = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 12 11 12 32
-let%span sstrsort'0 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 12 11 12 48
-let%span sstrsort'1 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 12 5 12 49
-let%span sstrsort'2 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 12 53 12 55
-let%span sstrsort'3 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 12 4 12 56
-let%span sstrsort'4 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 12 70 12 71
-let%span sstrsort'5 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 12 4 12 72
+let%span sstrsort = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 25 11 25 32
+let%span sstrsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 25 11 25 48
+let%span sstrsort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 25 5 25 49
+let%span sstrsort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 25 53 25 55
+let%span sstrsort'3 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 25 4 25 56
+let%span sstrsort'4 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 25 59 25 60
+let%span sstrsort'5 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 25 4 25 60
+let%span sstrsort'6 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 21 10 21 43
 
-use creusot.int.UInt64
-use creusot.int.Int32
+use creusot.int.UInt64BW
+use creusot.int.Int32BW
 use creusot.prelude.Any
 
-let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
-  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
+let wrapping_add (self: UInt64BW.t) (rhs: UInt64BW.t) (return (x: UInt64BW.t)) = any
+  [ return (result: UInt64BW.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64BW.add self rhs}
     (! return {result}) ]
 
-let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any [ return (result: UInt64.t) -> (! return {result}) ]
+let mix64 (x: UInt64BW.t) (return (x'0: UInt64BW.t)) = any [ return (result: UInt64BW.t) -> (! return {result}) ]
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let len_of [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 11 0 11 28] (i: UInt64.t) (return (x: UInt64.t)) =
-(! bb0
+let len_of [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 24 0 24 28] (i: UInt64BW.t)
+  (return (x: UInt64BW.t)) = (! bb0
   [ bb0 = s0
-    [ s0 = wrapping_add [%#sstrsort'0] {[%#sstrsort] (13907095858110791681: UInt64.t)} {i}
-        (fun (_x: UInt64.t) -> [ &_4 <- _x ] s1)
-    | s1 = mix64 [%#sstrsort'1] {_4} (fun (_x: UInt64.t) -> [ &_3 <- _x ] s2)
-    | s2 = UInt64.shr [%#sstrsort'3] {_3} {Int32.to_int ([%#sstrsort'2] (59: Int32.t))}
-        (fun (_x: UInt64.t) -> [ &_2 <- _x ] s3)
-    | s3 = wrapping_add [%#sstrsort'5] {_2} {[%#sstrsort'4] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s4)
+    [ s0 = wrapping_add [%#sstrsort'0] {[%#sstrsort] (13907095858110791681: UInt64BW.t)} {i}
+        (fun (_x: UInt64BW.t) -> [ &_5 <- _x ] s1)
+    | s1 = mix64 [%#sstrsort'1] {_5} (fun (_x: UInt64BW.t) -> [ &_4 <- _x ] s2)
+    | s2 = UInt64BW.shr [%#sstrsort'3] {_4} {Int32BW.to_BV256 ([%#sstrsort'2] (59: Int32BW.t))}
+        (fun (_x: UInt64BW.t) -> [ &_3 <- _x ] s3)
+    | s3 = UInt64BW.add [%#sstrsort'5] {_3} {[%#sstrsort'4] (1: UInt64BW.t)}
+        (fun (_x: UInt64BW.t) -> [ &_ret <- _x ] s4)
     | s4 = return {_ret} ] ]
-  [ & _ret: UInt64.t = Any.any_l ()
-  | & i: UInt64.t = i
-  | & _2: UInt64.t = Any.any_l ()
-  | & _3: UInt64.t = Any.any_l ()
-  | & _4: UInt64.t = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]
+  [ & _ret: UInt64BW.t = Any.any_l ()
+  | & i: UInt64BW.t = i
+  | & _3: UInt64BW.t = Any.any_l ()
+  | & _4: UInt64BW.t = Any.any_l ()
+  | & _5: UInt64BW.t = Any.any_l () ])
+  [ return (result: UInt64BW.t) ->
+  {[@stop_split] [@expl:len_of ensures] [%#sstrsort'6] UInt64BW.le (1: UInt64BW.t) result
+    /\ UInt64BW.le result (32: UInt64BW.t)}
+    (! return {result}) ]

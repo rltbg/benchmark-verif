@@ -4,6 +4,12 @@ use std::time::Instant;
 
 pub mod common;
 // @@MODS@@ (une ligne `pub mod <nom>;`)
+pub mod sha256;
+pub mod parsha;
+pub mod stream;
+pub mod sort;
+pub mod strsort;
+pub mod parsort;
 pub mod matmul;
 pub mod parmatmul;
 pub mod ntt;
@@ -23,6 +29,12 @@ fn main() {
     let t0 = Instant::now();
     let ck: u64 = match args[1].as_str() {
         // @@DISPATCH@@ (une ligne `"<nom>" => <nom>::run(n, threads),`)
+        "sha256" => sha256::run(n, threads),
+        "parsha" => parsha::run(n, threads),
+        "stream" => stream::run(n, threads),
+        "sort" => sort::run(n, threads),
+        "strsort" => strsort::run(n, threads),
+        "parsort" => parsort::run(n, threads),
         "matmul" => matmul::run(n, threads),
         "parmatmul" => parmatmul::run(n, threads),
         "ntt" => ntt::run(n, threads),

@@ -1,6 +1,6 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/sort.rs" 26 0 26 73 *)
+(* #"/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 34 0 34 73 *)
 
-let%span ssort = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 25 10 25 93
+let%span ssort = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 33 10 33 93
 let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 371 8 371 41
 let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 250 8 250 28
 
@@ -28,7 +28,7 @@ constant r1 : Seq.seq UInt32.t
 
 constant r2 : Seq.seq UInt32.t
 
-function perm_move_right [#"/home/user/benchmark-verif/impls/rust/src/sort.rs" 26 0 26 73] (acc: Seq.seq UInt32.t) (x: UInt32.t) (r1: Seq.seq UInt32.t) (r2: Seq.seq UInt32.t) : ()
+function perm_move_right [#"/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 34 0 34 73] (acc: Seq.seq UInt32.t) (x: UInt32.t) (r1: Seq.seq UInt32.t) (r2: Seq.seq UInt32.t) : ()
 
 goal vc_perm_move_right:
   [@stop_split] [@expl:perm_move_right ensures] [%#ssort] permutation_of_u32 (Seq.(++) (Seq.(++) (Seq.snoc acc x) r1) r2) (Seq.(++) (Seq.(++) acc r1) (cons_u32 r2 x))

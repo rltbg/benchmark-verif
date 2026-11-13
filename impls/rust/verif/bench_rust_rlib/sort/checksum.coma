@@ -1,36 +1,41 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/sort.rs" 151 0 151 46 *)
+(* #"/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 134 0 134 33 *)
 
+let%span ssort = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 135 12 135 19
+let%span ssort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 136 17 136 24
+let%span ssort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 137 19 137 23
+let%span ssort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 138 17 138 21
+let%span ssort'3 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 139 16 139 22
+let%span ssort'4 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 142 14 142 21
+let%span ssort'5 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 141 16 141 44
+let%span ssort'6 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 140 16 140 75
+let%span ssort'7 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 144 16 144 20
+let%span ssort'8 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 145 13 145 28
+let%span ssort'9 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 147 13 147 33
+let%span ssort'10 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 148 13 148 14
+let%span ssort'11 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 148 8 148 14
+let%span ssort'12 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 150 24 150 25
+let%span ssort'13 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 132 10 132 41
+let%span ssort'14 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 134 0 134 33
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 413 12 413 12
+let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 423 8 423 40
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 335 18 335 22
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
-let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
-let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
-let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
-let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
-let%span ssort = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 152 17 152 24
-let%span ssort'0 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 153 19 153 23
-let%span ssort'1 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 154 17 154 21
-let%span ssort'2 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 155 16 155 22
-let%span ssort'3 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 157 14 157 21
-let%span ssort'4 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 156 16 156 42
-let%span ssort'5 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 159 17 159 20
-let%span ssort'6 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 160 13 160 28
-let%span ssort'7 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 162 13 162 33
-let%span ssort'8 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 163 13 163 14
-let%span ssort'9 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 163 8 163 14
-let%span ssort'10 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 165 24 165 25
-let%span ssort'11 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 149 11 149 45
-let%span ssort'12 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 151 0 151 46
 
-use creusot.int.UInt64
+use creusot.slice.Slice64
 use creusot.int.UInt32
+use creusot.int.UInt64
 use seq.Seq
 use creusot.prelude.Any
 use int.Int
 
-constant const_CK_INIT: UInt64.t = [%#ssort'12] (14695981039346656037: UInt64.t)
+let len_u32 (self: Slice64.slice UInt32.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:len ensures] [%#sslice] Seq.length (Slice64.view self)
+    = UInt64.t'int result}
+    (! return {result}) ]
+
+constant const_CK_INIT: UInt64.t = [%#ssort'14] (14695981039346656037: UInt64.t)
 
 predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
 
@@ -45,87 +50,72 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
 
 meta "rewrite_def" predicate well_founded_relation_Int
 
-type t_Vec_u32_Global
-
-constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
-
-function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
-
-axiom view_Vec_u32_Global_spec:
-  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec] Seq.length (view_Vec_u32_Global self)
-    <= UInt64.t'int const_MAX
-
-predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) =
-  [%#sslice] UInt64.t'int self < Seq.length seq
-
-meta "rewrite_def" predicate in_bounds_usize
-
-predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) (out: UInt32.t) =
-  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
-
-meta "rewrite_def" predicate has_value_usize
-
-let index_Vec_u32_Global (self: t_Vec_u32_Global) (index: UInt64.t) (return (x: UInt32.t)) =
-{[@stop_split] [@expl:index requires] [%#svec'0] in_bounds_usize index (view_Vec_u32_Global self)}
-  any
-  [ return (result: UInt32.t) ->
-  {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u32_Global self) result}
-    (! return {result}) ]
+predicate sorted_range_u32 (self: Seq.seq UInt32.t) (start: int) (end': int) =
+  [%#sseq] forall i: int, j: int. start <= i /\ i <= j /\ j < end' -> UInt32.le (Seq.get self i) (Seq.get self j)
 
 let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
   [ return (result: UInt64.t) -> (! return {result}) ]
+
+predicate sorted_u32 (self: Seq.seq UInt32.t) = [%#sseq'0] sorted_range_u32 self 0 (Seq.length self)
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let checksum [#"/home/user/benchmark-verif/impls/rust/src/sort.rs" 151 0 151 46] (v: t_Vec_u32_Global) (n: UInt64.t)
-  (return (x: UInt64.t)) = {[@stop_split] [@expl:checksum requires] [%#ssort'11] Seq.length (view_Vec_u32_Global v)
-    = UInt64.t'int n
-  /\ UInt64.t'int n <= 1073741824}
-  (! bb0
+let checksum [#"/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 134 0 134 33] (v: Slice64.slice UInt32.t)
+  (return (x: UInt64.t)) = (! bb0
   [ bb0 = s0
-    [ s0 = [ &ck <- [%#ssort] const_CK_INIT ] s1
-    | s1 = [ &prev <- [%#ssort'0] (0: UInt32.t) ] s2
-    | s2 = [ &ok <- [%#ssort'1] true ] s3
-    | s3 = [ &i <- [%#ssort'2] (0: UInt64.t) ] s4
-    | s4 = bb1 ]
-  | bb1 = bb1invariant
-    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#ssort'3] UInt64.t'int n
+    [ s0 = len_u32 [%#ssort] {v} (fun (_x: UInt64.t) -> [ &n <- _x ] s1)
+    | s1 = [ &ck <- [%#ssort'0] const_CK_INIT ] s2
+    | s2 = [ &prev <- [%#ssort'1] (0: UInt32.t) ] s3
+    | s3 = [ &ok <- [%#ssort'2] true ] s4
+    | s4 = [ &i <- [%#ssort'3] (0: UInt64.t) ] s5
+    | s5 = bb2 ]
+  | bb2 = bb2invariant
+    [ bb2 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb2 ([%#ssort'4] UInt64.t'int n
       - UInt64.t'int i)}
-      bb1invariant
-    | bb1invariant = {[@expl:loop invariant] [%#ssort'4] Seq.length (view_Vec_u32_Global v) = UInt64.t'int n
-      /\ UInt64.t'int i <= UInt64.t'int n}
-      (! [ &variant_old_bb1 <- [%#ssort'3] UInt64.t'int n - UInt64.t'int i ] s0)
-      [ s0 = [ &_20 <- UInt64.lt i n ] s1 | s1 = any [ br0 -> {_20 = false} (! bb9) | br1 -> {_20} (! bb3) ] ]
-      [ bb3 = s0
-        [ s0 = index_Vec_u32_Global [%#ssort'5] {v} {i} (fun (_x: UInt32.t) -> [ &_24 <- _x ] s1)
-        | s1 = [ &x <- _24 ] s2
-        | s2 = any [ br0 -> {ok = false} (! bb6) | br1 -> {ok} (! bb5) ] ]
-      | bb5 = s0 [ s0 = [ &_27 <- UInt32.le prev x ] s1 | s1 = bb7 ]
-      | bb6 = s0 [ s0 = [ &_27 <- [%#ssort'6] false ] s1 | s1 = bb7 ]
-      | bb7 = s0
-        [ s0 = [ &ok <- _27 ] s1
+      bb2invariant
+    | bb2invariant = {[@expl:loop invariant #0] [%#ssort'6] UInt64.t'int i <= UInt64.t'int n
+      /\ prev = (if UInt64.t'int i = 0 then (0: UInt32.t) else Seq.get (Slice64.view v) (UInt64.t'int i - 1))}
+      {[@expl:loop invariant #1] [%#ssort'5] ok = sorted_range_u32 (Slice64.view v) 0 (UInt64.t'int i)}
+      (! [ &variant_old_bb2 <- [%#ssort'4] UInt64.t'int n - UInt64.t'int i ] s0)
+      [ s0 = [ &_25 <- UInt64.lt i n ] s1 | s1 = any [ br0 -> {_25 = false} (! bb10) | br1 -> {_25} (! bb4) ] ]
+      [ bb4 = s0
+        [ s0 = [ &_29 <- i ] s1
+        | s1 = [ &_30 <- Slice64.length v ] s2
+        | s2 = [ &_31 <- UInt64.lt _29 _30 ] s3
+        | s3 = {[@expl:index in bounds] [%#ssort'7] _31} s4
+        | s4 = Slice64.get [%#ssort'7] <UInt32.t> {v} {_29} (fun (r: UInt32.t) -> [ &x <- r ] s5)
+        | s5 = any [ br0 -> {ok = false} (! bb7) | br1 -> {ok} (! bb6) ] ]
+      | bb6 = s0 [ s0 = [ &_32 <- UInt32.le prev x ] s1 | s1 = bb8 ]
+      | bb7 = s0 [ s0 = [ &_32 <- [%#ssort'8] false ] s1 | s1 = bb8 ]
+      | bb8 = s0
+        [ s0 = [ &ok <- _32 ] s1
         | s1 = [ &prev <- x ] s2
-        | s2 = [ &_34 <- UInt64.of_int (UInt32.t'int x) ] s3
-        | s3 = ckfold [%#ssort'7] {ck} {_34} (fun (_x: UInt64.t) -> [ &_32 <- _x ] s4)
-        | s4 = [ &ck <- _32 ] s5
-        | s5 = UInt64.add [%#ssort'9] {i} {[%#ssort'8] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s6)
-        | s6 = bb1 ] ] ]
-  | bb9 = any [ br0 -> {ok = false} (! bb11) | br1 -> {ok} (! bb10) ]
-  | bb10 = s0 [ s0 = [ &_ret <- ck ] s1 | s1 = return {_ret} ]
-  | bb11 = s0 [ s0 = [ &_ret <- [%#ssort'10] (0: UInt64.t) ] s1 | s1 = return {_ret} ] ]
+        | s2 = [ &_39 <- UInt64.of_int (UInt32.t'int x) ] s3
+        | s3 = ckfold [%#ssort'9] {ck} {_39} (fun (_x: UInt64.t) -> [ &_37 <- _x ] s4)
+        | s4 = [ &ck <- _37 ] s5
+        | s5 = UInt64.add [%#ssort'11] {i} {[%#ssort'10] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s6)
+        | s6 = bb2 ] ] ]
+  | bb10 = any [ br0 -> {ok = false} (! bb12) | br1 -> {ok} (! bb11) ]
+  | bb11 = s0 [ s0 = [ &_ret <- ck ] s1 | s1 = return {_ret} ]
+  | bb12 = s0 [ s0 = [ &_ret <- [%#ssort'12] (0: UInt64.t) ] s1 | s1 = return {_ret} ] ]
   [ & _ret: UInt64.t = Any.any_l ()
-  | & v: t_Vec_u32_Global = v
-  | & n: UInt64.t = n
+  | & v: Slice64.slice UInt32.t = v
+  | & n: UInt64.t = Any.any_l ()
   | & ck: UInt64.t = Any.any_l ()
   | & prev: UInt32.t = Any.any_l ()
   | & ok: bool = Any.any_l ()
   | & i: UInt64.t = Any.any_l ()
-  | & _20: bool = Any.any_l ()
+  | & _25: bool = Any.any_l ()
   | & x: UInt32.t = Any.any_l ()
-  | & _24: UInt32.t = Any.any_l ()
-  | & _27: bool = Any.any_l ()
-  | & _32: UInt64.t = Any.any_l ()
-  | & _34: UInt64.t = Any.any_l ()
-  | & variant_old_bb1: int = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]
+  | & _29: UInt64.t = Any.any_l ()
+  | & _30: UInt64.t = Any.any_l ()
+  | & _31: bool = Any.any_l ()
+  | & _32: bool = Any.any_l ()
+  | & _37: UInt64.t = Any.any_l ()
+  | & _39: UInt64.t = Any.any_l ()
+  | & variant_old_bb2: int = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:checksum ensures] [%#ssort'13] not sorted_u32 (Slice64.view v)
+    -> result = (0: UInt64.t)}
+    (! return {result}) ]

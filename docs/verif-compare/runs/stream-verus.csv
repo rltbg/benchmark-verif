@@ -5,3 +5,8 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T21:09:35+00:00,10.8,echec,1,"v3: étapes intermédiaires de la mise à jour CRC"
 2026-11-13T21:09:58+00:00,9.9,echec,1,"v4: diagnostic pas à pas"
 2026-11-13T21:10:15+00:00,11.4,ok,0,"v5: lemme de décalage instancié sur le bon registre"
+2026-11-13T21:15:29+00:00,0.1,erreur_compil,0,"erreur d'usage CLI: --verify-module exige cargo verus focus"
+2026-11-13T21:16:34+00:00,0.1,erreur_compil,0,"nul: cargo n'a rien relancé (artefacts à jour), pas de vérification"
+2026-11-13T21:16:46+00:00,0.1,erreur_compil,0,"nul: cargo n'a rien relancé (artefacts à jour)"
+2026-11-13T21:16:57+00:00,0.1,erreur_compil,0,"nul: cache de target/verus-partial, pas de vérification"
+2026-11-13T21:18:37+00:00,43.2,ok,0,"FINAL à froid (rm target/verus-partial; focus --verify-module stream)"

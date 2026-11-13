@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"https://www.why3.org/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="CVC4" version="" timelimit="3.24469" memlimit="1000"/>
+<prover id="1" name="CVC5" version="" timelimit="3.12511" memlimit="1000"/>
+<prover id="2" name="Z3" version="" timelimit="3.05942" memlimit="1000"/>
+<prover id="3" name="Alt-Ergo" version="" timelimit="2.37089" memlimit="1000"/>
+<file format="coma">
+<path name=".."/><path name="digest.coma"/>
+<theory name="Coma">
+ <goal name="vc_set_IV" proved="true">
+ <proof prover="3" timelimit="0.026236"><result status="valid" time="0.026236" steps="0"/></proof>
+ </goal>
+ <goal name="vc_set_K" proved="true">
+ <proof prover="3" timelimit="0.021086"><result status="valid" time="0.021086" steps="0"/></proof>
+ </goal>
+ <goal name="vc_load_block" proved="true">
+ <proof prover="3" timelimit="0.024279"><result status="valid" time="0.024279" steps="0"/></proof>
+ </goal>
+ <goal name="vc_compress" proved="true">
+ <proof prover="3" timelimit="0.031391"><result status="valid" time="0.031391" steps="0"/></proof>
+ </goal>
+ <goal name="vc_byte_at" proved="true">
+ <proof prover="3" timelimit="0.026976"><result status="valid" time="0.026976" steps="0"/></proof>
+ </goal>
+ <goal name="vc_store_be32" proved="true">
+ <proof prover="3" timelimit="0.024935"><result status="valid" time="0.024935" steps="0"/></proof>
+ </goal>
+ <goal name="vc_load_be32" proved="true">
+ <proof prover="3" timelimit="0.023686"><result status="valid" time="0.023686" steps="0"/></proof>
+ </goal>
+ <goal name="vc_digest">
+ <transf name="compute_specified" >
+  <goal name="vc_digest.0">
+  <transf name="split_vc" >
+   <goal name="vc_digest.0.0" expl="division by zero" proved="true">
+   <proof prover="3" timelimit="0.053443"><result status="valid" time="0.053443" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.1" expl="inferred invariant: type invariant" proved="true">
+   <proof prover="2" timelimit="0.022347"><result status="valid" time="0.022347" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.2" expl="loop invariant #0" proved="true">
+   <proof prover="2" timelimit="0.018375"><result status="valid" time="0.018375" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.3" expl="loop invariant #1" proved="true">
+   <proof prover="2" timelimit="0.01971"><result status="valid" time="0.019710" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.4" expl="load_block requires" proved="true">
+   <proof prover="2" timelimit="0.01727"><result status="valid" time="0.017270" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.5" expl="assertion" proved="true">
+   <proof prover="2" timelimit="0.105671"><result status="valid" time="0.105671" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.6" expl="compress requires">
+   <transf name="split_vc" >
+    <goal name="vc_digest.0.6.0" expl="compress &#39;h&#39; type invariant (compress requires)">
+    <transf name="split_vc" >
+     <goal name="vc_digest.0.6.0.0" expl="compress &#39;h&#39; type invariant">
+     <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+     <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+     <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+     <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+     </goal>
+     <goal name="vc_digest.0.6.0.1" expl="compress &#39;h&#39; type invariant" proved="true">
+     <proof prover="3" timelimit="0.041522"><result status="valid" time="0.041522" steps="0"/></proof>
+     </goal>
+    </transf>
+    </goal>
+    <goal name="vc_digest.0.6.1" expl="compress &#39;m&#39; type invariant (compress requires)" proved="true">
+    <proof prover="3" timelimit="0.06357"><result status="valid" time="0.063570" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.7" expl="integer overflow" proved="true">
+   <proof prover="2" timelimit="0.019339"><result status="valid" time="0.019339" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.8" expl="loop variant" proved="true">
+   <proof prover="3" timelimit="0.062398"><result status="valid" time="0.062398" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.9" expl="inferred invariant: type invariant" proved="true">
+   <proof prover="3" timelimit="0.056768"><result status="valid" time="0.056768" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.10" expl="loop invariant #0" proved="true">
+   <proof prover="3" timelimit="0.043024"><result status="valid" time="0.043024" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.11" expl="loop invariant #1" proved="true">
+   <proof prover="1" timelimit="0.063776"><result status="valid" time="0.063776" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.12" expl="type invariant" proved="true">
+   <proof prover="3" timelimit="0.035003"><result status="valid" time="0.035003" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.13" expl="type invariant">
+   <proof prover="0" timelimit="1.62234"><result status="timeout" time="1.622345" steps="0"/></proof>
+   <proof prover="1" timelimit="1.56255"><result status="timeout" time="1.562555" steps="0"/></proof>
+   <proof prover="2" timelimit="1.52971"><result status="timeout" time="1.529708" steps="0"/></proof>
+   <proof prover="3" timelimit="1.18545"><result status="timeout" time="1.185447" steps="0"/></proof>
+   <transf name="split_vc" >
+    <goal name="vc_digest.0.13.0" expl="type invariant">
+    <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+    <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+    <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+    <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.14" expl="type invariant">
+   <proof prover="0" timelimit="1.62234"><result status="timeout" time="1.622345" steps="0"/></proof>
+   <proof prover="1" timelimit="1.56255"><result status="timeout" time="1.562555" steps="0"/></proof>
+   <proof prover="2" timelimit="1.52971"><result status="timeout" time="1.529708" steps="0"/></proof>
+   <proof prover="3" timelimit="1.18545"><result status="timeout" time="1.185447" steps="0"/></proof>
+   <transf name="split_vc" >
+    <goal name="vc_digest.0.14.0" expl="type invariant">
+    <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+    <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+    <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+    <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.15" expl="type invariant" proved="true">
+   <proof prover="3" timelimit="0.057045"><result status="valid" time="0.057045" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.16" expl="type invariant" proved="true">
+   <proof prover="3" timelimit="0.046423"><result status="valid" time="0.046423" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.17" expl="type invariant" proved="true">
+   <proof prover="3" timelimit="0.044636"><result status="valid" time="0.044636" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.18" expl="division by zero" proved="true">
+   <proof prover="3" timelimit="0.03979"><result status="valid" time="0.039790" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.19" expl="integer overflow" proved="true">
+   <proof prover="2" timelimit="0.02271"><result status="valid" time="0.022710" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.20" expl="inferred invariant: type invariant" proved="true">
+   <proof prover="2" timelimit="0.018411"><result status="valid" time="0.018411" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.21" expl="loop invariant #0" proved="true">
+   <proof prover="2" timelimit="0.020782"><result status="valid" time="0.020782" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.22" expl="loop invariant #1" proved="true">
+   <proof prover="3" timelimit="0.045291"><result status="valid" time="0.045291" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.23" expl="loop invariant #2" proved="true">
+   <proof prover="2" timelimit="0.022447"><result status="valid" time="0.022447" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.24" expl="index in bounds" proved="true">
+   <proof prover="2" timelimit="0.020439"><result status="valid" time="0.020439" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.25" expl="bounds check slice set" proved="true">
+   <proof prover="2" timelimit="0.037498"><result status="valid" time="0.037498" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.26" expl="integer overflow" proved="true">
+   <proof prover="2" timelimit="0.032261"><result status="valid" time="0.032261" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.27" expl="index in bounds" proved="true">
+   <proof prover="2" timelimit="0.026028"><result status="valid" time="0.026028" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.28" expl="bounds check slice set" proved="true">
+   <proof prover="2" timelimit="0.028147"><result status="valid" time="0.028147" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.29" expl="integer overflow" proved="true">
+   <proof prover="2" timelimit="0.022101"><result status="valid" time="0.022101" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.30" expl="loop variant" proved="true">
+   <proof prover="3" timelimit="0.054949"><result status="valid" time="0.054949" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.31" expl="inferred invariant: type invariant" proved="true">
+   <proof prover="2" timelimit="0.023838"><result status="valid" time="0.023838" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.32" expl="loop invariant #0" proved="true">
+   <proof prover="3" timelimit="0.052195"><result status="valid" time="0.052195" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.33" expl="loop invariant #1" proved="true">
+   <proof prover="0" timelimit="0.14156"><result status="valid" time="0.141560" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.34" expl="loop invariant #2" proved="true">
+   <proof prover="1" timelimit="0.138243"><result status="valid" time="0.138243" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.35" expl="integer overflow" proved="true">
+   <proof prover="2" timelimit="0.025846"><result status="valid" time="0.025846" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.36" expl="integer overflow" proved="true">
+   <proof prover="3" timelimit="0.05514"><result status="valid" time="0.055140" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.37" expl="out-of-bounds shifting" proved="true">
+   <proof prover="3" timelimit="0.065645"><result status="valid" time="0.065645" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.38" expl="store_be32 requires" proved="true">
+   <proof prover="2" timelimit="0.028362"><result status="valid" time="0.028362" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.39" expl="integer overflow" proved="true">
+   <proof prover="3" timelimit="0.053325"><result status="valid" time="0.053325" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.40" expl="store_be32 requires" proved="true">
+   <proof prover="3" timelimit="0.049162"><result status="valid" time="0.049162" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.41" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.41.0" expl="assertion" proved="true">
+    <proof prover="2" timelimit="0.033233"><result status="valid" time="0.033233" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.41.1" expl="assertion" proved="true">
+    <proof prover="2" timelimit="0.034685"><result status="valid" time="0.034685" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.41.2" expl="assertion" proved="true">
+    <proof prover="3" timelimit="0.058324"><result status="valid" time="0.058324" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.42" expl="assertion" proved="true">
+   <proof prover="2" timelimit="0.029106"><result status="valid" time="0.029106" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.43" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.43.0" expl="assertion" proved="true">
+    <proof prover="0" timelimit="0.497941"><result status="valid" time="0.497941" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.43.1" expl="assertion" proved="true">
+    <proof prover="2" timelimit="0.207979"><result status="valid" time="0.207979" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.44" expl="assertion" proved="true">
+   <proof prover="2" timelimit="0.026058"><result status="valid" time="0.026058" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.45" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.45.0" expl="assertion" proved="true">
+    <proof prover="2" timelimit="0.049292"><result status="valid" time="0.049292" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.45.1" expl="assertion" proved="true">
+    <proof prover="2" timelimit="0.025062"><result status="valid" time="0.025062" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.46" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.46.0" expl="assertion" proved="true">
+    <proof prover="2" timelimit="0.114833"><result status="valid" time="0.114833" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.46.1" expl="assertion" proved="true">
+    <proof prover="2" timelimit="0.122605"><result status="valid" time="0.122605" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.47" expl="assertion" proved="true">
+   <proof prover="3" timelimit="0.342777"><result status="valid" time="0.342777" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.48" expl="assertion" proved="true">
+   <proof prover="3" timelimit="0.504904"><result status="valid" time="0.504904" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.49" expl="assertion" proved="true">
+   <proof prover="2" timelimit="0.034873"><result status="valid" time="0.034873" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.50" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.50.0" expl="assertion" proved="true">
+    <proof prover="2" timelimit="0.029884"><result status="valid" time="0.029884" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.50.1" expl="assertion" proved="true">
+    <proof prover="2" timelimit="0.030322"><result status="valid" time="0.030322" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.51" expl="assertion" proved="true">
+   <proof prover="2" timelimit="0.03375"><result status="valid" time="0.033750" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.52" expl="inferred invariant: type invariant" proved="true">
+   <proof prover="2" timelimit="0.028122"><result status="valid" time="0.028122" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.53" expl="loop invariant #0" proved="true">
+   <proof prover="2" timelimit="0.027093"><result status="valid" time="0.027093" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.54" expl="loop invariant #1" proved="true">
+   <proof prover="2" timelimit="0.028804"><result status="valid" time="0.028804" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.55" expl="digest ensures">
+   <transf name="split_vc" >
+    <goal name="vc_digest.0.55.0" expl="digest result type invariant (digest ensures)">
+    <proof prover="0" timelimit="1.62234"><result status="timeout" time="1.622345" steps="0"/></proof>
+    <proof prover="1" timelimit="1.56255"><result status="timeout" time="1.562555" steps="0"/></proof>
+    <proof prover="2" timelimit="1.52971"><result status="timeout" time="1.529708" steps="0"/></proof>
+    <proof prover="3" timelimit="1.18545"><result status="timeout" time="1.185447" steps="0"/></proof>
+    <transf name="split_vc" >
+     <goal name="vc_digest.0.55.0.0" expl="digest result type invariant (digest ensures)">
+     <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+     <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+     <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+     <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+     </goal>
+     <goal name="vc_digest.0.55.0.1" expl="digest result type invariant (digest ensures)">
+     <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+     <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+     <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+     <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+     </goal>
+    </transf>
+    </goal>
+    <goal name="vc_digest.0.55.1" expl="digest ensures" proved="true">
+    <proof prover="1" timelimit="0.17819"><result status="valid" time="0.178190" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.56" expl="inferred invariant: type invariant" proved="true">
+   <proof prover="2" timelimit="0.009328"><result status="valid" time="0.009328" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.57" expl="loop invariant #0" proved="true">
+   <proof prover="2" timelimit="0.007465"><result status="valid" time="0.007465" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.58" expl="loop invariant #1" proved="true">
+   <proof prover="2" timelimit="0.010507"><result status="valid" time="0.010507" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.59" expl="assertion" proved="true">
+   <proof prover="2" timelimit="0.139664"><result status="valid" time="0.139664" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.60" expl="integer overflow" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.60.0" expl="integer overflow" proved="true">
+    <proof prover="0" timelimit="0.184469"><result status="valid" time="0.184469" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.60.1" expl="integer overflow" proved="true">
+    <proof prover="0" timelimit="0.165875"><result status="valid" time="0.165875" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.61" expl="integer overflow" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.61.0" expl="integer overflow" proved="true">
+    <proof prover="2" timelimit="0.028466"><result status="valid" time="0.028466" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.61.1" expl="integer overflow" proved="true">
+    <proof prover="2" timelimit="0.029846"><result status="valid" time="0.029846" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.62" expl="load_be32 requires" proved="true">
+   <proof prover="0" timelimit="0.44144"><result status="valid" time="0.441440" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.63" expl="index in bounds" proved="true">
+   <proof prover="2" timelimit="0.010956"><result status="valid" time="0.010956" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.64" expl="bounds check slice set" proved="true">
+   <proof prover="2" timelimit="0.036879"><result status="valid" time="0.036879" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.65" expl="integer overflow" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.65.0" expl="integer overflow" proved="true">
+    <proof prover="2" timelimit="0.031066"><result status="valid" time="0.031066" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.65.1" expl="integer overflow" proved="true">
+    <proof prover="2" timelimit="0.023847"><result status="valid" time="0.023847" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.66" expl="loop variant" proved="true">
+   <proof prover="3" timelimit="0.062608"><result status="valid" time="0.062608" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.67" expl="inferred invariant: type invariant" proved="true">
+   <proof prover="2" timelimit="0.030406"><result status="valid" time="0.030406" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.68" expl="loop invariant #0" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.68.0" expl="loop invariant #0" proved="true">
+    <proof prover="3" timelimit="0.067101"><result status="valid" time="0.067101" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.68.1" expl="loop invariant #0" proved="true">
+    <proof prover="3" timelimit="0.062597"><result status="valid" time="0.062597" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.69" expl="loop invariant #1">
+   <transf name="split_vc" >
+    <goal name="vc_digest.0.69.0" expl="loop invariant #1">
+    <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+    <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+    <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+    <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.69.1" expl="loop invariant #1" proved="true">
+    <proof prover="2" timelimit="0.49402"><result status="valid" time="0.494020" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.70" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.70.0" expl="assertion" proved="true">
+    <proof prover="0" timelimit="0.596369"><result status="valid" time="0.596369" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.70.1" expl="assertion" proved="true">
+    <proof prover="0" timelimit="0.544157"><result status="valid" time="0.544157" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.71" expl="compress requires">
+   <transf name="split_vc" >
+    <goal name="vc_digest.0.71.0" expl="compress &#39;h&#39; type invariant (compress requires)">
+    <transf name="split_vc" >
+     <goal name="vc_digest.0.71.0.0" expl="compress &#39;h&#39; type invariant">
+     <proof prover="0" timelimit="1.62234"><result status="timeout" time="1.622345" steps="0"/></proof>
+     <proof prover="1" timelimit="1.56255"><result status="timeout" time="1.562555" steps="0"/></proof>
+     <proof prover="2" timelimit="1.52971"><result status="timeout" time="1.529708" steps="0"/></proof>
+     <proof prover="3" timelimit="1.18545"><result status="timeout" time="1.185447" steps="0"/></proof>
+     <transf name="split_vc" >
+      <goal name="vc_digest.0.71.0.0.0" expl="compress &#39;h&#39; type invariant">
+      <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+      <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+      <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+      <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+      </goal>
+      <goal name="vc_digest.0.71.0.0.1" expl="compress &#39;h&#39; type invariant">
+      <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+      <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+      <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+      <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+      </goal>
+     </transf>
+     </goal>
+     <goal name="vc_digest.0.71.0.1" expl="compress &#39;h&#39; type invariant" proved="true">
+     <proof prover="3" timelimit="0.07434"><result status="valid" time="0.074340" steps="0"/></proof>
+     </goal>
+    </transf>
+    </goal>
+    <goal name="vc_digest.0.71.1" expl="compress &#39;m&#39; type invariant (compress requires)" proved="true">
+    <proof prover="3" timelimit="0.087143"><result status="valid" time="0.087143" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.72" expl="integer overflow" proved="true">
+   <proof prover="0" timelimit="0.145875"><result status="valid" time="0.145875" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.73" expl="loop variant" proved="true">
+   <proof prover="3" timelimit="0.082198"><result status="valid" time="0.082198" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.74" expl="inferred invariant: type invariant" proved="true">
+   <proof prover="2" timelimit="0.008819"><result status="valid" time="0.008819" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.75" expl="loop invariant #0" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="vc_digest.0.75.0" expl="loop invariant #0" proved="true">
+    <proof prover="2" timelimit="0.127962"><result status="valid" time="0.127962" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.75.1" expl="loop invariant #0" proved="true">
+    <proof prover="2" timelimit="0.072497"><result status="valid" time="0.072497" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.76" expl="loop invariant #1" proved="true">
+   <proof prover="2" timelimit="0.096563"><result status="valid" time="0.096563" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.77" expl="type invariant" proved="true">
+   <proof prover="2" timelimit="0.013326"><result status="valid" time="0.013326" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.78" expl="type invariant">
+   <proof prover="0" timelimit="1.62234"><result status="timeout" time="1.622345" steps="0"/></proof>
+   <proof prover="1" timelimit="1.56255"><result status="timeout" time="1.562555" steps="0"/></proof>
+   <proof prover="2" timelimit="1.52971"><result status="timeout" time="1.529708" steps="0"/></proof>
+   <proof prover="3" timelimit="1.18545"><result status="timeout" time="1.185447" steps="0"/></proof>
+   <transf name="split_vc" >
+    <goal name="vc_digest.0.78.0" expl="type invariant">
+    <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+    <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+    <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+    <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.78.1" expl="type invariant">
+    <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+    <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+    <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+    <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.79" expl="type invariant">
+   <proof prover="0" timelimit="1.62234"><result status="timeout" time="1.622345" steps="0"/></proof>
+   <proof prover="1" timelimit="1.56255"><result status="timeout" time="1.562555" steps="0"/></proof>
+   <proof prover="2" timelimit="1.52971"><result status="timeout" time="1.529708" steps="0"/></proof>
+   <proof prover="3" timelimit="1.18545"><result status="timeout" time="1.185447" steps="0"/></proof>
+   <transf name="split_vc" >
+    <goal name="vc_digest.0.79.0" expl="type invariant">
+    <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+    <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+    <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+    <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+    </goal>
+    <goal name="vc_digest.0.79.1" expl="type invariant">
+    <proof prover="0"><result status="timeout" time="3.244690" steps="0"/></proof>
+    <proof prover="1"><result status="timeout" time="3.125109" steps="0"/></proof>
+    <proof prover="2"><result status="timeout" time="3.059416" steps="0"/></proof>
+    <proof prover="3"><result status="timeout" time="2.370893" steps="0"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="vc_digest.0.80" expl="type invariant" proved="true">
+   <proof prover="3" timelimit="0.047623"><result status="valid" time="0.047623" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.81" expl="type invariant" proved="true">
+   <proof prover="2" timelimit="0.004979"><result status="valid" time="0.004979" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.82" expl="type invariant" proved="true">
+   <proof prover="2" timelimit="0.009715"><result status="valid" time="0.009715" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.83" expl="type invariant" proved="true">
+   <proof prover="3" timelimit="0.053438"><result status="valid" time="0.053438" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.84" expl="type invariant" proved="true">
+   <proof prover="2" timelimit="0.029258"><result status="valid" time="0.029258" steps="0"/></proof>
+   </goal>
+   <goal name="vc_digest.0.85" expl="type invariant" proved="true">
+   <proof prover="2" timelimit="0.031673"><result status="valid" time="0.031673" steps="0"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>

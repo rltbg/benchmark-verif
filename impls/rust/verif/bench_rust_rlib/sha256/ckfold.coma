@@ -1,0 +1,32 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 437 0 437 37 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 438 26 438 39
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 438 4 438 40
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 434 10 434 35
+let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 328 4 328 31
+
+use creusot.int.UInt64
+use creusot.prelude.Any
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+function ckfold_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 327 0 327 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+ = [%#ssha256'2] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let ckfold [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 437 0 437 37] (ck: UInt64.t) (v: UInt64.t)
+  (return (x: UInt64.t)) = (! bb0
+  [ bb0 = s0
+    [ s0 = [ &_6 <- UInt64.bw_xor ck v ] s1
+    | s1 = wrapping_mul [%#ssha256'0] {_6} {[%#ssha256] (1099511628211: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_ret <- _x ] s2)
+    | s2 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l () | & ck: UInt64.t = ck | & v: UInt64.t = v | & _6: UInt64.t = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:ckfold ensures] [%#ssha256'1] result = ckfold_l ck v}
+    (! return {result}) ]

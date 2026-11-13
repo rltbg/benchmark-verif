@@ -1,0 +1,69 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 427 0 427 27 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 428 27 428 45
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 428 12 428 46
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 429 23 429 25
+let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 429 17 429 26
+let%span ssha256'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 429 41 429 59
+let%span ssha256'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 429 12 429 60
+let%span ssha256'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 430 23 430 25
+let%span ssha256'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 430 17 430 26
+let%span ssha256'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 430 41 430 59
+let%span ssha256'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 430 12 430 60
+let%span ssha256'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 431 14 431 16
+let%span ssha256'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 431 8 431 17
+let%span ssha256'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 424 10 424 30
+let%span ssha256'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 286 4 286 38
+
+use creusot.int.UInt64
+use creusot.int.Int32
+use creusot.prelude.Any
+
+let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
+    (! return {result}) ]
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum'0] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+function mix64_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 285 0 285 29] (x: UInt64.t) : UInt64.t =
+  [%#ssha256'12] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let mix64 [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 427 0 427 27] (x: UInt64.t) (return (x'0: UInt64.t)) =
+(! bb0
+  [ bb0 = s0
+    [ s0 = wrapping_add [%#ssha256'0] {x} {[%#ssha256] (11400714819323198485: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z <- _x ] s1)
+    | s1 = UInt64.shr [%#ssha256'2] {z} {Int32.to_int ([%#ssha256'1] (30: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_9 <- _x ] s2)
+    | s2 = [ &_7 <- UInt64.bw_xor z _9 ] s3
+    | s3 = wrapping_mul [%#ssha256'4] {_7} {[%#ssha256'3] (13787848793156543929: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z'0 <- _x ] s4)
+    | s4 = UInt64.shr [%#ssha256'6] {z'0} {Int32.to_int ([%#ssha256'5] (27: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_14 <- _x ] s5)
+    | s5 = [ &_12 <- UInt64.bw_xor z'0 _14 ] s6
+    | s6 = wrapping_mul [%#ssha256'8] {_12} {[%#ssha256'7] (10723151780598845931: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z'1 <- _x ] s7)
+    | s7 = UInt64.shr [%#ssha256'10] {z'1} {Int32.to_int ([%#ssha256'9] (31: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_17 <- _x ] s8)
+    | s8 = [ &_ret <- UInt64.bw_xor z'1 _17 ] s9
+    | s9 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & x: UInt64.t = x
+  | & z: UInt64.t = Any.any_l ()
+  | & z'0: UInt64.t = Any.any_l ()
+  | & _7: UInt64.t = Any.any_l ()
+  | & _9: UInt64.t = Any.any_l ()
+  | & z'1: UInt64.t = Any.any_l ()
+  | & _12: UInt64.t = Any.any_l ()
+  | & _14: UInt64.t = Any.any_l ()
+  | & _17: UInt64.t = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:mix64 ensures] [%#ssha256'11] result = mix64_l x}
+    (! return {result}) ]

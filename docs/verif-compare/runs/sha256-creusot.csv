@@ -16,3 +16,4 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:43:39+00:00,252.7,echec,7,"v11b: digest seul, temps why3find 5 s (diagnostic)"
 2026-11-13T20:48:27+00:00,69.2,echec,7,"v12: compression dans un sous-module (compress_l fermé)"
 2026-11-13T20:50:00+00:00,6.9,ok,0,"v13: invariant h@.len()==8 explicite"
+2026-11-13T21:13:35+00:00,55.0,ok,0,"FINAL à froid (why3find -f --no-cache), module sha256"

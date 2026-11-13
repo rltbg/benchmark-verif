@@ -1,0 +1,151 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 272 0 272 44 *)
+
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 271 10 271 11
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 0 27 22
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 26 27 36
+let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 38 27 48
+let%span ssha256'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 50 27 60
+let%span ssha256'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 62 27 72
+let%span ssha256'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 74 27 84
+let%span ssha256'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 86 27 96
+let%span ssha256'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 98 27 108
+let%span ssha256'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 110 27 120
+let%span ssha256'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 44 8 44 56
+let%span ssha256'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 266 4 266 50
+let%span ssha256'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 253 4 253 39
+let%span ssha256'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 213 4 213 48
+let%span ssha256'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 241 4 241 25
+let%span ssha256'14 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 207 4 207 89
+let%span ssha256'15 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 247 4 247 78
+let%span ssha256'16 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 223 14 223 15
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+
+use creusot.int.UInt8
+use seq.Seq
+use creusot.int.UInt32
+use creusot.slice.Slice64
+use creusot.int.UInt64
+use creusot.prelude.Any
+use int.ComputerDivision
+use int.Int
+
+type tup8_u32_u32_u32_u32_u32_u32_u32_u32 = {
+  f0: UInt32.t;
+  f1: UInt32.t;
+  f2: UInt32.t;
+  f3: UInt32.t;
+  f4: UInt32.t;
+  f5: UInt32.t;
+  f6: UInt32.t;
+  f7: UInt32.t }
+
+predicate inv_Seq_u32 [@inline:trivial] (_1: Seq.seq UInt32.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u32
+
+predicate invariant_array_u32_8 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (8: UInt64.t)
+
+predicate inv_array_u32_8 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_8 _1
+
+meta "rewrite_def" predicate inv_array_u32_8
+
+constant const_IV [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 27 0 27 22] : Slice64.array UInt32.t
+
+axiom const_IV_spec: [%#ssha256'0] inv_array_u32_8 const_IV
+
+let set_IV (return) = bb0
+  [ bb0 = s0
+    [ s0 = any
+      [ any_ (__arr_temp: Slice64.array UInt32.t) -> (! -{Seq.get __arr_temp.Slice64.elts 0
+          = ([%#ssha256'1] (1779033703: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 1 = ([%#ssha256'2] (3144134277: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 2 = ([%#ssha256'3] (1013904242: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 3 = ([%#ssha256'4] (2773480762: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 4 = ([%#ssha256'5] (1359893119: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 5 = ([%#ssha256'6] (2600822924: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 6 = ([%#ssha256'7] (528734635: UInt32.t))
+        /\ Seq.get __arr_temp.Slice64.elts 7 = ([%#ssha256'8] (1541459225: UInt32.t))
+        /\ Seq.length __arr_temp.Slice64.elts = 8}-
+        [ &_ret <- __arr_temp ] s1) ]
+    | s1 = return {_ret} ] ] [ & _ret: Slice64.array UInt32.t = Any.any_l () ]
+  [ return (_const: Slice64.array UInt32.t) -> -{const_IV = _const}- return ]
+
+function st_of [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 43 4 43 35] (s: Seq.seq UInt32.t) : tup8_u32_u32_u32_u32_u32_u32_u32_u32
+ = [%#ssha256'9] { f0 = Seq.get s 0;
+                   f1 = Seq.get s 1;
+                   f2 = Seq.get s 2;
+                   f3 = Seq.get s 3;
+                   f4 = Seq.get s 4;
+                   f5 = Seq.get s 5;
+                   f6 = Seq.get s 6;
+                   f7 = Seq.get s 7 }
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+function nblocks [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 212 0 212 31] (len: int) : int =
+  [%#ssha256'12] ComputerDivision.div len 64 + (if ComputerDivision.mod len 64 < 56 then 1 else 2)
+
+function u64_of [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 224 4 224 32] (x: int) : UInt64.t
+
+function len_bits [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 240 0 240 36] (msg: Seq.seq UInt8.t) : UInt64.t
+ = [%#ssha256'13] u64_of (Seq.length msg * 8)
+
+function be_word [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 206 0 206 53] (b0: UInt8.t) (b1: UInt8.t) (b2: UInt8.t) (b3: UInt8.t) : UInt32.t
+ =
+  [%#ssha256'14] UInt32.bw_or (UInt32.bw_or (UInt32.bw_or (UInt32.shl (UInt32.of_int (UInt8.t'int b0)) (24: UInt32.t)) (UInt32.shl (UInt32.of_int (UInt8.t'int b1)) (16: UInt32.t))) (UInt32.shl (UInt32.of_int (UInt8.t'int b2)) (8: UInt32.t))) (UInt32.of_int (UInt8.t'int b3))
+
+function pad_byte [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 246 0 246 43] (msg: Seq.seq UInt8.t) (i: int) : UInt8.t
+ = [%#ssha256'15] if i < Seq.length msg then
+    Seq.get msg i
+  else
+    if i = Seq.length msg then (128: UInt8.t) else (0: UInt8.t)
+
+
+function pad_word [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 252 0 252 44] (msg: Seq.seq UInt8.t) (j: int) : UInt32.t
+ = [%#ssha256'11] let last = 16 * nblocks (Seq.length msg) in if j = last - 2 then
+    UInt32.of_int (UInt64.t'int (UInt64.shr (len_bits msg) (32: UInt64.t)))
+  else
+    if j = last - 1 then
+      UInt32.of_int (UInt64.t'int (len_bits msg))
+    else
+      be_word (pad_byte msg (4 * j)) (pad_byte msg (4 * j + 1)) (pad_byte msg (4 * j + 2)) (pad_byte msg (4 * j + 3))
+  
+
+
+function block [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 265 0 265 46] (msg: Seq.seq UInt8.t) (b: int) : Seq.seq UInt32.t
+ = [%#ssha256'10] Seq.create 16 (fun (j: int) -> pad_word msg (16 * b + j))
+
+function compress_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 105 4 105 47] (h: tup8_u32_u32_u32_u32_u32_u32_u32_u32) (m: Seq.seq UInt32.t) : tup8_u32_u32_u32_u32_u32_u32_u32_u32
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant msg : Seq.seq UInt8.t
+
+constant k : int
+
+function sha_state [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 272 0 272 44] (msg: Seq.seq UInt8.t) (k: int) : tup8_u32_u32_u32_u32_u32_u32_u32_u32
+
+let vc_sha_state (return) = (! set_IV (ret))
+  [ ret -> {if k <= 0 then
+      true
+    else
+      [@expl:variant decreases] well_founded_relation_Int ([%#ssha256] k) ([%#ssha256] k - 1)
+    }
+    (! return) ]

@@ -7,3 +7,4 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:53:25+00:00,3.5,echec,1,"v4c: idem (snapshot du handle)"
 2026-11-13T20:53:47+00:00,15.4,ok,0,"v5: égalités de sous-séquences pour l'itérateur"
 2026-11-13T20:54:37+00:00,4.9,ok,0,"v6: contrat de fermeture inféré (Rust stable refuse les attributs sur expressions)"
+2026-11-13T21:14:30+00:00,17.7,ok,0,"FINAL à froid (why3find -f --no-cache), module parsha"

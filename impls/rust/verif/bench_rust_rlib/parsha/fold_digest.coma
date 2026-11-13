@@ -1,0 +1,201 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 60 0 60 44 *)
+
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 434 10 434 35
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 334 4 334 38
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 44 8 44 56
+let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 328 4 328 31
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+let%span sinvariant = "/opt/tools/creusot/creusot-std/src/invariant.rs" 90 8 90 18
+let%span sparsha = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 61 30 61 31
+let%span sparsha'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 61 28 61 32
+let%span sparsha'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 61 17 61 40
+let%span sparsha'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 62 22 62 23
+let%span sparsha'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 62 20 62 24
+let%span sparsha'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 62 9 62 32
+let%span sparsha'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 63 22 63 23
+let%span sparsha'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 63 20 63 24
+let%span sparsha'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 63 9 63 32
+let%span sparsha'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 64 22 64 23
+let%span sparsha'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 64 20 64 24
+let%span sparsha'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 64 9 64 32
+let%span sparsha'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 65 22 65 23
+let%span sparsha'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 65 20 65 24
+let%span sparsha'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 65 9 65 32
+let%span sparsha'14 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 66 22 66 23
+let%span sparsha'15 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 66 20 66 24
+let%span sparsha'16 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 66 9 66 32
+let%span sparsha'17 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 67 22 67 23
+let%span sparsha'18 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 67 20 67 24
+let%span sparsha'19 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 67 9 67 32
+let%span sparsha'20 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 68 17 68 18
+let%span sparsha'21 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 68 15 68 19
+let%span sparsha'22 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 68 4 68 27
+let%span sparsha'23 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 60 24 60 25
+let%span sparsha'24 = "/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 58 10 58 44
+
+use creusot.int.UInt64
+use creusot.int.UInt32
+use creusot.slice.Slice64
+use creusot.prelude.Any
+use seq.Seq
+
+function ckfold_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 327 0 327 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+ = [%#ssha256'2] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
+
+let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:ckfold ensures] [%#ssha256] result = ckfold_l ck v}
+    (! return {result}) ]
+
+predicate inv_Seq_u32 [@inline:trivial] (_1: Seq.seq UInt32.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u32
+
+predicate invariant_array_u32_8 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (8: UInt64.t)
+
+predicate inv_array_u32_8 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_8 _1
+
+meta "rewrite_def" predicate inv_array_u32_8
+
+predicate invariant_ref_array_u32_8 [@inline:trivial] (self: Slice64.array UInt32.t) =
+  [%#sinvariant] inv_array_u32_8 self
+
+meta "rewrite_def" predicate invariant_ref_array_u32_8
+
+predicate inv_ref_array_u32_8 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_ref_array_u32_8 _1
+
+meta "rewrite_def" predicate inv_ref_array_u32_8
+
+type tup8_u32_u32_u32_u32_u32_u32_u32_u32 = {
+  f0: UInt32.t;
+  f1: UInt32.t;
+  f2: UInt32.t;
+  f3: UInt32.t;
+  f4: UInt32.t;
+  f5: UInt32.t;
+  f6: UInt32.t;
+  f7: UInt32.t }
+
+function ck_digest [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 333 0 333 39] (ck: UInt64.t) (h: tup8_u32_u32_u32_u32_u32_u32_u32_u32) : UInt64.t
+ =
+  [%#ssha256'0] let ck'0 = ckfold_l ck (UInt64.of_int (UInt32.t'int h.f0)) in let ck'1 = ckfold_l ck'0 (UInt64.of_int (UInt32.t'int h.f1)) in let ck'2 = ckfold_l ck'1 (UInt64.of_int (UInt32.t'int h.f2)) in let ck'3 = ckfold_l ck'2 (UInt64.of_int (UInt32.t'int h.f3)) in let ck'4 = ckfold_l ck'3 (UInt64.of_int (UInt32.t'int h.f4)) in let ck'5 = ckfold_l ck'4 (UInt64.of_int (UInt32.t'int h.f5)) in let ck'6 = ckfold_l ck'5 (UInt64.of_int (UInt32.t'int h.f6)) in ckfold_l ck'6 (UInt64.of_int (UInt32.t'int h.f7))
+
+function st_of [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 43 4 43 35] (s: Seq.seq UInt32.t) : tup8_u32_u32_u32_u32_u32_u32_u32_u32
+ = [%#ssha256'1] { f0 = Seq.get s 0;
+                   f1 = Seq.get s 1;
+                   f2 = Seq.get s 2;
+                   f3 = Seq.get s 3;
+                   f4 = Seq.get s 4;
+                   f5 = Seq.get s 5;
+                   f6 = Seq.get s 6;
+                   f7 = Seq.get s 7 }
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let fold_digest [#"/tmp/claude-0/verif-sha/creusot-sha/src/parsha.rs" 60 0 60 44] (ck: UInt64.t)
+  (h: Slice64.array UInt32.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:fold_digest 'h' type invariant] [%#sparsha'23] inv_ref_array_u32_8 h}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = [ &_10 <- [%#sparsha] (0: UInt64.t) ] s1
+    | s1 = [ &_11 <- UInt64.lt _10 ([%#sparsha'0] (8: UInt64.t)) ] s2
+    | s2 = {[@expl:index in bounds] [%#sparsha'0] _11} s3
+    | s3 = Slice64.get [%#sparsha'0] <UInt32.t> {h} {_10} (fun (r: UInt32.t) -> [ &_9 <- r ] s4)
+    | s4 = [ &_8 <- UInt64.of_int (UInt32.t'int _9) ] s5
+    | s5 = ckfold [%#sparsha'1] {ck} {_8} (fun (_x: UInt64.t) -> [ &ck'0 <- _x ] s6)
+    | s6 = [ &_16 <- [%#sparsha'2] (1: UInt64.t) ] s7
+    | s7 = [ &_17 <- UInt64.lt _16 ([%#sparsha'3] (8: UInt64.t)) ] s8
+    | s8 = {[@expl:index in bounds] [%#sparsha'3] _17} s9
+    | s9 = Slice64.get [%#sparsha'3] <UInt32.t> {h} {_16} (fun (r: UInt32.t) -> [ &_15 <- r ] s10)
+    | s10 = [ &_14 <- UInt64.of_int (UInt32.t'int _15) ] s11
+    | s11 = ckfold [%#sparsha'4] {ck'0} {_14} (fun (_x: UInt64.t) -> [ &_12 <- _x ] s12)
+    | s12 = [ &ck'0 <- _12 ] s13
+    | s13 = [ &_22 <- [%#sparsha'5] (2: UInt64.t) ] s14
+    | s14 = [ &_23 <- UInt64.lt _22 ([%#sparsha'6] (8: UInt64.t)) ] s15
+    | s15 = {[@expl:index in bounds] [%#sparsha'6] _23} s16
+    | s16 = Slice64.get [%#sparsha'6] <UInt32.t> {h} {_22} (fun (r: UInt32.t) -> [ &_21 <- r ] s17)
+    | s17 = [ &_20 <- UInt64.of_int (UInt32.t'int _21) ] s18
+    | s18 = ckfold [%#sparsha'7] {ck'0} {_20} (fun (_x: UInt64.t) -> [ &_18 <- _x ] s19)
+    | s19 = [ &ck'0 <- _18 ] s20
+    | s20 = [ &_28 <- [%#sparsha'8] (3: UInt64.t) ] s21
+    | s21 = [ &_29 <- UInt64.lt _28 ([%#sparsha'9] (8: UInt64.t)) ] s22
+    | s22 = {[@expl:index in bounds] [%#sparsha'9] _29} s23
+    | s23 = Slice64.get [%#sparsha'9] <UInt32.t> {h} {_28} (fun (r: UInt32.t) -> [ &_27 <- r ] s24)
+    | s24 = [ &_26 <- UInt64.of_int (UInt32.t'int _27) ] s25
+    | s25 = ckfold [%#sparsha'10] {ck'0} {_26} (fun (_x: UInt64.t) -> [ &_24 <- _x ] s26)
+    | s26 = [ &ck'0 <- _24 ] s27
+    | s27 = [ &_34 <- [%#sparsha'11] (4: UInt64.t) ] s28
+    | s28 = [ &_35 <- UInt64.lt _34 ([%#sparsha'12] (8: UInt64.t)) ] s29
+    | s29 = {[@expl:index in bounds] [%#sparsha'12] _35} s30
+    | s30 = Slice64.get [%#sparsha'12] <UInt32.t> {h} {_34} (fun (r: UInt32.t) -> [ &_33 <- r ] s31)
+    | s31 = [ &_32 <- UInt64.of_int (UInt32.t'int _33) ] s32
+    | s32 = ckfold [%#sparsha'13] {ck'0} {_32} (fun (_x: UInt64.t) -> [ &_30 <- _x ] s33)
+    | s33 = [ &ck'0 <- _30 ] s34
+    | s34 = [ &_40 <- [%#sparsha'14] (5: UInt64.t) ] s35
+    | s35 = [ &_41 <- UInt64.lt _40 ([%#sparsha'15] (8: UInt64.t)) ] s36
+    | s36 = {[@expl:index in bounds] [%#sparsha'15] _41} s37
+    | s37 = Slice64.get [%#sparsha'15] <UInt32.t> {h} {_40} (fun (r: UInt32.t) -> [ &_39 <- r ] s38)
+    | s38 = [ &_38 <- UInt64.of_int (UInt32.t'int _39) ] s39
+    | s39 = ckfold [%#sparsha'16] {ck'0} {_38} (fun (_x: UInt64.t) -> [ &_36 <- _x ] s40)
+    | s40 = [ &ck'0 <- _36 ] s41
+    | s41 = [ &_46 <- [%#sparsha'17] (6: UInt64.t) ] s42
+    | s42 = [ &_47 <- UInt64.lt _46 ([%#sparsha'18] (8: UInt64.t)) ] s43
+    | s43 = {[@expl:index in bounds] [%#sparsha'18] _47} s44
+    | s44 = Slice64.get [%#sparsha'18] <UInt32.t> {h} {_46} (fun (r: UInt32.t) -> [ &_45 <- r ] s45)
+    | s45 = [ &_44 <- UInt64.of_int (UInt32.t'int _45) ] s46
+    | s46 = ckfold [%#sparsha'19] {ck'0} {_44} (fun (_x: UInt64.t) -> [ &_42 <- _x ] s47)
+    | s47 = [ &ck'0 <- _42 ] s48
+    | s48 = [ &_51 <- [%#sparsha'20] (7: UInt64.t) ] s49
+    | s49 = [ &_52 <- UInt64.lt _51 ([%#sparsha'21] (8: UInt64.t)) ] s50
+    | s50 = {[@expl:index in bounds] [%#sparsha'21] _52} s51
+    | s51 = Slice64.get [%#sparsha'21] <UInt32.t> {h} {_51} (fun (r: UInt32.t) -> [ &_50 <- r ] s52)
+    | s52 = [ &_49 <- UInt64.of_int (UInt32.t'int _50) ] s53
+    | s53 = ckfold [%#sparsha'22] {ck'0} {_49} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s54)
+    | s54 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & ck: UInt64.t = ck
+  | & h: Slice64.array UInt32.t = h
+  | & ck'0: UInt64.t = Any.any_l ()
+  | & _8: UInt64.t = Any.any_l ()
+  | & _9: UInt32.t = Any.any_l ()
+  | & _10: UInt64.t = Any.any_l ()
+  | & _11: bool = Any.any_l ()
+  | & _12: UInt64.t = Any.any_l ()
+  | & _14: UInt64.t = Any.any_l ()
+  | & _15: UInt32.t = Any.any_l ()
+  | & _16: UInt64.t = Any.any_l ()
+  | & _17: bool = Any.any_l ()
+  | & _18: UInt64.t = Any.any_l ()
+  | & _20: UInt64.t = Any.any_l ()
+  | & _21: UInt32.t = Any.any_l ()
+  | & _22: UInt64.t = Any.any_l ()
+  | & _23: bool = Any.any_l ()
+  | & _24: UInt64.t = Any.any_l ()
+  | & _26: UInt64.t = Any.any_l ()
+  | & _27: UInt32.t = Any.any_l ()
+  | & _28: UInt64.t = Any.any_l ()
+  | & _29: bool = Any.any_l ()
+  | & _30: UInt64.t = Any.any_l ()
+  | & _32: UInt64.t = Any.any_l ()
+  | & _33: UInt32.t = Any.any_l ()
+  | & _34: UInt64.t = Any.any_l ()
+  | & _35: bool = Any.any_l ()
+  | & _36: UInt64.t = Any.any_l ()
+  | & _38: UInt64.t = Any.any_l ()
+  | & _39: UInt32.t = Any.any_l ()
+  | & _40: UInt64.t = Any.any_l ()
+  | & _41: bool = Any.any_l ()
+  | & _42: UInt64.t = Any.any_l ()
+  | & _44: UInt64.t = Any.any_l ()
+  | & _45: UInt32.t = Any.any_l ()
+  | & _46: UInt64.t = Any.any_l ()
+  | & _47: bool = Any.any_l ()
+  | & _49: UInt64.t = Any.any_l ()
+  | & _50: UInt32.t = Any.any_l ()
+  | & _51: UInt64.t = Any.any_l ()
+  | & _52: bool = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:fold_digest ensures] [%#sparsha'24] result
+    = ck_digest ck (st_of (Slice64.view h))}
+    (! return {result}) ]

@@ -1,58 +1,54 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 17 0 17 35 *)
+(* #"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 31 0 31 35 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
 let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span snum'1 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span sstrsort = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 18 79 18 81
-let%span sstrsort'0 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 18 64 18 82
-let%span sstrsort'1 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 18 29 18 50
-let%span sstrsort'2 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 18 29 18 83
-let%span sstrsort'3 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 18 29 18 99
-let%span sstrsort'4 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 18 23 18 100
-let%span sstrsort'5 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 18 103 18 104
-let%span sstrsort'6 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 18 4 18 8
-let%span sstrsort'7 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 18 4 18 112
+let%span sstrsort = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 68 32 70
+let%span sstrsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 53 32 71
+let%span sstrsort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 18 32 39
+let%span sstrsort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 18 32 72
+let%span sstrsort'3 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 18 32 88
+let%span sstrsort'4 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 12 32 89
+let%span sstrsort'5 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 92 32 93
+let%span sstrsort'6 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 4 32 8
+let%span sstrsort'7 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 4 32 100
 
-use creusot.int.UInt64
-use creusot.int.UInt8
+use creusot.int.UInt64BW
+use creusot.int.UInt8BW
 use creusot.prelude.Any
 
-let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
-  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
+let wrapping_mul (self: UInt64BW.t) (rhs: UInt64BW.t) (return (x: UInt64BW.t)) = any
+  [ return (result: UInt64BW.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64BW.mul self rhs}
     (! return {result}) ]
 
-let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
-  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum'0] result = UInt64.add self rhs}
+let wrapping_add (self: UInt64BW.t) (rhs: UInt64BW.t) (return (x: UInt64BW.t)) = any
+  [ return (result: UInt64BW.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum'0] result
+    = UInt64BW.add self rhs}
     (! return {result}) ]
 
-let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any [ return (result: UInt64.t) -> (! return {result}) ]
-
-let wrapping_add'0 (self: UInt8.t) (rhs: UInt8.t) (return (x: UInt8.t)) = any
-  [ return (result: UInt8.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum'1] result = UInt8.add self rhs}
-    (! return {result}) ]
+let mix64 (x: UInt64BW.t) (return (x'0: UInt64BW.t)) = any [ return (result: UInt64BW.t) -> (! return {result}) ]
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let chr_of [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 17 0 17 35] (i: UInt64.t) (k: UInt64.t)
-  (return (x: UInt8.t)) = (! bb0
+let chr_of [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 31 0 31 35] (i: UInt64BW.t) (k: UInt64BW.t)
+  (return (x: UInt8BW.t)) = (! bb0
   [ bb0 = s0
-    [ s0 = wrapping_mul [%#sstrsort'0] {i} {[%#sstrsort] (64: UInt64.t)} (fun (_x: UInt64.t) -> [ &_8 <- _x ] s1)
-    | s1 = wrapping_add [%#sstrsort'2] {[%#sstrsort'1] (13907095858110791682: UInt64.t)} {_8}
-        (fun (_x: UInt64.t) -> [ &_7 <- _x ] s2)
-    | s2 = wrapping_add [%#sstrsort'3] {_7} {k} (fun (_x: UInt64.t) -> [ &_6 <- _x ] s3)
-    | s3 = mix64 [%#sstrsort'4] {_6} (fun (_x: UInt64.t) -> [ &_5 <- _x ] s4)
-    | s4 = [ &_4 <- UInt64.bw_and _5 ([%#sstrsort'5] (3: UInt64.t)) ] s5
-    | s5 = [ &_3 <- UInt8.of_int (UInt64.t'int _4) ] s6
-    | s6 = wrapping_add'0 [%#sstrsort'7] {[%#sstrsort'6] (97: UInt8.t)} {_3} (fun (_x: UInt8.t) -> [ &_ret <- _x ] s7)
+    [ s0 = wrapping_mul [%#sstrsort'0] {i} {[%#sstrsort] (64: UInt64BW.t)} (fun (_x: UInt64BW.t) -> [ &_8 <- _x ] s1)
+    | s1 = wrapping_add [%#sstrsort'2] {[%#sstrsort'1] (13907095858110791682: UInt64BW.t)} {_8}
+        (fun (_x: UInt64BW.t) -> [ &_7 <- _x ] s2)
+    | s2 = wrapping_add [%#sstrsort'3] {_7} {k} (fun (_x: UInt64BW.t) -> [ &_6 <- _x ] s3)
+    | s3 = mix64 [%#sstrsort'4] {_6} (fun (_x: UInt64BW.t) -> [ &_5 <- _x ] s4)
+    | s4 = [ &_4 <- UInt64BW.bw_and _5 ([%#sstrsort'5] (3: UInt64BW.t)) ] s5
+    | s5 = [ &_3 <- UInt8BW.of_BV256 (UInt64BW.to_BV256 _4) ] s6
+    | s6 = UInt8BW.add [%#sstrsort'7] {[%#sstrsort'6] (97: UInt8BW.t)} {_3} (fun (_x: UInt8BW.t) -> [ &_ret <- _x ] s7)
     | s7 = return {_ret} ] ]
-  [ & _ret: UInt8.t = Any.any_l ()
-  | & i: UInt64.t = i
-  | & k: UInt64.t = k
-  | & _3: UInt8.t = Any.any_l ()
-  | & _4: UInt64.t = Any.any_l ()
-  | & _5: UInt64.t = Any.any_l ()
-  | & _6: UInt64.t = Any.any_l ()
-  | & _7: UInt64.t = Any.any_l ()
-  | & _8: UInt64.t = Any.any_l () ]) [ return (result: UInt8.t) -> (! return {result}) ]
+  [ & _ret: UInt8BW.t = Any.any_l ()
+  | & i: UInt64BW.t = i
+  | & k: UInt64BW.t = k
+  | & _3: UInt8BW.t = Any.any_l ()
+  | & _4: UInt64BW.t = Any.any_l ()
+  | & _5: UInt64BW.t = Any.any_l ()
+  | & _6: UInt64BW.t = Any.any_l ()
+  | & _7: UInt64BW.t = Any.any_l ()
+  | & _8: UInt64BW.t = Any.any_l () ]) [ return (result: UInt8BW.t) -> (! return {result}) ]

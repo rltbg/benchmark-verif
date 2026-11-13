@@ -1,51 +1,58 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 30 0 30 23 *)
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 444 0 444 23 *)
 
-let%span ssha256 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 10 31 14
-let%span ssha256'0 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 19 31 21
-let%span ssha256'1 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 4 31 22
-let%span ssha256'2 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 31 31 37
-let%span ssha256'3 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 42 31 43
-let%span ssha256'4 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 25 31 44
-let%span ssha256'5 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 54 31 55
-let%span ssha256'6 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 48 31 56
-let%span ssha256'7 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 59 31 65
-let%span ssha256'8 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 75 31 77
-let%span ssha256'9 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 31 69 31 78
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 10 445 14
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 19 445 21
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 4 445 22
+let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 31 445 37
+let%span ssha256'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 42 445 43
+let%span ssha256'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 25 445 44
+let%span ssha256'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 54 445 55
+let%span ssha256'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 48 445 56
+let%span ssha256'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 59 445 65
+let%span ssha256'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 75 445 77
+let%span ssha256'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 445 69 445 78
+let%span ssha256'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 441 10 441 30
+let%span ssha256'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 350 4 350 99
 
 use creusot.int.UInt32
 use creusot.int.Int32
 use creusot.prelude.Any
 
+function bswap_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 349 0 349 29] (x: UInt32.t) : UInt32.t =
+  [%#ssha256'11] UInt32.bw_or (UInt32.bw_or (UInt32.bw_or (UInt32.shl (UInt32.bw_and x (255: UInt32.t)) (24: UInt32.t)) (UInt32.shl (UInt32.bw_and x (65280: UInt32.t)) (8: UInt32.t))) (UInt32.bw_and (UInt32.shr x (8: UInt32.t)) (65280: UInt32.t))) (UInt32.shr x (24: UInt32.t))
+
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let bswap [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 30 0 30 23] (x: UInt32.t) (return (x'0: UInt32.t)) =
+let bswap [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 444 0 444 23] (x: UInt32.t) (return (x'0: UInt32.t)) =
 (! bb0
   [ bb0 = s0
-    [ s0 = [ &_5 <- UInt32.bw_and x ([%#ssha256] (255: UInt32.t)) ] s1
-    | s1 = UInt32.shl [%#ssha256'1] {_5} {Int32.to_int ([%#ssha256'0] (24: Int32.t))}
-        (fun (_x: UInt32.t) -> [ &_4 <- _x ] s2)
-    | s2 = [ &_8 <- UInt32.bw_and x ([%#ssha256'2] (65280: UInt32.t)) ] s3
-    | s3 = UInt32.shl [%#ssha256'4] {_8} {Int32.to_int ([%#ssha256'3] (8: Int32.t))}
-        (fun (_x: UInt32.t) -> [ &_7 <- _x ] s4)
-    | s4 = [ &_3 <- UInt32.bw_or _4 _7 ] s5
+    [ s0 = [ &_7 <- UInt32.bw_and x ([%#ssha256] (255: UInt32.t)) ] s1
+    | s1 = UInt32.shl [%#ssha256'1] {_7} {Int32.to_int ([%#ssha256'0] (24: Int32.t))}
+        (fun (_x: UInt32.t) -> [ &_6 <- _x ] s2)
+    | s2 = [ &_10 <- UInt32.bw_and x ([%#ssha256'2] (65280: UInt32.t)) ] s3
+    | s3 = UInt32.shl [%#ssha256'4] {_10} {Int32.to_int ([%#ssha256'3] (8: Int32.t))}
+        (fun (_x: UInt32.t) -> [ &_9 <- _x ] s4)
+    | s4 = [ &_5 <- UInt32.bw_or _6 _9 ] s5
     | s5 = UInt32.shr [%#ssha256'6] {x} {Int32.to_int ([%#ssha256'5] (8: Int32.t))}
-        (fun (_x: UInt32.t) -> [ &_11 <- _x ] s6)
-    | s6 = [ &_10 <- UInt32.bw_and _11 ([%#ssha256'7] (65280: UInt32.t)) ] s7
-    | s7 = [ &_2 <- UInt32.bw_or _3 _10 ] s8
+        (fun (_x: UInt32.t) -> [ &_13 <- _x ] s6)
+    | s6 = [ &_12 <- UInt32.bw_and _13 ([%#ssha256'7] (65280: UInt32.t)) ] s7
+    | s7 = [ &_4 <- UInt32.bw_or _5 _12 ] s8
     | s8 = UInt32.shr [%#ssha256'9] {x} {Int32.to_int ([%#ssha256'8] (24: Int32.t))}
-        (fun (_x: UInt32.t) -> [ &_13 <- _x ] s9)
-    | s9 = [ &_ret <- UInt32.bw_or _2 _13 ] s10
+        (fun (_x: UInt32.t) -> [ &_15 <- _x ] s9)
+    | s9 = [ &_ret <- UInt32.bw_or _4 _15 ] s10
     | s10 = return {_ret} ] ]
   [ & _ret: UInt32.t = Any.any_l ()
   | & x: UInt32.t = x
-  | & _2: UInt32.t = Any.any_l ()
-  | & _3: UInt32.t = Any.any_l ()
   | & _4: UInt32.t = Any.any_l ()
   | & _5: UInt32.t = Any.any_l ()
+  | & _6: UInt32.t = Any.any_l ()
   | & _7: UInt32.t = Any.any_l ()
-  | & _8: UInt32.t = Any.any_l ()
+  | & _9: UInt32.t = Any.any_l ()
   | & _10: UInt32.t = Any.any_l ()
-  | & _11: UInt32.t = Any.any_l ()
-  | & _13: UInt32.t = Any.any_l () ]) [ return (result: UInt32.t) -> (! return {result}) ]
+  | & _12: UInt32.t = Any.any_l ()
+  | & _13: UInt32.t = Any.any_l ()
+  | & _15: UInt32.t = Any.any_l () ])
+  [ return (result: UInt32.t) -> {[@stop_split] [@expl:bswap ensures] [%#ssha256'10] result = bswap_l x}
+    (! return {result}) ]

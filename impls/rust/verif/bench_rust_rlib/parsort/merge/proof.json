@@ -1,4 +1,0 @@
-{
-  "profile": [],
-  "proofs": { "Coma": { "vc_merge": { "prover": "z3", "time": 0.01 } } }
-}

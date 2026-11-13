@@ -3,3 +3,8 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T21:06:38+00:00,15.5,echec,1,"v1b: idem (type int dans la postcondition)"
 2026-11-13T21:07:02+00:00,11.0,echec,1,"v2: seg_digest opaque (rlimit dépassé dans run)"
 2026-11-13T21:07:21+00:00,10.0,ok,0,"v3: dépliage ck_segs(0)"
+2026-11-13T21:15:29+00:00,0.1,erreur_compil,0,"erreur d'usage CLI: --verify-module exige cargo verus focus"
+2026-11-13T21:16:34+00:00,0.1,erreur_compil,0,"nul: cargo n'a rien relancé (artefacts à jour), pas de vérification"
+2026-11-13T21:16:46+00:00,0.2,erreur_compil,0,"nul: cargo n'a rien relancé (artefacts à jour)"
+2026-11-13T21:16:56+00:00,0.2,erreur_compil,0,"nul: cache de target/verus-partial, pas de vérification"
+2026-11-13T21:17:59+00:00,38.1,ok,0,"FINAL à froid (rm target/verus-partial; focus --verify-module parsha)"

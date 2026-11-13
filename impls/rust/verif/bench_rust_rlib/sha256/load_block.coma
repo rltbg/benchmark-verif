@@ -1,47 +1,67 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 99 0 99 44 *)
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 464 0 464 55 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 465 16 465 22
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 468 14 468 20
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 469 14 469 15
+let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 467 16 467 16
+let%span ssha256'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 466 16 466 23
+let%span ssha256'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 470 20 470 21
+let%span ssha256'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 470 16 470 21
+let%span ssha256'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 470 16 470 32
+let%span ssha256'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 471 22 471 42
+let%span ssha256'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 471 16 471 43
+let%span ssha256'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 472 24 472 45
+let%span ssha256'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 473 19 473 34
+let%span ssha256'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 473 10 473 11
+let%span ssha256'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 473 10 473 15
+let%span ssha256'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 473 8 473 16
+let%span ssha256'14 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 473 8 473 34
+let%span ssha256'15 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 474 35 474 37
+let%span ssha256'16 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 474 29 474 38
+let%span ssha256'17 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 474 23 474 46
+let%span ssha256'18 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 474 10 474 11
+let%span ssha256'19 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 474 10 474 15
+let%span ssha256'20 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 474 18 474 19
+let%span ssha256'21 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 474 10 474 19
+let%span ssha256'22 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 474 8 474 20
+let%span ssha256'23 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 474 8 474 46
+let%span ssha256'24 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 475 13 475 14
+let%span ssha256'25 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 475 8 475 14
+let%span ssha256'26 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 464 37 464 38
+let%span ssha256'27 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 460 11 460 31
+let%span ssha256'28 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 461 10 461 10
+let%span ssha256'29 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 388 4 388 115
+let%span ssha256'30 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 424 10 424 30
+let%span ssha256'31 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 393 11 393 34
+let%span ssha256'32 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 394 10 394 69
+let%span ssha256'33 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 395 10 395 84
+let%span ssha256'34 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 398 8 398 34
+let%span ssha256'35 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 441 10 441 30
+let%span ssha256'36 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 207 4 207 89
+let%span ssha256'37 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 317 4 317 49
+let%span ssha256'38 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 286 4 286 38
+let%span ssha256'39 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 350 4 350 99
+let%span ssha256'40 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 229 14 229 16
+let%span ssha256'41 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 230 14 230 29
+let%span ssha256'42 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 362 10 362 106
+let%span ssha256'43 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 363 10 364 35
+let%span ssha256'44 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 365 30 365 32
+let%span ssha256'45 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 295 4 311 5
+let%span ssha256'46 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 223 14 223 15
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span ssha256 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 100 16 100 22
-let%span ssha256'0 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 102 14 102 20
-let%span ssha256'1 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 103 14 103 15
-let%span ssha256'2 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 101 16 101 23
-let%span ssha256'3 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 104 55 104 56
-let%span ssha256'4 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 104 40 104 57
-let%span ssha256'5 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 104 22 104 26
-let%span ssha256'6 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 104 22 104 58
-let%span ssha256'7 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 104 22 104 81
-let%span ssha256'8 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 104 16 104 82
-let%span ssha256'9 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 105 19 105 34
-let%span ssha256'10 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 105 10 105 11
-let%span ssha256'11 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 105 10 105 15
-let%span ssha256'12 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 105 8 105 16
-let%span ssha256'13 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 105 8 105 34
-let%span ssha256'14 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 106 35 106 37
-let%span ssha256'15 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 106 29 106 38
-let%span ssha256'16 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 106 23 106 46
-let%span ssha256'17 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 106 10 106 11
-let%span ssha256'18 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 106 10 106 15
-let%span ssha256'19 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 106 18 106 19
-let%span ssha256'20 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 106 10 106 19
-let%span ssha256'21 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 106 8 106 20
-let%span ssha256'22 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 106 8 106 46
-let%span ssha256'23 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 107 13 107 14
-let%span ssha256'24 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 107 8 107 14
-let%span ssha256'25 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 99 26 99 27
-let%span ssha256'26 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 97 11 97 15
-let%span ssha256'27 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 99 0 99 44
-let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
 let%span sinvariant = "/opt/tools/creusot/creusot-std/src/invariant.rs" 98 20 98 44
 
 use creusot.int.UInt64
 use creusot.prelude.MutBorrow
+use seq.Seq
 use creusot.slice.Slice64
 use creusot.int.UInt32
-use seq.Seq
+use creusot.int.UInt8
+use int.ComputerDivision
 use creusot.int.Int32
 use creusot.prelude.Any
 use int.Int
@@ -58,6 +78,53 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
   [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
 
 meta "rewrite_def" predicate well_founded_relation_Int
+
+function be_word [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 206 0 206 53] (b0: UInt8.t) (b1: UInt8.t) (b2: UInt8.t) (b3: UInt8.t) : UInt32.t
+ =
+  [%#ssha256'36] UInt32.bw_or (UInt32.bw_or (UInt32.bw_or (UInt32.shl (UInt32.of_int (UInt8.t'int b0)) (24: UInt32.t)) (UInt32.shl (UInt32.of_int (UInt8.t'int b1)) (16: UInt32.t))) (UInt32.shl (UInt32.of_int (UInt8.t'int b2)) (8: UInt32.t))) (UInt32.of_int (UInt8.t'int b3))
+
+function byte_le [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 294 0 294 36] (x: UInt64.t) (q: int) : UInt8.t =
+  [%#ssha256'45] if q = 0 then
+    UInt8.of_int (UInt64.t'int x)
+  else
+    if q = 1 then
+      UInt8.of_int (UInt64.t'int (UInt64.shr x (8: UInt64.t)))
+    else
+      if q = 2 then
+        UInt8.of_int (UInt64.t'int (UInt64.shr x (16: UInt64.t)))
+      else
+        if q = 3 then
+          UInt8.of_int (UInt64.t'int (UInt64.shr x (24: UInt64.t)))
+        else
+          if q = 4 then
+            UInt8.of_int (UInt64.t'int (UInt64.shr x (32: UInt64.t)))
+          else
+            if q = 5 then
+              UInt8.of_int (UInt64.t'int (UInt64.shr x (40: UInt64.t)))
+            else
+              if q = 6 then
+                UInt8.of_int (UInt64.t'int (UInt64.shr x (48: UInt64.t)))
+              else
+                UInt8.of_int (UInt64.t'int (UInt64.shr x (56: UInt64.t)))
+            
+          
+        
+      
+    
+  
+
+
+function mix64_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 285 0 285 29] (x: UInt64.t) : UInt64.t =
+  [%#ssha256'38] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+function u64_of [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 224 4 224 32] (x: int) : UInt64.t
+
+function msg_byte [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 316 0 316 40] (base: UInt64.t) (i: int) : UInt8.t
+ = [%#ssha256'37] byte_le (mix64_l (UInt64.add base (u64_of (ComputerDivision.div i 8)))) (ComputerDivision.mod i 8)
+
+function msg_word [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 387 0 387 41] (base: UInt64.t) (w: int) : UInt32.t
+ = [%#ssha256'29] be_word (msg_byte base (4 * w)) (msg_byte base (4 * w + 1)) (msg_byte base (4 * w
+  + 2)) (msg_byte base (4 * w + 3))
 
 predicate inv_Seq_u32 [@inline:trivial] (_1: Seq.seq UInt32.t) = true
 
@@ -80,19 +147,46 @@ predicate inv_refmut_array_u32_16 [@inline:trivial] (_1: MutBorrow.t (Slice64.ar
 
 meta "rewrite_def" predicate inv_refmut_array_u32_16
 
-let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
-  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
-    (! return {result}) ]
-
-constant const_SEED: UInt64.t = [%#ssha256'27] (6001118187368099138: UInt64.t)
-
 let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
-  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum'0] result = UInt64.add self rhs}
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
     (! return {result}) ]
 
-let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any [ return (result: UInt64.t) -> (! return {result}) ]
+let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:mix64 ensures] [%#ssha256'30] result = mix64_l x}
+    (! return {result}) ]
 
-let bswap (x: UInt32.t) (return (x'0: UInt32.t)) = any [ return (result: UInt32.t) -> (! return {result}) ]
+function bswap_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 349 0 349 29] (x: UInt32.t) : UInt32.t =
+  [%#ssha256'39] UInt32.bw_or (UInt32.bw_or (UInt32.bw_or (UInt32.shl (UInt32.bw_and x (255: UInt32.t)) (24: UInt32.t)) (UInt32.shl (UInt32.bw_and x (65280: UInt32.t)) (8: UInt32.t))) (UInt32.bw_and (UInt32.shr x (8: UInt32.t)) (65280: UInt32.t))) (UInt32.shr x (24: UInt32.t))
+
+function u64_of_view [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 231 4 231 30] (v: UInt64.t) : ()
+
+axiom u64_of_view_spec: forall v: UInt64.t. [%#ssha256'41] u64_of (UInt64.t'int v) = v
+
+function le_bytes_bswap [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 365 0 365 29] (x: UInt64.t) : () =
+  [%#ssha256'44] ()
+
+axiom le_bytes_bswap_spec:
+  forall x: UInt64.t. [%#ssha256'42] be_word (UInt8.of_int (UInt64.t'int x)) (UInt8.of_int (UInt64.t'int (UInt64.shr x (8: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (16: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (24: UInt64.t))))
+    = bswap_l (UInt32.of_int (UInt64.t'int x))
+
+axiom le_bytes_bswap_spec'0:
+  forall x: UInt64.t. [%#ssha256'43] be_word (UInt8.of_int (UInt64.t'int (UInt64.shr x (32: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (40: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (48: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (56: UInt64.t))))
+    = bswap_l (UInt32.of_int (UInt64.t'int (UInt64.shr x (32: UInt64.t))))
+
+function msg_word_mix [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 396 0 396 38] (base: UInt64.t) (w: UInt64.t) : ()
+ = [%#ssha256'34] let x = mix64_l (UInt64.add base w) in let _ = u64_of_view w in let _ = le_bytes_bswap x in ()
+
+axiom msg_word_mix_spec: forall base: UInt64.t, w: UInt64.t. ([%#ssha256'31] UInt64.t'int w < 1152921504606846976)
+    -> ([%#ssha256'32] msg_word base (2 * UInt64.t'int w)
+    = bswap_l (UInt32.of_int (UInt64.t'int (mix64_l (UInt64.add base w)))))
+
+axiom msg_word_mix_spec'0: forall base: UInt64.t, w: UInt64.t. ([%#ssha256'31] UInt64.t'int w < 1152921504606846976)
+    -> ([%#ssha256'33] msg_word base (2 * UInt64.t'int w + 1)
+    = bswap_l (UInt32.of_int (UInt64.t'int (UInt64.shr (mix64_l (UInt64.add base w)) (32: UInt64.t)))))
+
+let bswap (x: UInt32.t) (return (x'0: UInt32.t)) = any
+  [ return (result: UInt32.t) -> {[@stop_split] [@expl:bswap ensures] [%#ssha256'35] result = bswap_l x}
+    (! return {result}) ]
 
 predicate resolve_refmut_array_u32_16 [@inline:trivial] (_1: MutBorrow.t (Slice64.array UInt32.t)) =
   _1.final = _1.current
@@ -103,9 +197,10 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let load_block [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 99 0 99 44] (b: UInt64.t)
+let load_block [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 464 0 464 55] (base: UInt64.t) (b: UInt64.t)
   (m: MutBorrow.t (Slice64.array UInt32.t)) (return (x: ())) =
-{[@stop_split] [@expl:load_block 'm' type invariant] [%#ssha256'25] inv_refmut_array_u32_16 m}
+{[@stop_split] [@expl:load_block requires] ([@stop_split] [@expl:load_block 'm' type invariant] [%#ssha256'26] inv_refmut_array_u32_16 m)
+  /\ ([@stop_split] [@expl:load_block requires] [%#ssha256'27] UInt64.t'int b < 281474976710656)}
   (! bb0
   [ bb0 = s0 [ s0 = [ &k <- [%#ssha256] (0: UInt64.t) ] s1 | s1 = [ &_old <- m.final ] s2 | s2 = bb1 ]
   | bb1 = bb1invariant
@@ -113,59 +208,66 @@ let load_block [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 99 0 99 4
       bb1invariant
     | bb1invariant = {[@expl:inferred invariant: type invariant] inv_refmut_array_u32_16 m}
       {[@expl:inferred invariant: unchanged value] _old = m.final}
-      {[@expl:loop invariant] [%#ssha256'2] UInt64.t'int k <= 8}
+      {[@expl:loop invariant #0] [%#ssha256'3] UInt64.t'int k <= 8}
+      {[@expl:loop invariant #1] [%#ssha256'2] forall j: int. 0 <= j /\ j < 2 * UInt64.t'int k
+        -> Seq.get (Slice64.view m.current) j = msg_word base (16 * UInt64.t'int b + j)}
       (! [ &variant_old_bb1 <- [%#ssha256'0] 8 - UInt64.t'int k ] s0)
-      [ s0 = [ &_11 <- UInt64.lt k ([%#ssha256'1] (8: UInt64.t)) ] s1
-      | s1 = any [ br0 -> {_11 = false} (! bb12) | br1 -> {_11} (! bb3) ] ]
+      [ s0 = [ &_22 <- UInt64.lt k ([%#ssha256'1] (8: UInt64.t)) ] s1
+      | s1 = any [ br0 -> {_22 = false} (! bb10) | br1 -> {_22} (! bb3) ] ]
       [ bb3 = s0
-        [ s0 = wrapping_mul [%#ssha256'4] {b} {[%#ssha256'3] (8: UInt64.t)} (fun (_x: UInt64.t) -> [ &_16 <- _x ] s1)
-        | s1 = wrapping_add [%#ssha256'6] {[%#ssha256'5] const_SEED} {_16} (fun (_x: UInt64.t) -> [ &_15 <- _x ] s2)
-        | s2 = [ &_18 <- k ] s3
-        | s3 = wrapping_add [%#ssha256'7] {_15} {_18} (fun (_x: UInt64.t) -> [ &_14 <- _x ] s4)
-        | s4 = mix64 [%#ssha256'8] {_14} (fun (_x: UInt64.t) -> [ &x <- _x ] s5)
-        | s5 = [ &_21 <- UInt32.of_int (UInt64.t'int x) ] s6
-        | s6 = bswap [%#ssha256'9] {_21} (fun (_x: UInt32.t) -> [ &_20 <- _x ] s7)
-        | s7 = UInt64.mul [%#ssha256'11] {[%#ssha256'10] (2: UInt64.t)} {k} (fun (_x: UInt64.t) -> [ &_23 <- _x ] s8)
-        | s8 = [ &_25 <- UInt64.lt _23 ([%#ssha256'12] (16: UInt64.t)) ] s9
-        | s9 = {[@expl:index in bounds] [%#ssha256'12] _25} s10
-        | s10 = Slice64.set [%#ssha256'13] <UInt32.t> {m.current} {_23} {_20}
-            (fun (r: Slice64.array UInt32.t) -> [ &m <- { m with current = r } ] s11)
-        | s11 = UInt64.shr [%#ssha256'15] {x} {Int32.to_int ([%#ssha256'14] (32: Int32.t))}
-            (fun (_x: UInt64.t) -> [ &_28 <- _x ] s12)
-        | s12 = [ &_27 <- UInt32.of_int (UInt64.t'int _28) ] s13
-        | s13 = bswap [%#ssha256'16] {_27} (fun (_x: UInt32.t) -> [ &_26 <- _x ] s14)
-        | s14 = UInt64.mul [%#ssha256'18] {[%#ssha256'17] (2: UInt64.t)} {k} (fun (_x: UInt64.t) -> [ &_31 <- _x ] s15)
-        | s15 = UInt64.add [%#ssha256'20] {_31} {[%#ssha256'19] (1: UInt64.t)}
-            (fun (_x: UInt64.t) -> [ &_30 <- _x ] s16)
-        | s16 = [ &_33 <- UInt64.lt _30 ([%#ssha256'21] (16: UInt64.t)) ] s17
-        | s17 = {[@expl:index in bounds] [%#ssha256'21] _33} s18
-        | s18 = Slice64.set [%#ssha256'22] <UInt32.t> {m.current} {_30} {_26}
-            (fun (r: Slice64.array UInt32.t) -> [ &m <- { m with current = r } ] s19)
-        | s19 = UInt64.add [%#ssha256'24] {k} {[%#ssha256'23] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &k <- _x ] s20)
-        | s20 = bb1 ] ] ]
-  | bb12 = s0
+        [ s0 = UInt64.mul [%#ssha256'5] {b} {[%#ssha256'4] (8: UInt64.t)} (fun (_x: UInt64.t) -> [ &_25 <- _x ] s1)
+        | s1 = [ &_27 <- k ] s2
+        | s2 = UInt64.add [%#ssha256'6] {_25} {_27} (fun (_x: UInt64.t) -> [ &w <- _x ] s3)
+        | s3 = wrapping_add [%#ssha256'7] {base} {w} (fun (_x: UInt64.t) -> [ &_30 <- _x ] s4)
+        | s4 = mix64 [%#ssha256'8] {_30} (fun (_x: UInt64.t) -> [ &x <- _x ] s5)
+        | s5 = {[@expl:assertion] [%#ssha256'9] let _ = msg_word_mix base w in true} s6
+        | s6 = [ &_38 <- UInt32.of_int (UInt64.t'int x) ] s7
+        | s7 = bswap [%#ssha256'10] {_38} (fun (_x: UInt32.t) -> [ &_37 <- _x ] s8)
+        | s8 = UInt64.mul [%#ssha256'12] {[%#ssha256'11] (2: UInt64.t)} {k} (fun (_x: UInt64.t) -> [ &_40 <- _x ] s9)
+        | s9 = [ &_42 <- UInt64.lt _40 ([%#ssha256'13] (16: UInt64.t)) ] s10
+        | s10 = {[@expl:index in bounds] [%#ssha256'13] _42} s11
+        | s11 = Slice64.set [%#ssha256'14] <UInt32.t> {m.current} {_40} {_37}
+            (fun (r: Slice64.array UInt32.t) -> [ &m <- { m with current = r } ] s12)
+        | s12 = UInt64.shr [%#ssha256'16] {x} {Int32.to_int ([%#ssha256'15] (32: Int32.t))}
+            (fun (_x: UInt64.t) -> [ &_45 <- _x ] s13)
+        | s13 = [ &_44 <- UInt32.of_int (UInt64.t'int _45) ] s14
+        | s14 = bswap [%#ssha256'17] {_44} (fun (_x: UInt32.t) -> [ &_43 <- _x ] s15)
+        | s15 = UInt64.mul [%#ssha256'19] {[%#ssha256'18] (2: UInt64.t)} {k} (fun (_x: UInt64.t) -> [ &_48 <- _x ] s16)
+        | s16 = UInt64.add [%#ssha256'21] {_48} {[%#ssha256'20] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_47 <- _x ] s17)
+        | s17 = [ &_50 <- UInt64.lt _47 ([%#ssha256'22] (16: UInt64.t)) ] s18
+        | s18 = {[@expl:index in bounds] [%#ssha256'22] _50} s19
+        | s19 = Slice64.set [%#ssha256'23] <UInt32.t> {m.current} {_47} {_43}
+            (fun (r: Slice64.array UInt32.t) -> [ &m <- { m with current = r } ] s20)
+        | s20 = UInt64.add [%#ssha256'25] {k} {[%#ssha256'24] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &k <- _x ] s21)
+        | s21 = bb1 ] ] ]
+  | bb10 = s0
     [ s0 = s1 [ _ck -> (! {[@expl:type invariant] inv_refmut_array_u32_16 m} any) ]
     | s1 = -{resolve_refmut_array_u32_16 m}- s2
     | s2 = return {_ret} ] ]
   [ & _ret: () = Any.any_l ()
+  | & base: UInt64.t = base
   | & b: UInt64.t = b
   | & m: MutBorrow.t (Slice64.array UInt32.t) = m
   | & k: UInt64.t = Any.any_l ()
-  | & _11: bool = Any.any_l ()
+  | & _22: bool = Any.any_l ()
+  | & w: UInt64.t = Any.any_l ()
+  | & _25: UInt64.t = Any.any_l ()
+  | & _27: UInt64.t = Any.any_l ()
   | & x: UInt64.t = Any.any_l ()
-  | & _14: UInt64.t = Any.any_l ()
-  | & _15: UInt64.t = Any.any_l ()
-  | & _16: UInt64.t = Any.any_l ()
-  | & _18: UInt64.t = Any.any_l ()
-  | & _20: UInt32.t = Any.any_l ()
-  | & _21: UInt32.t = Any.any_l ()
-  | & _23: UInt64.t = Any.any_l ()
-  | & _25: bool = Any.any_l ()
-  | & _26: UInt32.t = Any.any_l ()
-  | & _27: UInt32.t = Any.any_l ()
-  | & _28: UInt64.t = Any.any_l ()
   | & _30: UInt64.t = Any.any_l ()
-  | & _31: UInt64.t = Any.any_l ()
-  | & _33: bool = Any.any_l ()
+  | & _37: UInt32.t = Any.any_l ()
+  | & _38: UInt32.t = Any.any_l ()
+  | & _40: UInt64.t = Any.any_l ()
+  | & _42: bool = Any.any_l ()
+  | & _43: UInt32.t = Any.any_l ()
+  | & _44: UInt32.t = Any.any_l ()
+  | & _45: UInt64.t = Any.any_l ()
+  | & _47: UInt64.t = Any.any_l ()
+  | & _48: UInt64.t = Any.any_l ()
+  | & _50: bool = Any.any_l ()
   | & _old: Slice64.array UInt32.t = Any.any_l ()
-  | & variant_old_bb1: int = Any.any_l () ]) [ return (result: ()) -> (! return {result}) ]
+  | & variant_old_bb1: int = Any.any_l () ])
+  [ return (result: ()) -> {[@stop_split] [@expl:load_block ensures] [%#ssha256'28] forall j: int. 0 <= j /\ j < 16
+      -> Seq.get (Slice64.view m.final) j = msg_word base (16 * UInt64.t'int b + j)}
+    (! return {result}) ]

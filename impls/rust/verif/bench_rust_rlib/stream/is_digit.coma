@@ -1,22 +1,28 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 11 0 11 26 *)
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 298 0 298 26 *)
 
-let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 12 9 12 11
-let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 12 20 12 22
-let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 12 4 12 22
+let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 299 9 299 11
+let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 299 20 299 22
+let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 299 4 299 22
+let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 295 10 295 33
+let%span sstream'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 87 4 87 26
 
 use creusot.int.UInt8
 use creusot.prelude.Any
+
+predicate is_digit_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 86 0 86 32] (c: UInt8.t) =
+  [%#sstream'3] UInt8.le (48: UInt8.t) c /\ UInt8.le c (57: UInt8.t)
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let is_digit [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 11 0 11 26] (c: UInt8.t) (return (x: bool)) =
+let is_digit [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 298 0 298 26] (c: UInt8.t) (return (x: bool)) =
 (! bb0
   [ bb0 = s0
-    [ s0 = [ &_2 <- UInt8.ge c ([%#sstream] (48: UInt8.t)) ] s1
-    | s1 = any [ br0 -> {_2 = false} (! bb2) | br1 -> {_2} (! bb1) ] ]
+    [ s0 = [ &_4 <- UInt8.ge c ([%#sstream] (48: UInt8.t)) ] s1
+    | s1 = any [ br0 -> {_4 = false} (! bb2) | br1 -> {_4} (! bb1) ] ]
   | bb1 = s0 [ s0 = [ &_ret <- UInt8.le c ([%#sstream'0] (57: UInt8.t)) ] s1 | s1 = return {_ret} ]
   | bb2 = s0 [ s0 = [ &_ret <- [%#sstream'1] false ] s1 | s1 = return {_ret} ] ]
-  [ & _ret: bool = Any.any_l () | & c: UInt8.t = c | & _2: bool = Any.any_l () ])
-  [ return (result: bool) -> (! return {result}) ]
+  [ & _ret: bool = Any.any_l () | & c: UInt8.t = c | & _4: bool = Any.any_l () ])
+  [ return (result: bool) -> {[@stop_split] [@expl:is_digit ensures] [%#sstream'2] result = is_digit_l c}
+    (! return {result}) ]

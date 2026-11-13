@@ -1,0 +1,54 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 79 4 79 44 *)
+
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 78 14 78 15
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 61 8 61 56
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 65 8 65 58
+let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 49 8 49 37
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+
+use creusot.int.UInt32
+use seq.Seq
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+function rotr_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 48 4 48 40] (x: UInt32.t) (k: UInt32.t) : UInt32.t
+ = [%#ssha256'2] UInt32.bw_or (UInt32.shr x k) (UInt32.shl x (UInt32.sub (32: UInt32.t) k))
+
+function ssig0_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 60 4 60 33] (x: UInt32.t) : UInt32.t =
+  [%#ssha256'0] UInt32.bw_xor (UInt32.bw_xor (rotr_l x (7: UInt32.t)) (rotr_l x (18: UInt32.t))) (UInt32.shr x (3: UInt32.t))
+
+function ssig1_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 64 4 64 33] (x: UInt32.t) : UInt32.t =
+  [%#ssha256'1] UInt32.bw_xor (UInt32.bw_xor (rotr_l x (17: UInt32.t)) (rotr_l x (19: UInt32.t))) (UInt32.shr x (10: UInt32.t))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant m : Seq.seq UInt32.t
+
+constant t : int
+
+function sched [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 79 4 79 44] (m: Seq.seq UInt32.t) (t: int) : UInt32.t
+
+goal vc_sched: if t < 16 then
+    true
+  else
+    ([@expl:variant decreases] well_founded_relation_Int ([%#ssha256] t) ([%#ssha256] t - 16))
+    /\ ([@expl:variant decreases] well_founded_relation_Int ([%#ssha256] t) ([%#ssha256] t - 15))
+    /\ ([@expl:variant decreases] well_founded_relation_Int ([%#ssha256] t) ([%#ssha256] t - 7))
+    /\ ([@expl:variant decreases] well_founded_relation_Int ([%#ssha256] t) ([%#ssha256] t - 2))
+  

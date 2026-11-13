@@ -1,0 +1,11 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_closure0": { "prover": "alt-ergo", "time": 0.018 },
+      "vc_merge_level": { "prover": "z3", "time": 0.02 },
+      "vc_merge_pairs": { "prover": "alt-ergo", "time": 0.014 },
+      "vc_scope_closure0": { "prover": "alt-ergo", "time": 0.011 }
+    }
+  }
+}

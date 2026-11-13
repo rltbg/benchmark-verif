@@ -5,3 +5,8 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T21:04:48+00:00,23.4,echec,1,"v4: word_at comme déclencheur"
 2026-11-13T21:05:27+00:00,9.7,ok,0,"v5: lemme div/mod de vstd pour (8w+r)/8"
 2026-11-13T21:10:31+00:00,105.5,ok,0,"build release (vérifie sha256+parsha+stream puis compile)"
+2026-11-13T21:15:29+00:00,0.1,erreur_compil,0,"erreur d'usage CLI: --verify-module exige cargo verus focus"
+2026-11-13T21:15:38+00:00,55.2,ok,0,"FINAL (cargo verus focus --verify-module sha256)"
+2026-11-13T21:16:46+00:00,0.3,erreur_compil,0,"nul: cargo n'a rien relancé (artefacts à jour)"
+2026-11-13T21:16:56+00:00,0.1,erreur_compil,0,"nul: cache de target/verus-partial, pas de vérification"
+2026-11-13T21:17:10+00:00,48.4,ok,0,"FINAL à froid (rm target/verus-partial; focus --verify-module sha256)"

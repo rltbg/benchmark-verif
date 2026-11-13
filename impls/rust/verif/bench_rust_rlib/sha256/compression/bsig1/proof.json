@@ -1,0 +1,9 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_bsig1": { "prover": "alt-ergo", "time": 0.014 },
+      "vc_rotr": { "prover": "alt-ergo", "time": 0.015 }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+(* #"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 64 0 64 69 *)
+
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 423 8 423 40
+let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 590 8 590 38
+let%span sseq'1 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 581 8 581 49
+let%span sseq'2 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 413 12 413 12
+let%span sparsort = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 60 11 60 106
+let%span sparsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 61 11 61 61
+let%span sparsort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 62 11 62 73
+let%span sparsort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 63 10 63 40
+let%span sparsort'3 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 46 11 46 33
+let%span sparsort'4 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 47 10 47 36
+let%span sparsort'5 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 52 11 52 67
+let%span sparsort'6 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 53 10 53 60
+let%span sparsort'7 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 35 16 35 16
+let%span sparsort'8 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 48 41 48 43
+let%span sparsort'9 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 54 62 54 64
+
+use creusot.int.UInt32
+use seq.Seq
+use creusot.int.UInt64
+use int.Int
+
+predicate sorted_range_u32 (self: Seq.seq UInt32.t) (start: int) (end': int) =
+  [%#sseq'2] forall i: int, j: int. start <= i /\ i <= j /\ j < end' -> UInt32.le (Seq.get self i) (Seq.get self j)
+
+predicate sorted_u32 (self: Seq.seq UInt32.t) = [%#sseq] sorted_range_u32 self 0 (Seq.length self)
+
+type t_RangeTo_Int = { end': int }
+
+function index_Seq_u32 [@inline:trivial] (self: Seq.seq UInt32.t) (range: t_RangeTo_Int) : Seq.seq UInt32.t =
+  [%#sseq'0] Seq.([..]) self 0 range.end'
+
+meta "rewrite_def" function index_Seq_u32
+
+predicate runs_sorted [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 34 0 34 81] (s: Seq.seq UInt32.t) (b: Seq.seq UInt64.t) (k: int) (m: int) (base: int) =
+  [%#sparsort'7] forall j: int. k <= j /\ j < m
+    -> sorted_range_u32 s (UInt64.t'int (Seq.get b j) - base) (UInt64.t'int (Seq.get b (j + 1)) - base)
+
+type t_RangeFrom_Int = { start: int }
+
+function index_Seq_u32'0 [@inline:trivial] (self: Seq.seq UInt32.t) (range: t_RangeFrom_Int) : Seq.seq UInt32.t =
+  [%#sseq'1] Seq.([..]) self range.start (Seq.length self)
+
+meta "rewrite_def" function index_Seq_u32'0
+
+type tup2_Seq_u32_Seq_u32 = { f0: Seq.seq UInt32.t; f1: Seq.seq UInt32.t }
+
+function split_concat [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 48 0 48 40] (s: Seq.seq UInt32.t) (m: int) : ()
+ = [%#sparsort'8] ()
+
+axiom split_concat_spec: forall s: Seq.seq UInt32.t, m: int. ([%#sparsort'3] 0 <= m /\ m <= Seq.length s)
+    -> ([%#sparsort'4] s = Seq.(++) (index_Seq_u32 s { end' = m }) (index_Seq_u32'0 s { start = m }))
+
+function sorted_shift [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 54 0 54 61] (u: Seq.seq UInt32.t) (v: Seq.seq UInt32.t) (x: int) (y: int) : ()
+ = [%#sparsort'9] ()
+
+axiom sorted_shift_spec: forall u: Seq.seq UInt32.t, v: Seq.seq UInt32.t, x: int, y: int. ([%#sparsort'5] 0 <= x
+      /\ x <= y /\ y <= Seq.length v /\ sorted_range_u32 v x y)
+    -> ([%#sparsort'6] sorted_range_u32 (Seq.(++) u v) (x + Seq.length u) (y + Seq.length u))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant s : Seq.seq UInt32.t
+
+constant b : Seq.seq UInt64.t
+
+constant k : int
+
+constant t : int
+
+constant m : int
+
+function runs_split [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 64 0 64 69] (s: Seq.seq UInt32.t) (b: Seq.seq UInt64.t) (k: int) (t: int) (m: int) : ()
+
+goal vc_runs_split: ([%#sparsort] 0 <= k
+    /\ k < t
+    /\ t < Seq.length b
+    /\ (forall p: int, q: int. 0 <= p /\ p <= q /\ q < Seq.length b -> UInt64.le (Seq.get b p) (Seq.get b q)))
+  -> ([%#sparsort'0] Seq.length s = UInt64.t'int (Seq.get b t) - UInt64.t'int (Seq.get b k)
+    /\ m = UInt64.t'int (Seq.get b (k + 1)) - UInt64.t'int (Seq.get b k))
+  -> ([%#sparsort'1] sorted_u32 (index_Seq_u32 s { end' = m })
+    /\ runs_sorted (index_Seq_u32'0 s { start = m }) b (k + 1) t (UInt64.t'int (Seq.get b (k + 1))))
+  -> (let {f0 = u; f1 = v} = { f0 = index_Seq_u32 s { end' = m };
+                               f1 = index_Seq_u32'0 s { start = m } } in ([@stop_split] [@expl:split_concat requires] [%#sparsort'3] 0
+      <= m
+    /\ m <= Seq.length s)
+  /\ (([@stop_split] [@expl:split_concat ensures] [%#sparsort'4] s
+    = Seq.(++) (index_Seq_u32 s { end' = m }) (index_Seq_u32'0 s { start = m }))
+  -> sorted_range_u32 s 0 m
+  && (forall j: int. if k < j then
+        if j < t then
+          [@stop_split] [@expl:sorted_shift requires] [%#sparsort'5] 0
+            <= UInt64.t'int (Seq.get b j) - UInt64.t'int (Seq.get b (k + 1))
+          /\ UInt64.t'int (Seq.get b j) - UInt64.t'int (Seq.get b (k + 1))
+            <= UInt64.t'int (Seq.get b (j + 1)) - UInt64.t'int (Seq.get b (k + 1))
+          /\ UInt64.t'int (Seq.get b (j + 1)) - UInt64.t'int (Seq.get b (k + 1)) <= Seq.length v
+          /\ sorted_range_u32 v (UInt64.t'int (Seq.get b j)
+          - UInt64.t'int (Seq.get b (k + 1))) (UInt64.t'int (Seq.get b (j + 1)) - UInt64.t'int (Seq.get b (k + 1)))
+        else
+          true
+      
+      else
+        true
+    )
+  /\ (forall j: int. k < j /\ j < t
+      -> (let _ = sorted_shift u v (UInt64.t'int (Seq.get b j)
+      - UInt64.t'int (Seq.get b (k + 1))) (UInt64.t'int (Seq.get b (j + 1))
+      - UInt64.t'int (Seq.get b (k + 1))) in sorted_range_u32 s (UInt64.t'int (Seq.get b j)
+      - UInt64.t'int (Seq.get b k)) (UInt64.t'int (Seq.get b (j + 1)) - UInt64.t'int (Seq.get b k))))
+  && ([@stop_split] [@expl:runs_split ensures] [%#sparsort'2] runs_sorted s b k t (UInt64.t'int (Seq.get b k)))))

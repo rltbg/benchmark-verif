@@ -1,0 +1,11 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_clone_Tok": { "prover": "alt-ergo", "time": 0.02 },
+      "vc_clone_bool": { "prover": "alt-ergo", "time": 0.017 },
+      "vc_clone_u64": { "prover": "alt-ergo", "time": 0.016 },
+      "vc_clone_u8": { "prover": "alt-ergo", "time": 0.01 }
+    }
+  }
+}

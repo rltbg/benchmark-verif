@@ -1,0 +1,344 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 166 0 166 41 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 732 4 732 36
+let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 160 4 160 29
+let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 128 4 154 5
+let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 102 4 115 5
+let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 87 4 87 26
+let%span sstream'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 121 4 121 27
+let%span sstream'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 91 4 91 27
+let%span sstream'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 96 4 96 66
+
+use creusot.int.UInt8
+use creusot.int.UInt64
+use seq.Seq
+use int.Int
+
+type t_Tok = {
+  mode: UInt8.t;
+  depth: UInt64.t;
+  maxd: UInt64.t;
+  objs: UInt64.t;
+  strs: UInt64.t;
+  nums: UInt64.t;
+  arrs: UInt64.t;
+  lits: UInt64.t;
+  lines: UInt64.t;
+  idsum: UInt64.t;
+  allsum: UInt64.t;
+  acc: UInt64.t;
+  isint: bool;
+  gotid: bool }
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+predicate is_digit_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 86 0 86 32] (c: UInt8.t) =
+  [%#sstream'2] UInt8.le (48: UInt8.t) c /\ UInt8.le c (57: UInt8.t)
+
+predicate gt_log_u64 [@inline:trivial] (self: UInt64.t) (other: UInt64.t) = [%#sord'0] UInt64.lt other self
+
+meta "rewrite_def" predicate gt_log_u64
+
+function tok_open [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 120 0 120 30] (t: t_Tok) : t_Tok =
+  [%#sstream'3] let d = UInt64.add t.depth (1: UInt64.t) in { mode = t.mode;
+                                                              depth = d;
+                                                              maxd = (if gt_log_u64 d t.maxd then d else t.maxd);
+                                                              objs = t.objs;
+                                                              strs = t.strs;
+                                                              nums = t.nums;
+                                                              arrs = t.arrs;
+                                                              lits = t.lits;
+                                                              lines = t.lines;
+                                                              idsum = t.idsum;
+                                                              allsum = t.allsum;
+                                                              acc = t.acc;
+                                                              isint = t.isint;
+                                                              gotid = t.gotid }
+
+predicate is_lower_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 90 0 90 32] (c: UInt8.t) =
+  [%#sstream'4] UInt8.le (97: UInt8.t) c /\ UInt8.le c (122: UInt8.t)
+
+function tok_act [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 127 0 127 36] (t: t_Tok) (c: UInt8.t) : t_Tok =
+  [%#sstream'0] if t.mode = (2: UInt8.t) then
+    { mode = (1: UInt8.t);
+      depth = t.depth;
+      maxd = t.maxd;
+      objs = t.objs;
+      strs = t.strs;
+      nums = t.nums;
+      arrs = t.arrs;
+      lits = t.lits;
+      lines = t.lines;
+      idsum = t.idsum;
+      allsum = t.allsum;
+      acc = t.acc;
+      isint = t.isint;
+      gotid = t.gotid }
+  else
+    if t.mode = (1: UInt8.t) then
+      { mode = (if c = (92: UInt8.t) then (2: UInt8.t) else if c = (34: UInt8.t) then (0: UInt8.t) else (1: UInt8.t));
+        depth = t.depth;
+        maxd = t.maxd;
+        objs = t.objs;
+        strs = t.strs;
+        nums = t.nums;
+        arrs = t.arrs;
+        lits = t.lits;
+        lines = t.lines;
+        idsum = t.idsum;
+        allsum = t.allsum;
+        acc = t.acc;
+        isint = t.isint;
+        gotid = t.gotid }
+    else
+      if t.mode = (3: UInt8.t) then
+        if is_digit_l c then
+          { mode = t.mode;
+            depth = t.depth;
+            maxd = t.maxd;
+            objs = t.objs;
+            strs = t.strs;
+            nums = t.nums;
+            arrs = t.arrs;
+            lits = t.lits;
+            lines = t.lines;
+            idsum = t.idsum;
+            allsum = t.allsum;
+            acc = UInt64.add (UInt64.mul t.acc (10: UInt64.t)) (UInt64.of_int (UInt8.t'int (UInt8.sub c (48: UInt8.t))));
+            isint = t.isint;
+            gotid = t.gotid }
+        else
+          { mode = t.mode;
+            depth = t.depth;
+            maxd = t.maxd;
+            objs = t.objs;
+            strs = t.strs;
+            nums = t.nums;
+            arrs = t.arrs;
+            lits = t.lits;
+            lines = t.lines;
+            idsum = t.idsum;
+            allsum = t.allsum;
+            acc = t.acc;
+            isint = false;
+            gotid = t.gotid }
+      
+      else
+        if t.mode = (4: UInt8.t) then
+          t
+        else
+          if c = (34: UInt8.t) then
+            { mode = (1: UInt8.t);
+              depth = t.depth;
+              maxd = t.maxd;
+              objs = t.objs;
+              strs = UInt64.add t.strs (1: UInt64.t);
+              nums = t.nums;
+              arrs = t.arrs;
+              lits = t.lits;
+              lines = t.lines;
+              idsum = t.idsum;
+              allsum = t.allsum;
+              acc = t.acc;
+              isint = t.isint;
+              gotid = t.gotid }
+          else
+            if c = (123: UInt8.t) then
+              tok_open { mode = t.mode;
+                         depth = t.depth;
+                         maxd = t.maxd;
+                         objs = UInt64.add t.objs (1: UInt64.t);
+                         strs = t.strs;
+                         nums = t.nums;
+                         arrs = t.arrs;
+                         lits = t.lits;
+                         lines = t.lines;
+                         idsum = t.idsum;
+                         allsum = t.allsum;
+                         acc = t.acc;
+                         isint = t.isint;
+                         gotid = t.gotid }
+            else
+              if c = (91: UInt8.t) then
+                tok_open { mode = t.mode;
+                           depth = t.depth;
+                           maxd = t.maxd;
+                           objs = t.objs;
+                           strs = t.strs;
+                           nums = t.nums;
+                           arrs = UInt64.add t.arrs (1: UInt64.t);
+                           lits = t.lits;
+                           lines = t.lines;
+                           idsum = t.idsum;
+                           allsum = t.allsum;
+                           acc = t.acc;
+                           isint = t.isint;
+                           gotid = t.gotid }
+              else
+                if c = (125: UInt8.t) \/ c = (93: UInt8.t) then
+                  { mode = t.mode;
+                    depth = (if gt_log_u64 t.depth (0: UInt64.t) then UInt64.sub t.depth (1: UInt64.t) else t.depth);
+                    maxd = t.maxd;
+                    objs = t.objs;
+                    strs = t.strs;
+                    nums = t.nums;
+                    arrs = t.arrs;
+                    lits = t.lits;
+                    lines = t.lines;
+                    idsum = t.idsum;
+                    allsum = t.allsum;
+                    acc = t.acc;
+                    isint = t.isint;
+                    gotid = t.gotid }
+                else
+                  if c = (10: UInt8.t) then
+                    { mode = t.mode;
+                      depth = t.depth;
+                      maxd = t.maxd;
+                      objs = t.objs;
+                      strs = t.strs;
+                      nums = t.nums;
+                      arrs = t.arrs;
+                      lits = t.lits;
+                      lines = UInt64.add t.lines (1: UInt64.t);
+                      idsum = t.idsum;
+                      allsum = t.allsum;
+                      acc = t.acc;
+                      isint = t.isint;
+                      gotid = false }
+                  else
+                    if is_digit_l c then
+                      { mode = (3: UInt8.t);
+                        depth = t.depth;
+                        maxd = t.maxd;
+                        objs = t.objs;
+                        strs = t.strs;
+                        nums = t.nums;
+                        arrs = t.arrs;
+                        lits = t.lits;
+                        lines = t.lines;
+                        idsum = t.idsum;
+                        allsum = t.allsum;
+                        acc = UInt64.of_int (UInt8.t'int (UInt8.sub c (48: UInt8.t)));
+                        isint = true;
+                        gotid = t.gotid }
+                    else
+                      if c = (45: UInt8.t) then
+                        { mode = (3: UInt8.t);
+                          depth = t.depth;
+                          maxd = t.maxd;
+                          objs = t.objs;
+                          strs = t.strs;
+                          nums = t.nums;
+                          arrs = t.arrs;
+                          lits = t.lits;
+                          lines = t.lines;
+                          idsum = t.idsum;
+                          allsum = t.allsum;
+                          acc = (0: UInt64.t);
+                          isint = true;
+                          gotid = t.gotid }
+                      else
+                        if is_lower_l c then
+                          { mode = (4: UInt8.t);
+                            depth = t.depth;
+                            maxd = t.maxd;
+                            objs = t.objs;
+                            strs = t.strs;
+                            nums = t.nums;
+                            arrs = t.arrs;
+                            lits = t.lits;
+                            lines = t.lines;
+                            idsum = t.idsum;
+                            allsum = t.allsum;
+                            acc = t.acc;
+                            isint = t.isint;
+                            gotid = t.gotid }
+                        else
+                          t
+                      
+                    
+                  
+                
+              
+            
+          
+        
+      
+    
+  
+
+
+predicate is_numpunct_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 95 0 95 35] (c: UInt8.t) =
+  [%#sstream'5] c = (46: UInt8.t) \/ c = (101: UInt8.t) \/ c = (69: UInt8.t) \/ c = (43: UInt8.t) \/ c = (45: UInt8.t)
+
+function tok_end [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 101 0 101 36] (t: t_Tok) (c: UInt8.t) : t_Tok =
+  [%#sstream'1] if t.mode = (3: UInt8.t) /\ not (is_digit_l c \/ is_numpunct_l c) then
+    { mode = (0: UInt8.t);
+      depth = t.depth;
+      maxd = t.maxd;
+      objs = t.objs;
+      strs = t.strs;
+      nums = UInt64.add t.nums (1: UInt64.t);
+      arrs = t.arrs;
+      lits = t.lits;
+      lines = t.lines;
+      idsum = (if t.isint /\ t.depth = (1: UInt64.t) /\ not t.gotid then UInt64.add t.idsum t.acc else t.idsum);
+      allsum = (if t.isint then UInt64.add t.allsum t.acc else t.allsum);
+      acc = t.acc;
+      isint = t.isint;
+      gotid = t.gotid \/ t.depth = (1: UInt64.t) }
+  else
+    if t.mode = (4: UInt8.t) /\ not is_lower_l c then
+      { mode = (0: UInt8.t);
+        depth = t.depth;
+        maxd = t.maxd;
+        objs = t.objs;
+        strs = t.strs;
+        nums = t.nums;
+        arrs = t.arrs;
+        lits = UInt64.add t.lits (1: UInt64.t);
+        lines = t.lines;
+        idsum = t.idsum;
+        allsum = t.allsum;
+        acc = t.acc;
+        isint = t.isint;
+        gotid = t.gotid }
+    else
+      t
+  
+
+
+function tok_step [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 159 0 159 37] (t: t_Tok) (c: UInt8.t) : t_Tok =
+  [%#sstream] tok_act (tok_end t c) c
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant t : t_Tok
+
+constant s : Seq.seq UInt8.t
+
+function tok_seq [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 166 0 166 41] (t: t_Tok) (s: Seq.seq UInt8.t) : t_Tok
+
+goal vc_tok_seq: if Seq.length s = 0 then
+    true
+  else
+    [@expl:variant decreases] well_founded_relation_Int ([%#sseq] Seq.length s) ([%#sseq] Seq.length (Seq.([..]) s 0 (Seq.length s
+    - 1)))
+  

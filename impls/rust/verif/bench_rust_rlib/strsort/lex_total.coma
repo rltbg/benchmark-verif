@@ -1,0 +1,79 @@
+(* #"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 77 0 77 40 *)
+
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 732 4 732 36
+let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 160 8 160 17
+let%span sseq'1 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 581 8 581 49
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sstrsort = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 76 10 76 38
+let%span sstrsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 55 8 58 43
+
+use creusot.int.UInt8
+use seq.Seq
+use int.Int
+
+type t_RangeFrom_Int = { start: int }
+
+function index_Seq_u8 [@inline:trivial] (self: Seq.seq UInt8.t) (range: t_RangeFrom_Int) : Seq.seq UInt8.t =
+  [%#sseq'1] Seq.([..]) self range.start (Seq.length self)
+
+meta "rewrite_def" function index_Seq_u8
+
+function tail_u8 [@inline:trivial] (self: Seq.seq UInt8.t) : Seq.seq UInt8.t =
+  [%#sseq'0] index_Seq_u8 self { start = 1 }
+
+meta "rewrite_def" function tail_u8
+
+predicate lex_le [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 53 0 53 45] (s: Seq.seq UInt8.t) (t: Seq.seq UInt8.t)
+
+axiom lex_le_def: forall s: Seq.seq UInt8.t, t: Seq.seq UInt8.t [lex_le s t]. lex_le s t
+    = ([%#sstrsort'0] if Seq.length s = 0 then
+      true
+    else
+      if Seq.length t = 0 then
+        false
+      else
+        if Seq.get s 0 <> Seq.get t 0 then UInt8.lt (Seq.get s 0) (Seq.get t 0) else lex_le (tail_u8 s) (tail_u8 t)
+    
+    )
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant s : Seq.seq UInt8.t
+
+constant t : Seq.seq UInt8.t
+
+function lex_total [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 77 0 77 40] (s: Seq.seq UInt8.t) (t: Seq.seq UInt8.t) : ()
+
+goal vc_lex_total: if gt_log_Int (Seq.length s) 0 then
+    if gt_log_Int (Seq.length t) 0 then
+      if Seq.get s 0 = Seq.get t 0 then
+        ([@expl:variant decreases] well_founded_relation_Int ([%#sseq] Seq.length s) ([%#sseq] Seq.length (tail_u8 s)))
+        /\ (([@stop_split] [@expl:lex_total ensures] [%#sstrsort] lex_le (tail_u8 s) (tail_u8 t)
+          \/ lex_le (tail_u8 t) (tail_u8 s))
+        -> ([@stop_split] [@expl:lex_total ensures] [%#sstrsort] lex_le s t \/ lex_le t s))
+      else
+        [@stop_split] [@expl:lex_total ensures] [%#sstrsort] lex_le s t \/ lex_le t s
+    
+    else
+      [@stop_split] [@expl:lex_total ensures] [%#sstrsort] lex_le s t \/ lex_le t s
+  
+  else
+    [@stop_split] [@expl:lex_total ensures] [%#sstrsort] lex_le s t \/ lex_le t s
+  

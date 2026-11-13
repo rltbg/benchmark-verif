@@ -1,0 +1,124 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 396 0 396 38 *)
+
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 393 11 393 34
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 394 10 394 69
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 395 10 395 84
+let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 230 14 230 29
+let%span ssha256'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 362 10 362 106
+let%span ssha256'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 363 10 364 35
+let%span ssha256'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 388 4 388 115
+let%span ssha256'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 350 4 350 99
+let%span ssha256'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 286 4 286 38
+let%span ssha256'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 229 14 229 16
+let%span ssha256'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 223 14 223 15
+let%span ssha256'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 365 30 365 32
+let%span ssha256'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 207 4 207 89
+let%span ssha256'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 317 4 317 49
+let%span ssha256'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 295 4 311 5
+
+use creusot.int.UInt64
+use creusot.int.UInt32
+use creusot.int.UInt8
+use int.ComputerDivision
+use int.Int
+
+function be_word [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 206 0 206 53] (b0: UInt8.t) (b1: UInt8.t) (b2: UInt8.t) (b3: UInt8.t) : UInt32.t
+ =
+  [%#ssha256'11] UInt32.bw_or (UInt32.bw_or (UInt32.bw_or (UInt32.shl (UInt32.of_int (UInt8.t'int b0)) (24: UInt32.t)) (UInt32.shl (UInt32.of_int (UInt8.t'int b1)) (16: UInt32.t))) (UInt32.shl (UInt32.of_int (UInt8.t'int b2)) (8: UInt32.t))) (UInt32.of_int (UInt8.t'int b3))
+
+function byte_le [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 294 0 294 36] (x: UInt64.t) (q: int) : UInt8.t =
+  [%#ssha256'13] if q = 0 then
+    UInt8.of_int (UInt64.t'int x)
+  else
+    if q = 1 then
+      UInt8.of_int (UInt64.t'int (UInt64.shr x (8: UInt64.t)))
+    else
+      if q = 2 then
+        UInt8.of_int (UInt64.t'int (UInt64.shr x (16: UInt64.t)))
+      else
+        if q = 3 then
+          UInt8.of_int (UInt64.t'int (UInt64.shr x (24: UInt64.t)))
+        else
+          if q = 4 then
+            UInt8.of_int (UInt64.t'int (UInt64.shr x (32: UInt64.t)))
+          else
+            if q = 5 then
+              UInt8.of_int (UInt64.t'int (UInt64.shr x (40: UInt64.t)))
+            else
+              if q = 6 then
+                UInt8.of_int (UInt64.t'int (UInt64.shr x (48: UInt64.t)))
+              else
+                UInt8.of_int (UInt64.t'int (UInt64.shr x (56: UInt64.t)))
+            
+          
+        
+      
+    
+  
+
+
+function mix64_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 285 0 285 29] (x: UInt64.t) : UInt64.t =
+  [%#ssha256'7] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+function u64_of [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 224 4 224 32] (x: int) : UInt64.t
+
+function msg_byte [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 316 0 316 40] (base: UInt64.t) (i: int) : UInt8.t
+ = [%#ssha256'12] byte_le (mix64_l (UInt64.add base (u64_of (ComputerDivision.div i 8)))) (ComputerDivision.mod i 8)
+
+function msg_word [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 387 0 387 41] (base: UInt64.t) (w: int) : UInt32.t
+ = [%#ssha256'5] be_word (msg_byte base (4 * w)) (msg_byte base (4 * w + 1)) (msg_byte base (4 * w
+  + 2)) (msg_byte base (4 * w + 3))
+
+function bswap_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 349 0 349 29] (x: UInt32.t) : UInt32.t =
+  [%#ssha256'6] UInt32.bw_or (UInt32.bw_or (UInt32.bw_or (UInt32.shl (UInt32.bw_and x (255: UInt32.t)) (24: UInt32.t)) (UInt32.shl (UInt32.bw_and x (65280: UInt32.t)) (8: UInt32.t))) (UInt32.bw_and (UInt32.shr x (8: UInt32.t)) (65280: UInt32.t))) (UInt32.shr x (24: UInt32.t))
+
+function u64_of_view [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 231 4 231 30] (v: UInt64.t) : ()
+
+axiom u64_of_view_spec: forall v: UInt64.t. [%#ssha256'2] u64_of (UInt64.t'int v) = v
+
+function le_bytes_bswap [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 365 0 365 29] (x: UInt64.t) : () =
+  [%#ssha256'10] ()
+
+axiom le_bytes_bswap_spec:
+  forall x: UInt64.t. [%#ssha256'3] be_word (UInt8.of_int (UInt64.t'int x)) (UInt8.of_int (UInt64.t'int (UInt64.shr x (8: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (16: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (24: UInt64.t))))
+    = bswap_l (UInt32.of_int (UInt64.t'int x))
+
+axiom le_bytes_bswap_spec'0:
+  forall x: UInt64.t. [%#ssha256'4] be_word (UInt8.of_int (UInt64.t'int (UInt64.shr x (32: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (40: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (48: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (56: UInt64.t))))
+    = bswap_l (UInt32.of_int (UInt64.t'int (UInt64.shr x (32: UInt64.t))))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant base : UInt64.t
+
+constant w : UInt64.t
+
+function msg_word_mix [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 396 0 396 38] (base: UInt64.t) (w: UInt64.t) : ()
+
+goal vc_msg_word_mix: ([%#ssha256] UInt64.t'int w < 1152921504606846976)
+  -> (let x = mix64_l (UInt64.add base w) in ([@stop_split] [@expl:u64_of_view ensures] [%#ssha256'2] u64_of (UInt64.t'int w)
+    = w)
+  -> ([@stop_split] [@expl:le_bytes_bswap ensures] ([@stop_split] [@expl:le_bytes_bswap ensures #0] [%#ssha256'3] be_word (UInt8.of_int (UInt64.t'int x)) (UInt8.of_int (UInt64.t'int (UInt64.shr x (8: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (16: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (24: UInt64.t))))
+      = bswap_l (UInt32.of_int (UInt64.t'int x)))
+    /\ ([@stop_split] [@expl:le_bytes_bswap ensures #1] [%#ssha256'4] be_word (UInt8.of_int (UInt64.t'int (UInt64.shr x (32: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (40: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (48: UInt64.t)))) (UInt8.of_int (UInt64.t'int (UInt64.shr x (56: UInt64.t))))
+    = bswap_l (UInt32.of_int (UInt64.t'int (UInt64.shr x (32: UInt64.t))))))
+  -> (forall r: int. 0 <= r /\ r < 8
+      -> ComputerDivision.div (8 * UInt64.t'int w + r) 8 = UInt64.t'int w
+      /\ ComputerDivision.mod (8 * UInt64.t'int w + r) 8 = r)
+  && (forall r: int. 0 <= r /\ r < 8
+      -> mix64_l (UInt64.add base (u64_of (ComputerDivision.div (8 * UInt64.t'int w + r) 8))) = x)
+  && msg_byte base (8 * UInt64.t'int w) = byte_le x 0
+  && msg_byte base (8 * UInt64.t'int w + 1) = byte_le x 1
+  && msg_byte base (8 * UInt64.t'int w + 2) = byte_le x 2
+  && msg_byte base (8 * UInt64.t'int w + 3) = byte_le x 3
+  && msg_byte base (8 * UInt64.t'int w + 4) = byte_le x 4
+  && msg_byte base (8 * UInt64.t'int w + 5) = byte_le x 5
+  && msg_byte base (8 * UInt64.t'int w + 6) = byte_le x 6
+  && msg_byte base (8 * UInt64.t'int w + 7) = byte_le x 7
+  && ([@stop_split] [@expl:msg_word_mix ensures] ([@stop_split] [@expl:msg_word_mix ensures #0] [%#ssha256'0] msg_word base (2
+      * UInt64.t'int w)
+    = bswap_l (UInt32.of_int (UInt64.t'int (mix64_l (UInt64.add base w)))))
+  /\ ([@stop_split] [@expl:msg_word_mix ensures #1] [%#ssha256'1] msg_word base (2 * UInt64.t'int w + 1)
+  = bswap_l (UInt32.of_int (UInt64.t'int (UInt64.shr (mix64_l (UInt64.add base w)) (32: UInt64.t)))))))

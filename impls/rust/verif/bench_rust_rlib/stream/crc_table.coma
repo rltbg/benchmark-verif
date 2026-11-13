@@ -1,76 +1,46 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 30 0 30 30 *)
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 319 0 319 32 *)
 
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 96 22 96 41
-let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 97 22 97 22
-let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
-let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
-let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
-let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
-let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
-let%span svec'6 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
-let%span svec'7 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
-let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
-let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
-let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
-let%span smacros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
-let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 31 26 31 30
-let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 31 32 31 35
-let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 32 16 32 22
-let%span sstream'2 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 34 14 34 22
-let%span sstream'3 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 35 14 35 17
-let%span sstream'4 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 33 16 33 44
-let%span sstream'5 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 37 20 37 26
-let%span sstream'6 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 39 18 39 24
-let%span sstream'7 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 40 18 40 19
-let%span sstream'8 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 38 20 38 27
-let%span sstream'9 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 41 23 41 24
-let%span sstream'10 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 41 28 41 29
-let%span sstream'11 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 41 38 41 39
-let%span sstream'12 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 41 32 41 40
-let%span sstream'13 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 41 43 41 53
-let%span sstream'14 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 41 68 41 69
-let%span sstream'15 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 41 63 41 69
-let%span sstream'16 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 42 17 42 18
-let%span sstream'17 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 42 12 42 18
-let%span sstream'18 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 44 9 44 12
-let%span sstream'19 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 45 13 45 14
-let%span sstream'20 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 45 8 45 14
-let%span sstream'21 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 29 10 29 30
+let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 320 16 320 27
+let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 320 17 320 21
+let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 321 16 321 22
+let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 324 14 324 22
+let%span sstream'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 325 14 325 17
+let%span sstream'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 323 16 323 16
+let%span sstream'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 322 16 322 25
+let%span sstream'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 327 20 327 26
+let%span sstream'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 329 18 329 24
+let%span sstream'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 330 18 330 19
+let%span sstream'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 328 20 328 58
+let%span sstream'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 23 331 24
+let%span sstream'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 28 331 29
+let%span sstream'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 38 331 39
+let%span sstream'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 32 331 40
+let%span sstream'14 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 43 331 53
+let%span sstream'15 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 68 331 69
+let%span sstream'16 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 63 331 69
+let%span sstream'17 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 332 17 332 18
+let%span sstream'18 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 332 12 332 18
+let%span sstream'19 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 334 8 334 12
+let%span sstream'20 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 334 8 334 16
+let%span sstream'21 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 335 13 335 14
+let%span sstream'22 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 335 8 335 14
+let%span sstream'23 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 319 22 319 32
+let%span sstream'24 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 317 10 317 10
+let%span sstream'25 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 34 10 34 11
+let%span sstream'26 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 36 4 36 58
+let%span sstream'27 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 29 4 29 74
 
 use creusot.int.UInt32
 use creusot.int.UInt64
+use creusot.slice.Slice64
 use seq.Seq
 use creusot.int.Int32
-use creusot.prelude.MutBorrow
 use creusot.prelude.Any
 use int.Int
-
-type t_Vec_u32_Global
-
-constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
-
-function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
-
-axiom view_Vec_u32_Global_spec:
-  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec'1] Seq.length (view_Vec_u32_Global self)
-    <= UInt64.t'int const_MAX
-
-function index_Vec_u32_Global [@inline:trivial] (self: t_Vec_u32_Global) (ix: int) : UInt32.t =
-  [%#svec'7] Seq.get (view_Vec_u32_Global self) ix
-
-meta "rewrite_def" function index_Vec_u32_Global
-
-let from_elem_u32 (elem: UInt32.t) (n: UInt64.t) (return (x: t_Vec_u32_Global)) = any
-  [ return (result: t_Vec_u32_Global) ->
-  {[@stop_split] [@expl:from_elem_u32 ensures] ([@stop_split] [@expl:from_elem ensures #0] [%#svec] Seq.length (view_Vec_u32_Global result)
-      = UInt64.t'int n)
-    /\ ([@stop_split] [@expl:from_elem ensures #1] [%#svec'0] forall i: int. 0 <= i /\ i < UInt64.t'int n
-      -> index_Vec_u32_Global result i = elem)}
-    (! return {result}) ]
 
 predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
 
@@ -85,105 +55,102 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
 
 meta "rewrite_def" predicate well_founded_relation_Int
 
-predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) =
-  [%#sslice] UInt64.t'int self < Seq.length seq
+function crc_shift [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 28 0 28 31] (x: UInt32.t) : UInt32.t =
+  [%#sstream'27] if UInt32.bw_and x (1: UInt32.t) <> (0: UInt32.t) then
+    UInt32.bw_xor (UInt32.shr x (1: UInt32.t)) (3988292384: UInt32.t)
+  else
+    UInt32.shr x (1: UInt32.t)
 
-meta "rewrite_def" predicate in_bounds_usize
 
-predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) (out: UInt32.t) =
-  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+function crc_iter [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 35 0 35 38] (x: UInt32.t) (k: int) : UInt32.t
 
-meta "rewrite_def" predicate has_value_usize
+axiom crc_iter_def: forall x: UInt32.t, k: int [crc_iter x k]. crc_iter x k
+    = ([%#sstream'26] if k <= 0 then x else crc_shift (crc_iter x (k - 1)))
 
-predicate resolve_elswhere_usize [@inline:trivial] (self: UInt64.t) (old': Seq.seq UInt32.t) (fin: Seq.seq UInt32.t) =
-  [%#sslice'1] forall i: int. 0 <= i /\ i <> UInt64.t'int self /\ i < Seq.length old' -> Seq.get old' i = Seq.get fin i
+predicate inv_Seq_u32 [@inline:trivial] (_1: Seq.seq UInt32.t) = true
 
-meta "rewrite_def" predicate resolve_elswhere_usize
+meta "rewrite_def" predicate inv_Seq_u32
 
-let index_mut_Vec_u32_Global (self: MutBorrow.t t_Vec_u32_Global) (index: UInt64.t) (return (x: MutBorrow.t UInt32.t)) =
-{[@stop_split] [@expl:index_mut requires] [%#svec'2] in_bounds_usize index (view_Vec_u32_Global self.current)}
-  any
-  [ return (result: MutBorrow.t UInt32.t) ->
-  {[@stop_split] [@expl:index_mut_Vec_u32_Global ensures] ([@stop_split] [@expl:index_mut ensures #0] [%#svec'3] has_value_usize index (view_Vec_u32_Global self.current) result.current)
-    /\ ([@stop_split] [@expl:index_mut ensures #1] [%#svec'4] has_value_usize index (view_Vec_u32_Global self.final) result.final)
-    /\ ([@stop_split] [@expl:index_mut ensures #2] [%#svec'5] resolve_elswhere_usize index (view_Vec_u32_Global self.current) (view_Vec_u32_Global self.final))
-    /\ ([@stop_split] [@expl:index_mut ensures #3] [%#svec'6] Seq.length (view_Vec_u32_Global self.final)
-    = Seq.length (view_Vec_u32_Global self.current))}
-    (! return {result}) ]
+predicate invariant_array_u32_256 (self: Slice64.array UInt32.t) =
+  [%#sarray] inv_Seq_u32 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (256: UInt64.t)
 
-predicate resolve_refmut_u32 [@inline:trivial] (_1: MutBorrow.t UInt32.t) = _1.final = _1.current
+predicate inv_array_u32_256 [@inline:trivial] (_1: Slice64.array UInt32.t) = invariant_array_u32_256 _1
 
-meta "rewrite_def" predicate resolve_refmut_u32
+meta "rewrite_def" predicate inv_array_u32_256
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let crc_table [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 30 0 30 30] (return (x: t_Vec_u32_Global)) =
+let crc_table [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 319 0 319 32] (return (x: Slice64.array UInt32.t)) =
 (! bb0
   [ bb0 = s0
-    [ s0 = from_elem_u32 [%#smacros] {[%#sstream] (0: UInt32.t)} {[%#sstream'0] (256: UInt64.t)}
-        (fun (_x: t_Vec_u32_Global) -> [ &t <- _x ] s1)
+    [ s0 = Slice64.create [%#sstream] <UInt32.t> {[%#sstream] (256: UInt64.t)}
+        {fun (_: int) -> [%#sstream'0] (0: UInt32.t)} (fun (_res: Slice64.array UInt32.t) -> [ &t <- _res ] s1)
     | s1 = [ &i <- [%#sstream'1] (0: UInt64.t) ] s2
-    | s2 = bb2 ]
-  | bb2 = bb2invariant
-    [ bb2 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb2 ([%#sstream'2] 256 - UInt64.t'int i)}
-      bb2invariant
-    | bb2invariant = {[@expl:loop invariant] [%#sstream'4] Seq.length (view_Vec_u32_Global t) = 256
-      /\ UInt64.t'int i <= 256}
-      (! [ &variant_old_bb2 <- [%#sstream'2] 256 - UInt64.t'int i ] s0)
-      [ s0 = [ &_12 <- UInt64.lt i ([%#sstream'3] (256: UInt64.t)) ] s1
-      | s1 = any [ br0 -> {_12 = false} (! bb13) | br1 -> {_12} (! bb4) ] ]
-      [ bb4 = s0
-        [ s0 = [ &x <- UInt32.of_int (UInt64.t'int i) ] s1 | s1 = [ &k <- [%#sstream'5] (0: UInt64.t) ] s2 | s2 = bb5 ]
-      | bb5 = bb5invariant
-        [ bb5 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb5 ([%#sstream'6] 8 - UInt64.t'int k)}
-          bb5invariant
-        | bb5invariant = {[@expl:loop invariant] [%#sstream'8] UInt64.t'int k <= 8}
-          (! [ &variant_old_bb5 <- [%#sstream'6] 8 - UInt64.t'int k ] s0)
-          [ s0 = [ &_23 <- UInt64.lt k ([%#sstream'7] (8: UInt64.t)) ] s1
-          | s1 = any [ br0 -> {_23 = false} (! bb11) | br1 -> {_23} (! bb7) ] ]
-          [ bb7 = s0
-            [ s0 = [ &_27 <- UInt32.bw_and x ([%#sstream'9] (1: UInt32.t)) ] s1
-            | s1 = [ &_26 <- _27 <> ([%#sstream'10] (0: UInt32.t)) ] s2
-            | s2 = any [ br0 -> {_26 = false} (! bb9) | br1 -> {_26} (! bb8) ] ]
+    | s2 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#sstream'2] 256 - UInt64.t'int i)}
+      bb1invariant
+    | bb1invariant = {[@expl:inferred invariant: type invariant] inv_array_u32_256 t}
+      {[@expl:loop invariant #0] [%#sstream'5] UInt64.t'int i <= 256}
+      {[@expl:loop invariant #1] [%#sstream'4] forall j: UInt64.t. UInt64.t'int j < UInt64.t'int i
+        -> Seq.get (Slice64.view t) (UInt64.t'int j) = crc_iter (UInt32.of_int (UInt64.t'int j)) 8}
+      (! [ &variant_old_bb1 <- [%#sstream'2] 256 - UInt64.t'int i ] s0)
+      [ s0 = [ &_14 <- UInt64.lt i ([%#sstream'3] (256: UInt64.t)) ] s1
+      | s1 = any [ br0 -> {_14 = false} (! bb12) | br1 -> {_14} (! bb3) ] ]
+      [ bb3 = s0
+        [ s0 = [ &x <- UInt32.of_int (UInt64.t'int i) ] s1 | s1 = [ &k <- [%#sstream'6] (0: UInt64.t) ] s2 | s2 = bb4 ]
+      | bb4 = bb4invariant
+        [ bb4 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb4 ([%#sstream'7] 8 - UInt64.t'int k)}
+          bb4invariant
+        | bb4invariant = {[@expl:loop invariant] [%#sstream'9] UInt64.t'int k <= 8
+          /\ x = crc_iter (UInt32.of_int (UInt64.t'int i)) (UInt64.t'int k)}
+          (! [ &variant_old_bb4 <- [%#sstream'7] 8 - UInt64.t'int k ] s0)
+          [ s0 = [ &_27 <- UInt64.lt k ([%#sstream'8] (8: UInt64.t)) ] s1
+          | s1 = any [ br0 -> {_27 = false} (! bb10) | br1 -> {_27} (! bb6) ] ]
+          [ bb6 = s0
+            [ s0 = [ &_31 <- UInt32.bw_and x ([%#sstream'10] (1: UInt32.t)) ] s1
+            | s1 = [ &_30 <- _31 <> ([%#sstream'11] (0: UInt32.t)) ] s2
+            | s2 = any [ br0 -> {_30 = false} (! bb8) | br1 -> {_30} (! bb7) ] ]
+          | bb7 = s0
+            [ s0 = UInt32.shr [%#sstream'13] {x} {Int32.to_int ([%#sstream'12] (1: Int32.t))}
+                (fun (_x: UInt32.t) -> [ &_33 <- _x ] s1)
+            | s1 = [ &_29 <- UInt32.bw_xor _33 ([%#sstream'14] (3988292384: UInt32.t)) ] s2
+            | s2 = bb9 ]
           | bb8 = s0
-            [ s0 = UInt32.shr [%#sstream'12] {x} {Int32.to_int ([%#sstream'11] (1: Int32.t))}
+            [ s0 = UInt32.shr [%#sstream'16] {x} {Int32.to_int ([%#sstream'15] (1: Int32.t))}
                 (fun (_x: UInt32.t) -> [ &_29 <- _x ] s1)
-            | s1 = [ &_25 <- UInt32.bw_xor _29 ([%#sstream'13] (3988292384: UInt32.t)) ] s2
-            | s2 = bb10 ]
+            | s1 = bb9 ]
           | bb9 = s0
-            [ s0 = UInt32.shr [%#sstream'15] {x} {Int32.to_int ([%#sstream'14] (1: Int32.t))}
-                (fun (_x: UInt32.t) -> [ &_25 <- _x ] s1)
-            | s1 = bb10 ]
-          | bb10 = s0
-            [ s0 = [ &x <- _25 ] s1
-            | s1 = UInt64.add [%#sstream'17] {k} {[%#sstream'16] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &k <- _x ] s2)
-            | s2 = bb5 ] ] ]
-      | bb11 = s0
-        [ s0 = MutBorrow.borrow_mut <t_Vec_u32_Global> {t}
-            (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_35 <- _bor ] [ &t <- _bor.final ] s1)
-        | s1 = index_mut_Vec_u32_Global [%#sstream'18] {_35} {i} (fun (_x: MutBorrow.t UInt32.t) -> [ &_34 <- _x ] s2)
-        | s2 = [ &_34 <- { _34 with current = x } ] s3
-        | s3 = -{resolve_refmut_u32 _34}- s4
-        | s4 = UInt64.add [%#sstream'20] {i} {[%#sstream'19] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s5)
-        | s5 = bb2 ] ] ]
-  | bb13 = s0 [ s0 = [ &_ret <- t ] s1 | s1 = return {_ret} ] ]
-  [ & _ret: t_Vec_u32_Global = Any.any_l ()
-  | & t: t_Vec_u32_Global = Any.any_l ()
+            [ s0 = [ &x <- _29 ] s1
+            | s1 = UInt64.add [%#sstream'18] {k} {[%#sstream'17] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &k <- _x ] s2)
+            | s2 = bb4 ] ] ]
+      | bb10 = s0
+        [ s0 = [ &_38 <- i ] s1
+        | s1 = [ &_39 <- UInt64.lt _38 ([%#sstream'19] (256: UInt64.t)) ] s2
+        | s2 = {[@expl:index in bounds] [%#sstream'19] _39} s3
+        | s3 = Slice64.set [%#sstream'20] <UInt32.t> {t} {_38} {x} (fun (r: Slice64.array UInt32.t) -> [ &t <- r ] s4)
+        | s4 = UInt64.add [%#sstream'22] {i} {[%#sstream'21] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s5)
+        | s5 = bb1 ] ] ]
+  | bb12 = s0 [ s0 = [ &_ret <- t ] s1 | s1 = return {_ret} ] ]
+  [ & _ret: Slice64.array UInt32.t = Any.any_l ()
+  | & t: Slice64.array UInt32.t = Any.any_l ()
   | & i: UInt64.t = Any.any_l ()
-  | & _12: bool = Any.any_l ()
+  | & _14: bool = Any.any_l ()
   | & x: UInt32.t = Any.any_l ()
   | & k: UInt64.t = Any.any_l ()
-  | & _23: bool = Any.any_l ()
-  | & _25: UInt32.t = Any.any_l ()
-  | & _26: bool = Any.any_l ()
-  | & _27: UInt32.t = Any.any_l ()
+  | & _27: bool = Any.any_l ()
   | & _29: UInt32.t = Any.any_l ()
-  | & _34: MutBorrow.t UInt32.t = Any.any_l ()
-  | & _35: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
-  | & variant_old_bb2: int = Any.any_l ()
-  | & variant_old_bb5: int = Any.any_l () ])
-  [ return (result: t_Vec_u32_Global) ->
-  {[@stop_split] [@expl:crc_table ensures] [%#sstream'21] Seq.length (view_Vec_u32_Global result) = 256}
+  | & _30: bool = Any.any_l ()
+  | & _31: UInt32.t = Any.any_l ()
+  | & _33: UInt32.t = Any.any_l ()
+  | & _38: UInt64.t = Any.any_l ()
+  | & _39: bool = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l ()
+  | & variant_old_bb4: int = Any.any_l () ])
+  [ return (result: Slice64.array UInt32.t) ->
+  {[@stop_split] [@expl:crc_table ensures] ([@stop_split] [@expl:crc_table result type invariant] [%#sstream'23] inv_array_u32_256 result)
+    /\ ([@stop_split] [@expl:crc_table ensures] [%#sstream'24] forall i: UInt64.t. UInt64.t'int i < 256
+      -> Seq.get (Slice64.view result) (UInt64.t'int i) = crc_iter (UInt32.of_int (UInt64.t'int i)) 8)}
     (! return {result}) ]

@@ -1,0 +1,582 @@
+(* #"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 181 0 181 43 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 41 28 41 33
+let%span ssort = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 43 10 43 33
+let%span ssort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 132 10 132 41
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 371 8 371 41
+let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 413 12 413 12
+let%span sseq'1 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 423 8 423 40
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span smacros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
+let%span smacros'0 = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 96 22 96 41
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 97 22 97 22
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 212 18 212 34
+let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 213 18 213 50
+let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 214 18 214 40
+let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 104 18 104 36
+let%span svec'6 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 118 18 118 43
+let%span svec'7 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 206 18 206 34
+let%span svec'8 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 114 18 114 40
+let%span svec'9 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'10 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span svec'11 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sparsort = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 182 24 182 25
+let%span sparsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 182 12 182 26
+let%span sparsort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 183 26 183 30
+let%span sparsort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 184 28 184 32
+let%span sparsort'3 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 185 9 185 15
+let%span sparsort'4 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 185 4 185 16
+let%span sparsort'5 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 187 33 187 43
+let%span sparsort'6 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 188 16 188 22
+let%span sparsort'7 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 190 16 190 16
+let%span sparsort'8 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 189 16 189 51
+let%span sparsort'9 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 192 20 192 25
+let%span sparsort'10 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 192 20 192 29
+let%span sparsort'11 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 192 8 192 30
+let%span sparsort'12 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 193 13 193 14
+let%span sparsort'13 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 193 8 193 14
+let%span sparsort'14 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 195 18 195 18
+let%span sparsort'15 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 196 18 196 36
+let%span sparsort'16 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 197 15 197 21
+let%span sparsort'17 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 197 23 197 31
+let%span sparsort'18 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 197 33 197 40
+let%span sparsort'19 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 197 4 197 44
+let%span sparsort'20 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 201 10 201 22
+let%span sparsort'21 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 201 25 201 26
+let%span sparsort'22 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 200 16 200 94
+let%span sparsort'23 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 199 16 199 76
+let%span sparsort'24 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 202 19 202 31
+let%span sparsort'25 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 202 34 202 35
+let%span sparsort'26 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 202 19 202 35
+let%span sparsort'27 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 203 27 203 28
+let%span sparsort'28 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 203 20 203 28
+let%span sparsort'29 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 205 20 205 26
+let%span sparsort'30 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 205 28 205 36
+let%span sparsort'31 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 205 38 205 45
+let%span sparsort'32 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 205 8 205 53
+let%span sparsort'33 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 206 33 206 43
+let%span sparsort'34 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 207 20 207 26
+let%span sparsort'35 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 209 20 209 20
+let%span sparsort'36 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 208 20 208 51
+let%span sparsort'37 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 211 27 211 28
+let%span sparsort'38 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 211 27 211 32
+let%span sparsort'39 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 211 26 211 33
+let%span sparsort'40 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 211 12 211 34
+let%span sparsort'41 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 212 17 212 18
+let%span sparsort'42 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 212 12 212 18
+let%span sparsort'43 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 214 18 214 19
+let%span sparsort'44 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 214 11 214 19
+let%span sparsort'45 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 214 23 214 24
+let%span sparsort'46 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 215 34 215 35
+let%span sparsort'47 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 215 27 215 35
+let%span sparsort'48 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 215 26 215 36
+let%span sparsort'49 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 215 12 215 37
+let%span sparsort'50 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 217 8 217 18
+let%span sparsort'51 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 219 22 219 68
+let%span sparsort'52 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 220 22 220 22
+let%span sparsort'53 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 221 22 221 82
+let%span sparsort'54 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 222 22 222 22
+let%span sparsort'55 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 224 22 224 22
+let%span sparsort'56 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 225 22 225 90
+let%span sparsort'57 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 226 22 226 97
+let%span sparsort'58 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 227 22 227 22
+let%span sparsort'59 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 228 22 228 63
+let%span sparsort'60 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 231 18 231 69
+let%span sparsort'61 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 232 13 232 15
+let%span sparsort'62 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 232 4 232 16
+let%span sparsort'63 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 180 11 180 64
+let%span sparsort'64 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 165 11 165 93
+let%span sparsort'65 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 166 10 166 70
+let%span sparsort'66 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 35 16 35 16
+let%span sparsort'67 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 27 8 28 72
+let%span sparsort'68 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 172 11 172 105
+let%span sparsort'69 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 173 11 173 50
+let%span sparsort'70 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 174 10 174 75
+let%span sparsort'71 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 175 10 175 10
+let%span sparsort'72 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 41 16 41 16
+let%span scmp = "/opt/tools/creusot/creusot-std/src/std/cmp.rs" 66 26 66 66
+let%span scmp'0 = "/opt/tools/creusot/creusot-std/src/std/cmp.rs" 67 26 67 63
+let%span scmp'1 = "/opt/tools/creusot/creusot-std/src/std/cmp.rs" 68 26 68 55
+let%span scmp'2 = "/opt/tools/creusot/creusot-std/src/std/cmp.rs" 69 26 69 30
+let%span scmp'3 = "/opt/tools/creusot/creusot-std/src/std/cmp.rs" 70 75 70 79
+
+use creusot.int.UInt64
+use creusot.int.UInt32
+use seq.Seq
+use creusot.prelude.MutBorrow
+use creusot.slice.Slice64
+use int.ComputerDivision
+use seq.Permut
+use creusot.prelude.Any
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+function deep_model_usize [@inline:trivial] (self: UInt64.t) : int = [%#snum] UInt64.t'int self
+
+meta "rewrite_def" function deep_model_usize
+
+let max_usize (self: UInt64.t) (other: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) ->
+  {[@stop_split] [@expl:max_usize ensures] ([@stop_split] [@expl:max ensures #0] [%#scmp] ge_log_Int (deep_model_usize result) (deep_model_usize self))
+    /\ ([@stop_split] [@expl:max ensures #1] [%#scmp'0] ge_log_Int (deep_model_usize result) (deep_model_usize other))
+    /\ ([@stop_split] [@expl:max ensures #2] [%#scmp'1] result = self \/ result = other)
+    /\ ([@stop_split] [@expl:max ensures #3] [%#scmp'2] deep_model_usize self <= deep_model_usize other
+      -> result = other)
+    /\ ([@stop_split] [@expl:max ensures #4] [%#scmp'3] deep_model_usize other < deep_model_usize self
+    -> result = self)}
+    (! return {result}) ]
+
+type t_Vec_u32_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
+
+axiom view_Vec_u32_Global_spec:
+  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec] Seq.length (view_Vec_u32_Global self)
+    <= UInt64.t'int const_MAX
+
+function index_Vec_u32_Global [@inline:trivial] (self: t_Vec_u32_Global) (ix: int) : UInt32.t =
+  [%#svec'11] Seq.get (view_Vec_u32_Global self) ix
+
+meta "rewrite_def" function index_Vec_u32_Global
+
+let from_elem_u32 (elem: UInt32.t) (n: UInt64.t) (return (x: t_Vec_u32_Global)) = any
+  [ return (result: t_Vec_u32_Global) ->
+  {[@stop_split] [@expl:from_elem_u32 ensures] ([@stop_split] [@expl:from_elem ensures #0] [%#svec'0] Seq.length (view_Vec_u32_Global result)
+      = UInt64.t'int n)
+    /\ ([@stop_split] [@expl:from_elem ensures #1] [%#svec'1] forall i: int. 0 <= i /\ i < UInt64.t'int n
+      -> index_Vec_u32_Global result i = elem)}
+    (! return {result}) ]
+
+let deref_mut_Vec_u32_Global (self: MutBorrow.t t_Vec_u32_Global) (return (x: MutBorrow.t (Slice64.slice UInt32.t))) =
+any
+  [ return (result: MutBorrow.t (Slice64.slice UInt32.t)) ->
+  {[@stop_split] [@expl:deref_mut_Vec_u32_Global ensures] ([@stop_split] [@expl:deref_mut ensures #0] [%#svec'2] Slice64.view result.current
+      = view_Vec_u32_Global self.current)
+    /\ ([@stop_split] [@expl:deref_mut ensures #1] [%#svec'3] Seq.length (view_Vec_u32_Global self.final)
+      = Seq.length (view_Vec_u32_Global self.current))
+    /\ ([@stop_split] [@expl:deref_mut ensures #2] [%#svec'4] Slice64.view result.final
+    = view_Vec_u32_Global self.final)}
+    (! return {result}) ]
+
+let fill (v: MutBorrow.t (Slice64.slice UInt32.t)) (return (x: ())) = any
+  [ return (result: ()) -> {[@stop_split] [@expl:fill ensures] [%#ssort] Seq.length (Slice64.view v.final)
+    = Seq.length (Slice64.view v.current)}
+    (! return {result}) ]
+
+predicate resolve_refmut_Vec_u32_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u32_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u32_Global
+
+predicate resolve_refmut_slice_u32 [@inline:trivial] (_1: MutBorrow.t (Slice64.slice UInt32.t)) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_slice_u32
+
+type t_Vec_usize_Global
+
+function view_Vec_usize_Global (self: t_Vec_usize_Global) : Seq.seq UInt64.t
+
+axiom view_Vec_usize_Global_spec:
+  forall self: t_Vec_usize_Global [view_Vec_usize_Global self]. [%#svec] Seq.length (view_Vec_usize_Global self)
+    <= UInt64.t'int const_MAX
+
+let new_usize (return (x: t_Vec_usize_Global)) = any
+  [ return (result: t_Vec_usize_Global) ->
+  {[@stop_split] [@expl:new ensures] [%#svec'5] Seq.length (view_Vec_usize_Global result) = 0}
+    (! return {result}) ]
+
+let push_usize (self: MutBorrow.t t_Vec_usize_Global) (value: UInt64.t) (return (x: ())) = any
+  [ return (result: ()) -> {[@stop_split] [@expl:push ensures] [%#svec'6] view_Vec_usize_Global self.final
+    = Seq.snoc (view_Vec_usize_Global self.current) value}
+    (! return {result}) ]
+
+let deref_Vec_usize_Global (self: t_Vec_usize_Global) (return (x: Slice64.slice UInt64.t)) = any
+  [ return (result: Slice64.slice UInt64.t) -> {[@stop_split] [@expl:deref ensures] [%#svec'7] Slice64.view result
+    = view_Vec_usize_Global self}
+    (! return {result}) ]
+
+predicate wf_bounds [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 25 0 25 47] (b: Seq.seq UInt64.t) (n: int) =
+  [%#sparsort'67] ge_log_Int (Seq.length b) 2
+  /\ UInt64.t'int (Seq.get b 0) = 0
+  /\ UInt64.t'int (Seq.get b (Seq.length b - 1)) = n
+  /\ (forall p: int, q: int. 0 <= p /\ p <= q /\ q < Seq.length b -> UInt64.le (Seq.get b p) (Seq.get b q))
+
+predicate sorted_range_u32 (self: Seq.seq UInt32.t) (start: int) (end': int) =
+  [%#sseq'0] forall i: int, j: int. start <= i /\ i <= j /\ j < end' -> UInt32.le (Seq.get self i) (Seq.get self j)
+
+predicate runs_sorted [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 34 0 34 81] (s: Seq.seq UInt32.t) (b: Seq.seq UInt64.t) (k: int) (m: int) (base: int) =
+  [%#sparsort'66] forall j: int. k <= j /\ j < m
+    -> sorted_range_u32 s (UInt64.t'int (Seq.get b j) - base) (UInt64.t'int (Seq.get b (j + 1)) - base)
+
+predicate permutation_of_u32 (self: Seq.seq UInt32.t) (other: Seq.seq UInt32.t) =
+  [%#sseq] Permut.permut self other 0 (Seq.length self)
+
+let sort_level (a: MutBorrow.t (Slice64.slice UInt32.t)) (tmp: MutBorrow.t (Slice64.slice UInt32.t))
+  (b: Slice64.slice UInt64.t) (t: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:sort_level requires] [%#sparsort'64] Seq.length (Slice64.view a.current)
+    = Seq.length (Slice64.view tmp.current)
+  /\ wf_bounds (Slice64.view b) (Seq.length (Slice64.view a.current))
+  /\ Seq.length (Slice64.view b) = UInt64.t'int t + 1 /\ 1 <= UInt64.t'int t}
+  any
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:sort_level ensures] [%#sparsort'65] runs_sorted (Slice64.view a.final) (Slice64.view b) 0 (UInt64.t'int t) 0
+    /\ permutation_of_u32 (Slice64.view a.final) (Slice64.view a.current)}
+    (! return {result}) ]
+
+let len_usize (self: t_Vec_usize_Global) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:len ensures] [%#svec'8] UInt64.t'int result
+    = Seq.length (view_Vec_usize_Global self)}
+    (! return {result}) ]
+
+predicate pairs_sorted [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 40 0 40 82] (s: Seq.seq UInt32.t) (b: Seq.seq UInt64.t) (p: int) (m: int) (base: int) =
+  [%#sparsort'72] forall q: int. p <= q /\ q < m
+    -> sorted_range_u32 s (UInt64.t'int (Seq.get b (2 * q)) - base) (UInt64.t'int (Seq.get b (2 * q + 2)) - base)
+
+let merge_level (a: MutBorrow.t (Slice64.slice UInt32.t)) (tmp: MutBorrow.t (Slice64.slice UInt32.t))
+  (b: Slice64.slice UInt64.t) (pairs: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:merge_level requires] ([@stop_split] [@expl:merge_level requires #0] [%#sparsort'68] Seq.length (Slice64.view a.current)
+      = Seq.length (Slice64.view tmp.current)
+    /\ wf_bounds (Slice64.view b) (Seq.length (Slice64.view a.current))
+    /\ 1 <= UInt64.t'int pairs /\ 2 * UInt64.t'int pairs + 1 <= Seq.length (Slice64.view b))
+  /\ ([@stop_split] [@expl:merge_level requires #1] [%#sparsort'69] runs_sorted (Slice64.view a.current) (Slice64.view b) 0 (Seq.length (Slice64.view b)
+  - 1) 0)}
+  any
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:merge_level ensures] ([@stop_split] [@expl:merge_level ensures #0] [%#sparsort'70] pairs_sorted (Slice64.view a.final) (Slice64.view b) 0 (UInt64.t'int pairs) 0
+      /\ permutation_of_u32 (Slice64.view a.final) (Slice64.view a.current))
+    /\ ([@stop_split] [@expl:merge_level ensures #1] [%#sparsort'71] forall i: int. UInt64.t'int (Seq.get (Slice64.view b) (2
+            * UInt64.t'int pairs))
+          <= i
+        /\ i < Seq.length (Slice64.view a.current)
+      -> Seq.get (Slice64.view a.final) i = Seq.get (Slice64.view a.current) i)}
+    (! return {result}) ]
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) (out: UInt64.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+let index_Vec_usize_Global (self: t_Vec_usize_Global) (index: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:index requires] [%#svec'9] in_bounds_usize index (view_Vec_usize_Global self)}
+  any
+  [ return (result: UInt64.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'10] has_value_usize index (view_Vec_usize_Global self) result}
+    (! return {result}) ]
+
+let deref_Vec_u32_Global (self: t_Vec_u32_Global) (return (x: Slice64.slice UInt32.t)) = any
+  [ return (result: Slice64.slice UInt32.t) -> {[@stop_split] [@expl:deref ensures] [%#svec'7] Slice64.view result
+    = view_Vec_u32_Global self}
+    (! return {result}) ]
+
+predicate sorted_u32 (self: Seq.seq UInt32.t) = [%#sseq'1] sorted_range_u32 self 0 (Seq.length self)
+
+let checksum (v: Slice64.slice UInt32.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:checksum ensures] [%#ssort'0] not sorted_u32 (Slice64.view v)
+    -> result = (0: UInt64.t)}
+    (! return {result}) ]
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let run [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 181 0 181 43] (n: UInt64.t) (threads: UInt64.t)
+  (return (x: UInt64.t)) = {[@stop_split] [@expl:run requires] [%#sparsort'63] 1 <= UInt64.t'int n
+  /\ UInt64.t'int n <= 1073741824 /\ UInt64.t'int threads <= 1073741824}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = max_usize [%#sparsort'0] {threads} {[%#sparsort] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &t <- _x ] s1)
+    | s1 = from_elem_u32 [%#smacros] {[%#sparsort'1] (0: UInt32.t)} {n} (fun (_x: t_Vec_u32_Global) -> [ &a <- _x ] s2)
+    | s2 = from_elem_u32 [%#smacros'0] {[%#sparsort'2] (0: UInt32.t)} {n}
+        (fun (_x: t_Vec_u32_Global) -> [ &tmp <- _x ] s3)
+    | s3 = MutBorrow.borrow_mut <t_Vec_u32_Global> {a}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_16 <- _bor ] [ &a <- _bor.final ] s4)
+    | s4 = MutBorrow.borrow_final <t_Vec_u32_Global> {_16.current} {MutBorrow.get_id _16}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_15 <- _bor ] [ &_16 <- { _16 with current = _bor.final } ] s5)
+    | s5 = deref_mut_Vec_u32_Global [%#sparsort'3] {_15}
+        (fun (_x: MutBorrow.t (Slice64.slice UInt32.t)) -> [ &_14 <- _x ] s6)
+    | s6 = MutBorrow.borrow_final <Slice64.slice UInt32.t> {_14.current} {MutBorrow.get_id _14}
+        (fun (_bor: MutBorrow.t (Slice64.slice UInt32.t)) ->
+          [ &_13 <- _bor ] [ &_14 <- { _14 with current = _bor.final } ] s7)
+    | s7 = fill [%#sparsort'4] {_13} (fun (_x: ()) -> [ &_12 <- _x ] s8)
+    | s8 = -{resolve_refmut_Vec_u32_Global _16}- s9
+    | s9 = -{resolve_refmut_slice_u32 _14}- s10
+    | s10 = any
+      [ any_ (_dest: Seq.seq UInt32.t) ->
+      (! -{([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u32_Global a) <= UInt64.t'int const_MAX)
+        /\ _dest = view_Vec_u32_Global a}-
+        [ &input <- _dest ] s11) ] [ _ck -> (! any) ]
+    | s11 = new_usize [%#sparsort'5] (fun (_x: t_Vec_usize_Global) -> [ &bounds <- _x ] s12)
+    | s12 = [ &k <- [%#sparsort'6] (0: UInt64.t) ] s13
+    | s13 = bb8 ]
+  | bb8 = bb8
+    [ bb8 = {[@expl:loop invariant #0] [%#sparsort'8] UInt64.t'int k <= UInt64.t'int t + 1
+      /\ Seq.length (view_Vec_usize_Global bounds) = UInt64.t'int k}
+      {[@expl:loop invariant #1] [%#sparsort'7] forall p: int. 0 <= p /\ p < UInt64.t'int k
+        -> UInt64.t'int (Seq.get (view_Vec_usize_Global bounds) p)
+        = ComputerDivision.div (UInt64.t'int n * p) (UInt64.t'int t)}
+      (! s0)
+      [ s0 = [ &_34 <- UInt64.le k t ] s1 | s1 = any [ br0 -> {_34 = false} (! bb13) | br1 -> {_34} (! bb10) ] ]
+      [ bb10 = s0
+        [ s0 = UInt64.mul [%#sparsort'9] {n} {k} (fun (_x: UInt64.t) -> [ &_40 <- _x ] s1)
+        | s1 = [ &_43 <- t ] s2
+        | s2 = [ &_44 <- _43 = ([%#sparsort'10] (0: UInt64.t)) ] s3
+        | s3 = {[@expl:division by zero] [%#sparsort'10] not _44} s4
+        | s4 = UInt64.div [%#sparsort'10] {_40} {_43} (fun (_x: UInt64.t) -> [ &_39 <- _x ] s5)
+        | s5 = MutBorrow.borrow_mut <t_Vec_usize_Global> {bounds}
+            (fun (_bor: MutBorrow.t t_Vec_usize_Global) -> [ &_38 <- _bor ] [ &bounds <- _bor.final ] s6)
+        | s6 = push_usize [%#sparsort'11] {_38} {_39} (fun (_x: ()) -> [ &_37 <- _x ] s7)
+        | s7 = UInt64.add [%#sparsort'13] {k} {[%#sparsort'12] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &k <- _x ] s8)
+        | s8 = bb8 ] ] ]
+  | bb13 = s0
+    [ s0 = {[@expl:assertion] [%#sparsort'14] forall p: int, q'0: int. 0 <= p /\ p <= q'0 /\ q'0 <= UInt64.t'int t
+        -> ComputerDivision.div (UInt64.t'int n * p) (UInt64.t'int t)
+        <= ComputerDivision.div (UInt64.t'int n * q'0) (UInt64.t'int t)}
+      s1
+    | s1 = {[@expl:assertion] [%#sparsort'15] ComputerDivision.div (UInt64.t'int n * UInt64.t'int t) (UInt64.t'int t)
+      = UInt64.t'int n}
+      s2
+    | s2 = MutBorrow.borrow_mut <t_Vec_u32_Global> {a}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_58 <- _bor ] [ &a <- _bor.final ] s3)
+    | s3 = MutBorrow.borrow_final <t_Vec_u32_Global> {_58.current} {MutBorrow.get_id _58}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_57 <- _bor ] [ &_58 <- { _58 with current = _bor.final } ] s4)
+    | s4 = deref_mut_Vec_u32_Global [%#sparsort'16] {_57}
+        (fun (_x: MutBorrow.t (Slice64.slice UInt32.t)) -> [ &_56 <- _x ] s5)
+    | s5 = MutBorrow.borrow_mut <t_Vec_u32_Global> {tmp}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_62 <- _bor ] [ &tmp <- _bor.final ] s6)
+    | s6 = MutBorrow.borrow_final <t_Vec_u32_Global> {_62.current} {MutBorrow.get_id _62}
+        (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_61 <- _bor ] [ &_62 <- { _62 with current = _bor.final } ] s7)
+    | s7 = deref_mut_Vec_u32_Global [%#sparsort'17] {_61}
+        (fun (_x: MutBorrow.t (Slice64.slice UInt32.t)) -> [ &_60 <- _x ] s8)
+    | s8 = [ &_66 <- bounds ] s9
+    | s9 = deref_Vec_usize_Global [%#sparsort'18] {_66} (fun (_x: Slice64.slice UInt64.t) -> [ &_64 <- _x ] s10)
+    | s10 = MutBorrow.borrow_final <Slice64.slice UInt32.t> {_56.current} {MutBorrow.get_id _56}
+        (fun (_bor: MutBorrow.t (Slice64.slice UInt32.t)) ->
+          [ &_55 <- _bor ] [ &_56 <- { _56 with current = _bor.final } ] s11)
+    | s11 = MutBorrow.borrow_final <Slice64.slice UInt32.t> {_60.current} {MutBorrow.get_id _60}
+        (fun (_bor: MutBorrow.t (Slice64.slice UInt32.t)) ->
+          [ &_59 <- _bor ] [ &_60 <- { _60 with current = _bor.final } ] s12)
+    | s12 = sort_level [%#sparsort'19] {_55} {_59} {_64} {t} (fun (_x: ()) -> [ &_54 <- _x ] s13)
+    | s13 = -{resolve_refmut_Vec_u32_Global _62}- s14
+    | s14 = -{resolve_refmut_slice_u32 _60}- s15
+    | s15 = -{resolve_refmut_Vec_u32_Global _58}- s16
+    | s16 = -{resolve_refmut_slice_u32 _56}- s17
+    | s17 = bb18 ]
+  | bb18 = bb18
+    [ bb18 = {[@expl:loop invariant #0] [%#sparsort'23] wf_bounds (view_Vec_usize_Global bounds) (UInt64.t'int n)
+      /\ Seq.length (view_Vec_u32_Global a) = UInt64.t'int n /\ Seq.length (view_Vec_u32_Global tmp) = UInt64.t'int n}
+      {[@expl:loop invariant #1] [%#sparsort'22] runs_sorted (view_Vec_u32_Global a) (view_Vec_usize_Global bounds) 0 (Seq.length (view_Vec_usize_Global bounds)
+        - 1) 0
+      /\ permutation_of_u32 (view_Vec_u32_Global a) input}
+      (! s0)
+      [ s0 = len_usize [%#sparsort'20] {bounds} (fun (_x: UInt64.t) -> [ &_80 <- _x ] s1)
+      | s1 = [ &_79 <- UInt64.gt _80 ([%#sparsort'21] (2: UInt64.t)) ] s2
+      | s2 = any [ br0 -> {_79 = false} (! bb47) | br1 -> {_79} (! bb21) ] ]
+      [ bb21 = s0
+        [ s0 = len_usize [%#sparsort'24] {bounds} (fun (_x: UInt64.t) -> [ &_83 <- _x ] s1)
+        | s1 = UInt64.sub [%#sparsort'26] {_83} {[%#sparsort'25] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &runs <- _x ] s2)
+        | s2 = [ &_87 <- ([%#sparsort'27] (2: UInt64.t)) = ([%#sparsort'28] (0: UInt64.t)) ] s3
+        | s3 = {[@expl:division by zero] [%#sparsort'28] not _87} s4
+        | s4 = UInt64.div [%#sparsort'28] {runs} {[%#sparsort'27] (2: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &pairs <- _x ] s5)
+        | s5 = any
+          [ any_ (_dest: Seq.seq UInt32.t) ->
+          (! -{([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u32_Global a)
+              <= UInt64.t'int const_MAX)
+            /\ _dest = view_Vec_u32_Global a}-
+            [ &before <- _dest ] s6) ] [ _ck -> (! any) ]
+        | s6 = MutBorrow.borrow_mut <t_Vec_u32_Global> {a}
+            (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_95 <- _bor ] [ &a <- _bor.final ] s7)
+        | s7 = MutBorrow.borrow_final <t_Vec_u32_Global> {_95.current} {MutBorrow.get_id _95}
+            (fun (_bor: MutBorrow.t t_Vec_u32_Global) ->
+              [ &_94 <- _bor ] [ &_95 <- { _95 with current = _bor.final } ] s8)
+        | s8 = deref_mut_Vec_u32_Global [%#sparsort'29] {_94}
+            (fun (_x: MutBorrow.t (Slice64.slice UInt32.t)) -> [ &_93 <- _x ] s9)
+        | s9 = MutBorrow.borrow_mut <t_Vec_u32_Global> {tmp}
+            (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_99 <- _bor ] [ &tmp <- _bor.final ] s10)
+        | s10 = MutBorrow.borrow_final <t_Vec_u32_Global> {_99.current} {MutBorrow.get_id _99}
+            (fun (_bor: MutBorrow.t t_Vec_u32_Global) ->
+              [ &_98 <- _bor ] [ &_99 <- { _99 with current = _bor.final } ] s11)
+        | s11 = deref_mut_Vec_u32_Global [%#sparsort'30] {_98}
+            (fun (_x: MutBorrow.t (Slice64.slice UInt32.t)) -> [ &_97 <- _x ] s12)
+        | s12 = [ &_103 <- bounds ] s13
+        | s13 = deref_Vec_usize_Global [%#sparsort'31] {_103} (fun (_x: Slice64.slice UInt64.t) -> [ &_101 <- _x ] s14)
+        | s14 = MutBorrow.borrow_final <Slice64.slice UInt32.t> {_93.current} {MutBorrow.get_id _93}
+            (fun (_bor: MutBorrow.t (Slice64.slice UInt32.t)) ->
+              [ &_92 <- _bor ] [ &_93 <- { _93 with current = _bor.final } ] s15)
+        | s15 = MutBorrow.borrow_final <Slice64.slice UInt32.t> {_97.current} {MutBorrow.get_id _97}
+            (fun (_bor: MutBorrow.t (Slice64.slice UInt32.t)) ->
+              [ &_96 <- _bor ] [ &_97 <- { _97 with current = _bor.final } ] s16)
+        | s16 = merge_level [%#sparsort'32] {_92} {_96} {_101} {pairs} (fun (_x: ()) -> [ &_91 <- _x ] s17)
+        | s17 = -{resolve_refmut_Vec_u32_Global _99}- s18
+        | s18 = -{resolve_refmut_slice_u32 _97}- s19
+        | s19 = -{resolve_refmut_Vec_u32_Global _95}- s20
+        | s20 = -{resolve_refmut_slice_u32 _93}- s21
+        | s21 = new_usize [%#sparsort'33] (fun (_x: t_Vec_usize_Global) -> [ &nb <- _x ] s22)
+        | s22 = [ &q <- [%#sparsort'34] (0: UInt64.t) ] s23
+        | s23 = bb30 ]
+      | bb30 = bb30
+        [ bb30 = {[@expl:loop invariant #0] [%#sparsort'36] UInt64.t'int q <= UInt64.t'int pairs
+          /\ Seq.length (view_Vec_usize_Global nb) = UInt64.t'int q}
+          {[@expl:loop invariant #1] [%#sparsort'35] forall x: int. 0 <= x /\ x < UInt64.t'int q
+            -> Seq.get (view_Vec_usize_Global nb) x = Seq.get (view_Vec_usize_Global bounds) (2 * x)}
+          (! s0)
+          [ s0 = [ &_117 <- UInt64.lt q pairs ] s1
+          | s1 = any [ br0 -> {_117 = false} (! bb35) | br1 -> {_117} (! bb32) ] ]
+          [ bb32 = s0
+            [ s0 = UInt64.mul [%#sparsort'38] {[%#sparsort'37] (2: UInt64.t)} {q}
+                (fun (_x: UInt64.t) -> [ &_125 <- _x ] s1)
+            | s1 = index_Vec_usize_Global [%#sparsort'39] {bounds} {_125} (fun (_x: UInt64.t) -> [ &_123 <- _x ] s2)
+            | s2 = MutBorrow.borrow_mut <t_Vec_usize_Global> {nb}
+                (fun (_bor: MutBorrow.t t_Vec_usize_Global) -> [ &_121 <- _bor ] [ &nb <- _bor.final ] s3)
+            | s3 = push_usize [%#sparsort'40] {_121} {_123} (fun (_x: ()) -> [ &_120 <- _x ] s4)
+            | s4 = UInt64.add [%#sparsort'42] {q} {[%#sparsort'41] (1: UInt64.t)}
+                (fun (_x: UInt64.t) -> [ &q <- _x ] s5)
+            | s5 = bb30 ] ] ]
+      | bb35 = s0
+        [ s0 = [ &_132 <- ([%#sparsort'43] (2: UInt64.t)) = ([%#sparsort'44] (0: UInt64.t)) ] s1
+        | s1 = {[@expl:remainder by zero] [%#sparsort'44] not _132} s2
+        | s2 = UInt64.rem [%#sparsort'44] {runs} {[%#sparsort'43] (2: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_130 <- _x ] s3)
+        | s3 = [ &_129 <- _130 = ([%#sparsort'45] (1: UInt64.t)) ] s4
+        | s4 = any [ br0 -> {_129 = false} (! bb41) | br1 -> {_129} (! bb37) ] ]
+      | bb37 = s0
+        [ s0 = UInt64.sub [%#sparsort'47] {runs} {[%#sparsort'46] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &_138 <- _x ] s1)
+        | s1 = index_Vec_usize_Global [%#sparsort'48] {bounds} {_138} (fun (_x: UInt64.t) -> [ &_136 <- _x ] s2)
+        | s2 = MutBorrow.borrow_mut <t_Vec_usize_Global> {nb}
+            (fun (_bor: MutBorrow.t t_Vec_usize_Global) -> [ &_134 <- _bor ] [ &nb <- _bor.final ] s3)
+        | s3 = push_usize [%#sparsort'49] {_134} {_136} (fun (_x: ()) -> [ &_133 <- _x ] s4)
+        | s4 = bb41 ]
+      | bb41 = s0
+        [ s0 = MutBorrow.borrow_mut <t_Vec_usize_Global> {nb}
+            (fun (_bor: MutBorrow.t t_Vec_usize_Global) -> [ &_141 <- _bor ] [ &nb <- _bor.final ] s1)
+        | s1 = push_usize [%#sparsort'50] {_141} {n} (fun (_x: ()) -> [ &_140 <- _x ] s2)
+        | s2 = {[@expl:assertion] [%#sparsort'51] UInt64.t'int runs = 2 * UInt64.t'int pairs
+          \/ UInt64.t'int runs = 2 * UInt64.t'int pairs + 1}
+          s3
+        | s3 = {[@expl:assertion] [%#sparsort'52] forall x: int. 0 <= x /\ x <= UInt64.t'int pairs
+            -> Seq.get (view_Vec_usize_Global nb) x = Seq.get (view_Vec_usize_Global bounds) (2 * x)}
+          s4
+        | s4 = {[@expl:assertion] [%#sparsort'53] Seq.length (view_Vec_usize_Global nb)
+            = UInt64.t'int runs - UInt64.t'int pairs + 1
+          /\ UInt64.t'int (Seq.get (view_Vec_usize_Global nb) (Seq.length (view_Vec_usize_Global nb) - 1))
+          = UInt64.t'int n}
+          s5
+        | s5 = {[@expl:assertion] [%#sparsort'54] forall x: int, y: int. 0 <= x
+              /\ x <= y /\ y < Seq.length (view_Vec_usize_Global nb)
+            -> UInt64.le (Seq.get (view_Vec_usize_Global nb) x) (Seq.get (view_Vec_usize_Global nb) y)}
+          s6
+        | s6 = {[@expl:assertion] [%#sparsort'55] forall i: int. UInt64.t'int (Seq.get (view_Vec_usize_Global bounds) (2
+                  * UInt64.t'int pairs))
+                <= i
+              /\ i < UInt64.t'int n -> Seq.get (view_Vec_u32_Global a) i = Seq.get before i}
+          s7
+        | s7 = {[@expl:assertion] [%#sparsort'56] UInt64.t'int runs = 2 * UInt64.t'int pairs + 1
+          -> sorted_range_u32 (view_Vec_u32_Global a) (UInt64.t'int (Seq.get (view_Vec_usize_Global bounds) (UInt64.t'int runs
+          - 1))) (UInt64.t'int n)}
+          s8
+        | s8 = {[@expl:assertion] [%#sparsort'57] UInt64.t'int runs = 2 * UInt64.t'int pairs + 1
+          -> sorted_range_u32 (view_Vec_u32_Global a) (UInt64.t'int (Seq.get (view_Vec_usize_Global nb) (UInt64.t'int pairs))) (UInt64.t'int (Seq.get (view_Vec_usize_Global nb) (UInt64.t'int pairs
+          + 1)))}
+          s9
+        | s9 = {[@expl:assertion] [%#sparsort'58] forall x: int. 0 <= x /\ x < UInt64.t'int pairs
+            -> sorted_range_u32 (view_Vec_u32_Global a) (UInt64.t'int (Seq.get (view_Vec_usize_Global nb) x)) (UInt64.t'int (Seq.get (view_Vec_usize_Global nb) (x
+            + 1)))}
+          s10
+        | s10 =
+          {[@expl:assertion] [%#sparsort'59] runs_sorted (view_Vec_u32_Global a) (view_Vec_usize_Global nb) 0 (Seq.length (view_Vec_usize_Global nb)
+          - 1) 0}
+          s11
+        | s11 = [ &bounds <- nb ] s12
+        | s12 = bb18 ] ] ]
+  | bb47 = s0
+    [ s0 = {[@expl:assertion] [%#sparsort'60] sorted_range_u32 (view_Vec_u32_Global a) 0 (UInt64.t'int n)
+      /\ permutation_of_u32 (view_Vec_u32_Global a) input}
+      s1
+    | s1 = [ &_200 <- a ] s2
+    | s2 = deref_Vec_u32_Global [%#sparsort'61] {_200} (fun (_x: Slice64.slice UInt32.t) -> [ &_198 <- _x ] s3)
+    | s3 = checksum [%#sparsort'62] {_198} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s4)
+    | s4 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & n: UInt64.t = n
+  | & threads: UInt64.t = threads
+  | & t: UInt64.t = Any.any_l ()
+  | & a: t_Vec_u32_Global = Any.any_l ()
+  | & tmp: t_Vec_u32_Global = Any.any_l ()
+  | & _12: () = Any.any_l ()
+  | & _13: MutBorrow.t (Slice64.slice UInt32.t) = Any.any_l ()
+  | & _14: MutBorrow.t (Slice64.slice UInt32.t) = Any.any_l ()
+  | & _15: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _16: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & input: Seq.seq UInt32.t = Any.any_l ()
+  | & bounds: t_Vec_usize_Global = Any.any_l ()
+  | & k: UInt64.t = Any.any_l ()
+  | & _34: bool = Any.any_l ()
+  | & _37: () = Any.any_l ()
+  | & _38: MutBorrow.t t_Vec_usize_Global = Any.any_l ()
+  | & _39: UInt64.t = Any.any_l ()
+  | & _40: UInt64.t = Any.any_l ()
+  | & _43: UInt64.t = Any.any_l ()
+  | & _44: bool = Any.any_l ()
+  | & _54: () = Any.any_l ()
+  | & _55: MutBorrow.t (Slice64.slice UInt32.t) = Any.any_l ()
+  | & _56: MutBorrow.t (Slice64.slice UInt32.t) = Any.any_l ()
+  | & _57: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _58: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _59: MutBorrow.t (Slice64.slice UInt32.t) = Any.any_l ()
+  | & _60: MutBorrow.t (Slice64.slice UInt32.t) = Any.any_l ()
+  | & _61: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _62: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _64: Slice64.slice UInt64.t = Any.any_l ()
+  | & _66: t_Vec_usize_Global = Any.any_l ()
+  | & _79: bool = Any.any_l ()
+  | & _80: UInt64.t = Any.any_l ()
+  | & runs: UInt64.t = Any.any_l ()
+  | & _83: UInt64.t = Any.any_l ()
+  | & pairs: UInt64.t = Any.any_l ()
+  | & _87: bool = Any.any_l ()
+  | & before: Seq.seq UInt32.t = Any.any_l ()
+  | & _91: () = Any.any_l ()
+  | & _92: MutBorrow.t (Slice64.slice UInt32.t) = Any.any_l ()
+  | & _93: MutBorrow.t (Slice64.slice UInt32.t) = Any.any_l ()
+  | & _94: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _95: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _96: MutBorrow.t (Slice64.slice UInt32.t) = Any.any_l ()
+  | & _97: MutBorrow.t (Slice64.slice UInt32.t) = Any.any_l ()
+  | & _98: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _99: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _101: Slice64.slice UInt64.t = Any.any_l ()
+  | & _103: t_Vec_usize_Global = Any.any_l ()
+  | & nb: t_Vec_usize_Global = Any.any_l ()
+  | & q: UInt64.t = Any.any_l ()
+  | & _117: bool = Any.any_l ()
+  | & _120: () = Any.any_l ()
+  | & _121: MutBorrow.t t_Vec_usize_Global = Any.any_l ()
+  | & _123: UInt64.t = Any.any_l ()
+  | & _125: UInt64.t = Any.any_l ()
+  | & _129: bool = Any.any_l ()
+  | & _130: UInt64.t = Any.any_l ()
+  | & _132: bool = Any.any_l ()
+  | & _133: () = Any.any_l ()
+  | & _134: MutBorrow.t t_Vec_usize_Global = Any.any_l ()
+  | & _136: UInt64.t = Any.any_l ()
+  | & _138: UInt64.t = Any.any_l ()
+  | & _140: () = Any.any_l ()
+  | & _141: MutBorrow.t t_Vec_usize_Global = Any.any_l ()
+  | & _198: Slice64.slice UInt32.t = Any.any_l ()
+  | & _200: t_Vec_u32_Global = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

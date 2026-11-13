@@ -1,0 +1,126 @@
+(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 484 0 484 46 *)
+
+let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 6 485 12
+let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 24 485 26
+let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 4 485 27
+let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 40 485 41
+let%span ssha256'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 36 485 41
+let%span ssha256'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 32 485 42
+let%span ssha256'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 54 485 56
+let%span ssha256'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 30 485 57
+let%span ssha256'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 70 485 71
+let%span ssha256'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 66 485 71
+let%span ssha256'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 62 485 72
+let%span ssha256'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 84 485 85
+let%span ssha256'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 60 485 86
+let%span ssha256'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 98 485 99
+let%span ssha256'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 94 485 99
+let%span ssha256'14 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 485 90 485 100
+let%span ssha256'15 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 484 13 484 16
+let%span ssha256'16 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 480 11 480 24
+let%span ssha256'17 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 481 10 481 79
+let%span ssha256'18 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 207 4 207 89
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+let%span sinvariant = "/opt/tools/creusot/creusot-std/src/invariant.rs" 90 8 90 18
+
+use creusot.int.UInt64
+use creusot.int.UInt8
+use creusot.slice.Slice64
+use creusot.int.UInt32
+use creusot.int.Int32
+use creusot.prelude.Any
+use seq.Seq
+use int.Int
+
+predicate inv_Seq_u8 [@inline:trivial] (_1: Seq.seq UInt8.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u8
+
+predicate invariant_array_u8_128 (self: Slice64.array UInt8.t) =
+  [%#sarray] inv_Seq_u8 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (128: UInt64.t)
+
+predicate inv_array_u8_128 [@inline:trivial] (_1: Slice64.array UInt8.t) = invariant_array_u8_128 _1
+
+meta "rewrite_def" predicate inv_array_u8_128
+
+predicate invariant_ref_array_u8_128 [@inline:trivial] (self: Slice64.array UInt8.t) =
+  [%#sinvariant] inv_array_u8_128 self
+
+meta "rewrite_def" predicate invariant_ref_array_u8_128
+
+predicate inv_ref_array_u8_128 [@inline:trivial] (_1: Slice64.array UInt8.t) = invariant_ref_array_u8_128 _1
+
+meta "rewrite_def" predicate inv_ref_array_u8_128
+
+function be_word [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 206 0 206 53] (b0: UInt8.t) (b1: UInt8.t) (b2: UInt8.t) (b3: UInt8.t) : UInt32.t
+ =
+  [%#ssha256'18] UInt32.bw_or (UInt32.bw_or (UInt32.bw_or (UInt32.shl (UInt32.of_int (UInt8.t'int b0)) (24: UInt32.t)) (UInt32.shl (UInt32.of_int (UInt8.t'int b1)) (16: UInt32.t))) (UInt32.shl (UInt32.of_int (UInt8.t'int b2)) (8: UInt32.t))) (UInt32.of_int (UInt8.t'int b3))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let load_be32 [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 484 0 484 46] (buf: Slice64.array UInt8.t)
+  (i: UInt64.t) (return (x: UInt32.t)) =
+{[@stop_split] [@expl:load_be32 requires] ([@stop_split] [@expl:load_be32 'buf' type invariant] [%#ssha256'15] inv_ref_array_u8_128 buf)
+  /\ ([@stop_split] [@expl:load_be32 requires] [%#ssha256'16] UInt64.t'int i + 4 <= 128)}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = [ &_13 <- i ] s1
+    | s1 = [ &_14 <- UInt64.lt _13 ([%#ssha256] (128: UInt64.t)) ] s2
+    | s2 = {[@expl:index in bounds] [%#ssha256] _14} s3
+    | s3 = Slice64.get [%#ssha256] <UInt8.t> {buf} {_13} (fun (r: UInt8.t) -> [ &_12 <- r ] s4)
+    | s4 = [ &_11 <- UInt32.of_int (UInt8.t'int _12) ] s5
+    | s5 = UInt32.shl [%#ssha256'1] {_11} {Int32.to_int ([%#ssha256'0] (24: Int32.t))}
+        (fun (_x: UInt32.t) -> [ &_10 <- _x ] s6)
+    | s6 = UInt64.add [%#ssha256'3] {i} {[%#ssha256'2] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &_18 <- _x ] s7)
+    | s7 = [ &_20 <- UInt64.lt _18 ([%#ssha256'4] (128: UInt64.t)) ] s8
+    | s8 = {[@expl:index in bounds] [%#ssha256'4] _20} s9
+    | s9 = Slice64.get [%#ssha256'4] <UInt8.t> {buf} {_18} (fun (r: UInt8.t) -> [ &_17 <- r ] s10)
+    | s10 = [ &_16 <- UInt32.of_int (UInt8.t'int _17) ] s11
+    | s11 = UInt32.shl [%#ssha256'6] {_16} {Int32.to_int ([%#ssha256'5] (16: Int32.t))}
+        (fun (_x: UInt32.t) -> [ &_15 <- _x ] s12)
+    | s12 = [ &_9 <- UInt32.bw_or _10 _15 ] s13
+    | s13 = UInt64.add [%#ssha256'8] {i} {[%#ssha256'7] (2: UInt64.t)} (fun (_x: UInt64.t) -> [ &_24 <- _x ] s14)
+    | s14 = [ &_26 <- UInt64.lt _24 ([%#ssha256'9] (128: UInt64.t)) ] s15
+    | s15 = {[@expl:index in bounds] [%#ssha256'9] _26} s16
+    | s16 = Slice64.get [%#ssha256'9] <UInt8.t> {buf} {_24} (fun (r: UInt8.t) -> [ &_23 <- r ] s17)
+    | s17 = [ &_22 <- UInt32.of_int (UInt8.t'int _23) ] s18
+    | s18 = UInt32.shl [%#ssha256'11] {_22} {Int32.to_int ([%#ssha256'10] (8: Int32.t))}
+        (fun (_x: UInt32.t) -> [ &_21 <- _x ] s19)
+    | s19 = [ &_8 <- UInt32.bw_or _9 _21 ] s20
+    | s20 = UInt64.add [%#ssha256'13] {i} {[%#ssha256'12] (3: UInt64.t)} (fun (_x: UInt64.t) -> [ &_29 <- _x ] s21)
+    | s21 = [ &_31 <- UInt64.lt _29 ([%#ssha256'14] (128: UInt64.t)) ] s22
+    | s22 = {[@expl:index in bounds] [%#ssha256'14] _31} s23
+    | s23 = Slice64.get [%#ssha256'14] <UInt8.t> {buf} {_29} (fun (r: UInt8.t) -> [ &_28 <- r ] s24)
+    | s24 = [ &_27 <- UInt32.of_int (UInt8.t'int _28) ] s25
+    | s25 = [ &_ret <- UInt32.bw_or _8 _27 ] s26
+    | s26 = return {_ret} ] ]
+  [ & _ret: UInt32.t = Any.any_l ()
+  | & buf: Slice64.array UInt8.t = buf
+  | & i: UInt64.t = i
+  | & _8: UInt32.t = Any.any_l ()
+  | & _9: UInt32.t = Any.any_l ()
+  | & _10: UInt32.t = Any.any_l ()
+  | & _11: UInt32.t = Any.any_l ()
+  | & _12: UInt8.t = Any.any_l ()
+  | & _13: UInt64.t = Any.any_l ()
+  | & _14: bool = Any.any_l ()
+  | & _15: UInt32.t = Any.any_l ()
+  | & _16: UInt32.t = Any.any_l ()
+  | & _17: UInt8.t = Any.any_l ()
+  | & _18: UInt64.t = Any.any_l ()
+  | & _20: bool = Any.any_l ()
+  | & _21: UInt32.t = Any.any_l ()
+  | & _22: UInt32.t = Any.any_l ()
+  | & _23: UInt8.t = Any.any_l ()
+  | & _24: UInt64.t = Any.any_l ()
+  | & _26: bool = Any.any_l ()
+  | & _27: UInt32.t = Any.any_l ()
+  | & _28: UInt8.t = Any.any_l ()
+  | & _29: UInt64.t = Any.any_l ()
+  | & _31: bool = Any.any_l () ])
+  [ return (result: UInt32.t) -> {[@stop_split] [@expl:load_be32 ensures] [%#ssha256'17] result
+    = be_word (Seq.get (Slice64.view buf) (UInt64.t'int i)) (Seq.get (Slice64.view buf) (UInt64.t'int i
+    + 1)) (Seq.get (Slice64.view buf) (UInt64.t'int i + 2)) (Seq.get (Slice64.view buf) (UInt64.t'int i + 3))}
+    (! return {result}) ]
