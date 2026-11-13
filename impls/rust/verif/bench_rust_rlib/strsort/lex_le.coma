@@ -1,11 +1,11 @@
-(* #"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 53 0 53 45 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 53 0 53 45 *)
 
-let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 732 4 732 36
-let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 160 8 160 17
-let%span sseq'1 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 581 8 581 49
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 732 4 732 36
+let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 160 8 160 17
+let%span sseq'1 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 581 8 581 49
 
 use creusot.int.UInt8
 use seq.Seq
@@ -44,7 +44,7 @@ constant s : Seq.seq UInt8.t
 
 constant t : Seq.seq UInt8.t
 
-predicate lex_le [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 53 0 53 45] (s: Seq.seq UInt8.t) (t: Seq.seq UInt8.t)
+predicate lex_le [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 53 0 53 45] (s: Seq.seq UInt8.t) (t: Seq.seq UInt8.t)
 
 goal vc_lex_le: if Seq.length s = 0 then
     true

@@ -1,16 +1,16 @@
-(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 91 0 91 45 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 91 0 91 45 *)
 
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span salloc = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 90 10 90 11
-let%span salloc'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 88 11 88 33
-let%span salloc'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 89 10 89 50
-let%span salloc'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 81 10 81 11
-let%span salloc'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 80 11 80 36
-let%span salloc'4 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 83 16 83 91
-let%span salloc'5 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 91 0 91 45
-let%span salloc'6 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 38 16 38 43
+let%span salloc = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 90 10 90 11
+let%span salloc'0 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 88 11 88 33
+let%span salloc'1 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 89 10 89 50
+let%span salloc'2 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 81 10 81 11
+let%span salloc'3 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 80 11 80 36
+let%span salloc'4 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 83 16 83 91
+let%span salloc'5 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 91 0 91 45
+let%span salloc'6 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 38 16 38 43
 
 use creusot.int.UInt64
 use seq.Seq
@@ -18,10 +18,10 @@ use int.Int
 
 constant const_CK_INIT: UInt64.t = [%#salloc'5] (14695981039346656037: UInt64.t)
 
-function ckfold_l [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 37 0 37 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+function ckfold_l [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 37 0 37 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
  = [%#salloc'6] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
 
-function fold_seq [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 82 0 82 46] (sums: Seq.seq UInt64.t) (k: int) : UInt64.t
+function fold_seq [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 82 0 82 46] (sums: Seq.seq UInt64.t) (k: int) : UInt64.t
 
 axiom fold_seq_def: forall sums: Seq.seq UInt64.t, k: int [fold_seq sums k]. ([%#salloc'3] 0 <= k
       /\ k <= Seq.length sums)
@@ -51,7 +51,7 @@ constant x : UInt64.t
 
 constant k : int
 
-function fold_snoc [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 91 0 91 45] (s: Seq.seq UInt64.t) (x: UInt64.t) (k: int) : ()
+function fold_snoc [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 91 0 91 45] (s: Seq.seq UInt64.t) (x: UInt64.t) (k: int) : ()
 
 goal vc_fold_snoc: ([%#salloc'0] 0 <= k /\ k <= Seq.length s)
   -> (if k = 0 then

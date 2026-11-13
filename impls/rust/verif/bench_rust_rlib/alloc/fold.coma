@@ -1,10 +1,10 @@
-(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 155 0 155 31 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 155 0 155 31 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span salloc = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 156 26 156 39
-let%span salloc'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 156 4 156 40
-let%span salloc'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 154 10 154 35
-let%span salloc'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 38 16 38 43
+let%span salloc = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 156 26 156 39
+let%span salloc'0 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 156 4 156 40
+let%span salloc'1 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 154 10 154 35
+let%span salloc'2 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 38 16 38 43
 
 use creusot.int.UInt64
 use creusot.prelude.Any
@@ -13,14 +13,14 @@ let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
   [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
     (! return {result}) ]
 
-function ckfold_l [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 37 0 37 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+function ckfold_l [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 37 0 37 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
  = [%#salloc'2] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let fold [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 155 0 155 31] (ck: UInt64.t) (v: UInt64.t)
+let fold [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 155 0 155 31] (ck: UInt64.t) (v: UInt64.t)
   (return (x: UInt64.t)) = (! bb0
   [ bb0 = s0
     [ s0 = [ &_6 <- UInt64.bw_xor ck v ] s1

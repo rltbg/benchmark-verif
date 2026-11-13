@@ -1,23 +1,23 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 117 0 117 24 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/lines.rs" 117 0 117 24 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 112 10 112 11
-let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 111 11 111 17
-let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 113 10 113 27
-let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 114 10 114 10
-let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 115 10 115 43
-let%span slines'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 116 10 116 44
-let%span slines'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 52 10 52 11
-let%span slines'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 51 11 51 17
-let%span slines'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 54 4 54 79
+let%span slines = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 112 10 112 11
+let%span slines'0 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 111 11 111 17
+let%span slines'1 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 113 10 113 27
+let%span slines'2 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 114 10 114 10
+let%span slines'3 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 115 10 115 43
+let%span slines'4 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 116 10 116 44
+let%span slines'5 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 52 10 52 11
+let%span slines'6 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 51 11 51 17
+let%span slines'7 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 54 4 54 79
 
 use seq.Seq
 use int.ComputerDivision
 use int.Int
 
-function dec [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 53 0 53 30] (v: int) : Seq.seq int
+function dec [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 53 0 53 30] (v: int) : Seq.seq int
 
 axiom dec_def: forall v: int [dec v]. ([%#slines'6] 0 <= v)
     -> dec v
@@ -46,7 +46,7 @@ meta "select_lsinst" "all"
 
 constant v : int
 
-function dec_shape [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 117 0 117 24] (v: int) : ()
+function dec_shape [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 117 0 117 24] (v: int) : ()
 
 goal vc_dec_shape: ([%#slines'0] 0 <= v)
   -> (if ge_log_Int v 10 then

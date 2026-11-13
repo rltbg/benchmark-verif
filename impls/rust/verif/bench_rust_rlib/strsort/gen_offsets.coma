@@ -1,27 +1,27 @@
-(* #"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 123 0 123 56 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 123 0 123 56 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span sstrsort = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 124 18 124 24
-let%span sstrsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 125 16 125 22
-let%span sstrsort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 129 14 129 21
-let%span sstrsort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 128 16 128 16
-let%span sstrsort'3 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 127 16 127 50
-let%span sstrsort'4 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 126 16 126 48
-let%span sstrsort'5 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 131 15 131 31
-let%span sstrsort'6 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 131 8 131 40
-let%span sstrsort'7 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 132 16 132 17
-let%span sstrsort'8 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 132 12 132 17
-let%span sstrsort'9 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 132 8 132 18
-let%span sstrsort'10 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 132 8 132 24
-let%span sstrsort'11 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 133 13 133 14
-let%span sstrsort'12 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 133 8 133 14
-let%span sstrsort'13 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 118 11 118 67
-let%span sstrsort'14 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 119 10 119 37
-let%span sstrsort'15 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 120 10 120 53
-let%span sstrsort'16 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 121 10 121 10
-let%span sstrsort'17 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 21 10 21 43
+let%span sstrsort = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 124 18 124 24
+let%span sstrsort'0 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 125 16 125 22
+let%span sstrsort'1 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 129 14 129 21
+let%span sstrsort'2 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 128 16 128 16
+let%span sstrsort'3 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 127 16 127 50
+let%span sstrsort'4 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 126 16 126 48
+let%span sstrsort'5 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 131 15 131 31
+let%span sstrsort'6 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 131 8 131 40
+let%span sstrsort'7 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 132 16 132 17
+let%span sstrsort'8 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 132 12 132 17
+let%span sstrsort'9 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 132 8 132 18
+let%span sstrsort'10 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 132 8 132 24
+let%span sstrsort'11 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 133 13 133 14
+let%span sstrsort'12 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 133 8 133 14
+let%span sstrsort'13 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 118 11 118 67
+let%span sstrsort'14 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 119 10 119 37
+let%span sstrsort'15 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 120 10 120 53
+let%span sstrsort'16 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 121 10 121 10
+let%span sstrsort'17 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 21 10 21 43
 
 use creusot.int.UInt64
 use creusot.prelude.MutBorrow
@@ -58,7 +58,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let gen_offsets [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 123 0 123 56]
+let gen_offsets [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 123 0 123 56]
   (off: MutBorrow.t (Slice64.slice UInt64.t)) (n: UInt64.t) (return (x: UInt64.t)) =
 {[@stop_split] [@expl:gen_offsets requires] [%#sstrsort'13] Seq.length (Slice64.view off.current) = UInt64.t'int n + 1
   /\ UInt64.t'int n <= 268435456 /\ UInt64.t'int (Seq.get (Slice64.view off.current) 0) = 0}

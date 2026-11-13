@@ -1,6 +1,6 @@
-(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 169 0 169 23 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 169 0 169 23 *)
 
-let%span sptrchase = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 168 10 168 10
+let%span sptrchase = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 168 10 168 10
 
 use creusot.int.UInt64BW
 
@@ -10,7 +10,7 @@ meta "select_lsinst" "all"
 
 constant y : UInt64BW.t
 
-function odd_even [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 169 0 169 23] (y: UInt64BW.t) : ()
+function odd_even [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 169 0 169 23] (y: UInt64BW.t) : ()
 
 goal vc_odd_even:
   [@stop_split] [@expl:odd_even ensures] [%#sptrchase] forall x: UInt64BW.t. UInt64BW.bw_or x (1: UInt64BW.t)

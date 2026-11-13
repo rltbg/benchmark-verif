@@ -1,13 +1,13 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 31 0 31 22 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 31 0 31 22 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
-let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 30 10 30 11
-let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 28 11 28 17
-let%span sntt'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 29 10 29 37
-let%span sntt'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 22 10 22 11
-let%span sntt'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 24 16 24 56
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 30 10 30 11
+let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 28 11 28 17
+let%span sntt'1 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 29 10 29 37
+let%span sntt'2 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 22 10 22 11
+let%span sntt'3 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 24 16 24 56
 
 use int.Int
 
@@ -15,7 +15,7 @@ predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other
 
 meta "rewrite_def" predicate gt_log_Int
 
-function pow2 [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 23 0 23 26] (k: int) : int
+function pow2 [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 23 0 23 26] (k: int) : int
 
 axiom pow2_def: forall k: int [pow2 k]. pow2 k = ([%#sntt'3] if k <= 0 then 1 else 2 * pow2 (k - 1))
 
@@ -34,7 +34,7 @@ meta "select_lsinst" "all"
 
 constant k : int
 
-function pow2_gt [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 31 0 31 22] (k: int) : ()
+function pow2_gt [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 31 0 31 22] (k: int) : ()
 
 goal vc_pow2_gt: ([%#sntt'0] 0 <= k)
   -> (if gt_log_Int k 0 then

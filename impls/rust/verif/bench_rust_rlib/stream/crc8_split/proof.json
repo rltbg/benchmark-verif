@@ -1,6 +1,6 @@
 {
   "profile": [],
   "proofs": {
-    "Coma": { "vc_crc8_split": { "prover": "cvc5", "time": 0.198 } }
+    "Coma": { "vc_crc8_split": { "prover": "cvc5", "time": 0.226 } }
   }
 }

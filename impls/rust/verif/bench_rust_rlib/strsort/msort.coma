@@ -1,14 +1,8 @@
-(* #"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 261 0 261 94 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 261 0 261 94 *)
 
-let%span ssort = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 38 11 38 53
-let%span ssort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 39 10 39 49
-let%span ssort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 17 16 17 51
-let%span ssort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 23 16 23 109
-let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 554 8 554 48
-let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 371 8 371 41
-let%span sseq'1 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 732 4 732 36
-let%span sseq'2 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 160 8 160 17
-let%span sseq'3 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 581 8 581 49
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 564 19 564 38
 let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 565 18 565 46
 let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 566 18 566 50
@@ -21,54 +15,60 @@ let%span sslice'7 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 331 18 331
 let%span sslice'8 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 172 20 172 70
 let%span sslice'9 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 177 20 177 67
 let%span sslice'10 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 183 12 183 12
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
-let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span sstrsort = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 262 7 262 14
-let%span sstrsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 262 17 262 18
-let%span sstrsort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 265 25 265 27
-let%span sstrsort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 266 19 266 28
-let%span sstrsort'3 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 266 31 266 32
-let%span sstrsort'4 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 266 19 266 32
-let%span sstrsort'5 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 266 14 266 32
-let%span sstrsort'6 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 267 4 267 37
-let%span sstrsort'7 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 268 23 268 25
-let%span sstrsort'8 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 269 4 269 37
-let%span sstrsort'9 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 270 23 270 25
-let%span sstrsort'10 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 271 4 271 41
-let%span sstrsort'11 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 272 5 272 13
-let%span sstrsort'12 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 272 34 272 42
-let%span sstrsort'13 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 272 4 272 43
-let%span sstrsort'14 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 273 18 273 84
-let%span sstrsort'15 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 274 18 274 69
-let%span sstrsort'16 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 275 18 275 75
-let%span sstrsort'17 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 276 20 276 95
-let%span sstrsort'18 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 277 18 277 48
-let%span sstrsort'19 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 278 18 278 18
-let%span sstrsort'20 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 279 18 279 47
-let%span sstrsort'21 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 260 10 260 19
-let%span sstrsort'22 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 251 11 251 90
-let%span sstrsort'23 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 252 11 252 40
-let%span sstrsort'24 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 253 11 253 11
-let%span sstrsort'25 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 254 10 254 50
-let%span sstrsort'26 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 255 10 255 44
-let%span sstrsort'27 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 256 10 256 41
-let%span sstrsort'28 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 257 10 257 43
-let%span sstrsort'29 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 258 10 258 37
-let%span sstrsort'30 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 191 11 191 94
-let%span sstrsort'31 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 192 11 192 58
-let%span sstrsort'32 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 193 11 193 85
-let%span sstrsort'33 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 194 11 194 95
-let%span sstrsort'34 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 195 10 195 52
-let%span sstrsort'35 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 196 10 196 46
-let%span sstrsort'36 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 197 10 197 45
-let%span sstrsort'37 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 198 10 198 47
-let%span sstrsort'38 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 39 8 40 78
-let%span sstrsort'39 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 108 16 108 16
-let%span sstrsort'40 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 114 16 114 16
-let%span sstrsort'41 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 87 8 88 74
-let%span sstrsort'42 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 55 8 58 43
-let%span sstrsort'43 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 47 16 47 42
+let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 554 8 554 48
+let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 371 8 371 41
+let%span sseq'1 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 732 4 732 36
+let%span sseq'2 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 160 8 160 17
+let%span sseq'3 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 581 8 581 49
+let%span ssort = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 38 11 38 53
+let%span ssort'0 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 39 10 39 49
+let%span ssort'1 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 17 16 17 51
+let%span ssort'2 = "/home/user/benchmark-verif/impls/rust/src/sort.rs" 23 16 23 109
+let%span sstrsort = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 262 7 262 14
+let%span sstrsort'0 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 262 17 262 18
+let%span sstrsort'1 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 265 25 265 27
+let%span sstrsort'2 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 266 19 266 28
+let%span sstrsort'3 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 266 31 266 32
+let%span sstrsort'4 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 266 19 266 32
+let%span sstrsort'5 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 266 14 266 32
+let%span sstrsort'6 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 267 4 267 37
+let%span sstrsort'7 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 268 23 268 25
+let%span sstrsort'8 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 269 4 269 37
+let%span sstrsort'9 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 270 23 270 25
+let%span sstrsort'10 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 271 4 271 41
+let%span sstrsort'11 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 272 5 272 13
+let%span sstrsort'12 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 272 34 272 42
+let%span sstrsort'13 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 272 4 272 43
+let%span sstrsort'14 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 273 18 273 84
+let%span sstrsort'15 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 274 18 274 69
+let%span sstrsort'16 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 275 18 275 75
+let%span sstrsort'17 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 276 20 276 95
+let%span sstrsort'18 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 277 18 277 48
+let%span sstrsort'19 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 278 18 278 18
+let%span sstrsort'20 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 279 18 279 47
+let%span sstrsort'21 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 260 10 260 19
+let%span sstrsort'22 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 251 11 251 90
+let%span sstrsort'23 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 252 11 252 40
+let%span sstrsort'24 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 253 11 253 11
+let%span sstrsort'25 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 254 10 254 50
+let%span sstrsort'26 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 255 10 255 44
+let%span sstrsort'27 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 256 10 256 41
+let%span sstrsort'28 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 257 10 257 43
+let%span sstrsort'29 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 258 10 258 37
+let%span sstrsort'30 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 191 11 191 94
+let%span sstrsort'31 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 192 11 192 58
+let%span sstrsort'32 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 193 11 193 85
+let%span sstrsort'33 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 194 11 194 95
+let%span sstrsort'34 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 195 10 195 52
+let%span sstrsort'35 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 196 10 196 46
+let%span sstrsort'36 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 197 10 197 45
+let%span sstrsort'37 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 198 10 198 47
+let%span sstrsort'38 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 39 8 40 78
+let%span sstrsort'39 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 108 16 108 16
+let%span sstrsort'40 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 114 16 114 16
+let%span sstrsort'41 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 87 8 88 74
+let%span sstrsort'42 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 55 8 58 43
+let%span sstrsort'43 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 47 16 47 42
 
 use creusot.int.UInt64
 use creusot.prelude.MutBorrow
@@ -88,7 +88,7 @@ predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other
 
 meta "rewrite_def" predicate ge_log_Int
 
-predicate wf_offsets [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 37 0 37 57] (pool: Seq.seq UInt8.t) (off: Seq.seq UInt64.t) =
+predicate wf_offsets [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 37 0 37 57] (pool: Seq.seq UInt8.t) (off: Seq.seq UInt64.t) =
   [%#sstrsort'38] ge_log_Int (Seq.length off) 1
   /\ UInt64.t'int (Seq.get off (Seq.length off - 1)) = Seq.length pool
   /\ (forall p: int, q: int. 0 <= p /\ p <= q /\ q < Seq.length off -> UInt64.le (Seq.get off p) (Seq.get off q))
@@ -105,7 +105,7 @@ function tail_u8 [@inline:trivial] (self: Seq.seq UInt8.t) : Seq.seq UInt8.t =
 
 meta "rewrite_def" function tail_u8
 
-predicate lex_le [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 53 0 53 45] (s: Seq.seq UInt8.t) (t: Seq.seq UInt8.t)
+predicate lex_le [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 53 0 53 45] (s: Seq.seq UInt8.t) (t: Seq.seq UInt8.t)
 
 axiom lex_le_def: forall s: Seq.seq UInt8.t, t: Seq.seq UInt8.t [lex_le s t]. lex_le s t
     = ([%#sstrsort'42] if Seq.length s = 0 then
@@ -125,19 +125,19 @@ function index_Seq_u8'0 [@inline:trivial] (self: Seq.seq UInt8.t) (range: t_Rang
 
 meta "rewrite_def" function index_Seq_u8'0
 
-function str_of [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 46 0 46 64] (pool: Seq.seq UInt8.t) (off: Seq.seq UInt64.t) (x: int) : Seq.seq UInt8.t
+function str_of [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 46 0 46 64] (pool: Seq.seq UInt8.t) (off: Seq.seq UInt64.t) (x: int) : Seq.seq UInt8.t
  = [%#sstrsort'43] index_Seq_u8'0 pool { start'0 = UInt64.t'int (Seq.get off x);
                                          end''0 = UInt64.t'int (Seq.get off (x + 1)) }
 
-predicate key_le [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 85 0 85 69] (pool: Seq.seq UInt8.t) (off: Seq.seq UInt64.t) (x: int) (y: int) =
+predicate key_le [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 85 0 85 69] (pool: Seq.seq UInt8.t) (off: Seq.seq UInt64.t) (x: int) (y: int) =
   [%#sstrsort'41] lex_le (str_of pool off x) (str_of pool off y)
   /\ (lex_le (str_of pool off y) (str_of pool off x) -> x <= y)
 
-predicate sorted_key [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 107 0 107 88] (pool: Seq.seq UInt8.t) (off: Seq.seq UInt64.t) (s: Seq.seq UInt32.t) (lo: int) (hi: int) =
+predicate sorted_key [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 107 0 107 88] (pool: Seq.seq UInt8.t) (off: Seq.seq UInt64.t) (s: Seq.seq UInt32.t) (lo: int) (hi: int) =
   [%#sstrsort'39] forall p: int, q: int. lo <= p /\ p < q /\ q < hi
     -> key_le pool off (UInt32.t'int (Seq.get s p)) (UInt32.t'int (Seq.get s q))
 
-predicate vals_in [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 113 0 113 69] (s: Seq.seq UInt32.t) (lo: int) (hi: int) (a: int) (b: int) =
+predicate vals_in [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 113 0 113 69] (s: Seq.seq UInt32.t) (lo: int) (hi: int) (a: int) (b: int) =
   [%#sstrsort'40] forall p: int. lo <= p /\ p < hi -> a <= UInt32.t'int (Seq.get s p) /\ UInt32.t'int (Seq.get s p) < b
 
 predicate permutation_of_u32 (self: Seq.seq UInt32.t) (other: Seq.seq UInt32.t) =
@@ -148,11 +148,11 @@ function index_Seq_u32 [@inline:trivial] (self: Seq.seq UInt32.t) (range: t_Rang
 
 meta "rewrite_def" function index_Seq_u32
 
-predicate perm_range [#"/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 16 0 16 69] (s: Seq.seq UInt32.t) (t: Seq.seq UInt32.t) (lo: int) (hi: int) =
+predicate perm_range [#"/home/user/benchmark-verif/impls/rust/src/sort.rs" 16 0 16 69] (s: Seq.seq UInt32.t) (t: Seq.seq UInt32.t) (lo: int) (hi: int) =
   [%#ssort'1] permutation_of_u32 (index_Seq_u32 s { start'0 = lo; end''0 = hi }) (index_Seq_u32 t { start'0 = lo;
                                                                                                     end''0 = hi })
 
-predicate same_outside [#"/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 22 0 22 71] (s: Seq.seq UInt32.t) (t: Seq.seq UInt32.t) (lo: int) (hi: int) =
+predicate same_outside [#"/home/user/benchmark-verif/impls/rust/src/sort.rs" 22 0 22 71] (s: Seq.seq UInt32.t) (t: Seq.seq UInt32.t) (lo: int) (hi: int) =
   [%#ssort'2] Seq.length s = Seq.length t
   /\ (forall p: int. 0 <= p /\ p < Seq.length s /\ (p < lo \/ hi <= p) -> Seq.get s p = Seq.get t p)
 
@@ -234,7 +234,7 @@ let copy_from_slice_u32 (self: MutBorrow.t (Slice64.slice UInt32.t)) (src: Slice
     = Slice64.view src}
     (! return {result}) ]
 
-function perm_concat [#"/tmp/claude-0/verif-sort/creusot-sort/src/sort.rs" 40 0 40 70] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (c: Seq.seq UInt32.t) (d: Seq.seq UInt32.t) : ()
+function perm_concat [#"/home/user/benchmark-verif/impls/rust/src/sort.rs" 40 0 40 70] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (c: Seq.seq UInt32.t) (d: Seq.seq UInt32.t) : ()
 
 axiom perm_concat_spec:
   forall a: Seq.seq UInt32.t, b: Seq.seq UInt32.t, c: Seq.seq UInt32.t, d: Seq.seq UInt32.t. ([%#ssort] permutation_of_u32 a b
@@ -253,7 +253,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let msort'0 [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 261 0 261 94] (pool: Slice64.slice UInt8.t)
+let msort'0 [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 261 0 261 94] (pool: Slice64.slice UInt8.t)
   (off: Slice64.slice UInt64.t) (a: MutBorrow.t (Slice64.slice UInt32.t)) (tmp: MutBorrow.t (Slice64.slice UInt32.t))
   (lo: UInt64.t) (hi: UInt64.t) (return (x: ())) =
 {[@stop_split] [@expl:msort requires] ([@stop_split] [@expl:msort requires #0] [%#sstrsort'22] wf_offsets (Slice64.view pool) (Slice64.view off)

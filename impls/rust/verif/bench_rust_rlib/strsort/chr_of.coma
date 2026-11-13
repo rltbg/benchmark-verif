@@ -1,16 +1,16 @@
-(* #"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 31 0 31 35 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 31 0 31 35 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
 let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span sstrsort = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 68 32 70
-let%span sstrsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 53 32 71
-let%span sstrsort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 18 32 39
-let%span sstrsort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 18 32 72
-let%span sstrsort'3 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 18 32 88
-let%span sstrsort'4 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 12 32 89
-let%span sstrsort'5 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 92 32 93
-let%span sstrsort'6 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 4 32 8
-let%span sstrsort'7 = "/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 32 4 32 100
+let%span sstrsort = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 32 68 32 70
+let%span sstrsort'0 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 32 53 32 71
+let%span sstrsort'1 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 32 18 32 39
+let%span sstrsort'2 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 32 18 32 72
+let%span sstrsort'3 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 32 18 32 88
+let%span sstrsort'4 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 32 12 32 89
+let%span sstrsort'5 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 32 92 32 93
+let%span sstrsort'6 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 32 4 32 8
+let%span sstrsort'7 = "/home/user/benchmark-verif/impls/rust/src/strsort.rs" 32 4 32 100
 
 use creusot.int.UInt64BW
 use creusot.int.UInt8BW
@@ -31,7 +31,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let chr_of [#"/tmp/claude-0/verif-sort/creusot-sort/src/strsort.rs" 31 0 31 35] (i: UInt64BW.t) (k: UInt64BW.t)
+let chr_of [#"/home/user/benchmark-verif/impls/rust/src/strsort.rs" 31 0 31 35] (i: UInt64BW.t) (k: UInt64BW.t)
   (return (x: UInt8BW.t)) = (! bb0
   [ bb0 = s0
     [ s0 = wrapping_mul [%#sstrsort'0] {i} {[%#sstrsort] (64: UInt64BW.t)} (fun (_x: UInt64BW.t) -> [ &_8 <- _x ] s1)

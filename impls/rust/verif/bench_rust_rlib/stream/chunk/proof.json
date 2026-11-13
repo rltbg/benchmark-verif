@@ -2,7 +2,7 @@
   "profile": [],
   "proofs": {
     "Coma": {
-      "vc_chunk": { "prover": "cvc5", "time": 0.246 },
+      "vc_chunk": { "prover": "cvc5", "time": 0.205 },
       "vc_index_Vec_u8_Global": { "prover": "alt-ergo", "time": 0.023 },
       "vc_tok_step_exec": { "prover": "alt-ergo", "time": 0.023 },
       "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.016 }

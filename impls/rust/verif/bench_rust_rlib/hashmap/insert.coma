@@ -1,7 +1,23 @@
 (* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 297 0 297 91 *)
 
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
 let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 777 16 777 35
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
+let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
+let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
+let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
+let%span svec'6 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
+let%span svec'7 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
 let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 299 22 299 35
 let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 300 16 300 29
 let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 301 18 301 39
@@ -96,23 +112,7 @@ let%span shashmap'89 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 46
 let%span shashmap'90 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 128 10 128 11
 let%span shashmap'91 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 130 4 130 97
 let%span shashmap'92 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 297 0 297 91
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span smapping = "/opt/tools/creusot/creusot-std/src/logic/mapping.rs" 66 8 66 19
-let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
-let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
-let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
-let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
-let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
-let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
-let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
-let%span svec'6 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
-let%span svec'7 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
-let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
-let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
-let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
-let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
 
 use creusot.prelude.MutBorrow
 use creusot.int.UInt64
@@ -204,8 +204,8 @@ let index_Vec_u64_Global (self: t_Vec_u64_Global) (index: UInt64.t) (return (x: 
   {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u64_Global self) result}
     (! return {result}) ]
 
-function at' [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 0 106 42] (h: int) (d: int) (cap: int) : int
- = [%#shashmap'61] if h + d < cap then h + d else h + d - cap
+function at' [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 0 106 42] (h: int) (d: int) (cap: int) : int =
+  [%#shashmap'61] if h + d < cap then h + d else h + d - cap
 
 function dist [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 112 0 112 44] (h: int) (s: int) (cap: int) : int
  = [%#shashmap'65] if h <= s then s - h else s + cap - h

@@ -1,97 +1,97 @@
-(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 344 0 344 36 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 344 0 344 36 *)
 
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
 let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 345 13 345 24
-let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 346 13 346 24
-let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 347 17 347 18
-let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 347 30 347 44
-let%span sstream'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 348 37 348 38
-let%span sstream'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 348 17 348 39
-let%span sstream'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 350 23 350 51
-let%span sstream'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 351 26 351 27
-let%span sstream'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 352 26 352 53
-let%span sstream'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 355 22 355 23
-let%span sstream'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 356 22 356 26
-let%span sstream'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 358 17 358 18
-let%span sstream'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 359 24 359 25
-let%span sstream'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 360 37 360 38
-let%span sstream'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 360 17 360 39
-let%span sstream'14 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 361 17 361 18
-let%span sstream'15 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 363 17 363 18
-let%span sstream'16 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 364 17 364 18
-let%span sstream'17 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 365 24 365 25
-let%span sstream'18 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 366 25 366 27
-let%span sstream'19 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 366 30 366 31
-let%span sstream'20 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 366 47 366 49
-let%span sstream'21 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 366 52 366 53
-let%span sstream'22 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 366 63 366 64
-let%span sstream'23 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 367 24 367 25
-let%span sstream'24 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 369 39 369 41
-let%span sstream'25 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 369 20 369 42
-let%span sstream'26 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 369 61 369 63
-let%span sstream'27 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 369 56 369 64
-let%span sstream'28 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 369 20 369 72
-let%span sstream'29 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 371 22 371 27
-let%span sstream'30 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 373 24 373 25
-let%span sstream'31 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 374 19 374 21
-let%span sstream'32 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 375 37 375 38
-let%span sstream'33 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 375 17 375 39
-let%span sstream'34 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 376 17 376 18
-let%span sstream'35 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 377 19 377 22
-let%span sstream'36 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 378 37 378 38
-let%span sstream'37 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 378 17 378 39
-let%span sstream'38 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 379 39 379 40
-let%span sstream'39 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 379 18 379 41
-let%span sstream'40 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 383 19 383 21
-let%span sstream'41 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 384 37 384 38
-let%span sstream'42 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 384 17 384 39
-let%span sstream'43 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 385 39 385 40
-let%span sstream'44 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 385 18 385 41
-let%span sstream'45 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 389 19 389 22
-let%span sstream'46 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 389 31 389 33
-let%span sstream'47 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 390 21 390 22
-let%span sstream'48 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 391 23 391 24
-let%span sstream'49 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 391 12 391 24
-let%span sstream'50 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 393 19 393 21
-let%span sstream'51 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 394 39 394 40
-let%span sstream'52 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 394 18 394 41
-let%span sstream'53 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 395 18 395 23
-let%span sstream'54 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 397 17 397 18
-let%span sstream'55 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 398 21 398 23
-let%span sstream'56 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 398 16 398 24
-let%span sstream'57 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 399 18 399 22
-let%span sstream'58 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 400 19 400 21
-let%span sstream'59 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 401 17 401 18
-let%span sstream'60 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 402 16 402 17
-let%span sstream'61 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 403 18 403 22
-let%span sstream'62 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 405 17 405 18
-let%span sstream'63 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 341 10 341 31
-let%span sstream'64 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 295 10 295 33
-let%span sstream'65 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 302 10 302 33
-let%span sstream'66 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 309 10 309 36
-let%span sstream'67 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 160 4 160 29
-let%span sstream'68 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 87 4 87 26
-let%span sstream'69 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 91 4 91 27
-let%span sstream'70 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 96 4 96 66
-let%span sstream'71 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 128 4 154 5
-let%span sstream'72 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 102 4 115 5
-let%span sstream'73 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 121 4 121 27
+let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 345 13 345 24
+let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 346 13 346 24
+let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 347 17 347 18
+let%span sstream'2 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 347 30 347 44
+let%span sstream'3 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 348 37 348 38
+let%span sstream'4 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 348 17 348 39
+let%span sstream'5 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 350 23 350 51
+let%span sstream'6 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 351 26 351 27
+let%span sstream'7 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 352 26 352 53
+let%span sstream'8 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 355 22 355 23
+let%span sstream'9 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 356 22 356 26
+let%span sstream'10 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 358 17 358 18
+let%span sstream'11 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 359 24 359 25
+let%span sstream'12 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 360 37 360 38
+let%span sstream'13 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 360 17 360 39
+let%span sstream'14 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 361 17 361 18
+let%span sstream'15 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 363 17 363 18
+let%span sstream'16 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 364 17 364 18
+let%span sstream'17 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 365 24 365 25
+let%span sstream'18 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 366 25 366 27
+let%span sstream'19 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 366 30 366 31
+let%span sstream'20 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 366 47 366 49
+let%span sstream'21 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 366 52 366 53
+let%span sstream'22 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 366 63 366 64
+let%span sstream'23 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 367 24 367 25
+let%span sstream'24 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 369 39 369 41
+let%span sstream'25 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 369 20 369 42
+let%span sstream'26 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 369 61 369 63
+let%span sstream'27 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 369 56 369 64
+let%span sstream'28 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 369 20 369 72
+let%span sstream'29 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 371 22 371 27
+let%span sstream'30 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 373 24 373 25
+let%span sstream'31 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 374 19 374 21
+let%span sstream'32 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 375 37 375 38
+let%span sstream'33 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 375 17 375 39
+let%span sstream'34 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 376 17 376 18
+let%span sstream'35 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 377 19 377 22
+let%span sstream'36 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 378 37 378 38
+let%span sstream'37 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 378 17 378 39
+let%span sstream'38 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 379 39 379 40
+let%span sstream'39 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 379 18 379 41
+let%span sstream'40 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 383 19 383 21
+let%span sstream'41 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 384 37 384 38
+let%span sstream'42 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 384 17 384 39
+let%span sstream'43 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 385 39 385 40
+let%span sstream'44 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 385 18 385 41
+let%span sstream'45 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 389 19 389 22
+let%span sstream'46 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 389 31 389 33
+let%span sstream'47 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 390 21 390 22
+let%span sstream'48 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 391 23 391 24
+let%span sstream'49 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 391 12 391 24
+let%span sstream'50 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 393 19 393 21
+let%span sstream'51 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 394 39 394 40
+let%span sstream'52 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 394 18 394 41
+let%span sstream'53 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 395 18 395 23
+let%span sstream'54 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 397 17 397 18
+let%span sstream'55 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 398 21 398 23
+let%span sstream'56 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 398 16 398 24
+let%span sstream'57 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 399 18 399 22
+let%span sstream'58 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 400 19 400 21
+let%span sstream'59 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 401 17 401 18
+let%span sstream'60 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 402 16 402 17
+let%span sstream'61 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 403 18 403 22
+let%span sstream'62 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 405 17 405 18
+let%span sstream'63 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 341 10 341 31
+let%span sstream'64 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 295 10 295 33
+let%span sstream'65 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 302 10 302 33
+let%span sstream'66 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 309 10 309 36
+let%span sstream'67 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 160 4 160 29
+let%span sstream'68 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 87 4 87 26
+let%span sstream'69 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 91 4 91 27
+let%span sstream'70 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 96 4 96 66
+let%span sstream'71 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 128 4 154 5
+let%span sstream'72 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 102 4 115 5
+let%span sstream'73 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 121 4 121 27
 
 use creusot.int.UInt8
 use creusot.int.UInt64
 use creusot.prelude.MutBorrow
 use creusot.prelude.Any
 
-predicate is_digit_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 86 0 86 32] (c: UInt8.t) =
+predicate is_digit_l [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 86 0 86 32] (c: UInt8.t) =
   [%#sstream'68] UInt8.le (48: UInt8.t) c /\ UInt8.le c (57: UInt8.t)
 
 let is_digit (c: UInt8.t) (return (x: bool)) = any
   [ return (result: bool) -> {[@stop_split] [@expl:is_digit ensures] [%#sstream'64] result = is_digit_l c}
     (! return {result}) ]
 
-predicate is_lower_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 90 0 90 32] (c: UInt8.t) =
+predicate is_lower_l [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 90 0 90 32] (c: UInt8.t) =
   [%#sstream'69] UInt8.le (97: UInt8.t) c /\ UInt8.le c (122: UInt8.t)
 
 let is_lower (c: UInt8.t) (return (x: bool)) = any
@@ -114,7 +114,7 @@ type t_Tok = {
   isint: bool;
   gotid: bool }
 
-predicate is_numpunct_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 95 0 95 35] (c: UInt8.t) =
+predicate is_numpunct_l [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 95 0 95 35] (c: UInt8.t) =
   [%#sstream'70] c = (46: UInt8.t) \/ c = (101: UInt8.t) \/ c = (69: UInt8.t) \/ c = (43: UInt8.t) \/ c = (45: UInt8.t)
 
 let is_numpunct (c: UInt8.t) (return (x: bool)) = any
@@ -137,7 +137,7 @@ predicate gt_log_u64 [@inline:trivial] (self: UInt64.t) (other: UInt64.t) = [%#s
 
 meta "rewrite_def" predicate gt_log_u64
 
-function tok_open [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 120 0 120 30] (t: t_Tok) : t_Tok =
+function tok_open [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 120 0 120 30] (t: t_Tok) : t_Tok =
   [%#sstream'73] let d = UInt64.add t.depth (1: UInt64.t) in { mode = t.mode;
                                                                depth = d;
                                                                maxd = (if gt_log_u64 d t.maxd then d else t.maxd);
@@ -153,7 +153,7 @@ function tok_open [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 120 0 12
                                                                isint = t.isint;
                                                                gotid = t.gotid }
 
-function tok_act [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 127 0 127 36] (t: t_Tok) (c: UInt8.t) : t_Tok =
+function tok_act [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 127 0 127 36] (t: t_Tok) (c: UInt8.t) : t_Tok =
   [%#sstream'71] if t.mode = (2: UInt8.t) then
     { mode = (1: UInt8.t);
       depth = t.depth;
@@ -364,7 +364,7 @@ function tok_act [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 127 0 127
   
 
 
-function tok_end [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 101 0 101 36] (t: t_Tok) (c: UInt8.t) : t_Tok =
+function tok_end [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 101 0 101 36] (t: t_Tok) (c: UInt8.t) : t_Tok =
   [%#sstream'72] if t.mode = (3: UInt8.t) /\ not (is_digit_l c \/ is_numpunct_l c) then
     { mode = (0: UInt8.t);
       depth = t.depth;
@@ -401,14 +401,14 @@ function tok_end [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 101 0 101
   
 
 
-function tok_step [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 159 0 159 37] (t: t_Tok) (c: UInt8.t) : t_Tok =
-  [%#sstream'67] tok_act (tok_end t c) c
+function tok_step [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 159 0 159 37] (t: t_Tok) (c: UInt8.t) : t_Tok
+ = [%#sstream'67] tok_act (tok_end t c) c
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let tok_step_exec [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 344 0 344 36] (t: MutBorrow.t t_Tok)
+let tok_step_exec [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 344 0 344 36] (t: MutBorrow.t t_Tok)
   (c: UInt8.t) (return (x: ())) = (! bb0
   [ bb0 = s0
     [ s0 = is_digit [%#sstream] {c} (fun (_x: bool) -> [ &dg <- _x ] s1)

@@ -1,25 +1,25 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 171 0 171 30 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 171 0 171 30 *)
 
-let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 168 11 168 27
-let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 169 10 169 67
-let%span sntt'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 170 10 170 69
-let%span sntt'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 45 11 45 47
-let%span sntt'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 46 10 46 24
-let%span sntt'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 162 11 162 27
-let%span sntt'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 163 10 163 61
-let%span sntt'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 48 47 50
-let%span sntt'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 164 33 164 35
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 168 11 168 27
+let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 169 10 169 67
+let%span sntt'1 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 170 10 170 69
+let%span sntt'2 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 45 11 45 47
+let%span sntt'3 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 46 10 46 24
+let%span sntt'4 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 162 11 162 27
+let%span sntt'5 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 163 10 163 61
+let%span sntt'6 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 47 48 47 50
+let%span sntt'7 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 164 33 164 35
 
 use int.ComputerDivision
 use int.Int
 
-function mul_mono [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 0 47 47] (a: int) (b: int) (x: int) (y: int) : ()
+function mul_mono [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 47 0 47 47] (a: int) (b: int) (x: int) (y: int) : ()
  = [%#sntt'6] ()
 
 axiom mul_mono_spec: forall a: int, b: int, x: int, y: int. ([%#sntt'2] 0 <= a /\ a <= x /\ 0 <= b /\ b <= y)
     -> ([%#sntt'3] a * b <= x * y)
 
-function mod_shift [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 164 0 164 32] (q: int) (z: int) : () =
+function mod_shift [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 164 0 164 32] (q: int) (z: int) : () =
   [%#sntt'7] ()
 
 axiom mod_shift_spec: forall q: int, z: int. ([%#sntt'4] 0 <= q /\ 0 <= z)
@@ -33,7 +33,7 @@ constant x : int
 
 constant y : int
 
-function mul_mod [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 171 0 171 30] (x: int) (y: int) : ()
+function mul_mod [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 171 0 171 30] (x: int) (y: int) : ()
 
 goal vc_mul_mod: ([%#sntt] 0 <= x /\ 0 <= y)
   -> x = ComputerDivision.div x 2013265921 * 2013265921 + ComputerDivision.mod x 2013265921

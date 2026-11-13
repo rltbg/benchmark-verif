@@ -58,7 +58,7 @@
               { "prover": "z3", "time": 0.009 },
               { "prover": "alt-ergo", "time": 0.024 },
               { "prover": "z3", "time": 0.094 },
-              { "prover": "alt-ergo", "time": 0.224 },
+              { "prover": "alt-ergo", "time": 0.184 },
               { "prover": "z3", "time": 0.017 },
               { "prover": "z3", "time": 0.007 },
               { "prover": "alt-ergo", "time": 0.048 },
@@ -84,7 +84,7 @@
                 ]
               },
               { "prover": "z3", "time": 0.063 },
-              { "prover": "z3", "time": 0.478 },
+              { "prover": "z3", "time": 0.462 },
               { "prover": "z3", "time": 0.018 },
               { "prover": "z3", "time": 0.032 },
               {
@@ -127,7 +127,7 @@
                   { "prover": "alt-ergo", "time": 0.035 },
                   { "prover": "alt-ergo", "time": 0.059 },
                   { "prover": "cvc4", "time": 0.071 },
-                  { "prover": "alt-ergo", "time": 0.203 }
+                  { "prover": "alt-ergo", "time": 0.217 }
                 ]
               },
               {

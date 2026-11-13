@@ -16,7 +16,7 @@
               { "prover": "alt-ergo", "time": 0.046 },
               { "prover": "alt-ergo", "time": 0.03 },
               { "prover": "z3", "time": 0.011 },
-              { "prover": "alt-ergo", "time": 0.314 },
+              { "prover": "alt-ergo", "time": 0.277 },
               { "prover": "alt-ergo", "time": 0.074 },
               { "prover": "alt-ergo", "time": 0.083 },
               { "prover": "alt-ergo", "time": 0.04 },

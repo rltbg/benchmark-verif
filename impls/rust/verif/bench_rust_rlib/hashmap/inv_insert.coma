@@ -45,8 +45,8 @@ constant const_PHI: UInt64.t = [%#shashmap'11] (11400714819323198485: UInt64.t)
 function home [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 51 0 51 37] (key: UInt64.t) (lg: UInt32.t) : int
  = [%#shashmap'8] UInt64.t'int (shr_u64 (UInt64.mul key const_PHI) (UInt32.sub (64: UInt32.t) lg))
 
-function at' [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 0 106 42] (h: int) (d: int) (cap: int) : int
- = [%#shashmap'9] if h + d < cap then h + d else h + d - cap
+function at' [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 0 106 42] (h: int) (d: int) (cap: int) : int =
+  [%#shashmap'9] if h + d < cap then h + d else h + d - cap
 
 predicate table_inv [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 135 0 135 66] (t: Seq.seq UInt64.t) (cap: int) (lg: UInt32.t) (m: Map.map UInt64.t t_Option_u64) =
   [%#shashmap'5] Seq.length t = 2 * cap

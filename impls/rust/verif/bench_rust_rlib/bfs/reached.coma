@@ -1,7 +1,7 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 86 0 86 42 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 86 0 86 42 *)
 
-let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 85 10 85 11
-let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 86 0 86 42
+let%span sbfs = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 85 10 85 11
+let%span sbfs'0 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 86 0 86 42
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
@@ -33,7 +33,7 @@ constant d : Seq.seq UInt32.t
 
 constant k : int
 
-function reached [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 86 0 86 42] (d: Seq.seq UInt32.t) (k: int) : int
+function reached [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 86 0 86 42] (d: Seq.seq UInt32.t) (k: int) : int
 
 goal vc_reached: if k <= 0 then
     true

@@ -70,7 +70,7 @@
               },
               { "prover": "z3", "time": 0.034 },
               { "prover": "cvc5", "time": 0.082 },
-              { "prover": "alt-ergo", "time": 0.246 },
+              { "prover": "alt-ergo", "time": 0.198 },
               { "prover": "alt-ergo", "time": 0.056 },
               { "prover": "alt-ergo", "time": 0.036 },
               { "prover": "alt-ergo", "time": 0.051 },

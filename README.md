@@ -13,6 +13,7 @@ checksum** ; sinon le résultat est marqué ❌.
 | `fstar-fsharp` | **les mêmes** sources F* | oui | `fstar.exe --codegen FSharp` → .NET 10 |
 | `fstar-ocaml` / `fstar-ocaml-fast` | **les mêmes** sources F* | oui | `fstar.exe --codegen OCaml` → `ocamlopt` (runtime livré / conversions corrigées) |
 | `rust-creusot` | `impls/rust` (Rust annoté Creusot) | **oui (Creusot)** | `cargo build --release` (les contrats sont effacés) |
+| `rust-verus` | `impls/rust-verus` (Rust vérifié avec **Verus**, mêmes cibles que Creusot) | **oui (Verus)** | `cargo verus build --release` (le code fantôme est effacé) |
 | `rust-plain` | `impls/rust-plain` (Rust idiomatique, sans Creusot) | non | `cargo build --release` (opt 3, LTO, `panic=abort`) |
 | `c-native` | `impls/c-native/bench.c` (C11 écrit à la main) | non | `gcc -O3 -std=c11` |
 | `zig` | `impls/zig/bench.zig` (**Zig 0.17.0**, à la main) | non | `zig build-exe -O ReleaseFast -lc` |
@@ -84,6 +85,22 @@ Les 5 workloads de base sont mono-thread, sur tableaux, sans fichier : ils ne d�
 Ce qui n'a **pas** pu être fait dans F* : les flottants (d'où `ntt` entière), de vrais pointeurs de tas pour `ptrchase`, de la concurrence prouvée (les threads
 sont dans les pilotes). Aucune colonne n'est « non implémentée » : les 8 colonnes tournent sur les 15 workloads.
 
+## Creusot contre Verus
+
+Le crate Creusot a été réécrit selon la documentation de Creusot (spécifications fonctionnelles, preuves à la place des gardes à l'exécution), et les
+15 workloads ont été écrits une seconde fois en **Verus** avec les mêmes cibles. Rapport complet : [`docs/verif-compare/RAPPORT.md`](docs/verif-compare/RAPPORT.md).
+
+* **Mêmes propriétés prouvées dans les deux outils**, y compris la preuve fonctionnelle de `matmul` qui avait échoué au départ, SHA-256 égal à sa
+  définition logique, les distances BFS, le crible, la table de hachage comme dictionnaire, et les threads de `parmatmul`, `parsort`, `parsha`.
+* **Performance** (taille `large`, moyenne géométrique relative à Rust simple) : Rust + Creusot ×0,98, Rust + Verus ×1,02. Avant la réécriture, Creusot était
+  ×1,24 plus lent : prouver davantage a permis de supprimer des gardes à l'exécution.
+* **Coût de la preuve** : vérification complète en ~110 s (Creusot) contre 14 s (Verus) ; un essai pendant le développement coûte 20–70 s contre 1–5 s ;
+  Verus demande 43 % de lignes en plus (isolation des boucles, déclencheurs, permutations à prouver soi-même).
+* **IA** (exercices identiques, agents neufs) : Creusot demande moins d'essais, surtout à un modèle faible (Haiku : 5 contre 18) ; Verus va 4 à 5 fois plus vite
+  en temps réel avec un bon modèle. Sur les gros workloads, le diagnostic des échecs, nettement meilleur en Verus, l'emporte.
+* **À privilégier** : Verus pour un projet de cette taille (boucle de 2 s, erreurs localisées), Creusot pour du code court très automatisable ou pour garder la
+  toolchain Rust du projet. Détails, critère par critère, dans le rapport.
+
 ## Ce que fait réellement F* 2026.10.25 (constats)
 
 F* a changé : `LowStar.Buffer`/KaRaMeL ont disparu de la ulib ; la programmation de bas niveau passe par
@@ -117,6 +134,7 @@ F* a changé : `LowStar.Buffer`/KaRaMeL ont disparu de la ulib ; la programmatio
 scripts/setup-fstar.sh      # F* 2026.10.25, .NET 10, switch opam OCaml 5.3 (stdint, zarith, ppx_deriving...)
 scripts/setup-creusot.sh    # Creusot (clone, opam, solveurs, cargo-creusot)
 scripts/setup-zig.sh        # Zig 0.17.0 (sha256 vérifié) dans /opt/tools/zig
+scripts/setup-verus.sh      # Verus 0.2026.11.02 (binaire officiel, Z3 inclus) + toolchain Rust 1.99.1
 
 scripts/build-all.sh        # Rust (x2), C natif, Zig + F* -> C, F#, OCaml ; écrit results/footprint.json
 make creusot                # preuves Creusot (durée enregistrée)
@@ -139,6 +157,7 @@ spec/WORKLOADS.md        les 5 workloads de base (algorithmes, graines, checksum
 spec/workloads.d, spec/checksums.d, harness/presets.d   les 10 workloads extrêmes : spécification, checksums, tailles par preset
 harness/bench.py         lanceur + mesures + rapport ; runner.c (fork/exec/wait4) ; impls.json ; presets.json
 impls/rust               crate Rust + contrats Creusot (src/{common,sort,sieve,matmul,lines,hashmap}.rs)
+impls/rust-verus         les 15 workloads vérifiés avec Verus (src/<nom>.rs)
 impls/rust-plain         même algorithmes en Rust idiomatique, sans Creusot (src/main.rs)
 impls/c-native           C11 écrit à la main (bench.c)
 impls/zig                Zig 0.17 écrit à la main (bench.zig)

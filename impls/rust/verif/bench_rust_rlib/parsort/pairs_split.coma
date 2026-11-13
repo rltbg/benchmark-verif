@@ -1,21 +1,21 @@
-(* #"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 80 0 80 70 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 80 0 80 70 *)
 
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 423 8 423 40
 let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 590 8 590 38
 let%span sseq'1 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 581 8 581 49
 let%span sseq'2 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 413 12 413 12
-let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
-let%span sparsort = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 76 11 76 110
-let%span sparsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 77 11 77 77
-let%span sparsort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 78 11 78 78
-let%span sparsort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 79 10 79 45
-let%span sparsort'3 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 46 11 46 33
-let%span sparsort'4 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 47 10 47 36
-let%span sparsort'5 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 52 11 52 67
-let%span sparsort'6 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 53 10 53 60
-let%span sparsort'7 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 41 16 41 16
-let%span sparsort'8 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 48 41 48 43
-let%span sparsort'9 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 54 62 54 64
+let%span sparsort = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 76 11 76 110
+let%span sparsort'0 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 77 11 77 77
+let%span sparsort'1 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 78 11 78 78
+let%span sparsort'2 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 79 10 79 45
+let%span sparsort'3 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 46 11 46 33
+let%span sparsort'4 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 47 10 47 36
+let%span sparsort'5 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 52 11 52 67
+let%span sparsort'6 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 53 10 53 60
+let%span sparsort'7 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 41 16 41 16
+let%span sparsort'8 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 48 41 48 43
+let%span sparsort'9 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 54 62 54 64
 
 use creusot.int.UInt32
 use seq.Seq
@@ -38,7 +38,7 @@ function index_Seq_u32 [@inline:trivial] (self: Seq.seq UInt32.t) (range: t_Rang
 
 meta "rewrite_def" function index_Seq_u32
 
-predicate pairs_sorted [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 40 0 40 82] (s: Seq.seq UInt32.t) (b: Seq.seq UInt64.t) (p: int) (m: int) (base: int) =
+predicate pairs_sorted [#"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 40 0 40 82] (s: Seq.seq UInt32.t) (b: Seq.seq UInt64.t) (p: int) (m: int) (base: int) =
   [%#sparsort'7] forall q: int. p <= q /\ q < m
     -> sorted_range_u32 s (UInt64.t'int (Seq.get b (2 * q)) - base) (UInt64.t'int (Seq.get b (2 * q + 2)) - base)
 
@@ -51,13 +51,13 @@ meta "rewrite_def" function index_Seq_u32'0
 
 type tup2_Seq_u32_Seq_u32 = { f0: Seq.seq UInt32.t; f1: Seq.seq UInt32.t }
 
-function split_concat [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 48 0 48 40] (s: Seq.seq UInt32.t) (m: int) : ()
+function split_concat [#"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 48 0 48 40] (s: Seq.seq UInt32.t) (m: int) : ()
  = [%#sparsort'8] ()
 
 axiom split_concat_spec: forall s: Seq.seq UInt32.t, m: int. ([%#sparsort'3] 0 <= m /\ m <= Seq.length s)
     -> ([%#sparsort'4] s = Seq.(++) (index_Seq_u32 s { end' = m }) (index_Seq_u32'0 s { start = m }))
 
-function sorted_shift [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 54 0 54 61] (u: Seq.seq UInt32.t) (v: Seq.seq UInt32.t) (x: int) (y: int) : ()
+function sorted_shift [#"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 54 0 54 61] (u: Seq.seq UInt32.t) (v: Seq.seq UInt32.t) (x: int) (y: int) : ()
  = [%#sparsort'9] ()
 
 axiom sorted_shift_spec: forall u: Seq.seq UInt32.t, v: Seq.seq UInt32.t, x: int, y: int. ([%#sparsort'5] 0 <= x
@@ -78,7 +78,7 @@ constant m : int
 
 constant h : int
 
-function pairs_split [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 80 0 80 70] (s: Seq.seq UInt32.t) (b: Seq.seq UInt64.t) (p: int) (m: int) (h: int) : ()
+function pairs_split [#"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 80 0 80 70] (s: Seq.seq UInt32.t) (b: Seq.seq UInt64.t) (p: int) (m: int) (h: int) : ()
 
 goal vc_pairs_split: ([%#sparsort] 0 <= p
     /\ p < m

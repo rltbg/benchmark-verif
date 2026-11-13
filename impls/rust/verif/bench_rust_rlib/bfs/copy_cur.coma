@@ -1,16 +1,16 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 320 0 320 61 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 320 0 320 61 *)
 
-let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 321 16 321 22
-let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 324 14 324 21
-let%span sbfs'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 323 16 323 16
-let%span sbfs'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 322 16 322 44
-let%span sbfs'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 326 20 326 23
-let%span sbfs'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 326 11 326 14
-let%span sbfs'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 327 13 327 14
-let%span sbfs'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 327 8 327 14
-let%span sbfs'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 316 11 316 51
-let%span sbfs'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 317 10 317 29
-let%span sbfs'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 318 10 318 10
+let%span sbfs = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 321 16 321 22
+let%span sbfs'0 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 324 14 324 21
+let%span sbfs'1 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 323 16 323 16
+let%span sbfs'2 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 322 16 322 44
+let%span sbfs'3 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 326 20 326 23
+let%span sbfs'4 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 326 11 326 14
+let%span sbfs'5 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 327 13 327 14
+let%span sbfs'6 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 327 8 327 14
+let%span sbfs'7 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 316 11 316 51
+let%span sbfs'8 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 317 10 317 29
+let%span sbfs'9 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 318 10 318 10
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
@@ -102,7 +102,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let copy_cur [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 320 0 320 61] (off: t_Vec_u32_Global)
+let copy_cur [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 320 0 320 61] (off: t_Vec_u32_Global)
   (cur: MutBorrow.t t_Vec_u32_Global) (n: UInt64.t) (return (x: ())) =
 {[@stop_split] [@expl:copy_cur requires] [%#sbfs'7] Seq.length (view_Vec_u32_Global off) = UInt64.t'int n + 1
   /\ Seq.length (view_Vec_u32_Global cur.current) = UInt64.t'int n}

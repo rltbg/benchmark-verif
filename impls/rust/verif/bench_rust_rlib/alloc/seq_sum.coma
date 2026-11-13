@@ -1,10 +1,10 @@
-(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 57 0 57 41 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 57 0 57 41 *)
 
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span salloc = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 56 10 56 11
-let%span salloc'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 55 11 55 33
+let%span salloc = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 56 10 56 11
+let%span salloc'0 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 55 11 55 33
 
 use creusot.int.UInt8
 use seq.Seq
@@ -31,7 +31,7 @@ constant b : Seq.seq UInt8.t
 
 constant k : int
 
-function seq_sum [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 57 0 57 41] (b: Seq.seq UInt8.t) (k: int) : int
+function seq_sum [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 57 0 57 41] (b: Seq.seq UInt8.t) (k: int) : int
 
 goal vc_seq_sum: ([%#salloc'0] 0 <= k /\ k <= Seq.length b)
   -> (if k = 0 then

@@ -43,7 +43,7 @@
                   { "prover": "alt-ergo", "time": 0.073 }
                 ]
               },
-              { "prover": "alt-ergo", "time": 0.186 },
+              { "prover": "alt-ergo", "time": 0.222 },
               { "prover": "alt-ergo", "time": 0.041 },
               { "prover": "alt-ergo", "time": 0.035 },
               { "prover": "alt-ergo", "time": 0.029 },
@@ -70,7 +70,7 @@
                   { "prover": "alt-ergo", "time": 0.287 }
                 ]
               },
-              { "prover": "alt-ergo", "time": 0.519 },
+              { "prover": "alt-ergo", "time": 0.639 },
               { "prover": "alt-ergo", "time": 0.05 },
               {
                 "tactic": "split_vc",
@@ -112,7 +112,7 @@
               {
                 "tactic": "split_vc",
                 "children": [
-                  { "prover": "cvc4", "time": 0.929 },
+                  { "prover": "cvc4", "time": 0.719 },
                   { "prover": "cvc5", "time": 0.251 }
                 ]
               },
@@ -123,7 +123,7 @@
                   { "prover": "cvc5", "time": 0.163 }
                 ]
               },
-              { "prover": "cvc4", "time": 0.5 },
+              { "prover": "cvc4", "time": 0.384 },
               {
                 "tactic": "split_vc",
                 "children": [

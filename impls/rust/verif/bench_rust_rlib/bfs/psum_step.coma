@@ -1,12 +1,12 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 129 0 129 46 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 129 0 129 46 *)
 
-let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 127 10 127 11
-let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 126 11 126 27
-let%span sbfs'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 128 10 128 92
-let%span sbfs'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 60 10 60 11
-let%span sbfs'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 62 4 62 67
-let%span sbfs'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 53 10 53 11
-let%span sbfs'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 55 4 55 83
+let%span sbfs = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 127 10 127 11
+let%span sbfs'0 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 126 11 126 27
+let%span sbfs'1 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 128 10 128 92
+let%span sbfs'2 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 60 10 60 11
+let%span sbfs'3 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 62 4 62 67
+let%span sbfs'4 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 53 10 53 11
+let%span sbfs'5 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 55 4 55 83
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
@@ -14,12 +14,12 @@ let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 use seq.Seq
 use int.Int
 
-function cnt [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 54 0 54 47] (us: Seq.seq int) (u: int) (j: int) : int
+function cnt [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 54 0 54 47] (us: Seq.seq int) (u: int) (j: int) : int
 
 axiom cnt_def: forall us: Seq.seq int, u: int, j: int [cnt us u j]. cnt us u j
     = ([%#sbfs'5] if j <= 0 then 0 else cnt us u (j - 1) + (if Seq.get us (j - 1) = u then 1 else 0))
 
-function psum [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 61 0 61 48] (us: Seq.seq int) (i: int) (j: int) : int
+function psum [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 61 0 61 48] (us: Seq.seq int) (i: int) (j: int) : int
 
 axiom psum_def: forall us: Seq.seq int, i: int, j: int [psum us i j]. psum us i j
     = ([%#sbfs'3] if i <= 0 then 0 else psum us (i - 1) j + cnt us (i - 1) j)
@@ -47,7 +47,7 @@ constant i : int
 
 constant j : int
 
-function psum_step [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 129 0 129 46] (us: Seq.seq int) (i: int) (j: int) : ()
+function psum_step [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 129 0 129 46] (us: Seq.seq int) (i: int) (j: int) : ()
 
 goal vc_psum_step: ([%#sbfs'0] 0 <= i /\ 0 <= j)
   -> (if gt_log_Int i 0 then

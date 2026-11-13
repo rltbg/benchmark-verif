@@ -59,7 +59,7 @@
                   { "prover": "alt-ergo", "time": 0.028 },
                   {
                     "tactic": "split_vc",
-                    "children": [ { "prover": "alt-ergo", "time": 0.683 } ]
+                    "children": [ { "prover": "alt-ergo", "time": 0.946 } ]
                   }
                 ]
               },

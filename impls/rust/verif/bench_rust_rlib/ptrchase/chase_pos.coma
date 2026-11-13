@@ -1,10 +1,10 @@
-(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 108 0 108 45 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 108 0 108 45 *)
 
-let%span sptrchase = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 107 10 107 11
-let%span sptrchase'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 106 11 106 17
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sptrchase = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 107 10 107 11
+let%span sptrchase'0 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 106 11 106 17
 
 use creusot.int.UInt32
 use seq.Seq
@@ -31,7 +31,7 @@ constant nx : Seq.seq UInt32.t
 
 constant h : int
 
-function chase_pos [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 108 0 108 45] (nx: Seq.seq UInt32.t) (h: int) : UInt32.t
+function chase_pos [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 108 0 108 45] (nx: Seq.seq UInt32.t) (h: int) : UInt32.t
 
 goal vc_chase_pos: ([%#sptrchase'0] ge_log_Int h 0)
   -> (if h = 0 then

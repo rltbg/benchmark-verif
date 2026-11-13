@@ -1,9 +1,9 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 60 0 60 38 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/lines.rs" 60 0 60 38 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 59 10 59 11
+let%span slines = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 59 10 59 11
 
 use seq.Seq
 use int.Int
@@ -29,7 +29,7 @@ constant s : Seq.seq int
 
 constant j : int
 
-function num [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 60 0 60 38] (s: Seq.seq int) (j: int) : int
+function num [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 60 0 60 38] (s: Seq.seq int) (j: int) : int
 
 goal vc_num: if j <= 0 then
     true

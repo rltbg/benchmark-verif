@@ -1,24 +1,24 @@
-(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 59 9 59 36 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 59 9 59 36 *)
 
 (* <stream::Tok as std::clone::Clone> *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 64 26 64 33
 let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 64 26 64 33
-let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 61 4 61 16
-let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 62 4 62 18
-let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 63 4 63 17
-let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 64 4 64 17
-let%span sstream'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 65 4 65 17
-let%span sstream'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 66 4 66 17
-let%span sstream'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 67 4 67 17
-let%span sstream'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 68 4 68 17
-let%span sstream'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 69 4 69 18
-let%span sstream'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 70 4 70 18
-let%span sstream'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 71 4 71 19
-let%span sstream'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 72 4 72 16
-let%span sstream'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 73 4 73 19
-let%span sstream'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 74 4 74 19
-let%span sstream'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 59 9 59 36
+let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 61 4 61 16
+let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 62 4 62 18
+let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 63 4 63 17
+let%span sstream'2 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 64 4 64 17
+let%span sstream'3 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 65 4 65 17
+let%span sstream'4 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 66 4 66 17
+let%span sstream'5 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 67 4 67 17
+let%span sstream'6 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 68 4 68 17
+let%span sstream'7 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 69 4 69 18
+let%span sstream'8 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 70 4 70 18
+let%span sstream'9 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 71 4 71 19
+let%span sstream'10 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 72 4 72 16
+let%span sstream'11 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 73 4 73 19
+let%span sstream'12 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 74 4 74 19
+let%span sstream'13 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 59 9 59 36
 let%span sclone = "/opt/tools/creusot/creusot-std/src/std/clone.rs" 26 29 26 33
 let%span sclone'0 = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/clone.rs" 715 20 715 43
 
@@ -70,7 +70,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let clone_Tok [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 59 9 59 36] (self: t_Tok) (return (x: t_Tok)) =
+let clone_Tok [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 59 9 59 36] (self: t_Tok) (return (x: t_Tok)) =
 (! bb0
   [ bb0 = s0
     [ s0 = [ &_6 <- self.mode ] s1

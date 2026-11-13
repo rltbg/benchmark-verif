@@ -1,10 +1,10 @@
-(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 291 0 291 33 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 291 0 291 33 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 292 26 292 39
-let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 292 4 292 40
-let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 288 10 288 35
-let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 172 4 172 31
+let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 292 26 292 39
+let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 292 4 292 40
+let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 288 10 288 35
+let%span sstream'2 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 172 4 172 31
 
 use creusot.int.UInt64
 use creusot.prelude.Any
@@ -13,14 +13,14 @@ let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
   [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
     (! return {result}) ]
 
-function ckfold_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 171 0 171 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+function ckfold_l [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 171 0 171 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
  = [%#sstream'2] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let ckfold [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 291 0 291 33] (ck: UInt64.t) (v: UInt64.t)
+let ckfold [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 291 0 291 33] (ck: UInt64.t) (v: UInt64.t)
   (return (x: UInt64.t)) = (! bb0
   [ bb0 = s0
     [ s0 = [ &_6 <- UInt64.bw_xor ck v ] s1

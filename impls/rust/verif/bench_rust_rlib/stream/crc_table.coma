@@ -1,38 +1,38 @@
-(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 319 0 319 32 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 319 0 319 32 *)
 
-let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 320 16 320 27
-let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 320 17 320 21
-let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 321 16 321 22
-let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 324 14 324 22
-let%span sstream'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 325 14 325 17
-let%span sstream'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 323 16 323 16
-let%span sstream'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 322 16 322 25
-let%span sstream'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 327 20 327 26
-let%span sstream'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 329 18 329 24
-let%span sstream'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 330 18 330 19
-let%span sstream'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 328 20 328 58
-let%span sstream'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 23 331 24
-let%span sstream'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 28 331 29
-let%span sstream'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 38 331 39
-let%span sstream'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 32 331 40
-let%span sstream'14 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 43 331 53
-let%span sstream'15 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 68 331 69
-let%span sstream'16 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 331 63 331 69
-let%span sstream'17 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 332 17 332 18
-let%span sstream'18 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 332 12 332 18
-let%span sstream'19 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 334 8 334 12
-let%span sstream'20 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 334 8 334 16
-let%span sstream'21 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 335 13 335 14
-let%span sstream'22 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 335 8 335 14
-let%span sstream'23 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 319 22 319 32
-let%span sstream'24 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 317 10 317 10
-let%span sstream'25 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 34 10 34 11
-let%span sstream'26 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 36 4 36 58
-let%span sstream'27 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 29 4 29 74
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 320 16 320 27
+let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 320 17 320 21
+let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 321 16 321 22
+let%span sstream'2 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 324 14 324 22
+let%span sstream'3 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 325 14 325 17
+let%span sstream'4 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 323 16 323 16
+let%span sstream'5 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 322 16 322 25
+let%span sstream'6 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 327 20 327 26
+let%span sstream'7 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 329 18 329 24
+let%span sstream'8 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 330 18 330 19
+let%span sstream'9 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 328 20 328 58
+let%span sstream'10 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 331 23 331 24
+let%span sstream'11 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 331 28 331 29
+let%span sstream'12 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 331 38 331 39
+let%span sstream'13 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 331 32 331 40
+let%span sstream'14 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 331 43 331 53
+let%span sstream'15 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 331 68 331 69
+let%span sstream'16 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 331 63 331 69
+let%span sstream'17 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 332 17 332 18
+let%span sstream'18 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 332 12 332 18
+let%span sstream'19 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 334 8 334 12
+let%span sstream'20 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 334 8 334 16
+let%span sstream'21 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 335 13 335 14
+let%span sstream'22 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 335 8 335 14
+let%span sstream'23 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 319 22 319 32
+let%span sstream'24 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 317 10 317 10
+let%span sstream'25 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 34 10 34 11
+let%span sstream'26 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 36 4 36 58
+let%span sstream'27 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 29 4 29 74
 
 use creusot.int.UInt32
 use creusot.int.UInt64
@@ -55,14 +55,14 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
 
 meta "rewrite_def" predicate well_founded_relation_Int
 
-function crc_shift [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 28 0 28 31] (x: UInt32.t) : UInt32.t =
+function crc_shift [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 28 0 28 31] (x: UInt32.t) : UInt32.t =
   [%#sstream'27] if UInt32.bw_and x (1: UInt32.t) <> (0: UInt32.t) then
     UInt32.bw_xor (UInt32.shr x (1: UInt32.t)) (3988292384: UInt32.t)
   else
     UInt32.shr x (1: UInt32.t)
 
 
-function crc_iter [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 35 0 35 38] (x: UInt32.t) (k: int) : UInt32.t
+function crc_iter [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 35 0 35 38] (x: UInt32.t) (k: int) : UInt32.t
 
 axiom crc_iter_def: forall x: UInt32.t, k: int [crc_iter x k]. crc_iter x k
     = ([%#sstream'26] if k <= 0 then x else crc_shift (crc_iter x (k - 1)))
@@ -82,8 +82,8 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let crc_table [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 319 0 319 32] (return (x: Slice64.array UInt32.t)) =
-(! bb0
+let crc_table [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 319 0 319 32]
+  (return (x: Slice64.array UInt32.t)) = (! bb0
   [ bb0 = s0
     [ s0 = Slice64.create [%#sstream] <UInt32.t> {[%#sstream] (256: UInt64.t)}
         {fun (_: int) -> [%#sstream'0] (0: UInt32.t)} (fun (_res: Slice64.array UInt32.t) -> [ &t <- _res ] s1)

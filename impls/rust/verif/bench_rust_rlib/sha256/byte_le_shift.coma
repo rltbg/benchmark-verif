@@ -1,15 +1,15 @@
-(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 372 0 372 36 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 372 0 372 36 *)
 
-let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 370 11 370 33
-let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 371 10 371 46
-let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 295 4 311 5
+let%span ssha256 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 370 11 370 33
+let%span ssha256'0 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 371 10 371 46
+let%span ssha256'1 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 295 4 311 5
 
 use creusot.int.UInt64BW
 use int.ComputerDivision
 use creusot.int.UInt8BW
 use int.Int
 
-function byte_le [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 294 0 294 36] (x: UInt64BW.t) (q: int) : UInt8BW.t
+function byte_le [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 294 0 294 36] (x: UInt64BW.t) (q: int) : UInt8BW.t
  = [%#ssha256'1] if q = 0 then
     UInt8BW.of_BV256 (UInt64BW.to_BV256 x)
   else
@@ -48,7 +48,7 @@ constant x : UInt64BW.t
 
 constant s : UInt64BW.t
 
-function byte_le_shift [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 372 0 372 36] (x: UInt64BW.t) (s: UInt64BW.t) : ()
+function byte_le_shift [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 372 0 372 36] (x: UInt64BW.t) (s: UInt64BW.t) : ()
 
 goal vc_byte_le_shift: ([%#ssha256] ComputerDivision.mod (UInt64BW.t'int s) 8 = 0 /\ UInt64BW.t'int s < 64)
   -> (if UInt64BW.t'int s = 0 then

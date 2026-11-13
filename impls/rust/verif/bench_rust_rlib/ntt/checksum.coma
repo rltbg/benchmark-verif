@@ -1,4 +1,4 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 452 0 452 57 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 452 0 452 57 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
@@ -9,23 +9,23 @@ let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
 let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
 let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
 let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
-let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 453 17 453 24
-let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 454 16 454 22
-let%span sntt'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 456 14 456 21
-let%span sntt'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 455 16 455 42
-let%span sntt'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 458 17 458 20
-let%span sntt'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 459 23 459 66
-let%span sntt'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 460 24 460 32
-let%span sntt'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 460 35 460 36
-let%span sntt'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 460 24 460 36
-let%span sntt'8 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 460 13 460 37
-let%span sntt'9 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 461 13 461 14
-let%span sntt'10 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 461 8 461 14
-let%span sntt'11 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 450 11 450 66
-let%span sntt'12 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 452 0 452 57
-let%span sntt'13 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 45 11 45 47
-let%span sntt'14 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 46 10 46 24
-let%span sntt'15 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 48 47 50
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 453 17 453 24
+let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 454 16 454 22
+let%span sntt'1 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 456 14 456 21
+let%span sntt'2 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 455 16 455 42
+let%span sntt'3 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 458 17 458 20
+let%span sntt'4 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 459 23 459 66
+let%span sntt'5 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 460 24 460 32
+let%span sntt'6 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 460 35 460 36
+let%span sntt'7 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 460 24 460 36
+let%span sntt'8 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 460 13 460 37
+let%span sntt'9 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 461 13 461 14
+let%span sntt'10 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 461 8 461 14
+let%span sntt'11 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 450 11 450 66
+let%span sntt'12 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 452 0 452 57
+let%span sntt'13 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 45 11 45 47
+let%span sntt'14 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 46 10 46 24
+let%span sntt'15 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 47 48 47 50
 
 use creusot.int.UInt64
 use seq.Seq
@@ -75,7 +75,7 @@ let index_Vec_u32_Global (self: t_Vec_u32_Global) (index: UInt64.t) (return (x: 
   {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u32_Global self) result}
     (! return {result}) ]
 
-function mul_mono [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 0 47 47] (a: int) (b: int) (x: int) (y: int) : ()
+function mul_mono [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 47 0 47 47] (a: int) (b: int) (x: int) (y: int) : ()
  = [%#sntt'15] ()
 
 axiom mul_mono_spec: forall a: int, b: int, x: int, y: int. ([%#sntt'13] 0 <= a /\ a <= x /\ 0 <= b /\ b <= y)
@@ -90,7 +90,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let checksum [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 452 0 452 57] (a: t_Vec_u32_Global) (n: UInt64.t)
+let checksum [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 452 0 452 57] (a: t_Vec_u32_Global) (n: UInt64.t)
   (ninv: UInt64.t) (return (x: UInt64.t)) =
 {[@stop_split] [@expl:checksum requires] [%#sntt'11] Seq.length (view_Vec_u32_Global a) = UInt64.t'int n
   /\ UInt64.t'int ninv < 2013265921 /\ UInt64.t'int n <= 134217728}

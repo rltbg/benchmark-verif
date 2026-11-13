@@ -1,23 +1,23 @@
-(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 441 0 441 32 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 441 0 441 32 *)
 
-let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 443 17 443 24
-let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 444 30 444 41
-let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 444 9 444 50
-let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 445 9 445 27
-let%span sstream'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 446 9 446 27
-let%span sstream'4 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 447 9 447 27
-let%span sstream'5 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 448 9 448 27
-let%span sstream'6 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 449 9 449 27
-let%span sstream'7 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 450 9 450 27
-let%span sstream'8 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 451 9 451 28
-let%span sstream'9 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 452 9 452 28
-let%span sstream'10 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 453 9 453 29
-let%span sstream'11 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 454 4 454 24
-let%span sstream'12 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 439 10 439 67
-let%span sstream'13 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 441 0 441 32
-let%span sstream'14 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 288 10 288 35
-let%span sstream'15 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 178 4 178 43
-let%span sstream'16 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 172 4 172 31
+let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 443 17 443 24
+let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 444 30 444 41
+let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 444 9 444 50
+let%span sstream'2 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 445 9 445 27
+let%span sstream'3 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 446 9 446 27
+let%span sstream'4 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 447 9 447 27
+let%span sstream'5 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 448 9 448 27
+let%span sstream'6 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 449 9 449 27
+let%span sstream'7 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 450 9 450 27
+let%span sstream'8 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 451 9 451 28
+let%span sstream'9 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 452 9 452 28
+let%span sstream'10 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 453 9 453 29
+let%span sstream'11 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 454 4 454 24
+let%span sstream'12 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 439 10 439 67
+let%span sstream'13 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 441 0 441 32
+let%span sstream'14 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 288 10 288 35
+let%span sstream'15 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 178 4 178 43
+let%span sstream'16 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 172 4 172 31
 
 use creusot.int.UInt32
 use creusot.int.UInt8
@@ -44,14 +44,14 @@ type t_State = { crc: UInt32.t; tok: t_Tok; total: UInt64.t }
 
 constant const_CK_INIT: UInt64.t = [%#sstream'13] (14695981039346656037: UInt64.t)
 
-function ckfold_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 171 0 171 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+function ckfold_l [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 171 0 171 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
  = [%#sstream'16] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
 
 let ckfold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
   [ return (result: UInt64.t) -> {[@stop_split] [@expl:ckfold ensures] [%#sstream'14] result = ckfold_l ck v}
     (! return {result}) ]
 
-function ck_of [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 177 0 177 49] (crc'0: UInt32.t) (t: t_Tok) (total'0: UInt64.t) : UInt64.t
+function ck_of [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 177 0 177 49] (crc'0: UInt32.t) (t: t_Tok) (total'0: UInt64.t) : UInt64.t
  =
   [%#sstream'15] let ck = ckfold_l const_CK_INIT (UInt64.of_int (UInt32.t'int crc'0)) in let ck'0 = ckfold_l ck t.objs in let ck'1 = ckfold_l ck'0 t.strs in let ck'2 = ckfold_l ck'1 t.nums in let ck'3 = ckfold_l ck'2 t.arrs in let ck'4 = ckfold_l ck'3 t.lits in let ck'5 = ckfold_l ck'4 t.maxd in let ck'6 = ckfold_l ck'5 t.lines in let ck'7 = ckfold_l ck'6 t.idsum in let ck'8 = ckfold_l ck'7 t.allsum in ckfold_l ck'8 total'0
 
@@ -59,7 +59,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let finish [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 441 0 441 32] (st: t_State) (return (x: UInt64.t)) =
+let finish [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 441 0 441 32] (st: t_State) (return (x: UInt64.t)) =
 (! bb0
   [ bb0 = s0
     [ s0 = [ &t <- st.tok ] s1

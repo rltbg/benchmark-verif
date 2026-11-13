@@ -1,11 +1,11 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 225 0 225 40 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 225 0 225 40 *)
 
-let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 223 10 223 11
-let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 222 11 222 67
-let%span sbfs'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 224 10 224 28
-let%span sbfs'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 225 0 225 40
-let%span sbfs'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 85 10 85 11
-let%span sbfs'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 87 4 87 84
+let%span sbfs = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 223 10 223 11
+let%span sbfs'0 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 222 11 222 67
+let%span sbfs'1 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 224 10 224 28
+let%span sbfs'2 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 225 0 225 40
+let%span sbfs'3 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 85 10 85 11
+let%span sbfs'4 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 87 4 87 84
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
@@ -16,7 +16,7 @@ use int.Int
 
 constant const_INF: UInt32.t = [%#sbfs'2] (4294967295: UInt32.t)
 
-function reached [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 86 0 86 42] (d: Seq.seq UInt32.t) (k: int) : int
+function reached [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 86 0 86 42] (d: Seq.seq UInt32.t) (k: int) : int
 
 axiom reached_def: forall d: Seq.seq UInt32.t, k: int [reached d k]. reached d k
     = ([%#sbfs'4] if k <= 0 then 0 else reached d (k - 1) + (if Seq.get d (k - 1) <> const_INF then 1 else 0))
@@ -42,7 +42,7 @@ constant d : Seq.seq UInt32.t
 
 constant k : int
 
-function reached_zero [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 225 0 225 40] (d: Seq.seq UInt32.t) (k: int) : ()
+function reached_zero [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 225 0 225 40] (d: Seq.seq UInt32.t) (k: int) : ()
 
 goal vc_reached_zero: ([%#sbfs'0] 0 <= k /\ (forall p: int. 0 <= p /\ p < k -> Seq.get d p = const_INF))
   -> (if gt_log_Int k 0 then

@@ -119,8 +119,8 @@ function mod_mul_add [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 66 0
 axiom mod_mul_add_spec: forall d: int, q: int, r: int. ([%#ssieve'29] 1 <= d /\ 0 <= q /\ 0 <= r /\ r < d)
     -> ([%#ssieve'30] ComputerDivision.mod (d * q + r) d = r)
 
-function div_trans [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 72 0 72 40] (d: int) (i: int) (k: int) : ()
- = [%#ssieve'24] mod_mul_add d (ComputerDivision.div i d * ComputerDivision.div k i) 0
+function div_trans [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 72 0 72 40] (d: int) (i: int) (k: int) : () =
+  [%#ssieve'24] mod_mul_add d (ComputerDivision.div i d * ComputerDivision.div k i) 0
 
 axiom div_trans_spec: forall d: int, i: int, k: int. ([%#ssieve'22] 1 <= d
       /\ 1 <= i /\ 0 <= k /\ ComputerDivision.mod i d = 0 /\ ComputerDivision.mod k i = 0)

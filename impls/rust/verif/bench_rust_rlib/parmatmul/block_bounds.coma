@@ -1,23 +1,23 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 74 0 74 43 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 74 0 74 43 *)
 
-let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 72 11 72 27
-let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 73 10 73 24
-let%span sparmatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 71 11 71 36
-let%span sparmatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 72 10 72 80
-let%span sparmatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 73 10 73 45
-let%span sparmatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 86 11 86 36
-let%span sparmatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 87 10 87 24
-let%span sparmatmul'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 88 38 88 40
+let%span smatmul = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 72 11 72 27
+let%span smatmul'0 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 73 10 73 24
+let%span sparmatmul = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 71 11 71 36
+let%span sparmatmul'0 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 72 10 72 80
+let%span sparmatmul'1 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 73 10 73 45
+let%span sparmatmul'2 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 86 11 86 36
+let%span sparmatmul'3 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 87 10 87 24
+let%span sparmatmul'4 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 88 38 88 40
 
 use int.ComputerDivision
 use int.Int
 
-function mul_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
+function mul_le [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
 
 axiom mul_le_spec: forall a: int, b: int, n: int. ([%#smatmul] a <= b /\ 0 <= n) -> ([%#smatmul'0] a * n <= b * n)
 
-function div_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 88 0 88 37] (x: int) (y: int) (t: int) : ()
- = [%#sparmatmul'4] ()
+function div_le [#"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 88 0 88 37] (x: int) (y: int) (t: int) : () =
+  [%#sparmatmul'4] ()
 
 axiom div_le_spec: forall x: int, y: int, t: int. ([%#sparmatmul'2] 0 <= x /\ x <= y /\ 0 < t)
     -> ([%#sparmatmul'3] ComputerDivision.div x t <= ComputerDivision.div y t)
@@ -32,7 +32,7 @@ constant t : int
 
 constant k : int
 
-function block_bounds [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 74 0 74 43] (n: int) (t: int) (k: int) : ()
+function block_bounds [#"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 74 0 74 43] (n: int) (t: int) (k: int) : ()
 
 goal vc_block_bounds: ([%#sparmatmul] 0 <= n /\ 0 <= k /\ k < t)
   -> ([@stop_split] [@expl:mul_le requires] [%#smatmul] k <= k + 1 /\ 0 <= n)

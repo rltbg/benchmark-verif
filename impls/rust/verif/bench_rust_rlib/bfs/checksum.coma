@@ -1,19 +1,19 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 539 0 539 59 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 539 0 539 59 *)
 
-let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 540 16 540 22
-let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 541 17 541 24
-let%span sbfs'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 542 19 542 23
-let%span sbfs'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 544 14 544 21
-let%span sbfs'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 543 16 543 45
-let%span sbfs'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 546 20 546 23
-let%span sbfs'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 547 13 547 33
-let%span sbfs'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 548 16 548 19
-let%span sbfs'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 551 13 551 14
-let%span sbfs'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 551 8 551 14
-let%span sbfs'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 553 11 553 31
-let%span sbfs'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 553 4 553 45
-let%span sbfs'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 537 11 537 28
-let%span sbfs'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 539 0 539 59
+let%span sbfs = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 540 16 540 22
+let%span sbfs'0 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 541 17 541 24
+let%span sbfs'1 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 542 19 542 23
+let%span sbfs'2 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 544 14 544 21
+let%span sbfs'3 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 543 16 543 45
+let%span sbfs'4 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 546 20 546 23
+let%span sbfs'5 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 547 13 547 33
+let%span sbfs'6 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 548 16 548 19
+let%span sbfs'7 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 551 13 551 14
+let%span sbfs'8 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 551 8 551 14
+let%span sbfs'9 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 553 11 553 31
+let%span sbfs'10 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 553 4 553 45
+let%span sbfs'11 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 537 11 537 28
+let%span sbfs'12 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 539 0 539 59
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
@@ -81,7 +81,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let checksum [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 539 0 539 59] (dist: t_Vec_u32_Global) (n: UInt64.t)
+let checksum [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 539 0 539 59] (dist: t_Vec_u32_Global) (n: UInt64.t)
   (t: UInt64.t) (return (x: UInt64.t)) =
 {[@stop_split] [@expl:checksum requires] [%#sbfs'11] Seq.length (view_Vec_u32_Global dist) = UInt64.t'int n}
   (! bb0

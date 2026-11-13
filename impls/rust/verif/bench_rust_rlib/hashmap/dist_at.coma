@@ -7,8 +7,8 @@ let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 113
 
 use int.Int
 
-function at' [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 0 106 42] (h: int) (d: int) (cap: int) : int
- = [%#shashmap'1] if h + d < cap then h + d else h + d - cap
+function at' [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 0 106 42] (h: int) (d: int) (cap: int) : int =
+  [%#shashmap'1] if h + d < cap then h + d else h + d - cap
 
 function dist [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 112 0 112 44] (h: int) (s: int) (cap: int) : int
  = [%#shashmap'2] if h <= s then s - h else s + cap - h

@@ -1,26 +1,26 @@
-(* #"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 167 0 167 72 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 167 0 167 72 *)
 
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 371 8 371 41
 let%span sseq'0 = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 413 12 413 12
-let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
-let%span sparsort = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 168 4 168 49
-let%span sparsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 165 11 165 93
-let%span sparsort'1 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 166 10 166 70
-let%span sparsort'2 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 168 43 168 44
-let%span sparsort'3 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 168 19 168 48
-let%span sparsort'4 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 168 16 168 17
-let%span sparsort'5 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 27 8 28 72
-let%span sparsort'6 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 35 16 35 16
-let%span sparsort'7 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 98 4 98 5
-let%span sparsort'8 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 92 11 92 40
-let%span sparsort'9 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 93 11 93 11
-let%span sparsort'10 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 94 11 94 66
-let%span sparsort'11 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 95 10 95 49
-let%span sparsort'12 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 96 10 96 34
-let%span sparsort'13 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 168 10 168 18
+let%span sinvariant = "/opt/tools/creusot/creusot-std/src/invariant.rs" 98 20 98 44
 let%span sthread = "/opt/tools/creusot/creusot-std/src/std/thread.rs" 95 11 95 11
 let%span sthread'0 = "/opt/tools/creusot/creusot-std/src/std/thread.rs" 96 10 96 10
-let%span sinvariant = "/opt/tools/creusot/creusot-std/src/invariant.rs" 98 20 98 44
+let%span sparsort = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 168 4 168 49
+let%span sparsort'0 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 165 11 165 93
+let%span sparsort'1 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 166 10 166 70
+let%span sparsort'2 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 168 43 168 44
+let%span sparsort'3 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 168 19 168 48
+let%span sparsort'4 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 168 16 168 17
+let%span sparsort'5 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 27 8 28 72
+let%span sparsort'6 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 35 16 35 16
+let%span sparsort'7 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 98 4 98 5
+let%span sparsort'8 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 92 11 92 40
+let%span sparsort'9 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 93 11 93 11
+let%span sparsort'10 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 94 11 94 66
+let%span sparsort'11 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 95 10 95 49
+let%span sparsort'12 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 96 10 96 34
+let%span sparsort'13 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 168 10 168 18
 
 use creusot.prelude.MutBorrow
 use creusot.slice.Slice64
@@ -53,7 +53,7 @@ meta "rewrite_def" predicate inv_refmut_Scope
 predicate sorted_range_u32 (self: Seq.seq UInt32.t) (start: int) (end': int) =
   [%#sseq'0] forall i: int, j: int. start <= i /\ i <= j /\ j < end' -> UInt32.le (Seq.get self i) (Seq.get self j)
 
-predicate runs_sorted [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 34 0 34 81] (s: Seq.seq UInt32.t) (b: Seq.seq UInt64.t) (k: int) (m: int) (base: int) =
+predicate runs_sorted [#"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 34 0 34 81] (s: Seq.seq UInt32.t) (b: Seq.seq UInt64.t) (k: int) (m: int) (base: int) =
   [%#sparsort'6] forall j: int. k <= j /\ j < m
     -> sorted_range_u32 s (UInt64.t'int (Seq.get b j) - base) (UInt64.t'int (Seq.get b (j + 1)) - base)
 
@@ -91,7 +91,7 @@ predicate resolve_closure0 [@inline:trivial] (_1: closure0) =
 
 meta "rewrite_def" predicate resolve_closure0
 
-let closure0 [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 168 10 168 18] [@coma:extspec] (self: closure0)
+let closure0 [#"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 168 10 168 18] [@coma:extspec] (self: closure0)
   (s: MutBorrow.t t_Scope) (return (x: ())) =
 {[@stop_split] [@expl:closure 's' type invariant] [%#sparsort'4] inv_refmut_Scope s}
   bb0
@@ -150,7 +150,7 @@ predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other
 
 meta "rewrite_def" predicate ge_log_Int
 
-predicate wf_bounds [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 25 0 25 47] (b: Seq.seq UInt64.t) (n: int) =
+predicate wf_bounds [#"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 25 0 25 47] (b: Seq.seq UInt64.t) (n: int) =
   [%#sparsort'5] ge_log_Int (Seq.length b) 2
   /\ UInt64.t'int (Seq.get b 0) = 0
   /\ UInt64.t'int (Seq.get b (Seq.length b - 1)) = n
@@ -160,7 +160,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let sort_level [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 167 0 167 72]
+let sort_level [#"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 167 0 167 72]
   (a: MutBorrow.t (Slice64.slice UInt32.t)) (tmp: MutBorrow.t (Slice64.slice UInt32.t)) (b: Slice64.slice UInt64.t)
   (t: UInt64.t) (return (x: ())) =
 {[@stop_split] [@expl:sort_level requires] [%#sparsort'0] Seq.length (Slice64.view a.current)

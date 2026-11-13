@@ -1,51 +1,51 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 165 0 165 102 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 165 0 165 102 *)
 
-let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 72 11 72 27
-let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 73 10 73 24
-let%span smatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 19 10 19 11
-let%span smatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 21 16 21 110
-let%span smatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 37 10 37 11
-let%span smatmul'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 35 11 35 17
-let%span smatmul'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 36 10 36 36
-let%span smatmul'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 58 11 58 41
-let%span smatmul'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 59 10 59 52
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span sparmatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 166 26 166 28
-let%span sparmatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 167 20 167 40
-let%span sparmatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 168 20 168 40
-let%span sparmatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 169 20 169 41
-let%span sparmatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 170 13 170 18
-let%span sparmatmul'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 171 13 171 18
-let%span sparmatmul'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 172 16 172 22
-let%span sparmatmul'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 176 14 176 21
-let%span sparmatmul'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 175 16 175 16
-let%span sparmatmul'8 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 174 16 174 16
-let%span sparmatmul'9 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 173 16 173 47
-let%span sparmatmul'10 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 179 12 179 46
-let%span sparmatmul'11 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 22 183 28
-let%span sparmatmul'12 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 20 183 29
-let%span sparmatmul'13 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 62 183 68
-let%span sparmatmul'14 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 60 183 69
-let%span sparmatmul'15 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 43 183 70
-let%span sparmatmul'16 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 20 183 71
-let%span sparmatmul'17 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 10 183 16
-let%span sparmatmul'18 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 8 183 17
-let%span sparmatmul'19 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 8 183 71
-let%span sparmatmul'20 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 184 13 184 14
-let%span sparmatmul'21 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 184 8 184 14
-let%span sparmatmul'22 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 158 11 158 83
-let%span sparmatmul'23 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 159 11 159 76
-let%span sparmatmul'24 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 160 11 160 11
-let%span sparmatmul'25 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 161 10 161 32
-let%span sparmatmul'26 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 162 10 162 10
-let%span sparmatmul'27 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 163 10 163 10
-let%span sparmatmul'28 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 47 11 47 36
-let%span sparmatmul'29 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 48 10 48 28
-let%span sparmatmul'30 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 50 4 50 23
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span smatmul = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 72 11 72 27
+let%span smatmul'0 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 73 10 73 24
+let%span smatmul'1 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 19 10 19 11
+let%span smatmul'2 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 21 16 21 110
+let%span smatmul'3 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 37 10 37 11
+let%span smatmul'4 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 35 11 35 17
+let%span smatmul'5 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 36 10 36 36
+let%span smatmul'6 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 58 11 58 41
+let%span smatmul'7 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 59 10 59 52
+let%span sparmatmul = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 166 26 166 28
+let%span sparmatmul'0 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 167 20 167 40
+let%span sparmatmul'1 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 168 20 168 40
+let%span sparmatmul'2 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 169 20 169 41
+let%span sparmatmul'3 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 170 13 170 18
+let%span sparmatmul'4 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 171 13 171 18
+let%span sparmatmul'5 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 172 16 172 22
+let%span sparmatmul'6 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 176 14 176 21
+let%span sparmatmul'7 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 175 16 175 16
+let%span sparmatmul'8 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 174 16 174 16
+let%span sparmatmul'9 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 173 16 173 47
+let%span sparmatmul'10 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 179 12 179 46
+let%span sparmatmul'11 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 183 22 183 28
+let%span sparmatmul'12 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 183 20 183 29
+let%span sparmatmul'13 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 183 62 183 68
+let%span sparmatmul'14 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 183 60 183 69
+let%span sparmatmul'15 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 183 43 183 70
+let%span sparmatmul'16 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 183 20 183 71
+let%span sparmatmul'17 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 183 10 183 16
+let%span sparmatmul'18 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 183 8 183 17
+let%span sparmatmul'19 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 183 8 183 71
+let%span sparmatmul'20 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 184 13 184 14
+let%span sparmatmul'21 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 184 8 184 14
+let%span sparmatmul'22 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 158 11 158 83
+let%span sparmatmul'23 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 159 11 159 76
+let%span sparmatmul'24 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 160 11 160 11
+let%span sparmatmul'25 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 161 10 161 32
+let%span sparmatmul'26 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 162 10 162 10
+let%span sparmatmul'27 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 163 10 163 10
+let%span sparmatmul'28 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 47 11 47 36
+let%span sparmatmul'29 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 48 10 48 28
+let%span sparmatmul'30 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 50 4 50 23
 
 use creusot.prelude.MutBorrow
 use creusot.slice.Slice64
@@ -57,11 +57,11 @@ use creusot.prelude.Opaque
 use creusot.prelude.Any
 use int.Int
 
-function mul_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
+function mul_le [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
 
 axiom mul_le_spec: forall a: int, b: int, n: int. ([%#smatmul] a <= b /\ 0 <= n) -> ([%#smatmul'0] a * n <= b * n)
 
-function in_block [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 49 0 49 39] (n: int) (m: int) (i: int) : ()
+function in_block [#"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 49 0 49 39] (n: int) (m: int) (i: int) : ()
  = [%#sparmatmul'30] mul_le (i + 1) m n
 
 axiom in_block_spec: forall n: int, m: int, i: int. ([%#sparmatmul'28] 0 <= i /\ i < m /\ 0 <= n)
@@ -80,7 +80,7 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
 
 meta "rewrite_def" predicate well_founded_relation_Int
 
-function dot [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 20 0 20 75] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (n: int) (i: int) (j: int) (k: int) : int
+function dot [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 20 0 20 75] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (n: int) (i: int) (j: int) (k: int) : int
 
 axiom dot_def:
   forall a: Seq.seq UInt32.t, b: Seq.seq UInt32.t, n: int, i: int, j: int, k: int [dot a b n i j k]. dot a b n i j k
@@ -90,12 +90,12 @@ axiom dot_def:
       dot a b n i j (k - 1) + UInt32.t'int (Seq.get a (i * n + (k - 1))) * UInt32.t'int (Seq.get b ((k - 1) * n + j))
     )
 
-function dot_nonneg [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 38 0 38 75] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (n: int) (i: int) (j: int) (k: int) : ()
+function dot_nonneg [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 38 0 38 75] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (n: int) (i: int) (j: int) (k: int) : ()
 
 axiom dot_nonneg_spec: forall a: Seq.seq UInt32.t, b: Seq.seq UInt32.t, n: int, i: int, j: int, k: int. ([%#smatmul'4] 0
       <= k) -> ([%#smatmul'5] ge_log_Int (dot a b n i j k) 0)
 
-function wrap_step [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 60 0 60 48] (c: UInt32.t) (x: UInt32.t) (y: UInt32.t) (d: int) : ()
+function wrap_step [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 60 0 60 48] (c: UInt32.t) (x: UInt32.t) (y: UInt32.t) (d: int) : ()
 
 axiom wrap_step_spec: forall c: UInt32.t, x: UInt32.t, y: UInt32.t, d: int. ([%#smatmul'6] 0 <= d
       /\ UInt32.t'int c = ComputerDivision.mod d 4294967296)
@@ -118,7 +118,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let row_step [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 165 0 165 102] (a: Slice64.slice UInt32.t)
+let row_step [#"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 165 0 165 102] (a: Slice64.slice UInt32.t)
   (b: Slice64.slice UInt32.t) (c: MutBorrow.t (Slice64.slice UInt32.t)) (n: UInt64.t) (m: UInt64.t) (i: UInt64.t)
   (k: UInt64.t) (aik: UInt32.t) (return (x: ())) =
 {[@stop_split] [@expl:row_step requires] ([@stop_split] [@expl:row_step requires #0] [%#sparmatmul'22] UInt64.t'int n

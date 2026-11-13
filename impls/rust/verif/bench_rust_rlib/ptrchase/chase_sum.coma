@@ -1,13 +1,13 @@
-(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 116 0 116 45 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 116 0 116 45 *)
 
-let%span sptrchase = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 115 10 115 11
-let%span sptrchase'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 114 11 114 17
-let%span sptrchase'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 106 11 106 17
-let%span sptrchase'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 107 10 107 11
-let%span sptrchase'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 109 16 109 69
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sptrchase = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 115 10 115 11
+let%span sptrchase'0 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 114 11 114 17
+let%span sptrchase'1 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 106 11 106 17
+let%span sptrchase'2 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 107 10 107 11
+let%span sptrchase'3 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 109 16 109 69
 
 use creusot.int.UInt32
 use seq.Seq
@@ -27,7 +27,7 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
 
 meta "rewrite_def" predicate well_founded_relation_Int
 
-function chase_pos [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 108 0 108 45] (nx: Seq.seq UInt32.t) (h: int) : UInt32.t
+function chase_pos [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 108 0 108 45] (nx: Seq.seq UInt32.t) (h: int) : UInt32.t
 
 axiom chase_pos_def: forall nx: Seq.seq UInt32.t, h: int [chase_pos nx h]. ([%#sptrchase'1] ge_log_Int h 0)
     -> chase_pos nx h
@@ -41,7 +41,7 @@ constant nx : Seq.seq UInt32.t
 
 constant h : int
 
-function chase_sum [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 116 0 116 45] (nx: Seq.seq UInt32.t) (h: int) : UInt64.t
+function chase_sum [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 116 0 116 45] (nx: Seq.seq UInt32.t) (h: int) : UInt64.t
 
 goal vc_chase_sum: ([%#sptrchase'0] ge_log_Int h 0)
   -> (if h = 0 then

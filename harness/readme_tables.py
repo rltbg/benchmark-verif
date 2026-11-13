@@ -7,8 +7,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 import bench
 
 R = Path(__file__).parent.parent / "results"
-ORDER = ["c-native", "zig", "rust-plain", "rust-creusot", "fstar-c", "fstar-fsharp", "fstar-ocaml-fast", "fstar-ocaml"]
-SHORT = {"c-native": "C natif", "zig": "Zig 0.17", "rust-plain": "Rust", "rust-creusot": "Rust + Creusot",
+ORDER = ["c-native", "zig", "rust-plain", "rust-creusot", "rust-verus", "fstar-c", "fstar-fsharp", "fstar-ocaml-fast", "fstar-ocaml"]
+SHORT = {"c-native": "C natif", "zig": "Zig 0.17", "rust-plain": "Rust", "rust-creusot": "Rust + Creusot", "rust-verus": "Rust + Verus",
          "fstar-c": "F*→C", "fstar-fsharp": "F*→F#", "fstar-ocaml-fast": "F*→OCaml (corrigé)", "fstar-ocaml": "F*→OCaml (livré)"}
 
 def merged(preset):

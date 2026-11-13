@@ -1,12 +1,12 @@
 (* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 81 0 81 29 *)
 
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 62 16 62 28
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 80 10 80 11
 let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 35 4 35 34
 let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 72 4 75 5
 let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 26 4 26 38
 let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 81 0 81 29
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 62 16 62 28
-let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span smapping = "/opt/tools/creusot/creusot-std/src/logic/mapping.rs" 66 8 66 19
 
 use creusot.int.UInt64

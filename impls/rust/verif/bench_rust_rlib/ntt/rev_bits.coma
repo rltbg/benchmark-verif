@@ -1,16 +1,16 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 58 0 58 38 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 58 0 58 38 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 57 10 57 11
-let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 22 10 22 11
-let%span sntt'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 24 16 24 56
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 57 10 57 11
+let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 22 10 22 11
+let%span sntt'1 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 24 16 24 56
 
 use int.ComputerDivision
 use int.Int
 
-function pow2 [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 23 0 23 26] (k: int) : int
+function pow2 [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 23 0 23 26] (k: int) : int
 
 axiom pow2_def: forall k: int [pow2 k]. pow2 k = ([%#sntt'1] if k <= 0 then 1 else 2 * pow2 (k - 1))
 
@@ -35,7 +35,7 @@ constant x : int
 
 constant k : int
 
-function rev_bits [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 58 0 58 38] (x: int) (k: int) : int
+function rev_bits [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 58 0 58 38] (x: int) (k: int) : int
 
 goal vc_rev_bits: if k <= 0 then
     true

@@ -1,8 +1,8 @@
-(* #"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 54 0 54 61 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 54 0 54 61 *)
 
 let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 413 12 413 12
-let%span sparsort = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 52 11 52 67
-let%span sparsort'0 = "/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 53 10 53 60
+let%span sparsort = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 52 11 52 67
+let%span sparsort'0 = "/home/user/benchmark-verif/impls/rust/src/parsort.rs" 53 10 53 60
 
 use creusot.int.UInt32
 use seq.Seq
@@ -23,7 +23,7 @@ constant x : int
 
 constant y : int
 
-function sorted_shift [#"/tmp/claude-0/verif-sort/creusot-sort/src/parsort.rs" 54 0 54 61] (u: Seq.seq UInt32.t) (v: Seq.seq UInt32.t) (x: int) (y: int) : ()
+function sorted_shift [#"/home/user/benchmark-verif/impls/rust/src/parsort.rs" 54 0 54 61] (u: Seq.seq UInt32.t) (v: Seq.seq UInt32.t) (x: int) (y: int) : ()
 
 goal vc_sorted_shift: ([%#sparsort] 0 <= x /\ x <= y /\ y <= Seq.length v /\ sorted_range_u32 v x y)
   -> ([@stop_split] [@expl:sorted_shift ensures] [%#sparsort'0] sorted_range_u32 (Seq.(++) u v) (x + Seq.length u) (y

@@ -1,18 +1,18 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 128 0 128 48 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/lines.rs" 128 0 128 48 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
-let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 126 10 126 11
-let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 125 11 125 11
-let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 127 10 127 32
-let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 59 10 59 11
-let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 61 4 61 65
+let%span slines = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 126 10 126 11
+let%span slines'0 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 125 11 125 11
+let%span slines'1 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 127 10 127 32
+let%span slines'2 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 59 10 59 11
+let%span slines'3 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 61 4 61 65
 
 use seq.Seq
 use int.Int
 
-function num [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 60 0 60 38] (s: Seq.seq int) (j: int) : int
+function num [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 60 0 60 38] (s: Seq.seq int) (j: int) : int
 
 axiom num_def: forall s: Seq.seq int, j: int [num s j]. num s j
     = ([%#slines'3] if j <= 0 then 0 else num s (j - 1) * 10 + (Seq.get s (j - 1) - 48))
@@ -40,7 +40,7 @@ constant t : Seq.seq int
 
 constant j : int
 
-function num_ext [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 128 0 128 48] (s: Seq.seq int) (t: Seq.seq int) (j: int) : ()
+function num_ext [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 128 0 128 48] (s: Seq.seq int) (t: Seq.seq int) (j: int) : ()
 
 goal vc_num_ext: ([%#slines'0] forall p: int. 0 <= p /\ p < j -> Seq.get s p = Seq.get t p)
   -> (if gt_log_Int j 0 then

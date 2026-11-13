@@ -1,9 +1,9 @@
-(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 127 0 127 23 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 127 0 127 23 *)
 
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
-let%span salloc = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 124 11 124 17
-let%span salloc'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 125 10 125 10
-let%span salloc'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 126 10 126 10
+let%span salloc = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 124 11 124 17
+let%span salloc'0 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 125 10 125 10
+let%span salloc'1 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 126 10 126 10
 
 use int.Int
 
@@ -17,7 +17,7 @@ meta "select_lsinst" "all"
 
 constant w : int
 
-function mul_mono [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 127 0 127 23] (w: int) : ()
+function mul_mono [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 127 0 127 23] (w: int) : ()
 
 goal vc_mul_mono: ([%#salloc] 1 <= w)
   -> ([@stop_split] [@expl:mul_mono ensures] ([@stop_split] [@expl:mul_mono ensures #0] [%#salloc'0] forall qa: int, qb: int. qa

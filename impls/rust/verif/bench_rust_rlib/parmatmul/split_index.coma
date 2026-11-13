@@ -1,14 +1,14 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 95 0 95 60 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 95 0 95 60 *)
 
-let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 72 11 72 27
-let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 73 10 73 24
-let%span sparmatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 92 11 92 60
-let%span sparmatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 93 10 93 90
-let%span sparmatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 94 10 94 74
+let%span smatmul = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 72 11 72 27
+let%span smatmul'0 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 73 10 73 24
+let%span sparmatmul = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 92 11 92 60
+let%span sparmatmul'0 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 93 10 93 90
+let%span sparmatmul'1 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 94 10 94 74
 
 use int.Int
 
-function mul_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
+function mul_le [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
 
 axiom mul_le_spec: forall a: int, b: int, n: int. ([%#smatmul] a <= b /\ 0 <= n) -> ([%#smatmul'0] a * n <= b * n)
 
@@ -26,7 +26,7 @@ constant i : int
 
 constant j : int
 
-function split_index [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 95 0 95 60] (n: int) (r0: int) (r1: int) (i: int) (j: int) : ()
+function split_index [#"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 95 0 95 60] (n: int) (r0: int) (r1: int) (i: int) (j: int) : ()
 
 goal vc_split_index: ([%#sparmatmul] 0 <= r0 /\ r0 <= r1 /\ r0 <= i /\ 0 <= j /\ j < n)
   -> (if i < r1 then

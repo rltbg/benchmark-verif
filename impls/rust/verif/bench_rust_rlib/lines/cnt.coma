@@ -1,10 +1,10 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 91 0 91 47 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/lines.rs" 91 0 91 47 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 90 10 90 11
-let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 36 16 36 29
+let%span slines = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 90 10 90 11
+let%span slines'0 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 36 16 36 29
 
 use creusot.int.UInt64
 use seq.Seq
@@ -23,7 +23,7 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
 
 meta "rewrite_def" predicate well_founded_relation_Int
 
-function key_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 35 0 35 28] (r: UInt64.t) : int =
+function key_of [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 35 0 35 28] (r: UInt64.t) : int =
   [%#slines'0] UInt64.t'int (UInt64.shr r (44: UInt64.t))
 
 meta "compute_max_steps" 1000000
@@ -36,7 +36,7 @@ constant i : int
 
 constant k : int
 
-function cnt [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 91 0 91 47] (rs: Seq.seq UInt64.t) (i: int) (k: int) : int
+function cnt [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 91 0 91 47] (rs: Seq.seq UInt64.t) (i: int) (k: int) : int
 
 goal vc_cnt: if i <= 0 then
     true

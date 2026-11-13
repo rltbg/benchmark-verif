@@ -43,8 +43,8 @@
                   { "prover": "cvc5", "time": 0.03 }
                 ]
               },
-              { "prover": "cvc5", "time": 0.181 },
-              { "prover": "cvc5", "time": 0.205 },
+              { "prover": "cvc5", "time": 0.21 },
+              { "prover": "cvc5", "time": 0.214 },
               { "prover": "alt-ergo", "time": 0.033 },
               { "prover": "alt-ergo", "time": 0.026 }
             ]

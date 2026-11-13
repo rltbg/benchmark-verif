@@ -1,23 +1,23 @@
-(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 243 0 243 32 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 243 0 243 32 *)
 
-let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 240 10 240 54
-let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 241 10 241 47
-let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 242 10 242 30
-let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 230 4 230 93
-let%span sstream'3 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 29 4 29 74
+let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 240 10 240 54
+let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 241 10 241 47
+let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 242 10 242 30
+let%span sstream'2 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 230 4 230 93
+let%span sstream'3 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 29 4 29 74
 
 use creusot.int.UInt32BW
 use creusot.int.UInt8BW
 use int.Int
 
-function crc_shift [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 28 0 28 31] (x: UInt32BW.t) : UInt32BW.t =
+function crc_shift [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 28 0 28 31] (x: UInt32BW.t) : UInt32BW.t =
   [%#sstream'3] if UInt32BW.bw_and x (1: UInt32BW.t) <> (0: UInt32BW.t) then
     UInt32BW.bw_xor (UInt32BW.shr x (1: UInt32BW.t)) (3988292384: UInt32BW.t)
   else
     UInt32BW.shr x (1: UInt32BW.t)
 
 
-function crc8n [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 229 0 229 27] (x: UInt32BW.t) : UInt32BW.t =
+function crc8n [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 229 0 229 27] (x: UInt32BW.t) : UInt32BW.t =
   [%#sstream'2] crc_shift (crc_shift (crc_shift (crc_shift (crc_shift (crc_shift (crc_shift (crc_shift x)))))))
 
 meta "compute_max_steps" 1000000
@@ -28,7 +28,7 @@ constant x : UInt32BW.t
 
 constant c : UInt8BW.t
 
-function crc8_split [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 243 0 243 32] (x: UInt32BW.t) (c: UInt8BW.t) : ()
+function crc8_split [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 243 0 243 32] (x: UInt32BW.t) (c: UInt8BW.t) : ()
 
 goal vc_crc8_split:
   [@stop_split] [@expl:crc8_split ensures] ([@stop_split] [@expl:crc8_split ensures #0] [%#sstream] crc8n x

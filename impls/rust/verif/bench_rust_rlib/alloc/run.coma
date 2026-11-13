@@ -1,9 +1,9 @@
-(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 197 0 197 27 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 197 0 197 27 *)
 
-let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 41 28 41 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 41 28 41 33
 let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
 let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 96 22 96 41
 let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 97 22 97 22
@@ -19,98 +19,98 @@ let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160
 let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
 let%span smacros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
 let%span smacros'0 = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
-let%span salloc = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 198 18 198 19
-let%span salloc'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 198 12 198 20
-let%span salloc'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 198 27 198 28
-let%span salloc'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 198 30 198 34
-let%span salloc'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 198 12 198 35
-let%span salloc'4 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 200 17 200 24
-let%span salloc'5 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 201 19 201 25
-let%span salloc'6 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 202 16 202 22
-let%span salloc'7 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 203 29 203 41
-let%span salloc'8 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 204 18 204 18
-let%span salloc'9 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 205 18 205 38
-let%span salloc'10 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 209 16 209 40
-let%span salloc'11 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 208 16 208 66
-let%span salloc'12 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 207 16 207 39
-let%span salloc'13 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 206 16 206 50
-let%span salloc'14 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 211 20 211 24
-let%span salloc'15 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 211 20 211 47
-let%span salloc'16 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 211 16 211 48
-let%span salloc'17 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 212 30 212 32
-let%span salloc'18 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 212 25 212 33
-let%span salloc'19 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 212 20 212 21
-let%span salloc'20 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 212 20 212 43
-let%span salloc'21 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 212 16 212 17
-let%span salloc'22 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 212 16 212 43
-let%span salloc'23 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 213 30 213 33
-let%span salloc'24 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 214 8 214 36
-let%span salloc'25 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 215 8 215 30
-let%span salloc'26 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 216 17 216 24
-let%span salloc'27 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 71 11 71 51
-let%span salloc'28 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 72 10 72 42
-let%span salloc'29 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 218 13 218 25
-let%span salloc'30 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 219 22 219 86
-let%span salloc'31 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 220 22 220 22
-let%span salloc'32 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 88 11 88 33
-let%span salloc'33 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 89 10 89 50
-let%span salloc'34 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 222 25 222 38
-let%span salloc'35 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 223 15 223 17
-let%span salloc'36 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 223 11 223 17
-let%span salloc'37 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 223 21 223 22
-let%span salloc'38 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 131 11 131 55
-let%span salloc'39 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 132 11 132 71
-let%span salloc'40 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 133 10 133 58
-let%span salloc'41 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 225 17 225 25
-let%span salloc'42 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 225 16 225 26
-let%span salloc'43 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 226 20 226 21
-let%span salloc'44 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 226 12 226 21
-let%span salloc'45 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 228 12 228 36
-let%span salloc'46 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 230 13 230 14
-let%span salloc'47 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 230 8 230 14
-let%span salloc'48 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 232 18 232 80
-let%span salloc'49 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 233 18 233 50
-let%span salloc'50 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 234 4 234 25
-let%span salloc'51 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 194 11 194 38
-let%span salloc'52 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 195 10 195 10
-let%span salloc'53 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 197 0 197 27
-let%span salloc'54 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 107 8 110 61
-let%span salloc'55 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 99 16 99 98
-let%span salloc'56 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 81 10 81 11
-let%span salloc'57 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 80 11 80 36
-let%span salloc'58 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 83 16 83 91
-let%span salloc'59 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 143 10 143 28
-let%span salloc'60 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 160 10 160 56
-let%span salloc'61 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 178 11 178 26
-let%span salloc'62 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 179 10 179 42
-let%span salloc'63 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 73 10 73 11
-let%span salloc'64 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 75 16 75 64
-let%span salloc'65 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 50 16 50 16
-let%span salloc'66 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 56 10 56 11
-let%span salloc'67 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 55 11 55 33
-let%span salloc'68 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 58 16 58 70
-let%span salloc'69 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 64 10 64 11
-let%span salloc'70 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 63 11 63 17
-let%span salloc'71 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 66 16 66 80
-let%span salloc'72 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 154 10 154 35
-let%span salloc'73 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 44 16 44 47
-let%span salloc'74 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 90 10 90 11
-let%span salloc'75 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 92 16 92 64
-let%span salloc'76 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 135 4 135 19
-let%span salloc'77 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 38 16 38 43
-let%span salloc'78 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 28 8 28 42
-let%span salloc'79 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 116 11 116 17
-let%span salloc'80 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 117 10 117 10
-let%span salloc'81 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 119 4 119 15
-let%span salloc'82 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 124 11 124 17
-let%span salloc'83 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 125 10 125 10
-let%span salloc'84 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 126 10 126 10
-let%span salloc'85 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 127 24 127 26
 let%span scmp = "/opt/tools/creusot/creusot-std/src/std/cmp.rs" 86 27 86 63
 let%span scmp'0 = "/opt/tools/creusot/creusot-std/src/std/cmp.rs" 87 26 87 65
 let%span scmp'1 = "/opt/tools/creusot/creusot-std/src/std/cmp.rs" 88 26 88 65
 let%span scmp'2 = "/opt/tools/creusot/creusot-std/src/std/cmp.rs" 89 26 89 74
 let%span scmp'3 = "/opt/tools/creusot/creusot-std/src/std/cmp.rs" 90 26 94 41
+let%span salloc = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 198 18 198 19
+let%span salloc'0 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 198 12 198 20
+let%span salloc'1 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 198 27 198 28
+let%span salloc'2 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 198 30 198 34
+let%span salloc'3 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 198 12 198 35
+let%span salloc'4 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 200 17 200 24
+let%span salloc'5 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 201 19 201 25
+let%span salloc'6 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 202 16 202 22
+let%span salloc'7 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 203 29 203 41
+let%span salloc'8 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 204 18 204 18
+let%span salloc'9 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 205 18 205 38
+let%span salloc'10 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 209 16 209 40
+let%span salloc'11 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 208 16 208 66
+let%span salloc'12 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 207 16 207 39
+let%span salloc'13 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 206 16 206 50
+let%span salloc'14 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 211 20 211 24
+let%span salloc'15 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 211 20 211 47
+let%span salloc'16 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 211 16 211 48
+let%span salloc'17 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 212 30 212 32
+let%span salloc'18 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 212 25 212 33
+let%span salloc'19 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 212 20 212 21
+let%span salloc'20 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 212 20 212 43
+let%span salloc'21 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 212 16 212 17
+let%span salloc'22 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 212 16 212 43
+let%span salloc'23 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 213 30 213 33
+let%span salloc'24 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 214 8 214 36
+let%span salloc'25 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 215 8 215 30
+let%span salloc'26 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 216 17 216 24
+let%span salloc'27 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 71 11 71 51
+let%span salloc'28 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 72 10 72 42
+let%span salloc'29 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 218 13 218 25
+let%span salloc'30 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 219 22 219 86
+let%span salloc'31 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 220 22 220 22
+let%span salloc'32 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 88 11 88 33
+let%span salloc'33 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 89 10 89 50
+let%span salloc'34 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 222 25 222 38
+let%span salloc'35 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 223 15 223 17
+let%span salloc'36 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 223 11 223 17
+let%span salloc'37 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 223 21 223 22
+let%span salloc'38 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 131 11 131 55
+let%span salloc'39 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 132 11 132 71
+let%span salloc'40 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 133 10 133 58
+let%span salloc'41 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 225 17 225 25
+let%span salloc'42 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 225 16 225 26
+let%span salloc'43 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 226 20 226 21
+let%span salloc'44 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 226 12 226 21
+let%span salloc'45 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 228 12 228 36
+let%span salloc'46 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 230 13 230 14
+let%span salloc'47 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 230 8 230 14
+let%span salloc'48 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 232 18 232 80
+let%span salloc'49 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 233 18 233 50
+let%span salloc'50 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 234 4 234 25
+let%span salloc'51 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 194 11 194 38
+let%span salloc'52 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 195 10 195 10
+let%span salloc'53 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 197 0 197 27
+let%span salloc'54 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 107 8 110 61
+let%span salloc'55 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 99 16 99 98
+let%span salloc'56 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 81 10 81 11
+let%span salloc'57 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 80 11 80 36
+let%span salloc'58 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 83 16 83 91
+let%span salloc'59 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 143 10 143 28
+let%span salloc'60 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 160 10 160 56
+let%span salloc'61 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 178 11 178 26
+let%span salloc'62 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 179 10 179 42
+let%span salloc'63 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 73 10 73 11
+let%span salloc'64 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 75 16 75 64
+let%span salloc'65 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 50 16 50 16
+let%span salloc'66 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 56 10 56 11
+let%span salloc'67 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 55 11 55 33
+let%span salloc'68 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 58 16 58 70
+let%span salloc'69 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 64 10 64 11
+let%span salloc'70 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 63 11 63 17
+let%span salloc'71 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 66 16 66 80
+let%span salloc'72 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 154 10 154 35
+let%span salloc'73 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 44 16 44 47
+let%span salloc'74 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 90 10 90 11
+let%span salloc'75 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 92 16 92 64
+let%span salloc'76 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 135 4 135 19
+let%span salloc'77 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 38 16 38 43
+let%span salloc'78 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 28 8 28 42
+let%span salloc'79 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 116 11 116 17
+let%span salloc'80 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 117 10 117 10
+let%span salloc'81 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 119 4 119 15
+let%span salloc'82 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 124 11 124 17
+let%span salloc'83 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 125 10 125 10
+let%span salloc'84 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 126 10 126 10
+let%span salloc'85 = "/home/user/benchmark-verif/impls/rust/src/alloc.rs" 127 24 127 26
 let%span shint = "/opt/tools/creusot/creusot-std/src/std/hint.rs" 11 22 11 37
 
 use creusot.int.Int32
@@ -186,19 +186,19 @@ axiom view_Vec_u8_Global_spec:
   forall self: t_Vec_u8_Global [view_Vec_u8_Global self]. [%#svec] Seq.length (view_Vec_u8_Global self)
     <= UInt64.t'int const_MAX
 
-function mix_l [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 26 0 26 27] (x: UInt64.t) : UInt64.t =
+function mix_l [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 26 0 26 27] (x: UInt64.t) : UInt64.t =
   [%#salloc'78] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
 
 constant const_SEED: UInt64.t = [%#salloc'53] (11605987345966301185: UInt64.t)
 
-function size_l [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 43 0 43 28] (i: UInt64.t) : int = [%#salloc'73] 8
+function size_l [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 43 0 43 28] (i: UInt64.t) : int = [%#salloc'73] 8
   + 8 * ComputerDivision.mod (UInt64.t'int (mix_l (UInt64.add const_SEED i))) 32
 
-predicate is_block [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 49 0 49 43] (b: Seq.seq UInt8.t) (i: int) =
+predicate is_block [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 49 0 49 43] (b: Seq.seq UInt8.t) (i: int) =
   [%#salloc'65] forall k: int. 0 <= k /\ k < Seq.length b
     -> UInt8.t'int (Seq.get b k) = ComputerDivision.mod (i + k) 251
 
-predicate window [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 105 0 105 68] (ring: Seq.seq t_Option_Vec_u8_Global) (w: int) (kept: int) =
+predicate window [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 105 0 105 68] (ring: Seq.seq t_Option_Vec_u8_Global) (w: int) (kept: int) =
   [%#salloc'54] Seq.length ring = w
   /\ (forall i: UInt64.t. ComputerDivision.mod (UInt64.t'int i) 16 = 0
         /\ kept - w <= ComputerDivision.div (UInt64.t'int i) 16 /\ ComputerDivision.div (UInt64.t'int i) 16 < kept
@@ -208,20 +208,20 @@ predicate window [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 105 0 105 
         end)
   /\ (forall s: int. kept <= s /\ s < w -> Seq.get ring s = None)
 
-function block_sum [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 65 0 65 39] (i: int) (k: int) : int
+function block_sum [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 65 0 65 39] (i: int) (k: int) : int
 
 axiom block_sum_def: forall i: int, k: int [block_sum i k]. ([%#salloc'70] 0 <= k)
     -> block_sum i k = ([%#salloc'71] if k = 0 then 0 else block_sum i (k - 1) + ComputerDivision.mod (i + k - 1) 251)
 
-predicate block_sums [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 98 0 98 49] (sums: Seq.seq UInt64.t) (n: int) =
+predicate block_sums [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 98 0 98 49] (sums: Seq.seq UInt64.t) (n: int) =
   [%#salloc'55] Seq.length sums = n
   /\ (forall i: UInt64.t. UInt64.t'int i < n
     -> UInt64.t'int (Seq.get sums (UInt64.t'int i)) = block_sum (UInt64.t'int i) (size_l i))
 
-function ckfold_l [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 37 0 37 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+function ckfold_l [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 37 0 37 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
  = [%#salloc'77] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
 
-function fold_seq [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 82 0 82 46] (sums: Seq.seq UInt64.t) (k: int) : UInt64.t
+function fold_seq [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 82 0 82 46] (sums: Seq.seq UInt64.t) (k: int) : UInt64.t
 
 axiom fold_seq_def: forall sums: Seq.seq UInt64.t, k: int [fold_seq sums k]. ([%#salloc'57] 0 <= k
       /\ k <= Seq.length sums)
@@ -263,7 +263,7 @@ let fill (b: MutBorrow.t t_Vec_u8_Global) (i: UInt64.t) (return (x: ())) = any
     /\ is_block (view_Vec_u8_Global b.final) (UInt64.t'int i)}
     (! return {result}) ]
 
-function seq_sum [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 57 0 57 41] (b: Seq.seq UInt8.t) (k: int) : int
+function seq_sum [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 57 0 57 41] (b: Seq.seq UInt8.t) (k: int) : int
 
 axiom seq_sum_def: forall b: Seq.seq UInt8.t, k: int [seq_sum b k]. ([%#salloc'67] 0 <= k /\ k <= Seq.length b)
     -> seq_sum b k = ([%#salloc'68] if k = 0 then 0 else seq_sum b (k - 1) + UInt8.t'int (Seq.get b (k - 1)))
@@ -275,7 +275,7 @@ let sum (b: t_Vec_u8_Global) (return (x: UInt64.t)) =
     = seq_sum (view_Vec_u8_Global b) (Seq.length (view_Vec_u8_Global b))}
     (! return {result}) ]
 
-function sum_block [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 74 0 74 44] (b: Seq.seq UInt8.t) (i: int) (k: int) : ()
+function sum_block [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 74 0 74 44] (b: Seq.seq UInt8.t) (i: int) (k: int) : ()
 
 axiom sum_block_def: forall b: Seq.seq UInt8.t, i: int, k: int [sum_block b i k]. ([%#salloc'27] is_block b i
       /\ 0 <= k /\ k <= Seq.length b) -> sum_block b i k = ([%#salloc'64] if k = 0 then () else sum_block b i (k - 1))
@@ -287,7 +287,7 @@ let fold (ck: UInt64.t) (v: UInt64.t) (return (x: UInt64.t)) = any
   [ return (result: UInt64.t) -> {[@stop_split] [@expl:fold ensures] [%#salloc'72] result = ckfold_l ck v}
     (! return {result}) ]
 
-function fold_snoc [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 91 0 91 45] (s: Seq.seq UInt64.t) (x: UInt64.t) (k: int) : ()
+function fold_snoc [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 91 0 91 45] (s: Seq.seq UInt64.t) (x: UInt64.t) (k: int) : ()
 
 axiom fold_snoc_def: forall s: Seq.seq UInt64.t, x: UInt64.t, k: int [fold_snoc s x k]. ([%#salloc'32] 0 <= k
       /\ k <= Seq.length s) -> fold_snoc s x k = ([%#salloc'75] if k = 0 then () else fold_snoc s x (k - 1))
@@ -295,7 +295,7 @@ axiom fold_snoc_def: forall s: Seq.seq UInt64.t, x: UInt64.t, k: int [fold_snoc 
 axiom fold_snoc_spec: forall s: Seq.seq UInt64.t, x: UInt64.t, k: int. ([%#salloc'32] 0 <= k /\ k <= Seq.length s)
     -> ([%#salloc'33] fold_seq (Seq.snoc s x) k = fold_seq s k)
 
-function mul_mono [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 127 0 127 23] (w: int) : () = [%#salloc'85] ()
+function mul_mono [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 127 0 127 23] (w: int) : () = [%#salloc'85] ()
 
 axiom mul_mono_spec: forall w: int. ([%#salloc'82] 1 <= w)
     -> ([%#salloc'83] forall qa: int, qb: int. qa < qb -> ge_log_Int (w * qb - w * qa) w)
@@ -303,14 +303,14 @@ axiom mul_mono_spec: forall w: int. ([%#salloc'82] 1 <= w)
 axiom mul_mono_spec'0: forall w: int. ([%#salloc'82] 1 <= w)
     -> ([%#salloc'84] forall qa: int, qb: int. qb <= qa -> w * qb - w * qa <= 0)
 
-function mod_distinct [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 118 0 118 27] (w: int) : () =
+function mod_distinct [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 118 0 118 27] (w: int) : () =
   [%#salloc'81] mul_mono w
 
 axiom mod_distinct_spec: forall w: int. ([%#salloc'79] 1 <= w)
     -> ([%#salloc'80] forall a: int, b: int. 0 <= a /\ a < b /\ b - a < w
       -> ComputerDivision.mod a w <> ComputerDivision.mod b w)
 
-function window_push [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 134 0 134 85] (ring: Seq.seq t_Option_Vec_u8_Global) (w: int) (kept: int) (i: UInt64.t) (b: t_Vec_u8_Global) : ()
+function window_push [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 134 0 134 85] (ring: Seq.seq t_Option_Vec_u8_Global) (w: int) (kept: int) (i: UInt64.t) (b: t_Vec_u8_Global) : ()
  = [%#salloc'76] mod_distinct w
 
 axiom window_push_spec:
@@ -360,7 +360,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let run [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 197 0 197 27] (n: UInt64.t) (return (x: UInt64.t)) =
+let run [#"/home/user/benchmark-verif/impls/rust/src/alloc.rs" 197 0 197 27] (n: UInt64.t) (return (x: UInt64.t)) =
 {[@stop_split] [@expl:run requires] [%#salloc'51] 1 <= UInt64.t'int n /\ UInt64.t'int n <= 4000000000}
   (! bb0
   [ bb0 = s0

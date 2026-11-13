@@ -1,10 +1,10 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 107 0 107 53 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 107 0 107 53 *)
 
-let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 105 10 105 11
-let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 104 11 104 27
-let%span sbfs'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 106 10 106 40
-let%span sbfs'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 53 10 53 11
-let%span sbfs'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 55 4 55 83
+let%span sbfs = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 105 10 105 11
+let%span sbfs'0 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 104 11 104 27
+let%span sbfs'1 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 106 10 106 40
+let%span sbfs'2 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 53 10 53 11
+let%span sbfs'3 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 55 4 55 83
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
@@ -12,7 +12,7 @@ let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 use seq.Seq
 use int.Int
 
-function cnt [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 54 0 54 47] (us: Seq.seq int) (u: int) (j: int) : int
+function cnt [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 54 0 54 47] (us: Seq.seq int) (u: int) (j: int) : int
 
 axiom cnt_def: forall us: Seq.seq int, u: int, j: int [cnt us u j]. cnt us u j
     = ([%#sbfs'3] if j <= 0 then 0 else cnt us u (j - 1) + (if Seq.get us (j - 1) = u then 1 else 0))
@@ -42,7 +42,7 @@ constant j : int
 
 constant k : int
 
-function cnt_mono [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 107 0 107 53] (us: Seq.seq int) (u: int) (j: int) (k: int) : ()
+function cnt_mono [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 107 0 107 53] (us: Seq.seq int) (u: int) (j: int) (k: int) : ()
 
 goal vc_cnt_mono: ([%#sbfs'0] 0 <= j /\ j <= k)
   -> (if j < k then

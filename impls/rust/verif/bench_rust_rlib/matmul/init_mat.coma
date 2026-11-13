@@ -1,23 +1,9 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 95 0 95 55 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 95 0 95 55 *)
 
-let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 96 16 96 22
-let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 98 14 98 23
-let%span smatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 97 16 97 46
-let%span smatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 100 26 100 30
-let%span smatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 100 26 100 48
-let%span smatmul'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 100 26 100 71
-let%span smatmul'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 100 20 100 72
-let%span smatmul'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 100 15 100 73
-let%span smatmul'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 100 9 100 12
-let%span smatmul'8 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 101 13 101 14
-let%span smatmul'9 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 101 8 101 14
-let%span smatmul'10 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 92 11 92 27
-let%span smatmul'11 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 93 10 93 29
-let%span smatmul'12 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 95 0 95 55
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
 let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
 let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
 let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
@@ -28,6 +14,20 @@ let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library
 let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
 let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
 let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
+let%span smatmul = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 96 16 96 22
+let%span smatmul'0 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 98 14 98 23
+let%span smatmul'1 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 97 16 97 46
+let%span smatmul'2 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 100 26 100 30
+let%span smatmul'3 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 100 26 100 48
+let%span smatmul'4 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 100 26 100 71
+let%span smatmul'5 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 100 20 100 72
+let%span smatmul'6 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 100 15 100 73
+let%span smatmul'7 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 100 9 100 12
+let%span smatmul'8 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 101 13 101 14
+let%span smatmul'9 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 101 8 101 14
+let%span smatmul'10 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 92 11 92 27
+let%span smatmul'11 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 93 10 93 29
+let%span smatmul'12 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 95 0 95 55
 
 use creusot.int.UInt64
 use creusot.prelude.MutBorrow
@@ -107,7 +107,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let init_mat [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 95 0 95 55] (m: MutBorrow.t t_Vec_u32_Global)
+let init_mat [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 95 0 95 55] (m: MutBorrow.t t_Vec_u32_Global)
   (len: UInt64.t) (off: UInt64.t) (return (x: ())) =
 {[@stop_split] [@expl:init_mat requires] [%#smatmul'10] Seq.length (view_Vec_u32_Global m.current) = UInt64.t'int len}
   (! bb0

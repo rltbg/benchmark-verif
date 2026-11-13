@@ -1,6 +1,6 @@
 {
   "profile": [],
   "proofs": {
-    "Coma": { "vc_crc_seq_concat": { "prover": "cvc5", "time": 0.427 } }
+    "Coma": { "vc_crc_seq_concat": { "prover": "cvc5", "time": 0.437 } }
   }
 }

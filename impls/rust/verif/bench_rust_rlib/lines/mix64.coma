@@ -1,21 +1,21 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 213 0 213 23 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/lines.rs" 213 0 213 23 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
 let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 214 27 214 45
-let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 214 12 214 46
-let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 215 23 215 25
-let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 215 17 215 26
-let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 215 41 215 59
-let%span slines'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 215 12 215 60
-let%span slines'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 216 23 216 25
-let%span slines'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 216 17 216 26
-let%span slines'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 216 41 216 59
-let%span slines'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 216 12 216 60
-let%span slines'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 217 14 217 16
-let%span slines'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 217 8 217 17
-let%span slines'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 210 10 210 30
-let%span slines'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 27 4 27 38
+let%span slines = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 214 27 214 45
+let%span slines'0 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 214 12 214 46
+let%span slines'1 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 215 23 215 25
+let%span slines'2 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 215 17 215 26
+let%span slines'3 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 215 41 215 59
+let%span slines'4 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 215 12 215 60
+let%span slines'5 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 216 23 216 25
+let%span slines'6 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 216 17 216 26
+let%span slines'7 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 216 41 216 59
+let%span slines'8 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 216 12 216 60
+let%span slines'9 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 217 14 217 16
+let%span slines'10 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 217 8 217 17
+let%span slines'11 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 210 10 210 30
+let%span slines'12 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 27 4 27 38
 
 use creusot.int.UInt64
 use creusot.int.Int32
@@ -29,15 +29,15 @@ let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
   [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum'0] result = UInt64.mul self rhs}
     (! return {result}) ]
 
-function mix64_l [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 26 0 26 29] (x: UInt64.t) : UInt64.t =
+function mix64_l [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 26 0 26 29] (x: UInt64.t) : UInt64.t =
   [%#slines'12] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let mix64 [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 213 0 213 23] (x: UInt64.t)
-  (return (x'0: UInt64.t)) = (! bb0
+let mix64 [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 213 0 213 23] (x: UInt64.t) (return (x'0: UInt64.t)) =
+(! bb0
   [ bb0 = s0
     [ s0 = wrapping_add [%#slines'0] {x} {[%#slines] (11400714819323198485: UInt64.t)}
         (fun (_x: UInt64.t) -> [ &z <- _x ] s1)

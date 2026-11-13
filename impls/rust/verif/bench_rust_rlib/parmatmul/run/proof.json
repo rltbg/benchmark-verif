@@ -10,7 +10,7 @@
       "vc_from_elem_u32": { "prover": "alt-ergo", "time": 0.016 },
       "vc_init_mat": { "prover": "alt-ergo", "time": 0.006 },
       "vc_max_usize": { "prover": "alt-ergo", "time": 0.01 },
-      "vc_run": { "prover": "cvc5", "time": 0.162 },
+      "vc_run": { "prover": "cvc5", "time": 0.21 },
       "vc_scope_closure0": { "prover": "alt-ergo", "time": 0.016 }
     }
   }

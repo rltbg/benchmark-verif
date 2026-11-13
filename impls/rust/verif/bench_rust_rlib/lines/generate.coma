@@ -1,4 +1,4 @@
-(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 263 0 263 58 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/lines.rs" 263 0 263 58 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
@@ -8,83 +8,83 @@ let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
 let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 108 18 108 36
 let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 118 18 118 43
 let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
-let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 264 50 264 52
-let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 264 46 264 52
-let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 264 55 264 57
-let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 264 46 264 57
-let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 264 27 264 58
-let%span slines'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 265 47 265 59
-let%span slines'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 266 16 266 22
-let%span slines'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 269 14 269 21
-let%span slines'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 268 16 268 46
-let%span slines'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 267 16 267 42
-let%span slines'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 271 22 271 26
-let%span slines'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 271 22 271 49
-let%span slines'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 271 16 271 50
-let%span slines'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 272 24 272 26
-let%span slines'13 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 272 18 272 27
-let%span slines'14 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 273 26 273 27
-let%span slines'15 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 273 20 273 28
-let%span slines'16 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 273 31 273 42
-let%span slines'17 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 273 46 273 55
-let%span slines'18 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 273 18 273 56
-let%span slines'19 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 274 24 274 36
-let%span slines'20 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 276 8 276 30
-let%span slines'21 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 277 17 277 21
-let%span slines'22 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 277 8 277 22
-let%span slines'23 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 279 8 279 30
-let%span slines'24 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 280 17 280 22
-let%span slines'25 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 280 8 280 23
-let%span slines'26 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 282 23 282 34
-let%span slines'27 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 51 11 51 17
-let%span slines'28 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 286 26 286 36
-let%span slines'29 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 287 24 287 46
-let%span slines'30 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 288 22 288 93
-let%span slines'31 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 289 22 289 22
-let%span slines'32 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 290 22 290 22
-let%span slines'33 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 291 22 291 63
-let%span slines'34 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 292 22 292 22
-let%span slines'35 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 293 22 293 22
-let%span slines'36 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 295 22 295 22
-let%span slines'37 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 296 22 296 93
-let%span slines'38 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 297 22 297 22
-let%span slines'39 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 298 22 298 68
-let%span slines'40 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 299 13 299 14
-let%span slines'41 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 299 8 299 14
-let%span slines'42 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 259 11 259 26
-let%span slines'43 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 260 10 260 30
-let%span slines'44 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 261 10 261 51
-let%span slines'45 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 98 16 98 92
-let%span slines'46 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 78 10 78 11
-let%span slines'47 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 80 4 80 82
-let%span slines'48 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 46 16 46 86
-let%span slines'49 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 263 0 263 58
-let%span slines'50 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 210 10 210 30
-let%span slines'51 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 106 10 106 47
-let%span slines'52 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 107 25 107 27
-let%span slines'53 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 36 16 36 29
-let%span slines'54 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 40 16 40 57
-let%span slines'55 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 221 11 221 24
-let%span slines'56 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 222 10 222 53
-let%span slines'57 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 223 10 223 10
-let%span slines'58 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 224 10 224 10
-let%span slines'59 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 52 10 52 11
-let%span slines'60 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 54 4 54 79
-let%span slines'61 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 73 4 73 30
-let%span slines'62 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 187 10 187 11
-let%span slines'63 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 186 11 186 34
-let%span slines'64 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 188 10 188 44
-let%span slines'65 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 190 4 192 5
-let%span slines'66 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 164 11 164 27
-let%span slines'67 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 165 10 165 61
-let%span slines'68 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 166 10 166 10
-let%span slines'69 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 167 10 167 40
-let%span slines'70 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 168 10 168 10
-let%span slines'71 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 169 10 169 59
-let%span slines'72 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 170 31 170 33
-let%span slines'73 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 27 4 27 38
-let%span slines'74 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 66 11 66 27
-let%span slines'75 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 68 4 68 43
+let%span slines = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 264 50 264 52
+let%span slines'0 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 264 46 264 52
+let%span slines'1 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 264 55 264 57
+let%span slines'2 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 264 46 264 57
+let%span slines'3 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 264 27 264 58
+let%span slines'4 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 265 47 265 59
+let%span slines'5 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 266 16 266 22
+let%span slines'6 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 269 14 269 21
+let%span slines'7 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 268 16 268 46
+let%span slines'8 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 267 16 267 42
+let%span slines'9 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 271 22 271 26
+let%span slines'10 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 271 22 271 49
+let%span slines'11 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 271 16 271 50
+let%span slines'12 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 272 24 272 26
+let%span slines'13 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 272 18 272 27
+let%span slines'14 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 273 26 273 27
+let%span slines'15 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 273 20 273 28
+let%span slines'16 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 273 31 273 42
+let%span slines'17 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 273 46 273 55
+let%span slines'18 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 273 18 273 56
+let%span slines'19 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 274 24 274 36
+let%span slines'20 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 276 8 276 30
+let%span slines'21 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 277 17 277 21
+let%span slines'22 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 277 8 277 22
+let%span slines'23 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 279 8 279 30
+let%span slines'24 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 280 17 280 22
+let%span slines'25 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 280 8 280 23
+let%span slines'26 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 282 23 282 34
+let%span slines'27 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 51 11 51 17
+let%span slines'28 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 286 26 286 36
+let%span slines'29 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 287 24 287 46
+let%span slines'30 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 288 22 288 93
+let%span slines'31 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 289 22 289 22
+let%span slines'32 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 290 22 290 22
+let%span slines'33 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 291 22 291 63
+let%span slines'34 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 292 22 292 22
+let%span slines'35 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 293 22 293 22
+let%span slines'36 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 295 22 295 22
+let%span slines'37 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 296 22 296 93
+let%span slines'38 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 297 22 297 22
+let%span slines'39 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 298 22 298 68
+let%span slines'40 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 299 13 299 14
+let%span slines'41 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 299 8 299 14
+let%span slines'42 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 259 11 259 26
+let%span slines'43 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 260 10 260 30
+let%span slines'44 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 261 10 261 51
+let%span slines'45 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 98 16 98 92
+let%span slines'46 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 78 10 78 11
+let%span slines'47 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 80 4 80 82
+let%span slines'48 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 46 16 46 86
+let%span slines'49 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 263 0 263 58
+let%span slines'50 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 210 10 210 30
+let%span slines'51 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 106 10 106 47
+let%span slines'52 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 107 25 107 27
+let%span slines'53 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 36 16 36 29
+let%span slines'54 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 40 16 40 57
+let%span slines'55 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 221 11 221 24
+let%span slines'56 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 222 10 222 53
+let%span slines'57 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 223 10 223 10
+let%span slines'58 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 224 10 224 10
+let%span slines'59 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 52 10 52 11
+let%span slines'60 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 54 4 54 79
+let%span slines'61 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 73 4 73 30
+let%span slines'62 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 187 10 187 11
+let%span slines'63 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 186 11 186 34
+let%span slines'64 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 188 10 188 44
+let%span slines'65 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 190 4 192 5
+let%span slines'66 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 164 11 164 27
+let%span slines'67 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 165 10 165 61
+let%span slines'68 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 166 10 166 10
+let%span slines'69 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 167 10 167 40
+let%span slines'70 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 168 10 168 10
+let%span slines'71 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 169 10 169 59
+let%span slines'72 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 170 31 170 33
+let%span slines'73 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 27 4 27 38
+let%span slines'74 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 66 11 66 27
+let%span slines'75 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 68 4 68 43
 
 use creusot.int.UInt64
 use seq.Seq
@@ -124,11 +124,11 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
 
 meta "rewrite_def" predicate well_founded_relation_Int
 
-predicate bytes_are [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 97 0 97 49] (t: Seq.seq UInt8.t) (m: Seq.seq int) =
+predicate bytes_are [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 97 0 97 49] (t: Seq.seq UInt8.t) (m: Seq.seq int) =
   [%#slines'45] Seq.length t = Seq.length m
   /\ (forall p: int. 0 <= p /\ p < Seq.length m -> UInt8.t'int (Seq.get t p) = Seq.get m p)
 
-function dec [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 53 0 53 30] (v: int) : Seq.seq int
+function dec [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 53 0 53 30] (v: int) : Seq.seq int
 
 axiom dec_def: forall v: int [dec v]. ([%#slines'27] 0 <= v)
     -> dec v
@@ -138,19 +138,19 @@ axiom dec_def: forall v: int [dec v]. ([%#slines'27] 0 <= v)
       Seq.snoc (dec (ComputerDivision.div v 10)) (48 + ComputerDivision.mod v 10)
     )
 
-function line [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 67 0 67 39] (k: int) (v: int) : Seq.seq int =
+function line [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 67 0 67 39] (k: int) (v: int) : Seq.seq int =
   [%#slines'75] Seq.snoc (Seq.(++) (Seq.snoc (dec k) 59) (dec v)) 10
 
-function key_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 35 0 35 28] (r: UInt64.t) : int =
+function key_of [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 35 0 35 28] (r: UInt64.t) : int =
   [%#slines'53] UInt64.t'int (UInt64.shr r (44: UInt64.t))
 
-function val_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 39 0 39 28] (r: UInt64.t) : int =
+function val_of [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 39 0 39 28] (r: UInt64.t) : int =
   [%#slines'54] ComputerDivision.mod (UInt64.t'int (UInt64.bw_and (UInt64.shr r (8: UInt64.t)) (4294967295: UInt64.t))) 1000000
 
-function line_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 72 0 72 34] (r: UInt64.t) : Seq.seq int =
+function line_of [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 72 0 72 34] (r: UInt64.t) : Seq.seq int =
   [%#slines'61] line (key_of r) (val_of r)
 
-function text [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 79 0 79 45] (rs: Seq.seq UInt64.t) (i: int) : Seq.seq int
+function text [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 79 0 79 45] (rs: Seq.seq UInt64.t) (i: int) : Seq.seq int
 
 axiom text_def: forall rs: Seq.seq UInt64.t, i: int [text rs i]. text rs i
     = ([%#slines'47] if i <= 0 then
@@ -159,12 +159,12 @@ axiom text_def: forall rs: Seq.seq UInt64.t, i: int [text rs i]. text rs i
       Seq.(++) (text rs (i - 1)) (line_of (Seq.get rs (i - 1)))
     )
 
-function mix64_l [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 26 0 26 29] (x: UInt64.t) : UInt64.t =
+function mix64_l [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 26 0 26 29] (x: UInt64.t) : UInt64.t =
   [%#slines'73] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
 
 constant const_SEED: UInt64.t = [%#slines'49] (1393743441198640095: UInt64.t)
 
-predicate draws [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 45 0 45 42] (rs: Seq.seq UInt64.t) (n: int) =
+predicate draws [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 45 0 45 42] (rs: Seq.seq UInt64.t) (n: int) =
   [%#slines'48] Seq.length rs = n
   /\ (forall j: UInt64.t. UInt64.t'int j < n -> Seq.get rs (UInt64.t'int j) = mix64_l (UInt64.add const_SEED j))
 
@@ -176,7 +176,7 @@ let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any
   [ return (result: UInt64.t) -> {[@stop_split] [@expl:mix64 ensures] [%#slines'50] result = mix64_l x}
     (! return {result}) ]
 
-function key_bound [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 107 0 107 24] (r: UInt64.t) : () =
+function key_bound [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 107 0 107 24] (r: UInt64.t) : () =
   [%#slines'52] ()
 
 axiom key_bound_spec: forall r: UInt64.t. [%#slines'51] 0 <= key_of r /\ key_of r < 1048576
@@ -205,7 +205,7 @@ let push_u8 (self: MutBorrow.t t_Vec_u8_Global) (value: UInt8.t) (return (x: ())
     = Seq.snoc (view_Vec_u8_Global self.current) value}
     (! return {result}) ]
 
-function text_snoc [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 189 0 189 46] (rs: Seq.seq UInt64.t) (r: UInt64.t) (i: int) : ()
+function text_snoc [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 189 0 189 46] (rs: Seq.seq UInt64.t) (r: UInt64.t) (i: int) : ()
 
 axiom text_snoc_def: forall rs: Seq.seq UInt64.t, r: UInt64.t, i: int [text_snoc rs r i]. ([%#slines'63] 0 <= i
       /\ i <= Seq.length rs) -> text_snoc rs r i = ([%#slines'65] if gt_log_Int i 0 then text_snoc rs r (i - 1) else ())
@@ -213,7 +213,7 @@ axiom text_snoc_def: forall rs: Seq.seq UInt64.t, r: UInt64.t, i: int [text_snoc
 axiom text_snoc_spec: forall rs: Seq.seq UInt64.t, r: UInt64.t, i: int. ([%#slines'63] 0 <= i /\ i <= Seq.length rs)
     -> ([%#slines'64] text (Seq.snoc rs r) i = text rs i)
 
-function line_at [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 170 0 170 30] (k: int) (v: int) : () =
+function line_at [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 170 0 170 30] (k: int) (v: int) : () =
   [%#slines'72] ()
 
 axiom line_at_spec: forall k: int, v: int. ([%#slines'66] 0 <= k /\ 0 <= v)
@@ -238,7 +238,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let generate [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 263 0 263 58] (n: UInt64.t)
+let generate [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 263 0 263 58] (n: UInt64.t)
   (return (x: tup2_Vec_u8_Global_Snapshot_Seq_u64)) =
 {[@stop_split] [@expl:generate requires] [%#slines'42] UInt64.t'int n <= 268435455}
   (! bb0

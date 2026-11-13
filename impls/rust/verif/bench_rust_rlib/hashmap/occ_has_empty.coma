@@ -1,14 +1,14 @@
 (* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 221 0 221 41 *)
 
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 218 10 218 11
 let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 219 11 219 54
 let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 220 10 220 10
 let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 128 10 128 11
 let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 130 4 130 97
 let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 101 4 101 12
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 
 use creusot.int.UInt64
 use seq.Seq

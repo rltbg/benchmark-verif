@@ -1,7 +1,13 @@
 (* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 386 0 386 66 *)
 
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
 let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 777 16 777 35
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
 let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 387 20 387 38
 let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 388 18 388 51
 let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 389 16 389 22
@@ -43,13 +49,7 @@ let%span shashmap'36 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 52
 let%span shashmap'37 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 107 4 107 49
 let%span shashmap'38 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 26 4 26 38
 let%span shashmap'39 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 386 0 386 66
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span smapping = "/opt/tools/creusot/creusot-std/src/logic/mapping.rs" 66 8 66 19
-let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
-let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
-let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
 
 use creusot.int.UInt64
 use seq.Seq
@@ -148,8 +148,8 @@ constant const_PHI: UInt64.t = [%#shashmap'39] (11400714819323198485: UInt64.t)
 function home [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 51 0 51 37] (key: UInt64.t) (lg: UInt32.t) : int
  = [%#shashmap'36] UInt64.t'int (shr_u64 (UInt64.mul key const_PHI) (UInt32.sub (64: UInt32.t) lg))
 
-function at' [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 0 106 42] (h: int) (d: int) (cap: int) : int
- = [%#shashmap'37] if h + d < cap then h + d else h + d - cap
+function at' [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 0 106 42] (h: int) (d: int) (cap: int) : int =
+  [%#shashmap'37] if h + d < cap then h + d else h + d - cap
 
 predicate table_inv [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 135 0 135 66] (t: Seq.seq UInt64.t) (cap: int) (lg: UInt32.t) (m: Map.map UInt64.t t_Option_u64) =
   [%#shashmap'23] Seq.length t = 2 * cap
@@ -203,8 +203,8 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let insert_all [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 386 0 386 66]
-  (t: MutBorrow.t t_Vec_u64_Global) (cap: UInt64.t) (lg: UInt32.t) (n: UInt64.t) (return (x: ())) =
+let insert_all [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 386 0 386 66] (t: MutBorrow.t t_Vec_u64_Global)
+  (cap: UInt64.t) (lg: UInt32.t) (n: UInt64.t) (return (x: ())) =
 {[@stop_split] [@expl:insert_all requires] ([@stop_split] [@expl:insert_all requires #0] [%#shashmap'13] shape cap lg
     /\ Seq.length (view_Vec_u64_Global t.current) = 2 * UInt64.t'int cap
     /\ 1 <= UInt64.t'int n /\ 2 * UInt64.t'int n <= UInt64.t'int cap)

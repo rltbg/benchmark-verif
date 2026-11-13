@@ -1,17 +1,17 @@
-(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 231 4 231 30 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 231 4 231 30 *)
 
-let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 229 14 229 16
-let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 230 14 230 29
-let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 223 14 223 15
-let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 225 8 225 56
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span ssha256 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 229 14 229 16
+let%span ssha256'0 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 230 14 230 29
+let%span ssha256'1 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 223 14 223 15
+let%span ssha256'2 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 225 8 225 56
 
 use creusot.int.UInt64
 use int.Int
 
-function u64_of [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 224 4 224 32] (x: int) : UInt64.t
+function u64_of [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 224 4 224 32] (x: int) : UInt64.t
 
 axiom u64_of_def: forall x: int [u64_of x]. u64_of x
     = ([%#ssha256'2] if x <= 0 then (0: UInt64.t) else UInt64.add (u64_of (x - 1)) (1: UInt64.t))
@@ -35,7 +35,7 @@ meta "select_lsinst" "all"
 
 constant v : UInt64.t
 
-function u64_of_view [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 231 4 231 30] (v: UInt64.t) : ()
+function u64_of_view [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 231 4 231 30] (v: UInt64.t) : ()
 
 goal vc_u64_of_view: if gt_log_Int (UInt64.t'int v) 0 then
     ([@expl:variant decreases] well_founded_relation_Int ([%#ssha256] UInt64.t'int v) ([%#ssha256] UInt64.t'int (UInt64.sub v (1: UInt64.t))))

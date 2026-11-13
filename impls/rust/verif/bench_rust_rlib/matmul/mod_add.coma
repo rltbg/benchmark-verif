@@ -1,7 +1,7 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 46 0 46 30 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 46 0 46 30 *)
 
-let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 44 11 44 27
-let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 45 10 45 80
+let%span smatmul = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 44 11 44 27
+let%span smatmul'0 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 45 10 45 80
 
 use int.ComputerDivision
 use int.Int
@@ -14,7 +14,7 @@ constant d : int
 
 constant e : int
 
-function mod_add [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 46 0 46 30] (d: int) (e: int) : ()
+function mod_add [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 46 0 46 30] (d: int) (e: int) : ()
 
 goal vc_mod_add: ([%#smatmul] 0 <= d /\ 0 <= e)
   -> d = ComputerDivision.div d 4294967296 * 4294967296 + ComputerDivision.mod d 4294967296

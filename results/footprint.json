@@ -3,7 +3,7 @@
   "build_s": 0.168621624,
   "binary_kb": 472.0,
   "runtime_kb": 0.0,
-  "verify_s": 37.596736454
+  "verify_s": 107.504987723
  },
  "fstar-c": {
   "verify_s": 428.548523495,
@@ -43,5 +43,8 @@
   "build_s": 18.129963473,
   "binary_kb": 3795.0,
   "runtime_kb": 0.0
+ },
+ "rust-verus": {
+  "verify_s": 13.831
  }
 }

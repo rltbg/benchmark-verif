@@ -1,16 +1,16 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 60 0 60 48 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 60 0 60 48 *)
 
-let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 58 11 58 41
-let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 59 10 59 52
-let%span smatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 44 11 44 27
-let%span smatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 45 10 45 80
-let%span smatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 49 8 49 8
+let%span smatmul = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 58 11 58 41
+let%span smatmul'0 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 59 10 59 52
+let%span smatmul'1 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 44 11 44 27
+let%span smatmul'2 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 45 10 45 80
+let%span smatmul'3 = "/home/user/benchmark-verif/impls/rust/src/matmul.rs" 49 8 49 8
 
 use creusot.int.UInt32
 use int.ComputerDivision
 use int.Int
 
-function mod_add [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 46 0 46 30] (d: int) (e: int) : () =
+function mod_add [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 46 0 46 30] (d: int) (e: int) : () =
   [%#smatmul'3] ()
 
 axiom mod_add_spec: forall d: int, e: int. ([%#smatmul'1] 0 <= d /\ 0 <= e)
@@ -30,7 +30,7 @@ constant y : UInt32.t
 
 constant d : int
 
-function wrap_step [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 60 0 60 48] (c: UInt32.t) (x: UInt32.t) (y: UInt32.t) (d: int) : ()
+function wrap_step [#"/home/user/benchmark-verif/impls/rust/src/matmul.rs" 60 0 60 48] (c: UInt32.t) (x: UInt32.t) (y: UInt32.t) (d: int) : ()
 
 goal vc_wrap_step: ([%#smatmul] 0 <= d /\ UInt32.t'int c = ComputerDivision.mod d 4294967296)
   -> UInt32.t'int (UInt32.mul x y) = ComputerDivision.mod (UInt32.t'int x * UInt32.t'int y) 4294967296

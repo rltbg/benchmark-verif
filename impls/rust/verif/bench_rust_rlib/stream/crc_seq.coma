@@ -1,13 +1,13 @@
-(* #"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 48 0 48 43 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/stream.rs" 48 0 48 43 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span sseq = "/opt/tools/creusot/creusot-std/src/logic/seq.rs" 732 4 732 36
-let%span sstream = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 42 4 42 33
-let%span sstream'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 34 10 34 11
-let%span sstream'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 36 4 36 58
-let%span sstream'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 29 4 29 74
+let%span sstream = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 42 4 42 33
+let%span sstream'0 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 34 10 34 11
+let%span sstream'1 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 36 4 36 58
+let%span sstream'2 = "/home/user/benchmark-verif/impls/rust/src/stream.rs" 29 4 29 74
 
 use creusot.int.UInt32
 use creusot.int.UInt8
@@ -27,19 +27,19 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
 
 meta "rewrite_def" predicate well_founded_relation_Int
 
-function crc_shift [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 28 0 28 31] (x: UInt32.t) : UInt32.t =
+function crc_shift [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 28 0 28 31] (x: UInt32.t) : UInt32.t =
   [%#sstream'2] if UInt32.bw_and x (1: UInt32.t) <> (0: UInt32.t) then
     UInt32.bw_xor (UInt32.shr x (1: UInt32.t)) (3988292384: UInt32.t)
   else
     UInt32.shr x (1: UInt32.t)
 
 
-function crc_iter [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 35 0 35 38] (x: UInt32.t) (k: int) : UInt32.t
+function crc_iter [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 35 0 35 38] (x: UInt32.t) (k: int) : UInt32.t
 
 axiom crc_iter_def: forall x: UInt32.t, k: int [crc_iter x k]. crc_iter x k
     = ([%#sstream'1] if k <= 0 then x else crc_shift (crc_iter x (k - 1)))
 
-function crc_byte [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 41 0 41 39] (crc: UInt32.t) (c: UInt8.t) : UInt32.t
+function crc_byte [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 41 0 41 39] (crc: UInt32.t) (c: UInt8.t) : UInt32.t
  = [%#sstream] crc_iter (UInt32.bw_xor crc (UInt32.of_int (UInt8.t'int c))) 8
 
 meta "compute_max_steps" 1000000
@@ -50,7 +50,7 @@ constant crc : UInt32.t
 
 constant s : Seq.seq UInt8.t
 
-function crc_seq [#"/tmp/claude-0/verif-sha/creusot-sha/src/stream.rs" 48 0 48 43] (crc: UInt32.t) (s: Seq.seq UInt8.t) : UInt32.t
+function crc_seq [#"/home/user/benchmark-verif/impls/rust/src/stream.rs" 48 0 48 43] (crc: UInt32.t) (s: Seq.seq UInt8.t) : UInt32.t
 
 goal vc_crc_seq: if Seq.length s = 0 then
     true

@@ -23,7 +23,7 @@
               { "prover": "cvc4", "time": 0.021 },
               { "prover": "cvc4", "time": 0.092 },
               { "prover": "alt-ergo", "time": 0.073 },
-              { "prover": "alt-ergo", "time": 0.175 },
+              { "prover": "alt-ergo", "time": 0.146 },
               { "prover": "cvc4", "time": 0.056 },
               { "prover": "cvc5", "time": 0.038 },
               { "prover": "cvc4", "time": 0.044 },

@@ -1,15 +1,15 @@
-(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 151 0 151 75 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 151 0 151 75 *)
 
-let%span sptrchase = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 148 11 148 67
-let%span sptrchase'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 149 11 149 64
-let%span sptrchase'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 150 10 150 43
-let%span sptrchase'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 75 8 77 103
-let%span sptrchase'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 49 16 49 24
-let%span sptrchase'4 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 67 16 67 84
-let%span sptrchase'5 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 55 16 55 21
-let%span sptrchase'6 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 61 16 61 26
-let%span sptrchase'7 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 151 0 151 75
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sptrchase = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 148 11 148 67
+let%span sptrchase'0 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 149 11 149 64
+let%span sptrchase'1 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 150 10 150 43
+let%span sptrchase'2 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 75 8 77 103
+let%span sptrchase'3 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 49 16 49 24
+let%span sptrchase'4 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 67 16 67 84
+let%span sptrchase'5 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 55 16 55 21
+let%span sptrchase'6 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 61 16 61 26
+let%span sptrchase'7 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 151 0 151 75
 
 use creusot.int.UInt64
 use seq.Seq
@@ -19,21 +19,21 @@ predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other
 
 meta "rewrite_def" predicate ge_log_Int
 
-function key [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 48 0 48 38] (a: Seq.seq UInt64.t) (i: int) : UInt64.t
+function key [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 48 0 48 38] (a: Seq.seq UInt64.t) (i: int) : UInt64.t
  = [%#sptrchase'3] Seq.get a (2 * i)
 
 constant const_M: UInt64.t = [%#sptrchase'7] (4294967295: UInt64.t)
 
-function left [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 54 0 54 26] (l: UInt64.t) : UInt64.t =
+function left [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 54 0 54 26] (l: UInt64.t) : UInt64.t =
   [%#sptrchase'5] UInt64.bw_and l const_M
 
-function right [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 60 0 60 27] (l: UInt64.t) : UInt64.t =
+function right [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 60 0 60 27] (l: UInt64.t) : UInt64.t =
   [%#sptrchase'6] UInt64.shr l (32: UInt64.t)
 
-function step [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 66 0 66 47] (a: Seq.seq UInt64.t) (i: int) (k: UInt64.t) : UInt64.t
+function step [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 66 0 66 47] (a: Seq.seq UInt64.t) (i: int) (k: UInt64.t) : UInt64.t
  = [%#sptrchase'4] if UInt64.lt k (key a i) then left (Seq.get a (2 * i + 1)) else right (Seq.get a (2 * i + 1))
 
-predicate search_path [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 73 0 73 70] (a: Seq.seq UInt64.t) (cnt: int) (k: UInt64.t) (p: Seq.seq int) =
+predicate search_path [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 73 0 73 70] (a: Seq.seq UInt64.t) (cnt: int) (k: UInt64.t) (p: Seq.seq int) =
   [%#sptrchase'2] ge_log_Int (Seq.length p) 1
   /\ Seq.get p 0 = 0
   /\ (forall j: int. 0 <= j /\ j < Seq.length p -> 0 <= Seq.get p j /\ Seq.get p j < cnt)
@@ -54,7 +54,7 @@ constant p : Seq.seq int
 
 constant c : int
 
-function search_path_snoc [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 151 0 151 75] (a: Seq.seq UInt64.t) (cnt: int) (k: UInt64.t) (p: Seq.seq int) (c: int) : ()
+function search_path_snoc [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 151 0 151 75] (a: Seq.seq UInt64.t) (cnt: int) (k: UInt64.t) (p: Seq.seq int) (c: int) : ()
 
 goal vc_search_path_snoc: ([%#sptrchase] search_path a cnt k p /\ key a (Seq.get p (Seq.length p - 1)) <> k)
   -> ([%#sptrchase'0] c = UInt64.t'int (step a (Seq.get p (Seq.length p - 1)) k) /\ 0 <= c /\ c < cnt)

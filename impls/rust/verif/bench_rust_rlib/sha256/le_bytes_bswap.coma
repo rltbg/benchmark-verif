@@ -1,19 +1,19 @@
-(* #"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 365 0 365 29 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 365 0 365 29 *)
 
-let%span ssha256 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 362 10 362 106
-let%span ssha256'0 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 363 10 364 35
-let%span ssha256'1 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 207 4 207 89
-let%span ssha256'2 = "/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 350 4 350 99
+let%span ssha256 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 362 10 362 106
+let%span ssha256'0 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 363 10 364 35
+let%span ssha256'1 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 207 4 207 89
+let%span ssha256'2 = "/home/user/benchmark-verif/impls/rust/src/sha256.rs" 350 4 350 99
 
 use creusot.int.UInt64BW
 use creusot.int.UInt8BW
 use creusot.int.UInt32BW
 
-function be_word [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 206 0 206 53] (b0: UInt8BW.t) (b1: UInt8BW.t) (b2: UInt8BW.t) (b3: UInt8BW.t) : UInt32BW.t
+function be_word [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 206 0 206 53] (b0: UInt8BW.t) (b1: UInt8BW.t) (b2: UInt8BW.t) (b3: UInt8BW.t) : UInt32BW.t
  =
   [%#ssha256'1] UInt32BW.bw_or (UInt32BW.bw_or (UInt32BW.bw_or (UInt32BW.shl (UInt32BW.of_BV256 (UInt8BW.to_BV256 b0)) (24: UInt32BW.t)) (UInt32BW.shl (UInt32BW.of_BV256 (UInt8BW.to_BV256 b1)) (16: UInt32BW.t))) (UInt32BW.shl (UInt32BW.of_BV256 (UInt8BW.to_BV256 b2)) (8: UInt32BW.t))) (UInt32BW.of_BV256 (UInt8BW.to_BV256 b3))
 
-function bswap_l [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 349 0 349 29] (x: UInt32BW.t) : UInt32BW.t =
+function bswap_l [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 349 0 349 29] (x: UInt32BW.t) : UInt32BW.t =
   [%#ssha256'2] UInt32BW.bw_or (UInt32BW.bw_or (UInt32BW.bw_or (UInt32BW.shl (UInt32BW.bw_and x (255: UInt32BW.t)) (24: UInt32BW.t)) (UInt32BW.shl (UInt32BW.bw_and x (65280: UInt32BW.t)) (8: UInt32BW.t))) (UInt32BW.bw_and (UInt32BW.shr x (8: UInt32BW.t)) (65280: UInt32BW.t))) (UInt32BW.shr x (24: UInt32BW.t))
 
 meta "compute_max_steps" 1000000
@@ -22,7 +22,7 @@ meta "select_lsinst" "all"
 
 constant x : UInt64BW.t
 
-function le_bytes_bswap [#"/tmp/claude-0/verif-sha/creusot-sha/src/sha256.rs" 365 0 365 29] (x: UInt64BW.t) : ()
+function le_bytes_bswap [#"/home/user/benchmark-verif/impls/rust/src/sha256.rs" 365 0 365 29] (x: UInt64BW.t) : ()
 
 goal vc_le_bytes_bswap:
   [@stop_split] [@expl:le_bytes_bswap ensures] ([@stop_split] [@expl:le_bytes_bswap ensures #0] [%#ssha256] be_word (UInt8BW.of_BV256 (UInt64BW.to_BV256 x)) (UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x (8: UInt64BW.t)))) (UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x (16: UInt64BW.t)))) (UInt8BW.of_BV256 (UInt64BW.to_BV256 (UInt64BW.shr x (24: UInt64BW.t))))

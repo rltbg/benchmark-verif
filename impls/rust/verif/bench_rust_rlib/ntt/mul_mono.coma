@@ -1,7 +1,7 @@
-(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 0 47 47 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 47 0 47 47 *)
 
-let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 45 11 45 47
-let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 46 10 46 24
+let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 45 11 45 47
+let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 46 10 46 24
 
 use int.Int
 
@@ -17,7 +17,7 @@ constant x : int
 
 constant y : int
 
-function mul_mono [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 0 47 47] (a: int) (b: int) (x: int) (y: int) : ()
+function mul_mono [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 47 0 47 47] (a: int) (b: int) (x: int) (y: int) : ()
 
 goal vc_mul_mono: ([%#sntt] 0 <= a /\ a <= x /\ 0 <= b /\ b <= y)
   -> ([@stop_split] [@expl:mul_mono ensures] [%#sntt'0] a * b <= x * y)
