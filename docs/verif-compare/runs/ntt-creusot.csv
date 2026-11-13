@@ -1,0 +1,12 @@
+2026-11-13T20:56:42+00:00,0.8,erreur_compil,,"v1: below_p partout, rev + involution + bitrev = permutation rev"
+2026-11-13T20:57:03+00:00,14.8,ok,0,v2: renommage rev -> rev_bits (collision avec la variable rev)
+2026-11-13T21:01:16+00:00,44.0,echec,2,"v3 (au-delà): powmod == b^e mod p, tw[j] == w^j mod p (lemmes pw_*)"
+2026-11-13T21:01:21+00:00,0,echec,2,but isole powmod_step (-X)
+2026-11-13T21:01:42+00:00,11.0,echec,2,"v4: pw(b,1) déplié en deux temps, fin de boucle powmod"
+2026-11-13T21:01:47+00:00,1,echec,1,but isole powmod_step (-X)
+2026-11-13T21:01:47+00:00,0,echec,1,but isole powmod (-X)
+2026-11-13T21:02:40+00:00,49,echec,1,but isole powmod avec -t 5 (toujours en échec : pas un problème de temps)
+2026-11-13T21:03:41+00:00,18.8,echec,1,"v5: powmod_step scindé en powmod_odd/powmod_even (pas de if dans le lemme), pw_succ"
+2026-11-13T21:03:51+00:00,3.8,ok,0,v6: étapes explicites dans powmod_odd
+2026-11-13T21:05:25+00:00,42.3,ok,0,final à froid (--no-cache) du module seul
+2026-11-13T21:08:13+00:00,59.1,ok,0,final à froid (--no-cache -f : recherche de preuve refaite) du module seul

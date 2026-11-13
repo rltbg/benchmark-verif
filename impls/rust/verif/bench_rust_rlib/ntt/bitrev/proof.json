@@ -2,9 +2,44 @@
   "profile": [],
   "proofs": {
     "Coma": {
-      "vc_bitrev": { "prover": "z3", "time": 0.012 },
-      "vc_index_Vec_u32_Global": { "prover": "alt-ergo", "time": 0.014 },
-      "vc_index_mut_Vec_u32_Global": { "prover": "alt-ergo", "time": 0.01 }
+      "vc_bitrev": {
+        "tactic": "compute_specified",
+        "children": [
+          {
+            "tactic": "split_vc",
+            "children": [
+              { "prover": "alt-ergo", "time": 0.017 },
+              { "prover": "alt-ergo", "time": 0.016 },
+              { "prover": "alt-ergo", "time": 0.012 },
+              { "prover": "alt-ergo", "time": 0.024 },
+              { "prover": "alt-ergo", "time": 0.02 },
+              { "prover": "alt-ergo", "time": 0.02 },
+              { "prover": "alt-ergo", "time": 0.028 },
+              { "prover": "z3", "time": 0.007 },
+              { "prover": "alt-ergo", "time": 0.016 },
+              { "prover": "z3", "time": 0.0 },
+              { "prover": "alt-ergo", "time": 0.013 },
+              { "prover": "z3", "time": 0.008 },
+              { "prover": "z3", "time": 0.009 },
+              { "prover": "alt-ergo", "time": 0.01 },
+              { "prover": "z3", "time": 0.014 },
+              { "prover": "alt-ergo", "time": 0.026 },
+              { "prover": "alt-ergo", "time": 0.022 },
+              { "prover": "alt-ergo", "time": 0.017 },
+              { "prover": "alt-ergo", "time": 0.017 },
+              { "prover": "alt-ergo", "time": 0.018 },
+              { "prover": "alt-ergo", "time": 0.023 },
+              { "prover": "alt-ergo", "time": 0.021 },
+              { "prover": "alt-ergo", "time": 0.046 },
+              { "prover": "alt-ergo", "time": 0.035 },
+              { "prover": "alt-ergo", "time": 0.029 },
+              { "prover": "z3", "time": 0.122 }
+            ]
+          }
+        ]
+      },
+      "vc_index_Vec_u32_Global": { "prover": "alt-ergo", "time": 0.017 },
+      "vc_index_mut_Vec_u32_Global": { "prover": "alt-ergo", "time": 0.013 }
     }
   }
 }

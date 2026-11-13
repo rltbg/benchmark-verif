@@ -1,0 +1,256 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 165 0 165 102 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 72 11 72 27
+let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 73 10 73 24
+let%span smatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 19 10 19 11
+let%span smatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 21 16 21 110
+let%span smatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 37 10 37 11
+let%span smatmul'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 35 11 35 17
+let%span smatmul'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 36 10 36 36
+let%span smatmul'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 58 11 58 41
+let%span smatmul'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 59 10 59 52
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sparmatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 166 26 166 28
+let%span sparmatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 167 20 167 40
+let%span sparmatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 168 20 168 40
+let%span sparmatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 169 20 169 41
+let%span sparmatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 170 13 170 18
+let%span sparmatmul'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 171 13 171 18
+let%span sparmatmul'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 172 16 172 22
+let%span sparmatmul'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 176 14 176 21
+let%span sparmatmul'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 175 16 175 16
+let%span sparmatmul'8 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 174 16 174 16
+let%span sparmatmul'9 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 173 16 173 47
+let%span sparmatmul'10 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 179 12 179 46
+let%span sparmatmul'11 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 22 183 28
+let%span sparmatmul'12 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 20 183 29
+let%span sparmatmul'13 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 62 183 68
+let%span sparmatmul'14 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 60 183 69
+let%span sparmatmul'15 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 43 183 70
+let%span sparmatmul'16 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 20 183 71
+let%span sparmatmul'17 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 10 183 16
+let%span sparmatmul'18 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 8 183 17
+let%span sparmatmul'19 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 183 8 183 71
+let%span sparmatmul'20 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 184 13 184 14
+let%span sparmatmul'21 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 184 8 184 14
+let%span sparmatmul'22 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 158 11 158 83
+let%span sparmatmul'23 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 159 11 159 76
+let%span sparmatmul'24 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 160 11 160 11
+let%span sparmatmul'25 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 161 10 161 32
+let%span sparmatmul'26 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 162 10 162 10
+let%span sparmatmul'27 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 163 10 163 10
+let%span sparmatmul'28 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 47 11 47 36
+let%span sparmatmul'29 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 48 10 48 28
+let%span sparmatmul'30 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 50 4 50 23
+
+use creusot.prelude.MutBorrow
+use creusot.slice.Slice64
+use creusot.int.UInt64
+use seq.Seq
+use creusot.int.UInt32
+use int.ComputerDivision
+use creusot.prelude.Opaque
+use creusot.prelude.Any
+use int.Int
+
+function mul_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
+
+axiom mul_le_spec: forall a: int, b: int, n: int. ([%#smatmul] a <= b /\ 0 <= n) -> ([%#smatmul'0] a * n <= b * n)
+
+function in_block [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 49 0 49 39] (n: int) (m: int) (i: int) : ()
+ = [%#sparmatmul'30] mul_le (i + 1) m n
+
+axiom in_block_spec: forall n: int, m: int, i: int. ([%#sparmatmul'28] 0 <= i /\ i < m /\ 0 <= n)
+    -> ([%#sparmatmul'29] i * n + n <= m * n)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+function dot [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 20 0 20 75] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (n: int) (i: int) (j: int) (k: int) : int
+
+axiom dot_def:
+  forall a: Seq.seq UInt32.t, b: Seq.seq UInt32.t, n: int, i: int, j: int, k: int [dot a b n i j k]. dot a b n i j k
+    = ([%#smatmul'2] if k <= 0 then
+      0
+    else
+      dot a b n i j (k - 1) + UInt32.t'int (Seq.get a (i * n + (k - 1))) * UInt32.t'int (Seq.get b ((k - 1) * n + j))
+    )
+
+function dot_nonneg [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 38 0 38 75] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (n: int) (i: int) (j: int) (k: int) : ()
+
+axiom dot_nonneg_spec: forall a: Seq.seq UInt32.t, b: Seq.seq UInt32.t, n: int, i: int, j: int, k: int. ([%#smatmul'4] 0
+      <= k) -> ([%#smatmul'5] ge_log_Int (dot a b n i j k) 0)
+
+function wrap_step [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 60 0 60 48] (c: UInt32.t) (x: UInt32.t) (y: UInt32.t) (d: int) : ()
+
+axiom wrap_step_spec: forall c: UInt32.t, x: UInt32.t, y: UInt32.t, d: int. ([%#smatmul'6] 0 <= d
+      /\ UInt32.t'int c = ComputerDivision.mod d 4294967296)
+    -> ([%#smatmul'7] UInt32.t'int (UInt32.add c (UInt32.mul x y))
+    = ComputerDivision.mod (d + UInt32.t'int x * UInt32.t'int y) 4294967296)
+
+let wrapping_mul (self: UInt32.t) (rhs: UInt32.t) (return (x: UInt32.t)) = any
+  [ return (result: UInt32.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt32.mul self rhs}
+    (! return {result}) ]
+
+let wrapping_add (self: UInt32.t) (rhs: UInt32.t) (return (x: UInt32.t)) = any
+  [ return (result: UInt32.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum'0] result = UInt32.add self rhs}
+    (! return {result}) ]
+
+predicate resolve_refmut_slice_u32 [@inline:trivial] (_1: MutBorrow.t (Slice64.slice UInt32.t)) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_slice_u32
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let row_step [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 165 0 165 102] (a: Slice64.slice UInt32.t)
+  (b: Slice64.slice UInt32.t) (c: MutBorrow.t (Slice64.slice UInt32.t)) (n: UInt64.t) (m: UInt64.t) (i: UInt64.t)
+  (k: UInt64.t) (aik: UInt32.t) (return (x: ())) =
+{[@stop_split] [@expl:row_step requires] ([@stop_split] [@expl:row_step requires #0] [%#sparmatmul'22] UInt64.t'int n
+      <= 16384
+    /\ UInt64.t'int m <= UInt64.t'int n
+    /\ UInt64.t'int i < UInt64.t'int m
+    /\ UInt64.t'int k < UInt64.t'int n
+    /\ aik = Seq.get (Slice64.view a) (UInt64.t'int i * UInt64.t'int n + UInt64.t'int k))
+  /\ ([@stop_split] [@expl:row_step requires #1] [%#sparmatmul'23] Seq.length (Slice64.view a)
+      = UInt64.t'int m * UInt64.t'int n
+    /\ Seq.length (Slice64.view b) = UInt64.t'int n * UInt64.t'int n
+    /\ Seq.length (Slice64.view c.current) = UInt64.t'int m * UInt64.t'int n)
+  /\ ([@stop_split] [@expl:row_step requires #2] [%#sparmatmul'24] forall j: int. 0 <= j /\ j < UInt64.t'int n
+    -> UInt32.t'int (Seq.get (Slice64.view c.current) (UInt64.t'int i * UInt64.t'int n + j))
+    = ComputerDivision.mod (dot (Slice64.view a) (Slice64.view b) (UInt64.t'int n) (UInt64.t'int i) j (UInt64.t'int k)) 4294967296)}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = [ &old_c <- [%#sparmatmul] Slice64.view c.current ] s1
+    | s1 =
+      {[@expl:assertion] [%#sparmatmul'0] let _ = in_block (UInt64.t'int n) (UInt64.t'int m) (UInt64.t'int i) in UInt64.t'int i
+          * UInt64.t'int n
+        + UInt64.t'int n
+      <= UInt64.t'int m * UInt64.t'int n}
+      s2
+    | s2 =
+      {[@expl:assertion] [%#sparmatmul'1] let _ = in_block (UInt64.t'int n) (UInt64.t'int n) (UInt64.t'int k) in UInt64.t'int k
+          * UInt64.t'int n
+        + UInt64.t'int n
+      <= UInt64.t'int n * UInt64.t'int n}
+      s3
+    | s3 =
+      {[@expl:assertion] [%#sparmatmul'2] let _ = mul_le (UInt64.t'int m) 16384 (UInt64.t'int n) in let _ = mul_le (UInt64.t'int n) 16384 16384 in UInt64.t'int m
+          * UInt64.t'int n
+        <= 268435456
+      /\ UInt64.t'int n * UInt64.t'int n <= 268435456}
+      s4
+    | s4 = UInt64.mul [%#sparmatmul'3] {i} {n} (fun (_x: UInt64.t) -> [ &ci <- _x ] s5)
+    | s5 = UInt64.mul [%#sparmatmul'4] {k} {n} (fun (_x: UInt64.t) -> [ &bk <- _x ] s6)
+    | s6 = [ &j <- [%#sparmatmul'5] (0: UInt64.t) ] s7
+    | s7 = [ &_old <- c.final ] s8
+    | s8 = bb2 ]
+  | bb2 = bb2invariant
+    [ bb2 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb2 ([%#sparmatmul'6] UInt64.t'int n
+      - UInt64.t'int j)}
+      bb2invariant
+    | bb2invariant = {[@expl:inferred invariant: unchanged value] _old = c.final}
+      {[@expl:loop invariant #0] [%#sparmatmul'9] Seq.length (Slice64.view c.current) = UInt64.t'int m * UInt64.t'int n
+      /\ UInt64.t'int j <= UInt64.t'int n}
+      {[@expl:loop invariant #1] [%#sparmatmul'8] forall j2: int. 0 <= j2 /\ j2 < UInt64.t'int j
+        -> UInt32.t'int (Seq.get (Slice64.view c.current) (UInt64.t'int ci + j2))
+        = ComputerDivision.mod (dot (Slice64.view a) (Slice64.view b) (UInt64.t'int n) (UInt64.t'int i) j2 (UInt64.t'int k
+        + 1)) 4294967296}
+      {[@expl:loop invariant #2] [%#sparmatmul'7] forall x: int. 0 <= x
+          /\ x < UInt64.t'int m * UInt64.t'int n /\ not (UInt64.t'int ci <= x /\ x < UInt64.t'int ci + UInt64.t'int j)
+        -> Seq.get (Slice64.view c.current) x = Seq.get old_c x}
+      (! [ &variant_old_bb2 <- [%#sparmatmul'6] UInt64.t'int n - UInt64.t'int j ] s0)
+      [ s0 = [ &_94 <- UInt64.lt j n ] s1 | s1 = any [ br0 -> {_94 = false} (! bb10) | br1 -> {_94} (! bb4) ] ]
+      [ bb4 = s0
+        [ s0 =
+          {[@expl:assertion] [%#sparmatmul'10] let _ = dot_nonneg (Slice64.view a) (Slice64.view b) (UInt64.t'int n) (UInt64.t'int i) (UInt64.t'int j) (UInt64.t'int k) in let _ = wrap_step (Seq.get (Slice64.view c.current) (UInt64.t'int ci
+          + UInt64.t'int j)) aik (Seq.get (Slice64.view b) (UInt64.t'int bk
+          + UInt64.t'int j)) (dot (Slice64.view a) (Slice64.view b) (UInt64.t'int n) (UInt64.t'int i) (UInt64.t'int j) (UInt64.t'int k)) in UInt32.t'int (UInt32.add (Seq.get (Slice64.view c.current) (UInt64.t'int ci
+            + UInt64.t'int j)) (UInt32.mul aik (Seq.get (Slice64.view b) (UInt64.t'int bk + UInt64.t'int j))))
+          = ComputerDivision.mod (dot (Slice64.view a) (Slice64.view b) (UInt64.t'int n) (UInt64.t'int i) (UInt64.t'int j) (UInt64.t'int k
+          + 1)) 4294967296}
+          s1
+        | s1 = UInt64.add [%#sparmatmul'11] {ci} {j} (fun (_x: UInt64.t) -> [ &_111 <- _x ] s2)
+        | s2 = Opaque.fresh_ptr
+            (fun (_ptr: Opaque.ptr) -> -{Slice64.slice_ptr_len _ptr = Slice64.length c.current}- [ &_114 <- _ptr ] s3)
+        | s3 = [ &_115 <- Slice64.slice_ptr_len _114 ] s4
+        | s4 = [ &_116 <- UInt64.lt _111 _115 ] s5
+        | s5 = {[@expl:index in bounds] [%#sparmatmul'12] _116} s6
+        | s6 = Slice64.get [%#sparmatmul'12] <UInt32.t> {c.current} {_111} (fun (r: UInt32.t) -> [ &_110 <- r ] s7)
+        | s7 = UInt64.add [%#sparmatmul'13] {bk} {j} (fun (_x: UInt64.t) -> [ &_120 <- _x ] s8)
+        | s8 = [ &_123 <- Slice64.length b ] s9
+        | s9 = [ &_124 <- UInt64.lt _120 _123 ] s10
+        | s10 = {[@expl:index in bounds] [%#sparmatmul'14] _124} s11
+        | s11 = Slice64.get [%#sparmatmul'14] <UInt32.t> {b} {_120} (fun (r: UInt32.t) -> [ &_119 <- r ] s12)
+        | s12 = wrapping_mul [%#sparmatmul'15] {aik} {_119} (fun (_x: UInt32.t) -> [ &_117 <- _x ] s13)
+        | s13 = wrapping_add [%#sparmatmul'16] {_110} {_117} (fun (_x: UInt32.t) -> [ &_109 <- _x ] s14)
+        | s14 = UInt64.add [%#sparmatmul'17] {ci} {j} (fun (_x: UInt64.t) -> [ &_125 <- _x ] s15)
+        | s15 = Opaque.fresh_ptr
+            (fun (_ptr: Opaque.ptr) -> -{Slice64.slice_ptr_len _ptr = Slice64.length c.current}- [ &_128 <- _ptr ] s16)
+        | s16 = [ &_129 <- Slice64.slice_ptr_len _128 ] s17
+        | s17 = [ &_130 <- UInt64.lt _125 _129 ] s18
+        | s18 = {[@expl:index in bounds] [%#sparmatmul'18] _130} s19
+        | s19 = Slice64.set [%#sparmatmul'19] <UInt32.t> {c.current} {_125} {_109}
+            (fun (r: Slice64.slice UInt32.t) -> [ &c <- { c with current = r } ] s20)
+        | s20 = UInt64.add [%#sparmatmul'21] {j} {[%#sparmatmul'20] (1: UInt64.t)}
+            (fun (_x: UInt64.t) -> [ &j <- _x ] s21)
+        | s21 = bb2 ] ] ]
+  | bb10 = s0 [ s0 = -{resolve_refmut_slice_u32 c}- s1 | s1 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & a: Slice64.slice UInt32.t = a
+  | & b: Slice64.slice UInt32.t = b
+  | & c: MutBorrow.t (Slice64.slice UInt32.t) = c
+  | & n: UInt64.t = n
+  | & m: UInt64.t = m
+  | & i: UInt64.t = i
+  | & k: UInt64.t = k
+  | & aik: UInt32.t = aik
+  | & old_c: Seq.seq UInt32.t = Any.any_l ()
+  | & ci: UInt64.t = Any.any_l ()
+  | & bk: UInt64.t = Any.any_l ()
+  | & j: UInt64.t = Any.any_l ()
+  | & _94: bool = Any.any_l ()
+  | & _109: UInt32.t = Any.any_l ()
+  | & _110: UInt32.t = Any.any_l ()
+  | & _111: UInt64.t = Any.any_l ()
+  | & _114: Opaque.ptr = Any.any_l ()
+  | & _115: UInt64.t = Any.any_l ()
+  | & _116: bool = Any.any_l ()
+  | & _117: UInt32.t = Any.any_l ()
+  | & _119: UInt32.t = Any.any_l ()
+  | & _120: UInt64.t = Any.any_l ()
+  | & _123: UInt64.t = Any.any_l ()
+  | & _124: bool = Any.any_l ()
+  | & _125: UInt64.t = Any.any_l ()
+  | & _128: Opaque.ptr = Any.any_l ()
+  | & _129: UInt64.t = Any.any_l ()
+  | & _130: bool = Any.any_l ()
+  | & _old: Slice64.slice UInt32.t = Any.any_l ()
+  | & variant_old_bb2: int = Any.any_l () ])
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:row_step ensures] ([@stop_split] [@expl:row_step ensures #0] [%#sparmatmul'25] Seq.length (Slice64.view c.final)
+      = UInt64.t'int m * UInt64.t'int n)
+    /\ ([@stop_split] [@expl:row_step ensures #1] [%#sparmatmul'26] forall j: int. 0 <= j /\ j < UInt64.t'int n
+        -> UInt32.t'int (Seq.get (Slice64.view c.final) (UInt64.t'int i * UInt64.t'int n + j))
+        = ComputerDivision.mod (dot (Slice64.view a) (Slice64.view b) (UInt64.t'int n) (UInt64.t'int i) j (UInt64.t'int k
+        + 1)) 4294967296)
+    /\ ([@stop_split] [@expl:row_step ensures #2] [%#sparmatmul'27] forall x: int. 0 <= x
+        /\ x < UInt64.t'int m * UInt64.t'int n
+        /\ (x < UInt64.t'int i * UInt64.t'int n \/ UInt64.t'int i * UInt64.t'int n + UInt64.t'int n <= x)
+      -> Seq.get (Slice64.view c.final) x = Seq.get (Slice64.view c.current) x)}
+    (! return {result}) ]

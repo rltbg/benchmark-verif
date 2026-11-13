@@ -1,0 +1,65 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 38 0 38 75 *)
+
+let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 37 10 37 11
+let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 35 11 35 17
+let%span smatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 36 10 36 36
+let%span smatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 19 10 19 11
+let%span smatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 21 16 21 110
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+
+use creusot.int.UInt32
+use seq.Seq
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+function dot [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 20 0 20 75] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (n: int) (i: int) (j: int) (k: int) : int
+
+axiom dot_def:
+  forall a: Seq.seq UInt32.t, b: Seq.seq UInt32.t, n: int, i: int, j: int, k: int [dot a b n i j k]. dot a b n i j k
+    = ([%#smatmul'3] if k <= 0 then
+      0
+    else
+      dot a b n i j (k - 1) + UInt32.t'int (Seq.get a (i * n + (k - 1))) * UInt32.t'int (Seq.get b ((k - 1) * n + j))
+    )
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant a : Seq.seq UInt32.t
+
+constant b : Seq.seq UInt32.t
+
+constant n : int
+
+constant i : int
+
+constant j : int
+
+constant k : int
+
+function dot_nonneg [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 38 0 38 75] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (n: int) (i: int) (j: int) (k: int) : ()
+
+goal vc_dot_nonneg: ([%#smatmul'0] 0 <= k)
+  -> (if gt_log_Int k 0 then
+    (([@stop_split] [@expl:dot_nonneg requires] [%#smatmul'0] 0 <= k - 1)
+      /\ ([@expl:variant decreases] well_founded_relation_Int ([%#smatmul] k) ([%#smatmul] k - 1)))
+    /\ (([@stop_split] [@expl:dot_nonneg ensures] [%#smatmul'1] ge_log_Int (dot a b n i j (k - 1)) 0)
+    -> ([@stop_split] [@expl:dot_nonneg ensures] [%#smatmul'1] ge_log_Int (dot a b n i j k) 0))
+  else
+    [@stop_split] [@expl:dot_nonneg ensures] [%#smatmul'1] ge_log_Int (dot a b n i j k) 0
+  )

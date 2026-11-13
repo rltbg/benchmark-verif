@@ -1,0 +1,7 @@
+2026-11-13T20:54:03+00:00,4.9,echec,6,v1: noyau + threads vstd::spawn/join + checksum = ck_seq(product)
+2026-11-13T20:54:27+00:00,3.9,echec,5,"v2: invariants complets de row_step, bornes n*k"
+2026-11-13T20:54:40+00:00,4.2,echec,3,v3: threads <= 2^16 (usize 32 bits possible en Verus)
+2026-11-13T20:54:56+00:00,3.7,ok,0,"v4: bornes m*n, fuel 2 pour le cas de base de ck_seq"
+2026-11-13T20:55:19+00:00,7,ok,0,cargo verus build --release (vérifie puis compile)
+2026-11-13T21:09:22+00:00,0.3,ok,0,final (cargo verus focus --verify-module parmatmul ; )
+2026-11-13T21:09:54+00:00,2.2,ok,0,final à froid (cargo clean -p puis cargo verus verify --time-expanded des 3 modules : 3.7 s mur au total ; temps propre du module)

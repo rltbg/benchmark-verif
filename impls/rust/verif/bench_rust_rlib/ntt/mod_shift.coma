@@ -1,0 +1,21 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 164 0 164 32 *)
+
+let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 162 11 162 27
+let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 163 10 163 61
+
+use int.ComputerDivision
+use int.Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant q : int
+
+constant z : int
+
+function mod_shift [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 164 0 164 32] (q: int) (z: int) : ()
+
+goal vc_mod_shift: ([%#sntt] 0 <= q /\ 0 <= z)
+  -> ([@stop_split] [@expl:mod_shift ensures] [%#sntt'0] ComputerDivision.mod (q * 2013265921 + z) 2013265921
+  = ComputerDivision.mod z 2013265921)

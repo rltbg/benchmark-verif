@@ -1,1 +1,8 @@
 2026-11-13T20:58:29+00:00,3.8,echec,4,première version Verus (fork_sort/fork_merge external_body)
+2026-11-13T20:58:55+00:00,1.2,erreur_compil,0,déclencheurs b[j+1] explicites; longueurs finales de tmp
+2026-11-13T20:58:59+00:00,3.0,echec,1,typage 0int
+2026-11-13T20:59:08+00:00,3.1,ok,0,merge_back: longueur finale de tmp
+2026-11-13T20:59:24+00:00,3.1,erreur_compil,0,contrôle: fork_* en version séquentielle vérifiée (spec = conjonction des contrats)
+2026-11-13T20:59:41+00:00,3.1,ok,0,contrôle séquentiel des fork_* avec decreases lexicographiques
+2026-11-13T20:59:44+00:00,3.1,ok,0,version parallèle avec decreases
+2026-11-13T20:59:55+00:00,1.2,erreur_compil,0,essai vstd::thread::spawn sur des &mut empruntés (attendu: refus 'static)

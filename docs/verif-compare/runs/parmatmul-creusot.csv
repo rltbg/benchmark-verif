@@ -1,0 +1,20 @@
+2026-11-13T20:35:47+00:00,0.7,erreur_compil,,v1: noyau fonctionnel + blocks récursif avec Scope::spawn/join_unwrap
+2026-11-13T20:35:55+00:00,0.9,erreur_compil,,v2: snapshot de c@ (slice non Sized)
+2026-11-13T20:37:20+00:00,72.1,echec,1,v3: faits de découpe énoncés avant split (pas de ^c après emprunt)
+2026-11-13T20:37:27+00:00,1,echec,3,but isole blocks (-X)
+2026-11-13T20:39:26+00:00,101.8,echec,1,"v4: dot_shift avec bonne borne, snapshots de mine/tail"
+2026-11-13T20:39:35+00:00,6,echec,6,but isole blocks (-X)
+2026-11-13T20:42:02+00:00,99.1,echec,2,"v5: lemme de recollement concat_blocks, quantifié sur la valeur finale"
+2026-11-13T20:42:16+00:00,1,echec,3,but isole blocks (-X)
+2026-11-13T20:43:50+00:00,57.1,echec,1,"v6: concat_blocks prouvé point par point (concat_point), dot_shift sur subsequence"
+2026-11-13T20:44:02+00:00,8,echec,4,but isole blocks (-X)
+2026-11-13T20:45:22+00:00,56.5,echec,1,"v7: dot_shift déplacé dans concat_point, faits tail/longueur ablk"
+2026-11-13T20:45:31+00:00,5,echec,2,but isole blocks (-X)
+2026-11-13T20:48:12+00:00,145,echec,1,but isole blocks avec -t 10 (temps max 10s)
+2026-11-13T20:49:38+00:00,74.6,echec,1,v8: faits de découpe déplacés dans concat_point (contexte réduit)
+2026-11-13T20:49:42+00:00,1,echec,3,but isole blocks (-X)
+2026-11-13T20:51:03+00:00,57.4,echec,1,v9: concat_blocks paramétré par m (termes identiques à ceux du contexte)
+2026-11-13T20:51:07+00:00,1,echec,3,but isole blocks (-X)
+2026-11-13T20:52:11+00:00,31.3,ok,0,v10: subsequence explicite (cf[..x] = index_Seq opaque différent du [0..x] des slices) + longueurs
+2026-11-13T21:05:25+00:00,12.1,ok,0,final à froid (--no-cache) du module seul
+2026-11-13T21:07:14+00:00,76.5,ok,0,final à froid (--no-cache -f : recherche de preuve refaite) du module seul

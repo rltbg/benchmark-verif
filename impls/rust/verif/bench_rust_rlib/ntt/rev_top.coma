@@ -1,0 +1,73 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 76 0 76 38 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 75 10 75 11
+let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 73 11 73 62
+let%span sntt'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 74 10 74 68
+let%span sntt'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 22 10 22 11
+let%span sntt'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 24 16 24 56
+let%span sntt'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 57 10 57 11
+let%span sntt'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 59 16 59 87
+
+use int.ComputerDivision
+use int.Int
+
+function pow2 [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 23 0 23 26] (k: int) : int
+
+axiom pow2_def: forall k: int [pow2 k]. pow2 k = ([%#sntt'3] if k <= 0 then 1 else 2 * pow2 (k - 1))
+
+function rev_bits [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 58 0 58 38] (x: int) (k: int) : int
+
+axiom rev_bits_def: forall x: int, k: int [rev_bits x k]. rev_bits x k
+    = ([%#sntt'5] if k <= 0 then
+      0
+    else
+      ComputerDivision.mod x 2 * pow2 (k - 1) + rev_bits (ComputerDivision.div x 2) (k - 1)
+    )
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant y : int
+
+constant t : int
+
+constant k : int
+
+function rev_top [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 76 0 76 38] (y: int) (t: int) (k: int) : ()
+
+goal vc_rev_top: ([%#sntt'0] 0 <= k /\ 0 <= y /\ y < pow2 k /\ 0 <= t /\ t <= 1)
+  -> (if gt_log_Int k 0 then
+    y + t * pow2 k = 2 * (ComputerDivision.div y 2 + t * pow2 (k - 1)) + ComputerDivision.mod y 2
+    && (if ComputerDivision.mod (y + t * pow2 k) 2 = ComputerDivision.mod y 2 then
+      ComputerDivision.div (y + t * pow2 k) 2 = ComputerDivision.div y 2 + t * pow2 (k - 1)
+      && (([@stop_split] [@expl:rev_top requires] [%#sntt'0] 0 <= k - 1
+          /\ 0 <= ComputerDivision.div y 2 /\ ComputerDivision.div y 2 < pow2 (k - 1) /\ 0 <= t /\ t <= 1)
+        /\ ([@expl:variant decreases] well_founded_relation_Int ([%#sntt] k) ([%#sntt] k - 1)))
+      /\ (([@stop_split] [@expl:rev_top ensures] [%#sntt'1] rev_bits (ComputerDivision.div y 2 + t * pow2 (k - 1)) (k
+            - 1
+          + 1)
+        = 2 * rev_bits (ComputerDivision.div y 2) (k - 1) + t)
+      -> ([@stop_split] [@expl:rev_top ensures] [%#sntt'1] rev_bits (y + t * pow2 k) (k + 1) = 2 * rev_bits y k + t))
+    else
+      false
+    )
+  else
+    [@stop_split] [@expl:rev_top ensures] [%#sntt'1] rev_bits (y + t * pow2 k) (k + 1) = 2 * rev_bits y k + t
+  )

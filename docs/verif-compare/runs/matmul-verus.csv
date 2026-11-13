@@ -1,0 +1,6 @@
+2026-11-13T20:29:07+00:00,162.5,erreur_compil,,"v1: première version complète (dot, lemmes nonlinear_arith)"
+2026-11-13T20:29:29+00:00,2.8,echec,2,v2: final(c) dans les ensures (nouvelles références mutables)
+2026-11-13T20:29:44+00:00,2.6,ok,0,v3: borne n*n dans les invariants (débordement usize)
+2026-11-13T20:31:50+00:00,117,ok,0,cargo verus build --release (vérifie puis compile ; compilation de vstd comprise)
+2026-11-13T21:09:12+00:00,42.1,ok,0,"final (cargo verus focus --verify-module matmul ; verification results:: 25 verified, 0 errors (partial verification with `--verify-*`))"
+2026-11-13T21:09:54+00:00,0.8,ok,0,final à froid (cargo clean -p puis cargo verus verify --time-expanded des 3 modules : 3.7 s mur au total ; temps propre du module)

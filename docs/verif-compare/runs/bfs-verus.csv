@@ -4,3 +4,6 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:57:18+00:00,3.2,ok,0,témoin choose + fin de corps explicitée: tout vérifié
 2026-11-13T20:57:25+00:00,7.0,ok,0,cargo verus build --release (vérifie + compile)
 2026-11-13T20:58:31+00:00,1.1,erreur_compil,-,correspondance CSR/arêtes: nat passé pour int
+2026-11-13T20:58:42+00:00,8.7,echec,1,fill (correspondance CSR/arêtes) vérifié du 1er coup; boucle interne BFS dépasse maintenant le rlimit (instabilité)
+2026-11-13T20:58:59+00:00,32.9,echec,1,rlimit(30) essayé: c'est maintenant la boucle externe qui dépasse (instable); attribut retiré
+2026-11-13T21:00:41+00:00,2.9,ok,0,BFS refait avec prédicats opaques (queued/preds/processed) + lemmes de pas: 1.2 s

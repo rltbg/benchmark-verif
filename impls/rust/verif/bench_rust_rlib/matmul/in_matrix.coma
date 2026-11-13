@@ -1,0 +1,31 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 88 0 88 40 *)
+
+let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 86 11 86 45
+let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 87 10 87 27
+let%span smatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 72 11 72 27
+let%span smatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 73 10 73 24
+let%span smatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 38 74 40
+
+use int.Int
+
+function mul_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
+ = [%#smatmul'3] ()
+
+axiom mul_le_spec: forall a: int, b: int, n: int. ([%#smatmul'1] a <= b /\ 0 <= n) -> ([%#smatmul'2] a * n <= b * n)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant n : int
+
+constant i : int
+
+constant j : int
+
+function in_matrix [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 88 0 88 40] (n: int) (i: int) (j: int) : ()
+
+goal vc_in_matrix: ([%#smatmul] 0 <= i /\ i < n /\ 0 <= j /\ j < n)
+  -> ([@stop_split] [@expl:mul_le requires] [%#smatmul'1] i + 1 <= n /\ 0 <= n)
+  /\ (([@stop_split] [@expl:mul_le ensures] [%#smatmul'2] (i + 1) * n <= n * n)
+  -> ([@stop_split] [@expl:in_matrix ensures] [%#smatmul'0] i * n + j < n * n))

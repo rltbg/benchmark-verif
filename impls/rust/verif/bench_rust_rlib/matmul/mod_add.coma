@@ -1,0 +1,27 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 46 0 46 30 *)
+
+let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 44 11 44 27
+let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 45 10 45 80
+
+use int.ComputerDivision
+use int.Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant d : int
+
+constant e : int
+
+function mod_add [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 46 0 46 30] (d: int) (e: int) : ()
+
+goal vc_mod_add: ([%#smatmul] 0 <= d /\ 0 <= e)
+  -> d = ComputerDivision.div d 4294967296 * 4294967296 + ComputerDivision.mod d 4294967296
+  && e = ComputerDivision.div e 4294967296 * 4294967296 + ComputerDivision.mod e 4294967296
+  && d + e
+    = (ComputerDivision.div d 4294967296 + ComputerDivision.div e 4294967296) * 4294967296
+    + (ComputerDivision.mod d 4294967296 + ComputerDivision.mod e 4294967296)
+  && ([@stop_split] [@expl:mod_add ensures] [%#smatmul'0] ComputerDivision.mod (ComputerDivision.mod d 4294967296
+    + ComputerDivision.mod e 4294967296) 4294967296
+  = ComputerDivision.mod (d + e) 4294967296)

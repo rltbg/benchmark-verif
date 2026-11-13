@@ -1,0 +1,6 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": { "vc_concat_point": { "prover": "z3", "time": 0.069 } }
+  }
+}

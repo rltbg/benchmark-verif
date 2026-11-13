@@ -1,0 +1,12 @@
+2026-11-13T20:19:09+00:00,69.6,ok,0,"baseline: code existant (3 modules, sans spec fonctionnelle)"
+2026-11-13T20:21:32+00:00,44.9,echec,2,v1: spec dot + lemmes wrap_step/mod_add/row_disjoint
+2026-11-13T20:22:16+00:00,21.3,echec,1,"v2: mod_add avec corps (d,e>=0) + dot_nonneg"
+2026-11-13T20:22:37+00:00,1.0,echec,1,but isole row_step (-X) pour voir la tâche
+2026-11-13T20:23:17+00:00,23.1,echec,1,"v3: assertions explicites du pas (dot k+1, wrap_step)"
+2026-11-13T20:23:43+00:00,20.0,echec,1,v4: assertion après la mise à jour
+2026-11-13T20:23:50+00:00,1.0,echec,1,but isole row_step (-X)
+2026-11-13T20:24:11+00:00,11.3,ok,0,v5: bornes non linéaires i*n+n<=n*n énoncées explicitement
+2026-11-13T20:24:23+00:00,6.2,ok,0,v6: nettoyage (retrait de 3 assertions intermédiaires)
+2026-11-13T20:24:39+00:00,10.7,echec,1,exp: wrap_step sans les 2 assertions de réduction mod 2^32
+2026-11-13T21:05:25+00:00,9.5,ok,0,final à froid (--no-cache) du module seul
+2026-11-13T21:05:58+00:00,32.6,ok,0,final à froid (--no-cache -f : recherche de preuve refaite) du module seul

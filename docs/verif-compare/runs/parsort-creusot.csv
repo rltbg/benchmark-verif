@@ -14,3 +14,10 @@
 2026-11-13T20:55:37+00:00,11.1,echec,1,fonction merge_back nommée (contrat) appelée par la closure
 2026-11-13T20:56:14+00:00,15.1,ok,0,fonctions sort_level/merge_level avec contrats autour de scope
 2026-11-13T20:56:33+00:00,2.0,ok,0,import inutilisé retiré
+2026-11-13T21:01:12+00:00,12.4,ok,0,FINAL à froid (--no-cache) parsort
+2026-11-13T21:04:29+00:00,1.4,echec,2,re-essai parsort seul après échec de la lib complète
+2026-11-13T21:04:35+00:00,59.2,echec,1,re-essai parsort --no-cache
+2026-11-13T21:06:25+00:00,59.1,echec,1,indications supplémentaires (robustesse sous charge)
+2026-11-13T21:08:18+00:00,41.2,echec,2,lemmes runs_split/pairs_split énoncés sur s (déclenchés par l'ensures)
+2026-11-13T21:09:49+00:00,36.1,echec,2,assertions découpées
+2026-11-13T21:10:50+00:00,22.1,ok,0,runs_split/pairs_split seuls (quantifiés); sans assertions prématurées

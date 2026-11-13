@@ -4,6 +4,9 @@ use std::time::Instant;
 
 pub mod common;
 // @@MODS@@ (une ligne `pub mod <nom>;`)
+pub mod matmul;
+pub mod parmatmul;
+pub mod ntt;
 pub mod ptrchase;
 pub mod alloc;
 pub mod sieve;
@@ -20,6 +23,9 @@ fn main() {
     let t0 = Instant::now();
     let ck: u64 = match args[1].as_str() {
         // @@DISPATCH@@ (une ligne `"<nom>" => <nom>::run(n, threads),`)
+        "matmul" => matmul::run(n, threads),
+        "parmatmul" => parmatmul::run(n, threads),
+        "ntt" => ntt::run(n, threads),
         "ptrchase" => ptrchase::run(n, threads),
         "alloc" => alloc::run(n, threads),
         "sieve" => sieve::run(n, threads),

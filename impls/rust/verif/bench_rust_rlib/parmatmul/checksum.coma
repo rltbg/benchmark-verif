@@ -1,18 +1,18 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 75 0 75 44 *)
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 287 0 287 44 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
-let%span sparmatmul = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 76 17 76 24
-let%span sparmatmul'0 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 77 16 77 22
-let%span sparmatmul'1 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 79 14 79 22
-let%span sparmatmul'2 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 78 16 78 44
-let%span sparmatmul'3 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 81 24 81 28
-let%span sparmatmul'4 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 81 13 81 36
-let%span sparmatmul'5 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 82 13 82 14
-let%span sparmatmul'6 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 82 8 82 14
-let%span sparmatmul'7 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 73 11 73 26
-let%span sparmatmul'8 = "/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 75 0 75 44
+let%span sparmatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 288 17 288 24
+let%span sparmatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 289 16 289 22
+let%span sparmatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 291 14 291 22
+let%span sparmatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 290 16 290 44
+let%span sparmatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 293 24 293 28
+let%span sparmatmul'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 293 13 293 36
+let%span sparmatmul'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 294 13 294 14
+let%span sparmatmul'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 294 8 294 14
+let%span sparmatmul'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 285 11 285 26
+let%span sparmatmul'8 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 287 0 287 44
 
 use creusot.int.UInt64
 use seq.Seq
@@ -43,7 +43,7 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let checksum [#"/home/user/benchmark-verif/impls/rust/src/parmatmul.rs" 75 0 75 44] (c: Slice64.slice UInt32.t)
+let checksum [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 287 0 287 44] (c: Slice64.slice UInt32.t)
   (nn: UInt64.t) (return (x: UInt64.t)) =
 {[@stop_split] [@expl:checksum requires] [%#sparmatmul'7] Seq.length (Slice64.view c) = UInt64.t'int nn}
   (! bb0

@@ -1,0 +1,7 @@
+2026-11-13T20:58:08+00:00,1.3,erreur_compil,,"v1: portage complet (below_p, rev_bits, involution, bitrev)"
+2026-11-13T20:58:14+00:00,3.7,echec,5,v2: P public (utilisé dans une spec open)
+2026-11-13T20:58:38+00:00,4.0,ok,0,"v3: constantes littérales pour mul_mono, fin de boucle rev, n>=1, borne reverse"
+2026-11-13T20:58:50+00:00,8,ok,0,cargo verus build --release
+2026-11-13T20:59:42+00:00,3.5,ok,0,"v4 (au-delà): powmod == b^e mod p, tw[j] == w^j mod p"
+2026-11-13T21:09:22+00:00,0.2,ok,0,final (cargo verus focus --verify-module ntt ; )
+2026-11-13T21:09:54+00:00,1.2,ok,0,final à froid (cargo clean -p puis cargo verus verify --time-expanded des 3 modules : 3.7 s mur au total ; temps propre du module)

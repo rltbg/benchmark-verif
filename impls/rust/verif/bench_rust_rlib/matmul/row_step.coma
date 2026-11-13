@@ -1,0 +1,309 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 113 0 113 101 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 114 26 114 28
+let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 115 20 115 45
+let%span smatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 116 20 116 45
+let%span smatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 117 20 117 40
+let%span smatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 118 13 118 18
+let%span smatmul'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 119 13 119 18
+let%span smatmul'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 120 16 120 22
+let%span smatmul'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 124 14 124 21
+let%span smatmul'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 123 16 123 16
+let%span smatmul'8 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 122 16 122 16
+let%span smatmul'9 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 121 16 121 47
+let%span smatmul'10 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 127 12 127 46
+let%span smatmul'11 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 131 22 131 28
+let%span smatmul'12 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 131 21 131 29
+let%span smatmul'13 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 131 62 131 68
+let%span smatmul'14 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 131 61 131 69
+let%span smatmul'15 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 131 43 131 70
+let%span smatmul'16 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 131 20 131 71
+let%span smatmul'17 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 131 10 131 16
+let%span smatmul'18 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 131 9 131 17
+let%span smatmul'19 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 132 13 132 14
+let%span smatmul'20 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 132 8 132 14
+let%span smatmul'21 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 106 11 106 70
+let%span smatmul'22 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 107 11 107 76
+let%span smatmul'23 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 108 11 108 11
+let%span smatmul'24 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 109 10 109 32
+let%span smatmul'25 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 110 10 110 10
+let%span smatmul'26 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 111 10 111 10
+let%span smatmul'27 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 86 11 86 45
+let%span smatmul'28 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 87 10 87 27
+let%span smatmul'29 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 89 4 89 23
+let%span smatmul'30 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 72 11 72 27
+let%span smatmul'31 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 73 10 73 24
+let%span smatmul'32 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 38 74 40
+let%span smatmul'33 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 19 10 19 11
+let%span smatmul'34 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 21 16 21 110
+let%span smatmul'35 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 37 10 37 11
+let%span smatmul'36 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 35 11 35 17
+let%span smatmul'37 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 36 10 36 36
+let%span smatmul'38 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 39 16 39 61
+let%span smatmul'39 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 58 11 58 41
+let%span smatmul'40 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 59 10 59 52
+let%span smatmul'41 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 64 8 64 8
+let%span smatmul'42 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 44 11 44 27
+let%span smatmul'43 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 45 10 45 80
+let%span smatmul'44 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 49 8 49 8
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
+let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
+let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
+let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
+let%span svec'6 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
+let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
+let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
+
+use creusot.prelude.MutBorrow
+use creusot.int.UInt64
+use seq.Seq
+use creusot.int.UInt32
+use int.ComputerDivision
+use creusot.prelude.Any
+use int.Int
+
+function mul_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
+ = [%#smatmul'32] ()
+
+axiom mul_le_spec: forall a: int, b: int, n: int. ([%#smatmul'30] a <= b /\ 0 <= n) -> ([%#smatmul'31] a * n <= b * n)
+
+function in_matrix [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 88 0 88 40] (n: int) (i: int) (j: int) : ()
+ = [%#smatmul'29] mul_le (i + 1) n n
+
+axiom in_matrix_spec: forall n: int, i: int, j: int. ([%#smatmul'27] 0 <= i /\ i < n /\ 0 <= j /\ j < n)
+    -> ([%#smatmul'28] i * n + j < n * n)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+type t_Vec_u32_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u32_Global (self: t_Vec_u32_Global) : Seq.seq UInt32.t
+
+axiom view_Vec_u32_Global_spec:
+  forall self: t_Vec_u32_Global [view_Vec_u32_Global self]. [%#svec] Seq.length (view_Vec_u32_Global self)
+    <= UInt64.t'int const_MAX
+
+function dot [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 20 0 20 75] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (n: int) (i: int) (j: int) (k: int) : int
+
+axiom dot_def:
+  forall a: Seq.seq UInt32.t, b: Seq.seq UInt32.t, n: int, i: int, j: int, k: int [dot a b n i j k]. dot a b n i j k
+    = ([%#smatmul'34] if k <= 0 then
+      0
+    else
+      dot a b n i j (k - 1) + UInt32.t'int (Seq.get a (i * n + (k - 1))) * UInt32.t'int (Seq.get b ((k - 1) * n + j))
+    )
+
+function dot_nonneg [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 38 0 38 75] (a: Seq.seq UInt32.t) (b: Seq.seq UInt32.t) (n: int) (i: int) (j: int) (k: int) : ()
+
+axiom dot_nonneg_def:
+  forall a: Seq.seq UInt32.t, b: Seq.seq UInt32.t, n: int, i: int, j: int, k: int [dot_nonneg a b n i j k]. ([%#smatmul'36] 0
+      <= k) -> dot_nonneg a b n i j k = ([%#smatmul'38] if gt_log_Int k 0 then dot_nonneg a b n i j (k - 1) else ())
+
+axiom dot_nonneg_spec:
+  forall a: Seq.seq UInt32.t, b: Seq.seq UInt32.t, n: int, i: int, j: int, k: int. ([%#smatmul'36] 0 <= k)
+    -> ([%#smatmul'37] ge_log_Int (dot a b n i j k) 0)
+
+function mod_add [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 46 0 46 30] (d: int) (e: int) : () =
+  [%#smatmul'44] ()
+
+axiom mod_add_spec: forall d: int, e: int. ([%#smatmul'42] 0 <= d /\ 0 <= e)
+    -> ([%#smatmul'43] ComputerDivision.mod (ComputerDivision.mod d 4294967296
+      + ComputerDivision.mod e 4294967296) 4294967296
+    = ComputerDivision.mod (d + e) 4294967296)
+
+function wrap_step [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 60 0 60 48] (c: UInt32.t) (x: UInt32.t) (y: UInt32.t) (d: int) : ()
+ = [%#smatmul'41] mod_add d (UInt32.t'int x * UInt32.t'int y)
+
+axiom wrap_step_spec: forall c: UInt32.t, x: UInt32.t, y: UInt32.t, d: int. ([%#smatmul'39] 0 <= d
+      /\ UInt32.t'int c = ComputerDivision.mod d 4294967296)
+    -> ([%#smatmul'40] UInt32.t'int (UInt32.add c (UInt32.mul x y))
+    = ComputerDivision.mod (d + UInt32.t'int x * UInt32.t'int y) 4294967296)
+
+predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) =
+  [%#sslice] UInt64.t'int self < Seq.length seq
+
+meta "rewrite_def" predicate in_bounds_usize
+
+predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt32.t) (out: UInt32.t) =
+  [%#sslice'0] Seq.get seq (UInt64.t'int self) = out
+
+meta "rewrite_def" predicate has_value_usize
+
+let index_Vec_u32_Global (self: t_Vec_u32_Global) (index: UInt64.t) (return (x: UInt32.t)) =
+{[@stop_split] [@expl:index requires] [%#svec'0] in_bounds_usize index (view_Vec_u32_Global self)}
+  any
+  [ return (result: UInt32.t) ->
+  {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u32_Global self) result}
+    (! return {result}) ]
+
+let wrapping_mul (self: UInt32.t) (rhs: UInt32.t) (return (x: UInt32.t)) = any
+  [ return (result: UInt32.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt32.mul self rhs}
+    (! return {result}) ]
+
+let wrapping_add (self: UInt32.t) (rhs: UInt32.t) (return (x: UInt32.t)) = any
+  [ return (result: UInt32.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum'0] result = UInt32.add self rhs}
+    (! return {result}) ]
+
+predicate resolve_elswhere_usize [@inline:trivial] (self: UInt64.t) (old': Seq.seq UInt32.t) (fin: Seq.seq UInt32.t) =
+  [%#sslice'1] forall i: int. 0 <= i /\ i <> UInt64.t'int self /\ i < Seq.length old' -> Seq.get old' i = Seq.get fin i
+
+meta "rewrite_def" predicate resolve_elswhere_usize
+
+let index_mut_Vec_u32_Global (self: MutBorrow.t t_Vec_u32_Global) (index: UInt64.t) (return (x: MutBorrow.t UInt32.t)) =
+{[@stop_split] [@expl:index_mut requires] [%#svec'2] in_bounds_usize index (view_Vec_u32_Global self.current)}
+  any
+  [ return (result: MutBorrow.t UInt32.t) ->
+  {[@stop_split] [@expl:index_mut_Vec_u32_Global ensures] ([@stop_split] [@expl:index_mut ensures #0] [%#svec'3] has_value_usize index (view_Vec_u32_Global self.current) result.current)
+    /\ ([@stop_split] [@expl:index_mut ensures #1] [%#svec'4] has_value_usize index (view_Vec_u32_Global self.final) result.final)
+    /\ ([@stop_split] [@expl:index_mut ensures #2] [%#svec'5] resolve_elswhere_usize index (view_Vec_u32_Global self.current) (view_Vec_u32_Global self.final))
+    /\ ([@stop_split] [@expl:index_mut ensures #3] [%#svec'6] Seq.length (view_Vec_u32_Global self.final)
+    = Seq.length (view_Vec_u32_Global self.current))}
+    (! return {result}) ]
+
+predicate resolve_refmut_u32 [@inline:trivial] (_1: MutBorrow.t UInt32.t) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_u32
+
+predicate resolve_refmut_Vec_u32_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u32_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u32_Global
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let row_step [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 113 0 113 101] (a: t_Vec_u32_Global)
+  (b: t_Vec_u32_Global) (c: MutBorrow.t t_Vec_u32_Global) (n: UInt64.t) (i: UInt64.t) (k: UInt64.t) (aik: UInt32.t)
+  (return (x: ())) =
+{[@stop_split] [@expl:row_step requires] ([@stop_split] [@expl:row_step requires #0] [%#smatmul'21] UInt64.t'int n
+      <= 4096
+    /\ UInt64.t'int i < UInt64.t'int n
+    /\ UInt64.t'int k < UInt64.t'int n
+    /\ aik = Seq.get (view_Vec_u32_Global a) (UInt64.t'int i * UInt64.t'int n + UInt64.t'int k))
+  /\ ([@stop_split] [@expl:row_step requires #1] [%#smatmul'22] Seq.length (view_Vec_u32_Global a)
+      = UInt64.t'int n * UInt64.t'int n
+    /\ Seq.length (view_Vec_u32_Global b) = UInt64.t'int n * UInt64.t'int n
+    /\ Seq.length (view_Vec_u32_Global c.current) = UInt64.t'int n * UInt64.t'int n)
+  /\ ([@stop_split] [@expl:row_step requires #2] [%#smatmul'23] forall j: int. 0 <= j /\ j < UInt64.t'int n
+    -> UInt32.t'int (Seq.get (view_Vec_u32_Global c.current) (UInt64.t'int i * UInt64.t'int n + j))
+    = ComputerDivision.mod (dot (view_Vec_u32_Global a) (view_Vec_u32_Global b) (UInt64.t'int n) (UInt64.t'int i) j (UInt64.t'int k)) 4294967296)}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = [ &old_c <- [%#smatmul] c.current ] s1
+    | s1 = {[@expl:assertion] [%#smatmul'0] let _ = in_matrix (UInt64.t'int n) (UInt64.t'int i) (UInt64.t'int n
+      - 1) in UInt64.t'int i * UInt64.t'int n + UInt64.t'int n <= UInt64.t'int n * UInt64.t'int n}
+      s2
+    | s2 = {[@expl:assertion] [%#smatmul'1] let _ = in_matrix (UInt64.t'int n) (UInt64.t'int k) (UInt64.t'int n
+      - 1) in UInt64.t'int k * UInt64.t'int n + UInt64.t'int n <= UInt64.t'int n * UInt64.t'int n}
+      s3
+    | s3 =
+      {[@expl:assertion] [%#smatmul'2] let _ = mul_le (UInt64.t'int n) 4096 (UInt64.t'int n) in let _ = mul_le (UInt64.t'int n) 4096 4096 in UInt64.t'int n
+        * UInt64.t'int n
+      <= 16777216}
+      s4
+    | s4 = UInt64.mul [%#smatmul'3] {i} {n} (fun (_x: UInt64.t) -> [ &ci <- _x ] s5)
+    | s5 = UInt64.mul [%#smatmul'4] {k} {n} (fun (_x: UInt64.t) -> [ &bk <- _x ] s6)
+    | s6 = [ &j <- [%#smatmul'5] (0: UInt64.t) ] s7
+    | s7 = [ &_old <- c.final ] s8
+    | s8 = bb2 ]
+  | bb2 = bb2invariant
+    [ bb2 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb2 ([%#smatmul'6] UInt64.t'int n
+      - UInt64.t'int j)}
+      bb2invariant
+    | bb2invariant = {[@expl:inferred invariant: unchanged value] _old = c.final}
+      {[@expl:loop invariant #0] [%#smatmul'9] Seq.length (view_Vec_u32_Global c.current)
+        = UInt64.t'int n * UInt64.t'int n
+      /\ UInt64.t'int j <= UInt64.t'int n}
+      {[@expl:loop invariant #1] [%#smatmul'8] forall j2: int. 0 <= j2 /\ j2 < UInt64.t'int j
+        -> UInt32.t'int (Seq.get (view_Vec_u32_Global c.current) (UInt64.t'int ci + j2))
+        = ComputerDivision.mod (dot (view_Vec_u32_Global a) (view_Vec_u32_Global b) (UInt64.t'int n) (UInt64.t'int i) j2 (UInt64.t'int k
+        + 1)) 4294967296}
+      {[@expl:loop invariant #2] [%#smatmul'7] forall x: int. 0 <= x
+          /\ x < UInt64.t'int n * UInt64.t'int n /\ not (UInt64.t'int ci <= x /\ x < UInt64.t'int ci + UInt64.t'int j)
+        -> Seq.get (view_Vec_u32_Global c.current) x = Seq.get (view_Vec_u32_Global old_c) x}
+      (! [ &variant_old_bb2 <- [%#smatmul'6] UInt64.t'int n - UInt64.t'int j ] s0)
+      [ s0 = [ &_85 <- UInt64.lt j n ] s1 | s1 = any [ br0 -> {_85 = false} (! bb10) | br1 -> {_85} (! bb4) ] ]
+      [ bb4 = s0
+        [ s0 =
+          {[@expl:assertion] [%#smatmul'10] let _ = dot_nonneg (view_Vec_u32_Global a) (view_Vec_u32_Global b) (UInt64.t'int n) (UInt64.t'int i) (UInt64.t'int j) (UInt64.t'int k) in let _ = wrap_step (Seq.get (view_Vec_u32_Global c.current) (UInt64.t'int ci
+          + UInt64.t'int j)) aik (Seq.get (view_Vec_u32_Global b) (UInt64.t'int bk
+          + UInt64.t'int j)) (dot (view_Vec_u32_Global a) (view_Vec_u32_Global b) (UInt64.t'int n) (UInt64.t'int i) (UInt64.t'int j) (UInt64.t'int k)) in UInt32.t'int (UInt32.add (Seq.get (view_Vec_u32_Global c.current) (UInt64.t'int ci
+            + UInt64.t'int j)) (UInt32.mul aik (Seq.get (view_Vec_u32_Global b) (UInt64.t'int bk + UInt64.t'int j))))
+          = ComputerDivision.mod (dot (view_Vec_u32_Global a) (view_Vec_u32_Global b) (UInt64.t'int n) (UInt64.t'int i) (UInt64.t'int j) (UInt64.t'int k
+          + 1)) 4294967296}
+          s1
+        | s1 = UInt64.add [%#smatmul'11] {ci} {j} (fun (_x: UInt64.t) -> [ &_104 <- _x ] s2)
+        | s2 = index_Vec_u32_Global [%#smatmul'12] {c.current} {_104} (fun (_x: UInt32.t) -> [ &_102 <- _x ] s3)
+        | s3 = UInt64.add [%#smatmul'13] {bk} {j} (fun (_x: UInt64.t) -> [ &_112 <- _x ] s4)
+        | s4 = index_Vec_u32_Global [%#smatmul'14] {b} {_112} (fun (_x: UInt32.t) -> [ &_110 <- _x ] s5)
+        | s5 = wrapping_mul [%#smatmul'15] {aik} {_110} (fun (_x: UInt32.t) -> [ &_107 <- _x ] s6)
+        | s6 = wrapping_add [%#smatmul'16] {_102} {_107} (fun (_x: UInt32.t) -> [ &_100 <- _x ] s7)
+        | s7 = MutBorrow.borrow_mut <t_Vec_u32_Global> {c.current}
+            (fun (_bor: MutBorrow.t t_Vec_u32_Global) -> [ &_116 <- _bor ] [ &c <- { c with current = _bor.final } ] s8)
+        | s8 = UInt64.add [%#smatmul'17] {ci} {j} (fun (_x: UInt64.t) -> [ &_117 <- _x ] s9)
+        | s9 = index_mut_Vec_u32_Global [%#smatmul'18] {_116} {_117}
+            (fun (_x: MutBorrow.t UInt32.t) -> [ &_115 <- _x ] s10)
+        | s10 = [ &_115 <- { _115 with current = _100 } ] s11
+        | s11 = -{resolve_refmut_u32 _115}- s12
+        | s12 = UInt64.add [%#smatmul'20] {j} {[%#smatmul'19] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &j <- _x ] s13)
+        | s13 = bb2 ] ] ]
+  | bb10 = s0 [ s0 = -{resolve_refmut_Vec_u32_Global c}- s1 | s1 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & a: t_Vec_u32_Global = a
+  | & b: t_Vec_u32_Global = b
+  | & c: MutBorrow.t t_Vec_u32_Global = c
+  | & n: UInt64.t = n
+  | & i: UInt64.t = i
+  | & k: UInt64.t = k
+  | & aik: UInt32.t = aik
+  | & old_c: t_Vec_u32_Global = Any.any_l ()
+  | & ci: UInt64.t = Any.any_l ()
+  | & bk: UInt64.t = Any.any_l ()
+  | & j: UInt64.t = Any.any_l ()
+  | & _85: bool = Any.any_l ()
+  | & _100: UInt32.t = Any.any_l ()
+  | & _102: UInt32.t = Any.any_l ()
+  | & _104: UInt64.t = Any.any_l ()
+  | & _107: UInt32.t = Any.any_l ()
+  | & _110: UInt32.t = Any.any_l ()
+  | & _112: UInt64.t = Any.any_l ()
+  | & _115: MutBorrow.t UInt32.t = Any.any_l ()
+  | & _116: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _117: UInt64.t = Any.any_l ()
+  | & _old: t_Vec_u32_Global = Any.any_l ()
+  | & variant_old_bb2: int = Any.any_l () ])
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:row_step ensures] ([@stop_split] [@expl:row_step ensures #0] [%#smatmul'24] Seq.length (view_Vec_u32_Global c.final)
+      = UInt64.t'int n * UInt64.t'int n)
+    /\ ([@stop_split] [@expl:row_step ensures #1] [%#smatmul'25] forall j: int. 0 <= j /\ j < UInt64.t'int n
+        -> UInt32.t'int (Seq.get (view_Vec_u32_Global c.final) (UInt64.t'int i * UInt64.t'int n + j))
+        = ComputerDivision.mod (dot (view_Vec_u32_Global a) (view_Vec_u32_Global b) (UInt64.t'int n) (UInt64.t'int i) j (UInt64.t'int k
+        + 1)) 4294967296)
+    /\ ([@stop_split] [@expl:row_step ensures #2] [%#smatmul'26] forall x: int. 0 <= x
+        /\ x < UInt64.t'int n * UInt64.t'int n
+        /\ (x < UInt64.t'int i * UInt64.t'int n \/ UInt64.t'int i * UInt64.t'int n + UInt64.t'int n <= x)
+      -> Seq.get (view_Vec_u32_Global c.final) x = Seq.get (view_Vec_u32_Global c.current) x)}
+    (! return {result}) ]

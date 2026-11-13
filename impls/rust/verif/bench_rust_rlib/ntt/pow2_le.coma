@@ -1,21 +1,21 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 34 0 34 30 *)
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 39 0 39 30 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
-let%span sntt = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 33 10 33 11
-let%span sntt'0 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 31 11 31 27
-let%span sntt'1 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 32 10 32 28
-let%span sntt'2 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 23 11 23 17
-let%span sntt'3 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 24 10 24 37
-let%span sntt'4 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 17 10 17 11
-let%span sntt'5 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 19 16 19 56
-let%span sntt'6 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 25 10 25 11
-let%span sntt'7 = "/home/user/benchmark-verif/impls/rust/src/ntt.rs" 27 16 27 43
+let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 38 10 38 11
+let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 36 11 36 27
+let%span sntt'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 37 10 37 28
+let%span sntt'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 28 11 28 17
+let%span sntt'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 29 10 29 37
+let%span sntt'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 22 10 22 11
+let%span sntt'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 24 16 24 56
+let%span sntt'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 30 10 30 11
+let%span sntt'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 32 16 32 43
 
 use int.Int
 
-function pow2 [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 18 0 18 26] (k: int) : int
+function pow2 [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 23 0 23 26] (k: int) : int
 
 axiom pow2_def: forall k: int [pow2 k]. pow2 k = ([%#sntt'5] if k <= 0 then 1 else 2 * pow2 (k - 1))
 
@@ -27,7 +27,7 @@ predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] oth
 
 meta "rewrite_def" predicate ge_log_Int
 
-function pow2_gt [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 26 0 26 22] (k: int) : ()
+function pow2_gt [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 31 0 31 22] (k: int) : ()
 
 axiom pow2_gt_def: forall k: int [pow2_gt k]. ([%#sntt'2] 0 <= k)
     -> pow2_gt k = ([%#sntt'7] if gt_log_Int k 0 then pow2_gt (k - 1) else ())
@@ -47,7 +47,7 @@ constant a : int
 
 constant b : int
 
-function pow2_le [#"/home/user/benchmark-verif/impls/rust/src/ntt.rs" 34 0 34 30] (a: int) (b: int) : ()
+function pow2_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 39 0 39 30] (a: int) (b: int) : ()
 
 goal vc_pow2_le: ([%#sntt'0] 0 <= a /\ a <= b)
   -> (if a < b then

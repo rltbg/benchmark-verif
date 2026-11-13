@@ -2,9 +2,9 @@
   "profile": [],
   "proofs": {
     "Coma": {
-      "vc_bitrev": { "prover": "alt-ergo", "time": 0.01 },
-      "vc_stage": { "prover": "alt-ergo", "time": 0.01 },
-      "vc_transform": { "prover": "alt-ergo", "time": 0.076 }
+      "vc_bitrev": { "prover": "alt-ergo", "time": 0.018 },
+      "vc_stage": { "prover": "alt-ergo", "time": 0.017 },
+      "vc_transform": { "prover": "alt-ergo", "time": 0.086 }
     }
   }
 }

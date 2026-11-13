@@ -1,3 +1,5 @@
 2026-11-13T20:33:26+00:00,134.9,echec,3,première version: spec stable + permutation; sans gardes
 2026-11-13T20:35:57+00:00,2.9,ok,0,bitwise_proof sur len_of/chr_of; le: s[0..]==s
 2026-11-13T20:36:26+00:00,4.6,ok,0,le: tranches pa/pb comme rust-plain (perf)
+2026-11-13T21:00:43+00:00,29.6,ok,0,FINAL à froid (--no-cache) strsort
+2026-11-13T21:05:50+00:00,34.0,ok,0,indications supplémentaires (robustesse sous charge)

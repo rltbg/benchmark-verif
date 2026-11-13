@@ -1,0 +1,20 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 0 74 37 *)
+
+let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 72 11 72 27
+let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 73 10 73 24
+
+use int.Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant a : int
+
+constant b : int
+
+constant n : int
+
+function mul_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
+
+goal vc_mul_le: ([%#smatmul] a <= b /\ 0 <= n) -> ([@stop_split] [@expl:mul_le ensures] [%#smatmul'0] a * n <= b * n)

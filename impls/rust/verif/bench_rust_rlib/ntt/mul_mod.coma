@@ -1,0 +1,72 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 171 0 171 30 *)
+
+let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 168 11 168 27
+let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 169 10 169 67
+let%span sntt'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 170 10 170 69
+let%span sntt'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 45 11 45 47
+let%span sntt'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 46 10 46 24
+let%span sntt'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 162 11 162 27
+let%span sntt'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 163 10 163 61
+let%span sntt'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 48 47 50
+let%span sntt'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 164 33 164 35
+
+use int.ComputerDivision
+use int.Int
+
+function mul_mono [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 0 47 47] (a: int) (b: int) (x: int) (y: int) : ()
+ = [%#sntt'6] ()
+
+axiom mul_mono_spec: forall a: int, b: int, x: int, y: int. ([%#sntt'2] 0 <= a /\ a <= x /\ 0 <= b /\ b <= y)
+    -> ([%#sntt'3] a * b <= x * y)
+
+function mod_shift [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 164 0 164 32] (q: int) (z: int) : () =
+  [%#sntt'7] ()
+
+axiom mod_shift_spec: forall q: int, z: int. ([%#sntt'4] 0 <= q /\ 0 <= z)
+    -> ([%#sntt'5] ComputerDivision.mod (q * 2013265921 + z) 2013265921 = ComputerDivision.mod z 2013265921)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant x : int
+
+constant y : int
+
+function mul_mod [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 171 0 171 30] (x: int) (y: int) : ()
+
+goal vc_mul_mod: ([%#sntt] 0 <= x /\ 0 <= y)
+  -> x = ComputerDivision.div x 2013265921 * 2013265921 + ComputerDivision.mod x 2013265921
+  && y = ComputerDivision.div y 2013265921 * 2013265921 + ComputerDivision.mod y 2013265921
+  && ([@stop_split] [@expl:mul_mono requires] [%#sntt'2] 0 <= 0
+    /\ 0 <= ComputerDivision.div x 2013265921 /\ 0 <= 0 /\ 0 <= y)
+  /\ (([@stop_split] [@expl:mul_mono ensures] [%#sntt'3] 0 * 0 <= ComputerDivision.div x 2013265921 * y)
+  -> ([@stop_split] [@expl:mul_mono requires] [%#sntt'2] 0 <= 0
+    /\ 0 <= ComputerDivision.mod x 2013265921 /\ 0 <= 0 /\ 0 <= y)
+  /\ (([@stop_split] [@expl:mul_mono ensures] [%#sntt'3] 0 * 0 <= ComputerDivision.mod x 2013265921 * y)
+  -> ([@stop_split] [@expl:mul_mono requires] [%#sntt'2] 0 <= 0
+    /\ 0 <= x /\ 0 <= 0 /\ 0 <= ComputerDivision.div y 2013265921)
+  /\ (([@stop_split] [@expl:mul_mono ensures] [%#sntt'3] 0 * 0 <= x * ComputerDivision.div y 2013265921)
+  -> ([@stop_split] [@expl:mul_mono requires] [%#sntt'2] 0 <= 0
+    /\ 0 <= x /\ 0 <= 0 /\ 0 <= ComputerDivision.mod y 2013265921)
+  /\ (([@stop_split] [@expl:mul_mono ensures] [%#sntt'3] 0 * 0 <= x * ComputerDivision.mod y 2013265921)
+  -> x * y = ComputerDivision.div x 2013265921 * y * 2013265921 + ComputerDivision.mod x 2013265921 * y
+  && x * y = x * ComputerDivision.div y 2013265921 * 2013265921 + x * ComputerDivision.mod y 2013265921
+  && ([@stop_split] [@expl:mod_shift requires] [%#sntt'4] 0 <= ComputerDivision.div x 2013265921 * y
+    /\ 0 <= ComputerDivision.mod x 2013265921 * y)
+  /\ (([@stop_split] [@expl:mod_shift ensures] [%#sntt'5] ComputerDivision.mod (ComputerDivision.div x 2013265921 * y
+        * 2013265921
+      + ComputerDivision.mod x 2013265921 * y) 2013265921
+    = ComputerDivision.mod (ComputerDivision.mod x 2013265921 * y) 2013265921)
+  -> ([@stop_split] [@expl:mod_shift requires] [%#sntt'4] 0 <= x * ComputerDivision.div y 2013265921
+    /\ 0 <= x * ComputerDivision.mod y 2013265921)
+  /\ (([@stop_split] [@expl:mod_shift ensures] [%#sntt'5] ComputerDivision.mod (x * ComputerDivision.div y 2013265921
+        * 2013265921
+      + x * ComputerDivision.mod y 2013265921) 2013265921
+    = ComputerDivision.mod (x * ComputerDivision.mod y 2013265921) 2013265921)
+  -> ([@stop_split] [@expl:mul_mod ensures] ([@stop_split] [@expl:mul_mod ensures #0] [%#sntt'0] ComputerDivision.mod (ComputerDivision.mod x 2013265921
+      * y) 2013265921
+    = ComputerDivision.mod (x * y) 2013265921)
+  /\ ([@stop_split] [@expl:mul_mod ensures #1] [%#sntt'1] ComputerDivision.mod (x
+    * ComputerDivision.mod y 2013265921) 2013265921
+  = ComputerDivision.mod (x * y) 2013265921))))))))

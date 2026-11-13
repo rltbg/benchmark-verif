@@ -1,0 +1,7 @@
+horodatage,duree_s,resultat,buts_echoues,note
+2026-11-13T21:08:47+00:00,1.2,erreur_compil,0,"v1: spec fonctionnelle (CRC bit à bit + automate), lecture external_body"
+2026-11-13T21:08:52+00:00,12.8,echec,2,"v1b: old(buf) dans read_block"
+2026-11-13T21:09:17+00:00,12.1,echec,1,"v2: témoin de l'existentiel, last() du sous-intervalle"
+2026-11-13T21:09:35+00:00,10.8,echec,1,"v3: étapes intermédiaires de la mise à jour CRC"
+2026-11-13T21:09:58+00:00,9.9,echec,1,"v4: diagnostic pas à pas"
+2026-11-13T21:10:15+00:00,11.4,ok,0,"v5: lemme de décalage instancié sur le bon registre"

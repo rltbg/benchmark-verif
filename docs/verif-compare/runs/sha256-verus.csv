@@ -1,0 +1,7 @@
+horodatage,duree_s,resultat,buts_echoues,note
+2026-11-13T21:02:02+00:00,117.6,erreur_compil,0,"v1: première écriture complète (spec FIPS + preuves)"
+2026-11-13T21:04:20+00:00,1.7,erreur_compil,0,"v2: final(..) dans les postconditions &mut"
+2026-11-13T21:04:29+00:00,1.6,erreur_compil,0,"v3: assertions explicites par octet (pas de déclencheur pour forall arithmétique)"
+2026-11-13T21:04:48+00:00,23.4,echec,1,"v4: word_at comme déclencheur"
+2026-11-13T21:05:27+00:00,9.7,ok,0,"v5: lemme div/mod de vstd pour (8w+r)/8"
+2026-11-13T21:10:31+00:00,105.5,ok,0,"build release (vérifie sha256+parsha+stream puis compile)"

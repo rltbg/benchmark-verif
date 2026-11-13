@@ -1,0 +1,54 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 74 0 74 43 *)
+
+let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 72 11 72 27
+let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 73 10 73 24
+let%span sparmatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 71 11 71 36
+let%span sparmatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 72 10 72 80
+let%span sparmatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 73 10 73 45
+let%span sparmatmul'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 86 11 86 36
+let%span sparmatmul'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 87 10 87 24
+let%span sparmatmul'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 88 38 88 40
+
+use int.ComputerDivision
+use int.Int
+
+function mul_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
+
+axiom mul_le_spec: forall a: int, b: int, n: int. ([%#smatmul] a <= b /\ 0 <= n) -> ([%#smatmul'0] a * n <= b * n)
+
+function div_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 88 0 88 37] (x: int) (y: int) (t: int) : ()
+ = [%#sparmatmul'4] ()
+
+axiom div_le_spec: forall x: int, y: int, t: int. ([%#sparmatmul'2] 0 <= x /\ x <= y /\ 0 < t)
+    -> ([%#sparmatmul'3] ComputerDivision.div x t <= ComputerDivision.div y t)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant n : int
+
+constant t : int
+
+constant k : int
+
+function block_bounds [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 74 0 74 43] (n: int) (t: int) (k: int) : ()
+
+goal vc_block_bounds: ([%#sparmatmul] 0 <= n /\ 0 <= k /\ k < t)
+  -> ([@stop_split] [@expl:mul_le requires] [%#smatmul] k <= k + 1 /\ 0 <= n)
+  /\ (([@stop_split] [@expl:mul_le ensures] [%#smatmul'0] k * n <= (k + 1) * n)
+  -> ([@stop_split] [@expl:mul_le requires] [%#smatmul] k + 1 <= t /\ 0 <= n)
+  /\ (([@stop_split] [@expl:mul_le ensures] [%#smatmul'0] (k + 1) * n <= t * n)
+  -> ComputerDivision.div (n * t) t = n
+  && ([@stop_split] [@expl:div_le requires] [%#sparmatmul'2] 0 <= n * k /\ n * k <= n * (k + 1) /\ 0 < t)
+  /\ (([@stop_split] [@expl:div_le ensures] [%#sparmatmul'3] ComputerDivision.div (n * k) t
+    <= ComputerDivision.div (n * (k + 1)) t)
+  -> ([@stop_split] [@expl:div_le requires] [%#sparmatmul'2] 0 <= n * (k + 1) /\ n * (k + 1) <= n * t /\ 0 < t)
+  /\ (([@stop_split] [@expl:div_le ensures] [%#sparmatmul'3] ComputerDivision.div (n * (k + 1)) t
+    <= ComputerDivision.div (n * t) t)
+  -> ([@stop_split] [@expl:block_bounds ensures] ([@stop_split] [@expl:block_bounds ensures #0] [%#sparmatmul'0] 0
+      <= ComputerDivision.div (n * k) t
+    /\ ComputerDivision.div (n * k) t <= ComputerDivision.div (n * (k + 1)) t
+    /\ ComputerDivision.div (n * (k + 1)) t <= n)
+  /\ ([@stop_split] [@expl:block_bounds ensures #1] [%#sparmatmul'1] k + 1 = t
+  -> ComputerDivision.div (n * (k + 1)) t = n))))))

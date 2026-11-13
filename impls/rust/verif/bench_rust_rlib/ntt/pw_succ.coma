@@ -1,0 +1,24 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 129 0 129 30 *)
+
+let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 127 11 127 17
+let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 128 10 128 38
+let%span sntt'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 112 10 112 11
+let%span sntt'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 114 16 114 57
+
+use int.Int
+
+function pw [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 113 0 113 32] (b: int) (e: int) : int
+
+axiom pw_def: forall b: int, e: int [pw b e]. pw b e = ([%#sntt'2] if e <= 0 then 1 else b * pw b (e - 1))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant b : int
+
+constant e : int
+
+function pw_succ [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 129 0 129 30] (b: int) (e: int) : ()
+
+goal vc_pw_succ: ([%#sntt] 0 <= e) -> ([@stop_split] [@expl:pw_succ ensures] [%#sntt'0] pw b (e + 1) = b * pw b e)

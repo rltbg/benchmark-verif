@@ -1,0 +1,60 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 121 0 121 32 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 120 10 120 11
+let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 118 11 118 27
+let%span sntt'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 119 10 119 23
+let%span sntt'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 45 11 45 47
+let%span sntt'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 46 10 46 24
+let%span sntt'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 112 10 112 11
+let%span sntt'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 114 16 114 57
+let%span sntt'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 48 47 50
+
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+function pw [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 113 0 113 32] (b: int) (e: int) : int
+
+axiom pw_def: forall b: int, e: int [pw b e]. pw b e = ([%#sntt'5] if e <= 0 then 1 else b * pw b (e - 1))
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+function mul_mono [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 0 47 47] (a: int) (b: int) (x: int) (y: int) : ()
+ = [%#sntt'6] ()
+
+axiom mul_mono_spec: forall a: int, b: int, x: int, y: int. ([%#sntt'2] 0 <= a /\ a <= x /\ 0 <= b /\ b <= y)
+    -> ([%#sntt'3] a * b <= x * y)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant b : int
+
+constant e : int
+
+function pw_nonneg [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 121 0 121 32] (b: int) (e: int) : ()
+
+goal vc_pw_nonneg: ([%#sntt'0] 0 <= b /\ 0 <= e)
+  -> (if gt_log_Int e 0 then
+    (([@stop_split] [@expl:pw_nonneg requires] [%#sntt'0] 0 <= b /\ 0 <= e - 1)
+      /\ ([@expl:variant decreases] well_founded_relation_Int ([%#sntt] e) ([%#sntt] e - 1)))
+    /\ (([@stop_split] [@expl:pw_nonneg ensures] [%#sntt'1] ge_log_Int (pw b (e - 1)) 0)
+    -> ([@stop_split] [@expl:mul_mono requires] [%#sntt'2] 0 <= 0 /\ 0 <= b /\ 0 <= 0 /\ 0 <= pw b (e - 1))
+    /\ (([@stop_split] [@expl:mul_mono ensures] [%#sntt'3] 0 * 0 <= b * pw b (e - 1))
+    -> ([@stop_split] [@expl:pw_nonneg ensures] [%#sntt'1] ge_log_Int (pw b e) 0)))
+  else
+    [@stop_split] [@expl:pw_nonneg ensures] [%#sntt'1] ge_log_Int (pw b e) 0
+  )

@@ -1,0 +1,44 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 95 0 95 60 *)
+
+let%span smatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 72 11 72 27
+let%span smatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 73 10 73 24
+let%span sparmatmul = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 92 11 92 60
+let%span sparmatmul'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 93 10 93 90
+let%span sparmatmul'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 94 10 94 74
+
+use int.Int
+
+function mul_le [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/matmul.rs" 74 0 74 37] (a: int) (b: int) (n: int) : ()
+
+axiom mul_le_spec: forall a: int, b: int, n: int. ([%#smatmul] a <= b /\ 0 <= n) -> ([%#smatmul'0] a * n <= b * n)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant n : int
+
+constant r0 : int
+
+constant r1 : int
+
+constant i : int
+
+constant j : int
+
+function split_index [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/parmatmul.rs" 95 0 95 60] (n: int) (r0: int) (r1: int) (i: int) (j: int) : ()
+
+goal vc_split_index: ([%#sparmatmul] 0 <= r0 /\ r0 <= r1 /\ r0 <= i /\ 0 <= j /\ j < n)
+  -> (if i < r1 then
+    ([@stop_split] [@expl:mul_le requires] [%#smatmul] i - r0 + 1 <= r1 - r0 /\ 0 <= n)
+    /\ (([@stop_split] [@expl:mul_le ensures] [%#smatmul'0] (i - r0 + 1) * n <= (r1 - r0) * n)
+    -> ([@stop_split] [@expl:split_index ensures] ([@stop_split] [@expl:split_index ensures #0] [%#sparmatmul'0] i < r1
+      -> (i - r0) * n + j < (r1 - r0) * n /\ (i - r0) * n + n <= (r1 - r0) * n)
+    /\ ([@stop_split] [@expl:split_index ensures #1] [%#sparmatmul'1] r1 <= i
+    -> (i - r0) * n + j - (r1 - r0) * n = (i - r1) * n + j)))
+  else
+    [@stop_split] [@expl:split_index ensures] ([@stop_split] [@expl:split_index ensures #0] [%#sparmatmul'0] i < r1
+      -> (i - r0) * n + j < (r1 - r0) * n /\ (i - r0) * n + n <= (r1 - r0) * n)
+    /\ ([@stop_split] [@expl:split_index ensures #1] [%#sparmatmul'1] r1 <= i
+    -> (i - r0) * n + j - (r1 - r0) * n = (i - r1) * n + j)
+  )

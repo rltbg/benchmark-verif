@@ -1,17 +1,6 @@
 {
   "profile": [],
   "proofs": {
-    "Coma": {
-      "vc_pow2_le": {
-        "tactic": "split_vc",
-        "children": [
-          { "prover": "alt-ergo", "time": 0.006 },
-          { "prover": "alt-ergo", "time": 0.01 },
-          { "prover": "alt-ergo", "time": 0.013 },
-          { "prover": "alt-ergo", "time": 0.01 },
-          { "prover": "alt-ergo", "time": 0.01 }
-        ]
-      }
-    }
+    "Coma": { "vc_pow2_le": { "prover": "alt-ergo", "time": 0.016 } }
   }
 }

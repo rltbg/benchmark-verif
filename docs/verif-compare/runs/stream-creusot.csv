@@ -1,2 +1,4 @@
 horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:57:56+00:00,0.6,erreur_compil,0,"v1: spec fonctionnelle (CRC bit à bit + automate logique), lecture seule trusted"
+2026-11-13T20:58:05+00:00,52.8,echec,3,"v1b: corrections de compilation (derive Clone, u64_of)"
+2026-11-13T20:59:19+00:00,2.2,ok,0,"v2: borne de l'indice de table (lemme bit à bit), cas vide des lemmes de concaténation"

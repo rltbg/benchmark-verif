@@ -6,3 +6,22 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:51:41+00:00,1.5,echec,2,relance -X bfs (cache): les appels de lemme suivis de 'true' sont effacés
 2026-11-13T20:52:11+00:00,71.3,echec,2,lemmes avec conclusion explicite; reste fill l.318 et bfs l.378
 2026-11-13T20:53:37+00:00,48.3,ok,0,bfs complet prouvé (étapes cnt/psum et file explicitées)
+2026-11-13T21:01:44+00:00,0.7,erreur_compil,-,correspondance CSR/arêtes: Snapshot non déréférencé
+2026-11-13T21:01:51+00:00,30.3,echec,2,fill: préservation de placed (l.376) et slot_ok (l.378)
+2026-11-13T21:02:46+00:00,30.9,echec,2,lemmes placed_keep/slot_keep: placed_keep non prouvé; fill l.397
+2026-11-13T21:03:31+00:00,27.1,echec,1,reste l.399 (slot_keep sous quantificateur)
+2026-11-13T21:04:06+00:00,18.0,echec,1,étapes intermédiaires OK; reste l.403 (application de slot_keep)
+2026-11-13T21:04:40+00:00,24.6,echec,1,slot_keep quantifié: même but échoue (l.404)
+2026-11-13T21:05:22+00:00,18.5,echec,1,fusion des étapes: toujours l.404
+2026-11-13T21:06:16+00:00,0.7,echec,1,relance -X (cache): l'appel de lemme n'instancie pas son axiome (let _ = lemme in ...)
+2026-11-13T21:06:44+00:00,40.4,echec,1,cibles en suite fantôme vs (indices Int): reste 1 but l.400
+2026-11-13T21:07:37+00:00,24.8,echec,1,transfert de l'existentiel slot_ok (l.404) échoue
+2026-11-13T21:08:48+00:00,3.0,echec,1,lemme slot_keep seul: inchangé (cache)
+2026-11-13T21:08:48+00:00,68.8,echec,4,témoins fantômes pos/who: 4 buts (post/inv?) l.352
+2026-11-13T21:10:18+00:00,1.1,echec,4,relance -X (cache): inv. pos/who et post slot_ok
+2026-11-13T21:10:18+00:00,30.1,ok,0,correspondance CSR/arêtes prouvée (témoins fantômes pos/who)
+2026-11-13T21:11:22+00:00,1.9,erreur_compil,-,bogue Creusot: variable locale nommée 'so' (mot-clé Why3) -> .coma invalide; renommée
+2026-11-13T21:11:40+00:00,22.8,echec,1,bfs_on_edges: 1 but (l.524)
+2026-11-13T21:12:16+00:00,18.1,echec,1,placed sur off OK; passage placed->arc (l.525) échoue
+2026-11-13T21:12:54+00:00,3.3,echec,1,lemme placed_arc seul: sans effet
+2026-11-13T21:12:55+00:00,1,echec,1,relance -X (cache; durée ~1 s)

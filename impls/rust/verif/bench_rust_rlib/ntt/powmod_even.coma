@@ -1,0 +1,147 @@
+(* #"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 237 0 237 42 *)
+
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sntt = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 235 11 235 50
+let%span sntt'0 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 236 10 236 91
+let%span sntt'1 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 147 11 147 17
+let%span sntt'2 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 148 10 148 38
+let%span sntt'3 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 45 11 45 47
+let%span sntt'4 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 46 10 46 24
+let%span sntt'5 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 188 11 188 27
+let%span sntt'6 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 189 10 189 69
+let%span sntt'7 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 118 11 118 27
+let%span sntt'8 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 119 10 119 23
+let%span sntt'9 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 168 11 168 27
+let%span sntt'10 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 169 10 169 67
+let%span sntt'11 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 170 10 170 69
+let%span sntt'12 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 112 10 112 11
+let%span sntt'13 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 114 16 114 57
+let%span sntt'14 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 149 10 149 11
+let%span sntt'15 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 152 8 156 9
+let%span sntt'16 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 48 47 50
+let%span sntt'17 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 190 10 190 11
+let%span sntt'18 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 193 8 201 9
+let%span sntt'19 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 120 10 120 11
+let%span sntt'20 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 122 16 122 81
+let%span sntt'21 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 173 8 173 8
+let%span sntt'22 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 162 11 162 27
+let%span sntt'23 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 163 10 163 61
+let%span sntt'24 = "/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 164 33 164 35
+
+use int.ComputerDivision
+use int.Int
+
+function pw [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 113 0 113 32] (b: int) (e: int) : int
+
+axiom pw_def: forall b: int, e: int [pw b e]. pw b e = ([%#sntt'13] if e <= 0 then 1 else b * pw b (e - 1))
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+function pw_sq [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 150 0 150 28] (b: int) (h: int) : ()
+
+axiom pw_sq_def: forall b: int, h: int [pw_sq b h]. ([%#sntt'1] 0 <= h)
+    -> pw_sq b h = ([%#sntt'15] if gt_log_Int h 0 then let _ = pw_sq b (h - 1) in () else ())
+
+axiom pw_sq_spec: forall b: int, h: int. ([%#sntt'1] 0 <= h) -> ([%#sntt'2] pw b (2 * h) = pw (b * b) h)
+
+function mul_mono [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 47 0 47 47] (a: int) (b: int) (x: int) (y: int) : ()
+ = [%#sntt'16] ()
+
+axiom mul_mono_spec: forall a: int, b: int, x: int, y: int. ([%#sntt'3] 0 <= a /\ a <= x /\ 0 <= b /\ b <= y)
+    -> ([%#sntt'4] a * b <= x * y)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+function pw_nonneg [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 121 0 121 32] (b: int) (e: int) : ()
+
+axiom pw_nonneg_def: forall b: int, e: int [pw_nonneg b e]. ([%#sntt'7] 0 <= b /\ 0 <= e)
+    -> pw_nonneg b e
+    = ([%#sntt'20] if gt_log_Int e 0 then let _ = pw_nonneg b (e - 1) in mul_mono 0 0 b (pw b (e - 1)) else ())
+
+axiom pw_nonneg_spec: forall b: int, e: int. ([%#sntt'7] 0 <= b /\ 0 <= e) -> ([%#sntt'8] ge_log_Int (pw b e) 0)
+
+function mod_shift [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 164 0 164 32] (q: int) (z: int) : () =
+  [%#sntt'24] ()
+
+axiom mod_shift_spec: forall q: int, z: int. ([%#sntt'22] 0 <= q /\ 0 <= z)
+    -> ([%#sntt'23] ComputerDivision.mod (q * 2013265921 + z) 2013265921 = ComputerDivision.mod z 2013265921)
+
+function mul_mod [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 171 0 171 30] (x: int) (y: int) : () =
+  [%#sntt'21] let _ = mul_mono 0 0 (ComputerDivision.div x 2013265921) y in let _ = mul_mono 0 0 (ComputerDivision.mod x 2013265921) y in let _ = mul_mono 0 0 x (ComputerDivision.div y 2013265921) in let _ = mul_mono 0 0 x (ComputerDivision.mod y 2013265921) in let _ = mod_shift (ComputerDivision.div x 2013265921
+  * y) (ComputerDivision.mod x 2013265921 * y) in mod_shift (x * ComputerDivision.div y 2013265921) (x
+  * ComputerDivision.mod y 2013265921)
+
+axiom mul_mod_spec: forall x: int, y: int. ([%#sntt'9] 0 <= x /\ 0 <= y)
+    -> ([%#sntt'10] ComputerDivision.mod (ComputerDivision.mod x 2013265921 * y) 2013265921
+    = ComputerDivision.mod (x * y) 2013265921)
+
+axiom mul_mod_spec'0: forall x: int, y: int. ([%#sntt'9] 0 <= x /\ 0 <= y)
+    -> ([%#sntt'11] ComputerDivision.mod (x * ComputerDivision.mod y 2013265921) 2013265921
+    = ComputerDivision.mod (x * y) 2013265921)
+
+function pw_mod [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 191 0 191 29] (b: int) (h: int) : ()
+
+axiom pw_mod_def: forall b: int, h: int [pw_mod b h]. ([%#sntt'5] 0 <= b /\ 0 <= h)
+    -> pw_mod b h
+    = ([%#sntt'18] if gt_log_Int h 0 then
+      let _ = pw_mod b (h - 1) in let _ = pw_nonneg (ComputerDivision.mod b 2013265921) (h
+      - 1) in let _ = pw_nonneg b (h - 1) in let _ = mul_mod b (pw (ComputerDivision.mod b 2013265921) (h
+      - 1)) in let _ = mul_mod b (pw b (h - 1)) in ()
+    else
+      ()
+    )
+
+axiom pw_mod_spec: forall b: int, h: int. ([%#sntt'5] 0 <= b /\ 0 <= h)
+    -> ([%#sntt'6] ComputerDivision.mod (pw (ComputerDivision.mod b 2013265921) h) 2013265921
+    = ComputerDivision.mod (pw b h) 2013265921)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant r : int
+
+constant b : int
+
+constant e : int
+
+function powmod_even [#"/tmp/claude-0/verif-matmul/creusot-matmul/src/ntt.rs" 237 0 237 42] (r: int) (b: int) (e: int) : ()
+
+goal vc_powmod_even: ([%#sntt] 0 <= r /\ 0 <= b /\ 0 < e /\ ComputerDivision.mod e 2 = 0)
+  -> (let h = ComputerDivision.div e 2 in let q = pw (b * b) h in let q2 = pw (ComputerDivision.mod (b
+  * b) 2013265921) h in ([@stop_split] [@expl:pw_sq requires] [%#sntt'1] 0 <= h)
+  /\ (([@stop_split] [@expl:pw_sq ensures] [%#sntt'2] pw b (2 * h) = pw (b * b) h)
+  -> ([@stop_split] [@expl:mul_mono requires] [%#sntt'3] 0 <= 0 /\ 0 <= b /\ 0 <= 0 /\ 0 <= b)
+  /\ (([@stop_split] [@expl:mul_mono ensures] [%#sntt'4] 0 * 0 <= b * b)
+  -> ([@stop_split] [@expl:pw_mod requires] [%#sntt'5] 0 <= b * b /\ 0 <= h)
+  /\ (([@stop_split] [@expl:pw_mod ensures] [%#sntt'6] ComputerDivision.mod (pw (ComputerDivision.mod (b
+      * b) 2013265921) h) 2013265921
+    = ComputerDivision.mod (pw (b * b) h) 2013265921)
+  -> ([@stop_split] [@expl:pw_nonneg requires] [%#sntt'7] 0 <= b * b /\ 0 <= h)
+  /\ (([@stop_split] [@expl:pw_nonneg ensures] [%#sntt'8] ge_log_Int (pw (b * b) h) 0)
+  -> ([@stop_split] [@expl:pw_nonneg requires] [%#sntt'7] 0 <= ComputerDivision.mod (b * b) 2013265921 /\ 0 <= h)
+  /\ (([@stop_split] [@expl:pw_nonneg ensures] [%#sntt'8] ge_log_Int (pw (ComputerDivision.mod (b * b) 2013265921) h) 0)
+  -> 2 * h = e
+  && r * pw b e = r * q
+  && ([@stop_split] [@expl:mul_mod requires] [%#sntt'9] 0 <= r /\ 0 <= q2)
+  /\ (([@stop_split] [@expl:mul_mod ensures] ([@stop_split] [@expl:mul_mod ensures #0] [%#sntt'10] ComputerDivision.mod (ComputerDivision.mod r 2013265921
+        * q2) 2013265921
+      = ComputerDivision.mod (r * q2) 2013265921)
+    /\ ([@stop_split] [@expl:mul_mod ensures #1] [%#sntt'11] ComputerDivision.mod (r
+      * ComputerDivision.mod q2 2013265921) 2013265921
+    = ComputerDivision.mod (r * q2) 2013265921))
+  -> ([@stop_split] [@expl:mul_mod requires] [%#sntt'9] 0 <= r /\ 0 <= q)
+  /\ (([@stop_split] [@expl:mul_mod ensures] ([@stop_split] [@expl:mul_mod ensures #0] [%#sntt'10] ComputerDivision.mod (ComputerDivision.mod r 2013265921
+        * q) 2013265921
+      = ComputerDivision.mod (r * q) 2013265921)
+    /\ ([@stop_split] [@expl:mul_mod ensures #1] [%#sntt'11] ComputerDivision.mod (r
+      * ComputerDivision.mod q 2013265921) 2013265921
+    = ComputerDivision.mod (r * q) 2013265921))
+  -> ([@stop_split] [@expl:powmod_even ensures] [%#sntt'0] ComputerDivision.mod (r * pw b e) 2013265921
+  = ComputerDivision.mod (r
+  * pw (ComputerDivision.mod (b * b) 2013265921) (ComputerDivision.div e 2)) 2013265921)))))))))
