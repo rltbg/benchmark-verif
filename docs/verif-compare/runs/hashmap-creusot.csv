@@ -1,0 +1,4 @@
+horodatage,duree_s,resultat,buts_echoues,note
+2026-11-13T20:23:54+00:00,0.7,erreur_compil,0,"v1: modele dictionnaire, sans garde ni compteur"
+2026-11-13T20:23:59+00:00,80.9,echec,4,"v2: constantes pub"
+2026-11-13T20:25:27+00:00,1,echec,4,"v2bis: -X pour afficher les buts"

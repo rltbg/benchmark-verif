@@ -1,0 +1,6 @@
+exercice,essai,duree_s,resultat,note
+t1,1,69,ok,invariants i<=len / s<=1000i / s==sum_to + proof_assert unfolding
+t2,1,56,ok,invariants lo/hi bornes + zones exclues + variant hi-lo
+t3,1,67,ok,snapshot de l'original + invariants des trois zones (gauche, droite, milieu)
+t4,1,66,erreur_syntaxe,types Snapshot vs Seq/u32 (deref manquant)
+t4,2,19,ok,invariants externes (permutation, prefixe trie) + interne (element mobile snapshot, zones)

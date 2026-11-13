@@ -1,2 +1,4 @@
 2026-11-13T20:20:06+00:00,1.0,erreur_compil,0,premier jet: BST par chemins fantomes, sans gardes
 2026-11-13T20:20:20+00:00,0.5,erreur_compil,0,snoc, permutation via existentielle
+2026-11-13T20:20:24+00:00,201.9,echec,5,constantes pub
+2026-11-13T20:25:36+00:00,10.2,echec,1,left/right en u64 + bitwise_proof: search et set_link passent; chase echoue (-x cible)

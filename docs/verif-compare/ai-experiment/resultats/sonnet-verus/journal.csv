@@ -1,0 +1,6 @@
+exercice,essai,duree_s,resultat,note
+t1,1,1,ok,aucune
+t2,1,1,ok,aucune
+t3,1,2,ok,aucune
+t4,1,2,echec,lemme swap multiset: assertion finale
+t4,2,2,ok,ajout contains pour count>0

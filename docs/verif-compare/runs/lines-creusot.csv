@@ -1,3 +1,4 @@
 horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:14:03+00:00,73.4,ok,0,état initial du dépôt (lines+bfs+common ensemble; compilation de creusot-std comprise)
 2026-11-13T20:22:33+00:00,1.0,erreur_compil,-,const SEED privé utilisé dans une fn logique open
+2026-11-13T20:22:38+00:00,159.3,echec,5,1er essai complet: generate 1 but; parse 4 buts

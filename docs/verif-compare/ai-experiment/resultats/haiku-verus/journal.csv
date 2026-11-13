@@ -1,0 +1,19 @@
+exercice,essai,duree_s,resultat,note
+t1,1,1.89,echec,assert v@[i]<=1000 non prouvee (i<len inconnu?)
+t1,2,1.43,echec,assert v@[i]<=1000 toujours non prouvee malgre i<len
+t1,3,1.61,echec,forall k dans requires non visible dans la boucle
+t1,4,2.01,ok,invariant forall dans la boucle (loop isolation)
+t2,1,1.34,ok,invariants lo/hi + bornes; assert forall final
+t3,1,1.03,echec,trigger non inferable sur forall invariant
+t3,2,1.32,echec,invariant non preservee a la fin du corps + assert final
+t3,3,1.39,echec,preservation OK; assert final branche 3 (instanciation)
+t3,4,1.43,ok,invariants + broadcast group_seq_lemmas + asserts finaux
+t4,1,0.08,erreur_syntaxe,position de #![trigger] dans forall
+t4,2,1.47,echec,preservation invariant interne (swap) + invariant externe apres boucle interne
+t4,3,1.02,echec,invariant multiset non preservee au swap
+t4,4,1.29,echec,assert multiset au swap (ligne 55)
+t4,5,1.54,echec,assert multiset au swap (lignes 55 et 59) malgre lemme update
+t4,6,1.79,echec,assert multiset toujours (lemme update applique a la main)
+t4,7,1.34,echec,assert multiset final (=~= apres remove/insert)
+t4,8,1.41,echec,assert count(t)>0 (lemme to_multiset_contains)
+t4,9,1.72,ok,lemme to_multiset_contains explicite + proof blocks

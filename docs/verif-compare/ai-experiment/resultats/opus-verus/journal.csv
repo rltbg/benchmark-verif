@@ -1,0 +1,6 @@
+exercice,essai,duree_s,resultat,note
+t1,1,1.4,ok,premier essai
+t2,1,1.8,ok,premier essai
+t3,1,1.9,ok,premier essai
+t4,1,0.3,erreur_syntaxe,chemin du groupe broadcast non qualifié
+t4,2,2.2,ok,qualification vstd::seq_lib corrigée
