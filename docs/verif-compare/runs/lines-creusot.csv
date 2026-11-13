@@ -3,3 +3,11 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:22:33+00:00,1.0,erreur_compil,-,const SEED privé utilisé dans une fn logique open
 2026-11-13T20:22:38+00:00,159.3,echec,5,1er essai complet: generate 1 but; parse 4 buts
 2026-11-13T20:25:31+00:00,1.5,echec,4,relance -x (cache) pour localiser les buts : invariants generate l.266 et parse l.303/305/314
+2026-11-13T20:26:16+00:00,1.0,erreur_compil,-,Snapshot non déréférencé dans concat(l)
+2026-11-13T20:26:23+00:00,101.8,echec,3,assertions par morceaux: reste generate l.292 et parse l.318
+2026-11-13T20:28:19+00:00,35.2,echec,2,reste generate l.291 (région valeur) et parse l.356
+2026-11-13T20:29:13+00:00,26.0,echec,1,generate prouvé; parse: 1 but
+2026-11-13T20:29:51+00:00,11.4,echec,1,assertion de sortie ajoutée; parse: 1 but (non localisé)
+2026-11-13T20:30:17+00:00,,echec,1,relance -X (durée non mesurée; affiche la tâche) : débordement de tab[2k+1] += 1
+2026-11-13T20:30:17+00:00,6.2,ok,0,parse prouvé (indice 2k+1 explicité)
+2026-11-13T20:30:29+00:00,1.5,ok,0,vérification complète (cache)

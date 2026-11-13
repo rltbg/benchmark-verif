@@ -1,0 +1,47 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 129 0 129 38 *)
+
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 128 10 128 11
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 101 4 101 12
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+
+use creusot.int.UInt64
+use seq.Seq
+use int.Int
+
+function key_at [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 100 0 100 41] (t: Seq.seq UInt64.t) (s: int) : UInt64.t
+ = [%#shashmap'0] Seq.get t (2 * s)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant t : Seq.seq UInt64.t
+
+constant c : int
+
+function occ [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 129 0 129 38] (t: Seq.seq UInt64.t) (c: int) : int
+
+goal vc_occ: if c <= 0 then
+    true
+  else
+    if key_at t (c - 1) = (0: UInt64.t) then
+      [@expl:variant decreases] well_founded_relation_Int ([%#shashmap] c) ([%#shashmap] c - 1)
+    else
+      [@expl:variant decreases] well_founded_relation_Int ([%#shashmap] c) ([%#shashmap] c - 1)
+  
+  

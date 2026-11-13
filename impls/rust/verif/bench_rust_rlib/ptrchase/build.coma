@@ -1,101 +1,156 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 19 0 19 56 *)
+(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 211 0 211 81 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
-let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
-let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
-let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
-let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
-let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
-let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
-let%span svec'6 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
+let%span sptrchase = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 212 15 212 20
+let%span sptrchase'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 212 11 212 21
+let%span sptrchase'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 212 6 212 7
+let%span sptrchase'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 212 5 212 8
+let%span sptrchase'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 212 24 212 25
+let%span sptrchase'4 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 213 6 213 7
+let%span sptrchase'5 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 213 5 213 8
+let%span sptrchase'6 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 213 11 213 15
+let%span sptrchase'7 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 214 18 214 24
+let%span sptrchase'8 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 215 19 215 23
+let%span sptrchase'9 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 216 30 216 63
+let%span sptrchase'10 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 217 16 217 22
+let%span sptrchase'11 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 129 10 129 49
+let%span sptrchase'12 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 219 18 219 45
+let%span sptrchase'13 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 224 14 224 21
+let%span sptrchase'14 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 223 16 223 16
+let%span sptrchase'15 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 222 16 222 16
+let%span sptrchase'16 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 221 16 221 40
+let%span sptrchase'17 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 220 16 220 84
+let%span sptrchase'18 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 226 21 226 26
+let%span sptrchase'19 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 226 21 226 49
+let%span sptrchase'20 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 226 17 226 50
+let%span sptrchase'21 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 226 53 226 54
+let%span sptrchase'22 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 227 22 227 45
+let%span sptrchase'23 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 228 22 228 28
+let%span sptrchase'24 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 229 20 229 24
+let%span sptrchase'25 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 231 30 231 47
+let%span sptrchase'26 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 237 18 237 29
+let%span sptrchase'27 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 239 17 239 18
+let%span sptrchase'28 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 239 12 239 18
+let%span sptrchase'29 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 240 23 240 24
+let%span sptrchase'30 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 240 23 240 30
+let%span sptrchase'31 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 240 22 240 31
+let%span sptrchase'32 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 236 20 236 51
+let%span sptrchase'33 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 235 20 235 75
+let%span sptrchase'34 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 234 20 234 75
+let%span sptrchase'35 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 245 24 245 25
+let%span sptrchase'36 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 245 24 245 31
+let%span sptrchase'37 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 245 34 245 35
+let%span sptrchase'38 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 245 24 245 35
+let%span sptrchase'39 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 245 23 245 36
+let%span sptrchase'40 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 247 39 247 40
+let%span sptrchase'41 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 247 57 247 59
+let%span sptrchase'42 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 247 50 247 59
+let%span sptrchase'43 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 248 20 248 23
+let%span sptrchase'44 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 249 30 249 66
+let%span sptrchase'45 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 250 30 250 52
+let%span sptrchase'46 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 148 11 148 67
+let%span sptrchase'47 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 149 11 149 64
+let%span sptrchase'48 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 150 10 150 43
+let%span sptrchase'49 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 253 30 253 40
+let%span sptrchase'50 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 156 11 156 11
+let%span sptrchase'51 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 157 11 157 11
+let%span sptrchase'52 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 158 11 158 11
+let%span sptrchase'53 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 159 11 159 88
+let%span sptrchase'54 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 160 11 160 58
+let%span sptrchase'55 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 161 10 161 10
+let%span sptrchase'56 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 162 10 162 10
+let%span sptrchase'57 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 257 14 257 15
+let%span sptrchase'58 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 257 14 257 21
+let%span sptrchase'59 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 257 13 257 22
+let%span sptrchase'60 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 258 14 258 15
+let%span sptrchase'61 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 258 14 258 21
+let%span sptrchase'62 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 258 24 258 25
+let%span sptrchase'63 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 258 14 258 25
+let%span sptrchase'64 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 258 13 258 26
+let%span sptrchase'65 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 258 29 258 33
+let%span sptrchase'66 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 259 29 259 63
+let%span sptrchase'67 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 259 14 259 15
+let%span sptrchase'68 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 259 14 259 21
+let%span sptrchase'69 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 259 24 259 25
+let%span sptrchase'70 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 259 14 259 25
+let%span sptrchase'71 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 259 13 259 26
+let%span sptrchase'72 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 261 26 261 26
+let%span sptrchase'73 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 262 26 262 26
+let%span sptrchase'74 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 135 11 135 102
+let%span sptrchase'75 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 136 11 136 63
+let%span sptrchase'76 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 137 11 137 57
+let%span sptrchase'77 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 138 11 138 91
+let%span sptrchase'78 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 139 11 139 112
+let%span sptrchase'79 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 140 11 140 114
+let%span sptrchase'80 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 141 11 141 11
+let%span sptrchase'81 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 142 11 142 11
+let%span sptrchase'82 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 143 10 143 53
+let%span sptrchase'83 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 265 30 265 54
+let%span sptrchase'84 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 266 19 266 20
+let%span sptrchase'85 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 266 12 266 20
+let%span sptrchase'86 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 269 15 269 35
+let%span sptrchase'87 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 270 13 270 14
+let%span sptrchase'88 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 270 8 270 14
+let%span sptrchase'89 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 205 11 205 60
+let%span sptrchase'90 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 206 10 206 70
+let%span sptrchase'91 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 207 10 207 45
+let%span sptrchase'92 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 208 10 208 10
+let%span sptrchase'93 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 209 10 209 10
+let%span sptrchase'94 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 211 0 211 81
+let%span sptrchase'95 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 176 10 176 28
+let%span sptrchase'96 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 22 36 22 38
+let%span sptrchase'97 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 22 28 22 39
+let%span sptrchase'98 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 22 29 22 32
+let%span sptrchase'99 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 22 22 22 25
+let%span sptrchase'100 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 130 20 130 22
+let%span sptrchase'101 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 55 16 55 21
+let%span sptrchase'102 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 61 16 61 26
+let%span sptrchase'103 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 49 16 49 24
+let%span sptrchase'104 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 43 16 43 39
+let%span sptrchase'105 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 101 16 101 16
+let%span sptrchase'106 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 92 8 94 122
+let%span sptrchase'107 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 75 8 77 103
+let%span sptrchase'108 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 84 16 84 48
+let%span sptrchase'109 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 151 76 151 78
+let%span sptrchase'110 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 67 16 67 84
+let%span sptrchase'111 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 163 82 163 84
+let%span sptrchase'112 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 197 11 197 18
+let%span sptrchase'113 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 198 10 198 70
+let%span sptrchase'114 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 199 10 199 70
+let%span sptrchase'115 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 144 115 144 117
+let%span sptrchase'116 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 33 8 33 42
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
+let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
+let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
+let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
+let%span svec'6 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
 let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
 let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
 let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
 let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
-let%span sptrchase = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 20 17 20 22
-let%span sptrchase'0 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 20 11 20 23
-let%span sptrchase'1 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 20 6 20 7
-let%span sptrchase'2 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 20 5 20 8
-let%span sptrchase'3 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 20 26 20 27
-let%span sptrchase'4 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 21 25 21 27
-let%span sptrchase'5 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 21 18 21 21
-let%span sptrchase'6 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 21 17 21 28
-let%span sptrchase'7 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 21 6 21 7
-let%span sptrchase'8 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 21 5 21 8
-let%span sptrchase'9 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 21 11 21 14
-let%span sptrchase'10 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 22 18 22 24
-let%span sptrchase'11 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 23 19 23 23
-let%span sptrchase'12 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 24 16 24 22
-let%span sptrchase'13 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 26 14 26 21
-let%span sptrchase'14 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 25 16 25 84
-let%span sptrchase'15 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 28 23 28 28
-let%span sptrchase'16 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 28 23 28 51
-let%span sptrchase'17 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 28 17 28 52
-let%span sptrchase'18 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 28 55 28 56
-let%span sptrchase'19 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 29 22 29 28
-let%span sptrchase'20 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 30 20 30 26
-let%span sptrchase'21 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 31 25 31 30
-let%span sptrchase'22 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 33 18 33 25
-let%span sptrchase'23 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 32 20 32 111
-let%span sptrchase'24 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 35 17 35 18
-let%span sptrchase'25 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 35 12 35 18
-let%span sptrchase'26 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 36 24 36 25
-let%span sptrchase'27 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 36 24 36 31
-let%span sptrchase'28 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 36 23 36 32
-let%span sptrchase'29 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 38 25 38 29
-let%span sptrchase'30 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 40 28 40 29
-let%span sptrchase'31 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 40 28 40 35
-let%span sptrchase'32 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 40 38 40 39
-let%span sptrchase'33 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 40 28 40 39
-let%span sptrchase'34 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 40 27 40 40
-let%span sptrchase'35 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 42 40 42 51
-let%span sptrchase'36 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 42 68 42 70
-let%span sptrchase'37 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 42 61 42 70
-let%span sptrchase'38 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 46 22 46 23
-let%span sptrchase'39 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 46 22 46 29
-let%span sptrchase'40 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 46 21 46 30
-let%span sptrchase'41 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 47 51 47 53
-let%span sptrchase'42 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 47 44 47 47
-let%span sptrchase'43 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 47 43 47 54
-let%span sptrchase'44 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 47 22 47 23
-let%span sptrchase'45 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 47 22 47 29
-let%span sptrchase'46 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 47 32 47 33
-let%span sptrchase'47 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 47 22 47 33
-let%span sptrchase'48 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 47 21 47 34
-let%span sptrchase'49 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 47 37 47 40
-let%span sptrchase'50 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 49 32 49 46
-let%span sptrchase'51 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 51 31 51 42
-let%span sptrchase'52 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 51 63 51 65
-let%span sptrchase'53 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 51 46 51 66
-let%span sptrchase'54 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 48 22 48 23
-let%span sptrchase'55 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 48 22 48 29
-let%span sptrchase'56 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 48 32 48 33
-let%span sptrchase'57 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 48 22 48 33
-let%span sptrchase'58 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 48 21 48 34
-let%span sptrchase'59 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 53 27 53 28
-let%span sptrchase'60 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 53 20 53 28
-let%span sptrchase'61 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 54 29 54 33
-let%span sptrchase'62 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 58 15 58 42
-let%span sptrchase'63 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 59 13 59 14
-let%span sptrchase'64 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 59 8 59 14
-let%span sptrchase'65 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 16 11 16 60
-let%span sptrchase'66 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 17 10 17 70
-let%span sptrchase'67 = "/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 19 0 19 56
 
 use creusot.int.UInt64
 use creusot.prelude.MutBorrow
 use seq.Seq
 use creusot.int.Int32
+use creusot.int.UInt32
 use creusot.prelude.Any
 use int.Int
 
-constant const_SEED1: UInt64.t = [%#sptrchase'67] (14991638734586249217: UInt64.t)
+constant const_SEED1: UInt64.t = [%#sptrchase'94] (14991638734586249217: UInt64.t)
 
-let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any [ return (result: UInt64.t) -> (! return {result}) ]
+function mix_l [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 31 0 31 27] (x: UInt64.t) : UInt64.t =
+  [%#sptrchase'116] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+let mix (x: UInt64.t) (return (x'0: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:mix ensures] [%#sptrchase'95] result = mix_l x}
+    (! return {result}) ]
 
 type t_Vec_u64_Global
 
@@ -109,7 +164,7 @@ constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
 function view_Vec_u64_Global (self: t_Vec_u64_Global) : Seq.seq UInt64.t
 
 axiom view_Vec_u64_Global_spec:
-  forall self: t_Vec_u64_Global [view_Vec_u64_Global self]. [%#svec'4] Seq.length (view_Vec_u64_Global self)
+  forall self: t_Vec_u64_Global [view_Vec_u64_Global self]. [%#svec] Seq.length (view_Vec_u64_Global self)
     <= UInt64.t'int const_MAX
 
 predicate has_value_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt64.t) (out: UInt64.t) =
@@ -123,13 +178,13 @@ predicate resolve_elswhere_usize [@inline:trivial] (self: UInt64.t) (old': Seq.s
 meta "rewrite_def" predicate resolve_elswhere_usize
 
 let index_mut_Vec_u64_Global (self: MutBorrow.t t_Vec_u64_Global) (index: UInt64.t) (return (x: MutBorrow.t UInt64.t)) =
-{[@stop_split] [@expl:index_mut requires] [%#svec] in_bounds_usize index (view_Vec_u64_Global self.current)}
+{[@stop_split] [@expl:index_mut requires] [%#svec'0] in_bounds_usize index (view_Vec_u64_Global self.current)}
   any
   [ return (result: MutBorrow.t UInt64.t) ->
-  {[@stop_split] [@expl:index_mut_Vec_u64_Global ensures] ([@stop_split] [@expl:index_mut ensures #0] [%#svec'0] has_value_usize index (view_Vec_u64_Global self.current) result.current)
-    /\ ([@stop_split] [@expl:index_mut ensures #1] [%#svec'1] has_value_usize index (view_Vec_u64_Global self.final) result.final)
-    /\ ([@stop_split] [@expl:index_mut ensures #2] [%#svec'2] resolve_elswhere_usize index (view_Vec_u64_Global self.current) (view_Vec_u64_Global self.final))
-    /\ ([@stop_split] [@expl:index_mut ensures #3] [%#svec'3] Seq.length (view_Vec_u64_Global self.final)
+  {[@stop_split] [@expl:index_mut_Vec_u64_Global ensures] ([@stop_split] [@expl:index_mut ensures #0] [%#svec'1] has_value_usize index (view_Vec_u64_Global self.current) result.current)
+    /\ ([@stop_split] [@expl:index_mut ensures #1] [%#svec'2] has_value_usize index (view_Vec_u64_Global self.final) result.final)
+    /\ ([@stop_split] [@expl:index_mut ensures #2] [%#svec'3] resolve_elswhere_usize index (view_Vec_u64_Global self.current) (view_Vec_u64_Global self.final))
+    /\ ([@stop_split] [@expl:index_mut ensures #3] [%#svec'4] Seq.length (view_Vec_u64_Global self.final)
     = Seq.length (view_Vec_u64_Global self.current))}
     (! return {result}) ]
 
@@ -137,7 +192,41 @@ predicate resolve_refmut_u64 [@inline:trivial] (_1: MutBorrow.t UInt64.t) = _1.f
 
 meta "rewrite_def" predicate resolve_refmut_u64
 
-constant const_NIL: UInt64.t = [%#sptrchase'67] (4294967295: UInt64.t)
+constant const_NIL: UInt64.t = [%#sptrchase'94] (4294967295: UInt64.t)
+
+constant const_LEAF [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 22 0 22 19] : UInt64.t
+
+let set_LEAF (return) = bb0
+  [ bb0 = s0
+    [ s0 = [ &_2 <- UInt32.of_int (Int32.to_int ([%#sptrchase'96] (32: Int32.t))) ] s1
+    | s1 = [ &_3 <- UInt32.lt _2 ([%#sptrchase'97] (64: UInt32.t)) ] s2
+    | s2 = {[@expl:Shl overflow] [%#sptrchase'97] _3} s3
+    | s3 = UInt64.shl [%#sptrchase'97] {[%#sptrchase'98] const_NIL} {Int32.to_int ([%#sptrchase'96] (32: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_1 <- _x ] s4)
+    | s4 = [ &_ret <- UInt64.bw_or ([%#sptrchase'99] const_NIL) _1 ] s5
+    | s5 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & _1: UInt64.t = Any.any_l ()
+  | & _2: UInt32.t = Any.any_l ()
+  | & _3: bool = Any.any_l () ] [ return (_const: UInt64.t) -> -{const_LEAF = _const}- return ]
+
+constant const_M: UInt64.t = [%#sptrchase'94] (4294967295: UInt64.t)
+
+function left [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 54 0 54 26] (l: UInt64.t) : UInt64.t =
+  [%#sptrchase'101] UInt64.bw_and l const_M
+
+function right [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 60 0 60 27] (l: UInt64.t) : UInt64.t =
+  [%#sptrchase'102] UInt64.shr l (32: UInt64.t)
+
+constant leaf_links: () = [%#sptrchase'100] ()
+
+axiom leaf_links_spec: [%#sptrchase'11] left const_LEAF = const_NIL /\ right const_LEAF = const_NIL
+
+function key [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 48 0 48 38] (a: Seq.seq UInt64.t) (i: int) : UInt64.t
+ = [%#sptrchase'103] Seq.get a (2 * i)
+
+function ins_key [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 42 0 42 29] (i: UInt64.t) : UInt64.t =
+  [%#sptrchase'104] UInt64.bw_or (mix_l (UInt64.add const_SEED1 i)) (1: UInt64.t)
 
 predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
 
@@ -152,9 +241,38 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
 
 meta "rewrite_def" predicate well_founded_relation_Int
 
+predicate contains [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 100 0 100 54] (a: Seq.seq UInt64.t) (cnt: int) (k: UInt64.t) =
+  [%#sptrchase'105] exists t: int. 0 <= t /\ t < cnt /\ key a t = k
+
+predicate link_ok [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 83 0 83 48] (c: UInt64.t) (i: int) (cnt: int) =
+  [%#sptrchase'108] c = const_NIL \/ i < UInt64.t'int c /\ UInt64.t'int c < cnt
+
+function step [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 66 0 66 47] (a: Seq.seq UInt64.t) (i: int) (k: UInt64.t) : UInt64.t
+ = [%#sptrchase'110] if UInt64.lt k (key a i) then left (Seq.get a (2 * i + 1)) else right (Seq.get a (2 * i + 1))
+
+predicate search_path [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 73 0 73 70] (a: Seq.seq UInt64.t) (cnt: int) (k: UInt64.t) (p: Seq.seq int) =
+  [%#sptrchase'107] ge_log_Int (Seq.length p) 1
+  /\ Seq.get p 0 = 0
+  /\ (forall j: int. 0 <= j /\ j < Seq.length p -> 0 <= Seq.get p j /\ Seq.get p j < cnt)
+  /\ (forall j: int. 0 <= j /\ j < Seq.length p - 1
+    -> key a (Seq.get p j) <> k /\ Seq.get p (j + 1) = UInt64.t'int (step a (Seq.get p j) k))
+
+predicate is_bst [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 90 0 90 66] (a: Seq.seq UInt64.t) (cnt: int) (paths: Seq.seq (Seq.seq int)) =
+  [%#sptrchase'106] 1 <= cnt
+  /\ cnt < UInt64.t'int const_NIL
+  /\ 2 * cnt <= Seq.length a
+  /\ Seq.length paths = cnt
+  /\ (forall i: int. 0 <= i /\ i < cnt
+      -> link_ok (left (Seq.get a (2 * i + 1))) i cnt /\ link_ok (right (Seq.get a (2 * i + 1))) i cnt)
+  /\ (forall t: int. 0 <= t /\ t < cnt
+    -> search_path a cnt (key a t) (Seq.get paths t)
+    /\ Seq.get (Seq.get paths t) (Seq.length (Seq.get paths t) - 1) = t)
+
 let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
   [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
     (! return {result}) ]
+
+type tup3_Seq_u64_usize_Seq_Seq_Int = { f0: Seq.seq UInt64.t; f1: UInt64.t; f2: Seq.seq (Seq.seq int) }
 
 let index_Vec_u64_Global (self: t_Vec_u64_Global) (index: UInt64.t) (return (x: UInt64.t)) =
 {[@stop_split] [@expl:index requires] [%#svec'5] in_bounds_usize index (view_Vec_u64_Global self)}
@@ -163,230 +281,433 @@ let index_Vec_u64_Global (self: t_Vec_u64_Global) (index: UInt64.t) (return (x: 
   {[@stop_split] [@expl:index ensures] [%#svec'6] has_value_usize index (view_Vec_u64_Global self) result}
     (! return {result}) ]
 
+function search_path_snoc [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 151 0 151 75] (a: Seq.seq UInt64.t) (cnt: int) (k: UInt64.t) (p: Seq.seq int) (c: int) : ()
+ = [%#sptrchase'109] ()
+
+axiom search_path_snoc_spec:
+  forall a: Seq.seq UInt64.t, cnt: int, k: UInt64.t, p: Seq.seq int, c: int. ([%#sptrchase'46] search_path a cnt k p
+      /\ key a (Seq.get p (Seq.length p - 1)) <> k)
+    -> ([%#sptrchase'47] c = UInt64.t'int (step a (Seq.get p (Seq.length p - 1)) k) /\ 0 <= c /\ c < cnt)
+    -> ([%#sptrchase'48] search_path a cnt k (Seq.snoc p c))
+
+function keys_step [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 163 0 163 81] (a0: Seq.seq UInt64.t) (a: Seq.seq UInt64.t) (cnt0: int) (cnt: int) (i: int) (ii: UInt64.t) : ()
+ = [%#sptrchase'111] ()
+
+axiom keys_step_spec:
+  forall a0: Seq.seq UInt64.t, a: Seq.seq UInt64.t, cnt0: int, cnt: int, i: int, ii: UInt64.t. ([%#sptrchase'50] forall j: UInt64.t. UInt64.t'int j
+          < i -> contains a0 cnt0 (ins_key j))
+    -> ([%#sptrchase'51] forall t: int. 0 <= t /\ t < cnt0
+        -> (exists j: UInt64.t. UInt64.t'int j < i /\ key a0 t = ins_key j))
+    -> ([%#sptrchase'52] forall t: int. 0 <= t /\ t < cnt0 -> key a t = key a0 t)
+    -> ([%#sptrchase'53] i = UInt64.t'int ii /\ (cnt = cnt0 \/ cnt = cnt0 + 1) /\ contains a cnt (ins_key ii))
+    -> ([%#sptrchase'54] cnt = cnt0 + 1 -> key a cnt0 = ins_key ii)
+    -> ([%#sptrchase'55] forall j: UInt64.t. UInt64.t'int j < i + 1 -> contains a cnt (ins_key j))
+
+axiom keys_step_spec'0:
+  forall a0: Seq.seq UInt64.t, a: Seq.seq UInt64.t, cnt0: int, cnt: int, i: int, ii: UInt64.t. ([%#sptrchase'50] forall j: UInt64.t. UInt64.t'int j
+          < i -> contains a0 cnt0 (ins_key j))
+    -> ([%#sptrchase'51] forall t: int. 0 <= t /\ t < cnt0
+        -> (exists j: UInt64.t. UInt64.t'int j < i /\ key a0 t = ins_key j))
+    -> ([%#sptrchase'52] forall t: int. 0 <= t /\ t < cnt0 -> key a t = key a0 t)
+    -> ([%#sptrchase'53] i = UInt64.t'int ii /\ (cnt = cnt0 \/ cnt = cnt0 + 1) /\ contains a cnt (ins_key ii))
+    -> ([%#sptrchase'54] cnt = cnt0 + 1 -> key a cnt0 = ins_key ii)
+    -> ([%#sptrchase'56] forall t: int. 0 <= t /\ t < cnt
+      -> (exists j: UInt64.t. UInt64.t'int j < i + 1 /\ key a t = ins_key j))
+
+let set_link (lnk: UInt64.t) (is_left: bool) (c: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:set_link requires] [%#sptrchase'112] UInt64.lt c const_NIL}
+  any
+  [ return (result: UInt64.t) ->
+  {[@stop_split] [@expl:set_link ensures] ([@stop_split] [@expl:set_link ensures #0] [%#sptrchase'113] is_left
+      -> left result = c /\ right result = right lnk)
+    /\ ([@stop_split] [@expl:set_link ensures #1] [%#sptrchase'114] not is_left
+    -> right result = c /\ left result = left lnk)}
+    (! return {result}) ]
+
+function insert_preserves [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 144 0 144 114] (a0: Seq.seq UInt64.t) (a: Seq.seq UInt64.t) (cnt: int) (cur: int) (nk: UInt64.t) (paths: Seq.seq (Seq.seq int)) (p: Seq.seq int) : ()
+ = [%#sptrchase'115] ()
+
+axiom insert_preserves_spec:
+  forall a0: Seq.seq UInt64.t, a: Seq.seq UInt64.t, cnt: int, cur: int, nk: UInt64.t, paths: Seq.seq (Seq.seq int), p: Seq.seq int. ([%#sptrchase'74] is_bst a0 cnt paths
+      /\ cnt + 1 < UInt64.t'int const_NIL /\ 2 * (cnt + 1) <= Seq.length a /\ Seq.length a = Seq.length a0)
+    -> ([%#sptrchase'75] search_path a0 cnt nk p /\ Seq.get p (Seq.length p - 1) = cur)
+    -> ([%#sptrchase'76] key a0 cur <> nk /\ step a0 cur nk = const_NIL)
+    -> ([%#sptrchase'77] key a cnt = nk
+      /\ left (Seq.get a (2 * cnt + 1)) = const_NIL /\ right (Seq.get a (2 * cnt + 1)) = const_NIL)
+    -> ([%#sptrchase'78] UInt64.lt nk (key a0 cur)
+      -> UInt64.t'int (left (Seq.get a (2 * cur + 1))) = cnt
+      /\ right (Seq.get a (2 * cur + 1)) = right (Seq.get a0 (2 * cur + 1)))
+    -> ([%#sptrchase'79] not UInt64.lt nk (key a0 cur)
+      -> UInt64.t'int (right (Seq.get a (2 * cur + 1))) = cnt
+      /\ left (Seq.get a (2 * cur + 1)) = left (Seq.get a0 (2 * cur + 1)))
+    -> ([%#sptrchase'80] forall t: int. 0 <= t /\ t < cnt -> key a t = key a0 t)
+    -> ([%#sptrchase'81] forall t: int. 0 <= t /\ t < cnt /\ t <> cur -> Seq.get a (2 * t + 1) = Seq.get a0 (2 * t + 1))
+    -> ([%#sptrchase'82] is_bst a (cnt + 1) (Seq.snoc paths (Seq.snoc p cnt)))
+
 predicate resolve_refmut_Vec_u64_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u64_Global) = _1.final = _1.current
 
 meta "rewrite_def" predicate resolve_refmut_Vec_u64_Global
 
-type tup2_usize_u64 = { f0: UInt64.t; f1: UInt64.t }
+type tup3_usize_u64_Snapshot_Seq_Seq_Int = { f0'0: UInt64.t; f1'0: UInt64.t; f2'0: Seq.seq (Seq.seq int) }
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let build [#"/home/user/benchmark-verif/impls/rust/src/ptrchase.rs" 19 0 19 56] (a: MutBorrow.t t_Vec_u64_Global)
-  (n: UInt64.t) (return (x: tup2_usize_u64)) = {[@stop_split] [@expl:build requires] [%#sptrchase'65] 1
-    <= UInt64.t'int n
+let build [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 211 0 211 81] (a: MutBorrow.t t_Vec_u64_Global)
+  (n: UInt64.t) (return (x: tup3_usize_u64_Snapshot_Seq_Seq_Int)) =
+{[@stop_split] [@expl:build requires] [%#sptrchase'89] 1 <= UInt64.t'int n
   /\ UInt64.t'int n <= 2147483646 /\ Seq.length (view_Vec_u64_Global a.current) = 2 * UInt64.t'int n}
-  (! bb0
-  [ bb0 = s0
-    [ s0 = mix64 [%#sptrchase'0] {[%#sptrchase] const_SEED1} (fun (_x: UInt64.t) -> [ &_9 <- _x ] s1)
-    | s1 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a.current}
-        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_11 <- _bor ] [ &a <- { a with current = _bor.final } ] s2)
-    | s2 = index_mut_Vec_u64_Global [%#sptrchase'2] {_11} {[%#sptrchase'1] (0: UInt64.t)}
-        (fun (_x: MutBorrow.t UInt64.t) -> [ &_10 <- _x ] s3)
-    | s3 = [ &_10 <- { _10 with current = UInt64.bw_or _9 ([%#sptrchase'3] (1: UInt64.t)) } ] s4
-    | s4 = -{resolve_refmut_u64 _10}- s5
-    | s5 = UInt64.shl [%#sptrchase'6] {[%#sptrchase'5] const_NIL} {Int32.to_int ([%#sptrchase'4] (32: Int32.t))}
-        (fun (_x: UInt64.t) -> [ &_12 <- _x ] s6)
-    | s6 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a.current}
-        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_14 <- _bor ] [ &a <- { a with current = _bor.final } ] s7)
-    | s7 = index_mut_Vec_u64_Global [%#sptrchase'8] {_14} {[%#sptrchase'7] (1: UInt64.t)}
-        (fun (_x: MutBorrow.t UInt64.t) -> [ &_13 <- _x ] s8)
-    | s8 = [ &_13 <- { _13 with current = UInt64.bw_or ([%#sptrchase'9] const_NIL) _12 } ] s9
-    | s9 = -{resolve_refmut_u64 _13}- s10
-    | s10 = [ &cnt <- [%#sptrchase'10] (1: UInt64.t) ] s11
-    | s11 = [ &plen <- [%#sptrchase'11] (0: UInt64.t) ] s12
-    | s12 = [ &i <- [%#sptrchase'12] (1: UInt64.t) ] s13
-    | s13 = [ &_old'0 <- a.final ] s14
-    | s14 = bb4 ]
-  | bb4 = bb4invariant
-    [ bb4 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb4 ([%#sptrchase'13] UInt64.t'int n
-      - UInt64.t'int i)}
-      bb4invariant
-    | bb4invariant = {[@expl:inferred invariant: unchanged value] _old'0 = a.final}
-      {[@expl:loop invariant] [%#sptrchase'14] 1 <= UInt64.t'int i
-      /\ UInt64.t'int i <= UInt64.t'int n
-      /\ 1 <= UInt64.t'int cnt
-      /\ UInt64.t'int cnt <= UInt64.t'int i /\ Seq.length (view_Vec_u64_Global a.current) = 2 * UInt64.t'int n}
-      (! [ &variant_old_bb4 <- [%#sptrchase'13] UInt64.t'int n - UInt64.t'int i ] s0)
-      [ s0 = [ &_29 <- UInt64.lt i n ] s1 | s1 = any [ br0 -> {_29 = false} (! bb33) | br1 -> {_29} (! bb6) ] ]
-      [ bb6 = s0
-        [ s0 = [ &_35 <- i ] s1
-        | s1 = wrapping_add [%#sptrchase'16] {[%#sptrchase'15] const_SEED1} {_35}
-            (fun (_x: UInt64.t) -> [ &_34 <- _x ] s2)
-        | s2 = mix64 [%#sptrchase'17] {_34} (fun (_x: UInt64.t) -> [ &_33 <- _x ] s3)
-        | s3 = [ &nk <- UInt64.bw_or _33 ([%#sptrchase'18] (1: UInt64.t)) ] s4
-        | s4 = [ &cur <- [%#sptrchase'19] (0: UInt64.t) ] s5
-        | s5 = [ &v <- [%#sptrchase'20] (0: UInt64.t) ] s6
-        | s6 = [ &placed <- [%#sptrchase'21] false ] s7
-        | s7 = [ &_old <- a.final ] s8
-        | s8 = bb9 ]
-      | bb9 = bb9invariant
-        [ bb9 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb9 ([%#sptrchase'22] UInt64.t'int n
-          - UInt64.t'int v)}
-          bb9invariant
-        | bb9invariant = {[@expl:inferred invariant: unchanged value] _old = a.final}
-          {[@expl:loop invariant] [%#sptrchase'23] UInt64.t'int cur < UInt64.t'int cnt
-          /\ UInt64.t'int v <= UInt64.t'int cnt
-          /\ UInt64.t'int cnt <= UInt64.t'int i + 1
-          /\ (placed \/ UInt64.t'int cnt <= UInt64.t'int i)
-          /\ Seq.length (view_Vec_u64_Global a.current) = 2 * UInt64.t'int n}
-          (! [ &variant_old_bb9 <- [%#sptrchase'22] UInt64.t'int n - UInt64.t'int v ] s0)
-          [ s0 = any [ br0 -> {placed = false} (! bb11) | br1 -> {placed} (! bb31) ] ]
-          [ bb11 = s0
-            [ s0 = [ &_54 <- UInt64.lt v cnt ] s1 | s1 = any [ br0 -> {_54 = false} (! bb31) | br1 -> {_54} (! bb12) ] ]
-          | bb12 = s0
-            [ s0 = UInt64.add [%#sptrchase'25] {v} {[%#sptrchase'24] (1: UInt64.t)}
+  (! set_LEAF
+    (bb0
+    [ bb0 = s0
+      [ s0 = mix [%#sptrchase'0] {[%#sptrchase] const_SEED1} (fun (_x: UInt64.t) -> [ &_17 <- _x ] s1)
+      | s1 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a.current}
+          (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_19 <- _bor ] [ &a <- { a with current = _bor.final } ] s2)
+      | s2 = index_mut_Vec_u64_Global [%#sptrchase'2] {_19} {[%#sptrchase'1] (0: UInt64.t)}
+          (fun (_x: MutBorrow.t UInt64.t) -> [ &_18 <- _x ] s3)
+      | s3 = [ &_18 <- { _18 with current = UInt64.bw_or _17 ([%#sptrchase'3] (1: UInt64.t)) } ] s4
+      | s4 = -{resolve_refmut_u64 _18}- s5
+      | s5 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a.current}
+          (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_21 <- _bor ] [ &a <- { a with current = _bor.final } ] s6)
+      | s6 = index_mut_Vec_u64_Global [%#sptrchase'5] {_21} {[%#sptrchase'4] (1: UInt64.t)}
+          (fun (_x: MutBorrow.t UInt64.t) -> [ &_20 <- _x ] s7)
+      | s7 = [ &_20 <- { _20 with current = ([%#sptrchase'6] const_LEAF) } ] s8
+      | s8 = -{resolve_refmut_u64 _20}- s9
+      | s9 = [ &cnt <- [%#sptrchase'7] (1: UInt64.t) ] s10
+      | s10 = [ &plen <- [%#sptrchase'8] (0: UInt64.t) ] s11
+      | s11 = [ &paths <- [%#sptrchase'9] Seq.singleton (Seq.singleton 0) ] s12
+      | s12 = [ &i <- [%#sptrchase'10] (1: UInt64.t) ] s13
+      | s13 = any
+        [ any_ (_dest: ()) -> (! -{([@stop_split] [@expl:leaf_links ensures] [%#sptrchase'11] left const_LEAF
+              = const_NIL
+            /\ right const_LEAF = const_NIL)
+          /\ _dest = leaf_links}-
+          [ &_27 <- _dest ] s14) ] [ _ck -> (! any) ]
+      | s14 = {[@expl:assertion] [%#sptrchase'12] key (view_Vec_u64_Global a.current) 0 = ins_key (0: UInt64.t)} s15
+      | s15 = [ &_old <- a.final ] s16
+      | s16 = bb6 ]
+    | bb6 = bb6invariant
+      [ bb6 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb6 ([%#sptrchase'13] UInt64.t'int n
+        - UInt64.t'int i)}
+        bb6invariant
+      | bb6invariant = {[@expl:inferred invariant: unchanged value] _old = a.final}
+        {[@expl:loop invariant #0] [%#sptrchase'17] 1 <= UInt64.t'int i
+        /\ UInt64.t'int i <= UInt64.t'int n
+        /\ 1 <= UInt64.t'int cnt
+        /\ UInt64.t'int cnt <= UInt64.t'int i /\ Seq.length (view_Vec_u64_Global a.current) = 2 * UInt64.t'int n}
+        {[@expl:loop invariant #1] [%#sptrchase'16] is_bst (view_Vec_u64_Global a.current) (UInt64.t'int cnt) paths}
+        {[@expl:loop invariant #2] [%#sptrchase'15] forall j: UInt64.t. UInt64.t'int j < UInt64.t'int i
+          -> contains (view_Vec_u64_Global a.current) (UInt64.t'int cnt) (ins_key j)}
+        {[@expl:loop invariant #3] [%#sptrchase'14] forall t: int. 0 <= t /\ t < UInt64.t'int cnt
+          -> (exists j: UInt64.t. UInt64.t'int j < UInt64.t'int i /\ key (view_Vec_u64_Global a.current) t = ins_key j)}
+        (! [ &variant_old_bb6 <- [%#sptrchase'13] UInt64.t'int n - UInt64.t'int i ] s0)
+        [ s0 = [ &_55 <- UInt64.lt i n ] s1 | s1 = any [ br0 -> {_55 = false} (! bb37) | br1 -> {_55} (! bb8) ] ]
+        [ bb8 = s0
+          [ s0 = [ &_61 <- i ] s1
+          | s1 = wrapping_add [%#sptrchase'19] {[%#sptrchase'18] const_SEED1} {_61}
+              (fun (_x: UInt64.t) -> [ &_60 <- _x ] s2)
+          | s2 = mix [%#sptrchase'20] {_60} (fun (_x: UInt64.t) -> [ &_59 <- _x ] s3)
+          | s3 = [ &nk <- UInt64.bw_or _59 ([%#sptrchase'21] (1: UInt64.t)) ] s4
+          | s4 = {[@expl:assertion] [%#sptrchase'22] nk = ins_key i} s5
+          | s5 = [ &cur <- [%#sptrchase'23] (0: UInt64.t) ] s6
+          | s6 = [ &v <- [%#sptrchase'24] (0: UInt64.t) ] s7
+          | s7 = [ &p <- [%#sptrchase'25] Seq.singleton 0 ] s8
+          | s8 = any
+            [ any_ (_dest: tup3_Seq_u64_usize_Seq_Seq_Int) ->
+            (! -{([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u64_Global a.current)
+                <= UInt64.t'int const_MAX)
+              /\ _dest = { f0 = view_Vec_u64_Global a.current; f1 = cnt; f2 = paths }}-
+              [ &before <- _dest ] s9) ] [ _ck -> (! any) ]
+          | s9 = bb13 ]
+        | bb13 = bb13invariant
+          [ bb13 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb13 ([%#sptrchase'26] UInt64.t'int cnt
+            - UInt64.t'int cur)}
+            bb13invariant
+          | bb13invariant = {[@expl:loop invariant #0] [%#sptrchase'34] view_Vec_u64_Global a.current = before.f0
+            /\ cnt = before.f1 /\ paths = before.f2}
+            {[@expl:loop invariant #1] [%#sptrchase'33] search_path (view_Vec_u64_Global a.current) (UInt64.t'int cnt) nk p
+            /\ Seq.get p (Seq.length p - 1) = UInt64.t'int cur}
+            {[@expl:loop invariant #2] [%#sptrchase'32] UInt64.t'int v + 1 = Seq.length p
+            /\ UInt64.t'int v <= UInt64.t'int cur}
+            (! [ &variant_old_bb13 <- [%#sptrchase'26] UInt64.t'int cnt - UInt64.t'int cur ] s0)
+            [ s0 = UInt64.add [%#sptrchase'28] {v} {[%#sptrchase'27] (1: UInt64.t)}
                 (fun (_x: UInt64.t) -> [ &v <- _x ] s1)
-            | s1 = UInt64.mul [%#sptrchase'27] {[%#sptrchase'26] (2: UInt64.t)} {cur}
-                (fun (_x: UInt64.t) -> [ &_60 <- _x ] s2)
-            | s2 = index_Vec_u64_Global [%#sptrchase'28] {a.current} {_60} (fun (_x: UInt64.t) -> [ &_58 <- _x ] s3)
-            | s3 = [ &key <- _58 ] s4
-            | s4 = [ &_62 <- nk = key ] s5
-            | s5 = any [ br0 -> {_62 = false} (! bb15) | br1 -> {_62} (! bb14) ] ]
-          | bb14 = s0 [ s0 = [ &placed <- [%#sptrchase'29] true ] s1 | s1 = bb9 ]
-          | bb15 = s0
-            [ s0 = UInt64.mul [%#sptrchase'31] {[%#sptrchase'30] (2: UInt64.t)} {cur}
-                (fun (_x: UInt64.t) -> [ &_69 <- _x ] s1)
-            | s1 = UInt64.add [%#sptrchase'33] {_69} {[%#sptrchase'32] (1: UInt64.t)}
-                (fun (_x: UInt64.t) -> [ &_68 <- _x ] s2)
-            | s2 = index_Vec_u64_Global [%#sptrchase'34] {a.current} {_68} (fun (_x: UInt64.t) -> [ &_66 <- _x ] s3)
-            | s3 = [ &lnk <- _66 ] s4
-            | s4 = [ &left <- UInt64.lt nk key ] s5
-            | s5 = any [ br0 -> {left = false} (! bb18) | br1 -> {left} (! bb17) ] ]
-          | bb17 = s0 [ s0 = [ &c <- UInt64.bw_and lnk ([%#sptrchase'35] (4294967295: UInt64.t)) ] s1 | s1 = bb19 ]
-          | bb18 = s0
-            [ s0 = UInt64.shr [%#sptrchase'37] {lnk} {Int32.to_int ([%#sptrchase'36] (32: Int32.t))}
-                (fun (_x: UInt64.t) -> [ &c <- _x ] s1)
-            | s1 = bb19 ]
-          | bb19 = s0
-            [ s0 = [ &_80 <- cnt ] s1
-            | s1 = [ &_78 <- UInt64.lt c _80 ] s2
-            | s2 = any [ br0 -> {_78 = false} (! bb21) | br1 -> {_78} (! bb20) ] ]
-          | bb20 = s0 [ s0 = [ &cur <- c ] s1 | s1 = bb9 ]
-          | bb21 = s0
-            [ s0 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a.current}
-                (fun (_bor: MutBorrow.t t_Vec_u64_Global) ->
-                  [ &_85 <- _bor ] [ &a <- { a with current = _bor.final } ] s1)
-            | s1 = UInt64.mul [%#sptrchase'39] {[%#sptrchase'38] (2: UInt64.t)} {cnt}
-                (fun (_x: UInt64.t) -> [ &_86 <- _x ] s2)
-            | s2 = index_mut_Vec_u64_Global [%#sptrchase'40] {_85} {_86}
-                (fun (_x: MutBorrow.t UInt64.t) -> [ &_84 <- _x ] s3)
-            | s3 = [ &_84 <- { _84 with current = nk } ] s4
-            | s4 = -{resolve_refmut_u64 _84}- s5
-            | s5 = UInt64.shl [%#sptrchase'43] {[%#sptrchase'42] const_NIL}
-                {Int32.to_int ([%#sptrchase'41] (32: Int32.t))} (fun (_x: UInt64.t) -> [ &_88 <- _x ] s6)
-            | s6 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a.current}
-                (fun (_bor: MutBorrow.t t_Vec_u64_Global) ->
-                  [ &_90 <- _bor ] [ &a <- { a with current = _bor.final } ] s7)
-            | s7 = UInt64.mul [%#sptrchase'45] {[%#sptrchase'44] (2: UInt64.t)} {cnt}
-                (fun (_x: UInt64.t) -> [ &_92 <- _x ] s8)
-            | s8 = UInt64.add [%#sptrchase'47] {_92} {[%#sptrchase'46] (1: UInt64.t)}
-                (fun (_x: UInt64.t) -> [ &_91 <- _x ] s9)
-            | s9 = index_mut_Vec_u64_Global [%#sptrchase'48] {_90} {_91}
-                (fun (_x: MutBorrow.t UInt64.t) -> [ &_89 <- _x ] s10)
-            | s10 = [ &_89 <- { _89 with current = UInt64.bw_or ([%#sptrchase'49] const_NIL) _88 } ] s11
-            | s11 = -{resolve_refmut_u64 _89}- s12
-            | s12 = any [ br0 -> {left = false} (! bb25) | br1 -> {left} (! bb24) ] ]
-          | bb24 = s0
-            [ s0 = [ &_98 <- UInt64.bw_not ([%#sptrchase'50] (4294967295: UInt64.t)) ] s1
-            | s1 = [ &_96 <- UInt64.bw_and lnk _98 ] s2
-            | s2 = [ &_99 <- cnt ] s3
-            | s3 = [ &_94 <- UInt64.bw_or _96 _99 ] s4
-            | s4 = bb26 ]
-          | bb25 = s0
-            [ s0 = [ &_101 <- UInt64.bw_and lnk ([%#sptrchase'51] (4294967295: UInt64.t)) ] s1
-            | s1 = [ &_104 <- cnt ] s2
-            | s2 = UInt64.shl [%#sptrchase'53] {_104} {Int32.to_int ([%#sptrchase'52] (32: Int32.t))}
-                (fun (_x: UInt64.t) -> [ &_103 <- _x ] s3)
-            | s3 = [ &_94 <- UInt64.bw_or _101 _103 ] s4
-            | s4 = bb26 ]
-          | bb26 = s0
-            [ s0 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a.current}
-                (fun (_bor: MutBorrow.t t_Vec_u64_Global) ->
-                  [ &_107 <- _bor ] [ &a <- { a with current = _bor.final } ] s1)
-            | s1 = UInt64.mul [%#sptrchase'55] {[%#sptrchase'54] (2: UInt64.t)} {cur}
-                (fun (_x: UInt64.t) -> [ &_109 <- _x ] s2)
-            | s2 = UInt64.add [%#sptrchase'57] {_109} {[%#sptrchase'56] (1: UInt64.t)}
-                (fun (_x: UInt64.t) -> [ &_108 <- _x ] s3)
-            | s3 = index_mut_Vec_u64_Global [%#sptrchase'58] {_107} {_108}
-                (fun (_x: MutBorrow.t UInt64.t) -> [ &_106 <- _x ] s4)
-            | s4 = [ &_106 <- { _106 with current = _94 } ] s5
-            | s5 = -{resolve_refmut_u64 _106}- s6
-            | s6 = UInt64.add [%#sptrchase'60] {cnt} {[%#sptrchase'59] (1: UInt64.t)}
-                (fun (_x: UInt64.t) -> [ &cnt <- _x ] s7)
-            | s7 = [ &placed <- [%#sptrchase'61] true ] s8
-            | s8 = bb9 ] ] ]
-      | bb31 = s0
-        [ s0 = [ &_114 <- v ] s1
-        | s1 = wrapping_add [%#sptrchase'62] {plen} {_114} (fun (_x: UInt64.t) -> [ &_112 <- _x ] s2)
-        | s2 = [ &plen <- _112 ] s3
-        | s3 = UInt64.add [%#sptrchase'64] {i} {[%#sptrchase'63] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s4)
-        | s4 = bb4 ] ] ]
-  | bb33 = s0
-    [ s0 = -{resolve_refmut_Vec_u64_Global a}- s1
-    | s1 = [ &_ret <- { f0 = cnt; f1 = plen } ] s2
-    | s2 = return {_ret} ] ]
-  [ & _ret: tup2_usize_u64 = Any.any_l ()
-  | & a: MutBorrow.t t_Vec_u64_Global = a
-  | & n: UInt64.t = n
-  | & _9: UInt64.t = Any.any_l ()
-  | & _10: MutBorrow.t UInt64.t = Any.any_l ()
-  | & _11: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
-  | & _12: UInt64.t = Any.any_l ()
-  | & _13: MutBorrow.t UInt64.t = Any.any_l ()
-  | & _14: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
-  | & cnt: UInt64.t = Any.any_l ()
-  | & plen: UInt64.t = Any.any_l ()
-  | & i: UInt64.t = Any.any_l ()
-  | & _29: bool = Any.any_l ()
-  | & nk: UInt64.t = Any.any_l ()
-  | & _33: UInt64.t = Any.any_l ()
-  | & _34: UInt64.t = Any.any_l ()
-  | & _35: UInt64.t = Any.any_l ()
-  | & cur: UInt64.t = Any.any_l ()
-  | & v: UInt64.t = Any.any_l ()
-  | & placed: bool = Any.any_l ()
-  | & _54: bool = Any.any_l ()
-  | & key: UInt64.t = Any.any_l ()
-  | & _58: UInt64.t = Any.any_l ()
-  | & _60: UInt64.t = Any.any_l ()
-  | & _62: bool = Any.any_l ()
-  | & lnk: UInt64.t = Any.any_l ()
-  | & _66: UInt64.t = Any.any_l ()
-  | & _68: UInt64.t = Any.any_l ()
-  | & _69: UInt64.t = Any.any_l ()
-  | & left: bool = Any.any_l ()
-  | & c: UInt64.t = Any.any_l ()
-  | & _78: bool = Any.any_l ()
-  | & _80: UInt64.t = Any.any_l ()
-  | & _84: MutBorrow.t UInt64.t = Any.any_l ()
-  | & _85: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
-  | & _86: UInt64.t = Any.any_l ()
-  | & _88: UInt64.t = Any.any_l ()
-  | & _89: MutBorrow.t UInt64.t = Any.any_l ()
-  | & _90: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
-  | & _91: UInt64.t = Any.any_l ()
-  | & _92: UInt64.t = Any.any_l ()
-  | & _94: UInt64.t = Any.any_l ()
-  | & _96: UInt64.t = Any.any_l ()
-  | & _98: UInt64.t = Any.any_l ()
-  | & _99: UInt64.t = Any.any_l ()
-  | & _101: UInt64.t = Any.any_l ()
-  | & _103: UInt64.t = Any.any_l ()
-  | & _104: UInt64.t = Any.any_l ()
-  | & _106: MutBorrow.t UInt64.t = Any.any_l ()
-  | & _107: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
-  | & _108: UInt64.t = Any.any_l ()
-  | & _109: UInt64.t = Any.any_l ()
-  | & _112: UInt64.t = Any.any_l ()
-  | & _114: UInt64.t = Any.any_l ()
-  | & _old: t_Vec_u64_Global = Any.any_l ()
-  | & _old'0: t_Vec_u64_Global = Any.any_l ()
-  | & variant_old_bb4: int = Any.any_l ()
-  | & variant_old_bb9: int = Any.any_l () ])
-  [ return (result: tup2_usize_u64) ->
-  {[@stop_split] [@expl:build ensures] [%#sptrchase'66] Seq.length (view_Vec_u64_Global a.final)
-      = Seq.length (view_Vec_u64_Global a.current)
-    /\ 1 <= UInt64.t'int result.f0 /\ UInt64.t'int result.f0 <= UInt64.t'int n}
+            | s1 = UInt64.mul [%#sptrchase'30] {[%#sptrchase'29] (2: UInt64.t)} {cur}
+                (fun (_x: UInt64.t) -> [ &_99 <- _x ] s2)
+            | s2 = index_Vec_u64_Global [%#sptrchase'31] {a.current} {_99} (fun (_x: UInt64.t) -> [ &_97 <- _x ] s3)
+            | s3 = [ &kc <- _97 ] s4
+            | s4 = [ &_102 <- nk = kc ] s5
+            | s5 = any [ br0 -> {_102 = false} (! bb18) | br1 -> {_102} (! bb16) ] ]
+            [ bb18 = s0
+              [ s0 = UInt64.mul [%#sptrchase'36] {[%#sptrchase'35] (2: UInt64.t)} {cur}
+                  (fun (_x: UInt64.t) -> [ &_116 <- _x ] s1)
+              | s1 = UInt64.add [%#sptrchase'38] {_116} {[%#sptrchase'37] (1: UInt64.t)}
+                  (fun (_x: UInt64.t) -> [ &_115 <- _x ] s2)
+              | s2 = index_Vec_u64_Global [%#sptrchase'39] {a.current} {_115} (fun (_x: UInt64.t) -> [ &_113 <- _x ] s3)
+              | s3 = [ &lnk <- _113 ] s4
+              | s4 = [ &is_left <- UInt64.lt nk kc ] s5
+              | s5 = any [ br0 -> {is_left = false} (! bb21) | br1 -> {is_left} (! bb20) ] ]
+            | bb20 = s0 [ s0 = [ &c <- UInt64.bw_and lnk ([%#sptrchase'40] const_M) ] s1 | s1 = bb22 ]
+            | bb21 = s0
+              [ s0 = UInt64.shr [%#sptrchase'42] {lnk} {Int32.to_int ([%#sptrchase'41] (32: Int32.t))}
+                  (fun (_x: UInt64.t) -> [ &c <- _x ] s1)
+              | s1 = bb22 ]
+            | bb22 = s0
+              [ s0 = [ &_126 <- c <> ([%#sptrchase'43] const_NIL) ] s1
+              | s1 = any [ br0 -> {_126 = false} (! bb26) | br1 -> {_126} (! bb23) ] ]
+            | bb23 = s0
+              [ s0 = {[@expl:assertion] [%#sptrchase'44] link_ok c (UInt64.t'int cur) (UInt64.t'int cnt)
+                /\ UInt64.t'int c <> UInt64.t'int const_NIL}
+                s1
+              | s1 = {[@expl:assertion] [%#sptrchase'45] UInt64.t'int cur < UInt64.t'int c
+                /\ UInt64.t'int c < UInt64.t'int cnt}
+                s2
+              | s2 = any
+                [ any_ (_dest: ()) ->
+                (! -{([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u64_Global a.current)
+                    <= UInt64.t'int const_MAX)
+                  /\ ([@stop_split] [@expl:search_path_snoc ensures] [%#sptrchase'48] search_path (view_Vec_u64_Global a.current) (UInt64.t'int cnt) nk (Seq.snoc p (UInt64.t'int c)))
+                  /\ _dest = search_path_snoc (view_Vec_u64_Global a.current) (UInt64.t'int cnt) nk p (UInt64.t'int c)}-
+                  [ &_139 <- _dest ] s3) ]
+                [ _ck -> (! {([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u64_Global a.current)
+                    <= UInt64.t'int const_MAX)
+                  -> ([@stop_split] [@expl:search_path_snoc requires] ([@stop_split] [@expl:search_path_snoc requires #0] [%#sptrchase'46] search_path (view_Vec_u64_Global a.current) (UInt64.t'int cnt) nk p
+                    /\ key (view_Vec_u64_Global a.current) (Seq.get p (Seq.length p - 1)) <> nk)
+                  /\ ([@stop_split] [@expl:search_path_snoc requires #1] [%#sptrchase'47] UInt64.t'int c
+                    = UInt64.t'int (step (view_Vec_u64_Global a.current) (Seq.get p (Seq.length p - 1)) nk)
+                  /\ 0 <= UInt64.t'int c /\ UInt64.t'int c < UInt64.t'int cnt))}
+                  any) ]
+              | s3 = [ &cur <- c ] s4
+              | s4 = [ &_147 <- [%#sptrchase'49] Seq.snoc p (UInt64.t'int c) ] s5
+              | s5 = [ &p <- _147 ] s6
+              | s6 = bb13 ] ] ]
+        | bb16 = s0
+          [ s0 = any
+            [ any_ (_dest: ()) ->
+            (! -{([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u64_Global a.current)
+                <= UInt64.t'int const_MAX)
+              /\ ([@stop_split] [@expl:keys_step ensures] ([@stop_split] [@expl:keys_step ensures #0] [%#sptrchase'55] forall j: UInt64.t. UInt64.t'int j
+                      < UInt64.t'int i + 1 -> contains (view_Vec_u64_Global a.current) (UInt64.t'int cnt) (ins_key j))
+                /\ ([@stop_split] [@expl:keys_step ensures #1] [%#sptrchase'56] forall t: int. 0 <= t
+                    /\ t < UInt64.t'int cnt
+                  -> (exists j: UInt64.t. UInt64.t'int j < UInt64.t'int i + 1
+                    /\ key (view_Vec_u64_Global a.current) t = ins_key j)))
+              /\ _dest
+              = keys_step before.f0 (view_Vec_u64_Global a.current) (UInt64.t'int cnt) (UInt64.t'int cnt) (UInt64.t'int i) i}-
+              [ &_106 <- _dest ] s1) ]
+            [ _ck -> (! {([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u64_Global a.current)
+                <= UInt64.t'int const_MAX)
+              -> ([@stop_split] [@expl:keys_step requires] ([@stop_split] [@expl:keys_step requires #0] [%#sptrchase'50] forall j: UInt64.t. UInt64.t'int j
+                    < UInt64.t'int i -> contains before.f0 (UInt64.t'int cnt) (ins_key j))
+              /\ ([@stop_split] [@expl:keys_step requires #1] [%#sptrchase'51] forall t: int. 0 <= t
+                    /\ t < UInt64.t'int cnt
+                  -> (exists j: UInt64.t. UInt64.t'int j < UInt64.t'int i /\ key before.f0 t = ins_key j))
+              /\ ([@stop_split] [@expl:keys_step requires #2] [%#sptrchase'52] forall t: int. 0 <= t
+                    /\ t < UInt64.t'int cnt -> key (view_Vec_u64_Global a.current) t = key before.f0 t)
+              /\ ([@stop_split] [@expl:keys_step requires #3] [%#sptrchase'53] UInt64.t'int i = UInt64.t'int i
+                /\ (UInt64.t'int cnt = UInt64.t'int cnt \/ UInt64.t'int cnt = UInt64.t'int cnt + 1)
+                /\ contains (view_Vec_u64_Global a.current) (UInt64.t'int cnt) (ins_key i))
+              /\ ([@stop_split] [@expl:keys_step requires #4] [%#sptrchase'54] UInt64.t'int cnt = UInt64.t'int cnt + 1
+              -> key (view_Vec_u64_Global a.current) (UInt64.t'int cnt) = ins_key i))}
+              any) ]
+          | s1 = bb35 ]
+        | bb26 = s0
+          [ s0 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a.current}
+              (fun (_bor: MutBorrow.t t_Vec_u64_Global) ->
+                [ &_153 <- _bor ] [ &a <- { a with current = _bor.final } ] s1)
+          | s1 = UInt64.mul [%#sptrchase'58] {[%#sptrchase'57] (2: UInt64.t)} {cnt}
+              (fun (_x: UInt64.t) -> [ &_154 <- _x ] s2)
+          | s2 = index_mut_Vec_u64_Global [%#sptrchase'59] {_153} {_154}
+              (fun (_x: MutBorrow.t UInt64.t) -> [ &_152 <- _x ] s3)
+          | s3 = [ &_152 <- { _152 with current = nk } ] s4
+          | s4 = -{resolve_refmut_u64 _152}- s5
+          | s5 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a.current}
+              (fun (_bor: MutBorrow.t t_Vec_u64_Global) ->
+                [ &_157 <- _bor ] [ &a <- { a with current = _bor.final } ] s6)
+          | s6 = UInt64.mul [%#sptrchase'61] {[%#sptrchase'60] (2: UInt64.t)} {cnt}
+              (fun (_x: UInt64.t) -> [ &_159 <- _x ] s7)
+          | s7 = UInt64.add [%#sptrchase'63] {_159} {[%#sptrchase'62] (1: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &_158 <- _x ] s8)
+          | s8 = index_mut_Vec_u64_Global [%#sptrchase'64] {_157} {_158}
+              (fun (_x: MutBorrow.t UInt64.t) -> [ &_156 <- _x ] s9)
+          | s9 = [ &_156 <- { _156 with current = ([%#sptrchase'65] const_LEAF) } ] s10
+          | s10 = -{resolve_refmut_u64 _156}- s11
+          | s11 = [ &_164 <- cnt ] s12
+          | s12 = set_link [%#sptrchase'66] {lnk} {is_left} {_164} (fun (_x: UInt64.t) -> [ &_161 <- _x ] s13)
+          | s13 = MutBorrow.borrow_mut <t_Vec_u64_Global> {a.current}
+              (fun (_bor: MutBorrow.t t_Vec_u64_Global) ->
+                [ &_167 <- _bor ] [ &a <- { a with current = _bor.final } ] s14)
+          | s14 = UInt64.mul [%#sptrchase'68] {[%#sptrchase'67] (2: UInt64.t)} {cur}
+              (fun (_x: UInt64.t) -> [ &_169 <- _x ] s15)
+          | s15 = UInt64.add [%#sptrchase'70] {_169} {[%#sptrchase'69] (1: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &_168 <- _x ] s16)
+          | s16 = index_mut_Vec_u64_Global [%#sptrchase'71] {_167} {_168}
+              (fun (_x: MutBorrow.t UInt64.t) -> [ &_166 <- _x ] s17)
+          | s17 = [ &_166 <- { _166 with current = _161 } ] s18
+          | s18 = -{resolve_refmut_u64 _166}- s19
+          | s19 = any
+            [ any_ (_dest: ()) -> (! -{([@stop_split] [@expl:leaf_links ensures] [%#sptrchase'11] left const_LEAF
+                  = const_NIL
+                /\ right const_LEAF = const_NIL)
+              /\ _dest = leaf_links}-
+              [ &_171 <- _dest ] s20) ] [ _ck -> (! any) ]
+          | s20 = {[@expl:assertion] [%#sptrchase'72] forall t: int. 0 <= t /\ t < UInt64.t'int cnt
+              -> key (view_Vec_u64_Global a.current) t = key before.f0 t}
+            s21
+          | s21 = {[@expl:assertion] [%#sptrchase'73] forall t: int. 0 <= t
+                /\ t < UInt64.t'int cnt /\ t <> UInt64.t'int cur
+              -> Seq.get (view_Vec_u64_Global a.current) (2 * t + 1) = Seq.get before.f0 (2 * t + 1)}
+            s22
+          | s22 = any
+            [ any_ (_dest: ()) ->
+            (! -{([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u64_Global a.current)
+                <= UInt64.t'int const_MAX)
+              /\ ([@stop_split] [@expl:insert_preserves ensures] [%#sptrchase'82] is_bst (view_Vec_u64_Global a.current) (UInt64.t'int cnt
+                + 1) (Seq.snoc paths (Seq.snoc p (UInt64.t'int cnt))))
+              /\ _dest
+              = insert_preserves before.f0 (view_Vec_u64_Global a.current) (UInt64.t'int cnt) (UInt64.t'int cur) nk paths p}-
+              [ &_184 <- _dest ] s23) ]
+            [ _ck -> (! {([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u64_Global a.current)
+                <= UInt64.t'int const_MAX)
+              -> ([@stop_split] [@expl:insert_preserves requires] ([@stop_split] [@expl:insert_preserves requires #0] [%#sptrchase'74] is_bst before.f0 (UInt64.t'int cnt) paths
+                /\ UInt64.t'int cnt + 1 < UInt64.t'int const_NIL
+                /\ 2 * (UInt64.t'int cnt + 1) <= Seq.length (view_Vec_u64_Global a.current)
+                /\ Seq.length (view_Vec_u64_Global a.current) = Seq.length before.f0)
+              /\ ([@stop_split] [@expl:insert_preserves requires #1] [%#sptrchase'75] search_path before.f0 (UInt64.t'int cnt) nk p
+                /\ Seq.get p (Seq.length p - 1) = UInt64.t'int cur)
+              /\ ([@stop_split] [@expl:insert_preserves requires #2] [%#sptrchase'76] key before.f0 (UInt64.t'int cur)
+                  <> nk
+                /\ step before.f0 (UInt64.t'int cur) nk = const_NIL)
+              /\ ([@stop_split] [@expl:insert_preserves requires #3] [%#sptrchase'77] key (view_Vec_u64_Global a.current) (UInt64.t'int cnt)
+                  = nk
+                /\ left (Seq.get (view_Vec_u64_Global a.current) (2 * UInt64.t'int cnt + 1)) = const_NIL
+                /\ right (Seq.get (view_Vec_u64_Global a.current) (2 * UInt64.t'int cnt + 1)) = const_NIL)
+              /\ ([@stop_split] [@expl:insert_preserves requires #4] [%#sptrchase'78] UInt64.lt nk (key before.f0 (UInt64.t'int cur))
+                -> UInt64.t'int (left (Seq.get (view_Vec_u64_Global a.current) (2 * UInt64.t'int cur + 1)))
+                  = UInt64.t'int cnt
+                /\ right (Seq.get (view_Vec_u64_Global a.current) (2 * UInt64.t'int cur + 1))
+                = right (Seq.get before.f0 (2 * UInt64.t'int cur + 1)))
+              /\ ([@stop_split] [@expl:insert_preserves requires #5] [%#sptrchase'79] not UInt64.lt nk (key before.f0 (UInt64.t'int cur))
+                -> UInt64.t'int (right (Seq.get (view_Vec_u64_Global a.current) (2 * UInt64.t'int cur + 1)))
+                  = UInt64.t'int cnt
+                /\ left (Seq.get (view_Vec_u64_Global a.current) (2 * UInt64.t'int cur + 1))
+                = left (Seq.get before.f0 (2 * UInt64.t'int cur + 1)))
+              /\ ([@stop_split] [@expl:insert_preserves requires #6] [%#sptrchase'80] forall t: int. 0 <= t
+                    /\ t < UInt64.t'int cnt -> key (view_Vec_u64_Global a.current) t = key before.f0 t)
+              /\ ([@stop_split] [@expl:insert_preserves requires #7] [%#sptrchase'81] forall t: int. 0 <= t
+                  /\ t < UInt64.t'int cnt /\ t <> UInt64.t'int cur
+                -> Seq.get (view_Vec_u64_Global a.current) (2 * t + 1) = Seq.get before.f0 (2 * t + 1)))}
+              any) ]
+          | s23 = any
+            [ any_ (_dest: ()) ->
+            (! -{([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u64_Global a.current)
+                <= UInt64.t'int const_MAX)
+              /\ ([@stop_split] [@expl:keys_step ensures] ([@stop_split] [@expl:keys_step ensures #0] [%#sptrchase'55] forall j: UInt64.t. UInt64.t'int j
+                      < UInt64.t'int i + 1
+                    -> contains (view_Vec_u64_Global a.current) (UInt64.t'int cnt + 1) (ins_key j))
+                /\ ([@stop_split] [@expl:keys_step ensures #1] [%#sptrchase'56] forall t: int. 0 <= t
+                    /\ t < UInt64.t'int cnt + 1
+                  -> (exists j: UInt64.t. UInt64.t'int j < UInt64.t'int i + 1
+                    /\ key (view_Vec_u64_Global a.current) t = ins_key j)))
+              /\ _dest
+              = keys_step before.f0 (view_Vec_u64_Global a.current) (UInt64.t'int cnt) (UInt64.t'int cnt
+              + 1) (UInt64.t'int i) i}-
+              [ &_193 <- _dest ] s24) ]
+            [ _ck -> (! {([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u64_Global a.current)
+                <= UInt64.t'int const_MAX)
+              -> ([@stop_split] [@expl:keys_step requires] ([@stop_split] [@expl:keys_step requires #0] [%#sptrchase'50] forall j: UInt64.t. UInt64.t'int j
+                    < UInt64.t'int i -> contains before.f0 (UInt64.t'int cnt) (ins_key j))
+              /\ ([@stop_split] [@expl:keys_step requires #1] [%#sptrchase'51] forall t: int. 0 <= t
+                    /\ t < UInt64.t'int cnt
+                  -> (exists j: UInt64.t. UInt64.t'int j < UInt64.t'int i /\ key before.f0 t = ins_key j))
+              /\ ([@stop_split] [@expl:keys_step requires #2] [%#sptrchase'52] forall t: int. 0 <= t
+                    /\ t < UInt64.t'int cnt -> key (view_Vec_u64_Global a.current) t = key before.f0 t)
+              /\ ([@stop_split] [@expl:keys_step requires #3] [%#sptrchase'53] UInt64.t'int i = UInt64.t'int i
+                /\ (UInt64.t'int cnt + 1 = UInt64.t'int cnt \/ UInt64.t'int cnt + 1 = UInt64.t'int cnt + 1)
+                /\ contains (view_Vec_u64_Global a.current) (UInt64.t'int cnt + 1) (ins_key i))
+              /\ ([@stop_split] [@expl:keys_step requires #4] [%#sptrchase'54] UInt64.t'int cnt + 1
+                = UInt64.t'int cnt + 1 -> key (view_Vec_u64_Global a.current) (UInt64.t'int cnt) = ins_key i))}
+              any) ]
+          | s24 = [ &_199 <- [%#sptrchase'83] Seq.snoc paths (Seq.snoc p (UInt64.t'int cnt)) ] s25
+          | s25 = [ &paths <- _199 ] s26
+          | s26 = UInt64.add [%#sptrchase'85] {cnt} {[%#sptrchase'84] (1: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &cnt <- _x ] s27)
+          | s27 = bb35 ]
+        | bb35 = s0
+          [ s0 = wrapping_add [%#sptrchase'86] {plen} {v} (fun (_x: UInt64.t) -> [ &_204 <- _x ] s1)
+          | s1 = [ &plen <- _204 ] s2
+          | s2 = UInt64.add [%#sptrchase'88] {i} {[%#sptrchase'87] (1: UInt64.t)}
+              (fun (_x: UInt64.t) -> [ &i <- _x ] s3)
+          | s3 = bb6 ] ] ]
+    | bb37 = s0
+      [ s0 = -{resolve_refmut_Vec_u64_Global a}- s1
+      | s1 = [ &_ret <- { f0'0 = cnt; f1'0 = plen; f2'0 = paths } ] s2
+      | s2 = return {_ret} ] ]
+    [ & _ret: tup3_usize_u64_Snapshot_Seq_Seq_Int = Any.any_l ()
+    | & a: MutBorrow.t t_Vec_u64_Global = a
+    | & n: UInt64.t = n
+    | & _17: UInt64.t = Any.any_l ()
+    | & _18: MutBorrow.t UInt64.t = Any.any_l ()
+    | & _19: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+    | & _20: MutBorrow.t UInt64.t = Any.any_l ()
+    | & _21: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+    | & cnt: UInt64.t = Any.any_l ()
+    | & plen: UInt64.t = Any.any_l ()
+    | & paths: Seq.seq (Seq.seq int) = Any.any_l ()
+    | & i: UInt64.t = Any.any_l ()
+    | & _27: () = Any.any_l ()
+    | & _55: bool = Any.any_l ()
+    | & nk: UInt64.t = Any.any_l ()
+    | & _59: UInt64.t = Any.any_l ()
+    | & _60: UInt64.t = Any.any_l ()
+    | & _61: UInt64.t = Any.any_l ()
+    | & cur: UInt64.t = Any.any_l ()
+    | & v: UInt64.t = Any.any_l ()
+    | & p: Seq.seq int = Any.any_l ()
+    | & before: tup3_Seq_u64_usize_Seq_Seq_Int = Any.any_l ()
+    | & kc: UInt64.t = Any.any_l ()
+    | & _97: UInt64.t = Any.any_l ()
+    | & _99: UInt64.t = Any.any_l ()
+    | & _102: bool = Any.any_l ()
+    | & _106: () = Any.any_l ()
+    | & lnk: UInt64.t = Any.any_l ()
+    | & _113: UInt64.t = Any.any_l ()
+    | & _115: UInt64.t = Any.any_l ()
+    | & _116: UInt64.t = Any.any_l ()
+    | & is_left: bool = Any.any_l ()
+    | & c: UInt64.t = Any.any_l ()
+    | & _126: bool = Any.any_l ()
+    | & _139: () = Any.any_l ()
+    | & _147: Seq.seq int = Any.any_l ()
+    | & _152: MutBorrow.t UInt64.t = Any.any_l ()
+    | & _153: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+    | & _154: UInt64.t = Any.any_l ()
+    | & _156: MutBorrow.t UInt64.t = Any.any_l ()
+    | & _157: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+    | & _158: UInt64.t = Any.any_l ()
+    | & _159: UInt64.t = Any.any_l ()
+    | & _161: UInt64.t = Any.any_l ()
+    | & _164: UInt64.t = Any.any_l ()
+    | & _166: MutBorrow.t UInt64.t = Any.any_l ()
+    | & _167: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+    | & _168: UInt64.t = Any.any_l ()
+    | & _169: UInt64.t = Any.any_l ()
+    | & _171: () = Any.any_l ()
+    | & _184: () = Any.any_l ()
+    | & _193: () = Any.any_l ()
+    | & _199: Seq.seq (Seq.seq int) = Any.any_l ()
+    | & _204: UInt64.t = Any.any_l ()
+    | & _old: t_Vec_u64_Global = Any.any_l ()
+    | & variant_old_bb6: int = Any.any_l ()
+    | & variant_old_bb13: int = Any.any_l () ]))
+  [ return (result: tup3_usize_u64_Snapshot_Seq_Seq_Int) ->
+  {[@stop_split] [@expl:build ensures] ([@stop_split] [@expl:build ensures #0] [%#sptrchase'90] Seq.length (view_Vec_u64_Global a.final)
+        = Seq.length (view_Vec_u64_Global a.current)
+      /\ 1 <= UInt64.t'int result.f0'0 /\ UInt64.t'int result.f0'0 <= UInt64.t'int n)
+    /\ ([@stop_split] [@expl:build ensures #1] [%#sptrchase'91] is_bst (view_Vec_u64_Global a.final) (UInt64.t'int result.f0'0) result.f2'0)
+    /\ ([@stop_split] [@expl:build ensures #2] [%#sptrchase'92] forall i: UInt64.t. UInt64.t'int i < UInt64.t'int n
+        -> contains (view_Vec_u64_Global a.final) (UInt64.t'int result.f0'0) (ins_key i))
+    /\ ([@stop_split] [@expl:build ensures #3] [%#sptrchase'93] forall t: int. 0 <= t /\ t < UInt64.t'int result.f0'0
+      -> (exists i: UInt64.t. UInt64.t'int i < UInt64.t'int n /\ key (view_Vec_u64_Global a.final) t = ins_key i))}
     (! return {result}) ]

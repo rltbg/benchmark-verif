@@ -1,0 +1,12 @@
+2026-11-13T20:41:18+00:00,1.2,erreur_compil,0,premier jet: modele ck_model, fenetre FIFO
+2026-11-13T20:42:14+00:00,59.0,echec,1,modele par suite de sommes (pas de % ni Int->u64 en logique)
+2026-11-13T20:43:19+00:00,20,echec,2,-X sur run pour voir les buts
+2026-11-13T20:43:34+00:00,19.4,echec,1,lemme fold_snoc, assertions pour block_sums et fenetre initiale
+2026-11-13T20:44:08+00:00,0.6,erreur_compil,0,lemmes window_push et mod_distinct
+2026-11-13T20:44:15+00:00,29.7,echec,2,mod_distinct en forme universelle
+2026-11-13T20:45:19+00:00,32.0,echec,1,mod_distinct via lemme mul_mono
+2026-11-13T20:45:57+00:00,15,echec,1,-X run/window_push
+2026-11-13T20:46:04+00:00,18.2,ok,0,temoins explicites pour l'existentielle de run
+2026-11-13T20:48:58+00:00,6.1,echec,0,--no-cache: calibration z3 impossible (machine chargee) - pas un echec de preuve
+2026-11-13T20:49:20+00:00,13.7,echec,0,cache vide: calibration z3 impossible (machine chargee), pas un echec de preuve -, module alloc
+2026-11-13T20:52:56+00:00,0.9,echec,0,cache elague: calibration z3 encore impossible (charge ~13), pas un echec de preuve, module alloc

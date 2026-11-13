@@ -1,3 +1,6 @@
 2026-11-13T20:18:36+00:00,68.5,echec,2,sort: tranches + syntaxe s[a..b] + copy_from_slice + same_outside
 2026-11-13T20:20:01+00:00,17.7,echec,1,msort: assert perm intermédiaire; run: a[0..n]==a
 2026-11-13T20:20:36+00:00,6.2,ok,0,msort: égalité des sous-suites puis ponctuelle
+2026-11-13T20:28:57+00:00,22.7,echec,1,checksum: spec 0 si non trié
+2026-11-13T20:29:31+00:00,16.7,echec,1,checksum: indications pour l'invariant ok
+2026-11-13T20:29:59+00:00,3.0,ok,0,checksum: invariant prev complet (cas i=0)

@@ -2,7 +2,21 @@
   "profile": [],
   "proofs": {
     "Coma": {
-      "vc_slot": { "prover": "alt-ergo", "time": 0.009 },
+      "vc_slot": {
+        "tactic": "split_vc",
+        "children": [
+          { "prover": "cvc5", "time": 0.016 },
+          { "prover": "alt-ergo", "time": 0.045 },
+          {
+            "tactic": "split_vc",
+            "children": [
+              { "prover": "alt-ergo", "time": 0.036 },
+              { "prover": "alt-ergo", "time": 0.045 }
+            ]
+          },
+          { "prover": "alt-ergo", "time": 0.051 }
+        ]
+      },
       "vc_wrapping_mul": { "prover": "alt-ergo", "time": 0.013 }
     }
   }

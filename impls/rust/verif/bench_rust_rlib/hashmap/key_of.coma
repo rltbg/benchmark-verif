@@ -1,39 +1,67 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 10 0 10 38 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 273 0 273 38 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 11 10 11 14
-let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 11 10 11 32
-let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 11 10 11 48
-let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 11 4 11 49
-let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 11 52 11 53
-let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 10 0 10 38
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 274 18 274 22
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 274 18 274 40
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 274 18 274 56
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 274 12 274 57
+let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 274 60 274 61
+let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 275 20 275 51
+let%span shashmap'5 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 270 10 270 51
+let%span shashmap'6 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 273 0 273 38
+let%span shashmap'7 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 253 10 253 30
+let%span shashmap'8 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 157 10 157 28
+let%span shashmap'9 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 158 22 158 24
+let%span shashmap'10 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 26 4 26 38
+let%span shashmap'11 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 35 4 35 34
 
 use creusot.int.UInt64
 use creusot.prelude.Any
 
-constant const_SEED: UInt64.t = [%#shashmap'4] (2623536861340474335: UInt64.t)
+constant const_SEED: UInt64.t = [%#shashmap'6] (2623536861340474335: UInt64.t)
 
 let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
   [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
     (! return {result}) ]
 
-let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any [ return (result: UInt64.t) -> (! return {result}) ]
+function mix64_l [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 25 0 25 29] (x: UInt64.t) : UInt64.t =
+  [%#shashmap'10] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+let mix64 (x: UInt64.t) (return (x'0: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:mix64 ensures] [%#shashmap'7] result = mix64_l x}
+    (! return {result}) ]
+
+function or1_nz [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 158 0 158 21] (x: UInt64.t) : () =
+  [%#shashmap'9] ()
+
+axiom or1_nz_spec: forall x: UInt64.t. [%#shashmap'8] UInt64.bw_or x (1: UInt64.t) <> (0: UInt64.t)
+
+function key_l [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 34 0 34 37] (off: UInt64.t) (i: UInt64.t) : UInt64.t
+ = [%#shashmap'11] UInt64.bw_or (mix64_l (UInt64.add (UInt64.add const_SEED off) i)) (1: UInt64.t)
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let key_of [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 10 0 10 38] (off: UInt64.t) (i: UInt64.t)
+let key_of [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 273 0 273 38] (off: UInt64.t) (i: UInt64.t)
   (return (x: UInt64.t)) = (! bb0
   [ bb0 = s0
-    [ s0 = wrapping_add [%#shashmap'0] {[%#shashmap] const_SEED} {off} (fun (_x: UInt64.t) -> [ &_5 <- _x ] s1)
-    | s1 = wrapping_add [%#shashmap'1] {_5} {i} (fun (_x: UInt64.t) -> [ &_4 <- _x ] s2)
-    | s2 = mix64 [%#shashmap'2] {_4} (fun (_x: UInt64.t) -> [ &_3 <- _x ] s3)
-    | s3 = [ &_ret <- UInt64.bw_or _3 ([%#shashmap'3] (1: UInt64.t)) ] s4
-    | s4 = return {_ret} ] ]
+    [ s0 = wrapping_add [%#shashmap'0] {[%#shashmap] const_SEED} {off} (fun (_x: UInt64.t) -> [ &_9 <- _x ] s1)
+    | s1 = wrapping_add [%#shashmap'1] {_9} {i} (fun (_x: UInt64.t) -> [ &_8 <- _x ] s2)
+    | s2 = mix64 [%#shashmap'2] {_8} (fun (_x: UInt64.t) -> [ &_7 <- _x ] s3)
+    | s3 = [ &r <- UInt64.bw_or _7 ([%#shashmap'3] (1: UInt64.t)) ] s4
+    | s4 =
+      {[@expl:assertion] [%#shashmap'4] let _ = or1_nz (mix64_l (UInt64.add (UInt64.add const_SEED off) i)) in true}
+      s5
+    | s5 = [ &_ret <- r ] s6
+    | s6 = return {_ret} ] ]
   [ & _ret: UInt64.t = Any.any_l ()
   | & off: UInt64.t = off
   | & i: UInt64.t = i
-  | & _3: UInt64.t = Any.any_l ()
-  | & _4: UInt64.t = Any.any_l ()
-  | & _5: UInt64.t = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]
+  | & r: UInt64.t = Any.any_l ()
+  | & _7: UInt64.t = Any.any_l ()
+  | & _8: UInt64.t = Any.any_l ()
+  | & _9: UInt64.t = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:key_of ensures] [%#shashmap'5] result = key_l off i
+    /\ result <> (0: UInt64.t)}
+    (! return {result}) ]

@@ -1,2 +1,8 @@
 horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:14:03+00:00,73.4,ok,0,état initial du dépôt (même appel que lines)
+2026-11-13T20:45:27+00:00,221.3,echec,7,1re vérif bfs réécrit: lemmes cnt_bounds/psum_*; count_deg; prefix; fill; bfs 4 buts
+2026-11-13T20:49:48+00:00,95.2,echec,4,invariants séparés + indications; reste psum_total; prefix; fill; bfs 2 buts
+2026-11-13T20:51:27+00:00,0.6,echec,1,relance -X psum_total : cas de base j=0 manquant (cache)
+2026-11-13T20:51:41+00:00,1.5,echec,2,relance -X bfs (cache): les appels de lemme suivis de 'true' sont effacés
+2026-11-13T20:52:11+00:00,71.3,echec,2,lemmes avec conclusion explicite; reste fill l.318 et bfs l.378
+2026-11-13T20:53:37+00:00,48.3,ok,0,bfs complet prouvé (étapes cnt/psum et file explicitées)

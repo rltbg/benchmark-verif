@@ -5,7 +5,23 @@
       "vc_ckfold": { "prover": "alt-ergo", "time": 0.008 },
       "vc_key_of": { "prover": "alt-ergo", "time": 0.012 },
       "vc_lookup": { "prover": "alt-ergo", "time": 0.012 },
-      "vc_lookup_all": { "prover": "alt-ergo", "time": 0.015 }
+      "vc_lookup_all": {
+        "tactic": "compute_specified",
+        "children": [
+          {
+            "tactic": "split_vc",
+            "children": [
+              { "prover": "alt-ergo", "time": 0.069 },
+              { "prover": "cvc5", "time": 0.016 },
+              { "prover": "alt-ergo", "time": 0.077 },
+              { "prover": "alt-ergo", "time": 0.018 },
+              { "prover": "alt-ergo", "time": 0.035 },
+              { "prover": "alt-ergo", "time": 0.022 },
+              { "prover": "alt-ergo", "time": 0.111 }
+            ]
+          }
+        ]
+      }
     }
   }
 }

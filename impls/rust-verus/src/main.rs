@@ -4,6 +4,10 @@ use std::time::Instant;
 
 pub mod common;
 // @@MODS@@ (une ligne `pub mod <nom>;`)
+pub mod ptrchase;
+pub mod alloc;
+pub mod sieve;
+pub mod hashmap;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
@@ -16,6 +20,10 @@ fn main() {
     let t0 = Instant::now();
     let ck: u64 = match args[1].as_str() {
         // @@DISPATCH@@ (une ligne `"<nom>" => <nom>::run(n, threads),`)
+        "ptrchase" => ptrchase::run(n, threads),
+        "alloc" => alloc::run(n, threads),
+        "sieve" => sieve::run(n, threads),
+        "hashmap" => hashmap::run(n, threads),
         _ => {
             eprintln!("workload inconnu");
             std::process::exit(2);

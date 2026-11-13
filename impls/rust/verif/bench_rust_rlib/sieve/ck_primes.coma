@@ -1,0 +1,47 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 48 0 48 31 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 62 16 62 28
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span ssieve = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 47 10 47 11
+let%span ssieve'0 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 48 0 48 31
+let%span ssieve'1 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 17 16 17 71
+let%span ssieve'2 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 42 4 42 31
+
+use creusot.int.UInt64
+use int.ComputerDivision
+use int.Int
+
+constant const_CK_INIT: UInt64.t = [%#ssieve'0] (14695981039346656037: UInt64.t)
+
+predicate is_prime [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 16 0 16 31] (p: int) =
+  [%#ssieve'1] 2 <= p /\ (forall d: int. 2 <= d /\ d < p -> ComputerDivision.mod p d <> 0)
+
+predicate gt_log_u64 [@inline:trivial] (self: UInt64.t) (other: UInt64.t) = [%#sord] UInt64.lt other self
+
+meta "rewrite_def" predicate gt_log_u64
+
+predicate well_founded_relation_u64 [@inline:trivial] (self: UInt64.t) (other: UInt64.t) =
+  [%#swell_founded] gt_log_u64 self other
+
+meta "rewrite_def" predicate well_founded_relation_u64
+
+function fold [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 41 0 41 35] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+ = [%#ssieve'2] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant m : UInt64.t
+
+function ck_primes [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 48 0 48 31] (m: UInt64.t) : UInt64.t
+
+goal vc_ck_primes: if UInt64.lt m (2: UInt64.t) then
+    true
+  else
+    if is_prime (UInt64.t'int m) then
+      [@expl:variant decreases] well_founded_relation_u64 ([%#ssieve] m) ([%#ssieve] UInt64.sub m (1: UInt64.t))
+    else
+      [@expl:variant decreases] well_founded_relation_u64 ([%#ssieve] m) ([%#ssieve] UInt64.sub m (1: UInt64.t))
+  
+  

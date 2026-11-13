@@ -1,0 +1,22 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 66 0 66 42 *)
+
+let%span ssieve = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 64 11 64 46
+let%span ssieve'0 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 65 10 65 30
+
+use int.ComputerDivision
+use int.Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant d : int
+
+constant q : int
+
+constant r : int
+
+function mod_mul_add [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 66 0 66 42] (d: int) (q: int) (r: int) : ()
+
+goal vc_mod_mul_add: ([%#ssieve] 1 <= d /\ 0 <= q /\ 0 <= r /\ r < d)
+  -> ([@stop_split] [@expl:mod_mul_add ensures] [%#ssieve'0] ComputerDivision.mod (d * q + r) d = r)

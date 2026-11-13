@@ -1,42 +1,72 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 103 0 103 27 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 422 0 422 27 *)
 
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 777 16 777 35
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 423 13 423 18
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 424 18 424 24
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 425 17 425 21
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 428 14 428 24
+let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 427 16 427 48
+let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 430 22 430 61
+let%span shashmap'5 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 431 8 431 18
+let%span shashmap'6 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 432 14 432 15
+let%span shashmap'7 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 432 8 432 15
+let%span shashmap'8 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 434 27 434 28
+let%span shashmap'9 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 434 27 434 34
+let%span shashmap'10 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 434 21 434 25
+let%span shashmap'11 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 435 4 435 34
+let%span shashmap'12 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 436 22 436 37
+let%span shashmap'13 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 437 41 437 42
+let%span shashmap'14 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 437 44 437 51
+let%span shashmap'15 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 437 14 437 55
+let%span shashmap'16 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 438 4 438 48
+let%span shashmap'17 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 418 11 418 36
+let%span shashmap'18 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 419 10 420 84
+let%span shashmap'19 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 46 16 46 59
+let%span shashmap'20 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 169 10 169 15
+let%span shashmap'21 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 170 11 170 26
+let%span shashmap'22 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 171 10 171 29
+let%span shashmap'23 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 173 4 175 5
+let%span shashmap'24 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 382 11 382 78
+let%span shashmap'25 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 383 11 383 11
+let%span shashmap'26 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 384 10 384 79
+let%span shashmap'27 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 80 10 80 11
+let%span shashmap'28 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 83 8 83 99
+let%span shashmap'29 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 422 0 422 27
+let%span shashmap'30 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 401 11 401 80
+let%span shashmap'31 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 402 11 402 25
+let%span shashmap'32 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 403 10 403 54
+let%span shashmap'33 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 89 10 89 11
+let%span shashmap'34 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 92 8 92 108
+let%span shashmap'35 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 137 8 148 111
+let%span shashmap'36 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 128 10 128 11
+let%span shashmap'37 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 130 4 130 97
+let%span shashmap'38 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 72 4 75 5
+let%span shashmap'39 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 35 4 35 34
+let%span shashmap'40 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 40 4 40 31
+let%span shashmap'41 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 63 4 66 5
+let%span shashmap'42 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 101 4 101 12
+let%span shashmap'43 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 113 4 113 44
+let%span shashmap'44 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 52 16 52 46
+let%span shashmap'45 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 107 4 107 49
+let%span shashmap'46 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 26 4 26 38
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 96 22 96 41
-let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 97 22 97 22
-let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
-let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span smapping = "/opt/tools/creusot/creusot-std/src/logic/mapping.rs" 66 8 66 19
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 407 8 407 40
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 96 22 96 41
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 97 22 97 22
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
 let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
-let%span smacros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
-let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 104 13 104 18
-let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 105 18 105 24
-let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 17 106 21
-let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 108 14 108 22
-let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 107 16 107 71
-let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 109 27 109 29
-let%span shashmap'5 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 109 40 109 48
-let%span shashmap'6 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 110 8 110 18
-let%span shashmap'7 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 111 14 111 15
-let%span shashmap'8 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 111 8 111 15
-let%span shashmap'9 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 113 32 113 33
-let%span shashmap'10 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 113 32 113 39
-let%span shashmap'11 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 113 26 113 30
-let%span shashmap'12 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 114 4 114 34
-let%span shashmap'13 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 115 41 115 42
-let%span shashmap'14 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 115 44 115 51
-let%span shashmap'15 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 115 14 115 52
-let%span shashmap'16 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 116 4 116 45
-let%span shashmap'17 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 102 11 102 36
-let%span shashmap'18 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 75 11 75 108
-let%span shashmap'19 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 76 10 76 33
-let%span shashmap'20 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 103 0 103 27
-let%span shashmap'21 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 88 11 88 108
 
 use creusot.int.UInt64
 use creusot.int.UInt32
+use bv.Pow2int
 use seq.Seq
 use creusot.prelude.MutBorrow
+use map.Map
+use map.Const
 use creusot.prelude.Any
 use int.Int
 
@@ -53,6 +83,17 @@ predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
 
 meta "rewrite_def" predicate well_founded_relation_Int
 
+predicate shape [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 45 0 45 41] (cap: UInt64.t) (lg: UInt32.t) =
+  [%#shashmap'19] 1 <= UInt32.t'int lg /\ UInt32.t'int lg <= 27 /\ UInt64.t'int cap = Pow2int.pow2 (UInt32.t'int lg)
+
+function pow2_lt [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 172 0 172 30] (a: int) (b: int) : ()
+
+axiom pow2_lt_def: forall a: int, b: int [pow2_lt a b]. ([%#shashmap'21] 0 <= a /\ a < b)
+    -> pow2_lt a b = ([%#shashmap'23] if a + 1 < b then pow2_lt (a + 1) b else ())
+
+axiom pow2_lt_spec: forall a: int, b: int. ([%#shashmap'21] 0 <= a /\ a < b)
+    -> ([%#shashmap'22] Pow2int.pow2 a < Pow2int.pow2 b)
+
 type t_Vec_u64_Global
 
 constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
@@ -60,51 +101,145 @@ constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
 function view_Vec_u64_Global (self: t_Vec_u64_Global) : Seq.seq UInt64.t
 
 axiom view_Vec_u64_Global_spec:
-  forall self: t_Vec_u64_Global [view_Vec_u64_Global self]. [%#svec'1] Seq.length (view_Vec_u64_Global self)
+  forall self: t_Vec_u64_Global [view_Vec_u64_Global self]. [%#svec'2] Seq.length (view_Vec_u64_Global self)
     <= UInt64.t'int const_MAX
 
 function index_Vec_u64_Global [@inline:trivial] (self: t_Vec_u64_Global) (ix: int) : UInt64.t =
-  [%#svec'2] Seq.get (view_Vec_u64_Global self) ix
+  [%#svec'3] Seq.get (view_Vec_u64_Global self) ix
 
 meta "rewrite_def" function index_Vec_u64_Global
 
 let from_elem_u64 (elem: UInt64.t) (n: UInt64.t) (return (x: t_Vec_u64_Global)) = any
   [ return (result: t_Vec_u64_Global) ->
-  {[@stop_split] [@expl:from_elem_u64 ensures] ([@stop_split] [@expl:from_elem ensures #0] [%#svec] Seq.length (view_Vec_u64_Global result)
+  {[@stop_split] [@expl:from_elem_u64 ensures] ([@stop_split] [@expl:from_elem ensures #0] [%#svec'0] Seq.length (view_Vec_u64_Global result)
       = UInt64.t'int n)
-    /\ ([@stop_split] [@expl:from_elem ensures #1] [%#svec'0] forall i: int. 0 <= i /\ i < UInt64.t'int n
+    /\ ([@stop_split] [@expl:from_elem ensures #1] [%#svec'1] forall i: int. 0 <= i /\ i < UInt64.t'int n
       -> index_Vec_u64_Global result i = elem)}
     (! return {result}) ]
 
+type t_Option_u64 = None | Some UInt64.t
+
+function key_at [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 100 0 100 41] (t: Seq.seq UInt64.t) (s: int) : UInt64.t
+ = [%#shashmap'42] Seq.get t (2 * s)
+
+function index_Mapping_u64_Option_u64 [@inline:trivial] (self: Map.map UInt64.t t_Option_u64) (a: UInt64.t) : t_Option_u64
+ = [%#smapping] Map.get self a
+
+meta "rewrite_def" function index_Mapping_u64_Option_u64
+
+function dist [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 112 0 112 44] (h: int) (s: int) (cap: int) : int
+ = [%#shashmap'43] if h <= s then s - h else s + cap - h
+
+function shr_u64 [@inline:trivial] (self: UInt64.t) (rhs: UInt32.t) : UInt64.t =
+  [%#snum] UInt64.shr self (UInt64.of_int (UInt32.t'int rhs))
+
+meta "rewrite_def" function shr_u64
+
+constant const_PHI: UInt64.t = [%#shashmap'29] (11400714819323198485: UInt64.t)
+
+function home [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 51 0 51 37] (key: UInt64.t) (lg: UInt32.t) : int
+ = [%#shashmap'44] UInt64.t'int (shr_u64 (UInt64.mul key const_PHI) (UInt32.sub (64: UInt32.t) lg))
+
+function at' [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 0 106 42] (h: int) (d: int) (cap: int) : int
+ = [%#shashmap'45] if h + d < cap then h + d else h + d - cap
+
+predicate table_inv [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 135 0 135 66] (t: Seq.seq UInt64.t) (cap: int) (lg: UInt32.t) (m: Map.map UInt64.t t_Option_u64) =
+  [%#shashmap'35] Seq.length t = 2 * cap
+  /\ (forall s: int. 0 <= s /\ s < cap /\ key_at t s <> (0: UInt64.t)
+      -> index_Mapping_u64_Option_u64 m (key_at t s) = Some (Seq.get t (2 * s + 1)))
+  /\ (forall s: int, d: int. 0 <= s
+        /\ s < cap /\ key_at t s <> (0: UInt64.t) /\ 0 <= d /\ d < dist (home (key_at t s) lg) s cap
+      -> key_at t (at' (home (key_at t s) lg) d cap) <> (0: UInt64.t))
+  /\ (forall s1: int, s2: int. 0 <= s1
+        /\ s1 < cap /\ 0 <= s2 /\ s2 < cap /\ key_at t s1 <> (0: UInt64.t) /\ key_at t s1 = key_at t s2 -> s1 = s2)
+  /\ (forall k: UInt64.t. index_Mapping_u64_Option_u64 m k <> None
+    -> k <> (0: UInt64.t) /\ (exists s: int. 0 <= s /\ s < cap /\ key_at t s = k))
+
+function add [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 71 0 71 45] (m: Map.map UInt64.t t_Option_u64) (k: UInt64.t) (v: UInt64.t) : Map.map UInt64.t t_Option_u64
+ = [%#shashmap'38] match index_Mapping_u64_Option_u64 m k with
+    | Some w -> Map.set m k (Some (UInt64.add w v))
+    | None -> Map.set m k (Some v)
+    end
+
+function mix64_l [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 25 0 25 29] (x: UInt64.t) : UInt64.t =
+  [%#shashmap'46] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+constant const_SEED: UInt64.t = [%#shashmap'29] (2623536861340474335: UInt64.t)
+
+function key_l [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 34 0 34 37] (off: UInt64.t) (i: UInt64.t) : UInt64.t
+ = [%#shashmap'39] UInt64.bw_or (mix64_l (UInt64.add (UInt64.add const_SEED off) i)) (1: UInt64.t)
+
+function model [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 81 0 81 29] (i: UInt64.t) : Map.map UInt64.t t_Option_u64
+
+axiom model_def: forall i: UInt64.t [model i]. model i
+    = ([%#shashmap'28] if i = (0: UInt64.t) then
+      Const.const (None)
+    else
+      add (model (UInt64.sub i (1: UInt64.t))) (key_l (0: UInt64.t) (UInt64.sub i (1: UInt64.t))) i
+    )
+
+function occ [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 129 0 129 38] (t: Seq.seq UInt64.t) (c: int) : int
+
+axiom occ_def: forall t: Seq.seq UInt64.t, c: int [occ t c]. occ t c
+    = ([%#shashmap'37] if c <= 0 then
+      0
+    else
+      if key_at t (c - 1) = (0: UInt64.t) then occ t (c - 1) else occ t (c - 1) + 1
+    )
+
 let insert_all (t: MutBorrow.t t_Vec_u64_Global) (cap: UInt64.t) (lg: UInt32.t) (n: UInt64.t) (return (x: ())) =
-{[@stop_split] [@expl:insert_all requires] [%#shashmap'18] 2 <= UInt64.t'int cap
-  /\ UInt64.t'int cap <= 134217728
-  /\ Seq.length (view_Vec_u64_Global t.current) = 2 * UInt64.t'int cap
-  /\ 1 <= UInt32.t'int lg /\ UInt32.t'int lg <= 27 /\ UInt64.t'int n <= 67108864}
+{[@stop_split] [@expl:insert_all requires] ([@stop_split] [@expl:insert_all requires #0] [%#shashmap'24] shape cap lg
+    /\ Seq.length (view_Vec_u64_Global t.current) = 2 * UInt64.t'int cap
+    /\ 1 <= UInt64.t'int n /\ 2 * UInt64.t'int n <= UInt64.t'int cap)
+  /\ ([@stop_split] [@expl:insert_all requires #1] [%#shashmap'25] forall j: int. 0 <= j
+      /\ j < Seq.length (view_Vec_u64_Global t.current) -> index_Vec_u64_Global t.current j = (0: UInt64.t))}
   any
   [ return (result: ()) ->
-  {[@stop_split] [@expl:insert_all ensures] [%#shashmap'19] Seq.length (view_Vec_u64_Global t.final)
-    = Seq.length (view_Vec_u64_Global t.current)}
+  {[@stop_split] [@expl:insert_all ensures] [%#shashmap'26] table_inv (view_Vec_u64_Global t.final) (UInt64.t'int cap) lg (model n)
+    /\ occ (view_Vec_u64_Global t.final) (UInt64.t'int cap) <= UInt64.t'int n}
     (! return {result}) ]
 
 predicate resolve_refmut_Vec_u64_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u64_Global) = _1.final = _1.current
 
 meta "rewrite_def" predicate resolve_refmut_Vec_u64_Global
 
-constant const_CK_INIT: UInt64.t = [%#shashmap'20] (14695981039346656037: UInt64.t)
+constant const_CK_INIT: UInt64.t = [%#shashmap'29] (14695981039346656037: UInt64.t)
+
+function fold [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 39 0 39 35] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+ = [%#shashmap'40] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
+
+function get0 [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 62 0 62 36] (m: Map.map UInt64.t t_Option_u64) (k: UInt64.t) : UInt64.t
+ = [%#shashmap'41] match index_Mapping_u64_Option_u64 m k with
+    | Some v -> v
+    | None -> (0: UInt64.t)
+    end
+
+function ck_lookups [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 90 0 90 62] (m: Map.map UInt64.t t_Option_u64) (off: UInt64.t) (i: UInt64.t) (ck0: UInt64.t) : UInt64.t
+
+axiom ck_lookups_def:
+  forall m: Map.map UInt64.t t_Option_u64, off: UInt64.t, i: UInt64.t, ck0: UInt64.t [ck_lookups m off i ck0]. ck_lookups m off i ck0
+    = ([%#shashmap'34] if i = (0: UInt64.t) then
+      ck0
+    else
+      fold (ck_lookups m off (UInt64.sub i (1: UInt64.t)) ck0) (get0 m (key_l off (UInt64.sub i (1: UInt64.t))))
+    )
 
 let lookup_all (t: t_Vec_u64_Global) (cap: UInt64.t) (lg: UInt32.t) (n: UInt64.t) (off: UInt64.t) (ck0: UInt64.t)
-  (return (x: UInt64.t)) = {[@stop_split] [@expl:lookup_all requires] [%#shashmap'21] 2 <= UInt64.t'int cap
-  /\ UInt64.t'int cap <= 134217728
-  /\ Seq.length (view_Vec_u64_Global t) = 2 * UInt64.t'int cap
-  /\ 1 <= UInt32.t'int lg /\ UInt32.t'int lg <= 27 /\ UInt64.t'int n <= 67108864}
-  any [ return (result: UInt64.t) -> (! return {result}) ]
+  (m: Map.map UInt64.t t_Option_u64) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:lookup_all requires] ([@stop_split] [@expl:lookup_all requires #0] [%#shashmap'30] shape cap lg
+    /\ table_inv (view_Vec_u64_Global t) (UInt64.t'int cap) lg m
+    /\ occ (view_Vec_u64_Global t) (UInt64.t'int cap) < UInt64.t'int cap)
+  /\ ([@stop_split] [@expl:lookup_all requires #1] [%#shashmap'31] UInt64.t'int n <= 67108864)}
+  any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:lookup_all ensures] [%#shashmap'32] result
+    = ck_lookups m off n ck0}
+    (! return {result}) ]
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let run [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 103 0 103 27] (n: UInt64.t) (return (x: UInt64.t)) =
+let run [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 422 0 422 27] (n: UInt64.t) (return (x: UInt64.t)) =
 {[@stop_split] [@expl:run requires] [%#shashmap'17] 1 <= UInt64.t'int n /\ UInt64.t'int n <= 67108864}
   (! bb0
   [ bb0 = s0
@@ -113,54 +248,53 @@ let run [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 103 0 103 27] (
     | s2 = [ &lg <- [%#shashmap'1] (1: UInt32.t) ] s3
     | s3 = bb1 ]
   | bb1 = bb1invariant
-    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#shashmap'2] 27 - UInt32.t'int lg)}
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#shashmap'2] UInt64.t'int n2
+      - UInt64.t'int cap)}
       bb1invariant
-    | bb1invariant = {[@expl:loop invariant] [%#shashmap'3] 2 <= UInt64.t'int cap
-      /\ UInt64.t'int cap <= 134217728 /\ 1 <= UInt32.t'int lg /\ UInt32.t'int lg <= 27}
-      (! [ &variant_old_bb1 <- [%#shashmap'2] 27 - UInt32.t'int lg ] s0)
-      [ s0 = [ &_17 <- UInt64.lt cap n2 ] s1 | s1 = any [ br0 -> {_17 = false} (! bb9) | br1 -> {_17} (! bb3) ] ]
+    | bb1invariant = {[@expl:loop invariant] [%#shashmap'3] shape cap lg /\ UInt64.t'int cap < 2 * UInt64.t'int n2}
+      (! [ &variant_old_bb1 <- [%#shashmap'2] UInt64.t'int n2 - UInt64.t'int cap ] s0)
+      [ s0 = [ &_21 <- UInt64.lt cap n2 ] s1 | s1 = any [ br0 -> {_21 = false} (! bb4) | br1 -> {_21} (! bb3) ] ]
       [ bb3 = s0
-        [ s0 = [ &_20 <- UInt32.lt lg ([%#shashmap'4] (27: UInt32.t)) ] s1
-        | s1 = any [ br0 -> {_20 = false} (! bb9) | br1 -> {_20} (! bb4) ] ]
-      | bb4 = s0
-        [ s0 = [ &_22 <- UInt64.le cap ([%#shashmap'5] (33554432: UInt64.t)) ] s1
-        | s1 = any [ br0 -> {_22 = false} (! bb9) | br1 -> {_22} (! bb5) ] ]
-      | bb5 = s0
-        [ s0 = UInt64.add [%#shashmap'6] {cap} {cap} (fun (_x: UInt64.t) -> [ &cap <- _x ] s1)
-        | s1 = UInt32.add [%#shashmap'8] {lg} {[%#shashmap'7] (1: UInt32.t)} (fun (_x: UInt32.t) -> [ &lg <- _x ] s2)
-        | s2 = bb1 ] ] ]
-  | bb9 = s0
-    [ s0 = UInt64.mul [%#shashmap'10] {[%#shashmap'9] (2: UInt64.t)} {cap} (fun (_x: UInt64.t) -> [ &_27 <- _x ] s1)
-    | s1 = from_elem_u64 [%#smacros] {[%#shashmap'11] (0: UInt64.t)} {_27}
-        (fun (_x: t_Vec_u64_Global) -> [ &t <- _x ] s2)
+        [ s0 = {[@expl:assertion] [%#shashmap'4] UInt32.t'int lg < 27
+          \/ (let _ = pow2_lt 26 (UInt32.t'int lg) in false)}
+          s1
+        | s1 = UInt64.add [%#shashmap'5] {cap} {cap} (fun (_x: UInt64.t) -> [ &cap <- _x ] s2)
+        | s2 = UInt32.add [%#shashmap'7] {lg} {[%#shashmap'6] (1: UInt32.t)} (fun (_x: UInt32.t) -> [ &lg <- _x ] s3)
+        | s3 = bb1 ] ] ]
+  | bb4 = s0
+    [ s0 = UInt64.mul [%#shashmap'9] {[%#shashmap'8] (2: UInt64.t)} {cap} (fun (_x: UInt64.t) -> [ &_30 <- _x ] s1)
+    | s1 = from_elem_u64 [%#svec] {[%#shashmap'10] (0: UInt64.t)} {_30} (fun (_x: t_Vec_u64_Global) -> [ &t <- _x ] s2)
     | s2 = MutBorrow.borrow_mut <t_Vec_u64_Global> {t}
-        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_31 <- _bor ] [ &t <- _bor.final ] s3)
-    | s3 = MutBorrow.borrow_final <t_Vec_u64_Global> {_31.current} {MutBorrow.get_id _31}
-        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_30 <- _bor ] [ &_31 <- { _31 with current = _bor.final } ] s4)
-    | s4 = insert_all [%#shashmap'12] {_30} {cap} {lg} {n} (fun (_x: ()) -> [ &_29 <- _x ] s5)
-    | s5 = -{resolve_refmut_Vec_u64_Global _31}- s6
-    | s6 = [ &_37 <- t ] s7
-    | s7 = lookup_all [%#shashmap'15] {_37} {cap} {lg} {n} {[%#shashmap'13] (0: UInt64.t)}
-        {[%#shashmap'14] const_CK_INIT} (fun (_x: UInt64.t) -> [ &ck1 <- _x ] s8)
-    | s8 = [ &_42 <- t ] s9
-    | s9 = [ &_46 <- n ] s10
-    | s10 = lookup_all [%#shashmap'16] {_42} {cap} {lg} {n} {_46} {ck1} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s11)
-    | s11 = return {_ret} ] ]
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_34 <- _bor ] [ &t <- _bor.final ] s3)
+    | s3 = MutBorrow.borrow_final <t_Vec_u64_Global> {_34.current} {MutBorrow.get_id _34}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_33 <- _bor ] [ &_34 <- { _34 with current = _bor.final } ] s4)
+    | s4 = insert_all [%#shashmap'11] {_33} {cap} {lg} {n} (fun (_x: ()) -> [ &_32 <- _x ] s5)
+    | s5 = -{resolve_refmut_Vec_u64_Global _34}- s6
+    | s6 = [ &m <- [%#shashmap'12] model n ] s7
+    | s7 = [ &_43 <- t ] s8
+    | s8 = lookup_all [%#shashmap'15] {_43} {cap} {lg} {n} {[%#shashmap'13] (0: UInt64.t)}
+        {[%#shashmap'14] const_CK_INIT} {m} (fun (_x: UInt64.t) -> [ &ck1 <- _x ] s9)
+    | s9 = [ &_49 <- t ] s10
+    | s10 = [ &_53 <- n ] s11
+    | s11 = lookup_all [%#shashmap'16] {_49} {cap} {lg} {n} {_53} {ck1} {m} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s12)
+    | s12 = return {_ret} ] ]
   [ & _ret: UInt64.t = Any.any_l ()
   | & n: UInt64.t = n
   | & n2: UInt64.t = Any.any_l ()
   | & cap: UInt64.t = Any.any_l ()
   | & lg: UInt32.t = Any.any_l ()
-  | & _17: bool = Any.any_l ()
-  | & _20: bool = Any.any_l ()
-  | & _22: bool = Any.any_l ()
+  | & _21: bool = Any.any_l ()
   | & t: t_Vec_u64_Global = Any.any_l ()
-  | & _27: UInt64.t = Any.any_l ()
-  | & _29: () = Any.any_l ()
-  | & _30: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
-  | & _31: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _30: UInt64.t = Any.any_l ()
+  | & _32: () = Any.any_l ()
+  | & _33: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _34: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & m: Map.map UInt64.t t_Option_u64 = Any.any_l ()
   | & ck1: UInt64.t = Any.any_l ()
-  | & _37: t_Vec_u64_Global = Any.any_l ()
-  | & _42: t_Vec_u64_Global = Any.any_l ()
-  | & _46: UInt64.t = Any.any_l ()
-  | & variant_old_bb1: int = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]
+  | & _43: t_Vec_u64_Global = Any.any_l ()
+  | & _49: t_Vec_u64_Global = Any.any_l ()
+  | & _53: UInt64.t = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:run ensures] [%#shashmap'18] result
+    = ck_lookups (model n) n n (ck_lookups (model n) (0: UInt64.t) n const_CK_INIT)}
+    (! return {result}) ]

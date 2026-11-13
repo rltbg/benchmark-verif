@@ -1,0 +1,8 @@
+2026-11-13T20:37:49+00:00,6.2,echec,3,première version Verus
+2026-11-13T20:38:21+00:00,6.1,echec,2,merge: preuves forall explicites; usize 64 bits; le: têtes
+2026-11-13T20:38:38+00:00,3.7,echec,1,merge: appels explicites key_trans; le: assert sur la tête
+2026-11-13T20:38:50+00:00,3.8,echec,1,le: diagnostic du retour anticipé
+2026-11-13T20:39:00+00:00,4.7,echec,1,le: suppression du masquage des paramètres a/b
+2026-11-13T20:39:10+00:00,4.0,echec,1,le: diagnostic 2
+2026-11-13T20:39:21+00:00,4.9,ok,0,le: définition de sa/sb dans l'invariant (isolation des boucles)
+2026-11-13T20:39:51+00:00,4.7,ok,0,précondition 32n < usize::MAX au lieu de global size_of usize

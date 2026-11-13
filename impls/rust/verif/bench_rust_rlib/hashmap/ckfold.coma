@@ -1,0 +1,32 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 266 0 266 33 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 267 26 267 39
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 267 4 267 40
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 263 10 263 31
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 40 4 40 31
+
+use creusot.int.UInt64
+use creusot.prelude.Any
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+function fold [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 39 0 39 35] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+ = [%#shashmap'2] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let ckfold [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 266 0 266 33] (ck: UInt64.t) (v: UInt64.t)
+  (return (x: UInt64.t)) = (! bb0
+  [ bb0 = s0
+    [ s0 = [ &_6 <- UInt64.bw_xor ck v ] s1
+    | s1 = wrapping_mul [%#shashmap'0] {_6} {[%#shashmap] (1099511628211: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_ret <- _x ] s2)
+    | s2 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l () | & ck: UInt64.t = ck | & v: UInt64.t = v | & _6: UInt64.t = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:ckfold ensures] [%#shashmap'1] result = fold ck v}
+    (! return {result}) ]

@@ -1,0 +1,16 @@
+2026-11-13T20:43:51+00:00,1.0,erreur_compil,0,première version: threads via creusot_std::std::thread; récursion
+2026-11-13T20:44:01+00:00,0.9,erreur_compil,0,closure: old(len) dans ensures
+2026-11-13T20:44:08+00:00,0.8,erreur_compil,0,closures scope: old(b)/old(t)
+2026-11-13T20:44:13+00:00,0.8,erreur_compil,0,closure: n remplacé par old(ra)@.len()
+2026-11-13T20:44:34+00:00,95.1,echec,4,snapshots des emprunts ma/ra avant déplacement
+2026-11-13T20:46:50+00:00,1.2,erreur_compil,0,lemmes sorted_shift/sorted_prefix; requires lo<=mid<=hi dans la closure
+2026-11-13T20:46:59+00:00,165.9,echec,3,snapshot a0 de l'emprunt paramètre
+2026-11-13T20:50:11+00:00,73.3,echec,1,split_concat explicite sur ^a
+2026-11-13T20:52:24+00:00,40.3,echec,1,lemmes runs_concat/pairs_concat (logique pure; sans prophéties)
+2026-11-13T20:53:27+00:00,10.1,ok,0,run: indications sur les nouvelles bornes
+2026-11-13T20:53:43+00:00,1.4,ok,0,parsort complet
+2026-11-13T20:54:21+00:00,0.9,erreur_compil,0,closures sans contrat (spec inférée du corps) : attributs sur expressions refusés par rustc stable
+2026-11-13T20:54:33+00:00,39.1,echec,2,closures en ligne sans contrat
+2026-11-13T20:55:37+00:00,11.1,echec,1,fonction merge_back nommée (contrat) appelée par la closure
+2026-11-13T20:56:14+00:00,15.1,ok,0,fonctions sort_level/merge_level avec contrats autour de scope
+2026-11-13T20:56:33+00:00,2.0,ok,0,import inutilisé retiré

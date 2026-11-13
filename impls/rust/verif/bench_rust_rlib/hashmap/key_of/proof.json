@@ -2,7 +2,18 @@
   "profile": [],
   "proofs": {
     "Coma": {
-      "vc_key_of": { "prover": "alt-ergo", "time": 0.008 },
+      "vc_key_of": {
+        "tactic": "split_vc",
+        "children": [
+          {
+            "tactic": "split_vc",
+            "children": [
+              { "prover": "alt-ergo", "time": 0.017 },
+              { "prover": "alt-ergo", "time": 0.012 }
+            ]
+          }
+        ]
+      },
       "vc_mix64": { "prover": "alt-ergo", "time": 0.006 },
       "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.006 }
     }

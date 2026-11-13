@@ -1,0 +1,37 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 83 0 83 46 *)
+
+let%span ssieve = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 81 11 81 63
+let%span ssieve'0 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 82 10 82 20
+let%span ssieve'1 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 64 11 64 46
+let%span ssieve'2 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 65 10 65 30
+let%span ssieve'3 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 66 43 66 45
+
+use int.ComputerDivision
+use int.Int
+
+function mod_mul_add [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 66 0 66 42] (d: int) (q: int) (r: int) : ()
+ = [%#ssieve'3] ()
+
+axiom mod_mul_add_spec: forall d: int, q: int, r: int. ([%#ssieve'1] 1 <= d /\ 0 <= q /\ 0 <= r /\ r < d)
+    -> ([%#ssieve'2] ComputerDivision.mod (d * q + r) d = r)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant i : int
+
+constant j : int
+
+constant k : int
+
+function no_mult_between [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 83 0 83 46] (i: int) (j: int) (k: int) : ()
+
+goal vc_no_mult_between: ([%#ssieve] 1 <= i /\ 0 <= j /\ ComputerDivision.mod j i = 0 /\ j < k /\ k < j + i)
+  -> j = i * ComputerDivision.div j i
+  && k = i * ComputerDivision.div j i + (k - j)
+  && ([@stop_split] [@expl:mod_mul_add requires] [%#ssieve'1] 1 <= i
+    /\ 0 <= ComputerDivision.div j i /\ 0 <= k - j /\ k - j < i)
+  /\ (([@stop_split] [@expl:mod_mul_add ensures] [%#ssieve'2] ComputerDivision.mod (i * ComputerDivision.div j i
+      + (k - j)) i
+    = k - j) -> ([@stop_split] [@expl:no_mult_between ensures] [%#ssieve'0] ComputerDivision.mod k i <> 0))

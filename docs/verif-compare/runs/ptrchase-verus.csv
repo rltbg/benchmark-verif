@@ -1,0 +1,9 @@
+2026-11-13T20:32:11+00:00,136.8,erreur_compil,0,premier jet complet
+2026-11-13T20:34:36+00:00,1.9,erreur_compil,0,syntaxe by(bit_vector)
+2026-11-13T20:34:50+00:00,12.1,echec,8,predicat inserted pour les declencheurs
+2026-11-13T20:36:02+00:00,1.2,erreur_compil,0,loop_isolation(false) sur build, lemma_keys_step, invariants repetes
+2026-11-13T20:36:11+00:00,12.7,echec,4,sans loop_isolation(false): faits externes repetes dans la descente
+2026-11-13T20:36:53+00:00,3.6,echec,4,lemmes cles scindes (boucle de declencheurs), multiensemble explicite
+2026-11-13T20:37:17+00:00,2.7,ok,0,!dup en invariant, borne cnt pour usize 32 bits, multiset contains
+2026-11-13T20:40:00+00:00,140,ok,0,cargo verus build --release (verif + compilation)
+2026-11-13T20:50:08+00:00,3.3,ok,0,final a froid (crate: common+ptrchase+alloc), --time

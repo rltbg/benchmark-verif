@@ -1,51 +1,70 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 18 0 18 51 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 284 0 284 39 *)
 
 let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
-let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 19 30 19 48
-let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 19 13 19 49
-let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 19 54 19 56
-let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 19 53 19 62
-let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 19 12 19 63
-let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 20 28 20 29
-let%span shashmap'5 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 15 11 15 45
-let%span shashmap'6 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 16 10 16 24
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 777 16 777 35
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 285 13 285 15
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 285 13 285 20
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 286 18 286 34
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 287 20 287 46
+let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 288 22 288 25
+let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 288 5 288 26
+let%span shashmap'5 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 288 4 288 33
+let%span shashmap'6 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 280 11 280 32
+let%span shashmap'7 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 281 10 281 58
+let%span shashmap'8 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 163 11 163 32
+let%span shashmap'9 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 164 10 164 43
+let%span shashmap'10 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 165 36 165 38
+let%span shashmap'11 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 284 0 284 39
+let%span shashmap'12 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 52 16 52 46
 
-use creusot.int.UInt64
 use creusot.int.UInt32
+use creusot.int.UInt64
+use bv.Pow2int
 use creusot.prelude.Any
 use int.Int
+
+function shr_u64 [@inline:trivial] (self: UInt64.t) (rhs: UInt32.t) : UInt64.t =
+  [%#snum'0] UInt64.shr self (UInt64.of_int (UInt32.t'int rhs))
+
+meta "rewrite_def" function shr_u64
+
+function shr_lt_pow2 [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 165 0 165 35] (x: UInt64.t) (lg: UInt32.t) : ()
+ = [%#shashmap'10] ()
+
+axiom shr_lt_pow2_spec: forall x: UInt64.t, lg: UInt32.t. ([%#shashmap'8] 1 <= UInt32.t'int lg /\ UInt32.t'int lg <= 27)
+    -> ([%#shashmap'9] UInt64.t'int (shr_u64 x (UInt32.sub (64: UInt32.t) lg)) < Pow2int.pow2 (UInt32.t'int lg))
+
+constant const_PHI: UInt64.t = [%#shashmap'11] (11400714819323198485: UInt64.t)
 
 let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
   [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
     (! return {result}) ]
 
+function home [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 51 0 51 37] (key: UInt64.t) (lg: UInt32.t) : int
+ = [%#shashmap'12] UInt64.t'int (shr_u64 (UInt64.mul key const_PHI) (UInt32.sub (64: UInt32.t) lg))
+
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let slot [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 18 0 18 51] (key: UInt64.t) (lg: UInt32.t)
-  (cap: UInt64.t) (return (x: UInt64.t)) = {[@stop_split] [@expl:slot requires] [%#shashmap'5] 1 <= UInt32.t'int lg
-  /\ UInt32.t'int lg <= 27 /\ 2 <= UInt64.t'int cap}
+let slot [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 284 0 284 39] (key: UInt64.t) (lg: UInt32.t)
+  (return (x: UInt64.t)) = {[@stop_split] [@expl:slot requires] [%#shashmap'6] 1 <= UInt32.t'int lg
+  /\ UInt32.t'int lg <= 27}
   (! bb0
   [ bb0 = s0
-    [ s0 = wrapping_mul [%#shashmap'0] {key} {[%#shashmap] (11400714819323198485: UInt64.t)}
-        (fun (_x: UInt64.t) -> [ &_11 <- _x ] s1)
-    | s1 = UInt32.sub [%#shashmap'2] {[%#shashmap'1] (64: UInt32.t)} {lg} (fun (_x: UInt32.t) -> [ &_13 <- _x ] s2)
-    | s2 = UInt64.shr [%#shashmap'3] {_11} {UInt32.t'int _13} (fun (_x: UInt64.t) -> [ &_10 <- _x ] s3)
-    | s3 = [ &s <- _10 ] s4
-    | s4 = [ &_15 <- UInt64.lt s cap ] s5
-    | s5 = any [ br0 -> {_15 = false} (! bb3) | br1 -> {_15} (! bb2) ] ]
-  | bb2 = s0 [ s0 = [ &_ret <- s ] s1 | s1 = return {_ret} ]
-  | bb3 = s0 [ s0 = [ &_ret <- [%#shashmap'4] (0: UInt64.t) ] s1 | s1 = return {_ret} ] ]
+    [ s0 = UInt32.sub [%#shashmap'0] {[%#shashmap] (64: UInt32.t)} {lg} (fun (_x: UInt32.t) -> [ &sh <- _x ] s1)
+    | s1 = {[@expl:assertion] [%#shashmap'1] sh = UInt32.sub (64: UInt32.t) lg} s2
+    | s2 = {[@expl:assertion] [%#shashmap'2] let _ = shr_lt_pow2 (UInt64.mul key const_PHI) lg in true} s3
+    | s3 = wrapping_mul [%#shashmap'4] {key} {[%#shashmap'3] const_PHI} (fun (_x: UInt64.t) -> [ &_19 <- _x ] s4)
+    | s4 = UInt64.shr [%#shashmap'5] {_19} {UInt32.t'int sh} (fun (_x: UInt64.t) -> [ &_18 <- _x ] s5)
+    | s5 = [ &_ret <- _18 ] s6
+    | s6 = return {_ret} ] ]
   [ & _ret: UInt64.t = Any.any_l ()
   | & key: UInt64.t = key
   | & lg: UInt32.t = lg
-  | & cap: UInt64.t = cap
-  | & s: UInt64.t = Any.any_l ()
-  | & _10: UInt64.t = Any.any_l ()
-  | & _11: UInt64.t = Any.any_l ()
-  | & _13: UInt32.t = Any.any_l ()
-  | & _15: bool = Any.any_l () ])
-  [ return (result: UInt64.t) -> {[@stop_split] [@expl:slot ensures] [%#shashmap'6] UInt64.t'int result
-    < UInt64.t'int cap}
+  | & sh: UInt32.t = Any.any_l ()
+  | & _18: UInt64.t = Any.any_l ()
+  | & _19: UInt64.t = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:slot ensures] [%#shashmap'7] UInt64.t'int result = home key lg
+    /\ UInt64.t'int result < Pow2int.pow2 (UInt32.t'int lg)}
     (! return {result}) ]

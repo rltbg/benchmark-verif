@@ -8,3 +8,8 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:21:12+00:00,2,echec,1,"v5bis: meme code, -x pour voir le but"
 2026-11-13T20:21:19+00:00,2,echec,1,"v5ter: -X pour afficher la tache"
 2026-11-13T20:21:27+00:00,2.8,ok,0,"v6: instance explicite de mod_mul_add"
+2026-11-13T20:46:19+00:00,27.8,erreur_outil,0,"a froid --no-cache: why3find ne peut pas recalibrer z3 (machine chargee)"
+2026-11-13T20:47:00+00:00,22.9,erreur_outil,0,"a froid cache vide: recalibration z3 impossible (charge 17 sur 4 coeurs)"
+2026-11-13T20:47:47+00:00,28.8,erreur_outil,0,"a froid cache vide sans nice: recalibration z3 impossible (charge 19)"
+2026-11-13T20:52:55+00:00,70.3,ok,0,"a froid (cache why3find vide, charge 13), copie sieve+hashmap+common : sieve entierement prouve (1 echec dans hashmap)"
+2026-11-13T20:54:22+00:00,48.4,ok,0,"a froid #2 (cache why3find vide), copie sieve+hashmap+common"

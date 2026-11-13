@@ -1,0 +1,41 @@
+(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 118 0 118 27 *)
+
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span salloc = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 116 11 116 17
+let%span salloc'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 117 10 117 10
+let%span salloc'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 124 11 124 17
+let%span salloc'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 125 10 125 10
+let%span salloc'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 126 10 126 10
+let%span salloc'4 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 127 24 127 26
+
+use int.ComputerDivision
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+function mul_mono [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 127 0 127 23] (w: int) : () = [%#salloc'4] ()
+
+axiom mul_mono_spec: forall w: int. ([%#salloc'1] 1 <= w)
+    -> ([%#salloc'2] forall qa: int, qb: int. qa < qb -> ge_log_Int (w * qb - w * qa) w)
+
+axiom mul_mono_spec'0: forall w: int. ([%#salloc'1] 1 <= w)
+    -> ([%#salloc'3] forall qa: int, qb: int. qb <= qa -> w * qb - w * qa <= 0)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant w : int
+
+function mod_distinct [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 118 0 118 27] (w: int) : ()
+
+goal vc_mod_distinct: ([%#salloc] 1 <= w)
+  -> ([@stop_split] [@expl:mul_mono requires] [%#salloc'1] 1 <= w)
+  /\ (([@stop_split] [@expl:mul_mono ensures] ([@stop_split] [@expl:mul_mono ensures #0] [%#salloc'2] forall qa: int, qb: int. qa
+          < qb -> ge_log_Int (w * qb - w * qa) w)
+    /\ ([@stop_split] [@expl:mul_mono ensures #1] [%#salloc'3] forall qa: int, qb: int. qb <= qa
+      -> w * qb - w * qa <= 0))
+  -> ([@stop_split] [@expl:mod_distinct ensures] [%#salloc'0] forall a: int, b: int. 0 <= a /\ a < b /\ b - a < w
+    -> ComputerDivision.mod a w <> ComputerDivision.mod b w))

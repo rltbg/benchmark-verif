@@ -1,0 +1,14 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_window_push": {
+        "tactic": "split_vc",
+        "children": [
+          { "prover": "alt-ergo", "time": 0.015 },
+          { "prover": "z3", "time": 0.204 }
+        ]
+      }
+    }
+  }
+}

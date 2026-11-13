@@ -1,0 +1,8 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_search_path_snoc": { "prover": "alt-ergo", "time": 0.034 }
+    }
+  }
+}

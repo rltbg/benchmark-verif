@@ -1,0 +1,44 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 29 0 29 32 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span ssieve = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 28 10 28 11
+let%span ssieve'0 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 17 16 17 71
+
+use int.ComputerDivision
+use int.Int
+
+predicate is_prime [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 16 0 16 31] (p: int) =
+  [%#ssieve'0] 2 <= p /\ (forall d: int. 2 <= d /\ d < p -> ComputerDivision.mod p d <> 0)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant m : int
+
+function num_primes [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 29 0 29 32] (m: int) : int
+
+goal vc_num_primes: if m < 2 then
+    true
+  else
+    if is_prime m then
+      [@expl:variant decreases] well_founded_relation_Int ([%#ssieve] m) ([%#ssieve] m - 1)
+    else
+      [@expl:variant decreases] well_founded_relation_Int ([%#ssieve] m) ([%#ssieve] m - 1)
+  
+  

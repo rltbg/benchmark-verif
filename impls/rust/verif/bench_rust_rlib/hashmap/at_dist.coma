@@ -1,0 +1,30 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 119 0 119 40 *)
+
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 117 11 117 49
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 118 10 118 91
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 113 4 113 44
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 107 4 107 49
+
+use int.Int
+
+function dist [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 112 0 112 44] (h: int) (s: int) (cap: int) : int
+ = [%#shashmap'1] if h <= s then s - h else s + cap - h
+
+function at' [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 106 0 106 42] (h: int) (d: int) (cap: int) : int
+ = [%#shashmap'2] if h + d < cap then h + d else h + d - cap
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant h : int
+
+constant s : int
+
+constant cap : int
+
+function at_dist [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 119 0 119 40] (h: int) (s: int) (cap: int) : ()
+
+goal vc_at_dist: ([%#shashmap] 0 <= h /\ h < cap /\ 0 <= s /\ s < cap)
+  -> ([@stop_split] [@expl:at_dist ensures] [%#shashmap'0] 0 <= dist h s cap
+  /\ dist h s cap < cap /\ at' h (dist h s cap) cap = s)

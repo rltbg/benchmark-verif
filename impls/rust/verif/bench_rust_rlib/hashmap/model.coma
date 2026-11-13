@@ -1,0 +1,58 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 81 0 81 29 *)
+
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 80 10 80 11
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 35 4 35 34
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 72 4 75 5
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 26 4 26 38
+let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 81 0 81 29
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 62 16 62 28
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span smapping = "/opt/tools/creusot/creusot-std/src/logic/mapping.rs" 66 8 66 19
+
+use creusot.int.UInt64
+use map.Map
+use map.Const
+
+type t_Option_u64 = None | Some UInt64.t
+
+predicate gt_log_u64 [@inline:trivial] (self: UInt64.t) (other: UInt64.t) = [%#sord] UInt64.lt other self
+
+meta "rewrite_def" predicate gt_log_u64
+
+predicate well_founded_relation_u64 [@inline:trivial] (self: UInt64.t) (other: UInt64.t) =
+  [%#swell_founded] gt_log_u64 self other
+
+meta "rewrite_def" predicate well_founded_relation_u64
+
+function mix64_l [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 25 0 25 29] (x: UInt64.t) : UInt64.t =
+  [%#shashmap'2] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+constant const_SEED: UInt64.t = [%#shashmap'3] (2623536861340474335: UInt64.t)
+
+function key_l [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 34 0 34 37] (off: UInt64.t) (i: UInt64.t) : UInt64.t
+ = [%#shashmap'0] UInt64.bw_or (mix64_l (UInt64.add (UInt64.add const_SEED off) i)) (1: UInt64.t)
+
+function index_Mapping_u64_Option_u64 [@inline:trivial] (self: Map.map UInt64.t t_Option_u64) (a: UInt64.t) : t_Option_u64
+ = [%#smapping] Map.get self a
+
+meta "rewrite_def" function index_Mapping_u64_Option_u64
+
+function add [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 71 0 71 45] (m: Map.map UInt64.t t_Option_u64) (k: UInt64.t) (v: UInt64.t) : Map.map UInt64.t t_Option_u64
+ = [%#shashmap'1] match index_Mapping_u64_Option_u64 m k with
+    | Some w -> Map.set m k (Some (UInt64.add w v))
+    | None -> Map.set m k (Some v)
+    end
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant i : UInt64.t
+
+function model [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 81 0 81 29] (i: UInt64.t) : Map.map UInt64.t t_Option_u64
+
+goal vc_model: if i = (0: UInt64.t) then
+    true
+  else
+    [@expl:variant decreases] well_founded_relation_u64 ([%#shashmap] i) ([%#shashmap] UInt64.sub i (1: UInt64.t))
+  

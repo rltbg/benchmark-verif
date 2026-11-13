@@ -5,7 +5,7 @@
       "vc_count": { "prover": "alt-ergo", "time": 0.017 },
       "vc_from_elem_u8": { "prover": "alt-ergo", "time": 0.014 },
       "vc_run": { "prover": "alt-ergo", "time": 0.016 },
-      "vc_sieve_outer": { "prover": "alt-ergo", "time": 0.014 }
+      "vc_sieve": { "prover": "alt-ergo", "time": 0.011 }
     }
   }
 }

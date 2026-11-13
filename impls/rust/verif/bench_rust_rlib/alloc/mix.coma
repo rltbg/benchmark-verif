@@ -1,0 +1,68 @@
+(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 144 0 144 21 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span salloc = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 145 27 145 45
+let%span salloc'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 145 12 145 46
+let%span salloc'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 146 23 146 28
+let%span salloc'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 146 17 146 29
+let%span salloc'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 146 44 146 62
+let%span salloc'4 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 146 12 146 63
+let%span salloc'5 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 147 23 147 28
+let%span salloc'6 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 147 17 147 29
+let%span salloc'7 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 147 44 147 62
+let%span salloc'8 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 147 12 147 63
+let%span salloc'9 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 148 14 148 19
+let%span salloc'10 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 148 8 148 20
+let%span salloc'11 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 143 10 143 28
+let%span salloc'12 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 28 8 28 42
+
+use creusot.int.UInt64
+use creusot.prelude.Any
+
+let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
+    (! return {result}) ]
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum'0] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+function mix_l [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 26 0 26 27] (x: UInt64.t) : UInt64.t =
+  [%#salloc'12] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let mix [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 144 0 144 21] (x: UInt64.t) (return (x'0: UInt64.t)) =
+(! bb0
+  [ bb0 = s0
+    [ s0 = wrapping_add [%#salloc'0] {x} {[%#salloc] (11400714819323198485: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z <- _x ] s1)
+    | s1 = UInt64.shr [%#salloc'2] {z} {UInt64.t'int ([%#salloc'1] (30: UInt64.t))}
+        (fun (_x: UInt64.t) -> [ &_9 <- _x ] s2)
+    | s2 = [ &_7 <- UInt64.bw_xor z _9 ] s3
+    | s3 = wrapping_mul [%#salloc'4] {_7} {[%#salloc'3] (13787848793156543929: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z'0 <- _x ] s4)
+    | s4 = UInt64.shr [%#salloc'6] {z'0} {UInt64.t'int ([%#salloc'5] (27: UInt64.t))}
+        (fun (_x: UInt64.t) -> [ &_14 <- _x ] s5)
+    | s5 = [ &_12 <- UInt64.bw_xor z'0 _14 ] s6
+    | s6 = wrapping_mul [%#salloc'8] {_12} {[%#salloc'7] (10723151780598845931: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z'1 <- _x ] s7)
+    | s7 = UInt64.shr [%#salloc'10] {z'1} {UInt64.t'int ([%#salloc'9] (31: UInt64.t))}
+        (fun (_x: UInt64.t) -> [ &_17 <- _x ] s8)
+    | s8 = [ &_ret <- UInt64.bw_xor z'1 _17 ] s9
+    | s9 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & x: UInt64.t = x
+  | & z: UInt64.t = Any.any_l ()
+  | & z'0: UInt64.t = Any.any_l ()
+  | & _7: UInt64.t = Any.any_l ()
+  | & _9: UInt64.t = Any.any_l ()
+  | & z'1: UInt64.t = Any.any_l ()
+  | & _12: UInt64.t = Any.any_l ()
+  | & _14: UInt64.t = Any.any_l ()
+  | & _17: UInt64.t = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:mix ensures] [%#salloc'11] result = mix_l x}
+    (! return {result}) ]

@@ -1,0 +1,52 @@
+(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 130 0 130 19 *)
+
+let%span sptrchase = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 129 10 129 49
+let%span sptrchase'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 55 16 55 21
+let%span sptrchase'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 22 36 22 38
+let%span sptrchase'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 22 28 22 39
+let%span sptrchase'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 22 29 22 32
+let%span sptrchase'4 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 22 22 22 25
+let%span sptrchase'5 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 130 0 130 19
+let%span sptrchase'6 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 61 16 61 26
+
+use creusot.int.UInt64BW
+use creusot.int.Int32BW
+use creusot.int.UInt32BW
+use creusot.prelude.Any
+
+constant const_M: UInt64BW.t = [%#sptrchase'5] (4294967295: UInt64BW.t)
+
+function left [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 54 0 54 26] (l: UInt64BW.t) : UInt64BW.t =
+  [%#sptrchase'0] UInt64BW.bw_and l const_M
+
+constant const_NIL: UInt64BW.t = [%#sptrchase'5] (4294967295: UInt64BW.t)
+
+constant const_LEAF [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 22 0 22 19] : UInt64BW.t
+
+let set_LEAF (return) = bb0
+  [ bb0 = s0
+    [ s0 = [ &_2 <- [%#sptrchase'1] (32: Int32BW.t) ] s1
+    | s1 = [ &_3 <- UInt32BW.lt _2 ([%#sptrchase'2] (64: UInt32BW.t)) ] s2
+    | s2 = {[@expl:Shl overflow] [%#sptrchase'2] _3} s3
+    | s3 = UInt64BW.shl [%#sptrchase'2] {[%#sptrchase'3] const_NIL} {Int32BW.to_BV256 ([%#sptrchase'1] (32: Int32BW.t))}
+        (fun (_x: UInt64BW.t) -> [ &_1 <- _x ] s4)
+    | s4 = [ &_ret <- UInt64BW.bw_or ([%#sptrchase'4] const_NIL) _1 ] s5
+    | s5 = return {_ret} ] ]
+  [ & _ret: UInt64BW.t = Any.any_l ()
+  | & _1: UInt64BW.t = Any.any_l ()
+  | & _2: UInt32BW.t = Any.any_l ()
+  | & _3: bool = Any.any_l () ] [ return (_const: UInt64BW.t) -> -{const_LEAF = _const}- return ]
+
+function right [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 60 0 60 27] (l: UInt64BW.t) : UInt64BW.t =
+  [%#sptrchase'6] UInt64BW.shr l (32: UInt64BW.t)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+function leaf_links [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 130 0 130 19] : ()
+
+let vc_leaf_links (return) = (! set_LEAF (ret))
+  [ ret -> {[@stop_split] [@expl:leaf_links ensures] [%#sptrchase] left const_LEAF = const_NIL
+    /\ right const_LEAF = const_NIL}
+    (! return) ]

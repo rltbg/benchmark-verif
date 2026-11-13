@@ -1,0 +1,5 @@
+2026-11-13T20:47:25+00:00,0.3,erreur_compil,0,mauvaise option (--verify-only-module exige cargo verus focus)
+2026-11-13T20:47:30+00:00,13.3,echec,1,premier jet: ck_model, fenetre FIFO
+2026-11-13T20:48:10+00:00,2.9,ok,0,lemmes vstd lemma_mod_equivalence / lemma_small_mod
+2026-11-13T20:48:27+00:00,8,ok,0,cargo verus build --release (verif + compilation)
+2026-11-13T20:51:22+00:00,64.4,ok,0,final: focus --verify-only-module alloc --time (64 s = reconstruction des deps; Verus total-time 1.9 s dont smt 0.33 s)

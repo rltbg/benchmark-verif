@@ -1,33 +1,56 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 9 0 9 59 *)
+(* #"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 132 0 132 48 *)
 
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
-let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
-let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
-let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
-let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
-let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
-let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
 let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 189 19 189 38
+let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
+let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
+let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
+let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
 let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
 let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
 let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
 let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
-let%span ssieve = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 13 14 13 26
-let%span ssieve'0 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 12 16 12 29
-let%span ssieve'1 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 11 16 11 34
-let%span ssieve'2 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 15 9 15 12
-let%span ssieve'3 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 15 15 15 16
-let%span ssieve'4 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 16 8 16 14
-let%span ssieve'5 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 6 11 6 90
-let%span ssieve'6 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 7 10 7 33
+let%span ssieve = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 133 24 133 26
+let%span ssieve'0 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 134 16 134 21
+let%span ssieve'1 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 135 20 135 42
+let%span ssieve'2 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 140 14 140 26
+let%span ssieve'3 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 138 16 138 16
+let%span ssieve'4 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 137 16 137 62
+let%span ssieve'5 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 136 16 136 34
+let%span ssieve'6 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 142 9 142 12
+let%span ssieve'7 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 142 15 142 16
+let%span ssieve'8 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 143 22 143 22
+let%span ssieve'9 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 144 22 144 42
+let%span ssieve'10 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 145 22 145 55
+let%span ssieve'11 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 146 24 146 55
+let%span ssieve'12 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 147 8 147 14
+let%span ssieve'13 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 127 11 127 77
+let%span ssieve'14 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 128 10 128 33
+let%span ssieve'15 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 129 10 129 10
+let%span ssieve'16 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 64 11 64 46
+let%span ssieve'17 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 65 10 65 30
+let%span ssieve'18 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 66 43 66 45
+let%span ssieve'19 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 81 11 81 63
+let%span ssieve'20 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 82 10 82 20
+let%span ssieve'21 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 84 4 84 4
 
 use creusot.prelude.MutBorrow
 use creusot.int.UInt64
-use seq.Seq
+use int.ComputerDivision
 use creusot.int.UInt8
+use seq.Seq
 use creusot.prelude.Any
 use int.Int
+
+function mod_mul_add [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 66 0 66 42] (d: int) (q: int) (r: int) : ()
+ = [%#ssieve'18] ()
+
+axiom mod_mul_add_spec: forall d: int, q: int, r: int. ([%#ssieve'16] 1 <= d /\ 0 <= q /\ 0 <= r /\ r < d)
+    -> ([%#ssieve'17] ComputerDivision.mod (d * q + r) d = r)
 
 predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
 
@@ -49,8 +72,13 @@ constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
 function view_Vec_u8_Global (self: t_Vec_u8_Global) : Seq.seq UInt8.t
 
 axiom view_Vec_u8_Global_spec:
-  forall self: t_Vec_u8_Global [view_Vec_u8_Global self]. [%#svec] Seq.length (view_Vec_u8_Global self)
+  forall self: t_Vec_u8_Global [view_Vec_u8_Global self]. [%#svec'0] Seq.length (view_Vec_u8_Global self)
     <= UInt64.t'int const_MAX
+
+function index_Vec_u8_Global [@inline:trivial] (self: t_Vec_u8_Global) (ix: int) : UInt8.t =
+  [%#svec] Seq.get (view_Vec_u8_Global self) ix
+
+meta "rewrite_def" function index_Vec_u8_Global
 
 predicate in_bounds_usize [@inline:trivial] (self: UInt64.t) (seq: Seq.seq UInt8.t) =
   [%#sslice] UInt64.t'int self < Seq.length seq
@@ -68,19 +96,25 @@ predicate resolve_elswhere_usize [@inline:trivial] (self: UInt64.t) (old': Seq.s
 meta "rewrite_def" predicate resolve_elswhere_usize
 
 let index_mut_Vec_u8_Global (self: MutBorrow.t t_Vec_u8_Global) (index: UInt64.t) (return (x: MutBorrow.t UInt8.t)) =
-{[@stop_split] [@expl:index_mut requires] [%#svec'0] in_bounds_usize index (view_Vec_u8_Global self.current)}
+{[@stop_split] [@expl:index_mut requires] [%#svec'1] in_bounds_usize index (view_Vec_u8_Global self.current)}
   any
   [ return (result: MutBorrow.t UInt8.t) ->
-  {[@stop_split] [@expl:index_mut_Vec_u8_Global ensures] ([@stop_split] [@expl:index_mut ensures #0] [%#svec'1] has_value_usize index (view_Vec_u8_Global self.current) result.current)
-    /\ ([@stop_split] [@expl:index_mut ensures #1] [%#svec'2] has_value_usize index (view_Vec_u8_Global self.final) result.final)
-    /\ ([@stop_split] [@expl:index_mut ensures #2] [%#svec'3] resolve_elswhere_usize index (view_Vec_u8_Global self.current) (view_Vec_u8_Global self.final))
-    /\ ([@stop_split] [@expl:index_mut ensures #3] [%#svec'4] Seq.length (view_Vec_u8_Global self.final)
+  {[@stop_split] [@expl:index_mut_Vec_u8_Global ensures] ([@stop_split] [@expl:index_mut ensures #0] [%#svec'2] has_value_usize index (view_Vec_u8_Global self.current) result.current)
+    /\ ([@stop_split] [@expl:index_mut ensures #1] [%#svec'3] has_value_usize index (view_Vec_u8_Global self.final) result.final)
+    /\ ([@stop_split] [@expl:index_mut ensures #2] [%#svec'4] resolve_elswhere_usize index (view_Vec_u8_Global self.current) (view_Vec_u8_Global self.final))
+    /\ ([@stop_split] [@expl:index_mut ensures #3] [%#svec'5] Seq.length (view_Vec_u8_Global self.final)
     = Seq.length (view_Vec_u8_Global self.current))}
     (! return {result}) ]
 
 predicate resolve_refmut_u8 [@inline:trivial] (_1: MutBorrow.t UInt8.t) = _1.final = _1.current
 
 meta "rewrite_def" predicate resolve_refmut_u8
+
+function no_mult_between [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 83 0 83 46] (i: int) (j: int) (k: int) : ()
+ = [%#ssieve'21] mod_mul_add i (ComputerDivision.div j i) (k - j)
+
+axiom no_mult_between_spec: forall i: int, j: int, k: int. ([%#ssieve'19] 1 <= i
+      /\ 0 <= j /\ ComputerDivision.mod j i = 0 /\ j < k /\ k < j + i) -> ([%#ssieve'20] ComputerDivision.mod k i <> 0)
 
 predicate resolve_refmut_Vec_u8_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u8_Global) = _1.final = _1.current
 
@@ -90,43 +124,78 @@ meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let mark [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 9 0 9 59] (f: MutBorrow.t t_Vec_u8_Global) (n: UInt64.t)
-  (i: UInt64.t) (j0: UInt64.t) (return (x: ())) =
-{[@stop_split] [@expl:mark requires] [%#ssieve'5] Seq.length (view_Vec_u8_Global f.current) = UInt64.t'int n + 1
-  /\ 1 <= UInt64.t'int i
-  /\ UInt64.t'int i <= UInt64.t'int n
-  /\ UInt64.t'int n <= 4000000000 /\ UInt64.t'int j0 <= UInt64.t'int n + UInt64.t'int i}
+let mark [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 132 0 132 48] (f: MutBorrow.t t_Vec_u8_Global)
+  (n: UInt64.t) (i: UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:mark requires] [%#ssieve'13] Seq.length (view_Vec_u8_Global f.current) = UInt64.t'int n + 1
+  /\ 2 <= UInt64.t'int i /\ UInt64.t'int i * UInt64.t'int i <= UInt64.t'int n /\ UInt64.t'int n <= 4000000000}
   (! bb0
-  [ bb0 = s0 [ s0 = [ &j <- j0 ] s1 | s1 = [ &_old <- f.final ] s2 | s2 = bb1 ]
-  | bb1 = bb1invariant
-    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#ssieve] UInt64.t'int n + UInt64.t'int i
+  [ bb0 = s0
+    [ s0 = [ &old' <- [%#ssieve] f.current ] s1
+    | s1 = UInt64.mul [%#ssieve'0] {i} {i} (fun (_x: UInt64.t) -> [ &j <- _x ] s2)
+    | s2 =
+      {[@expl:assertion] [%#ssieve'1] let _ = mod_mul_add (UInt64.t'int i) (UInt64.t'int i) 0 in ComputerDivision.mod (UInt64.t'int j) (UInt64.t'int i)
+      = 0}
+      s3
+    | s3 = [ &_old <- f.final ] s4
+    | s4 = bb2 ]
+  | bb2 = bb2invariant
+    [ bb2 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb2 ([%#ssieve'2] UInt64.t'int n
+        + UInt64.t'int i
       - UInt64.t'int j)}
-      bb1invariant
-    | bb1invariant = {[@expl:inferred invariant: unchanged value] _old = f.final}
-      {[@expl:loop invariant #0] [%#ssieve'1] Seq.length (view_Vec_u8_Global f.current) = UInt64.t'int n + 1}
-      {[@expl:loop invariant #1] [%#ssieve'0] UInt64.t'int j <= UInt64.t'int n + UInt64.t'int i}
-      (! [ &variant_old_bb1 <- [%#ssieve] UInt64.t'int n + UInt64.t'int i - UInt64.t'int j ] s0)
-      [ s0 = [ &_26 <- UInt64.le j n ] s1 | s1 = any [ br0 -> {_26 = false} (! bb5) | br1 -> {_26} (! bb3) ] ]
-      [ bb3 = s0
+      bb2invariant
+    | bb2invariant = {[@expl:inferred invariant: unchanged value] _old = f.final}
+      {[@expl:loop invariant #0] [%#ssieve'5] Seq.length (view_Vec_u8_Global f.current) = UInt64.t'int n + 1}
+      {[@expl:loop invariant #1] [%#ssieve'4] UInt64.t'int i * UInt64.t'int i <= UInt64.t'int j
+      /\ UInt64.t'int j <= UInt64.t'int n + UInt64.t'int i
+      /\ ComputerDivision.mod (UInt64.t'int j) (UInt64.t'int i) = 0}
+      {[@expl:loop invariant #2] [%#ssieve'3] forall k: int. 0 <= k /\ k <= UInt64.t'int n
+        -> (UInt8.t'int (index_Vec_u8_Global f.current k) = 0)
+        = (UInt8.t'int (index_Vec_u8_Global old' k) = 0
+        /\ not (UInt64.t'int i * UInt64.t'int i <= k
+        /\ k < UInt64.t'int j /\ ComputerDivision.mod k (UInt64.t'int i) = 0))}
+      (! [ &variant_old_bb2 <- [%#ssieve'2] UInt64.t'int n + UInt64.t'int i - UInt64.t'int j ] s0)
+      [ s0 = [ &_43 <- UInt64.le j n ] s1 | s1 = any [ br0 -> {_43 = false} (! bb6) | br1 -> {_43} (! bb4) ] ]
+      [ bb4 = s0
         [ s0 = MutBorrow.borrow_mut <t_Vec_u8_Global> {f.current}
-            (fun (_bor: MutBorrow.t t_Vec_u8_Global) -> [ &_30 <- _bor ] [ &f <- { f with current = _bor.final } ] s1)
-        | s1 = index_mut_Vec_u8_Global [%#ssieve'2] {_30} {j} (fun (_x: MutBorrow.t UInt8.t) -> [ &_29 <- _x ] s2)
-        | s2 = [ &_29 <- { _29 with current = ([%#ssieve'3] (1: UInt8.t)) } ] s3
-        | s3 = -{resolve_refmut_u8 _29}- s4
-        | s4 = UInt64.add [%#ssieve'4] {j} {i} (fun (_x: UInt64.t) -> [ &j <- _x ] s5)
-        | s5 = bb1 ] ] ]
-  | bb5 = s0 [ s0 = -{resolve_refmut_Vec_u8_Global f}- s1 | s1 = return {_ret} ] ]
+            (fun (_bor: MutBorrow.t t_Vec_u8_Global) -> [ &_47 <- _bor ] [ &f <- { f with current = _bor.final } ] s1)
+        | s1 = index_mut_Vec_u8_Global [%#ssieve'6] {_47} {j} (fun (_x: MutBorrow.t UInt8.t) -> [ &_46 <- _x ] s2)
+        | s2 = [ &_46 <- { _46 with current = ([%#ssieve'7] (1: UInt8.t)) } ] s3
+        | s3 = -{resolve_refmut_u8 _46}- s4
+        | s4 = {[@expl:assertion] [%#ssieve'8] forall k: int. UInt64.t'int j < k /\ k < UInt64.t'int j + UInt64.t'int i
+            -> (let _ = no_mult_between (UInt64.t'int i) (UInt64.t'int j) k in ComputerDivision.mod k (UInt64.t'int i)
+            <> 0)}
+          s5
+        | s5 = {[@expl:assertion] [%#ssieve'9] UInt64.t'int j
+          = UInt64.t'int i * ComputerDivision.div (UInt64.t'int j) (UInt64.t'int i)}
+          s6
+        | s6 = {[@expl:assertion] [%#ssieve'10] UInt64.t'int j + UInt64.t'int i
+          = UInt64.t'int i * (ComputerDivision.div (UInt64.t'int j) (UInt64.t'int i) + 1) + 0}
+          s7
+        | s7 =
+          {[@expl:assertion] [%#ssieve'11] let _ = mod_mul_add (UInt64.t'int i) (ComputerDivision.div (UInt64.t'int j) (UInt64.t'int i)
+          + 1) 0 in ComputerDivision.mod (UInt64.t'int i * (ComputerDivision.div (UInt64.t'int j) (UInt64.t'int i) + 1)
+            + 0) (UInt64.t'int i)
+          = 0}
+          s8
+        | s8 = UInt64.add [%#ssieve'12] {j} {i} (fun (_x: UInt64.t) -> [ &j <- _x ] s9)
+        | s9 = bb2 ] ] ]
+  | bb6 = s0 [ s0 = -{resolve_refmut_Vec_u8_Global f}- s1 | s1 = return {_ret} ] ]
   [ & _ret: () = Any.any_l ()
   | & f: MutBorrow.t t_Vec_u8_Global = f
   | & n: UInt64.t = n
   | & i: UInt64.t = i
-  | & j0: UInt64.t = j0
+  | & old': t_Vec_u8_Global = Any.any_l ()
   | & j: UInt64.t = Any.any_l ()
-  | & _26: bool = Any.any_l ()
-  | & _29: MutBorrow.t UInt8.t = Any.any_l ()
-  | & _30: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
+  | & _43: bool = Any.any_l ()
+  | & _46: MutBorrow.t UInt8.t = Any.any_l ()
+  | & _47: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
   | & _old: t_Vec_u8_Global = Any.any_l ()
-  | & variant_old_bb1: int = Any.any_l () ])
-  [ return (result: ()) -> {[@stop_split] [@expl:mark ensures] [%#ssieve'6] Seq.length (view_Vec_u8_Global f.final)
-    = Seq.length (view_Vec_u8_Global f.current)}
+  | & variant_old_bb2: int = Any.any_l () ])
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:mark ensures] ([@stop_split] [@expl:mark ensures #0] [%#ssieve'14] Seq.length (view_Vec_u8_Global f.final)
+      = Seq.length (view_Vec_u8_Global f.current))
+    /\ ([@stop_split] [@expl:mark ensures #1] [%#ssieve'15] forall k: int. 0 <= k /\ k <= UInt64.t'int n
+      -> (UInt8.t'int (index_Vec_u8_Global f.final k) = 0)
+      = (UInt8.t'int (index_Vec_u8_Global f.current k) = 0
+      /\ not (UInt64.t'int i * UInt64.t'int i <= k /\ ComputerDivision.mod k (UInt64.t'int i) = 0)))}
     (! return {result}) ]

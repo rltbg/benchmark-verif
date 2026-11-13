@@ -2,8 +2,24 @@
   "profile": [],
   "proofs": {
     "Coma": {
-      "vc_chase": { "prover": "alt-ergo", "time": 0.021 },
-      "vc_ckfold": { "prover": "alt-ergo", "time": 0.013 },
+      "vc_chase": {
+        "tactic": "compute_specified",
+        "children": [
+          {
+            "tactic": "split_vc",
+            "children": [
+              { "prover": "alt-ergo", "time": 0.014 },
+              { "prover": "alt-ergo", "time": 0.012 },
+              { "prover": "alt-ergo", "time": 0.022 },
+              { "prover": "alt-ergo", "time": 0.014 },
+              { "prover": "alt-ergo", "time": 0.013 },
+              { "prover": "alt-ergo", "time": 0.013 },
+              { "prover": "alt-ergo", "time": 0.021 }
+            ]
+          }
+        ]
+      },
+      "vc_ck2": { "prover": "alt-ergo", "time": 0.016 },
       "vc_index_Vec_u32_Global": { "prover": "alt-ergo", "time": 0.012 },
       "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.013 }
     }

@@ -1,0 +1,41 @@
+(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 65 0 65 39 *)
+
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span salloc = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 64 10 64 11
+let%span salloc'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 63 11 63 17
+
+use int.ComputerDivision
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant i : int
+
+constant k : int
+
+function block_sum [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/alloc.rs" 65 0 65 39] (i: int) (k: int) : int
+
+goal vc_block_sum: ([%#salloc'0] 0 <= k)
+  -> (if k = 0 then
+    true
+  else
+    ([@stop_split] [@expl:block_sum requires] [%#salloc'0] 0 <= k - 1)
+    /\ ([@expl:variant decreases] well_founded_relation_Int ([%#salloc] k) ([%#salloc] k - 1))
+  )

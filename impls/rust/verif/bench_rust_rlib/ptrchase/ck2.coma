@@ -1,0 +1,47 @@
+(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 188 0 188 29 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span sptrchase = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 189 13 189 20
+let%span sptrchase'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 189 39 189 52
+let%span sptrchase'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 189 12 189 53
+let%span sptrchase'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 190 25 190 38
+let%span sptrchase'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 190 4 190 39
+let%span sptrchase'4 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 187 10 187 53
+let%span sptrchase'5 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 188 0 188 29
+let%span sptrchase'6 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 123 16 123 43
+
+use creusot.int.UInt64
+use creusot.prelude.Any
+
+constant const_CK_INIT: UInt64.t = [%#sptrchase'5] (14695981039346656037: UInt64.t)
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+function ckfold_l [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 122 0 122 39] (ck: UInt64.t) (v: UInt64.t) : UInt64.t
+ = [%#sptrchase'6] UInt64.mul (UInt64.bw_xor ck v) (1099511628211: UInt64.t)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let ck2 [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 188 0 188 29] (x: UInt64.t) (y: UInt64.t)
+  (return (x'0: UInt64.t)) = (! bb0
+  [ bb0 = s0
+    [ s0 = [ &_7 <- UInt64.bw_xor ([%#sptrchase] const_CK_INIT) x ] s1
+    | s1 = wrapping_mul [%#sptrchase'1] {_7} {[%#sptrchase'0] (1099511628211: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &c <- _x ] s2)
+    | s2 = [ &_9 <- UInt64.bw_xor c y ] s3
+    | s3 = wrapping_mul [%#sptrchase'3] {_9} {[%#sptrchase'2] (1099511628211: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &_ret <- _x ] s4)
+    | s4 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & x: UInt64.t = x
+  | & y: UInt64.t = y
+  | & c: UInt64.t = Any.any_l ()
+  | & _7: UInt64.t = Any.any_l ()
+  | & _9: UInt64.t = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:ck2 ensures] [%#sptrchase'4] result
+    = ckfold_l (ckfold_l const_CK_INIT x) y}
+    (! return {result}) ]

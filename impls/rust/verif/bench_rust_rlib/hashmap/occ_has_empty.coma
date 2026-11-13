@@ -1,0 +1,69 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 221 0 221 41 *)
+
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 218 10 218 11
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 219 11 219 54
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 220 10 220 10
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 128 10 128 11
+let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 130 4 130 97
+let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 101 4 101 12
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+
+use creusot.int.UInt64
+use seq.Seq
+use int.Int
+
+function key_at [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 100 0 100 41] (t: Seq.seq UInt64.t) (s: int) : UInt64.t
+ = [%#shashmap'4] Seq.get t (2 * s)
+
+function occ [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 129 0 129 38] (t: Seq.seq UInt64.t) (c: int) : int
+
+axiom occ_def: forall t: Seq.seq UInt64.t, c: int [occ t c]. occ t c
+    = ([%#shashmap'3] if c <= 0 then
+      0
+    else
+      if key_at t (c - 1) = (0: UInt64.t) then occ t (c - 1) else occ t (c - 1) + 1
+    )
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant t : Seq.seq UInt64.t
+
+constant c : int
+
+function occ_has_empty [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 221 0 221 41] (t: Seq.seq UInt64.t) (c: int) : ()
+
+goal vc_occ_has_empty: ([%#shashmap'0] 0 <= c /\ 2 * c <= Seq.length t /\ occ t c < c)
+  -> (if gt_log_Int c 0 then
+    if key_at t (c - 1) <> (0: UInt64.t) then
+      (([@stop_split] [@expl:occ_has_empty requires] [%#shashmap'0] 0 <= c - 1
+          /\ 2 * (c - 1) <= Seq.length t /\ occ t (c - 1) < c - 1)
+        /\ ([@expl:variant decreases] well_founded_relation_Int ([%#shashmap] c) ([%#shashmap] c - 1)))
+      /\ (([@stop_split] [@expl:occ_has_empty ensures] [%#shashmap'1] exists e: int. 0 <= e
+          /\ e < c - 1 /\ key_at t e = (0: UInt64.t))
+      -> ([@stop_split] [@expl:occ_has_empty ensures] [%#shashmap'1] exists e: int. 0 <= e
+        /\ e < c /\ key_at t e = (0: UInt64.t)))
+    else
+      [@stop_split] [@expl:occ_has_empty ensures] [%#shashmap'1] exists e: int. 0 <= e
+        /\ e < c /\ key_at t e = (0: UInt64.t)
+  
+  else
+    [@stop_split] [@expl:occ_has_empty ensures] [%#shashmap'1] exists e: int. 0 <= e
+      /\ e < c /\ key_at t e = (0: UInt64.t)
+  )

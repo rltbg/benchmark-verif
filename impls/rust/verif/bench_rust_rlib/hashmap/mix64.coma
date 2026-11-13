@@ -1,0 +1,69 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 256 0 256 23 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span snum'0 = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 257 27 257 45
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 257 12 257 46
+let%span shashmap'1 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 258 23 258 25
+let%span shashmap'2 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 258 17 258 26
+let%span shashmap'3 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 258 41 258 59
+let%span shashmap'4 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 258 12 258 60
+let%span shashmap'5 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 259 23 259 25
+let%span shashmap'6 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 259 17 259 26
+let%span shashmap'7 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 259 41 259 59
+let%span shashmap'8 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 259 12 259 60
+let%span shashmap'9 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 260 14 260 16
+let%span shashmap'10 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 260 8 260 17
+let%span shashmap'11 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 253 10 253 30
+let%span shashmap'12 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 26 4 26 38
+
+use creusot.int.UInt64
+use creusot.int.Int32
+use creusot.prelude.Any
+
+let wrapping_add (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt64.add self rhs}
+    (! return {result}) ]
+
+let wrapping_mul (self: UInt64.t) (rhs: UInt64.t) (return (x: UInt64.t)) = any
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:wrapping_mul ensures] [%#snum'0] result = UInt64.mul self rhs}
+    (! return {result}) ]
+
+function mix64_l [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 25 0 25 29] (x: UInt64.t) : UInt64.t =
+  [%#shashmap'12] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let mix64 [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 256 0 256 23] (x: UInt64.t)
+  (return (x'0: UInt64.t)) = (! bb0
+  [ bb0 = s0
+    [ s0 = wrapping_add [%#shashmap'0] {x} {[%#shashmap] (11400714819323198485: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z <- _x ] s1)
+    | s1 = UInt64.shr [%#shashmap'2] {z} {Int32.to_int ([%#shashmap'1] (30: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_9 <- _x ] s2)
+    | s2 = [ &_7 <- UInt64.bw_xor z _9 ] s3
+    | s3 = wrapping_mul [%#shashmap'4] {_7} {[%#shashmap'3] (13787848793156543929: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z'0 <- _x ] s4)
+    | s4 = UInt64.shr [%#shashmap'6] {z'0} {Int32.to_int ([%#shashmap'5] (27: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_14 <- _x ] s5)
+    | s5 = [ &_12 <- UInt64.bw_xor z'0 _14 ] s6
+    | s6 = wrapping_mul [%#shashmap'8] {_12} {[%#shashmap'7] (10723151780598845931: UInt64.t)}
+        (fun (_x: UInt64.t) -> [ &z'1 <- _x ] s7)
+    | s7 = UInt64.shr [%#shashmap'10] {z'1} {Int32.to_int ([%#shashmap'9] (31: Int32.t))}
+        (fun (_x: UInt64.t) -> [ &_17 <- _x ] s8)
+    | s8 = [ &_ret <- UInt64.bw_xor z'1 _17 ] s9
+    | s9 = return {_ret} ] ]
+  [ & _ret: UInt64.t = Any.any_l ()
+  | & x: UInt64.t = x
+  | & z: UInt64.t = Any.any_l ()
+  | & z'0: UInt64.t = Any.any_l ()
+  | & _7: UInt64.t = Any.any_l ()
+  | & _9: UInt64.t = Any.any_l ()
+  | & z'1: UInt64.t = Any.any_l ()
+  | & _12: UInt64.t = Any.any_l ()
+  | & _14: UInt64.t = Any.any_l ()
+  | & _17: UInt64.t = Any.any_l () ])
+  [ return (result: UInt64.t) -> {[@stop_split] [@expl:mix64 ensures] [%#shashmap'11] result = mix64_l x}
+    (! return {result}) ]

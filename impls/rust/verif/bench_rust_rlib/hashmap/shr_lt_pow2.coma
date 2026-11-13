@@ -1,0 +1,29 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 165 0 165 35 *)
+
+let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 777 16 777 35
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 163 11 163 32
+let%span shashmap'0 = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 164 10 164 43
+
+use creusot.int.UInt64BW
+use creusot.int.UInt32BW
+use bv.Pow2int
+use int.Int
+
+function shr_u64 [@inline:trivial] (self: UInt64BW.t) (rhs: UInt32BW.t) : UInt64BW.t =
+  [%#snum] UInt64BW.shr self (UInt64BW.of_BV256 (UInt32BW.to_BV256 rhs))
+
+meta "rewrite_def" function shr_u64
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant x : UInt64BW.t
+
+constant lg : UInt32BW.t
+
+function shr_lt_pow2 [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 165 0 165 35] (x: UInt64BW.t) (lg: UInt32BW.t) : ()
+
+goal vc_shr_lt_pow2: ([%#shashmap] 1 <= UInt32BW.t'int lg /\ UInt32BW.t'int lg <= 27)
+  -> ([@stop_split] [@expl:shr_lt_pow2 ensures] [%#shashmap'0] UInt64BW.t'int (shr_u64 x (UInt32BW.sub (64: UInt32BW.t) lg))
+  < Pow2int.pow2 (UInt32BW.t'int lg))

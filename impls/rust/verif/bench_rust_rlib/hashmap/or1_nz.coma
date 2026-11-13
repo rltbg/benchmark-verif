@@ -1,0 +1,15 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 158 0 158 21 *)
+
+let%span shashmap = "/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 157 10 157 28
+
+use creusot.int.UInt64BW
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant x : UInt64BW.t
+
+function or1_nz [#"/home/user/benchmark-verif/impls/rust/src/hashmap.rs" 158 0 158 21] (x: UInt64BW.t) : ()
+
+goal vc_or1_nz: [@stop_split] [@expl:or1_nz ensures] [%#shashmap] UInt64BW.bw_or x (1: UInt64BW.t) <> (0: UInt64BW.t)

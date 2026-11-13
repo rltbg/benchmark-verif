@@ -3,3 +3,20 @@
 2026-11-13T20:20:24+00:00,201.9,echec,5,constantes pub
 2026-11-13T20:25:36+00:00,10.2,echec,1,left/right en u64 + bitwise_proof: search et set_link passent; chase echoue (-x cible)
 2026-11-13T20:25:50+00:00,12,echec,1,chase -X: borne cur<n manquante dans l'invariant
+2026-11-13T20:25:50+00:00,123.0,echec,2,invariant cur<n dans chase; module complet
+2026-11-13T20:28:09+00:00,1.0,erreur_compil,0,cast Int as u64 interdit en logique
+2026-11-13T20:28:30+00:00,4.5,echec,8,(ajoute a posteriori) -X build/search_all/odd_even: search_all et odd_even passent; build 8 buts (cadre de la descente)
+2026-11-13T20:28:49+00:00,93.8,echec,1,descente: invariant de cadre (before), lemmes leaf_links et insert_preserves
+2026-11-13T20:30:10+00:00,5,echec,6,(ajoute a posteriori) -X build apres before/insert_preserves: snoc du chemin, variant, existentielles
+2026-11-13T20:30:54+00:00,35.8,echec,1,lemmes search_path_snoc et keys_step
+2026-11-13T20:31:20+00:00,5,echec,1,(ajoute a posteriori) -X build: reste cur < c
+2026-11-13T20:31:42+00:00,6.8,ok,0,build: assertion intermediaire c != NIL
+2026-11-13T20:31:52+00:00,1.2,ok,0,module ptrchase complet
+2026-11-13T20:48:52+00:00,6.6,echec,0,--no-cache: calibration z3 impossible (machine chargee) - pas un echec de preuve
+2026-11-13T20:49:14+00:00,6.2,echec,0,cache vide: calibration z3 impossible (machine chargee), pas un echec de preuve -, module ptrchase
+2026-11-13T20:52:50+00:00,6.1,echec,0,cache elague: calibration z3 encore impossible (charge ~13), pas un echec de preuve, module ptrchase
+2026-11-13T20:53:27+00:00,0.7,echec,0,calibration z3 impossible (charge) - pas un echec de preuve; verification finale reportee
+2026-11-13T20:54:58+00:00,0.9,echec,1,verification finale de la copie (common+ptrchase+alloc)
+2026-11-13T20:55:13+00:00,0.8,echec,0,--replay: calibration z3 impossible (charge) - pas un echec de preuve
+2026-11-13T20:56:35+00:00,0.8,echec,0,calibration z3: echec de calibration mis en cache par les essais a froid (pas un echec de preuve)
+2026-11-13T20:56:46+00:00,6.6,ok,0,verification finale de la copie (common+ptrchase+alloc), cache chaud

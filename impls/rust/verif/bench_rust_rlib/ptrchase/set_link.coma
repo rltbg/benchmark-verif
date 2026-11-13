@@ -1,0 +1,60 @@
+(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 200 0 200 51 *)
+
+let%span sptrchase = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 201 25 201 26
+let%span sptrchase'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 201 48 201 49
+let%span sptrchase'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 201 59 201 64
+let%span sptrchase'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 201 53 201 65
+let%span sptrchase'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 197 11 197 18
+let%span sptrchase'4 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 198 10 198 70
+let%span sptrchase'5 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 199 10 199 70
+let%span sptrchase'6 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 200 0 200 51
+let%span sptrchase'7 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 55 16 55 21
+let%span sptrchase'8 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 61 16 61 26
+
+use creusot.int.UInt64BW
+use creusot.prelude.Any
+
+constant const_M: UInt64BW.t = [%#sptrchase'6] (4294967295: UInt64BW.t)
+
+constant const_NIL: UInt64BW.t = [%#sptrchase'6] (4294967295: UInt64BW.t)
+
+function left [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 54 0 54 26] (l: UInt64BW.t) : UInt64BW.t =
+  [%#sptrchase'7] UInt64BW.bw_and l const_M
+
+function right [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 60 0 60 27] (l: UInt64BW.t) : UInt64BW.t =
+  [%#sptrchase'8] UInt64BW.shr l (32: UInt64BW.t)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let set_link [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 200 0 200 51] (lnk: UInt64BW.t) (is_left: bool)
+  (c: UInt64BW.t) (return (x: UInt64BW.t)) =
+{[@stop_split] [@expl:set_link requires] [%#sptrchase'3] UInt64BW.lt c const_NIL}
+  (! bb0
+  [ bb0 = any [ br0 -> {is_left = false} (! bb2) | br1 -> {is_left} (! bb1) ]
+  | bb1 = s0
+    [ s0 = [ &_17 <- UInt64BW.bw_not ([%#sptrchase] const_M) ] s1
+    | s1 = [ &_15 <- UInt64BW.bw_and lnk _17 ] s2
+    | s2 = [ &_ret <- UInt64BW.bw_or _15 c ] s3
+    | s3 = return {_ret} ]
+  | bb2 = s0
+    [ s0 = [ &_19 <- UInt64BW.bw_and lnk ([%#sptrchase'0] const_M) ] s1
+    | s1 = UInt64BW.shl [%#sptrchase'2] {c} {UInt64BW.to_BV256 ([%#sptrchase'1] (32: UInt64BW.t))}
+        (fun (_x: UInt64BW.t) -> [ &_21 <- _x ] s2)
+    | s2 = [ &_ret <- UInt64BW.bw_or _19 _21 ] s3
+    | s3 = return {_ret} ] ]
+  [ & _ret: UInt64BW.t = Any.any_l ()
+  | & lnk: UInt64BW.t = lnk
+  | & is_left: bool = is_left
+  | & c: UInt64BW.t = c
+  | & _15: UInt64BW.t = Any.any_l ()
+  | & _17: UInt64BW.t = Any.any_l ()
+  | & _19: UInt64BW.t = Any.any_l ()
+  | & _21: UInt64BW.t = Any.any_l () ])
+  [ return (result: UInt64BW.t) ->
+  {[@stop_split] [@expl:set_link ensures] ([@stop_split] [@expl:set_link ensures #0] [%#sptrchase'4] is_left
+      -> left result = c /\ right result = right lnk)
+    /\ ([@stop_split] [@expl:set_link ensures #1] [%#sptrchase'5] not is_left
+    -> right result = c /\ left result = left lnk)}
+    (! return {result}) ]

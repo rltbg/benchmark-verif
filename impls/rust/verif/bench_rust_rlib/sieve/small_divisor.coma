@@ -1,0 +1,40 @@
+(* #"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 93 0 93 36 *)
+
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span ssieve = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 91 11 91 40
+let%span ssieve'0 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 92 10 92 23
+let%span ssieve'1 = "/home/user/benchmark-verif/impls/rust/src/sieve.rs" 23 16 23 16
+
+use int.ComputerDivision
+use int.Int
+
+predicate crossed [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 22 0 22 38] (k: int) (b: int) =
+  [%#ssieve'1] exists d: int. 2 <= d /\ d < b /\ d * d <= k /\ ComputerDivision.mod k d = 0
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant d : int
+
+constant k : int
+
+function small_divisor [#"/home/user/benchmark-verif/impls/rust/src/sieve.rs" 93 0 93 36] (d: int) (k: int) : ()
+
+goal vc_small_divisor: ([%#ssieve] 2 <= d /\ d < k /\ ComputerDivision.mod k d = 0)
+  -> (let q = ComputerDivision.div k d in k = d * q
+  && (if 2 <= q then
+    q < k
+    && ComputerDivision.mod k q = 0
+    && (if gt_log_Int (d * d) k then
+      q * q <= k && ([@stop_split] [@expl:small_divisor ensures] [%#ssieve'0] crossed k k)
+    else
+      [@stop_split] [@expl:small_divisor ensures] [%#ssieve'0] crossed k k
+    )
+  else
+    false
+  ))

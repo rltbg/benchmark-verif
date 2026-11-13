@@ -1,0 +1,9 @@
+horodatage,duree_s,resultat,buts_echoues,note
+2026-11-13T20:36:48+00:00,134.6,erreur_compil,0,"v1: premiere version complete (inclut la verification/compilation de vstd ; erreur: f dans ensures doit etre final(f))"
+2026-11-13T20:39:19+00:00,3.1,echec,3,"v2: final(f) dans les ensures"
+2026-11-13T20:39:36+00:00,2.8,ok,0,"v3: bornes non lineaires (q<d, i<=2^16, i<=k)"
+2026-11-13T20:42:37+00:00,137,ok,0,"cargo verus build --release (verifie aussi)"
+2026-11-13T20:47:59+00:00,0.2,erreur_outil,0,"option --verify-module mal passee (erreur de ligne de commande)"
+2026-11-13T20:48:13+00:00,67.7,ok,0,"premier cargo verus focus (recompile les dependances), --verify-module sieve"
+2026-11-13T20:49:36+00:00,0.2,erreur_outil,0,"no-op: cargo clean -p visait le mauvais target-dir, rien n a ete reverifie"
+2026-11-13T20:49:55+00:00,2.3,ok,0,"a froid, final: cargo verus focus --verify-module sieve apres cargo clean -p --target-dir target/verus-partial"

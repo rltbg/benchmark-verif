@@ -1,0 +1,53 @@
+(* #"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 116 0 116 45 *)
+
+let%span sptrchase = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 115 10 115 11
+let%span sptrchase'0 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 114 11 114 17
+let%span sptrchase'1 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 106 11 106 17
+let%span sptrchase'2 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 107 10 107 11
+let%span sptrchase'3 = "/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 109 16 109 69
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+
+use creusot.int.UInt32
+use seq.Seq
+use creusot.int.UInt64
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+function chase_pos [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 108 0 108 45] (nx: Seq.seq UInt32.t) (h: int) : UInt32.t
+
+axiom chase_pos_def: forall nx: Seq.seq UInt32.t, h: int [chase_pos nx h]. ([%#sptrchase'1] ge_log_Int h 0)
+    -> chase_pos nx h
+    = ([%#sptrchase'3] if h = 0 then (0: UInt32.t) else Seq.get nx (UInt32.t'int (chase_pos nx (h - 1))))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant nx : Seq.seq UInt32.t
+
+constant h : int
+
+function chase_sum [#"/tmp/claude-0/verif-ptr/creusot-ptr/src/ptrchase.rs" 116 0 116 45] (nx: Seq.seq UInt32.t) (h: int) : UInt64.t
+
+goal vc_chase_sum: ([%#sptrchase'0] ge_log_Int h 0)
+  -> (if h = 0 then
+    true
+  else
+    (([@stop_split] [@expl:chase_sum requires] [%#sptrchase'0] ge_log_Int (h - 1) 0)
+      /\ ([@expl:variant decreases] well_founded_relation_Int ([%#sptrchase] h) ([%#sptrchase] h - 1)))
+    /\ ([@stop_split] [@expl:chase_pos requires] [%#sptrchase'1] ge_log_Int h 0)
+  )
