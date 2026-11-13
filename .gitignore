@@ -12,3 +12,4 @@ impls/zig/bench.o
 impls/zig/.zig-cache/
 results/.ballast
 results/.genstream
+impls/rust-verus/target/

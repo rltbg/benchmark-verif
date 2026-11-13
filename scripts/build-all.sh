@@ -18,6 +18,11 @@ t0=$(now); (cd impls/rust && cargo build --release --quiet 2>&1 | { grep -E '^er
 record rust-creusot build_s "$(echo "$(now) - $t0" | bc -l)"
 record rust-creusot binary_kb "$(( $(stat -c %s impls/rust/target/release/bench-rust) / 1024 ))"; record rust-creusot runtime_kb 0
 ZIG=${ZIG:-/opt/tools/zig/zig-x86_64-linux-0.17.0/zig}
+echo "== rust-verus (cargo verus build --release : vérification puis compilation, le code fantôme est effacé) =="
+VERUS_BIN=${VERUS_BIN:-/opt/tools/verus/verus-x86-linux}
+t0=$(now); (cd impls/rust-verus && PATH="$VERUS_BIN:$PATH" cargo verus build --release 2>&1 | { grep -E '^error|verification results' || true; })
+record rust-verus build_s "$(echo "$(now) - $t0" | bc -l)"
+record rust-verus binary_kb "$(( $(stat -c %s impls/rust-verus/target/release/bench-rust-verus) / 1024 ))"; record rust-verus runtime_kb 0
 echo "== rust-plain =="
 t0=$(now); (cd impls/rust-plain && cargo build --release --quiet 2>&1 | { grep -E '^error' || true; })
 record rust-plain build_s "$(echo "$(now) - $t0" | bc -l)"

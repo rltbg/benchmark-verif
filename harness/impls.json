@@ -63,5 +63,13 @@
    "{workload}",
    "{n}"
   ]
+ },
+ "rust-verus": {
+  "label": "Rust + Verus",
+  "cmd": [
+   "impls/rust-verus/target/release/bench-rust-verus",
+   "{workload}",
+   "{n}"
+  ]
  }
 }
