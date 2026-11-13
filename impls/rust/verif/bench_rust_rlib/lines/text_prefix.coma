@@ -1,0 +1,99 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 178 0 178 48 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 175 10 175 11
+let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 174 11 174 27
+let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 176 10 176 48
+let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 177 10 177 10
+let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 78 10 78 11
+let%span slines'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 80 4 80 82
+let%span slines'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 73 4 73 30
+let%span slines'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 66 11 66 27
+let%span slines'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 68 4 68 43
+let%span slines'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 36 16 36 29
+let%span slines'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 40 16 40 57
+let%span slines'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 52 10 52 11
+let%span slines'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 51 11 51 17
+let%span slines'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 54 4 54 79
+
+use creusot.int.UInt64
+use seq.Seq
+use int.ComputerDivision
+use int.Int
+
+function dec [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 53 0 53 30] (v: int) : Seq.seq int
+
+axiom dec_def: forall v: int [dec v]. ([%#slines'11] 0 <= v)
+    -> dec v
+    = ([%#slines'12] if v < 10 then
+      Seq.singleton (48 + v)
+    else
+      Seq.snoc (dec (ComputerDivision.div v 10)) (48 + ComputerDivision.mod v 10)
+    )
+
+function line [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 67 0 67 39] (k: int) (v: int) : Seq.seq int =
+  [%#slines'7] Seq.snoc (Seq.(++) (Seq.snoc (dec k) 59) (dec v)) 10
+
+function key_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 35 0 35 28] (r: UInt64.t) : int =
+  [%#slines'8] UInt64.t'int (UInt64.shr r (44: UInt64.t))
+
+function val_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 39 0 39 28] (r: UInt64.t) : int =
+  [%#slines'9] ComputerDivision.mod (UInt64.t'int (UInt64.bw_and (UInt64.shr r (8: UInt64.t)) (4294967295: UInt64.t))) 1000000
+
+function line_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 72 0 72 34] (r: UInt64.t) : Seq.seq int =
+  [%#slines'5] line (key_of r) (val_of r)
+
+function text [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 79 0 79 45] (rs: Seq.seq UInt64.t) (i: int) : Seq.seq int
+
+axiom text_def: forall rs: Seq.seq UInt64.t, i: int [text rs i]. text rs i
+    = ([%#slines'4] if i <= 0 then
+      Seq.empty: Seq.seq int
+    else
+      Seq.(++) (text rs (i - 1)) (line_of (Seq.get rs (i - 1)))
+    )
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant rs : Seq.seq UInt64.t
+
+constant i : int
+
+constant n : int
+
+function text_prefix [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 178 0 178 48] (rs: Seq.seq UInt64.t) (i: int) (n: int) : ()
+
+goal vc_text_prefix: ([%#slines'0] 0 <= i /\ i <= n)
+  -> (if i < n then
+    (([@stop_split] [@expl:text_prefix requires] [%#slines'0] 0 <= i /\ i <= n - 1)
+      /\ ([@expl:variant decreases] well_founded_relation_Int ([%#slines] n) ([%#slines] n - 1)))
+    /\ (([@stop_split] [@expl:text_prefix ensures] ([@stop_split] [@expl:text_prefix ensures #0] [%#slines'1] Seq.length (text rs i)
+        <= Seq.length (text rs (n - 1)))
+      /\ ([@stop_split] [@expl:text_prefix ensures #1] [%#slines'2] forall p: int. 0 <= p /\ p < Seq.length (text rs i)
+        -> Seq.get (text rs (n - 1)) p = Seq.get (text rs i) p))
+    -> ([@stop_split] [@expl:text_prefix ensures] ([@stop_split] [@expl:text_prefix ensures #0] [%#slines'1] Seq.length (text rs i)
+      <= Seq.length (text rs n))
+    /\ ([@stop_split] [@expl:text_prefix ensures #1] [%#slines'2] forall p: int. 0 <= p /\ p < Seq.length (text rs i)
+      -> Seq.get (text rs n) p = Seq.get (text rs i) p)))
+  else
+    [@stop_split] [@expl:text_prefix ensures] ([@stop_split] [@expl:text_prefix ensures #0] [%#slines'1] Seq.length (text rs i)
+      <= Seq.length (text rs n))
+    /\ ([@stop_split] [@expl:text_prefix ensures #1] [%#slines'2] forall p: int. 0 <= p /\ p < Seq.length (text rs i)
+      -> Seq.get (text rs n) p = Seq.get (text rs i) p)
+  )

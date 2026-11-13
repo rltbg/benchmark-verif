@@ -1,0 +1,93 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 141 0 141 47 *)
+
+let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 139 10 139 11
+let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 137 11 137 44
+let%span sbfs'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 138 11 138 11
+let%span sbfs'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 140 10 140 29
+let%span sbfs'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 126 11 126 27
+let%span sbfs'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 128 10 128 92
+let%span sbfs'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 152 11 152 17
+let%span sbfs'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 154 10 154 29
+let%span sbfs'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 60 10 60 11
+let%span sbfs'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 62 4 62 67
+let%span sbfs'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 127 10 127 11
+let%span sbfs'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 130 4 132 5
+let%span sbfs'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 153 10 153 11
+let%span sbfs'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 156 4 158 5
+let%span sbfs'13 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 53 10 53 11
+let%span sbfs'14 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 55 4 55 83
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+
+use seq.Seq
+use int.Int
+
+function cnt [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 54 0 54 47] (us: Seq.seq int) (u: int) (j: int) : int
+
+axiom cnt_def: forall us: Seq.seq int, u: int, j: int [cnt us u j]. cnt us u j
+    = ([%#sbfs'14] if j <= 0 then 0 else cnt us u (j - 1) + (if Seq.get us (j - 1) = u then 1 else 0))
+
+function psum [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 61 0 61 48] (us: Seq.seq int) (i: int) (j: int) : int
+
+axiom psum_def: forall us: Seq.seq int, i: int, j: int [psum us i j]. psum us i j
+    = ([%#sbfs'8] if i <= 0 then 0 else psum us (i - 1) j + cnt us (i - 1) j)
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+function psum_step [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 129 0 129 46] (us: Seq.seq int) (i: int) (j: int) : ()
+
+axiom psum_step_def: forall us: Seq.seq int, i: int, j: int [psum_step us i j]. ([%#sbfs'3] 0 <= i /\ 0 <= j)
+    -> psum_step us i j = ([%#sbfs'10] if gt_log_Int i 0 then psum_step us (i - 1) j else ())
+
+axiom psum_step_spec: forall us: Seq.seq int, i: int, j: int. ([%#sbfs'3] 0 <= i /\ 0 <= j)
+    -> ([%#sbfs'4] psum us i (j + 1) = psum us i j + (if 0 <= Seq.get us j /\ Seq.get us j < i then 1 else 0))
+
+function psum_zero [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 155 0 155 38] (us: Seq.seq int) (i: int) : ()
+
+axiom psum_zero_def: forall us: Seq.seq int, i: int [psum_zero us i]. ([%#sbfs'5] 0 <= i)
+    -> psum_zero us i = ([%#sbfs'12] if gt_log_Int i 0 then psum_zero us (i - 1) else ())
+
+axiom psum_zero_spec: forall us: Seq.seq int, i: int. ([%#sbfs'5] 0 <= i) -> ([%#sbfs'6] psum us i 0 = 0)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant us : Seq.seq int
+
+constant n : int
+
+constant j : int
+
+function psum_total [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 141 0 141 47] (us: Seq.seq int) (n: int) (j: int) : ()
+
+goal vc_psum_total: ([%#sbfs'0] 0 <= j /\ j <= Seq.length us /\ 0 <= n)
+  -> ([%#sbfs'1] forall p: int. 0 <= p /\ p < Seq.length us -> 0 <= Seq.get us p /\ Seq.get us p < n)
+  -> (if gt_log_Int j 0 then
+    (([@stop_split] [@expl:psum_total requires] ([@stop_split] [@expl:psum_total requires #0] [%#sbfs'0] 0 <= j - 1
+          /\ j - 1 <= Seq.length us /\ 0 <= n)
+        /\ ([@stop_split] [@expl:psum_total requires #1] [%#sbfs'1] forall p: int. 0 <= p /\ p < Seq.length us
+          -> 0 <= Seq.get us p /\ Seq.get us p < n))
+      /\ ([@expl:variant decreases] well_founded_relation_Int ([%#sbfs] j) ([%#sbfs] j - 1)))
+    /\ (([@stop_split] [@expl:psum_total ensures] [%#sbfs'2] psum us n (j - 1) = j - 1)
+    -> ([@stop_split] [@expl:psum_step requires] [%#sbfs'3] 0 <= n /\ 0 <= j - 1)
+    /\ (([@stop_split] [@expl:psum_step ensures] [%#sbfs'4] psum us n (j - 1 + 1)
+      = psum us n (j - 1) + (if 0 <= Seq.get us (j - 1) /\ Seq.get us (j - 1) < n then 1 else 0))
+    -> ([@stop_split] [@expl:psum_total ensures] [%#sbfs'2] psum us n j = j)))
+  else
+    ([@stop_split] [@expl:psum_zero requires] [%#sbfs'5] 0 <= n)
+    /\ (([@stop_split] [@expl:psum_zero ensures] [%#sbfs'6] psum us n 0 = 0)
+    -> ([@stop_split] [@expl:psum_total ensures] [%#sbfs'2] psum us n j = j))
+  )

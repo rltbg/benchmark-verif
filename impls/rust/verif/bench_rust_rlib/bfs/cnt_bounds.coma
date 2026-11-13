@@ -1,0 +1,53 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 96 0 96 47 *)
+
+let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 94 10 94 11
+let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 93 11 93 17
+let%span sbfs'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 95 10 95 50
+let%span sbfs'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 53 10 53 11
+let%span sbfs'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 55 4 55 83
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+
+use seq.Seq
+use int.Int
+
+function cnt [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 54 0 54 47] (us: Seq.seq int) (u: int) (j: int) : int
+
+axiom cnt_def: forall us: Seq.seq int, u: int, j: int [cnt us u j]. cnt us u j
+    = ([%#sbfs'3] if j <= 0 then 0 else cnt us u (j - 1) + (if Seq.get us (j - 1) = u then 1 else 0))
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant us : Seq.seq int
+
+constant u : int
+
+constant j : int
+
+function cnt_bounds [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 96 0 96 47] (us: Seq.seq int) (u: int) (j: int) : ()
+
+goal vc_cnt_bounds: ([%#sbfs'0] 0 <= j)
+  -> (if gt_log_Int j 0 then
+    (([@stop_split] [@expl:cnt_bounds requires] [%#sbfs'0] 0 <= j - 1)
+      /\ ([@expl:variant decreases] well_founded_relation_Int ([%#sbfs] j) ([%#sbfs] j - 1)))
+    /\ (([@stop_split] [@expl:cnt_bounds ensures] [%#sbfs'1] 0 <= cnt us u (j - 1) /\ cnt us u (j - 1) <= j - 1)
+    -> ([@stop_split] [@expl:cnt_bounds ensures] [%#sbfs'1] 0 <= cnt us u j /\ cnt us u j <= j))
+  else
+    [@stop_split] [@expl:cnt_bounds ensures] [%#sbfs'1] 0 <= cnt us u j /\ cnt us u j <= j
+  )

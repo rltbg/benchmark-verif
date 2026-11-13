@@ -1,0 +1,150 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 141 0 141 22 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 138 10 138 11
+let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 137 11 137 17
+let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 139 10 139 40
+let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 140 10 140 10
+let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 111 11 111 17
+let%span slines'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 113 10 113 27
+let%span slines'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 114 10 114 10
+let%span slines'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 115 10 115 43
+let%span slines'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 116 10 116 44
+let%span slines'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 51 11 51 17
+let%span slines'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 152 11 152 11
+let%span slines'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 154 10 154 10
+let%span slines'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 59 10 59 11
+let%span slines'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 61 4 61 65
+let%span slines'13 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 52 10 52 11
+let%span slines'14 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 54 4 54 79
+let%span slines'15 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 112 10 112 11
+let%span slines'16 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 118 4 120 5
+let%span slines'17 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 153 10 153 11
+let%span slines'18 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 156 4 159 5
+let%span slines'19 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 126 10 126 11
+let%span slines'20 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 125 11 125 11
+let%span slines'21 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 127 10 127 32
+let%span slines'22 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 129 4 131 5
+
+use seq.Seq
+use int.ComputerDivision
+use int.Int
+
+function num [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 60 0 60 38] (s: Seq.seq int) (j: int) : int
+
+axiom num_def: forall s: Seq.seq int, j: int [num s j]. num s j
+    = ([%#slines'12] if j <= 0 then 0 else num s (j - 1) * 10 + (Seq.get s (j - 1) - 48))
+
+function dec [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 53 0 53 30] (v: int) : Seq.seq int
+
+axiom dec_def: forall v: int [dec v]. ([%#slines'8] 0 <= v)
+    -> dec v
+    = ([%#slines'14] if v < 10 then
+      Seq.singleton (48 + v)
+    else
+      Seq.snoc (dec (ComputerDivision.div v 10)) (48 + ComputerDivision.mod v 10)
+    )
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+function dec_shape [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 117 0 117 24] (v: int) : ()
+
+axiom dec_shape_def: forall v: int [dec_shape v]. ([%#slines'3] 0 <= v)
+    -> dec_shape v = ([%#slines'16] if ge_log_Int v 10 then dec_shape (ComputerDivision.div v 10) else ())
+
+axiom dec_shape_spec: forall v: int. ([%#slines'3] 0 <= v) -> ([%#slines'4] 1 <= Seq.length (dec v))
+
+axiom dec_shape_spec'0: forall v: int. ([%#slines'3] 0 <= v)
+    -> ([%#slines'5] forall p: int. 0 <= p /\ p < Seq.length (dec v)
+      -> 48 <= Seq.get (dec v) p /\ Seq.get (dec v) p <= 57)
+
+axiom dec_shape_spec'1: forall v: int. ([%#slines'3] 0 <= v) -> ([%#slines'6] v < 1000000 -> Seq.length (dec v) <= 6)
+
+axiom dec_shape_spec'2: forall v: int. ([%#slines'3] 0 <= v) -> ([%#slines'7] v < 10000000 -> Seq.length (dec v) <= 7)
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+function num_ext [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 128 0 128 48] (s: Seq.seq int) (t: Seq.seq int) (j: int) : ()
+
+axiom num_ext_def: forall s: Seq.seq int, t: Seq.seq int, j: int [num_ext s t j]. ([%#slines'20] forall p: int. 0 <= p
+          /\ p < j -> Seq.get s p = Seq.get t p)
+    -> num_ext s t j = ([%#slines'22] if gt_log_Int j 0 then num_ext s t (j - 1) else ())
+
+axiom num_ext_spec: forall s: Seq.seq int, t: Seq.seq int, j: int. ([%#slines'20] forall p: int. 0 <= p /\ p < j
+        -> Seq.get s p = Seq.get t p) -> ([%#slines'21] num s j = num t j)
+
+function num_ext_all [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 155 0 155 52] (s: Seq.seq int) (t: Seq.seq int) (m: int) : ()
+
+axiom num_ext_all_def: forall s: Seq.seq int, t: Seq.seq int, m: int [num_ext_all s t m]. ([%#slines'9] forall p: int. 0
+            <= p
+          /\ p < m -> Seq.get s p = Seq.get t p)
+    -> num_ext_all s t m
+    = ([%#slines'18] if gt_log_Int m 0 then let _ = num_ext s t m in num_ext_all s t (m - 1) else ())
+
+axiom num_ext_all_spec: forall s: Seq.seq int, t: Seq.seq int, m: int. ([%#slines'9] forall p: int. 0 <= p /\ p < m
+        -> Seq.get s p = Seq.get t p) -> ([%#slines'10] forall j: int. j <= m -> num s j = num t j)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant v : int
+
+function num_dec [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 141 0 141 22] (v: int) : ()
+
+goal vc_num_dec: ([%#slines'0] 0 <= v)
+  -> ([@stop_split] [@expl:dec_shape requires] [%#slines'3] 0 <= v)
+  /\ (([@stop_split] [@expl:dec_shape ensures] ([@stop_split] [@expl:dec_shape ensures #0] [%#slines'4] 1
+      <= Seq.length (dec v))
+    /\ ([@stop_split] [@expl:dec_shape ensures #1] [%#slines'5] forall p: int. 0 <= p /\ p < Seq.length (dec v)
+        -> 48 <= Seq.get (dec v) p /\ Seq.get (dec v) p <= 57)
+    /\ ([@stop_split] [@expl:dec_shape ensures #2] [%#slines'6] v < 1000000 -> Seq.length (dec v) <= 6)
+    /\ ([@stop_split] [@expl:dec_shape ensures #3] [%#slines'7] v < 10000000 -> Seq.length (dec v) <= 7))
+  -> (if ge_log_Int v 10 then
+    (([@stop_split] [@expl:num_dec requires] [%#slines'0] 0 <= ComputerDivision.div v 10)
+      /\ ([@expl:variant decreases] well_founded_relation_Int ([%#slines] v) ([%#slines] ComputerDivision.div v 10)))
+    /\ (([@stop_split] [@expl:num_dec ensures] ([@stop_split] [@expl:num_dec ensures #0] [%#slines'1] num (dec (ComputerDivision.div v 10)) (Seq.length (dec (ComputerDivision.div v 10)))
+        = ComputerDivision.div v 10)
+      /\ ([@stop_split] [@expl:num_dec ensures #1] [%#slines'2] forall j: int. 0 <= j
+          /\ j <= Seq.length (dec (ComputerDivision.div v 10))
+        -> 0 <= num (dec (ComputerDivision.div v 10)) j
+        /\ num (dec (ComputerDivision.div v 10)) j <= ComputerDivision.div v 10))
+    -> ([@stop_split] [@expl:dec_shape requires] [%#slines'3] 0 <= ComputerDivision.div v 10)
+    /\ (([@stop_split] [@expl:dec_shape ensures] ([@stop_split] [@expl:dec_shape ensures #0] [%#slines'4] 1
+        <= Seq.length (dec (ComputerDivision.div v 10)))
+      /\ ([@stop_split] [@expl:dec_shape ensures #1] [%#slines'5] forall p: int. 0 <= p
+            /\ p < Seq.length (dec (ComputerDivision.div v 10))
+          -> 48 <= Seq.get (dec (ComputerDivision.div v 10)) p /\ Seq.get (dec (ComputerDivision.div v 10)) p <= 57)
+      /\ ([@stop_split] [@expl:dec_shape ensures #2] [%#slines'6] ComputerDivision.div v 10 < 1000000
+        -> Seq.length (dec (ComputerDivision.div v 10)) <= 6)
+      /\ ([@stop_split] [@expl:dec_shape ensures #3] [%#slines'7] ComputerDivision.div v 10 < 10000000
+      -> Seq.length (dec (ComputerDivision.div v 10)) <= 7))
+    -> ([@stop_split] [@expl:dec requires] [%#slines'8] 0 <= v)
+    /\ ([@stop_split] [@expl:dec requires] [%#slines'8] 0 <= ComputerDivision.div v 10)
+    /\ ([@stop_split] [@expl:dec requires] [%#slines'8] 0 <= ComputerDivision.div v 10)
+    /\ ([@stop_split] [@expl:num_ext_all requires] [%#slines'9] forall p: int. 0 <= p
+          /\ p < Seq.length (dec (ComputerDivision.div v 10))
+        -> Seq.get (dec v) p = Seq.get (dec (ComputerDivision.div v 10)) p)
+    /\ (([@stop_split] [@expl:num_ext_all ensures] [%#slines'10] forall j: int. j
+          <= Seq.length (dec (ComputerDivision.div v 10)) -> num (dec v) j = num (dec (ComputerDivision.div v 10)) j)
+    -> ([@stop_split] [@expl:num_dec ensures] ([@stop_split] [@expl:num_dec ensures #0] [%#slines'1] num (dec v) (Seq.length (dec v))
+      = v)
+    /\ ([@stop_split] [@expl:num_dec ensures #1] [%#slines'2] forall j: int. 0 <= j /\ j <= Seq.length (dec v)
+      -> 0 <= num (dec v) j /\ num (dec v) j <= v)))))
+  else
+    [@stop_split] [@expl:num_dec ensures] ([@stop_split] [@expl:num_dec ensures #0] [%#slines'1] num (dec v) (Seq.length (dec v))
+      = v)
+    /\ ([@stop_split] [@expl:num_dec ensures #1] [%#slines'2] forall j: int. 0 <= j /\ j <= Seq.length (dec v)
+      -> 0 <= num (dec v) j /\ num (dec v) j <= v)
+  ))

@@ -1,0 +1,6 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": { "vc_psum_step": { "prover": "alt-ergo", "time": 0.025 } }
+  }
+}

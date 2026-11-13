@@ -1,0 +1,83 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 201 0 201 46 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 198 10 198 11
+let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 197 11 197 17
+let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 199 10 199 63
+let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 200 10 200 50
+let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 85 10 85 11
+let%span slines'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 87 4 87 109
+let%span slines'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 90 10 90 11
+let%span slines'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 92 4 92 91
+let%span slines'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 36 16 36 29
+let%span slines'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 40 16 40 57
+
+use creusot.int.UInt64
+use seq.Seq
+use int.ComputerDivision
+use int.Int
+
+function key_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 35 0 35 28] (r: UInt64.t) : int =
+  [%#slines'7] UInt64.t'int (UInt64.shr r (44: UInt64.t))
+
+function val_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 39 0 39 28] (r: UInt64.t) : int =
+  [%#slines'8] ComputerDivision.mod (UInt64.t'int (UInt64.bw_and (UInt64.shr r (8: UInt64.t)) (4294967295: UInt64.t))) 1000000
+
+function sum_v [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 86 0 86 49] (rs: Seq.seq UInt64.t) (i: int) (k: int) : int
+
+axiom sum_v_def: forall rs: Seq.seq UInt64.t, i: int, k: int [sum_v rs i k]. sum_v rs i k
+    = ([%#slines'4] if i <= 0 then
+      0
+    else
+      sum_v rs (i - 1) k + (if key_of (Seq.get rs (i - 1)) = k then val_of (Seq.get rs (i - 1)) else 0)
+    )
+
+function cnt [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 91 0 91 47] (rs: Seq.seq UInt64.t) (i: int) (k: int) : int
+
+axiom cnt_def: forall rs: Seq.seq UInt64.t, i: int, k: int [cnt rs i k]. cnt rs i k
+    = ([%#slines'6] if i <= 0 then 0 else cnt rs (i - 1) k + (if key_of (Seq.get rs (i - 1)) = k then 1 else 0))
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant rs : Seq.seq UInt64.t
+
+constant i : int
+
+constant k : int
+
+function agg_bound [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 201 0 201 46] (rs: Seq.seq UInt64.t) (i: int) (k: int) : ()
+
+goal vc_agg_bound: ([%#slines'0] 0 <= i)
+  -> (if gt_log_Int i 0 then
+    (([@stop_split] [@expl:agg_bound requires] [%#slines'0] 0 <= i - 1)
+      /\ ([@expl:variant decreases] well_founded_relation_Int ([%#slines] i) ([%#slines] i - 1)))
+    /\ (([@stop_split] [@expl:agg_bound ensures] ([@stop_split] [@expl:agg_bound ensures #0] [%#slines'1] 0
+          <= sum_v rs (i - 1) k
+        /\ sum_v rs (i - 1) k <= 999999 * (i - 1))
+      /\ ([@stop_split] [@expl:agg_bound ensures #1] [%#slines'2] 0 <= cnt rs (i - 1) k /\ cnt rs (i - 1) k <= i - 1))
+    -> ([@stop_split] [@expl:agg_bound ensures] ([@stop_split] [@expl:agg_bound ensures #0] [%#slines'1] 0
+        <= sum_v rs i k
+      /\ sum_v rs i k <= 999999 * i)
+    /\ ([@stop_split] [@expl:agg_bound ensures #1] [%#slines'2] 0 <= cnt rs i k /\ cnt rs i k <= i)))
+  else
+    [@stop_split] [@expl:agg_bound ensures] ([@stop_split] [@expl:agg_bound ensures #0] [%#slines'1] 0 <= sum_v rs i k
+      /\ sum_v rs i k <= 999999 * i)
+    /\ ([@stop_split] [@expl:agg_bound ensures #1] [%#slines'2] 0 <= cnt rs i k /\ cnt rs i k <= i)
+  )

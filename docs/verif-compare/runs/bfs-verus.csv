@@ -7,5 +7,9 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:58:42+00:00,8.7,echec,1,fill (correspondance CSR/arêtes) vérifié du 1er coup; boucle interne BFS dépasse maintenant le rlimit (instabilité)
 2026-11-13T20:58:59+00:00,32.9,echec,1,rlimit(30) essayé: c'est maintenant la boucle externe qui dépasse (instable); attribut retiré
 2026-11-13T21:00:41+00:00,2.9,ok,0,BFS refait avec prédicats opaques (queued/preds/processed) + lemmes de pas: 1.2 s
+2026-11-13T21:01:10+00:00,2.9,ok,0,lemma_bfs_on_edges (propriétés BFS sur les arêtes générées) vérifié du 1er coup (horodatage approché; ligne ajoutée après coup)
 2026-11-13T21:15:19+00:00,6.2,ok,0,cargo verus build --release final
 2026-11-13T21:22:06+00:00,0.1,erreur_compil,-,usage: --verify-module exige cargo verus focus
+2026-11-13T21:22:51+00:00,0.1,erreur_compil,-,focus non relancé par cargo (rien de modifié; aucune vérification)
+2026-11-13T21:23:01+00:00,0.1,erreur_compil,-,focus: a revérifié le module lines (sélection mémorisée) au lieu de bfs; sans valeur
+2026-11-13T21:23:01+00:00,2.3,ok,0,à froid: crate entier (common+lines+bfs) --time

@@ -3,10 +3,149 @@
   "proofs": {
     "Coma": {
       "vc_endp": { "prover": "alt-ergo", "time": 0.012 },
-      "vc_fill": { "prover": "z3", "time": 0.01 },
+      "vc_fill": {
+        "tactic": "compute_specified",
+        "children": [
+          {
+            "tactic": "split_vc",
+            "children": [
+              { "prover": "alt-ergo", "time": 0.037 },
+              { "prover": "alt-ergo", "time": 0.037 },
+              { "prover": "alt-ergo", "time": 0.018 },
+              { "prover": "alt-ergo", "time": 0.024 },
+              { "prover": "alt-ergo", "time": 0.013 },
+              { "prover": "alt-ergo", "time": 0.041 },
+              { "prover": "alt-ergo", "time": 0.023 },
+              { "prover": "alt-ergo", "time": 0.018 },
+              { "prover": "z3", "time": 0.003 },
+              {
+                "tactic": "split_vc",
+                "children": [
+                  { "prover": "alt-ergo", "time": 0.018 },
+                  { "prover": "alt-ergo", "time": 0.022 },
+                  { "prover": "alt-ergo", "time": 0.02 },
+                  { "prover": "alt-ergo", "time": 0.019 },
+                  { "prover": "alt-ergo", "time": 0.023 }
+                ]
+              },
+              { "prover": "alt-ergo", "time": 0.027 },
+              {
+                "tactic": "split_vc",
+                "children": [ { "prover": "cvc4", "time": 0.047 } ]
+              },
+              {
+                "tactic": "split_vc",
+                "children": [
+                  { "prover": "cvc5", "time": 0.03 },
+                  { "prover": "cvc5", "time": 0.035 },
+                  { "prover": "alt-ergo", "time": 0.024 }
+                ]
+              },
+              { "prover": "z3", "time": 0.031 },
+              {
+                "tactic": "split_vc",
+                "children": [
+                  { "prover": "cvc5", "time": 0.049 },
+                  { "prover": "alt-ergo", "time": 0.016 },
+                  { "prover": "alt-ergo", "time": 0.022 },
+                  { "prover": "z3", "time": 0.011 },
+                  { "prover": "alt-ergo", "time": 0.046 }
+                ]
+              },
+              { "prover": "alt-ergo", "time": 0.02 },
+              { "prover": "alt-ergo", "time": 0.015 },
+              { "prover": "cvc5", "time": 0.042 },
+              { "prover": "z3", "time": 0.009 },
+              { "prover": "alt-ergo", "time": 0.024 },
+              { "prover": "z3", "time": 0.094 },
+              { "prover": "alt-ergo", "time": 0.224 },
+              { "prover": "z3", "time": 0.017 },
+              { "prover": "z3", "time": 0.007 },
+              { "prover": "alt-ergo", "time": 0.048 },
+              { "prover": "alt-ergo", "time": 0.019 },
+              { "prover": "z3", "time": 0.017 },
+              { "prover": "alt-ergo", "time": 0.032 },
+              {
+                "tactic": "split_vc",
+                "children": [
+                  { "prover": "z3", "time": 0.014 },
+                  { "prover": "alt-ergo", "time": 0.035 },
+                  { "prover": "alt-ergo", "time": 0.051 }
+                ]
+              },
+              { "prover": "z3", "time": 0.016 },
+              {
+                "tactic": "split_vc",
+                "children": [
+                  {
+                    "tactic": "split_vc",
+                    "children": [ { "prover": "cvc4", "time": 0.048 } ]
+                  }
+                ]
+              },
+              { "prover": "z3", "time": 0.063 },
+              { "prover": "z3", "time": 0.478 },
+              { "prover": "z3", "time": 0.018 },
+              { "prover": "z3", "time": 0.032 },
+              {
+                "tactic": "split_vc",
+                "children": [
+                  { "prover": "alt-ergo", "time": 0.041 },
+                  { "prover": "cvc5", "time": 0.02 },
+                  { "prover": "cvc5", "time": 0.051 }
+                ]
+              },
+              { "prover": "z3", "time": 0.14 },
+              { "prover": "cvc5", "time": 0.049 },
+              {
+                "tactic": "split_vc",
+                "children": [
+                  { "prover": "alt-ergo", "time": 0.019 },
+                  { "prover": "alt-ergo", "time": 0.026 }
+                ]
+              },
+              {
+                "tactic": "split_vc",
+                "children": [ { "prover": "alt-ergo", "time": 0.027 } ]
+              },
+              { "prover": "alt-ergo", "time": 0.022 },
+              { "prover": "alt-ergo", "time": 0.029 },
+              {
+                "tactic": "split_vc",
+                "children": [
+                  { "prover": "alt-ergo", "time": 0.038 },
+                  { "prover": "alt-ergo", "time": 0.09 },
+                  { "prover": "alt-ergo", "time": 0.142 },
+                  { "prover": "cvc4", "time": 0.069 }
+                ]
+              },
+              { "prover": "z3", "time": 0.058 },
+              { "prover": "cvc4", "time": 0.106 },
+              {
+                "tactic": "split_vc",
+                "children": [
+                  { "prover": "alt-ergo", "time": 0.035 },
+                  { "prover": "alt-ergo", "time": 0.059 },
+                  { "prover": "cvc4", "time": 0.071 },
+                  { "prover": "alt-ergo", "time": 0.203 }
+                ]
+              },
+              {
+                "tactic": "split_vc",
+                "children": [
+                  { "prover": "alt-ergo", "time": 0.044 },
+                  { "prover": "cvc5", "time": 0.079 },
+                  { "prover": "cvc5", "time": 0.08 },
+                  { "prover": "cvc5", "time": 0.177 },
+                  { "prover": "cvc4", "time": 0.105 }
+                ]
+              }
+            ]
+          }
+        ]
+      },
       "vc_index_Vec_u32_Global": { "prover": "alt-ergo", "time": 0.012 },
-      "vc_index_mut_Vec_u32_Global": { "prover": "alt-ergo", "time": 0.009 },
-      "vc_wrapping_add": { "prover": "alt-ergo", "time": 0.011 }
+      "vc_index_mut_Vec_u32_Global": { "prover": "alt-ergo", "time": 0.009 }
     }
   }
 }

@@ -1,0 +1,102 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 524 0 525 112 *)
+
+let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 526 18 526 18
+let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 528 18 528 18
+let%span sbfs'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 531 18 531 18
+let%span sbfs'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 516 11 516 41
+let%span sbfs'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 517 11 517 11
+let%span sbfs'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 518 11 518 11
+let%span sbfs'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 520 11 520 11
+let%span sbfs'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 522 10 522 10
+let%span sbfs'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 524 0 525 112
+let%span sbfs'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 60 10 60 11
+let%span sbfs'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 62 4 62 67
+let%span sbfs'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 80 16 80 16
+let%span sbfs'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 53 10 53 11
+let%span sbfs'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 55 4 55 83
+
+use creusot.int.UInt32
+use seq.Seq
+use creusot.prelude.Any
+use int.Int
+
+constant const_INF: UInt32.t = [%#sbfs'7] (4294967295: UInt32.t)
+
+function cnt [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 54 0 54 47] (us: Seq.seq int) (u: int) (j: int) : int
+
+axiom cnt_def: forall us: Seq.seq int, u: int, j: int [cnt us u j]. cnt us u j
+    = ([%#sbfs'12] if j <= 0 then 0 else cnt us u (j - 1) + (if Seq.get us (j - 1) = u then 1 else 0))
+
+function psum [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 61 0 61 48] (us: Seq.seq int) (i: int) (j: int) : int
+
+axiom psum_def: forall us: Seq.seq int, i: int, j: int [psum us i j]. psum us i j
+    = ([%#sbfs'9] if i <= 0 then 0 else psum us (i - 1) j + cnt us (i - 1) j)
+
+predicate arc [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 79 0 79 64] (off: Seq.seq UInt32.t) (adj: Seq.seq UInt32.t) (u: int) (v: int) =
+  [%#sbfs'10] exists e: int. UInt32.t'int (Seq.get off u) <= e
+    /\ e < UInt32.t'int (Seq.get off (u + 1)) /\ UInt32.t'int (Seq.get adj e) = v
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let bfs_edges_backward [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 524 0 525 112] (off: Seq.seq UInt32.t)
+  (adj: Seq.seq UInt32.t) (d: Seq.seq UInt32.t) (us: Seq.seq int) (vs: Seq.seq int) (who: Seq.seq int) (n: int) (m: int)
+  (return (x: ())) =
+{[@stop_split] [@expl:bfs_edges_backward requires] ([@stop_split] [@expl:bfs_edges_backward requires #0] [%#sbfs'2] 1
+      <= n
+    /\ Seq.length off = n + 1)
+  /\ ([@stop_split] [@expl:bfs_edges_backward requires #1] [%#sbfs'3] forall i: int. 0 <= i /\ i <= n
+      -> UInt32.t'int (Seq.get off i) = psum us i m)
+  /\ ([@stop_split] [@expl:bfs_edges_backward requires #2] [%#sbfs'4] forall u: int, e: int. 0 <= u
+        /\ u < n /\ psum us u m <= e /\ e < psum us (u + 1) m
+      -> 0 <= Seq.get who e
+      /\ Seq.get who e < m
+      /\ Seq.get us (Seq.get who e) = u /\ Seq.get vs (Seq.get who e) = UInt32.t'int (Seq.get adj e))
+  /\ ([@stop_split] [@expl:bfs_edges_backward requires #3] [%#sbfs'5] forall v: int. 0 <= v
+      /\ v < n /\ v <> 0 /\ Seq.get d v <> const_INF
+    -> (exists x: int. 0 <= x
+      /\ x < n
+      /\ Seq.get d x <> const_INF /\ arc off adj x v /\ UInt32.t'int (Seq.get d x) + 1 = UInt32.t'int (Seq.get d v)))}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = {[@expl:assertion] [%#sbfs] forall x: int, e: int. 0 <= x
+          /\ x < n /\ UInt32.t'int (Seq.get off x) <= e /\ e < UInt32.t'int (Seq.get off (x + 1))
+        -> 0 <= Seq.get who e
+        /\ Seq.get who e < m
+        /\ Seq.get us (Seq.get who e) = x /\ Seq.get vs (Seq.get who e) = UInt32.t'int (Seq.get adj e)}
+      s1
+    | s1 = {[@expl:assertion] [%#sbfs'0] forall v: int. 0 <= v /\ v < n /\ v <> 0 /\ Seq.get d v <> const_INF
+        -> (exists x: int, e: int. 0 <= x
+          /\ x < n
+          /\ Seq.get d x <> const_INF
+          /\ UInt32.t'int (Seq.get off x) <= e
+          /\ e < UInt32.t'int (Seq.get off (x + 1))
+          /\ UInt32.t'int (Seq.get adj e) = v /\ UInt32.t'int (Seq.get d x) + 1 = UInt32.t'int (Seq.get d v))}
+      s2
+    | s2 = {[@expl:assertion] [%#sbfs'1] forall v: int. 0 <= v /\ v < n /\ v <> 0 /\ Seq.get d v <> const_INF
+        -> (exists x: int, e: int. 0 <= x
+          /\ x < n
+          /\ Seq.get d x <> const_INF
+          /\ UInt32.t'int (Seq.get d x) + 1 = UInt32.t'int (Seq.get d v)
+          /\ 0 <= Seq.get who e
+          /\ Seq.get who e < m /\ Seq.get us (Seq.get who e) = x /\ Seq.get vs (Seq.get who e) = v)}
+      s3
+    | s3 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & off: Seq.seq UInt32.t = off
+  | & adj: Seq.seq UInt32.t = adj
+  | & d: Seq.seq UInt32.t = d
+  | & us: Seq.seq int = us
+  | & vs: Seq.seq int = vs
+  | & who: Seq.seq int = who
+  | & n: int = n
+  | & m: int = m ])
+  [ return (result: ()) -> {[@stop_split] [@expl:bfs_edges_backward ensures] [%#sbfs'6] forall v: int. 0 <= v
+        /\ v < n /\ v <> 0 /\ Seq.get d v <> const_INF
+      -> (exists j: int. 0 <= j
+        /\ j < m
+        /\ Seq.get vs j = v
+        /\ Seq.get d (Seq.get us j) <> const_INF
+        /\ UInt32.t'int (Seq.get d (Seq.get us j)) + 1 = UInt32.t'int (Seq.get d v))}
+    (! return {result}) ]

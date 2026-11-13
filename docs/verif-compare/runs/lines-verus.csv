@@ -11,3 +11,5 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:38:54+00:00,2.8,ok,0,foralls séparés (un déclencheur sum_v / cnt chacun): tout vérifié
 2026-11-13T20:43:27+00:00,,ok,0,cargo verus build --release (vérifie avant de compiler; durée non mesurée)
 2026-11-13T21:22:06+00:00,0.1,erreur_compil,-,usage: --verify-module exige cargo verus focus
+2026-11-13T21:22:14+00:00,37.4,ok,0,à froid: focus --verify-module lines --time (2.1 s Verus; reste = recompilation des dépendances en mode focus)
+2026-11-13T21:23:01+00:00,2.3,ok,0,à froid: crate entier (common+lines+bfs) --time (même appel que bfs)

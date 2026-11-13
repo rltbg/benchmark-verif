@@ -1,0 +1,38 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 60 0 60 38 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 59 10 59 11
+
+use seq.Seq
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant s : Seq.seq int
+
+constant j : int
+
+function num [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 60 0 60 38] (s: Seq.seq int) (j: int) : int
+
+goal vc_num: if j <= 0 then
+    true
+  else
+    [@expl:variant decreases] well_founded_relation_Int ([%#slines] j) ([%#slines] j - 1)
+  

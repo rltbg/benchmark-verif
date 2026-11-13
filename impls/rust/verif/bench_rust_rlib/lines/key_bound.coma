@@ -1,0 +1,20 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 107 0 107 24 *)
+
+let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 106 10 106 47
+let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 36 16 36 29
+
+use creusot.int.UInt64BW
+use int.Int
+
+function key_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 35 0 35 28] (r: UInt64BW.t) : int =
+  [%#slines'0] UInt64BW.t'int (UInt64BW.shr r (44: UInt64BW.t))
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant r : UInt64BW.t
+
+function key_bound [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 107 0 107 24] (r: UInt64BW.t) : ()
+
+goal vc_key_bound: [@stop_split] [@expl:key_bound ensures] [%#slines] 0 <= key_of r /\ key_of r < 1048576

@@ -1,0 +1,40 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 53 0 53 30 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 52 10 52 11
+let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 51 11 51 17
+
+use seq.Seq
+use int.ComputerDivision
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant v : int
+
+function dec [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 53 0 53 30] (v: int) : Seq.seq int
+
+goal vc_dec: ([%#slines'0] 0 <= v)
+  -> (if v < 10 then
+    true
+  else
+    ([@stop_split] [@expl:dec requires] [%#slines'0] 0 <= ComputerDivision.div v 10)
+    /\ ([@expl:variant decreases] well_founded_relation_Int ([%#slines] v) ([%#slines] ComputerDivision.div v 10))
+  )

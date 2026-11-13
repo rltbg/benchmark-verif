@@ -1,0 +1,97 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 506 0 507 112 *)
+
+let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 508 18 508 18
+let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 510 18 510 18
+let%span sbfs'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 499 11 499 84
+let%span sbfs'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 500 11 500 11
+let%span sbfs'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 501 11 501 11
+let%span sbfs'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 503 11 503 11
+let%span sbfs'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 505 10 505 10
+let%span sbfs'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 80 16 80 16
+let%span sbfs'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 45 8 47 71
+let%span sbfs'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 60 10 60 11
+let%span sbfs'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 62 4 62 67
+let%span sbfs'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 506 0 507 112
+let%span sbfs'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 38 16 38 49
+let%span sbfs'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 53 10 53 11
+let%span sbfs'13 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 55 4 55 83
+let%span sbfs'14 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 29 4 29 38
+
+use seq.Seq
+use creusot.int.UInt32
+use creusot.prelude.Any
+use creusot.int.UInt64
+use int.ComputerDivision
+use int.Int
+
+predicate arc [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 79 0 79 64] (off: Seq.seq UInt32.t) (adj: Seq.seq UInt32.t) (u: int) (v: int) =
+  [%#sbfs'6] exists e: int. UInt32.t'int (Seq.get off u) <= e
+    /\ e < UInt32.t'int (Seq.get off (u + 1)) /\ UInt32.t'int (Seq.get adj e) = v
+
+function mix64_l [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 28 0 28 29] (x: UInt64.t) : UInt64.t =
+  [%#sbfs'14] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+constant const_SEED: UInt64.t = [%#sbfs'10] (13109978515275513857: UInt64.t)
+
+function endp_l [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 37 0 37 44] (j: UInt64.t) (k: UInt64.t) (n: int) : int
+ =
+  [%#sbfs'11] ComputerDivision.mod (UInt64.t'int (mix64_l (UInt64.add (UInt64.add const_SEED (UInt64.mul (2: UInt64.t) j)) k))) n
+
+predicate sources [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 43 0 43 52] (us: Seq.seq int) (m: int) (n: int) =
+  [%#sbfs'7] Seq.length us = m
+  /\ (forall j: UInt64.t. UInt64.t'int j < m -> Seq.get us (UInt64.t'int j) = endp_l j (0: UInt64.t) n)
+  /\ (forall j: int. 0 <= j /\ j < m -> 0 <= Seq.get us j /\ Seq.get us j < n)
+
+function cnt [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 54 0 54 47] (us: Seq.seq int) (u: int) (j: int) : int
+
+axiom cnt_def: forall us: Seq.seq int, u: int, j: int [cnt us u j]. cnt us u j
+    = ([%#sbfs'13] if j <= 0 then 0 else cnt us u (j - 1) + (if Seq.get us (j - 1) = u then 1 else 0))
+
+function psum [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 61 0 61 48] (us: Seq.seq int) (i: int) (j: int) : int
+
+axiom psum_def: forall us: Seq.seq int, i: int, j: int [psum us i j]. psum us i j
+    = ([%#sbfs'9] if i <= 0 then 0 else psum us (i - 1) j + cnt us (i - 1) j)
+
+constant const_INF: UInt32.t = [%#sbfs'10] (4294967295: UInt32.t)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let bfs_edges_forward [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 506 0 507 112] (off: Seq.seq UInt32.t)
+  (adj: Seq.seq UInt32.t) (d: Seq.seq UInt32.t) (us: Seq.seq int) (vs: Seq.seq int) (pos: Seq.seq int) (n: int) (m: int)
+  (return (x: ())) =
+{[@stop_split] [@expl:bfs_edges_forward requires] ([@stop_split] [@expl:bfs_edges_forward requires #0] [%#sbfs'1] 1 <= n
+    /\ Seq.length off = n + 1 /\ sources us m n /\ Seq.length pos = m)
+  /\ ([@stop_split] [@expl:bfs_edges_forward requires #1] [%#sbfs'2] forall i: int. 0 <= i /\ i <= n
+      -> UInt32.t'int (Seq.get off i) = psum us i m)
+  /\ ([@stop_split] [@expl:bfs_edges_forward requires #2] [%#sbfs'3] forall j: int. 0 <= j /\ j < m
+      -> psum us (Seq.get us j) m <= Seq.get pos j
+      /\ Seq.get pos j < psum us (Seq.get us j + 1) m /\ UInt32.t'int (Seq.get adj (Seq.get pos j)) = Seq.get vs j)
+  /\ ([@stop_split] [@expl:bfs_edges_forward requires #3] [%#sbfs'4] forall x: int, v: int. 0 <= x
+      /\ x < n /\ Seq.get d x <> const_INF /\ arc off adj x v
+    -> Seq.get d v <> const_INF /\ UInt32.t'int (Seq.get d v) <= UInt32.t'int (Seq.get d x) + 1)}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = {[@expl:assertion] [%#sbfs] forall j: int. 0 <= j /\ j < m
+        -> 0 <= Seq.get us j
+        /\ Seq.get us j < n
+        /\ UInt32.t'int (Seq.get off (Seq.get us j)) <= Seq.get pos j
+        /\ Seq.get pos j < UInt32.t'int (Seq.get off (Seq.get us j + 1))
+        /\ UInt32.t'int (Seq.get adj (Seq.get pos j)) = Seq.get vs j}
+      s1
+    | s1 = {[@expl:assertion] [%#sbfs'0] forall j: int. 0 <= j /\ j < m -> arc off adj (Seq.get us j) (Seq.get vs j)} s2
+    | s2 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & off: Seq.seq UInt32.t = off
+  | & adj: Seq.seq UInt32.t = adj
+  | & us: Seq.seq int = us
+  | & vs: Seq.seq int = vs
+  | & pos: Seq.seq int = pos
+  | & n: int = n
+  | & m: int = m ])
+  [ return (result: ()) -> {[@stop_split] [@expl:bfs_edges_forward ensures] [%#sbfs'5] forall j: int. 0 <= j
+        /\ j < m /\ Seq.get d (Seq.get us j) <> const_INF
+      -> Seq.get d (Seq.get vs j) <> const_INF
+      /\ UInt32.t'int (Seq.get d (Seq.get vs j)) <= UInt32.t'int (Seq.get d (Seq.get us j)) + 1}
+    (! return {result}) ]

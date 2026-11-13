@@ -1,20 +1,55 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 40 0 40 43 *)
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 301 0 301 87 *)
 
-let%span sbfs = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 41 16 41 22
-let%span sbfs'0 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 43 14 43 25
-let%span sbfs'1 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 42 16 42 63
-let%span sbfs'2 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 45 20 45 23
-let%span sbfs'3 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 45 45 45 46
-let%span sbfs'4 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 45 41 45 46
-let%span sbfs'5 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 45 40 45 47
-let%span sbfs'6 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 45 17 45 48
-let%span sbfs'7 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 45 11 45 14
-let%span sbfs'8 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 46 13 46 14
-let%span sbfs'9 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 46 8 46 14
-let%span sbfs'10 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 37 11 37 31
-let%span sbfs'11 = "/home/user/benchmark-verif/impls/rust/src/bfs.rs" 38 10 38 37
-let%span snum = "/opt/tools/creusot/creusot-std/src/std/num.rs" 415 26 415 48
+let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 302 20 302 43
+let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 303 20 303 46
+let%span sbfs'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 304 16 304 22
+let%span sbfs'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 308 14 308 25
+let%span sbfs'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 307 16 307 16
+let%span sbfs'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 306 16 306 16
+let%span sbfs'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 305 16 305 63
+let%span sbfs'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 310 26 310 27
+let%span sbfs'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 310 22 310 27
+let%span sbfs'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 310 21 310 28
+let%span sbfs'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 310 11 310 14
+let%span sbfs'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 310 8 310 28
+let%span sbfs'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 311 13 311 14
+let%span sbfs'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 311 8 311 14
+let%span sbfs'13 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 296 11 296 102
+let%span sbfs'14 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 297 11 297 95
+let%span sbfs'15 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 298 10 298 33
+let%span sbfs'16 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 299 10 299 10
+let%span sbfs'17 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 139 10 139 11
+let%span sbfs'18 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 137 11 137 44
+let%span sbfs'19 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 138 11 138 11
+let%span sbfs'20 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 140 10 140 29
+let%span sbfs'21 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 142 4 147 5
+let%span sbfs'22 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 60 10 60 11
+let%span sbfs'23 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 62 4 62 67
+let%span sbfs'24 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 164 10 164 11
+let%span sbfs'25 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 163 11 163 27
+let%span sbfs'26 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 165 10 165 10
+let%span sbfs'27 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 167 4 170 5
+let%span sbfs'28 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 53 10 53 11
+let%span sbfs'29 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 55 4 55 83
+let%span sbfs'30 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 45 8 47 71
+let%span sbfs'31 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 127 10 127 11
+let%span sbfs'32 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 126 11 126 27
+let%span sbfs'33 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 128 10 128 92
+let%span sbfs'34 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 130 4 132 5
+let%span sbfs'35 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 153 10 153 11
+let%span sbfs'36 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 152 11 152 17
+let%span sbfs'37 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 154 10 154 29
+let%span sbfs'38 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 156 4 158 5
+let%span sbfs'39 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 94 10 94 11
+let%span sbfs'40 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 93 11 93 17
+let%span sbfs'41 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 95 10 95 50
+let%span sbfs'42 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 97 4 99 5
+let%span sbfs'43 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 38 16 38 49
+let%span sbfs'44 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 29 4 29 38
+let%span sbfs'45 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 301 0 301 87
 let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
 let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
 let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 199 19 199 38
 let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 200 18 200 46
@@ -23,27 +58,80 @@ let%span svec'3 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 190 18 190 46
 let%span svec'4 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 191 18 191 49
 let%span svec'5 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 192 18 192 54
 let%span svec'6 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 193 18 193 47
-let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
-let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
 let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
 let%span sslice = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 155 20 155 37
 let%span sslice'0 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 160 20 160 37
 let%span sslice'1 = "/opt/tools/creusot/creusot-std/src/std/slice.rs" 165 20 165 20
 
+use seq.Seq
 use creusot.int.UInt64
 use creusot.prelude.MutBorrow
-use seq.Seq
 use creusot.int.UInt32
 use creusot.prelude.Any
+use int.ComputerDivision
 use int.Int
 
-predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+function cnt [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 54 0 54 47] (us: Seq.seq int) (u: int) (j: int) : int
 
-meta "rewrite_def" predicate ge_log_Int
+axiom cnt_def: forall us: Seq.seq int, u: int, j: int [cnt us u j]. cnt us u j
+    = ([%#sbfs'29] if j <= 0 then 0 else cnt us u (j - 1) + (if Seq.get us (j - 1) = u then 1 else 0))
 
-predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+function psum [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 61 0 61 48] (us: Seq.seq int) (i: int) (j: int) : int
+
+axiom psum_def: forall us: Seq.seq int, i: int, j: int [psum us i j]. psum us i j
+    = ([%#sbfs'23] if i <= 0 then 0 else psum us (i - 1) j + cnt us (i - 1) j)
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
 
 meta "rewrite_def" predicate gt_log_Int
+
+function psum_step [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 129 0 129 46] (us: Seq.seq int) (i: int) (j: int) : ()
+
+axiom psum_step_def: forall us: Seq.seq int, i: int, j: int [psum_step us i j]. ([%#sbfs'32] 0 <= i /\ 0 <= j)
+    -> psum_step us i j = ([%#sbfs'34] if gt_log_Int i 0 then psum_step us (i - 1) j else ())
+
+axiom psum_step_spec: forall us: Seq.seq int, i: int, j: int. ([%#sbfs'32] 0 <= i /\ 0 <= j)
+    -> ([%#sbfs'33] psum us i (j + 1) = psum us i j + (if 0 <= Seq.get us j /\ Seq.get us j < i then 1 else 0))
+
+function psum_zero [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 155 0 155 38] (us: Seq.seq int) (i: int) : ()
+
+axiom psum_zero_def: forall us: Seq.seq int, i: int [psum_zero us i]. ([%#sbfs'36] 0 <= i)
+    -> psum_zero us i = ([%#sbfs'38] if gt_log_Int i 0 then psum_zero us (i - 1) else ())
+
+axiom psum_zero_spec: forall us: Seq.seq int, i: int. ([%#sbfs'36] 0 <= i) -> ([%#sbfs'37] psum us i 0 = 0)
+
+function psum_total [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 141 0 141 47] (us: Seq.seq int) (n: int) (j: int) : ()
+
+axiom psum_total_def: forall us: Seq.seq int, n: int, j: int [psum_total us n j]. ([%#sbfs'18] 0 <= j
+      /\ j <= Seq.length us /\ 0 <= n)
+    -> ([%#sbfs'19] forall p: int. 0 <= p /\ p < Seq.length us -> 0 <= Seq.get us p /\ Seq.get us p < n)
+    -> psum_total us n j
+    = ([%#sbfs'21] if gt_log_Int j 0 then let _ = psum_total us n (j - 1) in psum_step us n (j - 1) else psum_zero us n)
+
+axiom psum_total_spec: forall us: Seq.seq int, n: int, j: int. ([%#sbfs'18] 0 <= j /\ j <= Seq.length us /\ 0 <= n)
+    -> ([%#sbfs'19] forall p: int. 0 <= p /\ p < Seq.length us -> 0 <= Seq.get us p /\ Seq.get us p < n)
+    -> ([%#sbfs'20] psum us n j = j)
+
+function cnt_bounds [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 96 0 96 47] (us: Seq.seq int) (u: int) (j: int) : ()
+
+axiom cnt_bounds_def: forall us: Seq.seq int, u: int, j: int [cnt_bounds us u j]. ([%#sbfs'40] 0 <= j)
+    -> cnt_bounds us u j = ([%#sbfs'42] if gt_log_Int j 0 then cnt_bounds us u (j - 1) else ())
+
+axiom cnt_bounds_spec: forall us: Seq.seq int, u: int, j: int. ([%#sbfs'40] 0 <= j)
+    -> ([%#sbfs'41] 0 <= cnt us u j /\ cnt us u j <= j)
+
+function psum_mono_all [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 166 0 166 50] (us: Seq.seq int) (k: int) (j: int) : ()
+
+axiom psum_mono_all_def: forall us: Seq.seq int, k: int, j: int [psum_mono_all us k j]. ([%#sbfs'25] 0 <= k /\ 0 <= j)
+    -> psum_mono_all us k j
+    = ([%#sbfs'27] if gt_log_Int k 0 then let _ = psum_mono_all us (k - 1) j in cnt_bounds us (k - 1) j else ())
+
+axiom psum_mono_all_spec: forall us: Seq.seq int, k: int, j: int. ([%#sbfs'25] 0 <= k /\ 0 <= j)
+    -> ([%#sbfs'26] forall i: int. 0 <= i /\ i <= k -> psum us i j <= psum us k j)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
 
 predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
   [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
@@ -77,10 +165,6 @@ let index_Vec_u32_Global (self: t_Vec_u32_Global) (index: UInt64.t) (return (x: 
   {[@stop_split] [@expl:index ensures] [%#svec'1] has_value_usize index (view_Vec_u32_Global self) result}
     (! return {result}) ]
 
-let wrapping_add (self: UInt32.t) (rhs: UInt32.t) (return (x: UInt32.t)) = any
-  [ return (result: UInt32.t) -> {[@stop_split] [@expl:wrapping_add ensures] [%#snum] result = UInt32.add self rhs}
-    (! return {result}) ]
-
 predicate resolve_elswhere_usize [@inline:trivial] (self: UInt64.t) (old': Seq.seq UInt32.t) (fin: Seq.seq UInt32.t) =
   [%#sslice'1] forall i: int. 0 <= i /\ i <> UInt64.t'int self /\ i < Seq.length old' -> Seq.get old' i = Seq.get fin i
 
@@ -105,51 +189,91 @@ predicate resolve_refmut_Vec_u32_Global [@inline:trivial] (_1: MutBorrow.t t_Vec
 
 meta "rewrite_def" predicate resolve_refmut_Vec_u32_Global
 
+function mix64_l [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 28 0 28 29] (x: UInt64.t) : UInt64.t =
+  [%#sbfs'44] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+constant const_SEED: UInt64.t = [%#sbfs'45] (13109978515275513857: UInt64.t)
+
+function endp_l [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 37 0 37 44] (j: UInt64.t) (k: UInt64.t) (n: int) : int
+ =
+  [%#sbfs'43] ComputerDivision.mod (UInt64.t'int (mix64_l (UInt64.add (UInt64.add const_SEED (UInt64.mul (2: UInt64.t) j)) k))) n
+
+predicate sources [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 43 0 43 52] (us: Seq.seq int) (m: int) (n: int) =
+  [%#sbfs'30] Seq.length us = m
+  /\ (forall j: UInt64.t. UInt64.t'int j < m -> Seq.get us (UInt64.t'int j) = endp_l j (0: UInt64.t) n)
+  /\ (forall j: int. 0 <= j /\ j < m -> 0 <= Seq.get us j /\ Seq.get us j < n)
+
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let prefix [#"/home/user/benchmark-verif/impls/rust/src/bfs.rs" 40 0 40 43] (off: MutBorrow.t t_Vec_u32_Global)
-  (n: UInt64.t) (return (x: ())) =
-{[@stop_split] [@expl:prefix requires] [%#sbfs'10] Seq.length (view_Vec_u32_Global off.current) = UInt64.t'int n + 1}
+let prefix [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 301 0 301 87] (off: MutBorrow.t t_Vec_u32_Global)
+  (n: UInt64.t) (m: UInt64.t) (us: Seq.seq int) (return (x: ())) =
+{[@stop_split] [@expl:prefix requires] ([@stop_split] [@expl:prefix requires #0] [%#sbfs'13] 1 <= UInt64.t'int n
+    /\ UInt64.t'int n <= 100000000
+    /\ UInt64.t'int m = 16 * UInt64.t'int n
+    /\ Seq.length (view_Vec_u32_Global off.current) = UInt64.t'int n + 1
+    /\ sources us (UInt64.t'int m) (UInt64.t'int n))
+  /\ ([@stop_split] [@expl:prefix requires #1] [%#sbfs'14] UInt32.t'int (Seq.get (view_Vec_u32_Global off.current) 0)
+    = 0
+  /\ (forall u: int. 0 <= u /\ u < UInt64.t'int n
+    -> UInt32.t'int (Seq.get (view_Vec_u32_Global off.current) (u + 1)) = cnt us u (UInt64.t'int m)))}
   (! bb0
-  [ bb0 = s0 [ s0 = [ &i <- [%#sbfs] (1: UInt64.t) ] s1 | s1 = [ &_old <- off.final ] s2 | s2 = bb1 ]
+  [ bb0 = s0
+    [ s0 =
+      {[@expl:assertion] [%#sbfs] let _ = psum_total us (UInt64.t'int n) (UInt64.t'int m) in psum us (UInt64.t'int n) (UInt64.t'int m)
+      = UInt64.t'int m}
+      s1
+    | s1 = {[@expl:assertion] [%#sbfs'0] let _ = psum_mono_all us (UInt64.t'int n) (UInt64.t'int m) in forall k: int. 0
+            <= k
+          /\ k <= UInt64.t'int n -> psum us k (UInt64.t'int m) <= UInt64.t'int m}
+      s2
+    | s2 = [ &i <- [%#sbfs'1] (1: UInt64.t) ] s3
+    | s3 = [ &_old <- off.final ] s4
+    | s4 = bb1 ]
   | bb1 = bb1invariant
-    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#sbfs'0] UInt64.t'int n + 1
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#sbfs'2] UInt64.t'int n + 1
       - UInt64.t'int i)}
       bb1invariant
     | bb1invariant = {[@expl:inferred invariant: unchanged value] _old = off.final}
-      {[@expl:loop invariant] [%#sbfs'1] 1 <= UInt64.t'int i
+      {[@expl:loop invariant #0] [%#sbfs'5] 1 <= UInt64.t'int i
       /\ UInt64.t'int i <= UInt64.t'int n + 1 /\ Seq.length (view_Vec_u32_Global off.current) = UInt64.t'int n + 1}
-      (! [ &variant_old_bb1 <- [%#sbfs'0] UInt64.t'int n + 1 - UInt64.t'int i ] s0)
-      [ s0 = [ &_18 <- UInt64.le i n ] s1 | s1 = any [ br0 -> {_18 = false} (! bb8) | br1 -> {_18} (! bb3) ] ]
+      {[@expl:loop invariant #1] [%#sbfs'4] forall k: int. 0 <= k /\ k < UInt64.t'int i
+        -> UInt32.t'int (Seq.get (view_Vec_u32_Global off.current) k) = psum us k (UInt64.t'int m)}
+      {[@expl:loop invariant #2] [%#sbfs'3] forall k: int. UInt64.t'int i <= k /\ k <= UInt64.t'int n
+        -> UInt32.t'int (Seq.get (view_Vec_u32_Global off.current) k) = cnt us (k - 1) (UInt64.t'int m)}
+      (! [ &variant_old_bb1 <- [%#sbfs'2] UInt64.t'int n + 1 - UInt64.t'int i ] s0)
+      [ s0 = [ &_54 <- UInt64.le i n ] s1 | s1 = any [ br0 -> {_54 = false} (! bb6) | br1 -> {_54} (! bb3) ] ]
       [ bb3 = s0
-        [ s0 = index_Vec_u32_Global [%#sbfs'2] {off.current} {i} (fun (_x: UInt32.t) -> [ &_23 <- _x ] s1)
-        | s1 = UInt64.sub [%#sbfs'4] {i} {[%#sbfs'3] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &_29 <- _x ] s2)
-        | s2 = index_Vec_u32_Global [%#sbfs'5] {off.current} {_29} (fun (_x: UInt32.t) -> [ &_27 <- _x ] s3)
-        | s3 = wrapping_add [%#sbfs'6] {_23} {_27} (fun (_x: UInt32.t) -> [ &_21 <- _x ] s4)
-        | s4 = MutBorrow.borrow_mut <t_Vec_u32_Global> {off.current}
+        [ s0 = UInt64.sub [%#sbfs'7] {i} {[%#sbfs'6] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &_60 <- _x ] s1)
+        | s1 = index_Vec_u32_Global [%#sbfs'8] {off.current} {_60} (fun (_x: UInt32.t) -> [ &_58 <- _x ] s2)
+        | s2 = MutBorrow.borrow_mut <t_Vec_u32_Global> {off.current}
             (fun (_bor: MutBorrow.t t_Vec_u32_Global) ->
-              [ &_32 <- _bor ] [ &off <- { off with current = _bor.final } ] s5)
-        | s5 = index_mut_Vec_u32_Global [%#sbfs'7] {_32} {i} (fun (_x: MutBorrow.t UInt32.t) -> [ &_31 <- _x ] s6)
-        | s6 = [ &_31 <- { _31 with current = _21 } ] s7
-        | s7 = -{resolve_refmut_u32 _31}- s8
-        | s8 = UInt64.add [%#sbfs'9] {i} {[%#sbfs'8] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s9)
-        | s9 = bb1 ] ] ]
-  | bb8 = s0 [ s0 = -{resolve_refmut_Vec_u32_Global off}- s1 | s1 = return {_ret} ] ]
+              [ &_63 <- _bor ] [ &off <- { off with current = _bor.final } ] s3)
+        | s3 = index_mut_Vec_u32_Global [%#sbfs'9] {_63} {i} (fun (_x: MutBorrow.t UInt32.t) -> [ &_62 <- _x ] s4)
+        | s4 = UInt32.add [%#sbfs'10] {_62.current} {_58}
+            (fun (_x: UInt32.t) -> [ &_62 <- { _62 with current = _x } ] s5)
+        | s5 = -{resolve_refmut_u32 _62}- s6
+        | s6 = UInt64.add [%#sbfs'12] {i} {[%#sbfs'11] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &i <- _x ] s7)
+        | s7 = bb1 ] ] ]
+  | bb6 = s0 [ s0 = -{resolve_refmut_Vec_u32_Global off}- s1 | s1 = return {_ret} ] ]
   [ & _ret: () = Any.any_l ()
   | & off: MutBorrow.t t_Vec_u32_Global = off
   | & n: UInt64.t = n
+  | & m: UInt64.t = m
+  | & us: Seq.seq int = us
   | & i: UInt64.t = Any.any_l ()
-  | & _18: bool = Any.any_l ()
-  | & _21: UInt32.t = Any.any_l ()
-  | & _23: UInt32.t = Any.any_l ()
-  | & _27: UInt32.t = Any.any_l ()
-  | & _29: UInt64.t = Any.any_l ()
-  | & _31: MutBorrow.t UInt32.t = Any.any_l ()
-  | & _32: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
+  | & _54: bool = Any.any_l ()
+  | & _58: UInt32.t = Any.any_l ()
+  | & _60: UInt64.t = Any.any_l ()
+  | & _62: MutBorrow.t UInt32.t = Any.any_l ()
+  | & _63: MutBorrow.t t_Vec_u32_Global = Any.any_l ()
   | & _old: t_Vec_u32_Global = Any.any_l ()
   | & variant_old_bb1: int = Any.any_l () ])
-  [ return (result: ()) -> {[@stop_split] [@expl:prefix ensures] [%#sbfs'11] Seq.length (view_Vec_u32_Global off.final)
-    = Seq.length (view_Vec_u32_Global off.current)}
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:prefix ensures] ([@stop_split] [@expl:prefix ensures #0] [%#sbfs'15] Seq.length (view_Vec_u32_Global off.final)
+      = UInt64.t'int n + 1)
+    /\ ([@stop_split] [@expl:prefix ensures #1] [%#sbfs'16] forall i: int. 0 <= i /\ i <= UInt64.t'int n
+      -> UInt32.t'int (Seq.get (view_Vec_u32_Global off.final) i) = psum us i (UInt64.t'int m)
+      /\ UInt32.t'int (Seq.get (view_Vec_u32_Global off.final) i) <= UInt64.t'int m)}
     (! return {result}) ]

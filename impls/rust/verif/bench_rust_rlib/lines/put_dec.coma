@@ -1,0 +1,248 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 226 0 226 41 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
+let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 118 18 118 43
+let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
+let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 227 18 227 27
+let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 227 19 227 22
+let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 228 16 228 22
+let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 230 20 230 33
+let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 236 14 236 16
+let%span slines'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 238 24 238 37
+let%span slines'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 239 29 239 31
+let%span slines'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 239 24 239 32
+let%span slines'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 239 8 239 14
+let%span slines'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 239 17 239 21
+let%span slines'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 239 8 239 38
+let%span slines'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 240 13 240 14
+let%span slines'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 240 8 240 14
+let%span slines'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 241 13 241 15
+let%span slines'13 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 241 8 241 15
+let%span slines'14 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 242 16 242 17
+let%span slines'15 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 235 16 235 16
+let%span slines'16 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 234 16 234 16
+let%span slines'17 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 233 16 233 73
+let%span slines'18 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 232 16 232 33
+let%span slines'19 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 251 14 251 16
+let%span slines'20 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 252 14 252 15
+let%span slines'21 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 250 16 250 16
+let%span slines'22 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 249 16 249 16
+let%span slines'23 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 248 16 248 87
+let%span slines'24 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 253 13 253 14
+let%span slines'25 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 253 8 253 14
+let%span slines'26 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 254 17 254 23
+let%span slines'27 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 254 8 254 24
+let%span slines'28 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 221 11 221 24
+let%span slines'29 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 222 10 222 53
+let%span slines'30 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 223 10 223 10
+let%span slines'31 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 224 10 224 10
+let%span slines'32 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 112 10 112 11
+let%span slines'33 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 111 11 111 17
+let%span slines'34 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 113 10 113 27
+let%span slines'35 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 114 10 114 10
+let%span slines'36 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 115 10 115 43
+let%span slines'37 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 116 10 116 44
+let%span slines'38 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 118 4 120 5
+let%span slines'39 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 52 10 52 11
+let%span slines'40 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 51 11 51 17
+let%span slines'41 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 54 4 54 79
+let%span sarray = "/opt/tools/creusot/creusot-std/src/std/array.rs" 9 20 9 51
+
+use creusot.int.UInt8
+use creusot.int.UInt64
+use creusot.slice.Slice64
+use seq.Seq
+use int.ComputerDivision
+use creusot.int.UInt32
+use creusot.prelude.MutBorrow
+use creusot.prelude.Any
+use int.Int
+
+function dec [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 53 0 53 30] (v: int) : Seq.seq int
+
+axiom dec_def: forall v: int [dec v]. ([%#slines'40] 0 <= v)
+    -> dec v
+    = ([%#slines'41] if v < 10 then
+      Seq.singleton (48 + v)
+    else
+      Seq.snoc (dec (ComputerDivision.div v 10)) (48 + ComputerDivision.mod v 10)
+    )
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+function dec_shape [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 117 0 117 24] (v: int) : ()
+
+axiom dec_shape_def: forall v: int [dec_shape v]. ([%#slines'33] 0 <= v)
+    -> dec_shape v = ([%#slines'38] if ge_log_Int v 10 then dec_shape (ComputerDivision.div v 10) else ())
+
+axiom dec_shape_spec: forall v: int. ([%#slines'33] 0 <= v) -> ([%#slines'34] 1 <= Seq.length (dec v))
+
+axiom dec_shape_spec'0: forall v: int. ([%#slines'33] 0 <= v)
+    -> ([%#slines'35] forall p: int. 0 <= p /\ p < Seq.length (dec v)
+      -> 48 <= Seq.get (dec v) p /\ Seq.get (dec v) p <= 57)
+
+axiom dec_shape_spec'1: forall v: int. ([%#slines'33] 0 <= v) -> ([%#slines'36] v < 1000000 -> Seq.length (dec v) <= 6)
+
+axiom dec_shape_spec'2: forall v: int. ([%#slines'33] 0 <= v) -> ([%#slines'37] v < 10000000 -> Seq.length (dec v) <= 7)
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+predicate inv_Seq_u8 [@inline:trivial] (_1: Seq.seq UInt8.t) = true
+
+meta "rewrite_def" predicate inv_Seq_u8
+
+predicate invariant_array_u8_10 (self: Slice64.array UInt8.t) =
+  [%#sarray] inv_Seq_u8 (Slice64.view self) /\ Seq.length (Slice64.view self) = UInt64.t'int (10: UInt64.t)
+
+predicate inv_array_u8_10 [@inline:trivial] (_1: Slice64.array UInt8.t) = invariant_array_u8_10 _1
+
+meta "rewrite_def" predicate inv_array_u8_10
+
+type t_Vec_u8_Global
+
+constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
+
+function view_Vec_u8_Global (self: t_Vec_u8_Global) : Seq.seq UInt8.t
+
+axiom view_Vec_u8_Global_spec:
+  forall self: t_Vec_u8_Global [view_Vec_u8_Global self]. [%#svec] Seq.length (view_Vec_u8_Global self)
+    <= UInt64.t'int const_MAX
+
+let push_u8 (self: MutBorrow.t t_Vec_u8_Global) (value: UInt8.t) (return (x: ())) = any
+  [ return (result: ()) -> {[@stop_split] [@expl:push ensures] [%#svec'0] view_Vec_u8_Global self.final
+    = Seq.snoc (view_Vec_u8_Global self.current) value}
+    (! return {result}) ]
+
+predicate resolve_refmut_Vec_u8_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u8_Global) = _1.final = _1.current
+
+meta "rewrite_def" predicate resolve_refmut_Vec_u8_Global
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+let put_dec [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 226 0 226 41] (out: MutBorrow.t t_Vec_u8_Global)
+  (v: UInt32.t) (return (x: ())) = {[@stop_split] [@expl:put_dec requires] [%#slines'28] UInt32.t'int v < 10000000}
+  (! bb0
+  [ bb0 = s0
+    [ s0 = Slice64.create [%#slines] <UInt8.t> {[%#slines] (10: UInt64.t)} {fun (_: int) -> [%#slines'0] (0: UInt8.t)}
+        (fun (_res: Slice64.array UInt8.t) -> [ &tmp <- _res ] s1)
+    | s1 = [ &l <- [%#slines'1] (0: UInt64.t) ] s2
+    | s2 = [ &x <- v ] s3
+    | s3 = {[@expl:assertion] [%#slines'2] let _ = dec_shape (UInt32.t'int v) in true} s4
+    | s4 = bb1 ]
+  | bb1 = bb1invariant
+    [ bb1 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb1 ([%#slines'3] UInt32.t'int x)} bb1invariant
+    | bb1invariant = {[@expl:inferred invariant: type invariant] inv_array_u8_10 tmp}
+      {[@expl:loop invariant #0] [%#slines'18] 0 < UInt32.t'int x \/ UInt64.t'int l = 0}
+      {[@expl:loop invariant #1] [%#slines'17] UInt64.t'int l + Seq.length (dec (UInt32.t'int x))
+        = Seq.length (dec (UInt32.t'int v))
+      /\ Seq.length (dec (UInt32.t'int v)) <= 7}
+      {[@expl:loop invariant #2] [%#slines'16] forall p: int. 0 <= p /\ p < UInt64.t'int l
+        -> UInt8.t'int (Seq.get (Slice64.view tmp) p)
+        = Seq.get (dec (UInt32.t'int v)) (Seq.length (dec (UInt32.t'int v)) - 1 - p)}
+      {[@expl:loop invariant #3] [%#slines'15] forall p: int. 0 <= p /\ p < Seq.length (dec (UInt32.t'int x))
+        -> Seq.get (dec (UInt32.t'int x)) p = Seq.get (dec (UInt32.t'int v)) p}
+      (! [ &variant_old_bb1 <- [%#slines'3] UInt32.t'int x ] s0)
+      [ s0 =
+        {[@expl:assertion] [%#slines'4] let _ = dec_shape (UInt32.t'int x) in let _ = dec_shape (ComputerDivision.div (UInt32.t'int x) 10) in true}
+        s1
+      | s1 = [ &_44 <- ([%#slines'5] (10: UInt32.t)) = ([%#slines'6] (0: UInt32.t)) ] s2
+      | s2 = {[@expl:remainder by zero] [%#slines'6] not _44} s3
+      | s3 = UInt32.rem [%#slines'6] {x} {[%#slines'5] (10: UInt32.t)} (fun (_x: UInt32.t) -> [ &_42 <- _x ] s4)
+      | s4 = [ &_41 <- UInt8.of_int (UInt32.t'int _42) ] s5
+      | s5 = [ &_45 <- l ] s6
+      | s6 = [ &_46 <- UInt64.lt _45 ([%#slines'7] (10: UInt64.t)) ] s7
+      | s7 = {[@expl:index in bounds] [%#slines'7] _46} s8
+      | s8 = UInt8.add [%#slines'9] {[%#slines'8] (48: UInt8.t)} {_41}
+          (fun (_x: UInt8.t) ->
+            Slice64.set [%#slines'9] <UInt8.t> {tmp} {_45} {_x} (fun (r: Slice64.array UInt8.t) -> [ &tmp <- r ] s9))
+      | s9 = UInt64.add [%#slines'11] {l} {[%#slines'10] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &l <- _x ] s10)
+      | s10 = [ &_47 <- ([%#slines'12] (10: UInt32.t)) = ([%#slines'13] (0: UInt32.t)) ] s11
+      | s11 = {[@expl:division by zero] [%#slines'13] not _47} s12
+      | s12 = UInt32.div [%#slines'13] {x} {[%#slines'12] (10: UInt32.t)} (fun (_x: UInt32.t) -> [ &x <- _x ] s13)
+      | s13 = [ &_48 <- x = ([%#slines'14] (0: UInt32.t)) ] s14
+      | s14 = any [ br0 -> {_48 = false} (! bb1) | br1 -> {_48} (! bb6) ] ] ]
+  | bb6 = s0
+    [ s0 = any
+      [ any_ (_dest: Seq.seq UInt8.t) ->
+      (! -{([@stop_split] [@expl:view ensures] [%#svec] Seq.length (view_Vec_u8_Global out.current)
+          <= UInt64.t'int const_MAX)
+        /\ _dest = view_Vec_u8_Global out.current}-
+        [ &orig <- _dest ] s1) ] [ _ck -> (! any) ]
+    | s1 = [ &j <- l ] s2
+    | s2 = [ &_old <- out.final ] s3
+    | s3 = bb9 ]
+  | bb9 = bb9invariant
+    [ bb9 = {[@expl:loop variant] well_founded_relation_Int variant_old_bb9 ([%#slines'19] UInt64.t'int j)} bb9invariant
+    | bb9invariant = {[@expl:inferred invariant: unchanged value] _old = out.final}
+      {[@expl:loop invariant #0] [%#slines'23] UInt64.t'int j <= UInt64.t'int l
+      /\ UInt64.t'int l = Seq.length (dec (UInt32.t'int v))
+      /\ Seq.length (view_Vec_u8_Global out.current) = Seq.length orig + (UInt64.t'int l - UInt64.t'int j)}
+      {[@expl:loop invariant #1] [%#slines'22] forall p: int. 0 <= p /\ p < Seq.length orig
+        -> Seq.get (view_Vec_u8_Global out.current) p = Seq.get orig p}
+      {[@expl:loop invariant #2] [%#slines'21] forall p: int. 0 <= p /\ p < UInt64.t'int l - UInt64.t'int j
+        -> UInt8.t'int (Seq.get (view_Vec_u8_Global out.current) (Seq.length orig + p))
+        = Seq.get (dec (UInt32.t'int v)) p}
+      (! [ &variant_old_bb9 <- [%#slines'19] UInt64.t'int j ] s0)
+      [ s0 = [ &_73 <- UInt64.gt j ([%#slines'20] (0: UInt64.t)) ] s1
+      | s1 = any [ br0 -> {_73 = false} (! bb14) | br1 -> {_73} (! bb11) ] ]
+      [ bb11 = s0
+        [ s0 = UInt64.sub [%#slines'25] {j} {[%#slines'24] (1: UInt64.t)} (fun (_x: UInt64.t) -> [ &j <- _x ] s1)
+        | s1 = [ &_78 <- j ] s2
+        | s2 = [ &_79 <- UInt64.lt _78 ([%#slines'26] (10: UInt64.t)) ] s3
+        | s3 = {[@expl:index in bounds] [%#slines'26] _79} s4
+        | s4 = Slice64.get [%#slines'26] <UInt8.t> {tmp} {_78} (fun (r: UInt8.t) -> [ &_77 <- r ] s5)
+        | s5 = MutBorrow.borrow_mut <t_Vec_u8_Global> {out.current}
+            (fun (_bor: MutBorrow.t t_Vec_u8_Global) ->
+              [ &_76 <- _bor ] [ &out <- { out with current = _bor.final } ] s6)
+        | s6 = push_u8 [%#slines'27] {_76} {_77} (fun (_x: ()) -> [ &_75 <- _x ] s7)
+        | s7 = bb9 ] ] ]
+  | bb14 = s0 [ s0 = -{resolve_refmut_Vec_u8_Global out}- s1 | s1 = return {_ret} ] ]
+  [ & _ret: () = Any.any_l ()
+  | & out: MutBorrow.t t_Vec_u8_Global = out
+  | & v: UInt32.t = v
+  | & tmp: Slice64.array UInt8.t = Any.any_l ()
+  | & l: UInt64.t = Any.any_l ()
+  | & x: UInt32.t = Any.any_l ()
+  | & _41: UInt8.t = Any.any_l ()
+  | & _42: UInt32.t = Any.any_l ()
+  | & _44: bool = Any.any_l ()
+  | & _45: UInt64.t = Any.any_l ()
+  | & _46: bool = Any.any_l ()
+  | & _47: bool = Any.any_l ()
+  | & _48: bool = Any.any_l ()
+  | & orig: Seq.seq UInt8.t = Any.any_l ()
+  | & j: UInt64.t = Any.any_l ()
+  | & _73: bool = Any.any_l ()
+  | & _75: () = Any.any_l ()
+  | & _76: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
+  | & _77: UInt8.t = Any.any_l ()
+  | & _78: UInt64.t = Any.any_l ()
+  | & _79: bool = Any.any_l ()
+  | & _old: t_Vec_u8_Global = Any.any_l ()
+  | & variant_old_bb1: int = Any.any_l ()
+  | & variant_old_bb9: int = Any.any_l () ])
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:put_dec ensures] ([@stop_split] [@expl:put_dec ensures #0] [%#slines'29] Seq.length (view_Vec_u8_Global out.final)
+      = Seq.length (view_Vec_u8_Global out.current) + Seq.length (dec (UInt32.t'int v)))
+    /\ ([@stop_split] [@expl:put_dec ensures #1] [%#slines'30] forall p: int. 0 <= p
+          /\ p < Seq.length (view_Vec_u8_Global out.current)
+        -> Seq.get (view_Vec_u8_Global out.final) p = Seq.get (view_Vec_u8_Global out.current) p)
+    /\ ([@stop_split] [@expl:put_dec ensures #2] [%#slines'31] forall p: int. 0 <= p
+        /\ p < Seq.length (dec (UInt32.t'int v))
+      -> UInt8.t'int (Seq.get (view_Vec_u8_Global out.final) (Seq.length (view_Vec_u8_Global out.current) + p))
+      = Seq.get (dec (UInt32.t'int v)) p)}
+    (! return {result}) ]

@@ -1,4 +1,4 @@
-(* #"/home/user/benchmark-verif/impls/rust/src/lines.rs" 128 0 128 27 *)
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 397 0 397 27 *)
 
 let%span svec = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 96 22 96 41
 let%span svec'0 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 97 22 97 22
@@ -6,32 +6,64 @@ let%span svec'1 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 18 14 18 41
 let%span svec'2 = "/opt/tools/creusot/creusot-std/src/std/vec.rs" 44 20 44 29
 let%span suint_macros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/core/src/num/uint_macros.rs" 51 8 51 27
 let%span smacros = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
-let%span smacros'0 = "/rustc/11177f2235f0c842b00f82c558ad9480c0c3a895/library/alloc/src/macros.rs" 48 8 48 41
-let%span slines = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 129 33 129 35
-let%span slines'0 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 129 33 129 39
-let%span slines'1 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 129 42 129 44
-let%span slines'2 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 129 33 129 44
-let%span slines'3 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 129 28 129 31
-let%span slines'4 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 130 14 130 35
-let%span slines'5 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 131 28 131 32
-let%span slines'6 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 131 34 131 41
-let%span slines'7 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 132 4 132 30
-let%span slines'8 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 133 4 133 18
-let%span slines'9 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 127 11 127 37
-let%span slines'10 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 51 11 51 56
-let%span slines'11 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 52 10 52 59
-let%span slines'12 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 80 11 80 54
-let%span slines'13 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 81 10 81 34
-let%span slines'14 = "/home/user/benchmark-verif/impls/rust/src/lines.rs" 113 11 113 32
+let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 398 20 398 31
+let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 399 28 399 32
+let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 399 34 399 41
+let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 400 4 400 29
+let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 401 4 401 18
+let%span slines'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 396 11 396 37
+let%span slines'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 259 11 259 26
+let%span slines'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 260 10 260 30
+let%span slines'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 261 10 261 51
+let%span slines'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 306 11 306 32
+let%span slines'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 307 11 307 47
+let%span slines'10 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 308 11 308 90
+let%span slines'11 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 309 10 309 34
+let%span slines'12 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 310 10 310 10
+let%span slines'13 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 382 11 382 32
+let%span slines'14 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 46 16 46 86
+let%span slines'15 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 98 16 98 92
+let%span slines'16 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 78 10 78 11
+let%span slines'17 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 80 4 80 82
+let%span slines'18 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 85 10 85 11
+let%span slines'19 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 87 4 87 109
+let%span slines'20 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 90 10 90 11
+let%span slines'21 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 92 4 92 91
+let%span slines'22 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 27 4 27 38
+let%span slines'23 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 397 0 397 27
+let%span slines'24 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 73 4 73 30
+let%span slines'25 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 36 16 36 29
+let%span slines'26 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 40 16 40 57
+let%span slines'27 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 66 11 66 27
+let%span slines'28 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 68 4 68 43
+let%span slines'29 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 52 10 52 11
+let%span slines'30 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 51 11 51 17
+let%span slines'31 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 54 4 54 79
 
 use creusot.int.UInt64
-use creusot.int.UInt8
 use seq.Seq
+use creusot.int.UInt8
+use int.ComputerDivision
 use creusot.prelude.MutBorrow
 use creusot.prelude.Any
 use int.Int
 
 type t_Vec_u8_Global
+
+type tup2_Vec_u8_Global_Snapshot_Seq_u64 = { f0: t_Vec_u8_Global; f1: Seq.seq UInt64.t }
+
+function mix64_l [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 26 0 26 29] (x: UInt64.t) : UInt64.t =
+  [%#slines'22] let z = UInt64.add x (11400714819323198485: UInt64.t) in let z'0 = UInt64.mul (UInt64.bw_xor z (UInt64.shr z (30: UInt64.t))) (13787848793156543929: UInt64.t) in let z'1 = UInt64.mul (UInt64.bw_xor z'0 (UInt64.shr z'0 (27: UInt64.t))) (10723151780598845931: UInt64.t) in UInt64.bw_xor z'1 (UInt64.shr z'1 (31: UInt64.t))
+
+constant const_SEED: UInt64.t = [%#slines'23] (1393743441198640095: UInt64.t)
+
+predicate draws [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 45 0 45 42] (rs: Seq.seq UInt64.t) (n: int) =
+  [%#slines'14] Seq.length rs = n
+  /\ (forall j: UInt64.t. UInt64.t'int j < n -> Seq.get rs (UInt64.t'int j) = mix64_l (UInt64.add const_SEED j))
+
+predicate bytes_are [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 97 0 97 49] (t: Seq.seq UInt8.t) (m: Seq.seq int) =
+  [%#slines'15] Seq.length t = Seq.length m
+  /\ (forall p: int. 0 <= p /\ p < Seq.length m -> UInt8.t'int (Seq.get t p) = Seq.get m p)
 
 constant const_MAX: UInt64.t = [%#suint_macros] (18446744073709551615: UInt64.t)
 
@@ -41,32 +73,44 @@ axiom view_Vec_u8_Global_spec:
   forall self: t_Vec_u8_Global [view_Vec_u8_Global self]. [%#svec'1] Seq.length (view_Vec_u8_Global self)
     <= UInt64.t'int const_MAX
 
-function index_Vec_u8_Global [@inline:trivial] (self: t_Vec_u8_Global) (ix: int) : UInt8.t =
-  [%#svec'2] Seq.get (view_Vec_u8_Global self) ix
+function dec [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 53 0 53 30] (v: int) : Seq.seq int
 
-meta "rewrite_def" function index_Vec_u8_Global
+axiom dec_def: forall v: int [dec v]. ([%#slines'30] 0 <= v)
+    -> dec v
+    = ([%#slines'31] if v < 10 then
+      Seq.singleton (48 + v)
+    else
+      Seq.snoc (dec (ComputerDivision.div v 10)) (48 + ComputerDivision.mod v 10)
+    )
 
-let from_elem_u8 (elem: UInt8.t) (n: UInt64.t) (return (x: t_Vec_u8_Global)) = any
-  [ return (result: t_Vec_u8_Global) ->
-  {[@stop_split] [@expl:from_elem_u8 ensures] ([@stop_split] [@expl:from_elem ensures #0] [%#svec] Seq.length (view_Vec_u8_Global result)
-      = UInt64.t'int n)
-    /\ ([@stop_split] [@expl:from_elem ensures #1] [%#svec'0] forall i: int. 0 <= i /\ i < UInt64.t'int n
-      -> index_Vec_u8_Global result i = elem)}
-    (! return {result}) ]
+function line [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 67 0 67 39] (k: int) (v: int) : Seq.seq int =
+  [%#slines'28] Seq.snoc (Seq.(++) (Seq.snoc (dec k) 59) (dec v)) 10
 
-let generate (txt: MutBorrow.t t_Vec_u8_Global) (n: UInt64.t) (return (x: UInt64.t)) =
-{[@stop_split] [@expl:generate requires] [%#slines'10] UInt64.t'int n <= 268435455
-  /\ Seq.length (view_Vec_u8_Global txt.current) = 15 * UInt64.t'int n + 20}
+function key_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 35 0 35 28] (r: UInt64.t) : int =
+  [%#slines'25] UInt64.t'int (UInt64.shr r (44: UInt64.t))
+
+function val_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 39 0 39 28] (r: UInt64.t) : int =
+  [%#slines'26] ComputerDivision.mod (UInt64.t'int (UInt64.bw_and (UInt64.shr r (8: UInt64.t)) (4294967295: UInt64.t))) 1000000
+
+function line_of [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 72 0 72 34] (r: UInt64.t) : Seq.seq int =
+  [%#slines'24] line (key_of r) (val_of r)
+
+function text [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 79 0 79 45] (rs: Seq.seq UInt64.t) (i: int) : Seq.seq int
+
+axiom text_def: forall rs: Seq.seq UInt64.t, i: int [text rs i]. text rs i
+    = ([%#slines'17] if i <= 0 then
+      Seq.empty: Seq.seq int
+    else
+      Seq.(++) (text rs (i - 1)) (line_of (Seq.get rs (i - 1)))
+    )
+
+let generate (n: UInt64.t) (return (x: tup2_Vec_u8_Global_Snapshot_Seq_u64)) =
+{[@stop_split] [@expl:generate requires] [%#slines'5] UInt64.t'int n <= 268435455}
   any
-  [ return (result: UInt64.t) ->
-  {[@stop_split] [@expl:generate ensures] [%#slines'11] Seq.length (view_Vec_u8_Global txt.final)
-      = Seq.length (view_Vec_u8_Global txt.current)
-    /\ UInt64.t'int result <= 15 * UInt64.t'int n}
+  [ return (result: tup2_Vec_u8_Global_Snapshot_Seq_u64) ->
+  {[@stop_split] [@expl:generate ensures] ([@stop_split] [@expl:generate ensures #0] [%#slines'6] draws result.f1 (UInt64.t'int n))
+    /\ ([@stop_split] [@expl:generate ensures #1] [%#slines'7] bytes_are (view_Vec_u8_Global result.f0) (text result.f1 (UInt64.t'int n)))}
     (! return {result}) ]
-
-predicate resolve_refmut_Vec_u8_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u8_Global) = _1.final = _1.current
-
-meta "rewrite_def" predicate resolve_refmut_Vec_u8_Global
 
 type t_Vec_u64_Global
 
@@ -89,12 +133,32 @@ let from_elem_u64 (elem: UInt64.t) (n: UInt64.t) (return (x: t_Vec_u64_Global)) 
       -> index_Vec_u64_Global result i = elem)}
     (! return {result}) ]
 
-let parse (txt: t_Vec_u8_Global) (tab: MutBorrow.t t_Vec_u64_Global) (len: UInt64.t) (return (x: ())) =
-{[@stop_split] [@expl:parse requires] [%#slines'12] UInt64.t'int len <= Seq.length (view_Vec_u8_Global txt)
-  /\ Seq.length (view_Vec_u64_Global tab.current) = 2097152}
+function sum_v [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 86 0 86 49] (rs: Seq.seq UInt64.t) (i: int) (k: int) : int
+
+axiom sum_v_def: forall rs: Seq.seq UInt64.t, i: int, k: int [sum_v rs i k]. sum_v rs i k
+    = ([%#slines'19] if i <= 0 then
+      0
+    else
+      sum_v rs (i - 1) k + (if key_of (Seq.get rs (i - 1)) = k then val_of (Seq.get rs (i - 1)) else 0)
+    )
+
+function cnt [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 91 0 91 47] (rs: Seq.seq UInt64.t) (i: int) (k: int) : int
+
+axiom cnt_def: forall rs: Seq.seq UInt64.t, i: int, k: int [cnt rs i k]. cnt rs i k
+    = ([%#slines'21] if i <= 0 then 0 else cnt rs (i - 1) k + (if key_of (Seq.get rs (i - 1)) = k then 1 else 0))
+
+let parse (txt: t_Vec_u8_Global) (tab: MutBorrow.t t_Vec_u64_Global) (rs: Seq.seq UInt64.t) (return (x: ())) =
+{[@stop_split] [@expl:parse requires] ([@stop_split] [@expl:parse requires #0] [%#slines'8] Seq.length rs <= 268435455)
+  /\ ([@stop_split] [@expl:parse requires #1] [%#slines'9] bytes_are (view_Vec_u8_Global txt) (text rs (Seq.length rs)))
+  /\ ([@stop_split] [@expl:parse requires #2] [%#slines'10] Seq.length (view_Vec_u64_Global tab.current) = 2097152
+  /\ (forall p: int. 0 <= p /\ p < 2097152 -> UInt64.t'int (Seq.get (view_Vec_u64_Global tab.current) p) = 0))}
   any
-  [ return (result: ()) -> {[@stop_split] [@expl:parse ensures] [%#slines'13] Seq.length (view_Vec_u64_Global tab.final)
-    = 2097152}
+  [ return (result: ()) ->
+  {[@stop_split] [@expl:parse ensures] ([@stop_split] [@expl:parse ensures #0] [%#slines'11] Seq.length (view_Vec_u64_Global tab.final)
+      = 2097152)
+    /\ ([@stop_split] [@expl:parse ensures #1] [%#slines'12] forall k: int. 0 <= k /\ k < 1048576
+      -> UInt64.t'int (Seq.get (view_Vec_u64_Global tab.final) (2 * k)) = sum_v rs (Seq.length rs) k
+      /\ UInt64.t'int (Seq.get (view_Vec_u64_Global tab.final) (2 * k + 1)) = cnt rs (Seq.length rs) k)}
     (! return {result}) ]
 
 predicate resolve_refmut_Vec_u64_Global [@inline:trivial] (_1: MutBorrow.t t_Vec_u64_Global) = _1.final = _1.current
@@ -102,49 +166,40 @@ predicate resolve_refmut_Vec_u64_Global [@inline:trivial] (_1: MutBorrow.t t_Vec
 meta "rewrite_def" predicate resolve_refmut_Vec_u64_Global
 
 let checksum (tab: t_Vec_u64_Global) (return (x: UInt64.t)) =
-{[@stop_split] [@expl:checksum requires] [%#slines'14] Seq.length (view_Vec_u64_Global tab) = 2097152}
+{[@stop_split] [@expl:checksum requires] [%#slines'13] Seq.length (view_Vec_u64_Global tab) = 2097152}
   any [ return (result: UInt64.t) -> (! return {result}) ]
 
 meta "compute_max_steps" 1000000
 
 meta "select_lsinst" "all"
 
-let run [#"/home/user/benchmark-verif/impls/rust/src/lines.rs" 128 0 128 27] (n: UInt64.t) (return (x: UInt64.t)) =
-{[@stop_split] [@expl:run requires] [%#slines'9] 1 <= UInt64.t'int n /\ UInt64.t'int n <= 268435455}
+let run [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 397 0 397 27] (n: UInt64.t) (return (x: UInt64.t)) =
+{[@stop_split] [@expl:run requires] [%#slines'4] 1 <= UInt64.t'int n /\ UInt64.t'int n <= 268435455}
   (! bb0
   [ bb0 = s0
-    [ s0 = UInt64.mul [%#slines'0] {[%#slines] (15: UInt64.t)} {n} (fun (_x: UInt64.t) -> [ &_6 <- _x ] s1)
-    | s1 = UInt64.add [%#slines'2] {_6} {[%#slines'1] (20: UInt64.t)} (fun (_x: UInt64.t) -> [ &_5 <- _x ] s2)
-    | s2 = from_elem_u8 [%#smacros] {[%#slines'3] (0: UInt8.t)} {_5} (fun (_x: t_Vec_u8_Global) -> [ &txt <- _x ] s3)
-    | s3 = MutBorrow.borrow_mut <t_Vec_u8_Global> {txt}
-        (fun (_bor: MutBorrow.t t_Vec_u8_Global) -> [ &_10 <- _bor ] [ &txt <- _bor.final ] s4)
-    | s4 = MutBorrow.borrow_final <t_Vec_u8_Global> {_10.current} {MutBorrow.get_id _10}
-        (fun (_bor: MutBorrow.t t_Vec_u8_Global) -> [ &_9 <- _bor ] [ &_10 <- { _10 with current = _bor.final } ] s5)
-    | s5 = generate [%#slines'4] {_9} {n} (fun (_x: UInt64.t) -> [ &len <- _x ] s6)
-    | s6 = -{resolve_refmut_Vec_u8_Global _10}- s7
-    | s7 = from_elem_u64 [%#smacros'0] {[%#slines'5] (0: UInt64.t)} {[%#slines'6] (2097152: UInt64.t)}
-        (fun (_x: t_Vec_u64_Global) -> [ &tab <- _x ] s8)
-    | s8 = [ &_15 <- txt ] s9
-    | s9 = MutBorrow.borrow_mut <t_Vec_u64_Global> {tab}
-        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_17 <- _bor ] [ &tab <- _bor.final ] s10)
-    | s10 = MutBorrow.borrow_final <t_Vec_u64_Global> {_17.current} {MutBorrow.get_id _17}
-        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_16 <- _bor ] [ &_17 <- { _17 with current = _bor.final } ] s11)
-    | s11 = parse [%#slines'7] {_15} {_16} {len} (fun (_x: ()) -> [ &_13 <- _x ] s12)
-    | s12 = -{resolve_refmut_Vec_u64_Global _17}- s13
-    | s13 = [ &_20 <- tab ] s14
-    | s14 = checksum [%#slines'8] {_20} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s15)
-    | s15 = return {_ret} ] ]
+    [ s0 = generate [%#slines] {n} (fun (_x: tup2_Vec_u8_Global_Snapshot_Seq_u64) -> [ &_6 <- _x ] s1)
+    | s1 = [ &txt <- _6.f0 ] s2
+    | s2 = [ &rs <- _6.f1 ] s3
+    | s3 = from_elem_u64 [%#smacros] {[%#slines'0] (0: UInt64.t)} {[%#slines'1] (2097152: UInt64.t)}
+        (fun (_x: t_Vec_u64_Global) -> [ &tab <- _x ] s4)
+    | s4 = [ &_11 <- txt ] s5
+    | s5 = MutBorrow.borrow_mut <t_Vec_u64_Global> {tab}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_13 <- _bor ] [ &tab <- _bor.final ] s6)
+    | s6 = MutBorrow.borrow_final <t_Vec_u64_Global> {_13.current} {MutBorrow.get_id _13}
+        (fun (_bor: MutBorrow.t t_Vec_u64_Global) -> [ &_12 <- _bor ] [ &_13 <- { _13 with current = _bor.final } ] s7)
+    | s7 = parse [%#slines'2] {_11} {_12} {rs} (fun (_x: ()) -> [ &_9 <- _x ] s8)
+    | s8 = -{resolve_refmut_Vec_u64_Global _13}- s9
+    | s9 = [ &_16 <- tab ] s10
+    | s10 = checksum [%#slines'3] {_16} (fun (_x: UInt64.t) -> [ &_ret <- _x ] s11)
+    | s11 = return {_ret} ] ]
   [ & _ret: UInt64.t = Any.any_l ()
   | & n: UInt64.t = n
   | & txt: t_Vec_u8_Global = Any.any_l ()
-  | & _5: UInt64.t = Any.any_l ()
-  | & _6: UInt64.t = Any.any_l ()
-  | & len: UInt64.t = Any.any_l ()
-  | & _9: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
-  | & _10: MutBorrow.t t_Vec_u8_Global = Any.any_l ()
+  | & rs: Seq.seq UInt64.t = Any.any_l ()
+  | & _6: tup2_Vec_u8_Global_Snapshot_Seq_u64 = Any.any_l ()
   | & tab: t_Vec_u64_Global = Any.any_l ()
-  | & _13: () = Any.any_l ()
-  | & _15: t_Vec_u8_Global = Any.any_l ()
-  | & _16: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
-  | & _17: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
-  | & _20: t_Vec_u64_Global = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]
+  | & _9: () = Any.any_l ()
+  | & _11: t_Vec_u8_Global = Any.any_l ()
+  | & _12: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _13: MutBorrow.t t_Vec_u64_Global = Any.any_l ()
+  | & _16: t_Vec_u64_Global = Any.any_l () ]) [ return (result: UInt64.t) -> (! return {result}) ]

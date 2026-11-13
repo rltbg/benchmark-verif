@@ -1,0 +1,69 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 155 0 155 52 *)
+
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 153 10 153 11
+let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 152 11 152 11
+let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 154 10 154 10
+let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 125 11 125 11
+let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 127 10 127 32
+let%span slines'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 59 10 59 11
+let%span slines'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 61 4 61 65
+let%span slines'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 126 10 126 11
+let%span slines'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 129 4 131 5
+
+use seq.Seq
+use int.Int
+
+function num [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 60 0 60 38] (s: Seq.seq int) (j: int) : int
+
+axiom num_def: forall s: Seq.seq int, j: int [num s j]. num s j
+    = ([%#slines'5] if j <= 0 then 0 else num s (j - 1) * 10 + (Seq.get s (j - 1) - 48))
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+function num_ext [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 128 0 128 48] (s: Seq.seq int) (t: Seq.seq int) (j: int) : ()
+
+axiom num_ext_def: forall s: Seq.seq int, t: Seq.seq int, j: int [num_ext s t j]. ([%#slines'2] forall p: int. 0 <= p
+          /\ p < j -> Seq.get s p = Seq.get t p)
+    -> num_ext s t j = ([%#slines'7] if gt_log_Int j 0 then num_ext s t (j - 1) else ())
+
+axiom num_ext_spec: forall s: Seq.seq int, t: Seq.seq int, j: int. ([%#slines'2] forall p: int. 0 <= p /\ p < j
+        -> Seq.get s p = Seq.get t p) -> ([%#slines'3] num s j = num t j)
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant s : Seq.seq int
+
+constant t : Seq.seq int
+
+constant m : int
+
+function num_ext_all [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 155 0 155 52] (s: Seq.seq int) (t: Seq.seq int) (m: int) : ()
+
+goal vc_num_ext_all: ([%#slines'0] forall p: int. 0 <= p /\ p < m -> Seq.get s p = Seq.get t p)
+  -> (if gt_log_Int m 0 then
+    ([@stop_split] [@expl:num_ext requires] [%#slines'2] forall p: int. 0 <= p /\ p < m -> Seq.get s p = Seq.get t p)
+    /\ (([@stop_split] [@expl:num_ext ensures] [%#slines'3] num s m = num t m)
+    -> (([@stop_split] [@expl:num_ext_all requires] [%#slines'0] forall p: int. 0 <= p /\ p < m - 1
+          -> Seq.get s p = Seq.get t p)
+      /\ ([@expl:variant decreases] well_founded_relation_Int ([%#slines] m) ([%#slines] m - 1)))
+    /\ (([@stop_split] [@expl:num_ext_all ensures] [%#slines'1] forall j: int. j <= m - 1 -> num s j = num t j)
+    -> ([@stop_split] [@expl:num_ext_all ensures] [%#slines'1] forall j: int. j <= m -> num s j = num t j)))
+  else
+    [@stop_split] [@expl:num_ext_all ensures] [%#slines'1] forall j: int. j <= m -> num s j = num t j
+  )

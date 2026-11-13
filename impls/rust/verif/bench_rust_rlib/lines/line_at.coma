@@ -1,0 +1,52 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 170 0 170 30 *)
+
+let%span slines = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 164 11 164 27
+let%span slines'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 165 10 165 61
+let%span slines'1 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 166 10 166 10
+let%span slines'2 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 167 10 167 40
+let%span slines'3 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 168 10 168 10
+let%span slines'4 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 169 10 169 59
+let%span slines'5 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 66 11 66 27
+let%span slines'6 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 68 4 68 43
+let%span slines'7 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 52 10 52 11
+let%span slines'8 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 51 11 51 17
+let%span slines'9 = "/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 54 4 54 79
+
+use seq.Seq
+use int.ComputerDivision
+use int.Int
+
+function dec [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 53 0 53 30] (v: int) : Seq.seq int
+
+axiom dec_def: forall v: int [dec v]. ([%#slines'8] 0 <= v)
+    -> dec v
+    = ([%#slines'9] if v < 10 then
+      Seq.singleton (48 + v)
+    else
+      Seq.snoc (dec (ComputerDivision.div v 10)) (48 + ComputerDivision.mod v 10)
+    )
+
+function line [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 67 0 67 39] (k: int) (v: int) : Seq.seq int =
+  [%#slines'6] Seq.snoc (Seq.(++) (Seq.snoc (dec k) 59) (dec v)) 10
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant k : int
+
+constant v : int
+
+function line_at [#"/tmp/claude-0/verif-lines/creusot-lines/src/lines.rs" 170 0 170 30] (k: int) (v: int) : ()
+
+goal vc_line_at: ([%#slines] 0 <= k /\ 0 <= v)
+  -> ([@stop_split] [@expl:line_at ensures] ([@stop_split] [@expl:line_at ensures #0] [%#slines'0] Seq.length (line k v)
+    = Seq.length (dec k) + Seq.length (dec v) + 2)
+  /\ ([@stop_split] [@expl:line_at ensures #1] [%#slines'1] forall j: int. 0 <= j /\ j < Seq.length (dec k)
+      -> Seq.get (line k v) j = Seq.get (dec k) j)
+  /\ ([@stop_split] [@expl:line_at ensures #2] [%#slines'2] Seq.get (line k v) (Seq.length (dec k)) = 59)
+  /\ ([@stop_split] [@expl:line_at ensures #3] [%#slines'3] forall j: int. 0 <= j /\ j < Seq.length (dec v)
+      -> Seq.get (line k v) (Seq.length (dec k) + 1 + j) = Seq.get (dec v) j)
+  /\ ([@stop_split] [@expl:line_at ensures #4] [%#slines'4] Seq.get (line k v) (Seq.length (dec k) + Seq.length (dec v)
+    + 1)
+  = 10))

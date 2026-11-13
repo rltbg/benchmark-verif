@@ -1,0 +1,15 @@
+{
+  "profile": [],
+  "proofs": {
+    "Coma": {
+      "vc_bfs_edges_forward": {
+        "tactic": "split_vc",
+        "children": [
+          { "prover": "z3", "time": 0.014 },
+          { "prover": "alt-ergo", "time": 0.022 },
+          { "prover": "alt-ergo", "time": 0.018 }
+        ]
+      }
+    }
+  }
+}

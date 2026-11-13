@@ -1,0 +1,42 @@
+(* #"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 86 0 86 42 *)
+
+let%span sbfs = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 85 10 85 11
+let%span sbfs'0 = "/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 86 0 86 42
+let%span swell_founded = "/opt/tools/creusot/creusot-std/src/logic/well_founded.rs" 43 8 43 33
+let%span sord = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 34 8 34 21
+let%span sord'0 = "/opt/tools/creusot/creusot-std/src/logic/ord.rs" 22 8 22 20
+
+use creusot.int.UInt32
+use seq.Seq
+use int.Int
+
+predicate ge_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord] other <= self
+
+meta "rewrite_def" predicate ge_log_Int
+
+predicate gt_log_Int [@inline:trivial] (self: int) (other: int) = [%#sord'0] other < self
+
+meta "rewrite_def" predicate gt_log_Int
+
+predicate well_founded_relation_Int [@inline:trivial] (self: int) (other: int) =
+  [%#swell_founded] ge_log_Int self 0 /\ gt_log_Int self other
+
+meta "rewrite_def" predicate well_founded_relation_Int
+
+constant const_INF: UInt32.t = [%#sbfs'0] (4294967295: UInt32.t)
+
+meta "compute_max_steps" 1000000
+
+meta "select_lsinst" "all"
+
+constant d : Seq.seq UInt32.t
+
+constant k : int
+
+function reached [#"/tmp/claude-0/verif-lines/creusot-lines/src/bfs.rs" 86 0 86 42] (d: Seq.seq UInt32.t) (k: int) : int
+
+goal vc_reached: if k <= 0 then
+    true
+  else
+    [@expl:variant decreases] well_founded_relation_Int ([%#sbfs] k) ([%#sbfs] k - 1)
+  
