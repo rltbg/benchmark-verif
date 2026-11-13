@@ -12,3 +12,4 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:30:17+00:00,6.2,ok,0,parse prouvé (indice 2k+1 explicité)
 2026-11-13T20:30:29+00:00,1.5,ok,0,vérification complète (cache)
 2026-11-13T21:15:31+00:00,28.5,ok,0,vérification à froid (--no-cache) du module lines
+2026-11-13T21:20:01+00:00,63.2,ok,0,100 % à froid (copie sans proof.json ni cache)

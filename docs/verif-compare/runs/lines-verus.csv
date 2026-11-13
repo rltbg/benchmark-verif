@@ -10,3 +10,4 @@ horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:38:24+00:00,4.1,echec,3,deux #[trigger] = multi-déclencheur (pas voulu)
 2026-11-13T20:38:54+00:00,2.8,ok,0,foralls séparés (un déclencheur sum_v / cnt chacun): tout vérifié
 2026-11-13T20:43:27+00:00,,ok,0,cargo verus build --release (vérifie avant de compiler; durée non mesurée)
+2026-11-13T21:22:06+00:00,0.1,erreur_compil,-,usage: --verify-module exige cargo verus focus
