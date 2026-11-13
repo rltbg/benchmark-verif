@@ -99,7 +99,7 @@
               {
                 "tactic": "split_vc",
                 "children": [
-                  { "prover": "cvc4", "time": 0.254 },
+                  { "prover": "cvc4", "time": 0.154 },
                   {
                     "tactic": "split_vc",
                     "children": [ { "prover": "cvc5", "time": 0.105 } ]

@@ -1,2 +1,5 @@
 horodatage,duree_s,resultat,buts_echoues,note
 2026-11-13T20:55:57+00:00,14.1,echec,3,1re vérif bfs: CSR presque OK; boucles BFS rlimit (monotonie par paires = multi-déclencheur)
+2026-11-13T20:56:47+00:00,14.8,echec,2,file par niveaux (lvl; s fantômes): boucle interne OK sauf témoin existentiel; boucle externe rlimit
+2026-11-13T20:57:18+00:00,3.2,ok,0,témoin choose + fin de corps explicitée: tout vérifié
+2026-11-13T20:57:25+00:00,7.0,ok,0,cargo verus build --release (vérifie + compile)

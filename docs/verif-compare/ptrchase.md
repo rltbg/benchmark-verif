@@ -46,8 +46,8 @@ des compteurs de visites (seulement bornés) ; pas de modèle logique fermé du 
 | | Creusot | Verus |
 |---|---|---|
 | lignes exécutables / spécification / preuve (≈) | 138 / 143 / 35 | 168 / 159 / 196 |
-| appels au vérificateur (journal) | 16, dont 2 ok, 4 erreurs de compilation, 10 échecs (dont 4 « calibration z3 impossible », machine chargée, sans rapport avec la preuve) | 9, dont 3 ok, 3 erreurs de compilation, 3 échecs |
-| temps de vérification final | module : 1,2 s avec cache ; temps prouveurs cumulés d'après `proof.json` : 5,9 s (150 appels de prouveur) ; à froid non mesurable (voir ci-dessous) | crate entière (common + ptrchase + alloc) à froid : 3,3 s (Verus `total-time` 2,95 s, SMT 1,05 s) |
+| appels au vérificateur (journal) | 23 : 4 ok, 3 erreurs de compilation, 10 échecs de preuve, 6 échecs d'outil (calibration de z3 impossible, machine chargée — sans rapport avec la preuve) | 9 : 3 ok, 3 erreurs de compilation, 3 échecs de preuve |
+| temps de vérification final | à froid (cache why3find vide, `proof.json` présents) : 9,1 s ; somme des temps prouveurs dans `proof.json` : 5,9 s (150 appels de prouveur) | crate entière (common + ptrchase + alloc) à froid : 3,3 s (Verus `total-time` 2,95 s, SMT 1,05 s) |
 | `trusted` / `assume` / `external_body` | aucun | aucun |
 | checksum (n = 1, 10, 1000, 10000, 30000, 300000) | identique aux références | identique aux références |
 | temps d'exécution n = 300 000 (min de 7, machine chargée) | 158 ms (plain : 152 ms) | 154 ms |
@@ -57,10 +57,11 @@ Lignes : comptage approximatif par un script (lignes non vides hors commentaires
 `proof_assert!`, `snapshot!`, variables fantômes). Le tri est grossier (±15 %). En Creusot les lemmes sans corps
 sont comptés en spécification.
 
-Temps à froid Creusot : vider le cache `.why3find` force why3find à recalibrer z3, ce qui a échoué 4 fois
-(« can not calibrate prover z3@ (N=33, Timeout 5 s) », charge ≈ 13 sur 4 cœurs) ; le chiffre « prouveurs cumulés »
-est la meilleure approximation disponible. Le premier passage complet sans preuves en cache a pris 202 s
-(avec 5 fonctions en échec, donc des délais d'attente).
+Temps à froid Creusot : vider le cache `.why3find` force why3find à recalibrer z3. Sous forte charge (≈ 13 sur
+4 cœurs, autres agents) la calibration a échoué (« can not calibrate prover z3@ (N=33, Timeout 5 s) »), et cet échec
+a été **mis en cache** : les essais suivants échouaient en 0,8 s jusqu'à suppression de l'entrée fautive
+(`.why3find/z3@/a0/…` contenant `{"status":"Timeout"}`). Mesure finale faite à charge ≈ 3. Le premier passage
+complet, sans preuves connues, avait pris 202 s (5 fonctions en échec, donc des délais d'attente).
 
 ## Expérience
 
